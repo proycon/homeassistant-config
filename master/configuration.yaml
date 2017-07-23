@@ -16,8 +16,6 @@ introduction:
 
 # Enables the frontend
 frontend:
-    api_password: !secret api_password
-    base_url: !secret base_url
 
 # Enables configuration UI
 config:
