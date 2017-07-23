@@ -55,9 +55,14 @@ sun:
 sensor:
   platform: yr
 
+media_player:
+    - platform: gstreamer
+      name: hall_speaker
+
 # Text to speech
 tts:
-  platform: google
+  platform: picotts
+  language: 'en-GB'
 
 group: !include groups.yaml
 automation: !include automations.yaml

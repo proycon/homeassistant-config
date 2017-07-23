@@ -1,1 +1,19 @@
-[]
+- alias: Startup - Starting system
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+      - service: tts.picotts_say
+        entity_id: hall_speaker
+        data:
+            message: "Home automation started"
+- alias: Shutdown - Stopping system
+  trigger:
+    platform: homeassistant
+    event: stop
+  action:
+      - service: tts.picotts_say
+        entity_id: hall_speaker
+        data:
+            message: "Home automation stopped"
+
