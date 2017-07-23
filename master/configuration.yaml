@@ -55,8 +55,8 @@ sun:
 sensor:
   platform: yr
 
-media_player:
-    - platform: gstreamer
+media_player hall_speaker:
+    - platform: vlc
       name: hall_speaker
 
 # Text to speech
