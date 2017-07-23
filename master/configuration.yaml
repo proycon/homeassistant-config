@@ -58,6 +58,7 @@ sensor:
 media_player hall_speaker:
     - platform: vlc
       name: hall_speaker
+      arguments: '--alsa-audio-device=hw:1,0'
 
 # Text to speech
 tts:
