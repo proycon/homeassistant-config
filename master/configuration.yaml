@@ -24,7 +24,8 @@ config:
 
 http:
   # Uncomment this to add a password (recommended!)
-  # api_password: PASSWORD
+  api_password: !secret api_password
+  use_x_forwarded_for: True
   # Uncomment this if you are using SSL or running in Docker etc
   # base_url: example.duckdns.org:8123
 
@@ -65,13 +66,7 @@ automation: !include automations.yaml
 
 #MQTT
 mqtt:
-  broker: 192.168.0.1
-#  certificate: !secret mqtt_ssl_cert_path
-  port: 1883
-  client_id: hass_master
-  keepalive: 60
-  username: !secret mqtt_user
-  password: !secret mqtt_pass
+  embedded:
 
 mqtt_eventstream:
   subscribe_topic: slaves/#
