@@ -58,7 +58,6 @@ sensor:
       monitored_conditions:
           - symbol
           - temperature
-          - precipitation
 
 media_player hall_speaker:
     - platform: vlc
