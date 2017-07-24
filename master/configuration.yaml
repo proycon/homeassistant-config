@@ -60,6 +60,21 @@ media_player hall_speaker:
       name: hall_speaker
       arguments: '--alsa-audio-device=hw:0,0'
 
+camera:
+    - platform: ffmpeg
+      name: Main Hall
+      input: /dev/video0
+    - platform: ffmpeg
+      name: Upstairs Hall
+      input: /dev/video1
+
+device_tracker:
+    - platform: tplink
+      host: !secret wifirouter_host
+      username: !secret wifirouter_user
+      password: !secret wifirouter_pass
+
+
 # Text to speech
 tts:
   platform: picotts
