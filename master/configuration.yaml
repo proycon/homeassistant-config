@@ -62,10 +62,17 @@ media_player hall_speaker:
 
 camera:
     - platform: foscam
+      name: Streetcam
       port: 80
       ip: !secret streetcam_host
       username: !secret streetcam_user
       password: !secret streetcam_password
+    - platform: foscam
+      name: Gardencam
+      port: 80
+      ip: !secret gardencam_host
+      username: !secret gardencam_user
+      password: !secret gardencam_password
     - platform: ffmpeg
       name: Main Hall
       input: /dev/video1
