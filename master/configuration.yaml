@@ -66,18 +66,12 @@ media_player hall_speaker:
       arguments: '--alsa-audio-device=hw:0,0'
 
 camera:
-    - platform: foscam
+    - platform: generic
       name: Streetcam
-      port: 80
-      ip: !secret streetcam_host
-      username: !secret streetcam_user
-      password: !secret streetcam_password
-    - platform: foscam
+      still_image_url: !secret streetcam_url
+    - platform: generic
       name: Gardencam
-      port: 80
-      ip: !secret gardencam_host
-      username: !secret gardencam_user
-      password: !secret gardencam_password
+      still_image_url: !secret gardencam_url
     - platform: ffmpeg
       name: Main Hall
       input: /dev/video1
