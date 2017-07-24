@@ -1,9 +1,12 @@
 from __future__ import print_function, unicode_literals, division, absolute_import
 
+# NeoPixel library strandtest example
 import time
 import random
 import sys
 import os
+
+HOST = os.uname()[1]
 
 from neopixel import *
 
@@ -14,7 +17,10 @@ LED_COUNT      = 30      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (must support PWM!).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
-LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
+try:
+    LED_BRIGHTNESS = int(sys.argv[2])     # Set to 0 for darkest and 255 for brightest
+except:
+    LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 
 def off(strip):
@@ -96,6 +102,13 @@ def rainbowCycle(strip, wait_ms=20, iterations=5):
         strip.show()
         time.sleep(wait_ms/1000.0)
 
+def colorCycle(strip, wait_ms=20, iterations=5):
+    for j in range(256*iterations):
+        for i in range(strip.numPixels()):
+            strip.setPixelColor(i, wheel(((256 / strip.numPixels()) + j) & 255))
+        strip.show()
+        time.sleep(wait_ms/1000.0)
+
 def theaterChaseRainbow(strip, wait_ms=50):
     """Rainbow movie theater light style chaser animation."""
     for j in range(256):
@@ -121,7 +134,7 @@ def sirene(strip):
 # Main program logic follows:
 if __name__ == '__main__':
     # Create NeoPixel object with appropriate configuration.
-    strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
+    strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, 0 , ws.WS2811_STRIP_GRB if HOST == "firepi" else ws.WS2811_STRIP_RGB)
     # Intialize the library (must be called once before other functions).
     strip.begin()
 
@@ -158,9 +171,36 @@ if __name__ == '__main__':
     elif scene == "rainbowcycle":
         while True:
             rainbowCycle(strip)
+    elif scene == "colorcycle_fast":
+        while True:
+            colorCycle(strip)
+    elif scene == "colorcycle":
+        while True:
+            colorCycle(strip,500)
+    elif scene == "colorcycle_slow":
+        while True:
+            colorCycle(strip,2000)
     elif scene == "rainbowchase":
         while True:
-            theaterChaseRainbow(strip)
+           theaterChaseRainbow(strip)
+    elif scene == "staticwhite":
+        singlecolor(strip, Color(255,255,255))
+    elif scene == "staticred":
+        singlecolor(strip, Color(255,0,0))
+    elif scene == "staticgreen":
+        singlecolor(strip, Color(0,255,0))
+    elif scene == "staticblue":
+        singlecolor(strip, Color(0,0,255))
+    elif scene == "staticyellow":
+        singlecolor(strip, Color(255,255,0))
+    elif scene == "staticpurple":
+        singlecolor(strip, Color(255,0,255))
+    elif scene == "staticcyan":
+        singlecolor(strip, Color(0,255,255))
+    elif scene == "staticwhitish":
+        singlecolor(strip, Color(244,243,169))
+    elif scene == "staticlamp":
+        singlecolor(strip, Color(196,181,51))
     elif scene == "sirene":
         while True:
             sirene(strip)
