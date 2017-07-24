@@ -11,9 +11,6 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Amsterdam
 
-# Show links to resources in log and frontend
-introduction:
-
 # Enables the frontend
 frontend:
 
@@ -58,7 +55,6 @@ sensor:
       monitored_conditions:
           - symbol
           - temperature
-          - precipitation
 
 media_player hall_speaker:
     - platform: vlc
@@ -93,6 +89,7 @@ tts:
 
 group: !include groups.yaml
 automation: !include automations.yaml
+script: !include scripts.yaml
 
 #MQTT
 mqtt:
