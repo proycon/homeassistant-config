@@ -61,12 +61,17 @@ media_player hall_speaker:
       arguments: '--alsa-audio-device=hw:0,0'
 
 camera:
+    - platform: foscam
+      port: 80
+      ip: !secret streetcam_host
+      username: !secret streetcam_user
+      password: !secret streetcam_password
     - platform: ffmpeg
       name: Main Hall
-      input: /dev/video0
+      input: /dev/video1
     - platform: ffmpeg
       name: Upstairs Hall
-      input: /dev/video1
+      input: /dev/video0
 
 device_tracker:
     - platform: tplink
