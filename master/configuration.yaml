@@ -53,7 +53,12 @@ sun:
 
 # Weather Prediction
 sensor:
-  platform: yr
+    - platform: buienradar
+      name: Weather
+      monitored_conditions:
+          - symbol
+          - temperature
+          - precipitation
 
 media_player hall_speaker:
     - platform: vlc
