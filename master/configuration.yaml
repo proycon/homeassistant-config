@@ -85,12 +85,12 @@ camera:
     #  still_image_url: !secret gardencam_url
 
 shell_command:
-    snapshot_livingroom: scripts/camera/takesnapshot.sh livingroom
-    snapshot_street: scripts/camera/takesnapshot.sh street
-    snapshot_garden: scripts/camera/takesnapshot.sh garden
-    snapshot_frontdoor: scripts/camera/takesnapshot.sh frontdoor
-    snapshot_hallupstairs: scripts/camera/takesnapshot.sh hallupstairs
-    archive_snapshots: scripts/camera/archive.sh
+    snapshot_livingroom: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh livingroom
+    snapshot_street: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh street
+    snapshot_garden: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh garden
+    snapshot_frontdoor: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh frontdoor
+    snapshot_hallupstairs: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh hallupstairs
+    archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
 
 device_tracker:
     - platform: tplink
