@@ -85,12 +85,12 @@ camera:
     #  still_image_url: !secret gardencam_url
 
 shell_command:
-    snapshot_livingroom: !secret snapshot_livingroom_cmd
-    snapshot_frontdoor: 'export DATE=`date +%Y-%m-%d_%H:%M:%S` && fswebcam -S 3 -r 640x480 -d /dev/video1 --save /home/homeautomation/homeassistant/snapshots/$DATE.frontdoor.jpg && ln -sf /home/homeautomation/homeassistant/snapshots/$DATE.frontdoor.jpg /home/homeautomation/homeassistant/snapshots/_frontdoor.jpg'
-    snapshot_hallupstairs: 'export DATE=`date +%Y-%m-%d_%H:%M:%S` && fswebcam -S 3 -r 640x480 -d /dev/video0 --save /home/homeautomation/homeassistant/snapshots/$DATE.hallupstairs.jpg && ln -sf /home/homeautomation/homeassistant/snapshots/$DATE.hallupstairs.jpg /home/homeautomation/homeassistant/snapshots/_hallupstairs.jpg'
-    snapshot_street: !secret snapshot_streetcam_cmd
-    snapshot_garden: !secret snapshot_gardencam_cmd
-    archive_snapshots: 'scripts/snapshots/archive.sh'
+    snapshot_livingroom: scripts/camera/takesnapshot.sh livingroom
+    snapshot_street: scripts/camera/takesnapshot.sh street
+    snapshot_garden: scripts/camera/takesnapshot.sh garden
+    snapshot_frontdoor: scripts/camera/takesnapshot.sh frontdoor
+    snapshot_hallupstairs: scripts/camera/takesnapshot.sh hallupstairs
+    archive_snapshots: scripts/camera/archive.sh
 
 device_tracker:
     - platform: tplink
@@ -119,3 +119,4 @@ mqtt:
 mqtt_eventstream:
   publish_topic: master
   subscribe_topic: slaves/#
+  visible: false
