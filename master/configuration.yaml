@@ -80,7 +80,11 @@ device_tracker:
       host: !secret wifirouter_host
       username: !secret wifirouter_user
       password: !secret wifirouter_pass
-
+    - platform: ping
+      hosts:
+          pi1: !secret pi1_ip
+          pi2: !secret pi2_ip
+          pi3: !secret pi3_ip
 
 # Text to speech
 tts:
