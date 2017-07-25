@@ -1,0 +1,11 @@
+webcam_snapshots:
+  alias: Take webcam snapshots
+  sequence:
+    - service: shell_command.snapshot_frontdoor
+    - service: shell_command.snapshot_hallupstairs
+ipcam_snapshots:
+  alias: Take IP cam snapshots
+  sequence:
+    - service: shell_command.snapshot_livingroom
+    - service: shell_command.snapshot_street
+    - service: shell_command.snapshot_garden

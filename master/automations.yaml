@@ -1,4 +1,4 @@
-- alias: Startup - Starting system
+- alias: Startup notification
   hide_entity: True
   trigger:
       platform: homeassistant
@@ -8,3 +8,24 @@
         entity_id: media_player.hall_speaker
         data:
             message: Home automation started
+- alias: Take webcam snapshots
+    trigger:
+        platform: time
+        seconds: '/10' #every ten seconds
+    action:
+        - service: script.webcam_snapshots
+- alias: Take IP camera snapshots
+    trigger:
+        platform: time
+        seconds: '/5' #every five seconds
+    action:
+        - service: script.ipcam_snapshots
+- alias: Archive snapshots
+    trigger:
+        platform: time
+        at: '00:00:00'
+    actions:
+        - service: shell_command.archive_snapshots
+
+
+
