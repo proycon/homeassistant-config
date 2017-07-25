@@ -9,18 +9,21 @@
         data:
             message: Home automation started
 - alias: Take webcam snapshots
+  hide_entity: True
   trigger:
     platform: time
     seconds: '/10' #every ten seconds
   action:
     - service: script.webcam_snapshots
 - alias: Take IP camera snapshots
+  hide_entity: True
   trigger:
     platform: time
     seconds: '/5' #every five seconds
   action:
     - service: script.ipcam_snapshots
 - alias: Archive snapshots
+  hide_entity: True
   trigger:
     platform: time
     at: "00:00:00"
