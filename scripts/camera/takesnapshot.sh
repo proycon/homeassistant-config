@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /home/homeautomation/homeassistant/secrets.sh
+source /home/homeautomation/homeassistant/master/secrets.sh
 cd /home/homeautomation/homeassistant/snapshots/
 LOGDIR=/home/homeautomation/homeassistant/snapshots/logs/
 
