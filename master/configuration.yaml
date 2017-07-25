@@ -42,6 +42,7 @@ conversation:
 # Enables support for tracking state changes over time.
 history:
     exclude:
+      entities:
         - automation.snapshots_frontdoor
         - automation.snapshots_garden
         - automation.snapshots_street
@@ -51,6 +52,12 @@ history:
 # View all events in a logbook
 logbook:
     exclude:
+      entities:
+        - automation.snapshots_frontdoor
+        - automation.snapshots_garden
+        - automation.snapshots_street
+        - automation.snapshots_livingroom
+        - automation.snapshots_hallupstairs
         - automation.snapshots_frontdoor
         - automation.snapshots_garden
         - automation.snapshots_street
