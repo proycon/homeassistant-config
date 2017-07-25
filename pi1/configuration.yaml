@@ -49,17 +49,17 @@ discovery:
 
 
 binary_sensor:
-    - id: frontdoor
+    - id: slave_frontdoor
       platform: rpi_gpio
       ports:
-        25: frontdoor
+        25: slave_frontdoor
       pull_mode: DOWN
       invert_logic: false
       bouncetime: 60
-    - id: doorbell
+    - id: slave_doorbell
       platform: rpi_gpio
       ports:
-        18: doorbell
+        18: slave_doorbell
       pull_mode: DOWN
       invert_logic: true
       bouncetime: 60
@@ -68,39 +68,39 @@ binary_sensor:
 switch:
     platform: command_line
     switches:
-        tv_spots:
+        slave_tv_spots:
             friendly_name: TV Spots
             command_on: "/home/homeautomation/43392/433send -g beneden -d 16 -s 1"
             command_off: "/home/homeautomation/43392/433send -g beneden -d 16 -s 0"
-        front_room:
+        slave_front_room:
             friendly_name: Front room
             command_on: "/home/homeautomation/43392/lights/kaku M 10 on"
             command_off: "/home/homeautomation/43392/lights/kaku M 10 off"
-        hall:
+        slave_hall:
             friendly_name: Hall
             command_on: "/home/homeautomation/43392/433send -g boven -d 2 -s 1"
             command_off: "/home/homeautomation/43392/433send -g boven -d 2 -s 0"
-        midspots:
+        slave_midspots:
             friendly_name: Midspots
             command_on: "/home/homeautomation/43392/433send -g beneden -d 2 -s 1"
             command_off: "/home/homeautomation/43392/433send -g beneden -d 2 -s 0"
-        back_room:
+        slave_back_room:
             friendly_name: Back room
             command_on: "/home/homeautomation/43392/433send -g beneden -d 1 -s 1"
             command_off: "/home/homeautomation/43392/433send -g beneden -d 1 -s 0"
-        back_corner:
+        slave_back_corner:
             friendly_name: Back corner
             command_on: "/home/homeautomation/43392/433send -g beneden -d 4 -s 1"
             command_off: "/home/homeautomation/43392/433send -g beneden -d 4 -s 0"
-        office:
+        slave_office:
             friendly_name: Office
             command_on: "/home/homeautomation/43392/433send -g boven -d 1 -s 1"
             command_off: "/home/homeautomation/43392/433send -g boven -d 1 -s 0"
-        bedroom:
+        slave_bedroom:
             friendly_name: Bedroom
             command_on: "/home/homeautomation/43392/433send -g boven -d 4 -s 1"
             command_off: "/home/homeautomation/43392/433send -g boven -d 4 -s 0"
-        garden:
+        slave_garden:
             friendly_name: Garden
             command_on: "/home/homeautomation/43392/433send -g buiten -d 1 -s 1"
             command_off: "/home/homeautomation/43392/433send -g buiten -d 1 -s 0"
