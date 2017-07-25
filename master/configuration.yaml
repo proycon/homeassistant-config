@@ -75,12 +75,12 @@ binary_sensor:
       sensors: # Persistence for sensors from slaves (redefinitions)
           frontdoor:
             friendly_name: Front Door
-            value_template: '{% if is_state("binary_sensor.slave_frontdoor","on") %}on{% else %}off{% endif %}'
+            value_template: '{% if is_state("binary_sensor.slave_frontdoor","on") %}on{% elif is_state("binary_sensor.slave_frontdoor","off")%}off{% endif %}'
             entity_id: binary_sensor.slave_frontdoor
             device_class: opening
           doorbell:
             friendly_name: Doorbell
-            value_template: '{% if is_state("binary_sensor.slave_doorbell","on") %}on{% else %}off{% endif %}'
+            value_template: '{% if is_state("binary_sensor.slave_doorbell","on") %}on{% elif is_state("binary_sensor.slave_frontdoor","off")%}off{% endif %}'
             entity_id: binary_sensor.slave_doorbell
             device_class: opening
 switch:
