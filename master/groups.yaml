@@ -12,6 +12,7 @@ all_lights:
         - switch.garden
         - switch.balcony
         - switch.roof
+
 cameras:
     name: Cameras
     entities:
@@ -20,7 +21,23 @@ cameras:
         - camera.frontdoor
         - camera.hallupstairs
         - camera.garden
+
 doors:
     name: Doors and Windows
     entities:
         - binary_sensor.frontdoor
+
+devices:
+    name: Devices
+    entities:
+        - known_devices.caprica
+        - known_devices.pi1
+        - known_devices.pi2
+        - known_devices.pi3
+        - known_devices.gardencam
+        - known_devices.unknown1
+        - known_devices.unknown2
+        - known_devices.unknown3
+        - known_devices.unknown4
+
+
