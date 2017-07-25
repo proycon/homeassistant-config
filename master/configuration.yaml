@@ -142,31 +142,31 @@ switch:
                 entity_id: switch.slave_back_corner
         office:
             friendly_name: Office
-            value_template: '{{ is_state("switch.office","on") }}'
+            value_template: '{{ is_state("switch.slave_office","on") }}'
             turn_on:
                 service: switch.turn_on
-                entity_id: switch.office
+                entity_id: switch.slave_office
             turn_off:
                 service: switch.turn_off
-                entity_id: switch.office
+                entity_id: switch.slave_office
         bedroom:
             friendly_name: Bedroom
-            value_template: '{{ is_state("switch.bedroom","on") }}'
+            value_template: '{{ is_state("switch.slave_bedroom","on") }}'
             turn_on:
                 service: switch.turn_on
-                entity_id: switch.bedroom
+                entity_id: switch.slave_bedroom
             turn_off:
                 service: switch.turn_off
-                entity_id: switch.bedroom
+                entity_id: switch.slave_bedroom
         garden:
             friendly_name: Garden
-            value_template: '{{ is_state("switch.garden","on") }}'
+            value_template: '{{ is_state("switch.slave_garden","on") }}'
             turn_on:
                 service: switch.turn_on
-                entity_id: switch.garden
+                entity_id: switch.slave_garden
             turn_off:
                 service: switch.turn_off
-                entity_id: switch.garden
+                entity_id: switch.slave_garden
 
 media_player hall_speaker:
     - platform: vlc
