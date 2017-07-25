@@ -30,14 +30,14 @@ doors:
 devices:
     name: Devices
     entities:
-        - known_devices.caprica
-        - known_devices.pi1
-        - known_devices.pi2
-        - known_devices.pi3
-        - known_devices.gardencam
-        - known_devices.unknown1
-        - known_devices.unknown2
-        - known_devices.unknown3
-        - known_devices.unknown4
+        - known_device.caprica
+        - known_device.pi1
+        - known_device.pi2
+        - known_device.pi3
+        - known_device.gardencam
+        - known_device.unknown1
+        - known_device.unknown2
+        - known_device.unknown3
+        - known_device.unknown4
 
 
