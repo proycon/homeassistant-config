@@ -20,3 +20,7 @@ cameras:
         - camera.frontdoor
         - camera.hallupstairs
         - camera.garden
+doors:
+    name: Doors and Windows
+    entities:
+        - binary_sensor.frontdoor
