@@ -119,4 +119,3 @@ mqtt:
 mqtt_eventstream:
   publish_topic: master
   subscribe_topic: slaves/#
-  visible: false
