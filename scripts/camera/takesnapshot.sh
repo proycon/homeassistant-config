@@ -1,8 +1,8 @@
 #!/bin/bash
 
-source /home/homeautomation/homeassistant/master/secrets.sh
+source /home/homeautomation/homeassistant/scripts/secrets.sh
 cd /home/homeautomation/homeassistant/snapshots/
-LOGDIR=/home/homeautomation/homeassistant/snapshots/logs/
+LOGDIR=/home/homeautomation/homeassistant/logs/
 
 DATE=`date +%Y-%m-%d_%H:%M:%S`
 
