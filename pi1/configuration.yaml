@@ -35,10 +35,10 @@ discovery:
 #conversation:
 
 # Enables support for tracking state changes over time.
-#history:
+history:
 
 # View all events in a logbook
-#logbook:
+logbook:
 
 # Track the sun
 #sun:

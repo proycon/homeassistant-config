@@ -58,11 +58,6 @@ logbook:
         - automation.snapshots_street
         - automation.snapshots_livingroom
         - automation.snapshots_hallupstairs
-        - automation.snapshots_frontdoor
-        - automation.snapshots_garden
-        - automation.snapshots_street
-        - automation.snapshots_livingroom
-        - automation.snapshots_hallupstairs
 
 # Track the sun
 sun:
