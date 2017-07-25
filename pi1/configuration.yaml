@@ -56,10 +56,18 @@ binary_sensor:
       bouncetime: 60
     - platform: rpi_gpio
       ports:
-          18: doorbell
+        18: doorbell
       invert_logic: true
       bouncetime: 60
 
+
+switch:
+    platform: command_line
+    switches:
+        tv_spots:
+            friendly_name: TV Spots
+            command_on: "/home/homeautomation/43392/433send beneden 16 1"
+            command_off: "/home/homeautomation/43392/433send beneden 16 0"
 
 #MQTT
 mqtt:

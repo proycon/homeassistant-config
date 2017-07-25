@@ -69,14 +69,14 @@ camera:
       name: Street
       file_path: /home/homeautomation/homeassistant/snapshots/_street.jpg
     - platform: local_file
-      name: Garden
-      file_path: /home/homeautomation/homeassistant/snapshots/_garden.jpg
-    - platform: local_file
       name: Front door
       file_path: /home/homeautomation/homeassistant/snapshots/_frontdoor.jpg
     - platform: local_file
       name: Hall upstairs
       file_path: /home/homeautomation/homeassistant/snapshots/_hallupstairs.jpg
+    - platform: local_file
+      name: Garden
+      file_path: /home/homeautomation/homeassistant/snapshots/_garden.jpg
     #- platform: generic
     #  name: Streetcam
     #  still_image_url: !secret streetcam_url
