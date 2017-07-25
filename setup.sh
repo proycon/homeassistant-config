@@ -11,9 +11,9 @@ fi
 
 pip install -U homeassistant
 
-ln -sf scripts master/scripts
-ln -sf scripts pi1/scripts
-ln -sf scripts pi2/scripts
-ln -sf scripts pi3/scripts
+ln -sf $HADIR/scripts master/scripts
+ln -sf $HADIR/scripts pi1/scripts
+ln -sf $HADIR/scripts pi2/scripts
+ln -sf $HADIR/scripts pi3/scripts
 
 
