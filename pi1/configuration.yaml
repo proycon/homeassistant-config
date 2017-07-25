@@ -49,14 +49,14 @@ discovery:
 
 
 binary_sensor:
-   frontdoor:
+    - id: frontdoor
       platform: rpi_gpio
       ports:
         25: frontdoor
       pull_mode: DOWN
       invert_logic: false
       bouncetime: 60
-   doorbell:
+    - id: doorbell
       platform: rpi_gpio
       ports:
         18: doorbell
