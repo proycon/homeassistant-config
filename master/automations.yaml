@@ -1,5 +1,5 @@
 #------------ Startup notification ------------------------
-- alias: Startup notification
+- alias: Startup
   hide_entity: True
   trigger:
       platform: homeassistant
@@ -9,6 +9,7 @@
         entity_id: media_player.hall_speaker
         data:
             message: Home automation started
+      - service: shell_command.snapshot_clear_locks #clear all snapshot locks on startup
 #------------ Snapshots ------------------------
 - id: snapshots_frontdoor
   alias: Frontdoor snapshots
@@ -59,7 +60,6 @@
     - service: shell_command.archive_snapshots
 
 
-#TODO: clear all snapshot locks on startup
 #TODO: turn lights on after sunset
 #TODO: turn lights off at bedtime and after sunrise
 #TODO: doorbell
