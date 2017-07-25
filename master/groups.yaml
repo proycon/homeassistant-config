@@ -1,11 +1,22 @@
 all_lights:
+    name: Lights
     entities:
         - switch.tv_spots
         - switch.front_room
+        - switch.midspots
         - switch.back_room
         - switch.back_corner
         - switch.hall
-        - switch.midspots
-        - switch.garden
         - switch.office
         - switch.bedroom
+        - switch.garden
+        - switch.balcony
+        - switch.roof
+cameras:
+    name: Cameras
+    entities:
+        - camera.livingroom
+        - camera.street
+        - camera.frontdoor
+        - camera.hallupstairs
+        - camera.garden
