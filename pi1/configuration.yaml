@@ -66,8 +66,8 @@ switch:
     switches:
         tv_spots:
             friendly_name: TV Spots
-            command_on: "/home/homeautomation/43392/433send beneden 16 1"
-            command_off: "/home/homeautomation/43392/433send beneden 16 0"
+            command_on: "/home/homeautomation/43392/433send -g beneden -d 16 -s 1"
+            command_off: "/home/homeautomation/43392/433send -g beneden -d 16 -s 0"
 
 #MQTT
 mqtt:
