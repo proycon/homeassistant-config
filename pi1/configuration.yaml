@@ -49,14 +49,18 @@ discovery:
 
 
 binary_sensor:
-    - platform: rpi_gpio
+   frontdoor:
+      platform: rpi_gpio
       ports:
         25: frontdoor
+      pull_mode: DOWN
       invert_logic: false
       bouncetime: 60
-    - platform: rpi_gpio
+   doorbell:
+      platform: rpi_gpio
       ports:
         18: doorbell
+      pull_mode: DOWN
       invert_logic: true
       bouncetime: 60
 
@@ -68,6 +72,38 @@ switch:
             friendly_name: TV Spots
             command_on: "/home/homeautomation/43392/433send -g beneden -d 16 -s 1"
             command_off: "/home/homeautomation/43392/433send -g beneden -d 16 -s 0"
+        front_room:
+            friendly_name: Front room
+            command_on: "/home/homeautomation/43392/lights/kaku M 10 on"
+            command_off: "/home/homeautomation/43392/lights/kaku M 10 off"
+        hall:
+            friendly_name: Hall
+            command_on: "/home/homeautomation/43392/433send -g boven -d 2 -s 1"
+            command_off: "/home/homeautomation/43392/433send -g boven -d 2 -s 0"
+        midspots:
+            friendly_name: Midspots
+            command_on: "/home/homeautomation/43392/433send -g beneden -d 2 -s 1"
+            command_off: "/home/homeautomation/43392/433send -g beneden -d 2 -s 0"
+        back_room:
+            friendly_name: Back room
+            command_on: "/home/homeautomation/43392/433send -g beneden -d 1 -s 1"
+            command_off: "/home/homeautomation/43392/433send -g beneden -d 1 -s 0"
+        back_corner:
+            friendly_name: Back corner
+            command_on: "/home/homeautomation/43392/433send -g beneden -d 4 -s 1"
+            command_off: "/home/homeautomation/43392/433send -g beneden -d 4 -s 0"
+        office:
+            friendly_name: Office
+            command_on: "/home/homeautomation/43392/433send -g boven -d 1 -s 1"
+            command_off: "/home/homeautomation/43392/433send -g boven -d 1 -s 0"
+        bedroom:
+            friendly_name: Bedroom
+            command_on: "/home/homeautomation/43392/433send -g boven -d 4 -s 1"
+            command_off: "/home/homeautomation/43392/433send -g boven -d 4 -s 0"
+        garden:
+            friendly_name: Garden
+            command_on: "/home/homeautomation/43392/433send -g buiten -d 1 -s 1"
+            command_off: "/home/homeautomation/43392/433send -g buiten -d 1 -s 0"
 
 #MQTT
 mqtt:
