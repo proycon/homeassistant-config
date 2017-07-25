@@ -25,9 +25,9 @@ elif [ "$MODE" == "hallupstairs" ]; then
 elif [ "$MODE" == "livingroom" ]; then
     curl -sS --netrc-file $LIVINGROOMCAM_NETRC http://$LIVINGROOMCAM_IP/image/jpeg.cgi -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "street" ]; then
-    curl -sS http://$STREETCAM_IP/snapshot.cgi?user=$STREETCAM_USER&pwd=$STREETCAM_PASSWORD -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
+    curl -sS "http://$STREETCAM_IP/snapshot.cgi?user=$STREETCAM_USER&pwd=$STREETCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "garden" ]; then
-    curl -sS http://$GARDENCAM_IP/snapshot.cgi?user=$GARDENCAM_USER&pwd=$GARDENCAM_PASSWORD -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
+    curl -sS "http://$GARDENCAM_IP/snapshot.cgi?user=$GARDENCAM_USER&pwd=$GARDENCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 else
     rm "$MODE.lock"
     echo "No such mode: $MODE" >&2
