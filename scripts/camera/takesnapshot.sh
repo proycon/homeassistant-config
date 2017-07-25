@@ -18,9 +18,9 @@ else
 fi
 
 if [ "$MODE" == "frontdoor" ]; then
-    fswebcam -S 3 -r 640x480 -d /dev/video1 --save $DATE.$MODE.jpg
+    fswebcam -S 3 -r 640x480 -d $FRONTDOORCAM_DEV --save $DATE.$MODE.jpg
 elif [ "$MODE" == "hallupstairs" ]; then
-    fswebcam -S 3 -r 640x480 -d /dev/video0 --save $DATE.$MODE.jpg
+    fswebcam -S 3 -r 640x480 -d $HALLUPSTAIRSCAM_DEV --save $DATE.$MODE.jpg
 elif [ "$MODE" == "livingroom" ]; then
     curl -sS --netrc-file $LIVINGROOMCAM_NETRC http://$LIVINGROOMCAM_IP/image/jpeg.cgi -o $DATE.$MODE.jpg
 elif [ "$MODE" == "street" ]; then
