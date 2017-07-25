@@ -51,8 +51,8 @@ switch:
     platform: command_line
     switches:
         technofire:
-            command_on: 'scripts/technofire.py fire'
-            command_off: 'scripts/technofire.py off'
+            command_on: 'scripts/technofire/technofire.py fire'
+            command_off: 'scripts/technofire/technofire.py off'
             command_state: 'ps aux | grep technofire.py | wc -l'
             value_template: '{{ value == "2" }}' #one process + grep
 
