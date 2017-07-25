@@ -8,35 +8,40 @@
         entity_id: media_player.hall_speaker
         data:
             message: Home automation started
-- alias: Frontdoor snapshots
+- id: snapshots_frontdoor
+  alias: Frontdoor snapshots
   hide_entity: True
   trigger:
     platform: time
     seconds: '/9' #every ten seconds
   action:
     - service: shell_command.snapshot_frontdoor
-- alias: Hall upstairs snapshots
+- id: snapshots_hallupstairs
+  alias: Hall upstairs snapshots
   hide_entity: True
   trigger:
     platform: time
     seconds: '/11' #every eleven seconds
   action:
     - service: shell_command.snapshot_hallupstairs
-- alias: Living room camera snapshots
+- id: snapshots_livingroom
+  alias: Living room camera snapshots
   hide_entity: True
   trigger:
     platform: time
     seconds: '/3' #every five seconds
   action:
     - service: shell_command.snapshot_livingroom
-- alias: Street camera snapshots
+- id: snapshots_street
+  alias: Street camera snapshots
   hide_entity: True
   trigger:
     platform: time
     seconds: '/3' #every three seconds
   action:
     - service: shell_command.snapshot_street
-- alias: Garden camera snapshots
+- id: snapshots_garden
+  alias: Garden camera snapshots
   hide_entity: True
   trigger:
     platform: time
