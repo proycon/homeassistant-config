@@ -23,11 +23,11 @@ if [ "$MODE" == "frontdoor" ]; then
 elif [ "$MODE" == "hallupstairs" ]; then
     fswebcam -S 3 -r 640x480 -d $HALLUPSTAIRSCAM_DEV --save $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "livingroom" ]; then
-    curl -sS --netrc-file $LIVINGROOMCAM_NETRC http://$LIVINGROOMCAM_IP/image/jpeg.cgi -o $DATE.$MODE.jpg 2>$LOGDIR/camera/camera.$MODE.log
+    curl -sS --netrc-file $LIVINGROOMCAM_NETRC http://$LIVINGROOMCAM_IP/image/jpeg.cgi -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "street" ]; then
-    curl -sS http://$STREETCAM_IP/snapshot.cgi?user=$STREETCAM_USER&pwd=$STREETCAM_PASSWORD -o $DATE.$MODE.jpg 2>$LOGDIR/camera/camera.$MODE.log
+    curl -sS http://$STREETCAM_IP/snapshot.cgi?user=$STREETCAM_USER&pwd=$STREETCAM_PASSWORD -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "garden" ]; then
-    curl -sS http://$GARDENCAM_IP/snapshot.cgi?user=$GARDENCAM_USER&pwd=$GARDENCAM_PASSWORD -o $DATE.$MODE.jpg 2>$LOGDIR/camera/camera.$MODE.log
+    curl -sS http://$GARDENCAM_IP/snapshot.cgi?user=$GARDENCAM_USER&pwd=$GARDENCAM_PASSWORD -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 else
     rm "$MODE.lock"
     echo "No such mode: $MODE" >&2
