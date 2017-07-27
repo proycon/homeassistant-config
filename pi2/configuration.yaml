@@ -12,6 +12,8 @@ homeassistant:
   time_zone: Europe/Amsterdam
 
 
+
+
 http:
   # Uncomment this to add a password (recommended!)
   api_password: !secret api_password
@@ -57,8 +59,9 @@ binary_sensor:
         17: bedroomwindow_right
         22: bedroomwindow_left
       pull_mode: DOWN
-      invert_logic: false
+      invert_logic: true
       bouncetime: 60
+      device_class: opening
 
 
 switch:
