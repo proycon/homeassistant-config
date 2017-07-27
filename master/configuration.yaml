@@ -249,7 +249,13 @@ script: !include scripts.yaml
 
 #MQTT
 mqtt:
-  embedded:
+    broker: 127.0.0.1
+    port: 1883
+    client_id: master
+    keepalive: 60
+    username: homeassistant
+    password: !secret api_password
+
 
 mqtt_eventstream:
   publish_topic: master
