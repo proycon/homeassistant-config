@@ -1,0 +1,27 @@
+slave_tv_spots:
+    command_on: "/home/homeautomation/43392/433send -g beneden -d 16 -s 1"
+    command_off: "/home/homeautomation/43392/433send -g beneden -d 16 -s 0"
+slave_front_room:
+    command_on: "/home/homeautomation/43392/lights/kaku M 10 on"
+    command_off: "/home/homeautomation/43392/lights/kaku M 10 off"
+slave_hall:
+    command_on: "/home/homeautomation/43392/433send -g boven -d 2 -s 1"
+    command_off: "/home/homeautomation/43392/433send -g boven -d 2 -s 0"
+slave_midspots:
+    command_on: "/home/homeautomation/43392/433send -g beneden -d 2 -s 1"
+    command_off: "/home/homeautomation/43392/433send -g beneden -d 2 -s 0"
+slave_back_room:
+    command_on: "/home/homeautomation/43392/433send -g beneden -d 1 -s 1"
+    command_off: "/home/homeautomation/43392/433send -g beneden -d 1 -s 0"
+slave_back_corner:
+    command_on: "/home/homeautomation/43392/433send -g beneden -d 4 -s 1"
+    command_off: "/home/homeautomation/43392/433send -g beneden -d 4 -s 0"
+slave_office:
+    command_on: "/home/homeautomation/43392/433send -g boven -d 1 -s 1"
+    command_off: "/home/homeautomation/43392/433send -g boven -d 1 -s 0"
+slave_bedroom:
+    command_on: "/home/homeautomation/43392/433send -g boven -d 4 -s 1"
+    command_off: "/home/homeautomation/43392/433send -g boven -d 4 -s 0"
+slave_garden:
+    command_on: "/home/homeautomation/43392/433send -g buiten -d 1 -s 1"
+    command_off: "/home/homeautomation/43392/433send -g buiten -d 1 -s 0"

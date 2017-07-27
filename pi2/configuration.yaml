@@ -1,6 +1,6 @@
 homeassistant:
   # Name of the location where Home Assistant is running
-  name: Pi1
+  name: Pi2
   # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude
   longitude: !secret longitude
@@ -69,17 +69,17 @@ binary_sensor:
 
 switch:
     platform: command_line
-    switches: !include ../pi1/rf_lights.yaml
+    switches: !include rf_lights.yaml
 
 #MQTT
 mqtt:
     broker: 192.168.0.1
     port: 1883
-    client_id: pi2
+    client_id: pi1
     keepalive: 60
     username: homeassistant
     password: !secret api_password
 
 mqtt_eventstream:
-  publish_topic: slaves/pi2
+  publish_topic: slaves/pi1
   subscribe_topic: master
