@@ -13,7 +13,7 @@
 #------------ Snapshots ------------------------
 - id: snapshots_frontdoor
   alias: Frontdoor snapshots
-  hide_entity: True
+  hide_entity: False
   trigger:
     platform: time
     seconds: '/9' #every ten seconds
@@ -21,7 +21,7 @@
     - service: shell_command.snapshot_frontdoor
 - id: snapshots_hallupstairs
   alias: Hall upstairs snapshots
-  hide_entity: True
+  hide_entity: False
   trigger:
     platform: time
     seconds: '/11' #every eleven seconds
@@ -29,7 +29,7 @@
     - service: shell_command.snapshot_hallupstairs
 - id: snapshots_livingroom
   alias: Living room camera snapshots
-  hide_entity: True
+  hide_entity: False
   trigger:
     platform: time
     seconds: '/3' #every five seconds
@@ -37,7 +37,7 @@
     - service: shell_command.snapshot_livingroom
 - id: snapshots_street
   alias: Street camera snapshots
-  hide_entity: True
+  hide_entity: False
   trigger:
     platform: time
     seconds: '/3' #every three seconds
@@ -45,14 +45,14 @@
     - service: shell_command.snapshot_street
 - id: snapshots_garden
   alias: Garden camera snapshots
-  hide_entity: True
+  hide_entity: False
   trigger:
     platform: time
     seconds: '/5' #every five seconds
   action:
     - service: shell_command.snapshot_garden
 - alias: Archive snapshots
-  hide_entity: True
+  hide_entity: False
   trigger:
     platform: time
     at: "00:00:00"
