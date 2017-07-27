@@ -75,12 +75,12 @@ binary_sensor:
       sensors: # Persistence for sensors from slaves (redefinitions)
           frontdoor:
             friendly_name: Front Door
-            value_template: '{% if is_state("binary_sensor.slave_frontdoor","on") %}on{% elif is_state("binary_sensor.slave_frontdoor","off")%}off{% endif %}'
+            value_template: "{% if states.binary_sensor.slave_frontdoor %}{{ states('binary_sensor.slave_frontdoor') }}{% else %}{{ states('binary_sensor.frontdoor') }}{% endif %}"
             entity_id: binary_sensor.slave_frontdoor
             device_class: opening
           doorbell:
             friendly_name: Doorbell
-            value_template: '{% if is_state("binary_sensor.slave_doorbell","on") %}on{% elif is_state("binary_sensor.slave_frontdoor","off")%}off{% endif %}'
+            value_template: "{% if states.binary_sensor.slave_doorbell %}{{ states('binary_sensor.slave_doorbell') }}{% else %}{{ states('binary_sensor.doorbell') }}{% endif %}"
             entity_id: binary_sensor.slave_doorbell
             device_class: opening
 switch:
@@ -88,16 +88,16 @@ switch:
       switches: # Persistence for switches from slaves (redefinitions)
         tv_spots:
             friendly_name: TV Spots
-            value_template: '{{ is_state("switch.slave_tv_spots","on") }}'
+            value_template: "{% if states.switch.slave_tv_spots %}{{ is_state('switch.slave_tv_spots','on') }}{% else %}{{ is_state('switch.tv_spots','on') }}{% endif %}"
             turn_on:
                 service: switch.turn_on
                 entity_id: switch.slave_tv_spots
             turn_off:
-                service: switch.turn_on
+                service: switch.turn_off
                 entity_id: switch.slave_tv_spots
         front_room:
             friendly_name: Front Room
-            value_template: '{{ is_state("switch.slave_front_room","on") }}'
+            value_template: "{% if states.switch.slave_front_room %}{{ is_state('switch.slave_front_room','on') }}{% else %}{{ is_state('switch.front_room','on') }}{% endif %}"
             turn_on:
                 service: switch.turn_on
                 entity_id: switch.slave_front_room
@@ -106,7 +106,7 @@ switch:
                 entity_id: switch.slave_front_room
         hall:
             friendly_name: Hall
-            value_template: '{{ is_state("switch.slave_hall","on") }}'
+            value_template: "{% if states.switch.slave_hall %}{{ is_state('switch.slave_hall','on') }}{% else %}{{ is_state('switch.hall','on') }}{% endif %}"
             turn_on:
                 service: switch.turn_on
                 entity_id: switch.slave_hall
@@ -115,7 +115,7 @@ switch:
                 entity_id: switch.slave_hall
         midspots:
             friendly_name: Midspots
-            value_template: '{{ is_state("switch.slave_midspots","on") }}'
+            value_template: "{% if states.switch.slave_midspots %}{{ is_state('switch.slave_midspots','on') }}{% else %}{{ is_state('switch.midspots','on') }}{% endif %}"
             turn_on:
                 service: switch.turn_on
                 entity_id: switch.slave_midspots
@@ -124,7 +124,7 @@ switch:
                 entity_id: switch.slave_midspots
         back_room:
             friendly_name: Back room
-            value_template: '{{ is_state("switch.slave_back_room","on") }}'
+            value_template: "{% if states.switch.slave_back_room %}{{ is_state('switch.slave_back_room','on') }}{% else %}{{ is_state('switch.back_room','on') }}{% endif %}"
             turn_on:
                 service: switch.turn_on
                 entity_id: switch.slave_back_room
@@ -133,7 +133,7 @@ switch:
                 entity_id: switch.slave_back_room
         back_corner:
             friendly_name: Back corner
-            value_template: '{{ is_state("switch.slave_back_corner","on") }}'
+            value_template: "{% if states.switch.slave_back_corner %}{{ is_state('switch.slave_back_corner','on') }}{% else %}{{ is_state('switch.back_corner','on') }}{% endif %}"
             turn_on:
                 service: switch.turn_on
                 entity_id: switch.slave_back_corner
@@ -142,7 +142,7 @@ switch:
                 entity_id: switch.slave_back_corner
         office:
             friendly_name: Office
-            value_template: '{{ is_state("switch.slave_office","on") }}'
+            value_template: "{% if states.switch.slave_office %}{{ is_state('switch.slave_office','on') }}{% else %}{{ is_state('switch.office','on') }}{% endif %}"
             turn_on:
                 service: switch.turn_on
                 entity_id: switch.slave_office
@@ -151,7 +151,7 @@ switch:
                 entity_id: switch.slave_office
         bedroom:
             friendly_name: Bedroom
-            value_template: '{{ is_state("switch.slave_bedroom","on") }}'
+            value_template: "{% if states.switch.slave_bedroom %}{{ is_state('switch.slave_bedroom','on') }}{% else %}{{ is_state('switch.bedroom','on') }}{% endif %}"
             turn_on:
                 service: switch.turn_on
                 entity_id: switch.slave_bedroom
@@ -160,7 +160,7 @@ switch:
                 entity_id: switch.slave_bedroom
         garden:
             friendly_name: Garden
-            value_template: '{{ is_state("switch.slave_garden","on") }}'
+            value_template: "{% if states.switch.slave_garden %}{{ is_state('switch.slave_garden','on') }}{% else %}{{ is_state('switch.garden','on') }}{% endif %}"
             turn_on:
                 service: switch.turn_on
                 entity_id: switch.slave_garden
