@@ -11,6 +11,10 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Amsterdam
 
+  customize:
+      sensor.api_password:
+          hidden: true
+
 # Enables the frontend
 frontend:
 
@@ -18,7 +22,6 @@ frontend:
 config:
 
 http:
-  # Uncomment this to add a password (recommended!)
   api_password: !secret api_password
   use_x_forwarded_for: True
   # Uncomment this if you are using SSL or running in Docker etc
@@ -62,126 +65,47 @@ logbook:
 # Track the sun
 sun:
 
-# Weather Prediction
 sensor:
-    - platform: buienradar
+    - platform: buienradar #weather prediction
       name: Weather
       monitored_conditions:
           - symbol
           - temperature
 
-binary_sensor:
-    - platform: template
-      sensors: # Persistence for sensors from slaves (redefinitions)
-          doorbell:
-            friendly_name: Doorbell
-            value_template: "{% if states.binary_sensor.slave_doorbell %}{{ states('binary_sensor.slave_doorbell') }}{% else %}{{ states('binary_sensor.doorbell') }}{% endif %}"
-            entity_id: binary_sensor.slave_doorbell
-            device_class: opening
-          frontdoor:
-            friendly_name: Front Door
-            value_template: "{% if states.binary_sensor.slave_frontdoor %}{{ states('binary_sensor.slave_frontdoor') }}{% else %}{{ states('binary_sensor.frontdoor') }}{% endif %}"
-            entity_id: binary_sensor.slave_frontdoor
-            device_class: opening
-          backdoor:
-            friendly_name: Back Door
-            value_template: "{% if states.binary_sensor.slave_backdoor %}{{ states('binary_sensor.slave_backdoor') }}{% else %}{{ states('binary_sensor.backdoor') }}{% endif %}"
-            entity_id: binary_sensor.slave_backdoor
-            device_class: opening
-          bedroomwindow_right:
-            friendly_name: Bedroom window Right
-            value_template: "{% if states.binary_sensor.slave_bedroomwindow_right %}{{ states('binary_sensor.slave_bedroomwindow_right') }}{% else %}{{ states('binary_sensor.bedroomwindow_right') }}{% endif %}"
-            entity_id: binary_sensor.slave_bedroomwindow_right
-            device_class: opening
-          bedroomwindow_left:
-            friendly_name: Bedroom window Left
-            value_template: "{% if states.binary_sensor.slave_bedroomwindow_left %}{{ states('binary_sensor.slave_bedroomwindow_left') }}{% else %}{{ states('binary_sensor.bedroomwindow_left') }}{% endif %}"
-            entity_id: binary_sensor.slave_bedroomwindow_left
-            device_class: opening
-switch:
-    - platform: template
-      switches: # Persistence for switches from slaves (redefinitions)
-        tv_spots:
-            friendly_name: TV Spots
-            value_template: "{% if states.switch.slave_tv_spots %}{{ is_state('switch.slave_tv_spots','on') }}{% else %}{{ is_state('switch.tv_spots','on') }}{% endif %}"
-            turn_on:
-                service: switch.turn_on
-                entity_id: switch.slave_tv_spots
-            turn_off:
-                service: switch.turn_off
-                entity_id: switch.slave_tv_spots
-        front_room:
-            friendly_name: Front Room
-            value_template: "{% if states.switch.slave_front_room %}{{ is_state('switch.slave_front_room','on') }}{% else %}{{ is_state('switch.front_room','on') }}{% endif %}"
-            turn_on:
-                service: switch.turn_on
-                entity_id: switch.slave_front_room
-            turn_off:
-                service: switch.turn_off
-                entity_id: switch.slave_front_room
-        hall:
-            friendly_name: Hall
-            value_template: "{% if states.switch.slave_hall %}{{ is_state('switch.slave_hall','on') }}{% else %}{{ is_state('switch.hall','on') }}{% endif %}"
-            turn_on:
-                service: switch.turn_on
-                entity_id: switch.slave_hall
-            turn_off:
-                service: switch.turn_off
-                entity_id: switch.slave_hall
-        midspots:
-            friendly_name: Midspots
-            value_template: "{% if states.switch.slave_midspots %}{{ is_state('switch.slave_midspots','on') }}{% else %}{{ is_state('switch.midspots','on') }}{% endif %}"
-            turn_on:
-                service: switch.turn_on
-                entity_id: switch.slave_midspots
-            turn_off:
-                service: switch.turn_off
-                entity_id: switch.slave_midspots
-        back_room:
-            friendly_name: Back room
-            value_template: "{% if states.switch.slave_back_room %}{{ is_state('switch.slave_back_room','on') }}{% else %}{{ is_state('switch.back_room','on') }}{% endif %}"
-            turn_on:
-                service: switch.turn_on
-                entity_id: switch.slave_back_room
-            turn_off:
-                service: switch.turn_off
-                entity_id: switch.slave_back_room
-        back_corner:
-            friendly_name: Back corner
-            value_template: "{% if states.switch.slave_back_corner %}{{ is_state('switch.slave_back_corner','on') }}{% else %}{{ is_state('switch.back_corner','on') }}{% endif %}"
-            turn_on:
-                service: switch.turn_on
-                entity_id: switch.slave_back_corner
-            turn_off:
-                service: switch.turn_off
-                entity_id: switch.slave_back_corner
-        office:
-            friendly_name: Office
-            value_template: "{% if states.switch.slave_office %}{{ is_state('switch.slave_office','on') }}{% else %}{{ is_state('switch.office','on') }}{% endif %}"
-            turn_on:
-                service: switch.turn_on
-                entity_id: switch.slave_office
-            turn_off:
-                service: switch.turn_off
-                entity_id: switch.slave_office
-        bedroom:
-            friendly_name: Bedroom
-            value_template: "{% if states.switch.slave_bedroom %}{{ is_state('switch.slave_bedroom','on') }}{% else %}{{ is_state('switch.bedroom','on') }}{% endif %}"
-            turn_on:
-                service: switch.turn_on
-                entity_id: switch.slave_bedroom
-            turn_off:
-                service: switch.turn_off
-                entity_id: switch.slave_bedroom
-        garden:
-            friendly_name: Garden
-            value_template: "{% if states.switch.slave_garden %}{{ is_state('switch.slave_garden','on') }}{% else %}{{ is_state('switch.garden','on') }}{% endif %}"
-            turn_on:
-                service: switch.turn_on
-                entity_id: switch.slave_garden
-            turn_off:
-                service: switch.turn_off
-                entity_id: switch.slave_garden
+binary_sensor doorbell:
+    platform: mqtt
+    name: Doorbell
+    state_topic: "home/binary_sensor/doorbell"
+
+binary_sensor frontdoor:
+    platform: mqtt
+    name: Front Door
+    state_topic: "home/binary_sensor/frontdoor"
+    device_class: opening
+
+binary_sensor backdoor:
+    platform: mqtt
+    name: Back Door
+    state_topic: "home/binary_sensor/backdoor"
+    device_class: opening
+
+binary_sensor bedroomwindow_right:
+    platform: mqtt
+    name: Bedroom window Right
+    state_topic: "home/binary_sensor/bedroomwindow_right"
+    device_class: opening
+
+binary_sensor bedroomwindow_left:
+    platform: mqtt
+    name: Bedroom window Left
+    state_topic: "home/binary_sensor/bedroomwindow_left"
+    device_class: opening
+
+switch office:
+    platform: mqtt
+    name: Office
+    state_topic: "home/switch/office"
+    command_topic: "home/switch/office/set"
 
 media_player hall_speaker:
     - platform: vlc
@@ -257,6 +181,6 @@ mqtt:
     password: !secret api_password
 
 
-mqtt_eventstream:
-  publish_topic: master
-  subscribe_topic: slaves/#
+#mqtt_eventstream:
+#  publish_topic: master
+#  subscribe_topic: slaves/#

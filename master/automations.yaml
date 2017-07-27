@@ -60,6 +60,7 @@
     - service: shell_command.archive_snapshots
 
 
+
 #TODO: turn lights on after sunset
 #TODO: turn lights off at bedtime and after sunrise
 #TODO: doorbell

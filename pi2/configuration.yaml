@@ -53,16 +53,73 @@ discovery:
 binary_sensor:
     - platform: rpi_gpio
       ports:
-        25: slave_backdoor
-        17: slave_bedroomwindow_right
-        22: slave_bedroomwindow_left
+        25: backdoor
+        17: bedroomwindow_right
+        22: bedroomwindow_left
       pull_mode: DOWN
       invert_logic: false
       bouncetime: 60
 
+
 switch:
     platform: command_line
     switches: !include rf_lights.yaml
+
+######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
+automation s2m_backdoor:
+    hide_entity: true
+    trigger:
+        platform: state
+        entity_id: binary_sensor.backdoor
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/binary_sensor/backdoor/set"
+            payload_template: "{{ states('binary_sensor.backdoor') }}"
+
+automation s2m_bedroomwindow_right:
+    hide_entity: true
+    trigger:
+        platform: state
+        entity_id: binary_sensor.bedroomwindow_right
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/binary_sensor/bedroomwindow_right/set"
+            payload_template: "{{ states('binary_sensor.bedroomwindow_right') }}"
+
+automation s2m_bedroomwindow_left:
+    hide_entity: true
+    trigger:
+        platform: state
+        entity_id: binary_sensor.bedroomwindow_left
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/binary_sensor/bedroomwindow_left/set"
+            payload_template: "{{ states('binary_sensor.bedroomwindow_left') }}"
+
+######### SWITCH PROPAGATION SLAVE->MASTER and MASTER->SLAVE (MQTT) #########
+automation s2m_office:
+    hide_entity: true
+    trigger:
+        platform: state
+        entity_id: switch.office
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/switch/office/set"
+            payload_template: "{{ states('switch.office') }}"
+
+automation m2s_office:
+     hide_entity: true
+     trigger:
+        platform: mqtt
+        topic: "home/switch/office"
+     action:
+        service_template: light.turn_{{ trigger.payload | string | lower }}
+        entity_id: switch.office
+
 
 #MQTT
 mqtt:
@@ -73,6 +130,6 @@ mqtt:
     username: homeassistant
     password: !secret api_password
 
-mqtt_eventstream:
-  publish_topic: slaves/pi2
-  subscribe_topic: master
+#mqtt_eventstream:
+#  publish_topic: slaves/pi2
+#  subscribe_topic: master
