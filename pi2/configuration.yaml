@@ -51,21 +51,14 @@ discovery:
 
 
 binary_sensor:
-    - id: slave_frontdoor
-      platform: rpi_gpio
+    - platform: rpi_gpio
       ports:
-        25: slave_frontdoor
+        25: slave_backdoor
+        17: slave_bedroomwindow_right
+        22: slave_bedroomwindow_left
       pull_mode: DOWN
       invert_logic: false
       bouncetime: 60
-    - id: slave_doorbell
-      platform: rpi_gpio
-      ports:
-        18: slave_doorbell
-      pull_mode: DOWN
-      invert_logic: true
-      bouncetime: 60
-
 
 switch:
     platform: command_line
@@ -75,11 +68,11 @@ switch:
 mqtt:
     broker: 192.168.0.1
     port: 1883
-    client_id: pi1
+    client_id: pi2
     keepalive: 60
     username: homeassistant
     password: !secret api_password
 
 mqtt_eventstream:
-  publish_topic: slaves/pi1
+  publish_topic: slaves/pi2
   subscribe_topic: master

@@ -26,6 +26,9 @@ doors:
     name: Doors and Windows
     entities:
         - binary_sensor.frontdoor
+        - binary_sensor.backdoor
+        - binary_sensor.bedroomwindow_left
+        - binary_sensor.bedroomwindow_right
 
 devices:
     name: Devices

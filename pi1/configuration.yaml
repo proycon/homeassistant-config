@@ -69,7 +69,7 @@ binary_sensor:
 
 switch:
     platform: command_line
-    switches: !include ../pi1/rf_lights.yaml
+    switches: !include rf_lights.yaml
 
 #MQTT
 mqtt:
