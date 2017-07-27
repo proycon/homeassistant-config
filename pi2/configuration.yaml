@@ -78,7 +78,7 @@ automation s2m_backdoor:
         service: mqtt.publish
         data:
             topic: "home/binary_sensor/backdoor/set"
-            payload_template: "{{ states('binary_sensor.backdoor') }}"
+            payload_template: "{{ states('binary_sensor.backdoor') | upper }}"
 
 automation s2m_bedroomwindow_right:
     hide_entity: true
@@ -89,7 +89,7 @@ automation s2m_bedroomwindow_right:
         service: mqtt.publish
         data:
             topic: "home/binary_sensor/bedroomwindow_right/set"
-            payload_template: "{{ states('binary_sensor.bedroomwindow_right') }}"
+            payload_template: "{{ states('binary_sensor.bedroomwindow_right') | upper }}"
 
 automation s2m_bedroomwindow_left:
     hide_entity: true
@@ -100,7 +100,7 @@ automation s2m_bedroomwindow_left:
         service: mqtt.publish
         data:
             topic: "home/binary_sensor/bedroomwindow_left/set"
-            payload_template: "{{ states('binary_sensor.bedroomwindow_left') }}"
+            payload_template: "{{ states('binary_sensor.bedroomwindow_left') | upper }}"
 
 ######### SWITCH PROPAGATION SLAVE->MASTER and MASTER->SLAVE (MQTT) #########
 automation s2m_office:
@@ -112,7 +112,7 @@ automation s2m_office:
         service: mqtt.publish
         data:
             topic: "home/switch/office/set"
-            payload_template: "{{ states('switch.office') }}"
+            payload_template: "{{ states('switch.office') | upper }}"
 
 automation m2s_office:
      hide_entity: true
