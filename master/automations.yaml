@@ -61,6 +61,31 @@
     at: "00:00:00"
   action:
     - service: shell_command.archive_snapshots
+- alias: Door notification
+  trigger:
+      - platform: state
+        entity_id: binary_sensor.frontdoor
+        state: "on"
+      - platform: state
+        entity_id: binary_sensor.backdoor
+        state: "on"
+   condition:
+      - condition: time
+        after: '23:00:00'
+        before: '05:00:00'
+      - condition: state
+        entity_id: binary_sensor.anybodyhome
+        state: "on"
+   action:
+      - service: tts.picotts_say
+        entity_id: media_player.hall_speaker
+        data:
+            message: Door open
+- alias: Lights on in the evening
+
+
+
+
 
 
 

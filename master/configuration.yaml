@@ -101,6 +101,16 @@ binary_sensor bedroomwindow_left:
     state_topic: "home/binary_sensor/bedroomwindow_left"
     device_class: opening
 
+binary_sensor anybodyhome:
+    platform: template
+    name: Anybody home?
+    value_template: {%- if is_state("device_tracker.proyphone","home") or is_state("device_tracker.hansphone"),"on") %}on{% else %}off{% end if %}
+    entity_id:
+        - device_tracker.proyphone
+        - device_tracker.hansphone
+    device_class: occupancy
+
+
 switch tv_spots:
     platform: mqtt
     name: TV Spots
