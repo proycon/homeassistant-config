@@ -56,30 +56,140 @@ binary_sensor:
       ports:
         25: slave_frontdoor
       pull_mode: DOWN
-      invert_logic: false
+      invert_logic: true
       bouncetime: 60
+      device_class: opening
     - id: slave_doorbell
       platform: rpi_gpio
       ports:
         18: slave_doorbell
       pull_mode: DOWN
-      invert_logic: true
+      invert_logic: false
       bouncetime: 60
 
 
 switch:
     platform: command_line
-    switches: !include rf_lights.yaml
+    switches:
+        tv_spots:
+            command_on: /home/homeautomation/43392/433send -g beneden -d 16 -s 1
+            command_off: /home/homeautomation/43392/433send -g beneden -d 16 -s 0
+        front_room:
+            command_on: /home/homeautomation/43392/lights/kaku M 10 on
+            command_off: /home/homeautomation/43392/lights/kaku M 10 off
+        hall:
+            command_on: /home/homeautomation/43392/433send -g boven -d 2 -s 1
+            command_off: /home/homeautomation/43392/433send -g boven -d 2 -s 0
+
+
+######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
+automation s2m_frontdoor:
+    hide_entity: true
+    trigger:
+        - platform: state
+          entity_id: binary_sensor.frontdoor
+        - platform: homeassistant
+          event: start
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/binary_sensor/frontdoor"
+            payload_template: "{{ states('binary_sensor.frontdoor') | upper }}"
+
+automation s2m_doorbell:
+    hide_entity: true
+    trigger:
+        - platform: state
+          entity_id: binary_sensor.doorbell
+        - platform: homeassistant
+          event: start
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/binary_sensor/doorbell"
+            payload_template: "{{ states('binary_sensor.doorbell') | upper }}"
+
+######### SWITCH PROPAGATION SLAVE->MASTER and MASTER->SLAVE (MQTT) #########
+automation s2m_tv_spots:
+    hide_entity: true
+    trigger:
+        - platform: state
+          entity_id: switch.tv_spots
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/switch/tv_spots"
+            payload_template: "{{ states('switch.tv_spots') | upper }}"
+
+automation m2s_tv_spots:
+     hide_entity: true
+     trigger:
+        platform: mqtt
+        topic: "home/switch/tv_spots"
+     action:
+        service_template: switch.turn_{{ trigger.payload | string | lower }}
+        entity_id: switch.tv_spots
+
+automation s2m_front_room:
+    hide_entity: true
+    trigger:
+        - platform: state
+          entity_id: switch.front_room
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/switch/front_room"
+            payload_template: "{{ states('switch.front_room') | upper }}"
+
+automation m2s_front_room:
+     hide_entity: true
+     trigger:
+        platform: mqtt
+        topic: "home/switch/front_room"
+     action:
+        service_template: switch.turn_{{ trigger.payload | string | lower }}
+        entity_id: switch.front_room
+
+automation s2m_hall:
+    hide_entity: true
+    trigger:
+        - platform: state
+          entity_id: switch.hall
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/switch/hall"
+            payload_template: "{{ states('switch.hall') | upper }}"
+
+automation m2s_hall:
+     hide_entity: true
+     trigger:
+        platform: mqtt
+        topic: "home/switch/hall"
+     action:
+        service_template: switch.turn_{{ trigger.payload | string | lower }}
+        entity_id: switch.hall
+
 
 #MQTT
 mqtt:
     broker: 192.168.0.1
     port: 1883
-    client_id: pi2
+    client_id: pi1
     keepalive: 60
     username: homeassistant
     password: !secret api_password
 
-mqtt_eventstream:
-  publish_topic: slaves/pi2
-  subscribe_topic: master
+#mqtt_eventstream:
+#  publish_topic: slaves/pi2
+#  subscribe_topic: master

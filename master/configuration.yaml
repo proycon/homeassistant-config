@@ -11,7 +11,9 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Amsterdam
 
-  #customize:
+  customize:
+      group.all_lights:
+          assumed_state: true
 
 # Enables the frontend
 frontend:
@@ -99,11 +101,56 @@ binary_sensor bedroomwindow_left:
     state_topic: "home/binary_sensor/bedroomwindow_left"
     device_class: opening
 
+switch tv_spots:
+    platform: mqtt
+    name: TV Spots
+    state_topic: "home/switch/tv_spots"
+    command_topic: "home/switch/tv_spots"
 switch office:
     platform: mqtt
     name: Office
     state_topic: "home/switch/office"
     command_topic: "home/switch/office"
+switch front_room:
+    platform: mqtt
+    name: Front Room
+    state_topic: "home/switch/front_room"
+    command_topic: "home/switch/front_room"
+switch midspots:
+    platform: mqtt
+    name: Midspots
+    state_topic: "home/switch/midspots"
+    command_topic: "home/switch/midspots"
+switch back_room:
+    platform: mqtt
+    name: Back room
+    state_topic: "home/switch/back_room"
+    command_topic: "home/switch/back_room"
+switch back_corner:
+    platform: mqtt
+    name: Back Corner
+    state_topic: "home/switch/back_corner"
+    command_topic: "home/switch/back_corner"
+switch bedroom:
+    platform: mqtt
+    name: Bedroom
+    state_topic: "home/switch/bedroom"
+    command_topic: "home/switch/bedroom"
+switch garden:
+    platform: mqtt
+    name: Garden
+    state_topic: "home/switch/garden"
+    command_topic: "home/switch/garden"
+switch balcony:
+    platform: mqtt
+    name: Balcony
+    state_topic: "home/switch/balcony"
+    command_topic: "home/switch/balcony"
+switch roof:
+    platform: mqtt
+    name: Roof
+    state_topic: "home/switch/roof"
+    command_topic: "home/switch/roof"
 
 media_player hall_speaker:
     - platform: vlc
