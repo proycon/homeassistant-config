@@ -11,9 +11,7 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Amsterdam
 
-  customize:
-      sensor.api_password:
-          hidden: true
+  #customize:
 
 # Enables the frontend
 frontend:
@@ -105,7 +103,7 @@ switch office:
     platform: mqtt
     name: Office
     state_topic: "home/switch/office"
-    command_topic: "home/switch/office/set"
+    command_topic: "home/switch/office"
 
 media_player hall_speaker:
     - platform: vlc
