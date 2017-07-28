@@ -194,6 +194,8 @@ shell_command:
     archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
     snapshot_clear_locks: find . -type f -name "*.lock" | xargs rm
 
+hdmi_cec:
+    host: !secret pi1_ip
 
 
 device_tracker:
