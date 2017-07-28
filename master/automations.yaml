@@ -65,34 +65,51 @@
   trigger:
       - platform: state
         entity_id: binary_sensor.frontdoor
-        state: "on"
+        to: "on"
       - platform: state
         entity_id: binary_sensor.backdoor
-        state: "on"
-   condition:
+        to: "on"
+  condition:
       - condition: time
         after: '23:00:00'
         before: '05:00:00'
       - condition: state
         entity_id: binary_sensor.anybodyhome
         state: "on"
-   action:
+  action:
       - service: tts.picotts_say
         entity_id: media_player.hall_speaker
         data:
             message: Door open
 - alias: Lights on in the evening
+  trigger:
+      platform: sun
+      event: sunset
+      offset: '-00:45:00'
+  action:
+      service: switch.turn_on
+      entity_id: group.living_lights
+- alias: Garden lights on in the evening
+  trigger:
+      platform: sun
+      event: sunset
+      offset: '01:00:00'
+  action:
+      service: switch.turn_on
+      entity_id: group.garden_lights
+- alias: Lights off at night
+  trigger:
+      platform: time
+      at: '01:00:00'
+  action:
+      service: switch.turn_off
+      entity_id: group.all_lights
 
 
 
 
-
-
-
-#TODO: turn lights on after sunset
-#TODO: turn lights off at bedtime and after sunrise
+#TODO: turn lights on and off in the morning
 #TODO: doorbell
-#TODO: door notifications
 #TODO: alarm
 #TODO: presence greeting
 #TODO: wake up clock

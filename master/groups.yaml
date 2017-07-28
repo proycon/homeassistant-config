@@ -13,6 +13,27 @@ all_lights:
         - switch.balcony
         - switch.roof
 
+living_lights:
+    name: Living Room lights
+    entities:
+        - switch.tv_spots
+        - switch.front_room
+        - switch.midspots
+        - switch.back_room
+        - switch.back_corner
+
+garden_lights:
+    name: Garden lights
+    entities:
+        - switch.garden
+        - switch.balcony
+
+guard_lights:
+    name: Guard lights
+    entities:
+        - switch.roof
+
+
 cameras:
     name: Cameras
     entities:
