@@ -1,6 +1,1 @@
-trigger_slave_poll:
-    sequence:
-      - service: mqtt.publish #trigger RPi slaves to send their known statussen again
-        data:
-            topic: "home/poll"
-            payload: "ON"
+[]

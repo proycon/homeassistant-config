@@ -188,34 +188,20 @@ automation startup:
   action:
       service: shell_command.start_pycec
 
+automation irsend:
+    hide_entity: true
+    trigger:
+        platform: mqtt
+        topic: "home/irsend/pi1"
+    action:
+        service: shell_command.irsend
+        data:
+            device: trigger.payload_json.device
+            key: trigger.payload_json.key
+
 shell_command:
     start_pycec: python -m pycec
-    tvdecoder_volup: irsend SEND_ONCE VIP1853 UP &
-    tvdecoder_voldown: irsend SEND_ONCE VIP1853 DOWN &
-    tvdecoder_chanup: irsend SEND_ONCE VIP1853 CHANNEL_UP &
-    tvdecoder_chandown: irsend SEND_ONCE VIP1853 CHANNEL_DOWN &
-    tvdecoder_ok: irsend SEND_ONCE VIP1853 OK &
-    tvdecoder_back: irsend SEND_ONCE VIP1853 BACK &
-    tvdecoder_down: irsend SEND_ONCE VIP1853 DOWN &
-    tvdecoder_up: irsend SEND_ONCE VIP1853 UP &
-    tvdecoder_right: irsend SEND_ONCE VIP1853 RIGHT &
-    tvdecoder_left: irsend SEND_ONCE VIP1853 LEFT &
-    tvdecoder_mute: irsend SEND_ONCE VIP1853 MUTE &
-    tvdecoder_pause: irsend SEND_ONCE VIP1853 PAUSE &
-    tvdecoder_1: irsend SEND_ONCE VIP1853 KEY_1 &
-    tvdecoder_2: irsend SEND_ONCE VIP1853 KEY_2 &
-    tvdecoder_3: irsend SEND_ONCE VIP1853 KEY_3 &
-    tvdecoder_4: irsend SEND_ONCE VIP1853 KEY_4 &
-    tvdecoder_5: irsend SEND_ONCE VIP1853 KEY_5 &
-    tvdecoder_6: irsend SEND_ONCE VIP1853 KEY_6 &
-    tvdecoder_7: irsend SEND_ONCE VIP1853 KEY_7 &
-    tvdecoder_8: irsend SEND_ONCE VIP1853 KEY_8 &
-    tvdecoder_9: irsend SEND_ONCE VIP1853 KEY_9 &
-    tvdecoder_0: irsend SEND_ONCE VIP1853 KEY_0 &
-    avr_mute: irsend SEND_ONCE avr KEY_MUTE &
-    avr_volup: irsend SEND_ONCE avr KEY_VOLUMEUP &
-    avr_voldown: irsend SEND_ONCE avr KEY_VOLUMEDOWN &
-    avr_voldown: irsend SEND_ONCE avr KEY_VOLUMEDOWN &
+    irsend: 'irsend SEND_ONCE "{{device}}" "{{key}}" &'
 
 
 
