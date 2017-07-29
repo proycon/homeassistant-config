@@ -285,7 +285,7 @@ automation:
 
 shell_command:
     start_pycec: python -m pycec
-    irsend: 'irsend SEND_ONCE "{{ device }}" "{{ key }}" 2> /tmp/err'
+    irsend: irsend SEND_ONCE "{{ device }}" "{{ key }}" > /tmp/log 2> /tmp/err
 
 
 
