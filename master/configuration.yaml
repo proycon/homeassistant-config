@@ -158,6 +158,11 @@ switch balcony:
     name: Balcony
     state_topic: "home/switch/balcony"
     command_topic: "home/switch/balcony"
+switch hall:
+    platform: mqtt
+    name: Hall
+    state_topic: "home/switch/hall"
+    command_topic: "home/switch/hall"
 switch roof:
     platform: mqtt
     name: Roof

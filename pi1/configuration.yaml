@@ -299,5 +299,5 @@ mqtt:
     password: !secret api_password
 
 #mqtt_eventstream:
-#  publish_topic: slaves/pi2
+#  publish_topic: slaves/pi1
 #  subscribe_topic: master
