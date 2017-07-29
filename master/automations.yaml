@@ -105,7 +105,8 @@
       service: switch.turn_off
       entity_id: group.all_lights
 - alias: Doorbell
-  trigger: state
+  trigger:
+      platform: state
       entity_id: binary_sensor.doorbell
       to: "on"
   condition:
@@ -116,7 +117,8 @@
       service: script.turn_on
       entity_id: script.doorbell_sound
 - alias: Doorbell Test
-  trigger: state
+  trigger:
+      platform: state
       entity_id: binary_sensor.doorbell
       to: "on"
   condition:
