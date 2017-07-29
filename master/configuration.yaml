@@ -667,6 +667,24 @@ script:
                 payload: '{"VIP1853":"KEY_6}'
           - delay:
                 milliseconds: 400
+    doorbell_sound:
+        alias: Doorbell sound
+        sequence:
+            - service: media_player.play_media
+              data:
+                  entity_id: media_player.hall_speaker
+                  media_content_id: /home/homeautomation/homeassistant/media/doorbell.ogg
+                  media_content_type: 'music'
+    dog_sound:
+        alias: Dog barking sound
+        sequence:
+            - service: media_player.play_media
+              data:
+                  entity_id: media_player.hall_speaker
+                  media_content_id: /home/homeautomation/homeassistant/media/dog.wav
+                  media_content_type: 'music'
+
+
 
 #MQTT
 mqtt:
