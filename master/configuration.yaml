@@ -683,6 +683,14 @@ script:
                   entity_id: media_player.hall_speaker
                   media_content_id: /home/homeautomation/homeassistant/media/dog.wav
                   media_content_type: 'music'
+    chime_sound:
+        alias: Chime sound
+        sequence:
+            - service: media_player.play_media
+              data:
+                  entity_id: media_player.hall_speaker
+                  media_content_id: /home/homeautomation/homeassistant/media/chime.wav
+                  media_content_type: 'music'
 
 
 
