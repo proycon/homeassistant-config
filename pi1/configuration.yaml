@@ -51,18 +51,18 @@ discovery:
 
 
 binary_sensor:
-    - id: slave_frontdoor
+    - id: frontdoor
       platform: rpi_gpio
       ports:
-        25: slave_frontdoor
+        25: frontdoor
       pull_mode: DOWN
       invert_logic: true
       bouncetime: 60
       device_class: opening
-    - id: slave_doorbell
+    - id: doorbell
       platform: rpi_gpio
       ports:
-        18: slave_doorbell
+        18: doorbell
       pull_mode: DOWN
       invert_logic: false
       bouncetime: 60

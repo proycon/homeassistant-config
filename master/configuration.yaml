@@ -451,7 +451,7 @@ script:
                 topic: "home/irsend/pi1"
                 payload: '{"VIP1853":"KEY_2}'
     tvdecoder_npo3:
-        alias: TV Channel -  NPO3
+        alias: TV Channel - NPO3
         sequence:
           - service: mqtt.publish
             data:
@@ -642,7 +642,7 @@ script:
                 topic: "home/irsend/pi1"
                 payload: '{"VIP1853":"KEY_8}'
     tvdecoder_arte:
-        alias: TV Channel - ARD
+        alias: TV Channel - Arte
         sequence:
           - service: mqtt.publish
             data:
