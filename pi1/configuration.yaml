@@ -280,8 +280,8 @@ automation:
     action:
         service: shell_command.irsend
         data:
-            device: trigger.payload_json.device
-            key: trigger.payload_json.key
+            device: {{ trigger.payload_json.device }}
+            key: {{ trigger.payload_json.key }}
 
 shell_command:
     start_pycec: python -m pycec
