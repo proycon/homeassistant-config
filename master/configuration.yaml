@@ -163,6 +163,21 @@ switch roof:
     name: Roof
     state_topic: "home/switch/roof"
     command_topic: "home/switch/roof"
+switch avr:
+    platform: mqtt
+    name: AVR
+    state_topic: "home/switch/avr"
+    command_topic: "home/switch/avr"
+switch tvdecoder:
+    platform: mqtt
+    name: TV Decoder
+    state_topic: "home/switch/tvdecoder"
+    command_topic: "home/switch/tvdecoder"
+switch tv:
+    platform: mqtt
+    name: TV
+    state_topic: "home/switch/tv"
+    command_topic: "home/switch/tv"
 
 media_player hall_speaker:
     - platform: vlc
