@@ -153,6 +153,7 @@ automation:
             payload_template: "{{ states('binary_sensor.doorbell') | upper }}"
 ######### SWITCH PROPAGATION SLAVE->MASTER and MASTER->SLAVE (MQTT) #########
   - id: s2m_tv_spots
+    alias: Slave-to-Master TV Spots
     hide_entity: true
     trigger:
       - platform: state
@@ -165,6 +166,7 @@ automation:
            topic: "home/switch/tv_spots"
            payload_template: "{{ states('switch.tv_spots') | upper }}"
   - id: m2s_tv_spots
+    alias: Master-to-Slave TV Spots
     hide_entity: true
     trigger:
        platform: mqtt
@@ -238,6 +240,7 @@ automation:
        service_template: switch.turn_{{ trigger.payload | string | lower }}
        entity_id: switch.avr
   - id: s2m_tvdecoder
+    alias: Slave-to-Master TV Decoder
     hide_entity: true
     trigger:
        - platform: state
@@ -251,6 +254,7 @@ automation:
            payload_template: "{{ states('switch.tvdecoder') | upper }}"
 
   - id: m2s_tvdecoder
+    alias: Master-to-Slave TV Decoder
     hide_entity: true
     trigger:
        platform: mqtt
@@ -260,6 +264,7 @@ automation:
        entity_id: switch.tvdecoder
 
   - id: startup
+    alias: Startup
     hide_entity: true
     trigger:
        platform: homeassistant
@@ -268,6 +273,7 @@ automation:
        service: shell_command.start_pycec
 
   - id: irsend
+    alias: IR Send
     trigger:
         platform: mqtt
         topic: "home/irsend/pi1"
