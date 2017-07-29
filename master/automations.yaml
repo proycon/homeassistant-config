@@ -61,7 +61,8 @@
     at: "00:00:00"
   action:
     - service: shell_command.archive_snapshots
-- alias: Door notification
+- id: door_notification
+  alias: Door notification
   trigger:
       - platform: state
         entity_id: binary_sensor.frontdoor
@@ -81,7 +82,8 @@
         entity_id: media_player.hall_speaker
         data:
             message: Door open
-- alias: Lights on in the evening
+- id: lights_on_evening
+  alias: Lights on in the evening
   trigger:
       platform: sun
       event: sunset
@@ -89,7 +91,8 @@
   action:
       service: switch.turn_on
       entity_id: group.living_lights
-- alias: Garden lights on in the evening
+- id: garden_lights_on_evening
+  alias: Garden lights on in the evening
   trigger:
       platform: sun
       event: sunset
@@ -97,14 +100,16 @@
   action:
       service: switch.turn_on
       entity_id: group.garden_lights
-- alias: Lights off at night
+- id: lights_off_night
+  alias: Lights off at night
   trigger:
       platform: time
       at: '01:00:00'
   action:
       service: switch.turn_off
       entity_id: group.all_lights
-- alias: Doorbell
+- id: doorbell
+  alias: Doorbell
   trigger:
       platform: state
       entity_id: binary_sensor.doorbell
@@ -116,7 +121,8 @@
   action:
       service: script.turn_on
       entity_id: script.doorbell_sound
-- alias: Doorbell Test
+- id: doorbell_test
+  alias: Doorbell Test
   trigger:
       platform: state
       entity_id: binary_sensor.doorbell

@@ -272,7 +272,6 @@ automation startup:
       service: shell_command.start_pycec
 
 automation irsend:
-    hide_entity: true
     trigger:
         platform: mqtt
         topic: "home/irsend/pi1"
