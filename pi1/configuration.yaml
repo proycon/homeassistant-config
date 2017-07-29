@@ -279,9 +279,9 @@ automation:
         topic: "home/irsend/pi1"
     action:
         service: shell_command.irsend
-        data:
-            device: {{ trigger.payload_json.device }}
-            key: {{ trigger.payload_json.key }}
+        data_template:
+            device: '{{ trigger.payload_json.device }}'
+            key: '{{ trigger.payload_json.key }}'
 
 shell_command:
     start_pycec: python -m pycec
