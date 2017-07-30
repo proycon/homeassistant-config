@@ -113,6 +113,7 @@ input_boolean:
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
 automation:
   - id: s2m_frontdoor
+    alias: s2m_frontdoor
     hide_entity: true
     trigger:
         - platform: state
@@ -126,7 +127,8 @@ automation:
         data:
             topic: "home/binary_sensor/frontdoor"
             payload_template: "{{ states('binary_sensor.frontdoor') | upper }}"
-  - id: doorbell
+  - id: s2m_doorbell
+    alias: s2m_doorbell
     hide_entity: true
     trigger:
         - platform: state
@@ -142,6 +144,7 @@ automation:
             payload_template: "{{ states('binary_sensor.doorbell') | upper }}"
 ######### SWITCH PROPAGATION SLAVE->MASTER and MASTER->SLAVE (MQTT) #########
   - id: s2m_avr
+    alias: s2m_avr
     hide_entity: true
     trigger:
        - platform: state
@@ -154,7 +157,7 @@ automation:
           topic: "home/switch/avr"
           payload_template: "{{ states('switch.avr') | upper }}"
 
-  - id: s2m_avr
+  - id: m2s_avr
     hide_entity: true
     trigger:
        platform: mqtt
