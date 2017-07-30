@@ -116,73 +116,73 @@ binary_sensor:
 switch tv_spots:
     platform: mqtt
     name: TV Spots
-    state_topic: "home/switch/tv_spots"
-    command_topic: "home/switch/tv_spots"
+    state_topic: "home/elro/get/beneden/16"
+    command_topic: "home/elro/set/pi1/beneden/16"
 switch office:
     platform: mqtt
     name: Office
-    state_topic: "home/switch/office"
-    command_topic: "home/switch/office"
+    state_topic: "home/elro/get/boven/1"
+    command_topic: "home/elro/set/pi2/boven/1"
 switch front_room:
     platform: mqtt
     name: Front Room
-    state_topic: "home/switch/front_room"
-    command_topic: "home/switch/front_room"
+    state_topic: "home/kaku/get/M/10"
+    command_topic: "home/kaku/set/pi1/M/10"
 switch midspots:
     platform: mqtt
     name: Midspots
-    state_topic: "home/switch/midspots"
-    command_topic: "home/switch/midspots"
+    state_topic: "home/elro/get/beneden/2"
+    command_topic: "home/elro/set/pi2/beneden/2"
 switch back_room:
     platform: mqtt
     name: Back room
-    state_topic: "home/switch/back_room"
-    command_topic: "home/switch/back_room"
+    state_topic: "home/elro/get/beneden/1"
+    command_topic: "home/elro/set/pi2/beneden/1"
 switch back_corner:
     platform: mqtt
     name: Back Corner
-    state_topic: "home/switch/back_corner"
-    command_topic: "home/switch/back_corner"
+    state_topic: "home/elro/get/beneden/4"
+    command_topic: "home/elro/set/pi2/beneden/4"
 switch bedroom:
     platform: mqtt
     name: Bedroom
-    state_topic: "home/switch/bedroom"
-    command_topic: "home/switch/bedroom"
+    state_topic: "home/elro/get/boven/4"
+    command_topic: "home/elro/set/pi2/boven/4"
 switch garden:
     platform: mqtt
     name: Garden
-    state_topic: "home/switch/garden"
-    command_topic: "home/switch/garden"
+    state_topic: "home/elro/get/buiten/1"
+    command_topic: "home/elro/set/pi2/buiten/1"
 switch balcony:
     platform: mqtt
     name: Balcony
-    state_topic: "home/switch/balcony"
-    command_topic: "home/switch/balcony"
+    state_topic: "home/elro/get/buiten/2"
+    command_topic: "home/elro/set/pi2/buiten/2"
 switch hall:
     platform: mqtt
     name: Hall
-    state_topic: "home/switch/hall"
-    command_topic: "home/switch/hall"
+    state_topic: "home/elro/get/boven/2"
+    command_topic: "home/elro/set/pi1/boven/2"
 switch roof:
     platform: mqtt
     name: Roof
-    state_topic: "home/switch/roof"
-    command_topic: "home/switch/roof"
+    state_topic: "home/elro/get/buiten/4"
+    command_topic: "home/elro/set/pi2/buiten/4"
 switch avr:
     platform: mqtt
     name: AVR
     state_topic: "home/switch/avr"
-    command_topic: "home/switch/avr"
+    command_topic: "home/switch/avr/set"
 switch tvdecoder:
     platform: mqtt
     name: TV Decoder
     state_topic: "home/switch/tvdecoder"
-    command_topic: "home/switch/tvdecoder"
+    command_topic: "home/switch/tvdecoder/set"
 switch tv:
     platform: mqtt
     name: TV
     state_topic: "home/switch/tv"
-    command_topic: "home/switch/tv"
+    command_topic: "home/switch/tv/set"
 
 media_player hall_speaker:
     - platform: vlc
@@ -261,429 +261,429 @@ script:
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"avr","key":"KEY_VOLUMEUP"}'
     avr_voldown:
         alias: Volume down (AVR)
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"avr","key":"KEY_VOLUMEDOWN"}'
     avr_mute:
         alias: Mute (AVR)
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"avr","key":"KEY_MUTE"}'
     avr_power:
         alias: Power (AVR) #replace with switch?
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"avr","key":"KEY_POWER"}'
     tvdecoder_channelup:
         alias: Channel up
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"CHANNEL_UP"}'
     tvdecoder_channeldown:
         alias: Channel down
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"CHANNEL_DOWN"}'
     tvdecoder_playpause:
         alias: Play/pause Toggle
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"PLAY_PAUSE"}'
     tvdecoder_ok:
         alias: OK
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"OK"}'
     tvdecoder_back:
         alias: Back
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"BACK"}'
     tvdecoder_down:
         alias: Down
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"down"}'
     tvdecoder_up:
         alias: Up
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"UP"}'
     tvdecoder_left:
         alias: left
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"LEFT"}'
     tvdecoder_right:
         alias: right
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"RIGHT"}'
     tvdecoder_1:
         alias: 1
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_1"}'
     tvdecoder_2:
         alias: 2
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_2"}'
     tvdecoder_3:
         alias: 3
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_3"}'
     tvdecoder_4:
         alias: 4
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_1"}'
     tvdecoder_5:
         alias: 5
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_5"}'
     tvdecoder_6:
         alias: 6
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_6"}'
     tvdecoder_7:
         alias: 7
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_7"}'
     tvdecoder_8:
         alias: 8
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_8"}'
     tvdecoder_9:
         alias: 9
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_9"}'
     tvdecoder_0:
         alias: 0
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_0"}'
     tvdecoder_npo1:
         alias: TV Channel - NPO1
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_6"}'
           - delay:
               milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_6}'
           - delay:
               milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_1}'
     tvdecoder_npo2:
         alias: TV Channel - NPO2
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_6"}'
           - delay:
               milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_6}'
           - delay:
               milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_2}'
     tvdecoder_npo3:
         alias: TV Channel - NPO3
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_6"}'
           - delay:
               milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_6}'
           - delay:
               milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_3}'
     tvdecoder_rtl4:
         alias: TV Channel - RTL4
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_6"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_6}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_4}'
     tvdecoder_veronica:
         alias: TV Channel - Veronica
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_6"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_6}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_9}'
     tvdecoder_een:
         alias: TV Channel - Één
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_7"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_2}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_1}'
     tvdecoder_canvas:
         alias: TV Channel - Canvas
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_7"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_2}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_2}'
     tvdecoder_bbc1st:
         alias: TV Channel - BBC First
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_7"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_2}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_9}'
     tvdecoder_bbc1:
         alias: TV Channel - BBC One
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_7"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_3}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_0}'
     tvdecoder_bbc2:
         alias: TV Channel - BBC Two
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_7"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_3}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_1}'
     tvdecoder_ard:
         alias: TV Channel - ARD
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_4"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_4}'
     tvdecoder_zdf:
         alias: TV Channel - ZDF
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_4"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_5}'
     tvdecoder_wdr:
         alias: TV Channel - WDR
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_4"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_8}'
     tvdecoder_arte:
         alias: TV Channel - Arte
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_4"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_9}'
     tvdecoder_tv5monde:
         alias: TV Channel - TV 5 Monde
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_9"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_2}'
     tvdecoder_rai1:
         alias: TV Channel - Rai 1
         sequence:
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_9"}'
           - delay:
                 milliseconds: 400
           - service: mqtt.publish
             data:
-                topic: "home/irsend/pi1"
+                topic: "home/ir_send/pi1"
                 payload: '{"device":"VIP1853","key":"KEY_6}'
           - delay:
                 milliseconds: 400

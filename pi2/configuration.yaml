@@ -92,8 +92,9 @@ switch:
             command_on: /home/homeautomation/43392/433send -g buiten -d 4 -s 1
             command_off: /home/homeautomation/43392/433send -g buiten -d 4 -s 0
 
+automation:
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
-automation s2m_backdoor:
+  - id: s2m_backdoor
     hide_entity: true
     trigger:
         - platform: state
@@ -108,7 +109,7 @@ automation s2m_backdoor:
             topic: "home/binary_sensor/backdoor"
             payload_template: "{{ states('binary_sensor.backdoor') | upper }}"
 
-automation s2m_bedroomwindow_right:
+  - id: s2m_bedroomwindow_right
     hide_entity: true
     trigger:
         - platform: state
@@ -122,8 +123,7 @@ automation s2m_bedroomwindow_right:
         data:
             topic: "home/binary_sensor/bedroomwindow_right"
             payload_template: "{{ states('binary_sensor.bedroomwindow_right') | upper }}"
-
-automation s2m_bedroomwindow_left:
+  - id: s2m_bedroomwindow_left
     hide_entity: true
     trigger:
         - platform: state
@@ -137,189 +137,36 @@ automation s2m_bedroomwindow_left:
         data:
             topic: "home/binary_sensor/bedroomwindow_left"
             payload_template: "{{ states('binary_sensor.bedroomwindow_left') | upper }}"
-
-######### SWITCH PROPAGATION SLAVE->MASTER and MASTER->SLAVE (MQTT) #########
-automation s2m_office:
-    hide_entity: true
+  - id: elro_send
+    alias: ELRO Send (433.92Mhz)
     trigger:
-        - platform: state
-          entity_id: switch.office
-        - platform: mqtt
-          topic: home/poll #an explicit re-poll of states, issued by master when it starts
-    action:
-        service: mqtt.publish
-        data:
-            topic: "home/switch/office"
-            payload_template: "{{ states('switch.office') | upper }}"
-
-automation m2s_office:
-     hide_entity: true
-     trigger:
         platform: mqtt
-        topic: "home/switch/office"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
-        entity_id: switch.office
-
-automation s2m_midspots:
-    hide_entity: true
+        topic: "home/elro/set/pi2/#"
+    action:
+        - service: shell_command.elro_send
+          data_template:
+             group: '{{ trigger.topic.split("/")[-2] }}'
+             unit: '{{ trigger.topic.split("/")[-1] }}'
+             state: '{% if trigger.payload|upper == "ON" %}1{% else %}0{% endif %}'
+        - service: mqtt.publish
+          data:
+              topic_template: "home/elro/get/{{ trigger.topic.split('.')[-2] }}/{{ triger.topic.split('.')[-1] }}"
+              payload: '{{ trigger.payload }}'
+  - id: kaku_send
+    alias: Klik-aan-Klik-Uit Send (433.92Mhz)
     trigger:
-        - platform: state
-          entity_id: switch.midspots
-        - platform: mqtt
-          topic: home/poll #an explicit re-poll of states, issued by master when it starts
-    action:
-        service: mqtt.publish
-        data:
-            topic: "home/switch/midspots"
-            payload_template: "{{ states('switch.midspots') | upper }}"
-
-automation m2s_midspots:
-     hide_entity: true
-     trigger:
         platform: mqtt
-        topic: "home/switch/midspots"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
-        entity_id: switch.midspots
-
-automation s2m_back_room:
-    hide_entity: true
-    trigger:
-        - platform: state
-          entity_id: switch.back_room
-        - platform: mqtt
-          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+        topic: "home/kaku/set/pi2/#"
     action:
-        service: mqtt.publish
-        data:
-            topic: "home/switch/back_room"
-            payload_template: "{{ states('switch.back_room') | upper }}"
-
-automation m2s_back_room:
-     hide_entity: true
-     trigger:
-        platform: mqtt
-        topic: "home/switch/back_room"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
-        entity_id: switch.back_room
-
-
-automation s2m_back_corner:
-    hide_entity: true
-    trigger:
-        - platform: state
-          entity_id: switch.back_corner
-        - platform: mqtt
-          topic: home/poll #an explicit re-poll of states, issued by master when it starts
-    action:
-        service: mqtt.publish
-        data:
-            topic: "home/switch/back_corner"
-            payload_template: "{{ states('switch.back_corner') | upper }}"
-
-automation m2s_back_corner:
-     hide_entity: true
-     trigger:
-        platform: mqtt
-        topic: "home/switch/back_corner"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
-        entity_id: switch.back_corner
-
-
-automation s2m_garden:
-    hide_entity: true
-    trigger:
-        - platform: state
-          entity_id: switch.garden
-        - platform: mqtt
-          topic: home/poll #an explicit re-poll of states, issued by master when it starts
-    action:
-        service: mqtt.publish
-        data:
-            topic: "home/switch/garden"
-            payload_template: "{{ states('switch.garden') | upper }}"
-
-automation m2s_garden:
-     hide_entity: true
-     trigger:
-        platform: mqtt
-        topic: "home/switch/garden"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
-        entity_id: switch.garden
-
-
-automation s2m_balcony:
-    hide_entity: true
-    trigger:
-        - platform: state
-          entity_id: switch.balcony
-        - platform: mqtt
-          topic: home/poll #an explicit re-poll of states, issued by master when it starts
-    action:
-        service: mqtt.publish
-        data:
-            topic: "home/switch/balcony"
-            payload_template: "{{ states('switch.balcony') | upper }}"
-
-automation m2s_balcony:
-     hide_entity: true
-     trigger:
-        platform: mqtt
-        topic: "home/switch/balcony"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
-        entity_id: switch.balcony
-
-
-automation s2m_bedroom:
-    hide_entity: true
-    trigger:
-        - platform: state
-          entity_id: switch.bedroom
-        - platform: mqtt
-          topic: home/poll #an explicit re-poll of states, issued by master when it starts
-    action:
-        service: mqtt.publish
-        data:
-            topic: "home/switch/bedroom"
-            payload_template: "{{ states('switch.bedroom') | upper }}"
-
-automation m2s_bedroom:
-     hide_entity: true
-     trigger:
-        platform: mqtt
-        topic: "home/switch/bedroom"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
-        entity_id: switch.bedroom
-
-
-automation s2m_roof:
-    hide_entity: true
-    trigger:
-        - platform: state
-          entity_id: switch.roof
-        - platform: mqtt
-          topic: home/poll #an explicit re-poll of states, issued by master when it starts
-    action:
-        service: mqtt.publish
-        data:
-            topic: "home/switch/roof"
-            payload_template: "{{ states('switch.roof') | upper }}"
-
-automation m2s_roof:
-     hide_entity: true
-     trigger:
-        platform: mqtt
-        topic: "home/switch/roof"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
-        entity_id: switch.roof
-
+        - service: shell_command.kaku_send
+          data_template:
+             group: '{{ trigger.topic.split("/")[-2] }}'
+             unit: '{{ trigger.topic.split("/")[-1] }}'
+             state: '{{ trigger.payload|lower }}'
+        - service: mqtt.publish
+          data:
+              topic_template: "home/kaku/get/{{ trigger.topic.split('.')[-2] }}/{{ triger.topic.split('.')[-1] }}"
+              payload: '{{ trigger.payload }}'
 
 
 #MQTT
