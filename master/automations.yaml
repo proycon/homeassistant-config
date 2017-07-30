@@ -118,13 +118,40 @@
   action:
       service: script.turn_on
       entity_id: script.doorbell_sound
-- alias: Camera to preset
+- id: ipcam_topreset
+  alias: Camera to preset
   trigger:
       platform: state
       entity_id: input_select.ipcam_direction
   action:
       service: script.turn_on
       entity_id: script.ipcam_topreset
+- id: alarm_trigger
+  alias: 'Trigger alarm while armed away'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.frontdoor
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.backdoor
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.bedroomwindow_left
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.bedroomwindow_right
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: armed_away
+  action:
+    - service: alarm_control_panel.alarm_trigger
+      entity_id: alarm_control_panel.ha_alarm
+    - service: script.turn_on
+      entity_id: script.alarm
+
+
 
 
 

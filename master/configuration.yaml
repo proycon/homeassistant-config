@@ -245,6 +245,10 @@ rest_command:
 hdmi_cec:
     host: !secret pi1_ip
 
+alarm_control_panel:
+    - platform: manual
+      name: Alarm System
+      trigger_time: 5
 
 device_tracker:
     - platform: tplink
@@ -727,6 +731,17 @@ script:
                   entity_id: media_player.hall_speaker
                   media_content_id: /home/homeautomation/homeassistant/media/chime.wav
                   media_content_type: 'music'
+    alarm:
+        alias: Alarm
+        sequence:
+            - service: media_player.play_media
+              data:
+                  entity_id: media_player.hall_speaker
+                  media_content_id: /home/homeautomation/homeassistant/media/alarm.ogg
+                  media_content_type: 'music'
+            - service: script.turn_on #loop
+              data:
+                  entity_id: script.alarm
     ipcam_topreset:
         alias: Camera to preset
         sequence:
