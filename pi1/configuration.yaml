@@ -122,7 +122,8 @@ input_boolean:
 
 
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
-automation s2m_frontdoor:
+automation:
+  - id: s2m_frontdoor
     hide_entity: true
     trigger:
         - platform: state
@@ -136,8 +137,7 @@ automation s2m_frontdoor:
         data:
             topic: "home/binary_sensor/frontdoor"
             payload_template: "{{ states('binary_sensor.frontdoor') | upper }}"
-
-automation s2m_doorbell:
+  - id: doorbell
     hide_entity: true
     trigger:
         - platform: state
@@ -151,31 +151,30 @@ automation s2m_doorbell:
         data:
             topic: "home/binary_sensor/doorbell"
             payload_template: "{{ states('binary_sensor.doorbell') | upper }}"
-
 ######### SWITCH PROPAGATION SLAVE->MASTER and MASTER->SLAVE (MQTT) #########
-automation s2m_tv_spots:
+  - id: s2m_tv_spots
+    alias: Slave-to-Master TV Spots
     hide_entity: true
     trigger:
-        - platform: state
-          entity_id: switch.tv_spots
-        - platform: mqtt
-          topic: home/poll #an explicit re-poll of states, issued by master when it starts
-    action:
-        service: mqtt.publish
-        data:
-            topic: "home/switch/tv_spots"
-            payload_template: "{{ states('switch.tv_spots') | upper }}"
-
-automation m2s_tv_spots:
-     hide_entity: true
-     trigger:
-        platform: mqtt
-        topic: "home/switch/tv_spots"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
+      - platform: state
         entity_id: switch.tv_spots
-
-automation s2m_front_room:
+      - platform: mqtt
+        topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+       service: mqtt.publish
+       data:
+           topic: "home/switch/tv_spots"
+           payload_template: "{{ states('switch.tv_spots') | upper }}"
+  - id: m2s_tv_spots
+    alias: Master-to-Slave TV Spots
+    hide_entity: true
+    trigger:
+       platform: mqtt
+       topic: "home/switch/tv_spots"
+    action:
+       service_template: switch.turn_{{ trigger.payload | string | lower }}
+       entity_id: switch.tv_spots
+  - id: s2m_front_room
     hide_entity: true
     trigger:
         - platform: state
@@ -188,16 +187,16 @@ automation s2m_front_room:
             topic: "home/switch/front_room"
             payload_template: "{{ states('switch.front_room') | upper }}"
 
-automation m2s_front_room:
-     hide_entity: true
-     trigger:
-        platform: mqtt
-        topic: "home/switch/front_room"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
-        entity_id: switch.front_room
+  - id: m2s_front_room
+    hide_entity: true
+    trigger:
+       platform: mqtt
+       topic: "home/switch/front_room"
+    action:
+       service_template: switch.turn_{{ trigger.payload | string | lower }}
+       entity_id: switch.front_room
 
-automation s2m_hall:
+  - id: s2m_hall
     hide_entity: true
     trigger:
         - platform: state
@@ -210,80 +209,83 @@ automation s2m_hall:
             topic: "home/switch/hall"
             payload_template: "{{ states('switch.hall') | upper }}"
 
-automation m2s_hall:
-     hide_entity: true
-     trigger:
-        platform: mqtt
-        topic: "home/switch/hall"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
-        entity_id: switch.hall
-
-automation s2m_avr:
+  - id: m2s_hall
     hide_entity: true
     trigger:
-        - platform: state
-          entity_id: switch.avr
-        - platform: mqtt
-          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+       platform: mqtt
+       topic: "home/switch/hall"
     action:
-        service: mqtt.publish
-        data:
-            topic: "home/switch/avr"
-            payload_template: "{{ states('switch.avr') | upper }}"
+       service_template: switch.turn_{{ trigger.payload | string | lower }}
+       entity_id: switch.hall
 
-automation m2s_avr:
-     hide_entity: true
-     trigger:
-        platform: mqtt
-        topic: "home/switch/avr"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
-        entity_id: switch.avr
-
-automation s2m_tvdecoder:
+  - id: s2m_avr
     hide_entity: true
     trigger:
-        - platform: state
-          entity_id: switch.tvdecoder
-        - platform: mqtt
-          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+       - platform: state
+         entity_id: switch.avr
+       - platform: mqtt
+         topic: home/poll #an explicit re-poll of states, issued by master when it starts
     action:
-        service: mqtt.publish
-        data:
-            topic: "home/switch/tvdecoder"
-            payload_template: "{{ states('switch.tvdecoder') | upper }}"
+       service: mqtt.publish
+       data:
+          topic: "home/switch/avr"
+          payload_template: "{{ states('switch.avr') | upper }}"
 
-automation m2s_tvdecoder:
-     hide_entity: true
-     trigger:
-        platform: mqtt
-        topic: "home/switch/tvdecoder"
-     action:
-        service_template: switch.turn_{{ trigger.payload | string | lower }}
-        entity_id: switch.tvdecoder
+  - id: s2m_avr
+    hide_entity: true
+    trigger:
+       platform: mqtt
+       topic: "home/switch/avr"
+    action:
+       service_template: switch.turn_{{ trigger.payload | string | lower }}
+       entity_id: switch.avr
+  - id: s2m_tvdecoder
+    alias: Slave-to-Master TV Decoder
+    hide_entity: true
+    trigger:
+       - platform: state
+         entity_id: switch.tvdecoder
+       - platform: mqtt
+         topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+       service: mqtt.publish
+       data:
+           topic: "home/switch/tvdecoder"
+           payload_template: "{{ states('switch.tvdecoder') | upper }}"
 
-automation startup:
-  hide_entity: true
-  trigger:
-      platform: homeassistant
-      event: start
-  action:
-      service: shell_command.start_pycec
+  - id: m2s_tvdecoder
+    alias: Master-to-Slave TV Decoder
+    hide_entity: true
+    trigger:
+       platform: mqtt
+       topic: "home/switch/tvdecoder"
+    action:
+       service_template: switch.turn_{{ trigger.payload | string | lower }}
+       entity_id: switch.tvdecoder
 
-automation irsend:
+  - id: startup
+    alias: Startup
+    hide_entity: true
+    trigger:
+       platform: homeassistant
+       event: start
+    action:
+       service: shell_command.start_pycec
+
+  - id: irsend
+    alias: IR Send
     trigger:
         platform: mqtt
         topic: "home/irsend/pi1"
     action:
         service: shell_command.irsend
-        data:
-            device: trigger.payload_json.device
-            key: trigger.payload_json.key
+        data_template:
+            device: '{{ trigger.payload_json.device }}'
+            key: '{{ trigger.payload_json.key }}'
 
 shell_command:
     start_pycec: python -m pycec
-    irsend: 'irsend SEND_ONCE "{{device}}" "{{key}}" &'
+    irsend: /home/homeautomation/homeassistant/scripts/media/irsend.sh "{{ device }}" "{{ key }}"
 
 
 
