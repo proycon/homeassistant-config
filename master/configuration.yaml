@@ -39,7 +39,9 @@ homeassistant:
     switch.tv:
         icon: mdi:television
     switch.avr:
-        icon: mdi:music-box-outline
+        icon: mdi:music_box_outline
+    switch.tvdecoder_1:
+        icon: mdi:numeric_one_box
 
 # Enables the frontend
 frontend:
