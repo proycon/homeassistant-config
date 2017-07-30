@@ -65,9 +65,9 @@ script.tvdecoder_ok:
 script.avr_mute:
     icon: mdi:volume-off
 script.avr_volup:
-    icon: mdi:volume-up
+    icon: mdi:volume-plus
 script.avr_voldown:
-    icon: mdi:volume-down
+    icon: mdi:volume-minus
 script.tvdecoder_playpause:
     icon: mdi:play-pause
 script.dog_sound:
