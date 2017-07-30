@@ -113,6 +113,7 @@
   trigger:
       platform: state
       entity_id: binary_sensor.doorbell
+      from: "off"
       to: "on"
   action:
       service: script.turn_on

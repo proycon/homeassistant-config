@@ -63,38 +63,10 @@ binary_sensor:
       bouncetime: 60
       device_class: opening
 
-
-switch:
-    platform: command_line
-    switches:
-        midspots:
-            command_on: /home/homeautomation/43392/433send -g beneden -d 2 -s 1
-            command_off: /home/homeautomation/43392/433send -g beneden -d 2 -s 0
-        back_room:
-            command_on: /home/homeautomation/43392/433send -g beneden -d 1 -s 1
-            command_off: /home/homeautomation/43392/433send -g beneden -d 1 -s 0
-        back_corner:
-            command_on: /home/homeautomation/43392/433send -g beneden -d 4 -s 1
-            command_off: /home/homeautomation/43392/433send -g beneden -d 4 -s 0
-        office:
-            command_on: /home/homeautomation/43392/433send -g boven -d 1 -s 1
-            command_off: /home/homeautomation/43392/433send -g boven -d 1 -s 0
-        bedroom:
-            command_on: /home/homeautomation/43392/433send -g boven -d 4 -s 1
-            command_off: /home/homeautomation/43392/433send -g boven -d 4 -s 0
-        garden:
-            command_on: /home/homeautomation/43392/433send -g buiten -d 1 -s 1
-            command_off: /home/homeautomation/43392/433send -g buiten -d 1 -s 0
-        balcony:
-            command_on: /home/homeautomation/43392/433send -g buiten -d 2 -s 1
-            command_off: /home/homeautomation/43392/433send -g buiten -d 2 -s 0
-        roof:
-            command_on: /home/homeautomation/43392/433send -g buiten -d 4 -s 1
-            command_off: /home/homeautomation/43392/433send -g buiten -d 4 -s 0
-
 automation:
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
   - id: s2m_backdoor
+    alias: s2m_backdoor
     hide_entity: true
     trigger:
         - platform: state
@@ -110,6 +82,7 @@ automation:
             payload_template: "{{ states('binary_sensor.backdoor') | upper }}"
 
   - id: s2m_bedroomwindow_right
+    alias: s2m_bedroomwindow_right
     hide_entity: true
     trigger:
         - platform: state
@@ -124,6 +97,7 @@ automation:
             topic: "home/binary_sensor/bedroomwindow_right"
             payload_template: "{{ states('binary_sensor.bedroomwindow_right') | upper }}"
   - id: s2m_bedroomwindow_left
+    alias: s2m_bedroomwindow_left
     hide_entity: true
     trigger:
         - platform: state
