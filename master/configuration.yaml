@@ -14,8 +14,6 @@ homeassistant:
   customize:
     switch.tv_spots:
         icon: mdi:lightbulb
-    switch.tv_spots:
-        icon: mdi:lightbulb
     switch.office:
         icon: mdi:lightbulb
     switch.front_room:
