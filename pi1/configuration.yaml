@@ -218,7 +218,7 @@ automation:
              state: '{% if trigger.payload|upper == "ON" %}1{% else %}0{% endif %}'
         - service: mqtt.publish
           data:
-              topic_template: "home/elro/get/{{ trigger.topic.split('.')[-2] }}/{{ triger.topic.split('.')[-1] }}"
+              topic_template: "home/elro/get/{{ trigger.topic.split('.')[-2] }}/{{ trigger.topic.split('.')[-1] }}"
               payload: '{{ trigger.payload }}'
   - id: kaku_send
     alias: Klik-aan-Klik-Uit Send (433.92Mhz)
@@ -233,7 +233,7 @@ automation:
              state: '{{ trigger.payload | lower }}'
         - service: mqtt.publish
           data:
-              topic_template: "home/kaku/get/{{ trigger.topic.split('.')[-2] }}/{{ triger.topic.split('.')[-1] }}"
+              topic_template: "home/kaku/get/{{ trigger.topic.split('.')[-2] }}/{{ trigger.topic.split('.')[-1] }}"
               payload: '{{ trigger.payload }}'
 
 shell_command:
