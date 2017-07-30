@@ -114,26 +114,9 @@
       platform: state
       entity_id: binary_sensor.doorbell
       to: "on"
-  condition:
-      condition: state
-      entity_id: binary_sensor.frontdoor
-      state: "off"
   action:
       service: script.turn_on
       entity_id: script.doorbell_sound
-- id: doorbell_test
-  alias: Doorbell Test
-  trigger:
-      platform: state
-      entity_id: binary_sensor.doorbell
-      to: "on"
-  condition:
-      condition: state
-      entity_id: binary_sensor.frontdoor
-      state: "on"
-  action:
-      service: script.turn_on
-      entity_id: script.chime_sound
 
 
 
