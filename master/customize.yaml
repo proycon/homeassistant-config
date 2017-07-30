@@ -1,0 +1,52 @@
+switch.tv_spots:
+    icon: mdi:lightbulb
+switch.office:
+    icon: mdi:lightbulb
+switch.front_room:
+    icon: mdi:lightbulb
+switch.midspots:
+    icon: mdi:lightbulb
+switch.back_room:
+    icon: mdi:lightbulb
+switch.back_corner:
+    icon: mdi:lightbulb
+switch.bedroom:
+    icon: mdi:lightbulb
+switch.garden:
+    icon: mdi:lightbulb
+switch.balcony:
+    icon: mdi:lightbulb
+switch.hall:
+    icon: mdi:lightbulb
+switch.roof:
+    icon: mdi:lightbulb
+switch.tvdecoder:
+    icon: mdi:airplay
+switch.tv:
+    icon: mdi:television
+switch.avr:
+    icon: mdi:music-box-outline
+script.tvdecoder_1:
+    icon: mdi:numeric-1-box
+script.tvdecoder_2:
+    icon: mdi:numeric-2-box
+script.tvdecoder_3:
+    icon: mdi:numeric-3-box
+script.tvdecoder_4:
+    icon: mdi:numeric-4-box
+script.tvdecoder_5:
+    icon: mdi:numeric-5-box
+script.tvdecoder_6:
+    icon: mdi:numeric-6-box
+script.tvdecoder_7:
+    icon: mdi:numeric-7-box
+script.tvdecoder_8:
+    icon: mdi:numeric-8-box
+script.tvdecoder_9:
+    icon: mdi:numeric-9-box
+script.tvdecoder_0:
+    icon: mdi:numeric-0-box
+script.avr_mute:
+    icon: mdi:music-off
+script.tvdecoder_playpause:
+    icon: mdi:play-pause
