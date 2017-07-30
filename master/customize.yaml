@@ -76,4 +76,5 @@ script.doorbell_sound:
     icon: mdi:music-note
 script.trigger_slave_poll:
     icon: mdi:refresh
-
+script.ipcam_topreset:
+    icon: mdi:camera
