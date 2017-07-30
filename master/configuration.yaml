@@ -189,23 +189,23 @@ media_player hall_speaker:
       arguments: '--alsa-audio-device=hw:0,0'
 
 camera:
-    livingroom:
+    - id: livingroom
       platform: local_file
       name: Living Room
       file_path: /home/homeautomation/homeassistant/snapshots/_livingroom.jpg
-    street:
+    - id: street
       platform: local_file
       name: Street
       file_path: /home/homeautomation/homeassistant/snapshots/_street.jpg
-    frontdoor:
+    - id: frontdoor
       platform: local_file
       name: Front door
       file_path: /home/homeautomation/homeassistant/snapshots/_frontdoor.jpg
-    hallupstairs:
+    - id: hallupstairs
       platform: local_file
       name: Hall upstairs
       file_path: /home/homeautomation/homeassistant/snapshots/_hallupstairs.jpg
-    garden:
+    - id: garden
       platform: local_file
       name: Garden
       file_path: /home/homeautomation/homeassistant/snapshots/_garden.jpg
