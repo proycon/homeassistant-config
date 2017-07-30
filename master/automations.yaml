@@ -12,7 +12,10 @@
       - service: shell_command.snapshot_clear_locks #clear all snapshot locks on startup
       - service: script.turn_on  #trigger RPi slaves to send their known statusses again
         data:
-            entity_id: "script.trigger_slave_poll"
+            entity_id: script.trigger_slave_poll
+      - service: script.turn_on
+        data:
+            entity_id: script.reset_lights
 #------------ Snapshots ------------------------
 - id: snapshots_frontdoor
   alias: Frontdoor snapshots
