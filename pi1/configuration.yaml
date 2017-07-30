@@ -217,7 +217,7 @@ automation:
              unit: '{{ trigger.topic.split("/")[-1] }}'
              state: '{% if trigger.payload|upper == "ON" %}1{% else %}0{% endif %}'
         - service: mqtt.publish
-          data:
+          data_template:
               topic_template: "home/elro/get/{{ trigger.topic.split('.')[-2] }}/{{ trigger.topic.split('.')[-1] }}"
               payload_template: '{{ trigger.payload }}'
   - id: kaku_send
@@ -232,7 +232,7 @@ automation:
              unit: '{{ trigger.topic.split("/")[-1] }}'
              state: '{{ trigger.payload | lower }}'
         - service: mqtt.publish
-          data:
+          data_template:
               topic_template: "home/kaku/get/{{ trigger.topic.split('.')[-2] }}/{{ trigger.topic.split('.')[-1] }}"
               payload_template: '{{ trigger.payload }}'
 
