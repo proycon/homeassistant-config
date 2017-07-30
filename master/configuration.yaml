@@ -216,6 +216,17 @@ camera:
     #  name: Gardencam
     #  still_image_url: !secret gardencam_url
 
+input_select:
+    ipcam_direction:
+        name: Camera Direction Living room
+        options:
+            - Hall
+            - Dresser
+            - Back
+            - TV
+            - Couch
+            - Front
+
 shell_command:
     snapshot_livingroom: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh livingroom
     snapshot_street: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh street
@@ -224,6 +235,12 @@ shell_command:
     snapshot_hallupstairs: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh hallupstairs
     archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
     snapshot_clear_locks: find . -type f -name "*.lock" | xargs rm
+
+rest_command:
+    ipcam_topreset:
+        url: 'http://{{ ip }}/cgi/ptdc.cgi?command=goto_preset_position&index={{ index }}'
+        username: !secret ipcam_user
+        password: !secret ipcam_password
 
 hdmi_cec:
     host: !secret pi1_ip
@@ -710,7 +727,13 @@ script:
                   entity_id: media_player.hall_speaker
                   media_content_id: /home/homeautomation/homeassistant/media/chime.wav
                   media_content_type: 'music'
-
+    ipcam_topreset:
+        alias: Camera to preset
+        sequence:
+            - service: rest_command.ipcam_topreset
+              data_template:
+                  ip: !secret ipcam_ip
+                  index: '{% if is_state("input_select","Hall") %}0{% elif is_state("input_select","Dresser") %}1{% elif is_state("input_select","Back") %}2{% elif is_state("input_select","TV") %}3{% elif is_state("input_select","Couch") %}4{% elif is_state("input_select","Front") %}5{% endif %}'
 
 
 #MQTT
