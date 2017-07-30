@@ -21,7 +21,7 @@ switch.hall:
 switch.roof:
     icon: mdi:lightbulb
 switch.tvdecoder:
-    icon: mdi:airplay
+    icon: mdi:television-guide
 switch.tv:
     icon: mdi:television
 switch.avr:
@@ -46,7 +46,34 @@ script.tvdecoder_9:
     icon: mdi:numeric-9-box
 script.tvdecoder_0:
     icon: mdi:numeric-0-box
+script.tvdecoder_back:
+    icon: mdi:backburger
+script.tvdecoder_channelup:
+    icon: mdi:arrow-up-bold-circle
+script.tvdecoder_channeldown:
+    icon: mdi:arrow-down-bold-circle
+script.tvdecoder_up:
+    icon: mdi:arrow-up
+script.tvdecoder_down:
+    icon: mdi:arrow-down
+script.tvdecoder_left:
+    icon: mdi:arrow-left
+script.tvdecoder_right:
+    icon: mdi:arrow-right
+script.tvdecoder_ok:
+    icon: mdi:thumb-up
 script.avr_mute:
-    icon: mdi:music-off
+    icon: mdi:volume-off
+script.avr_volup:
+    icon: mdi:volume-up
+script.avr_voldown:
+    icon: mdi:volume-down
 script.tvdecoder_playpause:
     icon: mdi:play-pause
+script.dog_sound:
+    icon: mdi:music-note
+script.doorbell_sound:
+    icon: mdi:music-note
+script.trigger_slave_poll:
+    icon: mdi:refresh
+
