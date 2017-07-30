@@ -150,6 +150,31 @@
       entity_id: alarm_control_panel.ha_alarm
     - service: script.turn_on
       entity_id: script.alarm
+    - service: switch.turn_on
+      entity_id: group.all_lights
+- id: arm
+  alias: 'Arm system when away'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.anybodyhome
+      to: 'off'
+  action:
+    - service: alarm_control_panel.alarm_arm_away
+      entity_id: alarm_control_panel.ha_alarm
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: System armed
+- id: disarm
+  alias: 'Disarm system when home'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.anybodyhome
+      to: 'on'
+  action:
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.ha_alarm
+
 
 
 
