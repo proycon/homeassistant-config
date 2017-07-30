@@ -168,6 +168,11 @@ automation:
               topic_template: "home/kaku/get/{{ trigger.topic.split('.')[-2] }}/{{ triger.topic.split('.')[-1] }}"
               payload: '{{ trigger.payload }}'
 
+shell_command:
+    start_pycec: python -m pycec
+    ir_send: /home/homeautomation/homeassistant/scripts/media/irsend.sh "{{ device }}" "{{ key }}"
+    elro_send: /home/homeautomation/homeassistant/scripts/switch/elro.sh "{{ group }}" "{{ unit }}" "{{ state }}"
+    kaku_send: /home/homeautomation/homeassistant/scripts/switch/kaku.sh "{{ group }}" "{{ unit }}" "{{ state }}" #Klik-aan-klik-uit
 
 #MQTT
 mqtt:
