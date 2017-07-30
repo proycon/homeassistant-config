@@ -41,9 +41,30 @@ homeassistant:
     switch.avr:
         icon: mdi:music-box-outline
     script.tvdecoder_1:
-        icon: mdi:numeric-one-box
+        icon: mdi:numeric-1-box
     script.tvdecoder_2:
-        icon: mdi:numeric-two-box
+        icon: mdi:numeric-2-box
+    script.tvdecoder_3:
+        icon: mdi:numeric-3-box
+    script.tvdecoder_4:
+        icon: mdi:numeric-4-box
+    script.tvdecoder_5:
+        icon: mdi:numeric-5-box
+    script.tvdecoder_6:
+        icon: mdi:numeric-6-box
+    script.tvdecoder_7:
+        icon: mdi:numeric-7-box
+    script.tvdecoder_8:
+        icon: mdi:numeric-8-box
+    script.tvdecoder_9:
+        icon: mdi:numeric-9-box
+    script.tvdecoder_0:
+        icon: mdi:numeric-0-box
+    script.avr_mute:
+        icon: mdi:music-off
+    script.tvdecoder_playpause:
+        icon: mdi:play-pause
+
 
 # Enables the frontend
 frontend:
