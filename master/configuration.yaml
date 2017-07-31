@@ -188,6 +188,10 @@ media_player hall_speaker:
       name: hall_speaker
       arguments: '--alsa-audio-device=hw:0,0'
 
+media_player avr:
+  - platform: yamaha
+    host: 192.168.0.135
+
 camera:
     - platform: local_file
       name: Living Room
