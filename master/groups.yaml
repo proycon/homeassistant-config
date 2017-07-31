@@ -150,7 +150,7 @@ media_devices:
     icon: mdi:television
     entities:
         - switch.tv_decoder
-        - switch.hdmi_0 #TV
+        - switch.hdmi_0 #TV, 50PFK5300/12
         - media_player.yamaha_receiver
 
 media_volume:

@@ -68,47 +68,6 @@ binary_sensor:
       bouncetime: 60
 
 
-switch:
-  - platform: template
-    switches:
-        avr:
-            value_template: "{{ states.input_boolean.avr }}"
-            turn_on:
-                service: shell_command.irsend
-                data:
-                    device: "avr"
-                    key: "KEY_POWER"
-            turn_off:
-                service: shell_command.irsend
-                data:
-                    device: "avr"
-                    key: "KEY_POWER"
-        tvdecoder:
-            value_template: "{{ states.input_boolean.tvdecoder }}"
-            turn_on:
-                - service: shell_command.irsend
-                  data:
-                     device: "VIP1853"
-                     key: "POWER"
-                - service: shell_command.irsend
-                  data:
-                    device: "avr"
-                    key: "KEY_TV"
-            turn_off:
-                service: shell_command.irsend
-                data:
-                    device: "VIP1853"
-                    key: "POWER"
-
-
-#Hidden states for stateless switches
-input_boolean:
-    avr:
-        initial: off
-    tvdecoder:
-        initial: off
-
-
 
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
 automation:
@@ -143,52 +102,6 @@ automation:
             topic: "home/binary_sensor/doorbell"
             payload_template: "{{ states('binary_sensor.doorbell') | upper }}"
 ######### SWITCH PROPAGATION SLAVE->MASTER and MASTER->SLAVE (MQTT) #########
-  - id: s2m_avr
-    alias: s2m_avr
-    hide_entity: true
-    trigger:
-       - platform: state
-         entity_id: switch.avr
-       - platform: mqtt
-         topic: home/poll #an explicit re-poll of states, issued by master when it starts
-    action:
-       service: mqtt.publish
-       data:
-          topic: "home/switch/avr"
-          payload_template: "{{ states('switch.avr') | upper }}"
-
-  - id: m2s_avr
-    hide_entity: true
-    trigger:
-       platform: mqtt
-       topic: "home/switch/avr"
-    action:
-       service_template: switch.turn_{{ trigger.payload | string | lower }}
-       entity_id: switch.avr
-  - id: s2m_tvdecoder
-    alias: Slave-to-Master TV Decoder
-    hide_entity: true
-    trigger:
-       - platform: state
-         entity_id: switch.tvdecoder
-       - platform: mqtt
-         topic: home/poll #an explicit re-poll of states, issued by master when it starts
-    action:
-       service: mqtt.publish
-       data:
-           topic: "home/switch/tvdecoder"
-           payload_template: "{{ states('switch.tvdecoder') | upper }}"
-
-  - id: m2s_tvdecoder
-    alias: Master-to-Slave TV Decoder
-    hide_entity: true
-    trigger:
-       platform: mqtt
-       topic: "home/switch/tvdecoder"
-    action:
-       service_template: switch.turn_{{ trigger.payload | string | lower }}
-       entity_id: switch.tvdecoder
-
   - id: startup
     alias: Startup
     hide_entity: true

@@ -167,21 +167,12 @@ switch roof:
     name: Roof
     state_topic: "home/elro/get/buiten/4"
     command_topic: "home/elro/set/pi2/buiten/4"
-switch avr:
-    platform: mqtt
-    name: AVR
-    state_topic: "home/switch/avr"
-    command_topic: "home/switch/avr/set"
-switch tvdecoder:
+switch tv_decoder:
     platform: mqtt
     name: TV Decoder
-    state_topic: "home/switch/tvdecoder"
-    command_topic: "home/switch/tvdecoder/set"
-switch tv:
-    platform: mqtt
-    name: TV
-    state_topic: "home/switch/tv"
-    command_topic: "home/switch/tv/set"
+    command_topic: "home/ir_send/pi1"
+    payload_on: '{"device":"VIP1853","key":"POWER"}'
+    payload_off: '{"device":"VIP1853","key":"POWER"}'
 
 media_player hall_speaker:
     - platform: vlc
@@ -193,7 +184,7 @@ media_player yamaha_receiver:
     host: !secret avr_ip
     source_names:
         HDMI1: "TV Decoder"
-        HDMI2: "Raspberry Pi 1"
+        HDMI2: "Pi1"
 
 camera:
     - platform: local_file
