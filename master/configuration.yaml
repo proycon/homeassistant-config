@@ -190,7 +190,7 @@ media_player hall_speaker:
 
 media_player avr:
   - platform: yamaha
-    host: 192.168.0.135
+    host: !secret avr_ip
 
 camera:
     - platform: local_file
