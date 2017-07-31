@@ -188,7 +188,7 @@ media_player hall_speaker:
       name: hall_speaker
       arguments: '--alsa-audio-device=hw:0,0'
 
-media_player avr:
+media_player yamaha_receiver:
   - platform: yamaha
     host: !secret avr_ip
 
