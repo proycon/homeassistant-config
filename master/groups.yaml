@@ -3,6 +3,7 @@ default_view:
     icon: mdi:home
     entities:
         - binary_sensor.anybodyhome
+        - alarm_control_panel.alarm_system
         - device_tracker.proyphone
         - device_tracker.hansphone
         - binary_sensor.front_door
@@ -13,8 +14,8 @@ default_view:
         - sensor.weather_symbol
         - sensor.weather_temperature
         - group.all_lights
-        - group.doors
         - group.cameras
+        - group.media_volume
 
 media_view:
     name: Media
@@ -24,7 +25,7 @@ media_view:
         - group.media_devices
         - group.media_volume
         - group.media_tv_channels
-        - group.media_tv_nav
+        - group.media_tv_navigation
 
 light_view:
     view: yes
@@ -47,6 +48,37 @@ camera_view:
         - camera.hall_upstairs
         - camera.front_door
         - input_select.ipcam_direction
+
+config_view:
+    name: Configuration
+    icon: mdi:settings
+    view: yes
+    entities:
+        - group.config_snapshots
+        - group.config_lights
+
+config_snapshots:
+    name: Snapshots
+    icon: mdi:camera
+    entities:
+        - automation.archive_snapshots
+        - automation.snapshots_frontdoor
+        - automation.snapshots_garden
+        - automation.snapshots_street
+        - automation.snapshots_livingroom
+        - automation.snapshots_hallupstairs
+
+config_lights:
+    name: Lights
+    icon: mdi:lightbulb
+    entities:
+        - automation.lights_on_evening
+        - automation.lights_off_night
+        - automation.garden_lights_on_evening
+        - automation.snapshots_garden
+        - automation.snapshots_street
+        - automation.snapshots_livingroom
+        - automation.snapshots_hallupstairs
 
 
 all_lights:
@@ -94,6 +126,7 @@ cameras:
     name: Cameras
     entities:
         - camera.living_room
+        - input_select.ipcam_direction
         - camera.street
         - camera.front_door
         - camera.hall_upstairs
@@ -125,7 +158,7 @@ media_volume:
         - script.avr_mute
         - script.avr_voldown
 
-media_tv_nav:
+media_tv_navigation:
     name: TV Navigation
     icon: mdi:cursor-move
     entities:
@@ -183,5 +216,6 @@ devices:
         - known_device.unknown2
         - known_device.unknown3
         - known_device.unknown4
+
 
 

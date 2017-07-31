@@ -207,6 +207,8 @@ camera:
     - platform: mjpeg
       name: Living Room Live
       mjpeg_url: !secret ipcam_mjpeg_url
+      user: !secret ipcam_user
+      password: !secret ipcam_password
     - platform: mjpeg
       friendly_name: Street Live
       mjpeg_url: !secret streetcam_mjpeg_url
