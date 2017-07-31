@@ -151,7 +151,7 @@ media_devices:
     entities:
         - switch.tv_decoder
         - switch.hdmi_0 #TV
-        - mediaplayer.yamaha_receiver
+        - media_player.yamaha_receiver
 
 media_volume:
     name: Volume (AVR)
