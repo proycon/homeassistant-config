@@ -189,32 +189,30 @@ media_player hall_speaker:
       arguments: '--alsa-audio-device=hw:0,0'
 
 camera:
-    - id: livingroom
-      platform: local_file
+    - platform: local_file
       name: Living Room
       file_path: /home/homeautomation/homeassistant/snapshots/_livingroom.jpg
-    - id: street
-      platform: local_file
+    - platform: local_file
       name: Street
       file_path: /home/homeautomation/homeassistant/snapshots/_street.jpg
-    - id: frontdoor
-      platform: local_file
+    - platform: local_file
       name: Front door
       file_path: /home/homeautomation/homeassistant/snapshots/_frontdoor.jpg
-    - id: hallupstairs
-      platform: local_file
+    - platform: local_file
       name: Hall upstairs
       file_path: /home/homeautomation/homeassistant/snapshots/_hallupstairs.jpg
-    - id: garden
-      platform: local_file
+    - platform: local_file
       name: Garden
       file_path: /home/homeautomation/homeassistant/snapshots/_garden.jpg
-    #- platform: generic
-    #  name: Streetcam
-    #  still_image_url: !secret streetcam_url
-    #- platform: generic
-    #  name: Gardencam
-    #  still_image_url: !secret gardencam_url
+    - platform: mjpeg
+      name: Living Room Live
+      mjpeg_url: !secret ipcam_mjpeg_url
+    - platform: mjpeg
+      friendly_name: Street Live
+      mjpeg_url: !secret streetcam_mjpeg_url
+    - platform: mjpeg
+      name: Garden Live
+      mjpeg_url: !secret gardencam_mjpeg_url
 
 input_select:
     ipcam_direction:

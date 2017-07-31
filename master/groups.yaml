@@ -1,3 +1,54 @@
+default_view:
+    view: yes
+    icon: mdi:home
+    entities:
+        - binary_sensor.anybodyhome
+        - device_tracker.proyphone
+        - device_tracker.hansphone
+        - binary_sensor.front_door
+        - binary_sensor.doorbell
+        - binary_sensor.back_door
+        - binary_sensor.bedroom_window_left
+        - binary_sensor.bedroom_window_right
+        - sensor.weather_symbol
+        - sensor.weather_temperature
+        - group.all_lights
+        - group.doors
+        - group.cameras
+
+media_view:
+    name: Media
+    icon: mdi:television
+    view: yes
+    entities:
+        - group.media_devices
+        - group.media_volume
+        - group.media_tv_channels
+        - group.media_tv_nav
+
+light_view:
+    view: yes
+    name: Lights
+    icon: mdi:lightbulb
+    entities:
+        - group.all_lights
+        - group.upstairs_lights
+        - group.garden_lights
+        - group.guard_lights
+
+camera_view:
+    name: Live Camera
+    icon: mdi:camera
+    view: yes
+    entities:
+        - camera.living_room_live
+        - camera.street_live
+        - camera.garden_live
+        - camera.hall_upstairs
+        - camera.front_door
+        - input_select.ipcam_direction
+
+
 all_lights:
     name: Lights
     entities:
@@ -22,6 +73,12 @@ living_lights:
         - switch.back_room
         - switch.back_corner
 
+upstairs_lights:
+    name: Upstairs Lights
+    entities:
+        - switch.office
+        - switch.bedroom
+
 garden_lights:
     name: Garden lights
     entities:
@@ -33,33 +90,23 @@ guard_lights:
     entities:
         - switch.roof
 
-
 cameras:
     name: Cameras
     entities:
-        - camera.livingroom
+        - camera.living_room
         - camera.street
-        - camera.frontdoor
-        - camera.hallupstairs
+        - camera.front_door
+        - camera.hall_upstairs
         - camera.garden
 
 doors:
     name: Doors and Windows
     entities:
-        - binary_sensor.frontdoor
-        - binary_sensor.backdoor
-        - binary_sensor.bedroomwindow_left
-        - binary_sensor.bedroomwindow_right
+        - binary_sensor.front_door
+        - binary_sensor.back_door
+        - binary_sensor.bedroom_window_left
+        - binary_sensor.bedroom_window_right
 
-media:
-    name: Media
-    icon: mdi:television
-    view: yes
-    entities:
-        - group.media_devices
-        - group.media_volume
-        - group.media_tv_channels
-        - group.media_tv_nav
 
 media_devices:
     name: Devices
@@ -67,7 +114,7 @@ media_devices:
     entities:
         - switch.avr
         - switch.tv
-        - switch.tvdecoder
+        - switch.tv_decoder
         - script.avr_power
 
 media_volume:
@@ -82,6 +129,7 @@ media_tv_nav:
     name: TV Navigation
     icon: mdi:cursor-move
     entities:
+        - script.tvdecoder_playpause
         - script.tvdecoder_left
         - script.tvdecoder_right
         - script.tvdecoder_up
@@ -110,14 +158,17 @@ media_tv_channels:
         - script.tvdecoder_npo3
         - script.tvdecoder_rtl4
         - script.tvdecoder_veronica
+        - script.tvdecoder_een
+        - script.tvdecoder_canvas
         - script.tvdecoder_bbc1st
         - script.tvdecoder_bbc1
         - script.tvdecoder_bbc2
         - script.tvdecoder_ard
         - script.tvdecoder_zdf
         - script.tvdecoder_wdr
+        - script.tvdecoder_arte
         - script.tvdecoder_tv5monde
-
+        - script.tvdecoder_rai1
 
 
 devices:

@@ -68,10 +68,10 @@
   alias: Door notification
   trigger:
       - platform: state
-        entity_id: binary_sensor.frontdoor
+        entity_id: binary_sensor.front_door
         to: "on"
       - platform: state
-        entity_id: binary_sensor.backdoor
+        entity_id: binary_sensor.back_door
         to: "on"
   condition:
       - condition: time
@@ -133,16 +133,16 @@
   alias: 'Trigger alarm while armed away'
   trigger:
     - platform: state
-      entity_id: binary_sensor.frontdoor
+      entity_id: binary_sensor.front_door
       to: 'on'
     - platform: state
-      entity_id: binary_sensor.backdoor
+      entity_id: binary_sensor.back_door
       to: 'on'
     - platform: state
-      entity_id: binary_sensor.bedroomwindow_left
+      entity_id: binary_sensor.bedroom_window_left
       to: 'on'
     - platform: state
-      entity_id: binary_sensor.bedroomwindow_right
+      entity_id: binary_sensor.bedroom_window_right
       to: 'on'
   condition:
     - condition: state
