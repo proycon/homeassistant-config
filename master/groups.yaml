@@ -32,7 +32,7 @@ light_view:
     name: Lights
     icon: mdi:lightbulb
     entities:
-        - group.all_lights
+        - group.living_lights
         - group.upstairs_lights
         - group.garden_lights
         - group.guard_lights
@@ -124,6 +124,7 @@ guard_lights:
     name: Guard lights
     entities:
         - switch.roof
+        - switch.hall
 
 cameras:
     name: Cameras
