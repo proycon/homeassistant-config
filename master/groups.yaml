@@ -24,7 +24,6 @@ media_view:
     entities:
         - group.media_devices
         - group.media_volume
-        - media_player.yamaha_receiver
         - group.media_tv_channels
         - group.media_tv_navigation
 
@@ -150,10 +149,9 @@ media_devices:
     name: Devices
     icon: mdi:television
     entities:
-        - switch.avr
-        - switch.tv
         - switch.tv_decoder
-        - script.avr_power
+        - switch.hdmi_0 #TV
+        - mediaplayer.yamaha_receiver
 
 media_volume:
     name: Volume (AVR)

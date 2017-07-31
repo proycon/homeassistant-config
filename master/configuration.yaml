@@ -191,6 +191,9 @@ media_player hall_speaker:
 media_player yamaha_receiver:
   - platform: yamaha
     host: !secret avr_ip
+    source_names:
+        HDMI1: "TV Decoder"
+        HDMI2: "Raspberry Pi 1"
 
 camera:
     - platform: local_file
@@ -248,6 +251,9 @@ rest_command:
 
 hdmi_cec:
     host: !secret pi1_ip
+    types:
+       hdmi_cec.hdmi_0: switch #will expose a switch.hdmi_0 entity
+
 
 alarm_control_panel:
     - platform: manual

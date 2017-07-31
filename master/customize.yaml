@@ -24,6 +24,8 @@ switch.tvdecoder:
     icon: mdi:television-guide
 switch.tv:
     icon: mdi:television
+switch.hdmi_0:
+    icon: mdi:television
 switch.avr:
     icon: mdi:music-box-outline
 script.tvdecoder_1:
