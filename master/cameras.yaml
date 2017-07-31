@@ -1,0 +1,26 @@
+    - platform: local_file
+      name: Living Room
+      file_path: /home/homeautomation/homeassistant/snapshots/_livingroom.jpg
+    - platform: local_file
+      name: Street
+      file_path: /home/homeautomation/homeassistant/snapshots/_street.jpg
+    - platform: local_file
+      name: Front door
+      file_path: /home/homeautomation/homeassistant/snapshots/_frontdoor.jpg
+    - platform: local_file
+      name: Hall upstairs
+      file_path: /home/homeautomation/homeassistant/snapshots/_hallupstairs.jpg
+    - platform: local_file
+      name: Garden
+      file_path: /home/homeautomation/homeassistant/snapshots/_garden.jpg
+    - platform: mjpeg
+      name: Living Room Live
+      mjpeg_url: !secret ipcam_mjpeg_url
+      user: !secret ipcam_user
+      password: !secret ipcam_password
+    - platform: mjpeg
+      friendly_name: Street Live
+      mjpeg_url: !secret streetcam_mjpeg_url
+    - platform: mjpeg
+      name: Garden Live
+      mjpeg_url: !secret gardencam_mjpeg_url

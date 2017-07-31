@@ -64,6 +64,62 @@ logbook:
 # Track the sun
 sun:
 
+
+
+
+shell_command:
+    snapshot_livingroom: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh livingroom
+    snapshot_street: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh street
+    snapshot_garden: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh garden
+    snapshot_frontdoor: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh frontdoor
+    snapshot_hallupstairs: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh hallupstairs
+    archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
+    snapshot_clear_locks: find . -type f -name "*.lock" | xargs rm
+
+rest_command:
+    ipcam_topreset:
+        url: 'http://{{ ip }}/cgi/ptdc.cgi?command=goto_preset_position&index={{ index }}'
+        username: !secret ipcam_user
+        password: !secret ipcam_password
+
+alarm_control_panel:
+    - platform: manual
+      name: Alarm System
+      trigger_time: 5
+
+device_tracker:
+    - platform: tplink
+      host: !secret wifirouter_host
+      username: !secret wifirouter_user
+      password: !secret wifirouter_pass
+    - platform: ping
+      hosts:
+          pi1: !secret pi1_ip
+          pi2: !secret pi2_ip
+          pi3: !secret pi3_ip
+
+# Text to speech
+tts:
+  platform: picotts
+  language: 'en-GB'
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+camera: !include cameras.yaml
+
+
+input_select:
+    ipcam_direction:
+        name: Camera Direction Living room
+        options:
+            - Hall
+            - Dresser
+            - Back
+            - TV
+            - Couch
+            - Front
+
 sensor:
     - platform: buienradar #weather prediction
       name: Weather
@@ -110,7 +166,6 @@ binary_sensor:
             - device_tracker.proyphone
             - device_tracker.hansphone
         device_class: occupancy
-
 
 switch tv_spots:
     platform: mqtt
@@ -174,6 +229,11 @@ switch tv_decoder:
     payload_on: '{"device":"VIP1853","key":"POWER"}'
     payload_off: '{"device":"VIP1853","key":"POWER"}'
 
+hdmi_cec:
+    host: !secret pi1_ip
+    types:
+       hdmi_cec.hdmi_0: switch #will expose a switch.hdmi_0 entity
+
 media_player hall_speaker:
     - platform: vlc
       name: hall_speaker
@@ -185,587 +245,6 @@ media_player yamaha_receiver:
     source_names:
         HDMI1: "TV Decoder"
         HDMI2: "Pi1"
-
-camera:
-    - platform: local_file
-      name: Living Room
-      file_path: /home/homeautomation/homeassistant/snapshots/_livingroom.jpg
-    - platform: local_file
-      name: Street
-      file_path: /home/homeautomation/homeassistant/snapshots/_street.jpg
-    - platform: local_file
-      name: Front door
-      file_path: /home/homeautomation/homeassistant/snapshots/_frontdoor.jpg
-    - platform: local_file
-      name: Hall upstairs
-      file_path: /home/homeautomation/homeassistant/snapshots/_hallupstairs.jpg
-    - platform: local_file
-      name: Garden
-      file_path: /home/homeautomation/homeassistant/snapshots/_garden.jpg
-    - platform: mjpeg
-      name: Living Room Live
-      mjpeg_url: !secret ipcam_mjpeg_url
-      user: !secret ipcam_user
-      password: !secret ipcam_password
-    - platform: mjpeg
-      friendly_name: Street Live
-      mjpeg_url: !secret streetcam_mjpeg_url
-    - platform: mjpeg
-      name: Garden Live
-      mjpeg_url: !secret gardencam_mjpeg_url
-
-input_select:
-    ipcam_direction:
-        name: Camera Direction Living room
-        options:
-            - Hall
-            - Dresser
-            - Back
-            - TV
-            - Couch
-            - Front
-
-shell_command:
-    snapshot_livingroom: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh livingroom
-    snapshot_street: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh street
-    snapshot_garden: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh garden
-    snapshot_frontdoor: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh frontdoor
-    snapshot_hallupstairs: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh hallupstairs
-    archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
-    snapshot_clear_locks: find . -type f -name "*.lock" | xargs rm
-
-rest_command:
-    ipcam_topreset:
-        url: 'http://{{ ip }}/cgi/ptdc.cgi?command=goto_preset_position&index={{ index }}'
-        username: !secret ipcam_user
-        password: !secret ipcam_password
-
-hdmi_cec:
-    host: !secret pi1_ip
-    types:
-       hdmi_cec.hdmi_0: switch #will expose a switch.hdmi_0 entity
-
-
-alarm_control_panel:
-    - platform: manual
-      name: Alarm System
-      trigger_time: 5
-
-device_tracker:
-    - platform: tplink
-      host: !secret wifirouter_host
-      username: !secret wifirouter_user
-      password: !secret wifirouter_pass
-    - platform: ping
-      hosts:
-          pi1: !secret pi1_ip
-          pi2: !secret pi2_ip
-          pi3: !secret pi3_ip
-
-# Text to speech
-tts:
-  platform: picotts
-  language: 'en-GB'
-
-group: !include groups.yaml
-automation: !include automations.yaml
-script:
-    trigger_slave_poll:
-        alias: Repoll slaves
-        sequence:
-          - service: mqtt.publish #trigger RPi slaves to send their known statusses again
-            data:
-                topic: "home/poll"
-                payload: "ON"
-    reset_lights:
-        alias: Reset Lights
-        sequence:
-            - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') %}on{% else %}off{% endif %}"
-              data:
-                  entity_id:
-                    - group.living_lights
-                    - group.garden_lights
-                    - switch.office
-            - service: switch.turn_off
-              data:
-                  entity_id:
-                    - group.guard_lights
-                    - switch.bedroom
-    avr_volup:
-        alias: Volume up (AVR)
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"avr","key":"KEY_VOLUMEUP"}'
-    avr_voldown:
-        alias: Volume down (AVR)
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"avr","key":"KEY_VOLUMEDOWN"}'
-    avr_mute:
-        alias: Mute (AVR)
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"avr","key":"KEY_MUTE"}'
-    avr_power:
-        alias: Power (AVR) #replace with switch?
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"avr","key":"KEY_POWER"}'
-    tvdecoder_channelup:
-        alias: Channel up
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"CHANNEL_UP"}'
-    tvdecoder_channeldown:
-        alias: Channel down
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"CHANNEL_DOWN"}'
-    tvdecoder_playpause:
-        alias: Play/pause Toggle
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"PLAY_PAUSE"}'
-    tvdecoder_ok:
-        alias: OK
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"OK"}'
-    tvdecoder_back:
-        alias: Back
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"BACK"}'
-    tvdecoder_down:
-        alias: Down
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"down"}'
-    tvdecoder_up:
-        alias: Up
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"UP"}'
-    tvdecoder_left:
-        alias: left
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"LEFT"}'
-    tvdecoder_right:
-        alias: right
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"RIGHT"}'
-    tvdecoder_1:
-        alias: 1
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_1"}'
-    tvdecoder_2:
-        alias: 2
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_2"}'
-    tvdecoder_3:
-        alias: 3
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_3"}'
-    tvdecoder_4:
-        alias: 4
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_1"}'
-    tvdecoder_5:
-        alias: 5
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_5"}'
-    tvdecoder_6:
-        alias: 6
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_6"}'
-    tvdecoder_7:
-        alias: 7
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_7"}'
-    tvdecoder_8:
-        alias: 8
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_8"}'
-    tvdecoder_9:
-        alias: 9
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_9"}'
-    tvdecoder_0:
-        alias: 0
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_0"}'
-    tvdecoder_npo1:
-        alias: TV Channel - NPO1
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_6"}'
-          - delay:
-              milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_6"}'
-          - delay:
-              milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_1"}'
-    tvdecoder_npo2:
-        alias: TV Channel - NPO2
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_6"}'
-          - delay:
-              milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_6"}'
-          - delay:
-              milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_2"}'
-    tvdecoder_npo3:
-        alias: TV Channel - NPO3
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_6"}'
-          - delay:
-              milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_6"}'
-          - delay:
-              milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_3"}'
-    tvdecoder_rtl4:
-        alias: TV Channel - RTL4
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_6"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_6"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_4"}'
-    tvdecoder_veronica:
-        alias: TV Channel - Veronica
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_6"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_6"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_9"}'
-    tvdecoder_een:
-        alias: TV Channel - Één
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_7"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_2"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_1"}'
-    tvdecoder_canvas:
-        alias: TV Channel - Canvas
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_7"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_2"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_2"}'
-    tvdecoder_bbc1st:
-        alias: TV Channel - BBC First
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_7"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_2"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_9"}'
-    tvdecoder_bbc1:
-        alias: TV Channel - BBC One
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_7"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_3"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_0"}'
-    tvdecoder_bbc2:
-        alias: TV Channel - BBC Two
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_7"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_3"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_1"}'
-    tvdecoder_ard:
-        alias: TV Channel - ARD
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_4"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_4"}'
-    tvdecoder_zdf:
-        alias: TV Channel - ZDF
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_4"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_5"}'
-    tvdecoder_wdr:
-        alias: TV Channel - WDR
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_4"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_8"}'
-    tvdecoder_arte:
-        alias: TV Channel - Arte
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_4"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_9"}'
-    tvdecoder_tv5monde:
-        alias: TV Channel - TV 5 Monde
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_9"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_2"}'
-    tvdecoder_rai1:
-        alias: TV Channel - Rai 1
-        sequence:
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_9"}'
-          - delay:
-                milliseconds: 400
-          - service: mqtt.publish
-            data:
-                topic: "home/ir_send/pi1"
-                payload: '{"device":"VIP1853","key":"KEY_6"}'
-          - delay:
-                milliseconds: 400
-    doorbell_sound:
-        alias: Doorbell sound
-        sequence:
-            - service: media_player.play_media
-              data:
-                  entity_id: media_player.hall_speaker
-                  media_content_id: /home/homeautomation/homeassistant/media/doorbell.ogg
-                  media_content_type: 'music'
-    dog_sound:
-        alias: Dog barking sound
-        sequence:
-            - service: media_player.play_media
-              data:
-                  entity_id: media_player.hall_speaker
-                  media_content_id: /home/homeautomation/homeassistant/media/dog.wav
-                  media_content_type: 'music'
-    chime_sound:
-        alias: Chime sound
-        sequence:
-            - service: media_player.play_media
-              data:
-                  entity_id: media_player.hall_speaker
-                  media_content_id: /home/homeautomation/homeassistant/media/chime.wav
-                  media_content_type: 'music'
-    alarm:
-        alias: Alarm
-        sequence:
-            - service: media_player.play_media
-              data:
-                  entity_id: media_player.hall_speaker
-                  media_content_id: /home/homeautomation/homeassistant/media/alarm.ogg
-                  media_content_type: 'music'
-            - service: script.turn_on #loop
-              data:
-                  entity_id: script.alarm
-    ipcam_topreset:
-        alias: Camera to preset
-        sequence:
-            - service: rest_command.ipcam_topreset
-              data_template:
-                  ip: !secret ipcam_ip
-                  index: '{% if is_state("input_select.ipcam_direction","Hall") %}0{% elif is_state("input_select.ipcam_direction","Dresser") %}1{% elif is_state("input_select.ipcam_direction","Back") %}2{% elif is_state("input_select.ipcam_direction","TV") %}3{% elif is_state("input_select.ipcam_direction","Couch") %}4{% elif is_state("input_select.ipcam_direction","Front") %}5{% endif %}'
-
-
 #MQTT
 mqtt:
     broker: 127.0.0.1
