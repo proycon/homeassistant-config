@@ -24,7 +24,7 @@ media_view:
     entities:
         - group.media_devices
         - group.media_volume
-        - media_player.yamaga_receiver
+        - media_player.yamaha_receiver
         - group.media_tv_channels
         - group.media_tv_navigation
 
