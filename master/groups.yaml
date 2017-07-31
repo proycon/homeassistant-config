@@ -56,30 +56,33 @@ config_view:
     entities:
         - group.config_snapshots
         - group.config_lights
+        - group.config_sound
 
 config_snapshots:
     name: Snapshots
     icon: mdi:camera
     entities:
-        - automation.archive_snapshots
-        - automation.snapshots_frontdoor
-        - automation.snapshots_garden
-        - automation.snapshots_street
-        - automation.snapshots_livingroom
-        - automation.snapshots_hallupstairs
+        - automation.daily_snapshot_archiving
+        - automation.frontdoor_snapshots
+        - automation.garden_snapshots
+        - automation.living_room_snapshots
+        - automation.hall_upstairs_snapshots
+        - automation.street_snapshots
+
+config_sound:
+    name: Sound
+    icon: mdi:music
+    entities:
+        - automation.door_notification_at_night
+        - automation.doorbell
 
 config_lights:
     name: Lights
     icon: mdi:lightbulb
     entities:
-        - automation.lights_on_evening
-        - automation.lights_off_night
-        - automation.garden_lights_on_evening
-        - automation.snapshots_garden
-        - automation.snapshots_street
-        - automation.snapshots_livingroom
-        - automation.snapshots_hallupstairs
-
+        - automation.lights_on_in_the_evening
+        - automation.lights_off_at_night
+        - automation.garden_lights_on_in_the_evening
 
 all_lights:
     name: Lights

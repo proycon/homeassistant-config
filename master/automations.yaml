@@ -17,55 +17,49 @@
         data:
             entity_id: script.reset_lights
 #------------ Snapshots ------------------------
-- id: snapshots_frontdoor
-  alias: Frontdoor snapshots
+- alias: Frontdoor snapshots
   hide_entity: False
   trigger:
     platform: time
     seconds: '/9' #every ten seconds
   action:
     - service: shell_command.snapshot_frontdoor
-- id: snapshots_hallupstairs
-  alias: Hall upstairs snapshots
+- alias: Hall upstairs snapshots
   hide_entity: False
   trigger:
     platform: time
     seconds: '/11' #every eleven seconds
   action:
     - service: shell_command.snapshot_hallupstairs
-- id: snapshots_livingroom
-  alias: Living room camera snapshots
+- alias: Living room snapshots
   hide_entity: False
   trigger:
     platform: time
     seconds: '/3' #every five seconds
   action:
     - service: shell_command.snapshot_livingroom
-- id: snapshots_street
-  alias: Street camera snapshots
+- alias: Street camera snapshots
   hide_entity: False
   trigger:
     platform: time
     seconds: '/3' #every three seconds
   action:
     - service: shell_command.snapshot_street
-- id: snapshots_garden
-  alias: Garden camera snapshots
+- alias: Garden snapshots
   hide_entity: False
   trigger:
     platform: time
     seconds: '/5' #every five seconds
   action:
     - service: shell_command.snapshot_garden
-- alias: Archive snapshots
+- alias: Daily snapshot archiving
   hide_entity: False
   trigger:
     platform: time
     at: "00:00:00"
   action:
     - service: shell_command.archive_snapshots
-- id: door_notification
-  alias: Door notification
+- alias: Door notification at night
   trigger:
       - platform: state
         entity_id: binary_sensor.front_door
@@ -85,7 +79,7 @@
         entity_id: media_player.hall_speaker
         data:
             message: Door open
-- id: lights_on_evening
+- id: lights_on_in_the_evening
   alias: Lights on in the evening
   trigger:
       platform: sun
@@ -94,7 +88,7 @@
   action:
       service: switch.turn_on
       entity_id: group.living_lights
-- id: garden_lights_on_evening
+- id: garden_lights_on_in_the_evening
   alias: Garden lights on in the evening
   trigger:
       platform: sun
@@ -103,7 +97,7 @@
   action:
       service: switch.turn_on
       entity_id: group.garden_lights
-- id: lights_off_night
+- id: lights_off_at_night
   alias: Lights off at night
   trigger:
       platform: time
@@ -155,8 +149,8 @@
       entity_id: script.alarm
     - service: switch.turn_on
       entity_id: group.all_lights
-- id: arm
-  alias: 'Arm system when away'
+- id: arm_when_away
+  alias: 'Arm when away'
   trigger:
     - platform: state
       entity_id: binary_sensor.anybodyhome
@@ -168,8 +162,8 @@
       entity_id: media_player.hall_speaker
       data:
           message: System armed
-- id: disarm
-  alias: 'Disarm system when home'
+- id: disarm_when_home
+  alias: 'Disarm when home'
   trigger:
     - platform: state
       entity_id: binary_sensor.anybodyhome
