@@ -47,14 +47,24 @@ discovery:
 #sensor:
 #  platform: yr
 
-switch:
-    platform: command_line
-    switches:
-        technofire:
-            command_on: 'scripts/technofire/technofire.py fire'
-            command_off: 'scripts/technofire/technofire.py off'
-            command_state: 'ps aux | grep technofire.py | wc -l'
-            value_template: '{{ value == "2" }}' #one process + grep
+shell_command:
+    technofire: '/home/homeautomation/homeassistant/scripts/technofire/technofire.py {{ state.replace(" ","_") | lower }} {{ brightness }}'
+
+automation:
+  - id: technofire
+    alias: Technofire
+    trigger:
+        platform: mqtt
+        topic: "home/technofire/pi3/set"
+    action:
+        - service: shell_command.technofire
+          data_template:
+             scene: '{{ trigger.payload_json.scene }}'
+             brightness: '{{ trigger.payload_json.brightness }}'
+        - service: mqtt.publish
+          data_template:
+              topic_template: "home/technofire/pi3/get"
+              payload_template: '{{ trigger.scene }}'
 
 #MQTT
 mqtt:
@@ -65,6 +75,6 @@ mqtt:
     username: homeassistant
     password: !secret api_password
 
-mqtt_eventstream:
-  publish_topic: slaves/pi3
-  subscribe_topic: master
+#mqtt_eventstream:
+#  publish_topic: slaves/pi3
+#  subscribe_topic: master

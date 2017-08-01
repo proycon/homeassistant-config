@@ -149,59 +149,59 @@ if __name__ == '__main__':
         initfire(strip)
         while True:
             fire(strip)
-    elif scene == "redwipe":
+    elif scene == "red_wipe":
         while True:
             colorWipe(strip, Color(255, 0, 0))  # Red wipe
-    elif scene == "bluewipe":
+    elif scene == "blue_wipe":
         while True:
             colorWipe(strip, Color(0, 255, 0))  # Blue wipe
-    elif scene == "greenwipe":
+    elif scene == "green_wipe":
         while True:
             colorWipe(strip, Color(0, 0, 255))  # Blue wipe
-    elif scene == "whitechase":
+    elif scene == "white_chase":
         while True:
             theaterChase(strip, Color(127, 127, 127))  # White theater chase
-    elif scene == "redchase":
+    elif scene == "red_chase":
         while True:
             theaterChase(strip, Color(127,   0,   0))  # Red theater chase
-    elif scene == "bluechase":
+    elif scene == "blue_chase":
         while True:
             theaterChase(strip, Color(0,   0,   127))  # Red theater chase
     elif scene == "rainbow":
         while True:
             rainbow(strip)
-    elif scene == "rainbowcycle":
+    elif scene == "rainbowi_cycle":
         while True:
             rainbowCycle(strip)
-    elif scene == "colorcycle_fast":
+    elif scene == "color_cycle_fast":
         while True:
             colorCycle(strip)
-    elif scene == "colorcycle":
+    elif scene == "color_cycle":
         while True:
             colorCycle(strip,500)
-    elif scene == "colorcycle_slow":
+    elif scene == "color_cycle_slow":
         while True:
             colorCycle(strip,2000)
-    elif scene == "rainbowchase":
+    elif scene == "rainbow_chase":
         while True:
            theaterChaseRainbow(strip)
-    elif scene == "staticwhite":
+    elif scene == "white":
         singlecolor(strip, Color(255,255,255))
-    elif scene == "staticred":
+    elif scene == "red":
         singlecolor(strip, Color(255,0,0))
-    elif scene == "staticgreen":
+    elif scene == "green":
         singlecolor(strip, Color(0,255,0))
-    elif scene == "staticblue":
+    elif scene == "blue":
         singlecolor(strip, Color(0,0,255))
-    elif scene == "staticyellow":
+    elif scene == "yellow":
         singlecolor(strip, Color(255,255,0))
-    elif scene == "staticpurple":
+    elif scene == "purple":
         singlecolor(strip, Color(255,0,255))
-    elif scene == "staticcyan":
+    elif scene == "cyan":
         singlecolor(strip, Color(0,255,255))
-    elif scene == "staticwhitish":
+    elif scene == "whitish":
         singlecolor(strip, Color(244,243,169))
-    elif scene == "staticlamp":
+    elif scene == "lamp":
         singlecolor(strip, Color(196,181,51))
     elif scene == "sirene":
         while True:

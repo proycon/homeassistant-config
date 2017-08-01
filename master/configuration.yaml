@@ -119,6 +119,35 @@ input_select:
             - TV
             - Couch
             - Front
+    fireplace:
+        name: Fireplace
+        options:
+            - Fire
+            - Lamp
+            - Ambilight
+            - Rainbow Cycle
+            - Colorcycle Fast
+            - Colorcycle
+            - Colorcycle Slow
+            - Sirene
+            - Red Cycle
+            - Green Cycle
+            - Blue Cycle
+            - Red
+            - Green
+            - Blue
+            - Yellow
+            - Purple
+            - Cyan
+            - White
+
+input_slider:
+    fireplace_brightness:
+        name: Fireplace brightness
+        min: 0
+        max: 255
+        step: 1
+        initial: 255
 
 sensor:
     - platform: buienradar #weather prediction
@@ -228,6 +257,12 @@ switch tv_decoder:
     command_topic: "home/ir_send/pi1"
     payload_on: '{"device":"VIP1853","key":"POWER"}'
     payload_off: '{"device":"VIP1853","key":"POWER"}'
+switch fireplace:
+    platform: mqtt
+    name: Fireplace
+    command_topic: "home/technofire/pi3/set"
+    payload_on: '{"scene":"{{ states.input_select.technofire |lower }}","brightness":"{{ states.input_slider.technofire_brightness.state }}"}'
+    payload_off: '{"scene":"off","brightness":"0"}'
 
 hdmi_cec:
     host: !secret pi1_ip

@@ -223,5 +223,12 @@ devices:
         - known_device.unknown3
         - known_device.unknown4
 
+fireplace:
+    name: Fireplace
+    icon: mdi:fire
+    entities:
+        - input_select.fireplace
+        - input_slider.fireplace_brightness
+        - script.fireplace
 
 
