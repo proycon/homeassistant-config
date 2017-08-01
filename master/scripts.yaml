@@ -70,13 +70,17 @@
             - service: switch.turn_off
               entity_id: switch.roof
             - delay:
-                minutes: 5
+                seconds: 2
             - service: switch.turn_off
               entity_id: switch.tv_spots
             - delay:
                 seconds: 2
             - service: switch.turn_off
               entity_id: switch.office
+            - service: script.turn_on
+              entity_id: script.extinguish_fireplace
+            - service: script.turn_on
+              entity_id: script.extinguish_dresser_ambilight
     avr_volup:
         alias: Volume up (AVR)
         sequence:

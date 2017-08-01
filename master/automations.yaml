@@ -484,6 +484,21 @@
   action:
        - service: switch.turn_off
          entity_id: switch.tv_spots
+- id: ignite_fireplace_in_evening
+  alias: Ignite fireplace in evening
+  trigger:
+     platform: sun
+     event: sunset
+     offset: '1:00:00'
+  condition:
+     - condition: state
+       entity_id: binary_sensor.anybodyhome
+       state: "on"
+  action:
+     - service: script.turn_on
+       entity_id: script.ignite_fireplace
+     - service: script.turn_on
+       entity_id: script.ignite_dresser_ambilight
 
 
 
