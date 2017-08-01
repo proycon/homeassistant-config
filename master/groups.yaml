@@ -13,6 +13,7 @@ default_view:
         - binary_sensor.bedroom_window_right
         - sensor.weather_symbol
         - sensor.weather_temperature
+        - group.light_shorcuts
         - group.all_lights
         - group.cameras
         - group.media_volume
@@ -32,6 +33,7 @@ light_view:
     name: Lights
     icon: mdi:lightbulb
     entities:
+        - group.lights_shortcuts
         - group.living_lights
         - group.upstairs_lights
         - group.garden_lights
@@ -108,6 +110,12 @@ all_lights:
         - switch.garden
         - switch.balcony
         - switch.roof
+
+light_shortcuts:
+    name: Light Shortcuts
+    entities:
+        - script.lights_on
+        - script.lights_off
 
 living_lights:
     name: Living Room lights

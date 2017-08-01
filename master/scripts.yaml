@@ -19,6 +19,64 @@
                   entity_id:
                     - group.guard_lights
                     - switch.bedroom
+    lights_on:
+        alias: Lights on
+        sequence:
+            - service: switch.turn_on
+              entity_id: switch.tv_spots
+            - delay:
+                seconds: 1.5
+            - service: switch.turn_on
+              entity_id: switch.back_corner
+            - delay:
+                seconds: 1.5
+            - service: switch.turn_on
+              entity_id: switch.back_room
+            - delay:
+                seconds: 1.5
+            - service: switch.turn_on
+              entity_id: switch.front_room
+            - delay:
+                seconds: 1.5
+            - service: switch.turn_on
+              entity_id: switch.midspots
+    lights_off:
+        alias: Lights off
+        sequence:
+            - service: switch.turn_off
+              entity_id: switch.back_corner
+            - delay:
+                seconds: 1.5
+            - service: switch.turn_off
+              entity_id: switch.back_room
+            - delay:
+                seconds: 1.5
+            - service: switch.turn_off
+              entity_id: switch.front_room
+            - delay:
+                seconds: 1.5
+            - service: switch.turn_off
+              entity_id: switch.midspots
+            - delay:
+                seconds: 2
+            - service: switch.turn_off
+              entity_id: switch.garden
+            - delay:
+                seconds: 2
+            - service: switch.turn_off
+              entity_id: switch.balcony
+            - delay:
+                seconds: 2
+            - service: switch.turn_off
+              entity_id: switch.roof
+            - delay:
+                minutes: 5
+            - service: switch.turn_off
+              entity_id: switch.tv_spots
+            - delay:
+                seconds: 2
+            - service: switch.turn_off
+              entity_id: switch.office
     avr_volup:
         alias: Volume up (AVR)
         sequence:

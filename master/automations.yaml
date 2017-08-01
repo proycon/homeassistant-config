@@ -126,8 +126,8 @@
       platform: time
       at: '01:00:00'
   action:
-      service: switch.turn_off
-      entity_id: group.all_lights
+      - service: script.turn_on
+        entity_id: script.lights_off
 - id: doorbell
   alias: Doorbell
   trigger:
