@@ -9,7 +9,7 @@ fi
 
 if [ ! -d "$HADIR/env" ]; then
     echo "Virtualenv not setup yet for $HOST" >&2
-    exit 2
+    ./setup.py
 fi
 
 . $HADIR/env/bin/activate
