@@ -176,6 +176,17 @@ input_slider:
         step: 1
         initial: 255
 
+input_boolean:
+    inside_house:
+        name: inside house? #anybody
+        initial: on
+    proycon_inside_house:
+        name: Proycon inside house?
+        initial: on
+    hans_inside_house:
+        name: Hans inside house?
+        initial: on
+
 sensor:
     - platform: buienradar #weather prediction
       name: Weather

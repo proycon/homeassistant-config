@@ -327,6 +327,140 @@
         seconds: 10
     - service: script.turn_on
       entity_id: script.reset_ipcam
+- id: home_greeting
+  alias: "Home Greeting"
+  trigger: #when doors close on reentry
+    - platform: state
+      entity_id: binary_sensor.front_door
+      from: 'off'
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.back_door
+      from: 'on'
+      to: 'off'
+  condition: #and we were not home
+    - condition: state
+      entity_id: input_boolean.inside_house
+      state: "off"
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.inside_house
+    - delay:
+        seconds: 3
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data_template:
+        message: Welcome home
+- id: home_greeting_proycon
+  alias: "Home Greeting proycon"
+  trigger: #when doors close on reentry
+    - platform: state
+      entity_id: binary_sensor.front_door
+      from: 'on'
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.back_door
+      from: 'on'
+      to: 'off'
+  condition: #and we were not home
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.proycon_inside_house
+          state: "off"
+        - condition: state
+          entity_id: input_boolean.inside_house
+          state: "on"
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.proycon_inside_house
+    - delay:
+        seconds: 3
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+        message: Hello Martin
+- id: home_greeting_hans
+  alias: "Home Greeting Hans"
+  trigger: #when doors close on reentry
+    - platform: state
+      entity_id: binary_sensor.front_door
+      from: 'on'
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.back_door
+      from: 'on'
+      to: 'off'
+  condition: #and we were not home
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.hans_inside_house
+          state: "off"
+        - condition: state
+          entity_id: input_boolean.inside_house
+          state: "on"
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.hans_inside_house
+    - delay:
+        seconds: 3
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+        message: Hello Hans
+- id: proycon_left_house
+  alias: Proycon Left House
+  trigger:
+    - platform: state
+      entity_id: device_tracker.proyphone
+      from: 'home'
+      to: 'away'
+  action:
+     - delay:
+         minutes: 10
+     - service: input_boolean.turn_off
+       entity_id: input_boolean.proycon_inside_house
+- id: hans_left_house
+  alias: Hans Left House
+  trigger:
+    - platform: state
+      entity_id: device_tracker.hansphone
+      from: 'home'
+      to: 'away'
+  action:
+     - delay:
+         minutes: 10
+     - service: input_boolean.turn_off
+       entity_id: input_boolean.hans_inside_house
+- id: both_left_house
+  alias: Both Left House
+  trigger:
+    - platform: state
+      entity_id: input_boolean.proycon_inside_house
+      from: 'on'
+      to: 'off'
+    - platform: state
+      entity_id: input_boolean.hans_inside_house
+      from: 'on'
+      to: 'off'
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.proycon_inside_house
+          state: "off"
+        - condition: state
+          entity_id: input_boolean.hans_inside_house
+          state: "off"
+  action:
+     - service: input_boolean.turn_off
+       entity_id: input_boolean.inside_house
+
+
+
+
+
 
 
 
