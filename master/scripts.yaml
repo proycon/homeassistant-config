@@ -553,7 +553,7 @@
             - service: switch.turn_on
               entity_id: switch.porch
             - delay:
-                milliseconds: 250
+                seconds: 1
             - service: switch.turn_on
               entity_id: switch.back_room
             - delay:
@@ -561,7 +561,7 @@
             - service: switch.turn_off
               entity_id: switch.porch
             - delay:
-                milliseconds: 250
+                seconds: 1
             - service: switch.turn_off
               entity_id: switch.back_room
     flash_notification:
@@ -570,23 +570,23 @@
             - service: script.turn_on
               entity_id: script.flash_notification_single_round
             - delay:
-                seconds: 3
+                seconds: 1
             - service: script.turn_on
               entity_id: script.flash_notification_single_round
             - delay:
-                seconds: 3
+                seconds: 1
             - service: script.turn_on
               entity_id: script.flash_notification_single_round
             - delay:
-                seconds: 3
+                seconds: 1
             - service: script.turn_on
               entity_id: script.flash_notification_single_round
             - delay:
-                seconds: 3
+                seconds: 1
             - service: script.turn_on
               entity_id: script.flash_notification_single_round
             - delay:
-                seconds: 3
+                seconds: 1
             - service: script.turn_on
               entity_id: script.flash_notification_reset
     flash_notification_reset:
