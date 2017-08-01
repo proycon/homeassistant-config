@@ -48,7 +48,7 @@ discovery:
 #  platform: yr
 
 shell_command:
-    technofire: '/home/homeautomation/homeassistant/scripts/technofire/technofire.py {{ state.replace(" ","_") | lower }} {{ brightness }}'
+    technofire: '/home/homeautomation/homeassistant/scripts/technofire/technofire.py {{ scene.replace(" ","_") | lower }} {{ brightness }}'
 
 automation:
   - id: technofire
