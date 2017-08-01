@@ -274,6 +274,19 @@ media_player yamaha_receiver:
     source_names:
         HDMI1: "TV Decoder"
         HDMI2: "Pi1"
+
+notify:
+  - name: xmpp_proycon
+    platform: xmpp
+    sender: !secret xmpp_sender
+    password: !secret xmpp_password
+    recipient: !secret xmpp_proycon
+  - name: xmpp_hans
+    platform: xmpp
+    sender: !secret xmpp_sender
+    password: !secret xmpp_password
+    recipient: !secret xmpp_proycon
+
 #MQTT
 mqtt:
     broker: 127.0.0.1

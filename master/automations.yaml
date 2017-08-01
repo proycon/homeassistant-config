@@ -16,6 +16,11 @@
       - service: script.turn_on
         data:
             entity_id: script.reset_lights
+      - service: notify.xmpp_proycon
+        data:
+            message: "Home automation started"
+
+
 #------------ Snapshots ------------------------
 - alias: Frontdoor snapshots
   hide_entity: False
@@ -149,6 +154,12 @@
       entity_id: script.alarm
     - service: switch.turn_on
       entity_id: group.all_lights
+    - service: notify.xmpp_proycon
+      data:
+          message: "INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
+    - service: notify.xmpp_hans
+      data:
+          message: "INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
 - id: arm_when_away
   alias: 'Arm when away'
   trigger:
@@ -162,6 +173,12 @@
       entity_id: media_player.hall_speaker
       data:
           message: System armed
+    - service: notify.xmpp_proycon
+      data:
+          message: "System armed"
+    - service: notify.xmpp_hans
+      data:
+          message: "System armed"
 - id: disarm_when_home
   alias: 'Disarm when home'
   trigger:
@@ -171,6 +188,12 @@
   action:
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm
+    - service: notify.xmpp_proycon
+      data:
+          message: "System disarmed"
+    - service: notify.xmpp_hans
+      data:
+          message: "System disarmed"
 
 
 
