@@ -120,12 +120,22 @@
   action:
       - service: script.turn_on
         entity_id: script.doorbell_sound
+      - service: script.turn_off
+        entity_id: script.reset_ipcam
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.ipcam_direction
+          option: Front
       - service: notify.xmpp_proycon
         data:
-            message: "There is somebody at the door"
+          message: "There is somebody at the door"
       - service: notify.xmpp_hans
         data:
-            message: "De deurbel gaat"
+          message: "De deurbel gaat"
+      - delay:
+          seconds: 10
+      - service: script.turn_on
+          entity_id: script.reset_ipcam
 - id: ipcam_topreset
   alias: Camera to preset
   trigger:
@@ -225,7 +235,7 @@
     - service: input_select.select_option
       data:
           entity_id: input_select.ipcam_direction
-          option: Front
+          option: Hall
     - delay:
         seconds: 10
     - service: script.turn_on
@@ -260,6 +270,28 @@
         seconds: 10
     - service: script.turn_on
       entity_id: script.reset_ipcam
+ - id: window_upstair_opened
+   alias: "Window upstairs opened"
+   trigger:
+    - platform: state
+      entity_id: binary_sensor.bedroom_window_left
+      from: 'off'
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.bedroom_window_right
+      from: 'off'
+      to: 'on'
+   action:
+    - service: script.turn_off
+      entity_id: script.reset_ipcam
+    - service: input_select.select_option
+      data:
+          entity_id: input_select.ipcam_direction
+          option: Hall
+    - delay:
+        seconds: 10
+    - service: script.turn_on
+      entity_id: script.reset_ipcam
 
 
 
@@ -268,5 +300,4 @@
 #TODO: turn lights on and off in the morning
 #TODO: alarm
 #TODO: presence greeting
-#TODO: door still open notifications
 #TODO: wake up clock
