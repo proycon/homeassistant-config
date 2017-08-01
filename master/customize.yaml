@@ -82,3 +82,5 @@ script.trigger_slave_poll:
     icon: mdi:refresh
 script.ipcam_topreset:
     icon: mdi:camera
+script.watch_tv:
+    icon: mdi:television

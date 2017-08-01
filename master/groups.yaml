@@ -16,6 +16,7 @@ default_view:
         - group.light_shorcuts
         - group.all_lights
         - group.cameras
+        - group.media_activities
         - group.media_volume
 
 media_view:
@@ -23,6 +24,7 @@ media_view:
     icon: mdi:television
     view: yes
     entities:
+        - group.media_activities
         - group.media_devices
         - group.media_volume
         - group.media_tv_channels
@@ -162,6 +164,12 @@ doors:
         - binary_sensor.back_door
         - binary_sensor.bedroom_window_left
         - binary_sensor.bedroom_window_right
+
+media_activities:
+    name: Media Activities
+    icon: mdi:television
+    entities:
+        - script.watch_tv
 
 
 media_devices:
