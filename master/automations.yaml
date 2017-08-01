@@ -456,6 +456,34 @@
   action:
      - service: input_boolean.turn_off
        entity_id: input_boolean.inside_house
+- id: morninglights_on_hans
+  trigger:
+      - platform: time
+        at: '05:15:00'
+  condition:
+      condition: time
+      weekday:
+          - mon
+          - tue
+          - thu
+          - fri
+  action:
+       - service: switch.turn_on
+         entity_id: switch.tv_spots
+- id: morninglights_off_hans
+  trigger:
+      - platform: time
+        at: '06:15:00'
+  condition:
+      condition: time
+      weekday:
+          - mon
+          - tue
+          - thu
+          - fri
+  action:
+       - service: switch.turn_off
+         entity_id: switch.tv_spots
 
 
 
