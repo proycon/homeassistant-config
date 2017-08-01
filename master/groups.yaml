@@ -37,6 +37,7 @@ light_view:
         - group.garden_lights
         - group.guard_lights
         - group.fireplace
+        - group.dresser_ambilight
 
 camera_view:
     name: Live Camera
@@ -241,5 +242,14 @@ fireplace:
         - input_slider.fireplace_brightness
         - script.ignite_fireplace
         - script.extinguish_fireplace
+
+dresser_ambilight:
+    name: Dresser Ambilight
+    icon: mdi:lamp
+    entities:
+        - input_select.dresser_ambilight
+        - input_slider.dresser_ambilight_brightness
+        - script.ignite_dresser_ambilight
+        - script.extinguish_dresser_ambilight
 
 

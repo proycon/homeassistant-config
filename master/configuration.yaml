@@ -140,10 +140,37 @@ input_select:
             - Purple
             - Cyan
             - White
+    dresser_ambilight:
+        name: Dresser Ambilight
+        options:
+            - Fire
+            - Lamp
+            - Ambilight
+            - Rainbow Cycle
+            - Colorcycle Fast
+            - Colorcycle
+            - Colorcycle Slow
+            - Sirene
+            - Red Cycle
+            - Green Cycle
+            - Blue Cycle
+            - Red
+            - Green
+            - Blue
+            - Yellow
+            - Purple
+            - Cyan
+            - White
 
 input_slider:
     fireplace_brightness:
         name: Fireplace brightness
+        min: 0
+        max: 255
+        step: 1
+        initial: 255
+    dresser_ambilight_brightness:
+        name: Dresser Ambilight brightness
         min: 0
         max: 255
         step: 1

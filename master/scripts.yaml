@@ -506,6 +506,20 @@
             data:
                 topic: "home/technofire/pi3/set"
                 payload: '{"scene":"off","brightness":"0"}'
+    ignite_dresser_ambilight:
+        alias: Ignite dresser_ambilight
+        sequence:
+          - service: mqtt.publish
+            data_template:
+                topic: "home/technofire/pi2/set"
+                payload_template: '{"scene":"{{ states.input_select.dresser_ambilight.state |lower }}","brightness":"{{ states.input_slider.dresser_ambilight_brightness.state|int }}"}'
+    extinguish_dresser_ambilight:
+        alias: Extinguish dresser_ambilight
+        sequence:
+          - service: mqtt.publish
+            data:
+                topic: "home/technofire/pi2/set"
+                payload: '{"scene":"off","brightness":"0"}'
     front_door_still_open:
         alias: Front door still open
         sequence:
