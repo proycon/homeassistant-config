@@ -496,7 +496,7 @@
         alias: Ignite Fireplace
         sequence:
           - service: mqtt.publish
-            data:
+            data_template:
                 topic: "home/technofire/pi3/set"
                 payload: '{"scene":"{{ states.input_select.technofire |lower }}","brightness":"{{ states.input_slider.technofire_brightness.state }}"}'
     extinguish_fireplace:
