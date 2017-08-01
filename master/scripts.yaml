@@ -524,3 +524,15 @@
             entity_id: media_player.hall_speaker
             data:
                 message: Back door still open
+    reset_ipcam:
+        alias: Reset IPcam
+        sequence:
+          - delay: #starts with a long delay, returns to starting position after a while
+                seconds: 300
+          - service: input_select.select_option
+            data:
+              entity_id: input_select.ipcam_direction
+              option: Back
+
+
+

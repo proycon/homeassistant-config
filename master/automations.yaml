@@ -220,6 +220,16 @@
   action:
     - service: script.turn_on
       entity_id: script.front_door_still_open
+    - service: script.turn_off
+      entity_id: script.reset_ipcam
+    - service: input_select.select_option
+      data:
+          entity_id: input_select.ipcam_direction
+          option: Front
+    - delay:
+        seconds: 10
+    - service: script.turn_on
+      entity_id: script.reset_ipcam
 - id: back_door_closed
   alias: "back Door closed"
   trigger:
@@ -240,6 +250,16 @@
   action:
     - service: script.turn_on
       entity_id: script.back_door_still_open
+    - service: script.turn_off
+      entity_id: script.reset_ipcam
+    - service: input_select.select_option
+      data:
+          entity_id: input_select.ipcam_direction
+          option: Back
+    - delay:
+        seconds: 10
+    - service: script.turn_on
+      entity_id: script.reset_ipcam
 
 
 
