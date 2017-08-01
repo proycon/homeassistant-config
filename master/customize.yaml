@@ -20,6 +20,8 @@ switch.hall:
     icon: mdi:lightbulb
 switch.roof:
     icon: mdi:lightbulb
+switch.porch:
+    icon: mdi:lightbulb
 switch.tvdecoder:
     icon: mdi:television-guide
 switch.tv:
