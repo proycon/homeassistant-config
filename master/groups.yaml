@@ -36,6 +36,7 @@ light_view:
         - group.upstairs_lights
         - group.garden_lights
         - group.guard_lights
+        - group.fireplace
 
 camera_view:
     name: Live Camera
