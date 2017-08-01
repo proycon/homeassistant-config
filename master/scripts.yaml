@@ -498,7 +498,7 @@
           - service: mqtt.publish
             data_template:
                 topic: "home/technofire/pi3/set"
-                payload_template: '{"scene":"{{ states.input_select.technofire |lower }}","brightness":"{{ states.input_slider.technofire_brightness.state }}"}'
+                payload_template: '{"scene":"{{ states.input_select.fireplace.state |lower }}","brightness":"{{ states.input_slider.fireplace_brightness.state|int }}"}'
     extinguish_fireplace:
         alias: Extinguish Fireplace
         sequence:
