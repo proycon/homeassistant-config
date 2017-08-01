@@ -317,6 +317,16 @@ media_player yamaha_receiver:
         HDMI1: "TV Decoder"
         HDMI2: "Pi1"
 
+media_player mpd:
+  - platform: mpd
+    host: 127.0.0.1
+    password: !secret mpd_password
+
+media_player kodi:
+    - platform: kodi
+      host: !secret pi1_ip
+
+
 notify:
   - name: xmpp_proycon
     platform: xmpp
