@@ -232,7 +232,6 @@ binary_sensor:
         entity_id:
             - device_tracker.proyphone
             - device_tracker.hansphone
-        device_class: occupancy
 
 switch tv_spots:
     platform: mqtt

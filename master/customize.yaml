@@ -22,7 +22,7 @@ switch.roof:
     icon: mdi:lightbulb
 switch.porch:
     icon: mdi:lightbulb
-switch.tvdecoder:
+switch.tv_decoder:
     icon: mdi:television-guide
 switch.tv:
     icon: mdi:television
@@ -84,3 +84,17 @@ script.ipcam_topreset:
     icon: mdi:camera
 script.watch_tv:
     icon: mdi:television
+script.turn_media_off:
+    icon: mdi:power-plug-off
+input_select.ipcam_direction:
+    icon: mdi:camera-iris
+script.ignite_fireplace:
+    icon: mdi:fire
+script.ignite_dresser_ambilight:
+    icon: mdi:lamp
+
+
+    icon: mdi:fire
+
+
+
