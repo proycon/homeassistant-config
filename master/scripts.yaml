@@ -492,3 +492,18 @@
               data_template:
                   ip: !secret ipcam_ip
                   index: '{% if is_state("input_select.ipcam_direction","Hall") %}0{% elif is_state("input_select.ipcam_direction","Dresser") %}1{% elif is_state("input_select.ipcam_direction","Back") %}2{% elif is_state("input_select.ipcam_direction","TV") %}3{% elif is_state("input_select.ipcam_direction","Couch") %}4{% elif is_state("input_select.ipcam_direction","Front") %}5{% endif %}'
+    ignite_fireplace:
+        alias: Ignite Fireplace
+        sequence:
+          - service: mqtt.publish
+            data:
+                topic: "home/technofire/pi3/set"
+                payload: '{"scene":"{{ states.input_select.technofire |lower }}","brightness":"{{ states.input_slider.technofire_brightness.state }}"}'
+    extinguish_fireplace:
+        alias: Extinguish Fireplace
+        sequence:
+          - service: mqtt.publish
+            data:
+                topic: "home/technofire/pi3/set"
+                payload: '{"scene":"off","brightness":"0"}'
+
