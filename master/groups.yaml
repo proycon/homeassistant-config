@@ -230,6 +230,6 @@ fireplace:
     entities:
         - input_select.fireplace
         - input_slider.fireplace_brightness
-        - script.fireplace
+        - switch.fireplace
 
 
