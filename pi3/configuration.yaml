@@ -48,7 +48,7 @@ homeassistant:
 #  platform: yr
 
 shell_command:
-    technofire: '/home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }}'
+    technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }}'
 
 automation:
   - id: technofire
