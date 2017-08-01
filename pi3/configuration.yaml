@@ -63,8 +63,8 @@ automation:
              brightness: '{{ trigger.payload_json.brightness }}'
         - service: mqtt.publish
           data_template:
-              topic_template: "home/technofire/pi3/get"
-              payload_template: '{{ trigger.scene }}'
+              topic: "home/technofire/pi3/get"
+              payload_template: '{{ trigger.payload_json.scene }}'
 
 #MQTT
 mqtt:
