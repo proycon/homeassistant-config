@@ -170,6 +170,7 @@ media_activities:
     icon: mdi:television
     entities:
         - script.watch_tv
+        - script.turn_media_off
 
 
 media_devices:
