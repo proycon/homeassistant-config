@@ -550,45 +550,51 @@
     flash_notification_single_round:
         alias: Flash notification single round
         sequence:
-            - service: switch.turn_on
-              entity_id: switch.porch
-            - delay:
-                seconds: 2
-            - service: switch.turn_on
-              entity_id: switch.back_room
-            - delay:
-                seconds: 2
-            - service: switch.turn_off
-              entity_id: switch.porch
-            - delay:
-                seconds: 2
-            - service: switch.turn_off
-              entity_id: switch.back_room
     flash_notification:
         alias: Flash notification
         sequence:
-            - service: script.turn_on
-              entity_id: script.flash_notification_single_round
+            - service: switch.turn_on
+              entity_id: switch.porch
             - delay:
                 seconds: 2
-            - service: script.turn_on
-              entity_id: script.flash_notification_single_round
+            - service: switch.turn_on
+              entity_id: switch.back_room
             - delay:
                 seconds: 2
-            - service: script.turn_on
-              entity_id: script.flash_notification_single_round
+            - service: switch.turn_off
+              entity_id: switch.porch
             - delay:
                 seconds: 2
-            - service: script.turn_on
-              entity_id: script.flash_notification_single_round
+            - service: switch.turn_off
+              entity_id: switch.back_room
+            - service: switch.turn_on
+              entity_id: switch.porch
             - delay:
                 seconds: 2
-            - service: script.turn_on
-              entity_id: script.flash_notification_single_round
+            - service: switch.turn_on
+              entity_id: switch.back_room
             - delay:
                 seconds: 2
-            - service: script.turn_on
-              entity_id: script.flash_notification_reset
+            - service: switch.turn_off
+              entity_id: switch.porch
+            - delay:
+                seconds: 2
+            - service: switch.turn_off
+              entity_id: switch.back_room
+            - service: switch.turn_on
+              entity_id: switch.porch
+            - delay:
+                seconds: 2
+            - service: switch.turn_on
+              entity_id: switch.back_room
+            - delay:
+                seconds: 2
+            - service: switch.turn_off
+              entity_id: switch.porch
+            - delay:
+                seconds: 2
+            - service: switch.turn_off
+              entity_id: switch.back_room
     flash_notification_reset:
         alias: flash_notification_reset
         sequence:
