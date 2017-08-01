@@ -180,6 +180,8 @@ media_devices:
         - switch.tv_decoder
         - switch.hdmi_0 #TV, 50PFK5300/12
         - media_player.yamaha_receiver
+        - media_player.kodi
+        - media_player.mpd
 
 media_volume:
     name: Volume (AVR)
