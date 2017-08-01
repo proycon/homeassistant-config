@@ -93,8 +93,3 @@ script.ignite_fireplace:
 script.ignite_dresser_ambilight:
     icon: mdi:lamp
 
-
-    icon: mdi:fire
-
-
-
