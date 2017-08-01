@@ -102,6 +102,24 @@
   action:
       service: switch.turn_on
       entity_id: group.garden_lights
+- id: porch_light_on_at_night
+  alias: Porch light on at night
+  trigger:
+      platform: sun
+      event: sunset
+      offset: '00:00:00'
+  action:
+      service: switch.turn_on
+      entity_id: switch.porch
+- id: porch_light_off_after_dawn
+  alias: Porch light off after dawn
+  trigger:
+      platform: sun
+      event: sunrise
+      offset: '01:00:00'
+  action:
+      service: switch.turn_off
+      entity_id: switch.porch
 - id: lights_off_at_night
   alias: Lights off at night
   trigger:
@@ -132,9 +150,12 @@
       - service: notify.xmpp_hans
         data:
           message: "De deurbel gaat"
+      - service: script.turn_on
+        entity_id: script.flash_notification
       - delay:
           seconds: 10
       - service: script.turn_on
+        data:
           entity_id: script.reset_ipcam
 - id: ipcam_topreset
   alias: Camera to preset
@@ -210,6 +231,8 @@
     - service: notify.xmpp_hans
       data:
           message: "System disarmed"
+    - service: script.turn_on
+      entity_id: script.flash_notification
 - id: front_door_closed
   alias: "Front Door closed"
   trigger:
@@ -236,12 +259,18 @@
       data:
           entity_id: input_select.ipcam_direction
           option: Hall
+    - service: script.turn_off
+      entity_id: script.flash_notification
     - delay:
-        seconds: 10
+        seconds: 2
+    - service: script.turn_on
+      entity_id: script.flash_reset
+    - delay:
+        seconds: 6
     - service: script.turn_on
       entity_id: script.reset_ipcam
 - id: back_door_closed
-  alias: "back Door closed"
+  alias: "Back Door closed"
   trigger:
     - platform: state
       entity_id: binary_sensor.back_door
@@ -266,13 +295,19 @@
       data:
           entity_id: input_select.ipcam_direction
           option: Back
+    - service: script.turn_off
+      entity_id: script.flash_notification
     - delay:
-        seconds: 10
+        seconds: 2
+    - service: script.turn_on
+      entity_id: script.flash_reset
+    - delay:
+        seconds: 8
     - service: script.turn_on
       entity_id: script.reset_ipcam
- - id: window_upstair_opened
-   alias: "Window upstairs opened"
-   trigger:
+- id: window_upstairs_opened
+  alias: "Window upstairs opened"
+  trigger:
     - platform: state
       entity_id: binary_sensor.bedroom_window_left
       from: 'off'
@@ -281,7 +316,7 @@
       entity_id: binary_sensor.bedroom_window_right
       from: 'off'
       to: 'on'
-   action:
+  action:
     - service: script.turn_off
       entity_id: script.reset_ipcam
     - service: input_select.select_option

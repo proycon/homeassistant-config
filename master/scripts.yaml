@@ -533,6 +533,61 @@
             data:
               entity_id: input_select.ipcam_direction
               option: Back
+    flash_notification_single_round:
+        alias: Flash notification single round
+        sequence:
+            - service: switch.turn_on
+              entity_id: switch.porch
+            - delay:
+                milliseconds: 250
+            - service: switch.turn_on
+              entity_id: switch.back_room
+            - delay:
+                seconds: 1
+            - service: switch.turn_off
+              entity_id: switch.porch
+            - delay:
+                milliseconds: 250
+            - service: switch.turn_off
+              entity_id: switch.back_room
+    flash_notification:
+        alias: Flash notification
+        sequence:
+            - service: script.turn_on
+              entity_id: script.flash_notification_single_round
+            - delay:
+                seconds: 3
+            - service: script.turn_on
+              entity_id: script.flash_notification_single_round
+            - delay:
+                seconds: 3
+            - service: script.turn_on
+              entity_id: script.flash_notification_single_round
+            - delay:
+                seconds: 3
+            - service: script.turn_on
+              entity_id: script.flash_notification_single_round
+            - delay:
+                seconds: 3
+            - service: script.turn_on
+              entity_id: script.flash_notification_single_round
+            - delay:
+                seconds: 3
+            - service: script.turn_on
+              entity_id: script.flash_notification_reset
+    flash_notification_reset:
+        alias: flash_notification_reset
+        sequence:
+            - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') %}on{% else %}off{% endif %}"
+              data:
+                  entity_id:
+                    - switch.porch
+            - delay:
+                seconds: 1
+            - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') %}on{% else %}off{% endif %}"
+              data:
+                  entity_id:
+                    - switch.back_room
 
 
 

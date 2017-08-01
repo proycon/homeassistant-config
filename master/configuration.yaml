@@ -251,6 +251,11 @@ switch roof:
     name: Roof
     state_topic: "home/elro/get/buiten/4"
     command_topic: "home/elro/set/pi2/buiten/4"
+switch porch:
+    platform: mqtt
+    name: Porch
+    state_topic: "home/kaku/get/M/11"
+    command_topic: "home/kaku/set/pi1/M/11"
 switch tv_decoder:
     platform: mqtt
     name: TV Decoder

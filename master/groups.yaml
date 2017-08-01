@@ -58,6 +58,7 @@ config_view:
         - group.config_snapshots
         - group.config_lights
         - group.config_sound
+        - group.config_tests
 
 config_snapshots:
     name: Snapshots
@@ -84,6 +85,13 @@ config_lights:
         - automation.lights_on_in_the_evening
         - automation.lights_off_at_night
         - automation.garden_lights_on_in_the_evening
+
+config_tests:
+    name: Tests
+    entities:
+        - script.flash_notification
+        - script.doorbell_sound
+        - script.dog_barking_sound
 
 all_lights:
     name: Lights
@@ -126,6 +134,7 @@ guard_lights:
     entities:
         - switch.roof
         - switch.hall
+        - switch.porch
 
 cameras:
     name: Cameras
