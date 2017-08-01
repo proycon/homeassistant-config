@@ -11,9 +11,13 @@ fi
 
 pip install -U homeassistant
 
-ln -sf $HADIR/scripts master/scripts
-ln -sf $HADIR/scripts pi1/scripts
-ln -sf $HADIR/scripts pi2/scripts
-ln -sf $HADIR/scripts pi3/scripts
+ln -sf $HADIR/scripts $HADIR/master/scripts
+ln -sf $HADIR/scripts $HADIR/pi1/scripts
+ln -sf $HADIR/scripts $HADIR/pi2/scripts
+ln -sf $HADIR/scripts $HADIR/pi3/scripts
+ln -sf $HADIR/custom_components $HADIR/master/custom_components
+ln -sf $HADIR/custom_components $HADIR/pi1/custom_components
+ln -sf $HADIR/custom_components $HADIR/pi2/custom_components
+ln -sf $HADIR/custom_components $HADIR/pi3/custom_components
 
 

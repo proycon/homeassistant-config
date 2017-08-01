@@ -2,6 +2,7 @@
 
 HOST=$(hostname)
 HADIR=/home/homeautomation/homeassistant/
+cd $HADIR
 if [ $HOST == "roma" ]; then
     HOST="master"
 fi
