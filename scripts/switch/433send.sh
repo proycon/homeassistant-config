@@ -8,5 +8,5 @@ while [ -f /tmp/43392.lock ]; do
 done
 touch /tmp/43392.lock
 echo "Calling 433send $1 $2 $3 $4 $5" >&2
-/home/homeautomation/homeassistant/scripts/switch/433send $1 $2 $3 $4 $5
+/home/homeautomation/homeassistant/scripts/switch/433mhzforpi/433send $1 $2 $3 $4 $5
 rm /tmp/43392.lock
