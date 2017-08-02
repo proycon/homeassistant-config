@@ -745,6 +745,32 @@ red_alert_lights:
          - service: script.turn_on
            entity_id: script.ignite_dresser_ambilight
 
+sirene_lights:
+     alias: Sirene lights
+     sequence:
+         - service: input_select.select_option
+           data:
+               entity_id: input_select.fireplace
+               option: Sirene
+         - service: input_select.select_value
+           data:
+               entity_id: input_select.fireplace_brightness
+               option: 255
+         - service: input_select.select_value
+           data:
+               entity_id: input_select.dresser_ambilight_brightness
+               option: 255
+         - service: input_select.select_option
+           data:
+               entity_id: input_select.dresser_ambilight
+               option: Sirene
+         - delay:
+               seconds: 1
+         - service: script.turn_on
+           entity_id: script.ignite_fireplace
+         - service: script.turn_on
+           entity_id: script.ignite_dresser_ambilight
+
 
 alarm_blink:
     alias: alarm_blink
