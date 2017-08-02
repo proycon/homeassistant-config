@@ -210,7 +210,6 @@ sensor:
     - platform: time_date
       display_options:
           - 'time'
-          - 'date'
     - platform: template
       sensors:
           wake_up_time:
