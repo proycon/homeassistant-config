@@ -35,7 +35,7 @@ light_view:
     name: Lights
     icon: mdi:lightbulb
     entities:
-        - group.lights_shortcuts
+        - group.light_shortcuts
         - group.living_lights
         - group.upstairs_lights
         - group.garden_lights
@@ -170,6 +170,7 @@ media_activities:
     icon: mdi:television
     entities:
         - script.watch_tv
+        - script.media_centre
         - script.turn_media_off
 
 
