@@ -299,8 +299,10 @@ switch garden:
 switch balcony:
     platform: mqtt
     name: Balcony
-    state_topic: "home/elro/get/buiten/2"
-    command_topic: "home/elro/set/pi2/buiten/2"
+    state_topic: "home/kaku/get/M/12"
+    command_topic: "home/kaku/set/pi2/M/12"
+    #state_topic: "home/elro/get/buiten/2"
+    #command_topic: "home/elro/set/pi2/buiten/2"
 switch hall:
     platform: mqtt
     name: Hall
@@ -309,8 +311,10 @@ switch hall:
 switch roof:
     platform: mqtt
     name: Roof
-    state_topic: "home/elro/get/buiten/4"
-    command_topic: "home/elro/set/pi2/buiten/4"
+    state_topic: "home/kaku/get/M/13"
+    command_topic: "home/kaku/set/pi2/M/13"
+    #state_topic: "home/elro/get/buiten/4"
+    #command_topic: "home/elro/set/pi2/buiten/4"
 switch porch:
     platform: mqtt
     name: Porch
