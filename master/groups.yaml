@@ -13,11 +13,16 @@ default_view:
         - binary_sensor.bedroom_window_right
         - sensor.weather_symbol
         - sensor.weather_temperature
+        - sensor.time
+        - sensor.date
+        - sensor.wake_up_time
         - group.light_shorcuts
         - group.all_lights
         - group.cameras
         - group.media_activities
         - group.media_volume
+        - group.wake_up_alarm
+
 
 media_view:
     name: Media
@@ -273,4 +278,9 @@ dresser_ambilight:
         - script.ignite_dresser_ambilight
         - script.extinguish_dresser_ambilight
 
-
+wake_up_alarm:
+    name: Wake up alarm
+    icon: mdi:timer
+    entities:
+        - input_slider.wake_up_hour
+        - input_slider.wake_up_minutes
