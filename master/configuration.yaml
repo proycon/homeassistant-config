@@ -259,67 +259,67 @@ binary_sensor:
 switch tv_spots:
     platform: mqtt
     name: TV Spots
-    state_topic: "home/elro/get/beneden/16"
-    command_topic: "home/elro/set/pi1/beneden/16"
+    state_topic: "home/433send/get/elro/31/E"
+    command_topic: "home/433send/set/pi1/elro/31/E"
 switch office:
     platform: mqtt
     name: Office
-    state_topic: "home/elro/get/boven/1"
-    command_topic: "home/elro/set/pi2/boven/1"
+    state_topic: "home/433send/get/elro/30/A"
+    command_topic: "home/433send/set/pi2/elro/30/A"
 switch front_room:
     platform: mqtt
     name: Front Room
-    state_topic: "home/kaku/get/M/10"
-    command_topic: "home/kaku/set/pi1/M/10"
+    state_topic: "home/433send/get/oldkaku/M/10"
+    command_topic: "home/433send/set/pi1/oldkaku/M/10"
 switch midspots:
     platform: mqtt
     name: Midspots
-    state_topic: "home/elro/get/beneden/2"
-    command_topic: "home/elro/set/pi2/beneden/2"
+    state_topic: "home/433send/get/elro/31/B"
+    command_topic: "home/433send/set/pi2/elro/31/B"
 switch back_room:
     platform: mqtt
     name: Back room
-    state_topic: "home/elro/get/beneden/1"
-    command_topic: "home/elro/set/pi2/beneden/1"
+    state_topic: "home/433send/get/elro/31/A"
+    command_topic: "home/433send/set/pi2/elro/31/A"
 switch back_corner:
     platform: mqtt
     name: Back Corner
-    state_topic: "home/elro/get/beneden/4"
-    command_topic: "home/elro/set/pi2/beneden/4"
+    state_topic: "home/433send/get/elro/31/C"
+    command_topic: "home/433send/set/pi2/31/C"
 switch bedroom:
     platform: mqtt
     name: Bedroom
-    state_topic: "home/elro/get/boven/4"
-    command_topic: "home/elro/set/pi2/boven/4"
+    state_topic: "home/433send/get/elro/30/C"
+    command_topic: "home/433send/set/pi2/elro/30/C"
 switch garden:
     platform: mqtt
     name: Garden
-    state_topic: "home/elro/get/buiten/1"
-    command_topic: "home/elro/set/pi2/buiten/1"
+    state_topic: "home/433send/get/elro/29/A"
+    command_topic: "home/433send/set/pi2/elro/29/A"
 switch balcony:
     platform: mqtt
     name: Balcony
-    state_topic: "home/kaku/get/M/12"
-    command_topic: "home/kaku/set/pi2/M/12"
-    #state_topic: "home/elro/get/buiten/2"
-    #command_topic: "home/elro/set/pi2/buiten/2"
+    state_topic: "home/433send/get/newkaku/121/9"
+    command_topic: "home/433send/set/pi2/newkaku/121/9"
+    #state_topic: "home/elro/get/29/2"
+    #command_topic: "home/elro/set/pi2/29/2"
 switch hall:
     platform: mqtt
     name: Hall
-    state_topic: "home/elro/get/boven/2"
-    command_topic: "home/elro/set/pi1/boven/2"
+    state_topic: "home/433send/get/elro/30/B"
+    command_topic: "home/433send/set/pi1/elro/30/B"
 switch roof:
     platform: mqtt
     name: Roof
-    state_topic: "home/kaku/get/M/13"
-    command_topic: "home/kaku/set/pi2/M/13"
-    #state_topic: "home/elro/get/buiten/4"
-    #command_topic: "home/elro/set/pi2/buiten/4"
+    state_topic: "home/433send/get/newkaku/121/8"
+    command_topic: "home/433send/set/pi2/newkaku/121/8"
+    #state_topic: "home/elro/get/29/4"
+    #command_topic: "home/elro/set/pi2/29/4"
 switch porch:
     platform: mqtt
     name: Porch
-    state_topic: "home/kaku/get/M/11"
-    command_topic: "home/kaku/set/pi1/M/11"
+    state_topic: "home/433send/get/oldkaku/M/11"
+    command_topic: "home/433send/set/pi1/oldkaku/M/11"
 switch tv_decoder:
     platform: mqtt
     name: TV Decoder

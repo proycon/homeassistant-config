@@ -121,42 +121,27 @@ automation:
         data_template:
             device: '{{ trigger.payload_json.device }}'
             key: '{{ trigger.payload_json.key }}'
-  - id: elro_send
-    alias: ELRO Send (433.92Mhz)
+  - id: 433send
+    alias: 433send
     trigger:
         platform: mqtt
-        topic: "home/elro/set/pi1/#"
+        topic: "home/433send/pi1/#"
     action:
-        - service: shell_command.elro_send
+        - service: shell_command.433send
           data_template:
+             protocol: '{{ trigger.topic.split("/")[-3] }}'
              group: '{{ trigger.topic.split("/")[-2] }}'
              unit: '{{ trigger.topic.split("/")[-1] }}'
-             state: '{% if trigger.payload|upper == "ON" %}1{% else %}0{% endif %}'
+             state: '{{ trigger.payload|lower }}'
         - service: mqtt.publish
           data_template:
-              topic_template: "home/elro/get/{{ trigger.topic.split('/')[-2] }}/{{ trigger.topic.split('/')[-1] }}"
-              payload_template: '{{ trigger.payload }}'
-  - id: kaku_send
-    alias: Klik-aan-Klik-Uit Send (433.92Mhz)
-    trigger:
-        platform: mqtt
-        topic: "home/kaku/set/pi1/#"
-    action:
-        - service: shell_command.kaku_send
-          data_template:
-             group: '{{ trigger.topic.split("/")[-2] }}'
-             unit: '{{ trigger.topic.split("/")[-1] }}'
-             state: '{{ trigger.payload | lower }}'
-        - service: mqtt.publish
-          data_template:
-              topic_template: "home/kaku/get/{{ trigger.topic.split('/')[-2] }}/{{ trigger.topic.split('/')[-1] }}"
+              topic_template: "home/433send/get/{{ trigger.topic.split('/')[-3] }}/{{ trigger.topic.split('/')[-2] }}/{{ trigger.topic.split('/')[-1] }}"
               payload_template: '{{ trigger.payload }}'
 
 shell_command:
     start_pycec: python -m pycec
     ir_send: /home/homeautomation/homeassistant/scripts/media/irsend.sh "{{ device }}" "{{ key }}"
-    elro_send: /home/homeautomation/homeassistant/scripts/switch/elro.sh "{{ group }}" "{{ unit }}" "{{ state }}"
-    kaku_send: /home/homeautomation/homeassistant/scripts/switch/kaku.sh "{{ group }}" "{{ unit }}" "{{ state }}" #Klik-aan-klik-uit
+    433send: /home/homeautomation/homeassistant/scripts/switch/433send.sh 8 "{{ protocol }}" "{{ group }}" "{{ unit }}" "{{ state }}"
 
 
 
