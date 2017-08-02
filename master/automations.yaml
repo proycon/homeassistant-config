@@ -182,15 +182,15 @@
       to: 'on'
   condition:
     - condition: state
-      entity_id: alarm_control_panel.ha_alarm
+      entity_id: alarm_control_panel.alarm_system
       state: armed_away
   action:
     - service: alarm_control_panel.alarm_trigger
-      entity_id: alarm_control_panel.ha_alarm
+      entity_id: alarm_control_panel.alarm_system
     - service: script.turn_on
       entity_id: script.alarm
     - service: switch.turn_on
-      entity_id: group.all_lights
+      entity_id: script.lights on
     - service: notify.xmpp_proycon
       data:
           message: "INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
@@ -202,10 +202,11 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.anybodyhome
+      from: 'on'
       to: 'off'
   action:
     - service: alarm_control_panel.alarm_arm_away
-      entity_id: alarm_control_panel.ha_alarm
+      entity_id: alarm_control_panel.alarm_system
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
       data:
@@ -221,10 +222,11 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.anybodyhome
+      from: 'off'
       to: 'on'
   action:
     - service: alarm_control_panel.alarm_disarm
-      entity_id: alarm_control_panel.ha_alarm
+      entity_id: alarm_control_panel.alarm_system
     - service: notify.xmpp_proycon
       data:
           message: "System disarmed"
