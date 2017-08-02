@@ -166,7 +166,7 @@
       service: script.turn_on
       entity_id: script.ipcam_topreset
 - id: alarm_trigger
-  alias: 'Trigger alarm while armed away'
+  alias: Alarm trigger
   trigger:
     - platform: state
       entity_id: binary_sensor.front_door
@@ -189,14 +189,42 @@
       entity_id: alarm_control_panel.alarm_system
     - service: script.turn_on
       entity_id: script.alarm
-    - service: switch.turn_on
-      entity_id: script.lights on
     - service: notify.xmpp_proycon
       data:
           message: "INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
     - service: notify.xmpp_hans
       data:
           message: "INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
+    - service: script.turn_on
+      entity_id: script.red_alert_lights
+    - service: switch.turn_on
+      entity_id: switch.office
+    - delay:
+        seconds: 1
+    - service: switch.turn_off
+      entity_id: switch.tv_spots
+    - delay:
+        seconds: 1
+    - service: switch.turn_off
+      entity_id: switch.front_room
+    - delay:
+        seconds: 1
+    - service: switch.turn_off
+      entity_id: switch.back_room
+    - delay:
+        seconds: 1
+    - service: switch.turn_off
+      entity_id: switch.midspots
+    - delay:
+        seconds: 1
+    - service: switch.turn_off
+      entity_id: switch.back_corner
+    - delay:
+        seconds: 1
+    - service: switch.turn_off
+      entity_id: switch.back_room
+    - service: script.turn_on
+      entity_id: script.alarm_blink
 - id: arm_when_away
   alias: 'Arm when away'
   trigger:

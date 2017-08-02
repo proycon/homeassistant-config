@@ -719,5 +719,52 @@ update_kodi_library:
           entity_id: media_player.kodi
           method: VideoLibrary.Scan
 
+red_alert_lights:
+     alias: Red Alert Lights
+     sequence:
+         - service: input_select.select_option
+           data:
+               entity_id: input_select.fireplace
+               option: Red
+         - service: input_select.select_value
+           data:
+               entity_id: input_select.fireplace_brightness
+               option: 255
+         - service: input_select.select_value
+           data:
+               entity_id: input_select.dresser_ambilight_brightness
+               option: 255
+         - service: input_select.select_option
+           data:
+               entity_id: input_select.dresser_ambilight
+               option: Red
+         - delay:
+               seconds: 1
+         - service: script.turn_on
+           entity_id: script.ignite_fireplace
+         - service: script.turn_on
+           entity_id: script.ignite_dresser_ambilight
 
+
+alarm_blink:
+    alias: alarm_blink
+    sequence:
+    - delay:
+        seconds: 10
+    - service: switch.turn_on
+      entity_id: switch.back_room
+    - delay:
+        seconds: 10
+    - service: switch.turn_off
+      entity_id: switch.back_room
+    - delay:
+        seconds: 10
+    - service: switch.turn_on
+      entity_id: switch.back_room
+    - delay:
+        seconds: 10
+    - service: switch.turn_off
+      entity_id: switch.back_room
+    - service: script.turn_on
+      entity_id: script.alarm_blink
 
