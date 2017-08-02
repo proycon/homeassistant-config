@@ -115,7 +115,7 @@ automation:
     alias: 433send
     trigger:
         platform: mqtt
-        topic: "home/433send/pi1/#"
+        topic: "home/433send/set/pi2/#"
     action:
         - service: shell_command.433send
           data_template:
