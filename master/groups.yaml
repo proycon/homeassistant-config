@@ -183,6 +183,7 @@ media_devices:
         - media_player.yamaha_receiver
         - media_player.kodi
         - media_player.mpd
+        - script.update_kodi_library
 
 media_volume:
     name: Volume (AVR)

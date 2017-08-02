@@ -325,6 +325,14 @@ media_player mpd:
 media_player kodi:
     - platform: kodi
       host: !secret pi1_ip
+      username: !secret kodi_username
+      password: !secret kodi_password
+      turn_on_action:
+          - service: script.turn_on
+            entity_id: script.media_centre
+      turn_off_action:
+          - service: script.turn_off
+            entity_id: script.turn_media_off
 
 
 notify:
