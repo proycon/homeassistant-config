@@ -225,6 +225,14 @@
       entity_id: switch.back_room
     - service: script.turn_on
       entity_id: script.alarm_blink
+    - delay:
+        seconds: 1
+    - service: script.turn_on
+      entity_id: switch.roof
+    - delay:
+        seconds: 1
+    - service: script.turn_on
+      entity_id: switch.porch
 - id: arm_when_away
   alias: 'Arm when away'
   trigger:
