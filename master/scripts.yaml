@@ -545,8 +545,7 @@ alarm:
               media_content_id: /home/homeautomation/homeassistant/media/alarm.ogg
               media_content_type: 'music'
         - service: script.turn_on #loop
-          data:
-              entity_id: script.alarm
+          entity_id: script.alarm
 ipcam_topreset:
     alias: Camera to preset
     sequence:
@@ -683,7 +682,8 @@ watch_tv:
             seconds: 1
         - service: media_player.select_source
           entity_id: media_player.yamaha_receiver
-          source: HMDI1
+          data:
+              source: HMDI1
 
 media_centre:
     alias: Media Centre
@@ -696,7 +696,8 @@ media_centre:
             seconds: 1
         - service: media_player.select_source
           entity_id: media_player.yamaha_receiver
-          source: HMDI2
+          data:
+              source: HMDI2
 
 turn_media_off:
     alias: Turn media off
