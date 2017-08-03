@@ -98,6 +98,7 @@ config_lights:
 
 config_tests:
     name: Tests
+    control: hidden
     entities:
         - script.flash_notification
         - script.doorbell_sound
@@ -109,6 +110,7 @@ config_tests:
 
 all_lights:
     name: Lights
+    control: hidden
     entities:
         - switch.tv_spots
         - switch.front_room
@@ -124,12 +126,14 @@ all_lights:
 
 light_shortcuts:
     name: Light Shortcuts
+    control: hidden
     entities:
         - script.lights_on
         - script.lights_off
 
 living_lights:
     name: Living Room lights
+    control: hidden
     entities:
         - switch.tv_spots
         - switch.front_room
@@ -158,6 +162,7 @@ guard_lights:
 
 cameras:
     name: Cameras
+    control: hidden
     entities:
         - camera.living_room
         - input_select.ipcam_direction
@@ -177,6 +182,7 @@ doors:
 media_activities:
     name: Media Activities
     icon: mdi:television
+    control: hidden
     entities:
         - script.watch_tv
         - script.media_centre
@@ -186,6 +192,7 @@ media_activities:
 media_devices:
     name: Devices
     icon: mdi:television
+    control: hidden
     entities:
         - switch.tv_decoder
         - switch.hdmi_0 #TV, 50PFK5300/12
@@ -267,6 +274,7 @@ devices:
 fireplace:
     name: Fireplace
     icon: mdi:fire
+    control: hidden
     entities:
         - input_select.fireplace
         - input_slider.fireplace_brightness
@@ -276,6 +284,7 @@ fireplace:
 dresser_ambilight:
     name: Dresser Ambilight
     icon: mdi:lamp
+    control: hidden
     entities:
         - input_select.dresser_ambilight
         - input_slider.dresser_ambilight_brightness
