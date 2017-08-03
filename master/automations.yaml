@@ -16,6 +16,12 @@
       - service: script.turn_on
         data:
             entity_id: script.reset_lights
+      - service: script.turn_on
+        data:
+            entity_id: script.reset_fireplace
+      - service: script.turn_on
+        data:
+            entity_id: script.reset_ipcam
       - service: notify.xmpp_proycon
         data:
             message: "Home automation started"
