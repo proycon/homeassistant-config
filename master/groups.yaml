@@ -117,6 +117,7 @@ all_lights:
         - switch.midspots
         - switch.back_room
         - switch.back_corner
+        - switch.kitchen
         - switch.hall
         - switch.office
         - switch.bedroom
