@@ -564,6 +564,32 @@
      - service: script.turn_on
        entity_id: script.ignite_dresser_ambilight
 
+- id: alarm_cancelled
+  alias: Alarm Cancelled
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.alarm_system
+      from: 'triggered'
+      to: 'disarmed'
+  action:
+      - service: script.turn_off
+        entity_id: script.alarm
+      - service: script.turn_off
+        entity_id: script.alarm_blink
+      - service: script.turn_off
+        entity_id: script.sirene_lights
+      - service: script.turn_on
+        data:
+            entity_id: script.reset_ipcam
+      - service: script.turn_on
+        data:
+            entity_id: script.reset_fireplace
+      - service: script.turn_on
+        data:
+            entity_id: script.reset_lights
+
+
+
 
 
 #TODO: wake up clock
