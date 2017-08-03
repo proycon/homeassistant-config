@@ -15,7 +15,7 @@ default_view:
         - sensor.weather_temperature
         - sensor.time
         - sensor.wake_up_time
-        - group.light_shorcuts
+        - group.light_shortcuts
         - group.all_lights
         - group.cameras
         - group.media_activities
