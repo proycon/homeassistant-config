@@ -44,6 +44,8 @@ conversation:
 # Enables support for tracking state changes over time.
 history:
     exclude:
+      domains:
+        - shell_command
       entities:
         - automation.snapshots_frontdoor
         - automation.snapshots_garden
