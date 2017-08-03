@@ -745,6 +745,32 @@ red_alert_lights:
          - service: script.turn_on
            entity_id: script.ignite_dresser_ambilight
 
+green_lights:
+     alias: Green Lights
+     sequence:
+         - service: input_select.select_option
+           data:
+               entity_id: input_select.fireplace
+               option: Green
+         - service: input_select.select_value
+           data:
+               entity_id: input_select.fireplace_brightness
+               option: 255
+         - service: input_select.select_value
+           data:
+               entity_id: input_select.dresser_ambilight_brightness
+               option: 255
+         - service: input_select.select_option
+           data:
+               entity_id: input_select.dresser_ambilight
+               option: Green
+         - delay:
+               seconds: 1
+         - service: script.turn_on
+           entity_id: script.ignite_fireplace
+         - service: script.turn_on
+           entity_id: script.ignite_dresser_ambilight
+
 sirene_lights:
      alias: Sirene lights
      sequence:
@@ -770,6 +796,34 @@ sirene_lights:
            entity_id: script.ignite_fireplace
          - service: script.turn_on
            entity_id: script.ignite_dresser_ambilight
+
+reset_fireplace:
+     alias: Reset Fireplace
+     sequence:
+     - service: input_select.select_option
+       data:
+           entity_id: input_select.fireplace
+           option: Fire
+     - service: input_select.select_value
+       data:
+           entity_id: input_select.fireplace_brightness
+           option: 255
+     - service: input_select.select_value
+       data:
+           entity_id: input_select.dresser_ambilight_brightness
+           option: 40
+     - service: input_select.select_option
+       data:
+           entity_id: input_select.dresser_ambilight
+           option: Lamp
+     - delay:
+           seconds: 1
+     - service: script.turn_on
+       data_template:
+           entity_id: "script.{% if is_state('sun.sun','below_horizon') %}ignite{% else %}extinguish{% endif %}_fireplace"
+     - service: script.turn_on
+       data_template:
+           entity_id: "script.{% if is_state('sun.sun','below_horizon') %}ignite{% else %}extinguish{% endif %}_dresser_ambilight"
 
 
 alarm_blink:

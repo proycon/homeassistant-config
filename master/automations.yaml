@@ -271,6 +271,8 @@
           message: "System disarmed"
     - service: script.turn_on
       entity_id: script.flash_notification
+    - service: script.turn_on
+      entity_id: script.green_lights
 - id: front_door_closed
   alias: "Front Door closed"
   trigger:
@@ -298,6 +300,8 @@
           entity_id: input_select.ipcam_direction
           option: Hall
     - service: script.turn_off
+      entity_id: script.green_lights
+    - service: script.turn_off
       entity_id: script.flash_notification
     - delay:
         seconds: 2
@@ -307,6 +311,8 @@
         seconds: 6
     - service: script.turn_on
       entity_id: script.reset_ipcam
+    - service: script.turn_on
+      entity_id: script.reset_fireplace
 - id: back_door_closed
   alias: "Back Door closed"
   trigger:
@@ -343,6 +349,8 @@
         seconds: 8
     - service: script.turn_on
       entity_id: script.reset_ipcam
+    - service: script.turn_on
+      entity_id: script.reset_fireplace
 - id: window_upstairs_opened
   alias: "Window upstairs opened"
   trigger:
@@ -533,11 +541,28 @@
        entity_id: binary_sensor.anybodyhome
        state: "on"
   action:
+     - service: input_select.select_option
+       data:
+           entity_id: input_select.fireplace
+           option: Fire
+     - service: input_select.select_value
+       data:
+           entity_id: input_select.fireplace_brightness
+           option: 255
+     - service: input_select.select_value
+       data:
+           entity_id: input_select.dresser_ambilight_brightness
+           option: 40
+     - service: input_select.select_option
+       data:
+           entity_id: input_select.dresser_ambilight
+           option: Lamp
+     - delay:
+           seconds: 1
      - service: script.turn_on
        entity_id: script.ignite_fireplace
      - service: script.turn_on
        entity_id: script.ignite_dresser_ambilight
-
 
 
 
