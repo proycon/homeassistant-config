@@ -16,6 +16,8 @@ switch.garden:
     icon: mdi:lightbulb
 switch.balcony:
     icon: mdi:lightbulb
+switch.kitchen:
+    icon: mdi:lightbulb
 switch.hall:
     icon: mdi:lightbulb
 switch.roof:
