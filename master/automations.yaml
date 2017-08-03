@@ -150,6 +150,10 @@
       - service: notify.xmpp_hans
         data:
           message: "De deurbel gaat"
+      - service: notify.mail_both
+        data:
+            title: "[homeautomation] Doorbell: There is somebody at the door"
+            message: "There is somebody at the door, please check"
       - service: script.turn_on
         entity_id: script.flash_notification
       - delay:
@@ -194,6 +198,10 @@
           message: "INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
     - service: notify.xmpp_hans
       data:
+          message: "INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
+    - service: notify.mail_both
+      data:
+          title: "[homeautomation] INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
           message: "INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
     - service: script.turn_on
       entity_id: script.sirene_lights

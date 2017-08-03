@@ -424,6 +424,13 @@ notify:
     sender: !secret xmpp_sender
     password: !secret xmpp_password
     recipient: !secret xmpp_hans
+  - name: mail_both
+    platform: smtp
+    sender: !secret xmpp_sender
+    server: 127.0.0.1
+    recipient:
+        - !secret xmpp_proycon
+        - !secret xmpp_hans
 
 #MQTT
 mqtt:
