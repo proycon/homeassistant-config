@@ -559,7 +559,7 @@ ignite_fireplace:
       - service: mqtt.publish
         data_template:
             topic: "home/technofire/pi3/set"
-            payload_template: '{"scene":"{{ states.input_select.fireplace.state |lower }}","brightness":"{{ states.input_slider.fireplace_brightness.state|int }}"}'
+            payload_template: '{"scene":"{{ states.input_select.fireplace.state.replace(" ","_") |lower }}","brightness":"{{ states.input_slider.fireplace_brightness.state|int }}"}'
 extinguish_fireplace:
     alias: Extinguish Fireplace
     sequence:
@@ -573,7 +573,7 @@ ignite_dresser_ambilight:
       - service: mqtt.publish
         data_template:
             topic: "home/technofire/pi2/set"
-            payload_template: '{"scene":"{{ states.input_select.dresser_ambilight.state |lower }}","brightness":"{{ states.input_slider.dresser_ambilight_brightness.state|int }}"}'
+            payload_template: '{"scene":"{{ states.input_select.dresser_ambilight.state.replace(" ","_") |lower }}","brightness":"{{ states.input_slider.dresser_ambilight_brightness.state|int }}"}'
 extinguish_dresser_ambilight:
     alias: Extinguish dresser_ambilight
     sequence:

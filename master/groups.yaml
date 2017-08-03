@@ -68,6 +68,7 @@ config_view:
         - group.config_lights
         - group.config_sound
         - group.config_tests
+        - switch.bathroom_vent
 
 config_snapshots:
     name: Snapshots
@@ -102,6 +103,7 @@ config_tests:
         - script.doorbell_sound
         - script.dog_barking_sound
         - script.red_alert_lights
+        - script.green_alert_lights
         - script.sirene_lights
         - script.alarm_blink
 
