@@ -25,19 +25,19 @@ lights_on:
         - service: switch.turn_on
           entity_id: switch.tv_spots
         - delay:
-            seconds: 1.5
+            seconds: 2
         - service: switch.turn_on
           entity_id: switch.back_corner
         - delay:
-            seconds: 1.5
+            seconds: 2
         - service: switch.turn_on
           entity_id: switch.back_room
         - delay:
-            seconds: 1.5
+            seconds: 2
         - service: switch.turn_on
           entity_id: switch.front_room
         - delay:
-            seconds: 1.5
+            seconds: 2
         - service: switch.turn_on
           entity_id: switch.midspots
 lights_off:
@@ -46,15 +46,15 @@ lights_off:
         - service: switch.turn_off
           entity_id: switch.back_corner
         - delay:
-            seconds: 1.5
+            seconds: 2
         - service: switch.turn_off
           entity_id: switch.back_room
         - delay:
-            seconds: 1.5
+            seconds: 2
         - service: switch.turn_off
           entity_id: switch.front_room
         - delay:
-            seconds: 1.5
+            seconds: 2
         - service: switch.turn_off
           entity_id: switch.midspots
         - delay:
@@ -73,6 +73,10 @@ lights_off:
             seconds: 2
         - service: switch.turn_off
           entity_id: switch.tv_spots
+        - delay:
+            seconds: 2
+        - service: switch.turn_off
+          entity_id: switch.kitchen
         - delay:
             seconds: 2
         - service: switch.turn_off

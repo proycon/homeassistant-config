@@ -602,7 +602,23 @@
         data:
             entity_id: script.reset_lights
 
+- id: kitchen_light_on_around_dinner_time
+  alias: Kitchen Light on around dinner time
+  trigger:
+     platform: time
+     at: '17:00:00'
+  action:
+      - service: switch.turn_on
+        entity_id: switch.kitchen
 
+- id: kitchen_light_off_after_dinner_time
+  alias: Kitchen Light off after dinner time
+  trigger:
+     platform: time
+     at: '20:00:00'
+  action:
+      - service: switch.turn_off
+        entity_id: switch.kitchen
 
 
 
