@@ -151,15 +151,19 @@
           entity_id: input_select.ipcam_direction
           option: Front
       - service: notify.xmpp_proycon
-        data:
-          message: "There is somebody at the door"
+        data_template:
+          message: "The doorbell rang, there is somebody at the door ({{ now() }})"
       - service: notify.xmpp_hans
         data:
           message: "De deurbel gaat"
       - service: notify.mail_both
-        data:
-            title: "[homeautomation] Doorbell: There is somebody at the door"
-            message: "There is somebody at the door, please check"
+        data_template:
+            title: "[homeautomation] Doorbell rang ({{ now() }})"
+            message: "The doorbell rang; there is somebody at the door, please check"
+      - service: persistent_notification.create
+        data_template:
+            message: "There is sometbody at the door ({{ now() }})"
+            title: "The doorbell rang"
       - service: script.turn_on
         entity_id: script.flash_notification
       - delay:
@@ -200,15 +204,19 @@
     - service: script.turn_on
       entity_id: script.alarm
     - service: notify.xmpp_proycon
-      data:
-          message: "INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
+      data_template:
+          message: "INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now() }})!!! CHECK IMMEDIATELY!!!"
     - service: notify.xmpp_hans
-      data:
-          message: "INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
+      data_template:
+          message: "INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now() }})!!! CHECK IMMEDIATELY!!!"
     - service: notify.mail_both
-      data:
-          title: "[homeautomation] INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
-          message: "INTRUDER ALERT!! ALARM TRIGGERED!!! CHECK IMMEDIATELY!!!"
+      data_template:
+          title: "[homeautomation] INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now() }})!!! CHECK IMMEDIATELY!!!"
+          message: "INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now() }})!!! CHECK IMMEDIATELY!!!"
+    - service: persistent_notification.create
+      data_template:
+        message: "ALARM TRIGGERED!!!"
+        title: "INTRUDER ALTER!!! ALARM TRIGGERED AT ({{ now() }})!!! CHECK IMMEDIATELY!!!"
     - service: script.turn_on
       entity_id: script.sirene_lights
     - service: switch.turn_on
