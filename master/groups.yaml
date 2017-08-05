@@ -170,7 +170,7 @@ cameras:
     entities:
         - camera.living_room
         - input_select.ipcam_direction
-        - camera.street
+        - camera.streetcam_live
         - camera.front_door
         - camera.hall_upstairs
         - camera.garden

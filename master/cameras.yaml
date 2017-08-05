@@ -14,13 +14,16 @@
       name: Garden
       file_path: /home/homeautomation/homeassistant/snapshots/_garden.jpg
     - platform: mjpeg
-      name: Living Room Live
+      name: living_room_live
+      friendly_name: Living Room Live
       mjpeg_url: !secret ipcam_mjpeg_url
       user: !secret ipcam_user
       password: !secret ipcam_password
     - platform: mjpeg
       friendly_name: Street Live
+      name: street_live
       mjpeg_url: !secret streetcam_mjpeg_url
     - platform: mjpeg
-      name: Garden Live
+      friendly_name: Garden Live
+      name: garden_live
       mjpeg_url: !secret gardencam_mjpeg_url
