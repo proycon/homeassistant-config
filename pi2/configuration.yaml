@@ -217,7 +217,7 @@ shell_command:
     start_pycec: python -m pycec
     ir_send: /home/homeautomation/homeassistant/scripts/media/irsend.sh "{{ device }}" "{{ key }}"
     433send: /home/homeautomation/homeassistant/scripts/switch/433send.sh 4 "{{ protocol }}" "{{ group }}" "{{ unit }}" "{{ state }}"
-    hdmi_cec_send: echo "{{ payload }}" | cec-client -s -d 1
+    hdmi_cec_send: /home/homeautomation/homeassistant/scripts/switch/hdmicecsend.sh "{{ payload }}"
     technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }}'
 
 #MQTT
