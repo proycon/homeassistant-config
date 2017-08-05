@@ -630,6 +630,12 @@
 
 
 
+- id: wake_up
+  alias: 'Wake up'
+  trigger:
+    platform: template
+    value_template: '{{ states.sensor.time.state == states.sensor.wake_up_time.state }}'
+  action:
+    - service: script.turn_on
+      entity_id: script.wake_up_alarm
 
-
-#TODO: wake up clock

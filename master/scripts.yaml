@@ -874,3 +874,17 @@ alarm_blink:
     - service: script.turn_on
       entity_id: script.alarm_blink
 
+wake_up_alarm:
+    alias: Wake up alarm
+    sequence:
+    - service: switch.turn_on
+      entity_id: switch.bedroom
+    - delay:
+      minutes: 45
+    - service: switch.turn_off
+      entity_id: switch.bedroom
+
+
+
+
+

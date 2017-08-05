@@ -63,6 +63,18 @@ binary_sensor:
       bouncetime: 60
       device_class: opening
 
+switch:
+    platform: command_line
+    switches:
+        kodi:
+            command_on: "kodi-standalone &"
+            command_off: "killall kodi-standalone kodi kodi_v7.bin"
+            command_state: "ps aux | grep kodi | grep -v grep"
+        xorg:
+            command_on: "startx &"
+            command_off: "killall Xorg"
+            command_state: "ps aux | grep Xorg | grep -v grep"
+
 automation:
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
   - id: s2m_backdoor
@@ -141,6 +153,46 @@ automation:
           data_template:
               topic: "home/technofire/pi2/get"
               payload_template: '{{ trigger.payload_json.scene }}'
+  - id: s2m_kodi
+    alias: s2m_kodi
+    trigger:
+        - platform: state
+          entity_id: switch.kodi
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/kodi/get/pi2"
+            payload_template: "{{ states('switch.kodi') | upper }}"
+  - id: s2m_xorg
+    alias: s2m_xorg
+    trigger:
+        - platform: state
+          entity_id: switch.xorg
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/xorg/get/pi2"
+            payload_template: "{{ states('switch.xorg') | upper }}"
+  - id: m2s_kodi
+    alias: m2s_kodi
+    trigger:
+        platform: mqtt
+        topic: "home/kodi/set/pi2"
+    action:
+        service_template: switch.turn_{{trigger.payload|lower}}
+        entity_id: switch.kodi
+  - id: m2s_xorg
+    alias: m2s_xorg
+    trigger:
+        platform: mqtt
+        topic: "home/xorg/set/pi2"
+    action:
+        service_template: switch.turn_{{trigger.payload|lower}}
+        entity_id: switch.kodi
 
 shell_command:
     start_pycec: python -m pycec
