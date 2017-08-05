@@ -87,6 +87,8 @@ config_sound:
     entities:
         - automation.door_notification_at_night
         - automation.doorbell
+        - script.hall_speaker_normal_volume
+        - script.hall_speaker_full_volume
 
 config_lights:
     name: Lights

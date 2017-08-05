@@ -219,6 +219,8 @@ shell_command:
     433send: /home/homeautomation/homeassistant/scripts/switch/433send.sh 4 "{{ protocol }}" "{{ group }}" "{{ unit }}" "{{ state }}"
     hdmi_cec_send: /home/homeautomation/homeassistant/scripts/switch/hdmicecsend.sh "{{ payload }}"
     technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }}'
+    hallspeaker_normalvolume: "amixer set Master 60%"
+    hallspeaker_fullvolume: "amixer set Master 100%"
 
 #MQTT
 mqtt:

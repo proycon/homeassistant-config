@@ -5,6 +5,8 @@
       platform: homeassistant
       event: start
   action:
+      - service: script.turn_on
+        entity_id: script.hall_speaker_normal_volume
       - service: tts.picotts_say
         entity_id: media_player.hall_speaker
         data:
@@ -203,6 +205,8 @@
       entity_id: alarm_control_panel.alarm_system
     - service: script.turn_on
       entity_id: script.alarm
+    - service: script.turn_on
+      entity_id: script.hall_speaker_full_volume
     - service: notify.xmpp_proycon
       data_template:
           message: "INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now() }})!!! CHECK IMMEDIATELY!!!"

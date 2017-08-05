@@ -540,6 +540,17 @@ chime_sound:
               entity_id: media_player.hall_speaker
               media_content_id: /home/homeautomation/homeassistant/media/chime.wav
               media_content_type: 'music'
+
+hall_speaker_normal_volume:
+    alias: Hall speaker Normal Volume
+    sequence:
+        - service: shell_command.hallspeaker_normalvolume
+
+hall_speaker_full_volume:
+    alias: Hall speaker Full Volume
+    sequence:
+        - service: shell_command.hallspeaker_fullvolume
+
 alarm:
     alias: Alarm
     sequence:

@@ -408,7 +408,7 @@ hdmi_cec:
 
 media_player hall_speaker:
     - platform: vlc
-      name: hall_speaker
+      name: Hall speaker
       arguments: '--alsa-audio-device=hw:0,0'
 
 media_player yamaha_receiver:
