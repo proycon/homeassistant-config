@@ -17,6 +17,7 @@
       name: living_room_live
       friendly_name: Living Room Live
       mjpeg_url: !secret ipcam_mjpeg_url
+      authentication: basic
       user: !secret ipcam_user
       password: !secret ipcam_password
     - platform: mjpeg
