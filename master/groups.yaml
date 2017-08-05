@@ -69,6 +69,7 @@ config_view:
         - group.config_sound
         - group.config_tests
         - switch.bathroom_vent
+        - script.repoll_slaves
 
 config_snapshots:
     name: Snapshots

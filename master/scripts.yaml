@@ -1,4 +1,4 @@
-trigger_slave_poll:
+repoll_slaves:
     alias: Repoll slaves
     sequence:
       - service: mqtt.publish #trigger RPi slaves to send their known statusses again
