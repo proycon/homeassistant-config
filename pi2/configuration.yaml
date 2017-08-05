@@ -123,6 +123,16 @@ automation:
         data:
             topic: "home/binary_sensor/bedroomwindow_left"
             payload_template: "{{ states('binary_sensor.bedroomwindow_left') | upper }}"
+  - id: ir_send
+    alias: IR Send
+    trigger:
+        platform: mqtt
+        topic: "home/ir_send/pi2"
+    action:
+        service: shell_command.ir_send
+        data_template:
+            device: '{{ trigger.payload_json.device }}'
+            key: '{{ trigger.payload_json.key }}'
   - id: 433send
     alias: 433send
     trigger:
@@ -139,6 +149,15 @@ automation:
           data_template:
               topic_template: "home/433send/get/{{ trigger.topic.split('/')[-3] }}/{{ trigger.topic.split('/')[-2] }}/{{ trigger.topic.split('/')[-1] }}"
               payload_template: '{{ trigger.payload }}'
+  - id: hdmi_cec_send
+    alias: HDMI CEC Send
+    trigger:
+        platform: mqtt
+        topic: "home/hdmi_cec_send/pi2"
+    action:
+        service: shell_command.hdmi_cec_send
+        data_template:
+            payload: '{{ trigger.payload }}'
   - id: technofire
     alias: Technofire
     trigger:
@@ -198,6 +217,7 @@ shell_command:
     start_pycec: python -m pycec
     ir_send: /home/homeautomation/homeassistant/scripts/media/irsend.sh "{{ device }}" "{{ key }}"
     433send: /home/homeautomation/homeassistant/scripts/switch/433send.sh 4 "{{ protocol }}" "{{ group }}" "{{ unit }}" "{{ state }}"
+    hdmi_cec_send: echo "{{ payload }}" | cec-client -s -d 1
     technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }}'
 
 #MQTT

@@ -877,14 +877,17 @@ alarm_blink:
 wake_up_alarm:
     alias: Wake up alarm
     sequence:
-    - service: switch.turn_on
-      entity_id: switch.bedroom
-    - delay:
-      minutes: 45
-    - service: switch.turn_off
-      entity_id: switch.bedroom
+        - service: switch.turn_on
+          entity_id: switch.bedroom
+        - delay:
+            minutes: 45
+        - service: switch.turn_off
+          entity_id: switch.bedroom
 
-
-
-
-
+turn_tv_upstairs_on:
+    alias: Turn TV upstairs on
+    sequence:
+      - service: mqtt.publish
+        data:
+            command_topic: "home/hdmi_cec_send/pi2"
+            payload: "on 0"

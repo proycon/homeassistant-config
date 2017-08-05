@@ -203,6 +203,7 @@ media_devices:
         - script.update_kodi_library
         - switch.pi1_kodi
         - switch.pi1_xorg
+        - script.turn_tv_upstairs_on
 
 media_volume:
     name: Volume (AVR)
