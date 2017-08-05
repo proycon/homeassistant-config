@@ -221,6 +221,12 @@
       data_template:
         message: "ALARM TRIGGERED!!!"
         title: "INTRUDER ALTER!!! ALARM TRIGGERED AT ({{ now() }})!!! CHECK IMMEDIATELY!!!"
+    - service: notify.sms
+      data_template:
+          message: "INTRUDER ALTER!!! ALARM TRIGGERED AT ({{ now() }})!!! CHECK IMMEDIATELY!!!"
+          target:
+              - !secret proyphone
+              - !secret hansphone
     - service: script.turn_on
       entity_id: script.sirene_lights
     - service: switch.turn_on

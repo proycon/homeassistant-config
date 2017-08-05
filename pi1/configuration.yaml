@@ -19,7 +19,7 @@ http:
   # Uncomment this if you are using SSL or running in Docker etc
   # base_url: example.duckdns.org:8123
 
-frontend:
+#frontend:
 
 # Checks for available updates
 # Note: This component will send some information about your system to

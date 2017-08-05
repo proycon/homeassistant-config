@@ -457,6 +457,9 @@ notify:
     recipient:
         - !secret xmpp_proycon
         - !secret xmpp_hans
+  - name: sms
+    platform: message_bird
+    api_key: !secret messagebird_apikey
 
 #MQTT
 mqtt:
