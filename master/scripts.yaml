@@ -687,7 +687,7 @@ watch_tv:
         - service: media_player.select_source
           entity_id: media_player.yamaha_receiver
           data:
-              source: HMDI1
+              source: HDMI1
 
 media_centre:
     alias: Media Centre
@@ -701,7 +701,7 @@ media_centre:
         - service: media_player.select_source
           entity_id: media_player.yamaha_receiver
           data:
-              source: HMDI2
+              source: HDMI2
 
 turn_media_off:
     alias: Turn media off
