@@ -200,10 +200,11 @@ media_devices:
         - media_player.yamaha_receiver
         - media_player.kodi
         - media_player.mpd
-        - script.update_kodi_library
         - switch.pi1_kodi
         - switch.pi1_xorg
+        - media_player.hall_speaker
         - script.turn_tv_upstairs_on
+        - script.update_kodi_library
 
 media_volume:
     name: Volume (AVR)
