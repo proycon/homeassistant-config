@@ -106,4 +106,9 @@ switch.pi2_desktop:
     icon: mdi:desktop-classic
 switch.pi2_kodi:
     icon: mdi:kodi
+script.lights_on:
+    icon: mdi:lightbulb-on
+script.lights_off:
+    icon: mdi:sleep
+
 
