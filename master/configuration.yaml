@@ -379,6 +379,27 @@ switch tv_decoder:
     command_topic: "home/ir_send/pi1"
     payload_on: '{"device":"VIP1853","key":"POWER"}'
     payload_off: '{"device":"VIP1853","key":"POWER"}'
+switch pi1_kodi:
+    platform: mqtt
+    name: Pi1 Kodi
+    command_topic: "home/kodi/pi1/set"
+    state_topic: "home/kodi/pi1/get"
+switch pi1_xorg:
+    platform: mqtt
+    name: Pi1 Xorg
+    command_topic: "home/xorg/pi1/set"
+    state_topic: "home/xorg/pi1/get"
+switch pi2_kodi:
+    platform: mqtt
+    name: Pi2 Kodi
+    command_topic: "home/kodi/pi2/set"
+    state_topic: "home/kodi/pi2/get"
+switch pi2_xorg:
+    platform: mqtt
+    name: Pi2 Xorg
+    command_topic: "home/xorg/pi2/set"
+    state_topic: "home/xorg/pi2/get"
+
 
 hdmi_cec:
     host: !secret pi1_ip

@@ -696,8 +696,30 @@ media_centre:
           entity_id: switch.hdmi_0
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
+        - service: switch.turn_off
+          entity_id: switch.pi1_xorg
         - delay:
             seconds: 1
+        - service: switch.turn_on
+          entity_id: switch.pi1_kodi
+        - service: media_player.select_source
+          entity_id: media_player.yamaha_receiver
+          data:
+              source: HDMI2
+
+desktop:
+    alias: Desktop
+    sequence:
+        - service: switch.turn_on
+          entity_id: switch.hdmi_0
+        - service: media_player.turn_on
+          entity_id: media_player.yamaha_receiver
+        - service: switch.turn_off
+          entity_id: switch.pi1_kodi
+        - delay:
+            seconds: 1
+        - service: switch.turn_on
+          entity_id: switch.pi1_xorg
         - service: media_player.select_source
           entity_id: media_player.yamaha_receiver
           data:

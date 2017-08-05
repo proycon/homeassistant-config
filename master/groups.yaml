@@ -187,8 +187,8 @@ media_activities:
     entities:
         - script.watch_tv
         - script.media_centre
+        - script.desktop
         - script.turn_media_off
-
 
 media_devices:
     name: Devices
@@ -201,6 +201,8 @@ media_devices:
         - media_player.kodi
         - media_player.mpd
         - script.update_kodi_library
+        - switch.pi1_kodi
+        - switch.pi1_xorg
 
 media_volume:
     name: Volume (AVR)

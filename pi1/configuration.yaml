@@ -67,7 +67,17 @@ binary_sensor:
       invert_logic: false
       bouncetime: 60
 
-
+switch:
+    platform: command_line
+    switches:
+        kodi:
+            command_on: "kodi-standalone &"
+            command_off: "killall kodi-standalone kodi kodi_v7.bin"
+            command_state: "ps aux | grep kodi | grep -v grep"
+        xorg:
+            command_on: "startx &"
+            command_off: "killall Xorg"
+            command_state: "ps aux | grep Xorg | grep -v grep"
 
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
 automation:
@@ -101,6 +111,50 @@ automation:
         data:
             topic: "home/binary_sensor/doorbell"
             payload_template: "{{ states('binary_sensor.doorbell') | upper }}"
+  - id: s2m_kodi
+    alias: s2m_kodi
+    trigger:
+        - platform: state
+          entity_id: switch.kodi
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/kodi/get/pi1"
+            payload_template: "{{ states('switch.kodi') | upper }}"
+  - id: s2m_xorg
+    alias: s2m_xorg
+    trigger:
+        - platform: state
+          entity_id: switch.xorg
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/xorg/get/pi1"
+            payload_template: "{{ states('switch.xorg') | upper }}"
+  - id: m2s_kodi
+    alias: m2s_kodi
+    trigger:
+        platform: mqtt
+        topic: "home/kodi/set/pi1"
+    action:
+        service_template: switch.turn_{{trigger.payload|lower}}
+        entity_id: switch.kodi
+  - id: m2s_xorg
+    alias: m2s_xorg
+    trigger:
+        platform: mqtt
+        topic: "home/xorg/set/pi1"
+    action:
+        service_template: switch.turn_{{trigger.payload|lower}}
+        entity_id: switch.kodi
+
+
+
+
 ######### SWITCH PROPAGATION SLAVE->MASTER and MASTER->SLAVE (MQTT) #########
   - id: startup
     alias: Startup
