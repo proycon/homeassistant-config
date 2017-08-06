@@ -673,3 +673,13 @@
     - service: script.turn_on
       entity_id: script.wake_up_alarm
 
+- alias: Streetcam Reset
+  trigger:
+    platform: time
+    minutes: "/10"
+    seconds: 00
+  action:
+    - service: shell_command.streetcam_reset_1
+    - delay:
+        seconds: 10
+    - service: shell_command.streetcam_reset_2

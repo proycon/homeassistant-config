@@ -117,6 +117,8 @@ shell_command:
     archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
     event_snapshots: /home/homeautomation/homeassistant/scripts/camera/eventsnapshots.sh "{{ cam }}" "{{ delay }}"
     snapshot_clear_locks: find . -type f -name "/home/homeautomation/homeassistant/snapshots/*.lock" | xargs rm
+    streetcam_reset_1: !secret streetcam_noir_command
+    streetcam_reset_2: !secret streetcam_quality_command
 
 rest_command:
     ipcam_topreset:
