@@ -11,7 +11,7 @@ fi
 if [ -d archive ]; then
     mv archive archive.2
 fi
-
+mkdir archive
 find . -type f -name "2*.jpg" -maxdepth 1 | xargs -I '{}' -n 1  mv '{}' archive/
 
 
