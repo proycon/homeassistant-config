@@ -84,6 +84,7 @@ config_view:
         - group.config_tests
         - switch.bathroom_vent
         - script.repoll_slaves
+        - group.config_eventsnapshots
 
 config_snapshots:
     name: Snapshots
@@ -124,6 +125,15 @@ config_tests:
         - script.green_lights
         - script.sirene_lights
         - script.alarm_blink
+
+config_eventsnapshots:
+    name: Event Snapshots
+    entities:
+        - switch.make_event_snapshots_living_room
+        - switch.make_event_street_room
+        - switch.make_event_garden_room
+        - switch.make_event_front_door_room
+        - switch.make_event_hall_upstairs_room
 
 all_lights:
     name: Lights
