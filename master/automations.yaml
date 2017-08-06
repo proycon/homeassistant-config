@@ -601,13 +601,13 @@
        data:
            entity_id: input_select.fireplace
            option: Fire
-     - service: input_select.select_value
+     - service: input_slider.select_value
        data:
-           entity_id: input_select.fireplace_brightness
+           entity_id: input_slider.fireplace_brightness
            option: 255
-     - service: input_select.select_value
+     - service: input_slider.select_value
        data:
-           entity_id: input_select.dresser_ambilight_brightness
+           entity_id: input_slider.dresser_ambilight_brightness
            option: 40
      - service: input_select.select_option
        data:

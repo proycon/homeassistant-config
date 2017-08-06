@@ -763,13 +763,13 @@ red_alert_lights:
            data:
                entity_id: input_select.fireplace
                option: Red
-         - service: input_select.select_value
+         - service: input_slider.select_value
            data:
-               entity_id: input_select.fireplace_brightness
+               entity_id: input_slider.fireplace_brightness
                option: 255
-         - service: input_select.select_value
+         - service: input_slider.select_value
            data:
-               entity_id: input_select.dresser_ambilight_brightness
+               entity_id: input_slider.dresser_ambilight_brightness
                option: 255
          - service: input_select.select_option
            data:
@@ -789,13 +789,13 @@ green_lights:
            data:
                entity_id: input_select.fireplace
                option: Green
-         - service: input_select.select_value
+         - service: input_slider.select_value
            data:
-               entity_id: input_select.fireplace_brightness
+               entity_id: input_slider.fireplace_brightness
                option: 255
-         - service: input_select.select_value
+         - service: input_slider.select_value
            data:
-               entity_id: input_select.dresser_ambilight_brightness
+               entity_id: input_slider.dresser_ambilight_brightness
                option: 255
          - service: input_select.select_option
            data:
@@ -815,13 +815,13 @@ sirene_lights:
            data:
                entity_id: input_select.fireplace
                option: Sirene
-         - service: input_select.select_value
+         - service: input_slider.select_value
            data:
-               entity_id: input_select.fireplace_brightness
+               entity_id: input_slider.fireplace_brightness
                option: 255
-         - service: input_select.select_value
+         - service: input_slider.select_value
            data:
-               entity_id: input_select.dresser_ambilight_brightness
+               entity_id: input_slider.dresser_ambilight_brightness
                option: 255
          - service: input_select.select_option
            data:
@@ -841,13 +841,13 @@ reset_fireplace:
        data:
            entity_id: input_select.fireplace
            option: Fire
-     - service: input_select.select_value
+     - service: input_slider.select_value
        data:
-           entity_id: input_select.fireplace_brightness
+           entity_id: input_slider.fireplace_brightness
            option: 255
-     - service: input_select.select_value
+     - service: input_slider.select_value
        data:
-           entity_id: input_select.dresser_ambilight_brightness
+           entity_id: input_slider.dresser_ambilight_brightness
            option: 40
      - service: input_select.select_option
        data:
