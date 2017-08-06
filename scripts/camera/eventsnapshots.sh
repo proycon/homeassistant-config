@@ -10,12 +10,9 @@ fi
 touch /tmp/eventsnapshots.$CAM.lock
 DATE=`date +%Y-%m-%d_`
 EVENTDATE=`date +%Y-%m-%d_%H:%M:%S`
-SNAPSHOTS=$(find /home/homeautomation/homeassistant/snapshots/ -name "$DATE*$CAM*.jpg" | tail -n 10)
 if [ -f event.$CAM.latest.gif ]; then
     mv event.$CAM.latest.gif event.$CAM.previous.gif
 fi
-if [ ! -z "$SNAPSHOTS" ]; then
-    echo $SNAPSHOTS | xargs -I '{}' convert -loop 0 -delay 500 {} $EVENTDATE.$CAM.gif
-    ln -sf $EVENTDATE.$CAM.gif event.$CAM.latest.gif
-fi
+convert -loop 0 -delay 500 $(find . -name "$DATE*$CAM*jpg" | tail -z -n 6) $EVENTDATE.$CAM.gif
+ln -sf $EVENTDATE.$CAM.gif event.$CAM.latest.gif
 rm /tmp/eventsnapshots.$CAM.lock
