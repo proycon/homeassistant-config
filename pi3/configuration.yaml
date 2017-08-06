@@ -47,6 +47,20 @@ homeassistant:
 #sensor:
 #  platform: yr
 
+sensor:
+  - platform: dht
+    sensor: AM2302
+    pin: 4
+    monitored_conditions:
+      - temperature
+      - humidity
+
+binary_sensor:
+  - platform: rpi_gpio
+    ports:
+        23: PIR
+
+
 shell_command:
     technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }}'
 
