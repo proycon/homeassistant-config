@@ -61,6 +61,17 @@ camera_view:
         - camera.hall_upstairs
         - camera.front_door
         - input_select.ipcam_direction
+        - group.event_cameras
+
+event_cameras:
+    name: Event Cameras
+    icon: mdi:camera
+    entities:
+        - camera.living_room_event
+        - camera.street_event
+        - camera.garden_event
+        - camera.front_door_event
+        - camera.hall_upstairs_event
 
 config_view:
     name: Configuration

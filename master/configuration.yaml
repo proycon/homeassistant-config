@@ -115,6 +115,7 @@ shell_command:
     snapshot_frontdoor: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh frontdoor
     snapshot_hallupstairs: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh hallupstairs
     archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
+    event_snapshots: /home/homeautomation/homeassistant/scripts/camera/eventsnapshots.sh "{{ cam }}" "{{ delay }}"
     snapshot_clear_locks: find . -type f -name "*.lock" | xargs rm
 
 rest_command:

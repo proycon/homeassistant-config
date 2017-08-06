@@ -168,6 +168,12 @@
             title: "The doorbell rang"
       - service: script.turn_on
         entity_id: script.flash_notification
+      - service: script.turn_on
+        entity_id: script.make_event_snapshots_front_door
+      - service: script.turn_on
+        entity_id: script.make_event_snapshots_street
+      - service: script.turn_on
+        entity_id: script.make_event_snapshots_living_room
       - delay:
           seconds: 10
       - service: script.turn_on
@@ -231,6 +237,16 @@
       entity_id: script.sirene_lights
     - service: switch.turn_on
       entity_id: switch.office
+    - service: script.turn_on
+      entity_id: script.make_event_snapshots_living_room
+    - service: script.turn_on
+      entity_id: script.make_event_snapshots_hall_upstairs
+    - service: script.turn_on
+      entity_id: script.make_event_snapshots_front_door
+    - service: script.turn_on
+      entity_id: script.make_event_snapshots_garden
+    - service: script.turn_on
+      entity_id: script.make_event_snapshots_street
     - delay:
         seconds: 1
     - service: switch.turn_off
@@ -335,6 +351,10 @@
       entity_id: script.green_lights
     - service: script.turn_off
       entity_id: script.flash_notification
+    - service: script.turn_on
+      entity_id: script.make_event_snapshots_front_door
+    - service: script.turn_on
+      entity_id: script.make_event_snapshots_street
     - delay:
         seconds: 2
     - service: script.turn_on
@@ -373,6 +393,10 @@
           option: Back
     - service: script.turn_off
       entity_id: script.flash_notification
+    - service: script.turn_on
+      entity_id: script.make_event_snapshots_living_room
+    - service: script.turn_on
+      entity_id: script.make_event_snapshots_garden
     - delay:
         seconds: 2
     - service: script.turn_on

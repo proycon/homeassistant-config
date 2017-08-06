@@ -28,3 +28,23 @@
       friendly_name: Garden Live
       name: garden_live
       mjpeg_url: !secret gardencam_mjpeg_url
+    - platform: local_file
+      name: hall_upstairs_event
+      friendly_name: Hall upstairs Event
+      file_path: /home/homeautomation/homeassistant/snapshots/event.hallupstairs.latest.gif
+    - platform: local_file
+      name: street_event
+      friendly_name: Street Event
+      file_path: /home/homeautomation/homeassistant/snapshots/event.street.latest.gif
+    - platform: local_file
+      name: living_room_event
+      friendly_name: Living Room Event
+      file_path: /home/homeautomation/homeassistant/snapshots/event.livingroom.latest.gif
+    - platform: local_file
+      name: front_door_event
+      friendly_name: Front Door Event
+      file_path: /home/homeautomation/homeassistant/snapshots/event.frontdoor.latest.gif
+    - platform: local_file
+      name: garden_event
+      friendly_name: Garden Event
+      file_path: /home/homeautomation/homeassistant/snapshots/event.garden.latest.gif
