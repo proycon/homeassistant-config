@@ -14,10 +14,10 @@ default_view:
         - sensor.weather_symbol
         - sensor.weather_temperature
         - sensor.temperature_living_room
-        - sensor.humidity_living_room
         - sensor.time
         - sensor.wake_up_time
         - binary_sensor.pir_living_room
+        - sensor.humidity_living_room
         - group.light_shortcuts
         - group.all_lights
         - group.cameras
@@ -129,11 +129,11 @@ config_tests:
 config_eventsnapshots:
     name: Event Snapshots
     entities:
-        - switch.make_event_snapshots_living_room
-        - switch.make_event_street_room
-        - switch.make_event_garden_room
-        - switch.make_event_front_door_room
-        - switch.make_event_hall_upstairs_room
+        - script.make_event_snapshots_living_room
+        - script.make_event_street_room
+        - script.make_event_garden_room
+        - script.make_event_front_door_room
+        - script.make_event_hall_upstairs_room
 
 all_lights:
     name: Lights
