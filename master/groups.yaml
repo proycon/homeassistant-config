@@ -17,7 +17,7 @@ default_view:
         - sensor.humidity_living_room
         - sensor.time
         - sensor.wake_up_time
-        - sensor.pir_living_room
+        - binary_sensor.pir_living_room
         - group.light_shortcuts
         - group.all_lights
         - group.cameras
