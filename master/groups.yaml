@@ -151,6 +151,7 @@ all_lights:
         - switch.garden
         - switch.balcony
         - switch.roof
+        - switch.porch
 
 light_shortcuts:
     name: Light Shortcuts
