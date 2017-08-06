@@ -130,10 +130,10 @@ config_eventsnapshots:
     name: Event Snapshots
     entities:
         - script.make_event_snapshots_living_room
-        - script.make_event_street_room
-        - script.make_event_garden_room
-        - script.make_event_front_door_room
-        - script.make_event_hall_upstairs_room
+        - script.make_event_snapshots_street
+        - script.make_event_snapshots_garden
+        - script.make_event_snapshots_front_door
+        - script.make_event_snapshots_hall_upstairs
 
 all_lights:
     name: Lights
