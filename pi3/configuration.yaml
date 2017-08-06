@@ -82,7 +82,48 @@ automation:
           data_template:
               topic: "home/technofire/pi3/get"
               payload_template: '{{ trigger.payload_json.scene }}'
-
+  - id: s2m_pir
+    alias: s2m_pir
+    trigger:
+        - platform: state
+          entity_id: binary_sensor.pir
+        - platform: homeassistant
+          event: start
+        - platform: mqtt
+          topic: home/poll
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/binary_sensor/pir_living_room"
+            payload_template: "{{ states('binary_sensor.pir') | upper }}"
+  - id: s2m_dht_sensor_temperature
+    alias: s2m_dht_sensor_temperature
+    trigger:
+        - platform: state
+          entity_id: sensor.dht_sensor_temperature
+        - platform: homeassistant
+          event: start
+        - platform: mqtt
+          topic: home/poll
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/sensor/temperature_living_room"
+            payload_template: "{{ states('sensor.dht_sensor_temperature') }}"
+  - id: s2m_dht_sensor_humidity
+    alias: s2m_dht_sensor_humidity
+    trigger:
+        - platform: state
+          entity_id: sensor.dht_sensor_humidity
+        - platform: homeassistant
+          event: start
+        - platform: mqtt
+          topic: home/poll
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/sensor/humidity_living_room"
+            payload_template: "{{ states('sensor.dht_sensor_humidity') }}"
 #MQTT
 mqtt:
     broker: 192.168.0.1

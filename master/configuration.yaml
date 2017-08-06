@@ -256,6 +256,16 @@ sensor:
           wake_up_time:
             friendly_name: 'Wake up Time'
             value_template: '{{ "%0.02d:%0.02d" | format(states("input_slider.wake_up_hour") | int, states("input_slider.wake_up_minutes") | int) }}'
+    - platform: mqtt
+      name: temperature_living_room
+      unit_of_measurement: °C
+      state_topic: "home/sensor/temperature_living_room"
+    - platform: mqtt
+      name: humidity_living_room
+      unit_of_measurement: %
+      state_topic: "home/sensor/humidity_living_room"
+
+
 
 
 binary_sensor doorbell:
@@ -286,6 +296,13 @@ binary_sensor bedroomwindow_left:
     name: Bedroom window Left
     state_topic: "home/binary_sensor/bedroomwindow_left"
     device_class: opening
+
+binary_sensor pir_living_room:
+    platform: mqtt
+    name: PIR Living Room
+    state_topic: "home/binary_sensor/pir_living_room"
+    device_class: motion
+
 
 binary_sensor:
     platform: template

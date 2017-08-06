@@ -13,8 +13,11 @@ default_view:
         - binary_sensor.bedroom_window_right
         - sensor.weather_symbol
         - sensor.weather_temperature
+        - sensor.temperature_living_room
+        - sensor.humidity_living_room
         - sensor.time
         - sensor.wake_up_time
+        - sensor.pir_living_room
         - group.light_shortcuts
         - group.all_lights
         - group.cameras
@@ -170,7 +173,7 @@ cameras:
     entities:
         - camera.living_room
         - input_select.ipcam_direction
-        - camera.streetcam_live
+        - camera.street
         - camera.front_door
         - camera.hall_upstairs
         - camera.garden
