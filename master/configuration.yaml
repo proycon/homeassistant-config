@@ -263,11 +263,11 @@ sensor:
             friendly_name: 'Wake up Time'
             value_template: '{{ "%0.02d:%0.02d" | format(states("input_slider.wake_up_hour") | int, states("input_slider.wake_up_minutes") | int) }}'
     - platform: mqtt
-      name: temperature_living_room
+      name: Temperature Living Room
       unit_of_measurement: °C
       state_topic: "home/sensor/temperature_living_room"
     - platform: mqtt
-      name: humidity_living_room
+      name: Humidity Living Room
       unit_of_measurement: "%"
       state_topic: "home/sensor/humidity_living_room"
 
