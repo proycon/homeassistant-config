@@ -29,7 +29,7 @@ http:
 panel_iframe:
     kodi:
         title: "Kodi"
-        url: https://home.anaproy.nl/kodi_pi1/
+        url: !secret kodi_pi1_url
         icon: mdi:kodi
 
 # Checks for available updates
