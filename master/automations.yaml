@@ -202,6 +202,9 @@
     - platform: state
       entity_id: binary_sensor.bedroom_window_right
       to: 'on'
+    - platform: state
+      entity_id: binary_sensor.bathroom_window_sensor
+      to: 'on'
   condition:
     - condition: state
       entity_id: alarm_control_panel.alarm_system
@@ -416,6 +419,10 @@
       to: 'on'
     - platform: state
       entity_id: binary_sensor.bedroom_window_right
+      from: 'off'
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.bathroom_window_sensor
       from: 'off'
       to: 'on'
   action:

@@ -11,6 +11,7 @@ default_view:
         - binary_sensor.back_door
         - binary_sensor.bedroom_window_left
         - binary_sensor.bedroom_window_right
+        - binary_sensor.bathroom_window_sensor
         - sensor.weather_symbol
         - sensor.weather_temperature
         - sensor.temperature_living_room

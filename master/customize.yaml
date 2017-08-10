@@ -118,3 +118,6 @@ sensor.fibaro_multisensor_general:
     friendly_name: Kitchen Motion
 sensor.fibaro_multisensor_luminance:
     friendly_name: Kitchen Light Level
+binary_sensor.bathroom_window_sensor:
+    friendly_name: Bathroom Window Sensor
+    device_class: opening
