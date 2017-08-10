@@ -17,7 +17,10 @@ default_view:
         - sensor.time
         - sensor.wake_up_time
         - binary_sensor.pir_living_room
+        - binary_sensor.pir_kitchen
         - sensor.humidity_living_room
+        - sensor.fibaro_multisensor_temperature
+        - sensor.fibaro_multisensor_luminance
         - group.light_shortcuts
         - group.all_lights
         - group.cameras

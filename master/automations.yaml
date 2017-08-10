@@ -644,6 +644,37 @@
         data:
             entity_id: script.reset_lights
 
+- id: kitchen_light_on_motion
+  alias: Kitching Light On Motion
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_kitchen
+      from: "off"
+      to: "on"
+  condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.anybodyhome
+          state: "on"
+        - condition: numeric_state
+          entity_id: sensor.fibaro_multisensor_luminance
+          below: 40
+  action:
+      - service: switch.turn_on
+        entity_id: switch.kitchen
+      - delay:
+          minutes: 10
+      - service: switch.turn_off
+        entity_id: switch.kitchen
+
+
+
+
+
+
+
+
 - id: kitchen_light_on_around_dinner_time
   alias: Kitchen Light on around dinner time
   trigger:
@@ -683,3 +714,13 @@
     - delay:
         seconds: 10
     - service: shell_command.streetcam_reset_2
+
+- alias: Z-Wave network is ready
+  trigger:
+    platform: event
+    event_type: zwave.network_ready
+  action:
+      - service: tts.picotts_say
+        entity_id: media_player.hall_speaker
+        data:
+            message: Zed Wave network ready

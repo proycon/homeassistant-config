@@ -112,5 +112,9 @@ script.lights_on:
     icon: mdi:lightbulb-on
 script.lights_off:
     icon: mdi:sleep
-
-
+sensor.fibaro_multisensor_temperature:
+    friendly_name: Kitchen Temperature
+sensor.fibaro_multisensor_general:
+    friendly_name: Kitchen Motion
+sensor.fibaro_multisensor_luminance:
+    friendly_name: Kitchen Light Level
