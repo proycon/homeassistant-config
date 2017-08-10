@@ -6,24 +6,11 @@ default_view:
         - alarm_control_panel.alarm_system
         - device_tracker.proyphone
         - device_tracker.hansphone
-        - binary_sensor.front_door
         - binary_sensor.doorbell
-        - binary_sensor.back_door
-        - binary_sensor.bedroom_window_left
-        - binary_sensor.bedroom_window_right
-        - binary_sensor.bathroom_window_sensor
-        - sensor.weather_symbol
-        - sensor.weather_temperature
         - sensor.temperature_living_room
-        - sensor.bathroom_sensor_temperature
-        - sensor.bathroom_sensor_relative_humidity
         - sensor.time
-        - sensor.wake_up_time
-        - binary_sensor.pir_living_room
-        - binary_sensor.pir_kitchen
-        - sensor.humidity_living_room
-        - sensor.fibaro_multisensor_temperature
-        - sensor.fibaro_multisensor_luminance
+        - group.doors_and_windows
+        - group.environment
         - group.light_shortcuts
         - group.all_lights
         - group.cameras
@@ -37,6 +24,7 @@ media_view:
     icon: mdi:television
     view: yes
     entities:
+        - sensor.time
         - group.media_activities
         - group.media_devices
         - group.media_volume
@@ -48,6 +36,7 @@ light_view:
     name: Lights
     icon: mdi:lightbulb
     entities:
+        - sensor.time
         - group.light_shortcuts
         - group.living_lights
         - group.upstairs_lights
@@ -61,6 +50,17 @@ camera_view:
     icon: mdi:camera
     view: yes
     entities:
+        - sensor.time
+        - binary_sensor.anybodyhome
+        - alarm_control_panel.alarm_system
+        - device_tracker.proyphone
+        - device_tracker.hansphone
+        - binary_sensor.front_door
+        - binary_sensor.doorbell
+        - binary_sensor.back_door
+        - binary_sensor.bedroom_window_left
+        - binary_sensor.bedroom_window_right
+        - binary_sensor.bathroom_window_sensor
         - camera.living_room_live
         - camera.street_live
         - camera.garden_live
@@ -78,6 +78,30 @@ event_cameras:
         - camera.garden_event
         - camera.front_door_event
         - camera.hall_upstairs_event
+
+doors_and_windows:
+    name: Doors and Windows
+    entities:
+        - binary_sensor.front_door
+        - binary_sensor.back_door
+        - binary_sensor.bedroom_window_left
+        - binary_sensor.bedroom_window_right
+        - binary_sensor.bathroom_window_sensor
+
+environment:
+    name: Environment
+    entities:
+        - sensor.weather_symbol
+        - sensor.weather_temperature
+        - sensor.temperature_living_room
+        - sensor.bathroom_sensor_temperature
+        - sensor.bathroom_sensor_relative_humidity
+        - sensor.humidity_living_room
+        - sensor.fibaro_multisensor_temperature
+        - sensor.fibaro_multisensor_luminance
+        - binary_sensor.pir_living_room
+        - binary_sensor.pir_kitchen
+
 
 config_view:
     name: Configuration
@@ -334,5 +358,6 @@ wake_up_alarm:
     name: Wake up alarm
     icon: mdi:timer
     entities:
+        - sensor.wake_up_time
         - input_slider.wake_up_hour
         - input_slider.wake_up_minutes
