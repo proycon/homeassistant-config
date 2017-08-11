@@ -30,7 +30,9 @@ media_view:
         - group.media_volume
         - group.media_tv_channels
         - group.media_tv_navigation
-        - weblink.kodi
+        - weblink.kodi_control_interface
+        - weblink.mpd_control_interface
+        - weblink.mpd_music_stream
 
 light_view:
     view: yes
@@ -48,7 +50,7 @@ light_view:
 
 camera_view:
     name: Live Camera
-    icon: mdi:camera
+    icon: mdi:camcorder
     view: yes
     entities:
         - sensor.time
@@ -116,6 +118,17 @@ config_view:
         - switch.bathroom_vent
         - script.repoll_slaves
         - group.config_eventsnapshots
+        - group.config_links
+
+config_links:
+    name: Links
+    entities:
+        - weblink.kodi_control_interface
+        - weblink.mpd_control_interface
+        - weblink.mpd_music_stream
+        - weblink.anaproyboven_router
+        - weblink.ipcam
+        - weblink.kpn_router
 
 config_snapshots:
     name: Snapshots

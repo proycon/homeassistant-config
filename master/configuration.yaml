@@ -29,9 +29,24 @@ http:
 
 weblink:
     entities:
-        - name: Kodi
+        - name: Kodi Control Interface
           url: !secret kodi_pi1_url
           icon: mdi:kodi
+        - name: MPD Control Interface
+          url: !secret mpd_url
+          icon: mdi:music-box-outline
+        - name: MPD Music Stream
+          url: !secret music_stream_url
+          icon: mdi:play-circle
+        - name: AnaproyBoven Router
+          url: !secret wifi_router_url
+          icon: mdi:router-wireless
+        - name: IPCam
+          url: !secret ipcam_url
+          icon: mdi:camcorder
+        - name: KPN Router
+          url: !secret kpn_router_url
+          icon: mdi:upload-network
 
 # Checks for available updates
 # Note: This component will send some information about your system to
