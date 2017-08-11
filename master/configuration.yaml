@@ -27,11 +27,11 @@ http:
   ip_ban_enabled: True
   login_attempts_threshold: 5
 
-panel_iframe:
-    kodi:
-        title: "Kodi"
-        url: !secret kodi_pi1_url
-        icon: mdi:kodi
+weblink:
+    entities:
+        - name: Kodi
+          url: !secret kodi_pi1_url
+          icon: mdi:kodi
 
 # Checks for available updates
 # Note: This component will send some information about your system to

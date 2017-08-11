@@ -30,6 +30,7 @@ media_view:
         - group.media_volume
         - group.media_tv_channels
         - group.media_tv_navigation
+        - weblink.kodi
 
 light_view:
     view: yes
