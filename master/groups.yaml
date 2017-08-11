@@ -119,6 +119,7 @@ config_view:
         - script.repoll_slaves
         - group.config_eventsnapshots
         - group.config_links
+        - automation.wake_up
 
 config_links:
     name: Links
@@ -147,6 +148,11 @@ config_sound:
     entities:
         - automation.door_notification_at_night
         - automation.doorbell
+        - automation.front_door_still_open
+        - automation.back_door_still_open
+        - automation.home_greeting
+        - automation.home_greeting_proycon
+        - automation.home_greeting_hans
         - script.hall_speaker_normal_volume
         - script.hall_speaker_full_volume
 
@@ -156,7 +162,12 @@ config_lights:
     entities:
         - automation.lights_on_in_the_evening
         - automation.lights_off_at_night
+        - automation.morning_lights_on_hans
+        - automation.morning_lights_off_hans
         - automation.garden_lights_on_in_the_evening
+        - automation.ignite_fireplace_in_evening
+        - automation.kitchen_light_on_motion
+        - automation.kitchen_light_off
 
 config_tests:
     name: Tests

@@ -332,16 +332,34 @@
         seconds: 1
     - service: script.turn_on
       entity_id: script.flash_notification
-- id: front_door_closed
-  alias: "Front Door closed"
+- id: front_door_still_open
+  alias: "Front door still open"
   trigger:
     - platform: state
       entity_id: binary_sensor.front_door
-      from: 'on'
-      to: 'off'
+      to: 'on'
+      for:
+          seconds: 30
   action:
-    - service: script.turn_off
-      entity_id: script.front_door_still_open
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: Front door still open
+- id: back_door_still_open
+  alias: "Back door still open"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.back_door
+      to: 'on'
+      for:
+          seconds: 30
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: Back door still open
+
+
 - id: front_door_opened
   alias: "Front door opened"
   trigger:
@@ -350,8 +368,6 @@
       from: 'off'
       to: 'on'
   action:
-    - service: script.turn_on
-      entity_id: script.front_door_still_open
     - service: script.turn_off
       entity_id: script.reset_ipcam
     - service: switch.turn_on
@@ -378,16 +394,6 @@
       entity_id: script.reset_ipcam
     - service: script.turn_on
       entity_id: script.reset_fireplace
-- id: back_door_closed
-  alias: "Back Door closed"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.back_door
-      from: 'on'
-      to: 'off'
-  action:
-    - service: script.turn_off
-      entity_id: script.back_door_still_open
 - id: back_door_opened
   alias: "back door opened"
   trigger:
@@ -396,8 +402,6 @@
       from: 'off'
       to: 'on'
   action:
-    - service: script.turn_on
-      entity_id: script.back_door_still_open
     - service: script.turn_off
       entity_id: script.reset_ipcam
     - service: input_select.select_option
@@ -535,9 +539,9 @@
       entity_id: device_tracker.proyphone
       from: 'home'
       to: 'not_home'
+      for:
+          minutes: 10
   action:
-     - delay:
-         minutes: 10
      - service: input_boolean.turn_off
        entity_id: input_boolean.proycon_inside_house
 - id: hans_left_house
@@ -547,9 +551,9 @@
       entity_id: device_tracker.hansphone
       from: 'home'
       to: 'not_home'
+      for:
+          minutes: 10
   action:
-     - delay:
-         minutes: 10
      - service: input_boolean.turn_off
        entity_id: input_boolean.hans_inside_house
 - id: both_left_house
@@ -575,7 +579,8 @@
   action:
      - service: input_boolean.turn_off
        entity_id: input_boolean.inside_house
-- id: morninglights_on_hans
+- id: morning_lights_on_hans
+  alias: Morning Lights on Hans
   trigger:
       - platform: time
         at: '05:15:00'
@@ -589,7 +594,8 @@
   action:
        - service: switch.turn_on
          entity_id: switch.tv_spots
-- id: morninglights_off_hans
+- id: morning_lights_off_hans
+  alias: Morning Lights off Hans
   trigger:
       - platform: time
         at: '06:15:00'
@@ -662,7 +668,7 @@
             entity_id: script.reset_lights
 
 - id: kitchen_light_on_motion
-  alias: Kitching Light On Motion
+  alias: Kitchen Light On Motion
   trigger:
       platform: state
       entity_id: binary_sensor.pir_kitchen
@@ -680,36 +686,19 @@
   action:
       - service: switch.turn_on
         entity_id: switch.kitchen
-      - delay:
-          minutes: 10
-      - service: switch.turn_off
-        entity_id: switch.kitchen
 
-
-
-
-
-
-
-
-- id: kitchen_light_on_around_dinner_time
-  alias: Kitchen Light on around dinner time
+- id: kitchen_light_off
+  alias: Kitchen Light Off
   trigger:
-     platform: time
-     at: '17:00:00'
-  action:
-      - service: switch.turn_on
-        entity_id: switch.kitchen
-
-- id: kitchen_light_off_after_dinner_time
-  alias: Kitchen Light off after dinner time
-  trigger:
-     platform: time
-     at: '20:00:00'
+      platform: state
+      entity_id: binary_sensor.pir_kitchen
+      from: "on"
+      to: "off"
+      for:
+          minutes: 5
   action:
       - service: switch.turn_off
         entity_id: switch.kitchen
-
 
 
 - id: wake_up
@@ -720,6 +709,17 @@
   action:
     - service: script.turn_on
       entity_id: script.wake_up_alarm
+    - service: media_player.play_media
+      data:
+          entity_id: media_player.hall_speaker
+          media_content_id: /home/homeautomation/homeassistant/media/morningbell.ogg
+          media_content_type: 'music'
+    - delay:
+        seconds: 120
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: Good morning
 
 - alias: Streetcam Reset
   trigger:

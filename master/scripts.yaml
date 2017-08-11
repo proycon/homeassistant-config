@@ -596,24 +596,6 @@ extinguish_dresser_ambilight:
         data:
             topic: "home/technofire/pi2/set"
             payload: '{"scene":"off","brightness":"0"}'
-front_door_still_open:
-    alias: Front door still open
-    sequence:
-      - delay: #starts with a delay, gets triggered when a door opens, and then aborted when a door closes
-            seconds: 30
-      - service: tts.picotts_say
-        entity_id: media_player.hall_speaker
-        data:
-            message: Front door still open
-back_door_still_open:
-    alias: Back door still open
-    sequence:
-      - delay: #starts with a delay, gets triggered when a door opens, and then aborted when a door closes
-            seconds: 30
-      - service: tts.picotts_say
-        entity_id: media_player.hall_speaker
-        data:
-            message: Back door still open
 reset_ipcam:
     alias: Reset IPcam
     sequence:
