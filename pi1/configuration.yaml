@@ -73,6 +73,10 @@ switch:
             command_on: "startx &"
             command_off: "killall Xorg"
             command_state: "ps aux | grep Xorg | grep -v grep"
+        musicplayer:
+            command_on: "cvlc http://192.168.0.1:8000/stream.mp3 >/dev/null 2>/dev/null &"
+            command_off: "killall cvlc"
+            command_state: "ps aux | grep vlc | grep -v vlc"
 
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
 automation:
@@ -166,6 +170,36 @@ automation:
     action:
         service_template: switch.turn_off
         entity_id: switch.xorg
+  - id: s2m_musicplayer
+    alias: s2m_musicplayer
+    trigger:
+        - platform: state
+          entity_id: switch.musicplayer
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/musicplayer/get/pi1"
+            payload_template: "{{ states('switch.musicplayer') | upper }}"
+  - id: m2s_musicplayer_on
+    alias: m2s_musicplayer_on
+    trigger:
+        platform: mqtt
+        topic: "home/musicplayer/set/pi1"
+        payload: 'ON'
+    action:
+        service_template: switch.turn_on
+        entity_id: switch.musicplayer
+  - id: m2s_musicplayer_off
+    alias: m2s_musicplayer_off
+    trigger:
+        platform: mqtt
+        topic: "home/musicplayer/set/pi1"
+        payload: 'OFF'
+    action:
+        service_template: switch.turn_off
+        entity_id: switch.musicplayer
 
 
 
