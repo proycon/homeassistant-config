@@ -348,6 +348,10 @@ binary_sensor:
         entity_id:
             - sensor.fibaro_multisensor_burglar
         device_class: motion
+      bathroom_too_humid:
+        value_template: '{{ states.sensor.bathroom_sensor_relative_humidity | float > 75.0 }}'
+        entity_id:
+            - sensor.bathroom_sensor_relative_humidity
 
 
 switch tv_spots:

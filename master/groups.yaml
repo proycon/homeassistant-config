@@ -155,6 +155,9 @@ config_sound:
         - automation.home_greeting_hans
         - script.hall_speaker_normal_volume
         - script.hall_speaker_full_volume
+        - automation.bathroom_vent_on
+        - automation.bathroom_vent_off
+        - automation.bathroom_vent_off_after_a_while
 
 config_lights:
     name: Lights

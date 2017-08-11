@@ -741,3 +741,49 @@
         entity_id: media_player.hall_speaker
         data:
             message: Zed Wave network ready
+
+- alias: Bathroom Vent On
+  trigger:
+    platform: state
+    entity_id: binary_sensor.bathroom_too_humid
+    from: "off"
+    to: "on"
+    for:
+       minutes: 20
+  condition:
+      condition: and
+      conditions:
+        - condition: time
+          after: '10:00'
+          before: '23:00'
+        - condition: state
+          entity_id: switch.bathroom_vent
+          state: "off"
+  action:
+      - service: switch.turn_on
+        entity_id: switch.bathroom_vent
+
+- alias: Bathroom Vent Off
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.bathroom_sensor_relative_humidity
+    below: 70
+  condition:
+    - condition: state
+      entity_id: switch.bathroom_vent
+      state: "on"
+  action:
+      - service: switch.turn_off
+        entity_id: switch.bathroom_vent
+
+- alias: Bathroom Vent Off After a While
+  trigger:
+    platform: state
+    entity_id: switch.bathroom_vent
+    from: "off"
+    to: "on"
+    for:
+        minutes: 30
+  action:
+      - service: switch.turn_off
+        entity_id: switch.bathroom_vent
