@@ -51,7 +51,7 @@
     seconds: '/3' #every five seconds
   action:
     - service: shell_command.snapshot_livingroom
-- alias: Street camera snapshots
+- alias: Street snapshots
   hide_entity: False
   trigger:
     platform: time

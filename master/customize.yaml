@@ -121,3 +121,7 @@ sensor.fibaro_multisensor_luminance:
 binary_sensor.bathroom_window_sensor:
     friendly_name: Bathroom Window Sensor
     device_class: opening
+sensor.bathroom_sensor_relative_humidity:
+    icon: mdi:water-percent
+sensor.humidity_living_room:
+    icon: mdi:water-percent
