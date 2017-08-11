@@ -75,8 +75,8 @@ switch:
             command_state: "ps aux | grep Xorg | grep -v grep"
         musicplayer:
             command_on: "cvlc http://192.168.0.1:8000/stream.mp3 >/dev/null 2>/dev/null &"
-            command_off: "killall cvlc"
-            command_state: "ps aux | grep vlc | grep -v vlc"
+            command_off: "killall vlc"
+            command_state: "ps aux | grep vlc | grep -v grep"
 
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
 automation:
