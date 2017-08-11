@@ -86,8 +86,12 @@ script.ipcam_topreset:
     icon: mdi:camera
 script.watch_tv:
     icon: mdi:television
+script.listen_to_music:
+    icon: mdi:music-circle
 script.turn_media_off:
     icon: mdi:power-plug-off
+switch.pi1_music_player:
+    icon: mdi:music-circle
 input_select.ipcam_direction:
     icon: mdi:camera-iris
 script.ignite_fireplace:

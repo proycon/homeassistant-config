@@ -437,6 +437,11 @@ switch pi1_kodi:
     name: Pi1 Kodi
     command_topic: "home/kodi/set/pi1"
     state_topic: "home/kodi/set/pi1"
+switch pi1_music_player:
+    platform: mqtt
+    name: Pi1 Music Player
+    command_topic: "home/musicplayer/set/pi1"
+    state_topic: "home/musicplayer/set/pi1"
 switch pi1_xorg:
     platform: mqtt
     name: Pi1 Xorg

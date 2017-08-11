@@ -259,6 +259,7 @@ media_activities:
     entities:
         - script.watch_tv
         - script.media_centre
+        - script.listen_to_music
         - script.desktop
         - script.turn_media_off
 
@@ -274,6 +275,7 @@ media_devices:
         - media_player.mpd
         - switch.pi1_kodi
         - switch.pi1_xorg
+        - switch.pi1_media_player
         - media_player.hall_speaker
         - script.turn_tv_upstairs_on
         - script.update_kodi_library

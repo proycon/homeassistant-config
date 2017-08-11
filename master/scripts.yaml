@@ -700,6 +700,30 @@ watch_tv:
           data:
               source: HDMI1
 
+listen_to_music:
+    alias: Listen to Music
+    sequence:
+        - service: switch.turn_on
+          entity_id: switch.hdmi_0
+        - service: media_player.turn_on
+          entity_id: media_player.yamaha_receiver
+        - service: switch.turn_off
+          entity_id: switch.pi1_xorg
+        - service: switch.turn_off
+          entity_id: switch.pi1_kodi
+        - delay:
+            seconds: 1
+        - service: switch.turn_on
+          entity_id: switch.pi1_music_player
+        - service: media_player.select_source
+          entity_id: media_player.yamaha_receiver
+          data:
+              source: HDMI2
+        - service: media_player.play_media
+          data:
+              entity_id: media_player.mpd
+
+
 media_centre:
     alias: Media Centre
     sequence:
