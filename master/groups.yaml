@@ -275,7 +275,7 @@ media_devices:
         - media_player.mpd
         - switch.pi1_kodi
         - switch.pi1_xorg
-        - switch.pi1_media_player
+        - switch.pi1_music_player
         - media_player.hall_speaker
         - script.turn_tv_upstairs_on
         - script.update_kodi_library
