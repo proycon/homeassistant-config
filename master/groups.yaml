@@ -199,7 +199,8 @@ all_lights:
     name: Lights
     control: hidden
     entities:
-        - group.light_shortcuts
+        - script.lights_on
+        - script.lights_off
         - switch.tv_spots
         - switch.front_room
         - switch.midspots
