@@ -129,3 +129,8 @@ sensor.bathroom_sensor_relative_humidity:
     icon: mdi:water-percent
 sensor.humidity_living_room:
     icon: mdi:water-percent
+script.repoll_slaves:
+    icon: mdi:reload
+script.play_youtube_playlist:
+    icon: mdi:youtube-play
+

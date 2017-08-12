@@ -948,6 +948,16 @@ make_event_snapshots_hall_upstairs:
           data:
               cam: hallupstairs
 
-
-
+play_youtube_playlist:
+    alias: Play YouTube
+    sequence:
+    - service: script.turn_on
+      entity_id: script.media_centre
+    - delay:
+        seconds: 6
+    - service: media_player.play_media
+      entity_id: media_player.kodi
+      data_template:
+        media_content_id: !secret youtube_play_playlist
+        media_content_type: 'video'
 

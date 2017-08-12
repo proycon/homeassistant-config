@@ -276,6 +276,7 @@ media_activities:
         - script.watch_tv
         - script.media_centre
         - script.listen_to_music
+        - script.play_youtube_playlist
         - script.desktop
         - script.turn_media_off
 
