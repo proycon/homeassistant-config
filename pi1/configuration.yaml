@@ -66,15 +66,15 @@ switch:
     platform: command_line
     switches:
         kodi:
-            command_on: "kodi-standalone &"
+            command_on: "killall kodi-standalone kodi kodi_v7.bin; kodi-standalone &"
             command_off: "killall kodi-standalone kodi kodi_v7.bin"
             command_state: "ps aux | grep kodi | grep -v grep"
         xorg:
-            command_on: "startx &"
+            command_on: "killal Xorg; startx &"
             command_off: "killall Xorg"
             command_state: "ps aux | grep Xorg | grep -v grep"
         musicplayer:
-            command_on: "cvlc http://192.168.0.1:8000/stream.mp3 >/dev/null 2>/dev/null &"
+            command_on: "killall vlc; cvlc http://192.168.0.1:8000/stream.mp3 >/dev/null 2>/dev/null &"
             command_off: "killall vlc"
             command_state: "ps aux | grep vlc | grep -v grep"
 
