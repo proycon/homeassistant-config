@@ -69,11 +69,11 @@ history:
       domains:
         - shell_command
       entities:
-        - automation.snapshots_frontdoor
-        - automation.snapshots_garden
-        - automation.snapshots_street
-        - automation.snapshots_livingroom
-        - automation.snapshots_hallupstairs
+        - automation.frontdoor_snapshot
+        - automation.garden_snapshots
+        - automation.street_snapshots
+        - automation.living_room_snapshots
+        - automation.hall_upstairs_snapshots
         - script.update_kodi_library
         - script.avr_volup
         - script.avr_mute
@@ -118,11 +118,11 @@ history:
 logbook:
     exclude:
       entities:
-        - automation.snapshots_frontdoor
-        - automation.snapshots_garden
-        - automation.snapshots_street
-        - automation.snapshots_livingroom
-        - automation.snapshots_hallupstairs
+        - automation.frontdoor_snapshot
+        - automation.garden_snapshots
+        - automation.street_snapshots
+        - automation.living_room_snapshots
+        - automation.hall_upstairs_snapshots
 
 # Track the sun
 sun:
