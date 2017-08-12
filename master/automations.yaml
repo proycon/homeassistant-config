@@ -103,7 +103,7 @@
       below: 29
   condition:
       condition: template
-      value_template: '{% if states.automation.lights_on_in_the_evening.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on_in_the_evening.attributes.last_triggered)) > 36000 } {% else %} true {% endif %}'
+      value_template: '{% if states.automation.lights_on_in_the_evening.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on_in_the_evening.attributes.last_triggered)) > 36000 }} {% else %} true {% endif %}'
   action:
       service: script.turn_on
       entity_id: script.lights_on
