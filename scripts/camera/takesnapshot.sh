@@ -23,7 +23,8 @@ if [ "$MODE" == "frontdoor" ]; then
 elif [ "$MODE" == "hallupstairs" ]; then
     fswebcam -S 3 -r 640x480 -d $HALLUPSTAIRSCAM_DEV --save $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "livingroom" ]; then
-    curl -sS --netrc-file $LIVINGROOMCAM_NETRC http://$LIVINGROOMCAM_IP/image/jpeg.cgi -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
+    curl -sS --netrc-file $LIVINGROOMCAM_NETRC http://$LIVINGROOMCAM_IP/image/jpeg.cgi -o tmp.jpg 2>$LOGDIR/camera.$MODE.log
+    convert -flip -flop tmp.jpg $DATE.$MODE.jpg
 elif [ "$MODE" == "street" ]; then
     curl -sS "http://$STREETCAM_IP/snapshot.cgi?user=$STREETCAM_USER&pwd=$STREETCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "garden" ]; then
