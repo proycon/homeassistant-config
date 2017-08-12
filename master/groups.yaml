@@ -326,16 +326,6 @@ media_tv_channels:
     entities:
         - script.tvdecoder_channelup
         - script.tvdecoder_channeldown
-        - script.tvdecoder_0
-        - script.tvdecoder_1
-        - script.tvdecoder_2
-        - script.tvdecoder_3
-        - script.tvdecoder_4
-        - script.tvdecoder_5
-        - script.tvdecoder_6
-        - script.tvdecoder_7
-        - script.tvdecoder_8
-        - script.tvdecoder_9
         - script.tvdecoder_npo1
         - script.tvdecoder_npo2
         - script.tvdecoder_npo3
@@ -352,6 +342,16 @@ media_tv_channels:
         - script.tvdecoder_arte
         - script.tvdecoder_tv5monde
         - script.tvdecoder_rai1
+        - script.tvdecoder_0
+        - script.tvdecoder_1
+        - script.tvdecoder_2
+        - script.tvdecoder_3
+        - script.tvdecoder_4
+        - script.tvdecoder_5
+        - script.tvdecoder_6
+        - script.tvdecoder_7
+        - script.tvdecoder_8
+        - script.tvdecoder_9
 
 
 devices:
