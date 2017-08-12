@@ -171,6 +171,8 @@ config_lights:
         - automation.ignite_fireplace_in_evening
         - automation.kitchen_light_on_motion
         - automation.kitchen_light_off
+        - automation.night_light_on_motion
+        - automation.night_light_off
 
 config_tests:
     name: Tests

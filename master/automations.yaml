@@ -799,3 +799,62 @@
   action:
       - service: switch.turn_off
         entity_id: switch.bathroom_vent
+
+- alias: Night light on motion
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_living_room
+      from: "off"
+      to: "on"
+  condition:
+      condition: and
+      conditions:
+        - condition: time
+          after: '22:00'
+          before: '09:00'
+        - condition: state
+          entity_id: binary_sensor.anybodyhome
+          state: "on"
+        - condition: state
+          entity_id: switch.tv_spots
+          state: "off"
+        - condition: state
+          entity_id: switch.front_room
+          state: "off"
+        - condition: state
+          entity_id: switch.back_room
+          state: "off"
+        - condition: state
+          entity_id: switch.back_corner
+          state: "off"
+        - condition: state
+          entity_id: switch.midspots
+          state: "off"
+  action:
+     - service: input_slider.select_value
+       data:
+           entity_id: input_slider.dresser_ambilight_brightness
+           option: 20
+     - service: input_select.select_option
+       data:
+           entity_id: input_select.dresser_ambilight
+           option: Red
+     - delay:
+           seconds: 1
+     - service: script.turn_on
+       entity_id: script.ignite_dresser_ambilight
+
+- alias: Night light off
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_living_room
+      from: "on"
+      to: "off"
+      for:
+          minutes: 5
+  condition:
+      condition: template
+      value_template: '{% if states.automation.night_light_on_motion.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.night_light_on_motion.attributes.last_triggered)) < 400 }} true {% else %} false {% endif %}'
+  action:
+     - service: script.turn_on
+       entity_id: script.extinguish_dresser_ambilight
