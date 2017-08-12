@@ -13,8 +13,6 @@ homeassistant:
 
   customize: !include customize.yaml
 
-recorder:
-    db_url: !secret db_url
 
 # Enables the frontend
 frontend:
@@ -64,6 +62,14 @@ discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
+
+recorder:
+    db_url: !secret db_url
+    exclude:
+      domains:
+        - group
+        - weblink
+      entities: !include exclude.yaml
 
 # Enables support for tracking state changes over time.
 history:
