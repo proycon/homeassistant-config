@@ -864,3 +864,10 @@
   action:
      - service: script.turn_on
        entity_id: script.extinguish_dresser_ambilight
+
+
+
+
+
+
+

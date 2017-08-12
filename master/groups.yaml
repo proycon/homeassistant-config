@@ -103,6 +103,7 @@ environment:
         - sensor.fibaro_multisensor_luminance
         - binary_sensor.pir_living_room
         - binary_sensor.pir_kitchen
+        - sensor.ir_send_activity
 
 
 config_view:
