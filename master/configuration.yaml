@@ -67,7 +67,6 @@ recorder:
     db_url: !secret db_url
     exclude:
       domains:
-        - group
         - weblink
       entities: !include exclude.yaml
 
