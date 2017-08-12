@@ -10,12 +10,11 @@ default_view:
         - sensor.temperature_living_room
         - sensor.time
         - group.doors_and_windows
-        - group.environment
-        - group.light_shortcuts
+        - group.media_volume
         - group.all_lights
         - group.cameras
         - group.media_activities
-        - group.media_volume
+        - group.environment
         - group.wake_up_alarm
 
 
@@ -199,6 +198,7 @@ all_lights:
     name: Lights
     control: hidden
     entities:
+        - group.light_shortcuts
         - switch.tv_spots
         - switch.front_room
         - switch.midspots
