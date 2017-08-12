@@ -24,20 +24,16 @@ lights_on:
     sequence:
         - service: switch.turn_on
           entity_id: switch.tv_spots
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.tv_spots') == 'on' }}"
         - service: switch.turn_on
           entity_id: switch.back_corner
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.back_corner') == 'on' }}"
         - service: switch.turn_on
           entity_id: switch.back_room
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.back_room') == 'on' }}"
         - service: switch.turn_on
           entity_id: switch.front_room
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.front_room') == 'on' }}"
         - service: switch.turn_on
           entity_id: switch.midspots
 lights_off:
@@ -45,42 +41,34 @@ lights_off:
     sequence:
         - service: switch.turn_off
           entity_id: switch.back_corner
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.tv_spots') == 'off' }}"
         - service: switch.turn_off
           entity_id: switch.back_room
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.back_room') == 'off' }}"
         - service: switch.turn_off
           entity_id: switch.front_room
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.front_room') == 'off' }}"
         - service: switch.turn_off
           entity_id: switch.midspots
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.midspots') == 'off' }}"
         - service: switch.turn_off
           entity_id: switch.garden
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.garden') == 'off' }}"
         - service: switch.turn_off
           entity_id: switch.balcony
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.balcony') == 'off' }}"
         - service: switch.turn_off
           entity_id: switch.roof
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.roof') == 'off' }}"
         - service: switch.turn_off
           entity_id: switch.tv_spots
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.tv_spots') == 'off' }}"
         - service: switch.turn_off
           entity_id: switch.kitchen
-        - delay:
-            seconds: 2
+        - wait_template: "{{ states('switch.kitchen') == 'off' }}"
         - service: switch.turn_off
           entity_id: switch.office
+        - wait_template: "{{ states('switch.office') == 'off' }}"
         - service: script.turn_on
           entity_id: script.extinguish_fireplace
         - service: script.turn_on
