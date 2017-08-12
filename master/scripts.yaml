@@ -716,12 +716,15 @@ media_centre:
           entity_id: switch.pi1_xorg
         - delay:
             seconds: 1
-        - service: switch.turn_on
-          entity_id: switch.pi1_kodi
         - service: media_player.select_source
           entity_id: media_player.yamaha_receiver
           data:
               source: HDMI2
+        - condition: state
+          entity_id: switch.pi1_kodi
+          state: 'off'
+        - service: switch.turn_on
+          entity_id: switch.pi1_kodi
 
 desktop:
     alias: Desktop
@@ -734,12 +737,15 @@ desktop:
           entity_id: switch.pi1_kodi
         - delay:
             seconds: 1
-        - service: switch.turn_on
-          entity_id: switch.pi1_xorg
         - service: media_player.select_source
           entity_id: media_player.yamaha_receiver
           data:
               source: HDMI2
+        - condition: state
+          entity_id: switch.pi1_xorg
+          state: 'off'
+        - service: switch.turn_on
+          entity_id: switch.pi1_xorg
 
 turn_media_off:
     alias: Turn media off
@@ -948,13 +954,16 @@ make_event_snapshots_hall_upstairs:
           data:
               cam: hallupstairs
 
+
+
 play_youtube_playlist:
     alias: Play YouTube
     sequence:
     - service: script.turn_on
       entity_id: script.media_centre
+    - wait_template: "{{ states.switch.pi1_kodi.state == 'on' }}"
     - delay:
-        seconds: 6
+        seconds: 4
     - service: media_player.play_media
       entity_id: media_player.kodi
       data_template:
