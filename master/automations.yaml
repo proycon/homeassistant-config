@@ -394,6 +394,18 @@
       entity_id: script.reset_ipcam
     - service: script.turn_on
       entity_id: script.reset_fireplace
+- id: hall_light_off
+  alias: "Hall light off"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door
+      from: 'on'
+      to: 'off'
+      for:
+          minutes: 1
+  action:
+    - service: switch.turn_off
+      entity_id: switch.hall
 - id: back_door_opened
   alias: "back door opened"
   trigger:
