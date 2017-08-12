@@ -402,7 +402,7 @@
       from: 'on'
       to: 'off'
       for:
-          minutes: 1
+          minutes: 5
   action:
     - service: switch.turn_off
       entity_id: switch.hall
