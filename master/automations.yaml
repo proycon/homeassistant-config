@@ -149,6 +149,9 @@
       entity_id: binary_sensor.doorbell
       from: "off"
       to: "on"
+  condition:
+      condition: template
+      value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
   action:
       - service: script.turn_on
         entity_id: script.doorbell_sound
