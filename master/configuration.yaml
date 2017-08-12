@@ -13,6 +13,8 @@ homeassistant:
 
   customize: !include customize.yaml
 
+recorder:
+    db_url: !secret db_url
 
 # Enables the frontend
 frontend:
