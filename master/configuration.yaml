@@ -68,61 +68,17 @@ history:
     exclude:
       domains:
         - shell_command
-      entities:
-        - automation.frontdoor_snapshot
-        - automation.garden_snapshots
-        - automation.street_snapshots
-        - automation.living_room_snapshots
-        - automation.hall_upstairs_snapshots
-        - script.update_kodi_library
-        - script.avr_volup
-        - script.avr_mute
-        - script.avr_voldown
-        - script.tvdecoder_playpause
-        - script.tvdecoder_left
-        - script.tvdecoder_right
-        - script.tvdecoder_up
-        - script.tvdecoder_down
-        - script.tvdecoder_ok
-        - script.tvdecoder_back
-        - script.tvdecoder_channelup
-        - script.tvdecoder_channeldown
-        - script.tvdecoder_0
-        - script.tvdecoder_1
-        - script.tvdecoder_2
-        - script.tvdecoder_3
-        - script.tvdecoder_4
-        - script.tvdecoder_5
-        - script.tvdecoder_6
-        - script.tvdecoder_7
-        - script.tvdecoder_8
-        - script.tvdecoder_9
-        - script.tvdecoder_npo1
-        - script.tvdecoder_npo2
-        - script.tvdecoder_npo3
-        - script.tvdecoder_rtl4
-        - script.tvdecoder_veronica
-        - script.tvdecoder_een
-        - script.tvdecoder_canvas
-        - script.tvdecoder_bbc1st
-        - script.tvdecoder_bbc1
-        - script.tvdecoder_bbc2
-        - script.tvdecoder_ard
-        - script.tvdecoder_zdf
-        - script.tvdecoder_wdr
-        - script.tvdecoder_arte
-        - script.tvdecoder_tv5monde
-        - script.tvdecoder_rai1
+        - group
+        - weblink
+      entities: !include exclude.yaml
 
 # View all events in a logbook
 logbook:
     exclude:
-      entities:
-        - automation.frontdoor_snapshot
-        - automation.garden_snapshots
-        - automation.street_snapshots
-        - automation.living_room_snapshots
-        - automation.hall_upstairs_snapshots
+      domains:
+        - group
+        - weblink
+      entities: !include exclude.yaml
 
 # Track the sun
 sun:

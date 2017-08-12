@@ -605,9 +605,6 @@ reset_ipcam:
         data:
           entity_id: input_select.ipcam_direction
           option: Back
-flash_notification_single_round:
-    alias: Flash notification single round
-    sequence:
 flash_notification:
     alias: Flash notification
     sequence:
