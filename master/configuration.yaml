@@ -67,6 +67,7 @@ recorder:
     db_url: !secret db_url
     exclude:
       domains:
+        - shell_command
         - weblink
       entities: !include exclude.yaml
 
@@ -75,7 +76,6 @@ history:
     exclude:
       domains:
         - shell_command
-        - group
         - weblink
       entities: !include exclude.yaml
 
@@ -83,7 +83,7 @@ history:
 logbook:
     exclude:
       domains:
-        - group
+        - shell_command
         - weblink
       entities: !include exclude.yaml
 
