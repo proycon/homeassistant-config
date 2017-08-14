@@ -933,7 +933,7 @@
         entity_id: media_player.yamaha_receiver
         state: "on"
   action:
-      - service: switch.turn_on
+      - service: script.turn_on
         entity_id: script.avr_voldup
 
 - alias: SoftRemote Volume down
@@ -948,7 +948,7 @@
         entity_id: media_player.yamaha_receiver
         state: "on"
   action:
-      - service: switch.turn_on
+      - service: script.turn_on
         entity_id: script.avr_voldown
 
 
