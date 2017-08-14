@@ -41,7 +41,7 @@ lights_off:
     sequence:
         - service: switch.turn_off
           entity_id: switch.back_corner
-        - wait_template: "{{ states('switch.tv_spots') == 'off' }}"
+        - wait_template: "{{ states('switch.back_corner') == 'off' }}"
         - service: switch.turn_off
           entity_id: switch.back_room
         - wait_template: "{{ states('switch.back_room') == 'off' }}"
