@@ -967,4 +967,38 @@
       - service: script.turn_on
         entity_id: script.avr_mute
 
+- alias: Master off switch
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 13 #Doubleclick on closed circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: binary_sensor.anybodyhome
+            state: "on"
+  action:
+      - service: script.turn_on
+        entity_id: script.lights_off
+      - service: script.turn_on
+        entity_id: script.turn_media_off
 
+- alias: Master on switch
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 33 #Doubleclick on open circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: binary_sensor.anybodyhome
+            state: "on"
+  action:
+      - service: script.turn_on
+        entity_id: script.lights_on
