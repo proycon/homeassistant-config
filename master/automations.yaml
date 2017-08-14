@@ -986,7 +986,7 @@
       - service: script.turn_on
         entity_id: script.turn_media_off
 
-- alias: Master on switch
+- alias: SoftRemote Master on switch
   trigger:
     platform: event
     event_type: zwave.scene_activated
@@ -1002,3 +1002,57 @@
   action:
       - service: script.turn_on
         entity_id: script.lights_on
+
+- alias: SoftRemote Away Switch
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 43 #Doubleclick on minus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: binary_sensor.anybodyhome
+            state: "on"
+          - condition: state
+            entity_id: alarm_control_panel.alarm_system
+            state: "disarmed"
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: Arming system in two minutes, good bye
+    - delay:
+        minutes: 2
+    - service: alarm_control_panel.alarm_arm_away
+      entity_id: alarm_control_panel.alarm_system
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: System armed
+
+- alias: SoftRemote Cancel Away Switch
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 43 #Doubleclick on minus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: binary_sensor.anybodyhome
+            state: "on"
+          - condition: state
+            entity_id: alarm_control_panel.alarm_system
+            state: "pending"
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: Cancelled
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.alarm_system
