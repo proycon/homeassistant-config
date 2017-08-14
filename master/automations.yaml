@@ -921,6 +921,19 @@
      - service: script.turn_on
        entity_id: script.extinguish_dresser_ambilight
 
+- alias: Zwave button press
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+  action:
+      - service: tts.picotts_say
+        entity_id: media_player.hall_speaker
+        data_template:
+            message: "Scene {{ trigger.event_data.scene_id }} activated"
+
+
 
 
 
