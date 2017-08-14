@@ -952,5 +952,19 @@
         entity_id: media_player.yamaha_receiver
 
 
+- alias: SoftRemote Mute
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 30 #Minus button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      - condition: state
+        entity_id: media_player.yamaha_receiver
+        state: "on"
+  action:
+      - service: media_player.volume_mute
+        entity_id: media_player.yamaha_receiver
 
 
