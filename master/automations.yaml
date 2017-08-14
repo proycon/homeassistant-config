@@ -114,22 +114,21 @@
       entity_id: sensor.fibaro_multisensor_luminance
       below: 29
   condition:
-      condition: and
+    - condition: and
       conditions:
           - condition: template
-            entity_id: sensor.wake_up_relative_time
             value_template: '{{ sensor.wake_up_relative_time > 0 }}'
           - condition: state
             entity_id: sun.sun
-            state: above_horizon
+            state: "above_horizon"
           - condition: template
             value_template: '{% if states.automation.lights_on_in_the_evening.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on_in_the_evening.attributes.last_triggered)) > 36000 }} {% else %} true {% endif %}'
           - condition: state
             entity_id: switch.front_room
-            state: off
+            state: "off"
           - condition: state
             entity_id: switch.midspots
-            state: off
+            state: "off"
   action:
       service: script.turn_on
       entity_id: script.lights_on
@@ -140,25 +139,24 @@
       entity_id: sensor.fibaro_multisensor_luminance
       above: 80
   condition:
-      condition: and
+    - condition: and
       conditions:
           - condition: template
-            entity_id: sensor.wake_up_relative_time
             value_template: '{{ sensor.wake_up_relative_time > 0 }}'
           - condition: state
             entity_id: sun.sun
-            state: above_horizon
+            state: "above_horizon"
           - condition: state
             entity_id: switch.kitchen
-            state: off
+            state: "off"
           - condition: template
             value_template: '{% if states.automation.lights_on_when_dark_during_the_day.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on_when_dark_during_the_day.attributes.last_triggered)) < 21600 }} {% else %} true {% endif %}'
           - condition: state
             entity_id: switch.front_room
-            state: on
+            state: "on"
           - condition: state
             entity_id: switch.midspots
-            state: on
+            state: "on"
   action:
       service: script.turn_on
       entity_id: script.lights_on
