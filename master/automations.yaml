@@ -107,6 +107,61 @@
   action:
       service: script.turn_on
       entity_id: script.lights_on
+- id: lights_on_when_dark_during_the_day
+  alias: Lights on when dark during the day
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.fibaro_multisensor_luminance
+      below: 29
+  condition:
+      condition: and
+      conditions:
+          - condition: template
+            entity_id: sensor.wake_up_relative_time
+            value_template: '{{ sensor.wake_up_relative_time > 0 }}'
+          - condition: state
+            entity_id: sun.sun
+            state: above_horizon
+          - condition: template
+            value_template: '{% if states.automation.lights_on_in_the_evening.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on_in_the_evening.attributes.last_triggered)) > 36000 }} {% else %} true {% endif %}'
+          - condition: state
+            entity_id: switch.front_room
+            state: off
+          - condition: state
+            entity_id: switch.midspots
+            state: off
+  action:
+      service: script.turn_on
+      entity_id: script.lights_on
+- id: lights_off_when_light_during_the_day
+  alias: Lights off when light during the day
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.fibaro_multisensor_luminance
+      above: 80
+  condition:
+      condition: and
+      conditions:
+          - condition: template
+            entity_id: sensor.wake_up_relative_time
+            value_template: '{{ sensor.wake_up_relative_time > 0 }}'
+          - condition: state
+            entity_id: sun.sun
+            state: above_horizon
+          - condition: state
+            entity_id: switch.kitchen
+            state: off
+          - condition: template
+            value_template: '{% if states.automation.lights_on_when_dark_during_the_day.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on_when_dark_during_the_day.attributes.last_triggered)) < 21600 }} {% else %} true {% endif %}'
+          - condition: state
+            entity_id: switch.front_room
+            state: on
+          - condition: state
+            entity_id: switch.midspots
+            state: on
+  action:
+      service: script.turn_on
+      entity_id: script.lights_on
 - id: garden_lights_on_in_the_evening
   alias: Garden lights on in the evening
   trigger:

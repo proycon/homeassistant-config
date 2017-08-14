@@ -242,11 +242,15 @@ sensor:
     - platform: time_date
       display_options:
           - 'time'
+          - 'date'
     - platform: template
       sensors:
           wake_up_time:
             friendly_name: 'Wake up Time'
             value_template: '{{ "%0.02d:%0.02d" | format(states("input_slider.wake_up_hour") | int, states("input_slider.wake_up_minutes") | int) }}'
+          wake_up_relative_time:
+            friendly_name: Wake up relative time #seconds after wake up time
+            value_template: "{{ states.sensor.time.state[:2]|int * 60  + states.sensor.time.state[2:4]|int  - states.sensor.wake_up_time.state[:2]|int * 60  + states.sensor.wake_up_time.state[2:4]|int }}"
     - platform: mqtt
       name: Temperature Living Room
       unit_of_measurement: °C
@@ -260,6 +264,7 @@ sensor:
       state_topic: "home/ir_send/pi1"
       expire_after: 3
       value_template: 1
+
 
 
 
