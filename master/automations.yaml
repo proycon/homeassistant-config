@@ -931,7 +931,7 @@
       - service: tts.picotts_say
         entity_id: media_player.hall_speaker
         data_template:
-            message: "Scene {{ trigger.event_data.scene_id }} activated"
+            message: "Scene {{ trigger.scene_id }} activated"
 
 
 
