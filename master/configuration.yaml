@@ -69,6 +69,7 @@ recorder:
       domains:
         - shell_command
         - weblink
+        - group
       entities: !include exclude.yaml
 
 # Enables support for tracking state changes over time.
@@ -77,15 +78,46 @@ history:
       domains:
         - shell_command
         - weblink
+        - group
       entities: !include exclude.yaml
 
 # View all events in a logbook
 logbook:
-    exclude:
+    include:
       domains:
-        - shell_command
-        - weblink
-      entities: !include exclude.yaml
+        - device_tracker
+        - media_player
+        - alarm_control_panel
+        - automation
+      entities:
+        - binary_sensor.front_door
+        - binary_sensor.back_door
+        - binary_sensor.bedroom_window_left
+        - binary_sensor.bedroom_window_right
+        - binary_sensor.bathroom_window_sensor
+        - binary_sensor.doorbell
+        - binary_sensor.anybodyhome
+        - script.watch_tv
+        - script.media_centre
+        - script.listen_to_music
+        - script.play_youtube_playlist
+        - script.desktop
+        - script.turn_media_off
+        - script.lights_on
+        - script.lights_off
+        - script.alarm
+        - script.ignite_dresser_ambilight
+        - script.ignite_fireplace
+        - script.extinguish_dresser_ambilight
+        - script.extinguish_fireplace
+        - script.wake_up_alarm
+    exclude:
+      entities:
+        - automation.frontdoor_snapshots
+        - automation.garden_snapshots
+        - automation.street_snapshots
+        - automation.living_room_snapshots
+        - automation.hall_upstairs_snapshots
 
 # Track the sun
 sun:
