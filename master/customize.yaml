@@ -133,4 +133,11 @@ script.repoll_slaves:
     icon: mdi:reload
 script.play_youtube_playlist:
     icon: mdi:youtube-play
+device_tracker.mhysa:
+    icon: mdi:desktop-classic
+device_tracker.wifi_router:
+    icon: mdi:router-wireless
+device_tracker.kpn_router:
+    icon: mdi:upload-network
+
 
