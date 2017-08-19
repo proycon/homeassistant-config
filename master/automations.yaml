@@ -878,6 +878,9 @@
           entity_id: binary_sensor.anybodyhome
           state: "on"
         - condition: state
+          entity_id: sun.sun
+          state: "below_horizon"
+        - condition: state
           entity_id: switch.tv_spots
           state: "off"
         - condition: state
