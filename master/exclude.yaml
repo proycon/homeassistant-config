@@ -3,6 +3,8 @@
 - automation.street_snapshots
 - automation.living_room_snapshots
 - automation.hall_upstairs_snapshots
+- automation.streetcam_reset
+- automation.ipcam_topreset
 - sensor.time
 - script.update_kodi_library
 - script.avr_volup
