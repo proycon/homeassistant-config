@@ -41,7 +41,7 @@ lights_off:
     sequence:
         - service: switch.turn_off
           entity_id: switch.back_corner
-        - wait_template: "{{ states('switch.tv_spots') == 'off' }}"
+        - wait_template: "{{ states('switch.back_corner') == 'off' }}"
         - service: switch.turn_off
           entity_id: switch.back_room
         - wait_template: "{{ states('switch.back_room') == 'off' }}"
@@ -571,14 +571,14 @@ extinguish_fireplace:
             topic: "home/technofire/pi3/set"
             payload: '{"scene":"off","brightness":"0"}'
 ignite_dresser_ambilight:
-    alias: Ignite dresser_ambilight
+    alias: Ignite dresser ambilight
     sequence:
       - service: mqtt.publish
         data_template:
             topic: "home/technofire/pi2/set"
             payload_template: '{"scene":"{{ states.input_select.dresser_ambilight.state.replace(" ","_") |lower }}","brightness":"{{ states.input_slider.dresser_ambilight_brightness.state|int }}"}'
 extinguish_dresser_ambilight:
-    alias: Extinguish dresser_ambilight
+    alias: Extinguish dresser ambilight
     sequence:
       - service: mqtt.publish
         data:

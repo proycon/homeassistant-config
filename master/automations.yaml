@@ -107,6 +107,59 @@
   action:
       service: script.turn_on
       entity_id: script.lights_on
+- id: lights_on_when_dark_during_the_day
+  alias: Lights on when dark during the day
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.fibaro_multisensor_luminance
+      below: 29
+  condition:
+    - condition: and
+      conditions:
+          - condition: template
+            value_template: '{{ sensor.wake_up_relative_time > 0 }}'
+          - condition: state
+            entity_id: sun.sun
+            state: "above_horizon"
+          - condition: template
+            value_template: '{% if states.automation.lights_on_in_the_evening.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on_in_the_evening.attributes.last_triggered)) > 36000 }} {% else %} true {% endif %}'
+          - condition: state
+            entity_id: switch.front_room
+            state: "off"
+          - condition: state
+            entity_id: switch.midspots
+            state: "off"
+  action:
+      service: script.turn_on
+      entity_id: script.lights_on
+- id: lights_off_when_light_during_the_day
+  alias: Lights off when light during the day
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.fibaro_multisensor_luminance
+      above: 80
+  condition:
+    - condition: and
+      conditions:
+          - condition: template
+            value_template: '{{ sensor.wake_up_relative_time > 0 }}'
+          - condition: state
+            entity_id: sun.sun
+            state: "above_horizon"
+          - condition: state
+            entity_id: switch.kitchen
+            state: "off"
+          - condition: template
+            value_template: '{% if states.automation.lights_on_when_dark_during_the_day.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on_when_dark_during_the_day.attributes.last_triggered)) < 21600 }} {% else %} true {% endif %}'
+          - condition: state
+            entity_id: switch.front_room
+            state: "on"
+          - condition: state
+            entity_id: switch.midspots
+            state: "on"
+  action:
+      service: script.turn_on
+      entity_id: script.lights_on
 - id: garden_lights_on_in_the_evening
   alias: Garden lights on in the evening
   trigger:
@@ -868,9 +921,228 @@
      - service: script.turn_on
        entity_id: script.extinguish_dresser_ambilight
 
+- alias: SoftRemote Volume up
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 20 #Plus button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      - condition: state
+        entity_id: media_player.yamaha_receiver
+        state: "on"
+  action:
+      - service: media_player.volume_up
+        entity_id: media_player.yamaha_receiver
+
+- alias: SoftRemote Volume down
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 40 #Minus button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      - condition: state
+        entity_id: media_player.yamaha_receiver
+        state: "on"
+  action:
+      - service: media_player.volume_down
+        entity_id: media_player.yamaha_receiver
 
 
+- alias: SoftRemote Mute
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 30 #Open circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      - condition: state
+        entity_id: media_player.yamaha_receiver
+        state: "on"
+  action:
+      - service: script.turn_on
+        entity_id: script.avr_mute
 
+- alias: Master off switch
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 13 #Doubleclick on closed circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: binary_sensor.anybodyhome
+            state: "on"
+  action:
+      - service: script.turn_on
+        entity_id: script.lights_off
+      - service: script.turn_on
+        entity_id: script.turn_media_off
 
+- alias: SoftRemote Master on switch
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 33 #Doubleclick on open circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: binary_sensor.anybodyhome
+            state: "on"
+  action:
+      - service: script.turn_on
+        entity_id: script.lights_on
 
+- alias: SoftRemote Away Switch
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 43 #Doubleclick on minus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: binary_sensor.anybodyhome
+            state: "on"
+          - condition: state
+            entity_id: alarm_control_panel.alarm_system
+            state: "disarmed"
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: Arming system in two minutes, good bye
+    - delay:
+        minutes: 2
+    - service: alarm_control_panel.alarm_arm_away
+      entity_id: alarm_control_panel.alarm_system
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: System armed
 
+- alias: SoftRemote Cancel Away Switch
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 43 #Doubleclick on minus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: binary_sensor.anybodyhome
+            state: "on"
+          - condition: state
+            entity_id: alarm_control_panel.alarm_system
+            state: "pending"
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: Cancelled
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.alarm_system
+
+- alias: Pi 1 down
+  trigger:
+    - platform: state
+      entity_id: device_tracker.pi1
+      from: 'home'
+      to: 'not_home'
+      for:
+          minutes: 5
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: Pi 1 is down
+    - service: persistent_notification.create
+      data_template:
+          message: "Pi 1 is down ({{ now() }})"
+          title: "Pi 1 is down"
+
+- alias: Pi 2 down
+  trigger:
+    - platform: state
+      entity_id: device_tracker.pi2
+      from: 'home'
+      to: 'not_home'
+      for:
+          minutes: 5
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: Pi 2 is down
+    - service: persistent_notification.create
+      data_template:
+          message: "Pi 2 is down ({{ now() }})"
+          title: "Pi 2 is down"
+
+- alias: Pi 3 down
+  trigger:
+    - platform: state
+      entity_id: device_tracker.pi3
+      from: 'home'
+      to: 'not_home'
+      for:
+          minutes: 5
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: Pi 3 is down
+    - service: persistent_notification.create
+      data_template:
+          message: "Pi 3 is down ({{ now() }})"
+          title: "Pi 3 is down"
+
+- alias: kpn_router_down
+  trigger:
+    - platform: state
+      entity_id: device_tracker.kpn_router
+      from: 'home'
+      to: 'not_home'
+      for:
+          minutes: 5
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: "KPN router is down"
+    - service: persistent_notification.create
+      data_template:
+          message: "KPN router is down ({{ now() }})"
+          title: "KPN router is down"
+
+- alias: wifi_router_down
+  trigger:
+    - platform: state
+      entity_id: device_tracker.wifi_router
+      from: 'home'
+      to: 'not_home'
+      for:
+          minutes: 5
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: "wifi router is down"
+    - service: persistent_notification.create
+      data_template:
+          message: "wifi router is down ({{ now() }})"
+          title: "wifi router is down"
