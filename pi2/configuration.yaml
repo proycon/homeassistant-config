@@ -207,6 +207,14 @@ automation:
     action:
         service_template: switch.turn_{{trigger.payload|lower}}
         entity_id: switch.kodi
+  - id: m2s_wakeup
+    alias: m2s_wakeup
+    trigger:
+        platform: mqtt
+        topic: "home/wakeup/pi2"
+    action:
+        service_template: shell_command.wakeup
+
 
 shell_command:
     start_pycec: python -m pycec
@@ -216,6 +224,7 @@ shell_command:
     technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }}'
     hallspeaker_normalvolume: "amixer set Master 60%"
     hallspeaker_fullvolume: "amixer set Master 100%"
+    wakeup: sudo /home/homeautomation/homeassistant/scripts/wakeup/wakeup.xinit.sh
 
 #MQTT
 mqtt:

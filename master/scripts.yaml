@@ -895,6 +895,12 @@ wake_up_alarm:
         - service: switch.turn_on
           entity_id: switch.bedroom
         - delay:
+            seconds: 30
+        - service: mqtt.publish
+          data:
+              command_topic: "home/wakeup/pi2"
+              payload: "on"
+        - delay:
             minutes: 45
         - service: switch.turn_off
           entity_id: switch.bedroom
