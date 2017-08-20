@@ -770,11 +770,11 @@ red_alert_lights:
          - service: input_slider.select_value
            data:
                entity_id: input_slider.fireplace_brightness
-               option: 255
+               value: 255
          - service: input_slider.select_value
            data:
                entity_id: input_slider.dresser_ambilight_brightness
-               option: 255
+               value: 255
          - service: input_select.select_option
            data:
                entity_id: input_select.dresser_ambilight
@@ -796,11 +796,11 @@ green_lights:
          - service: input_slider.select_value
            data:
                entity_id: input_slider.fireplace_brightness
-               option: 255
+               value: 255
          - service: input_slider.select_value
            data:
                entity_id: input_slider.dresser_ambilight_brightness
-               option: 255
+               value: 255
          - service: input_select.select_option
            data:
                entity_id: input_select.dresser_ambilight
@@ -822,11 +822,11 @@ sirene_lights:
          - service: input_slider.select_value
            data:
                entity_id: input_slider.fireplace_brightness
-               option: 255
+               value: 255
          - service: input_slider.select_value
            data:
                entity_id: input_slider.dresser_ambilight_brightness
-               option: 255
+               value: 255
          - service: input_select.select_option
            data:
                entity_id: input_select.dresser_ambilight
@@ -848,11 +848,11 @@ reset_fireplace:
      - service: input_slider.select_value
        data:
            entity_id: input_slider.fireplace_brightness
-           option: 255
+           value: 255
      - service: input_slider.select_value
        data:
            entity_id: input_slider.dresser_ambilight_brightness
-           option: 40
+           value: 40
      - service: input_select.select_option
        data:
            entity_id: input_select.dresser_ambilight
