@@ -523,6 +523,8 @@ notify:
     platform: smtp
     sender: !secret xmpp_sender
     server: 127.0.0.1
+    encryption: starttls
+    debug: true
     recipient:
         - !secret xmpp_proycon
         - !secret xmpp_hans
