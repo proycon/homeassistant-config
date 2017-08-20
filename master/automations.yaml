@@ -229,13 +229,13 @@
             message: "There is sometbody at the door ({{ now() }})"
             title: "The doorbell rang"
       - service: script.turn_on
-        entity_id: script.flash_notification
-      - service: script.turn_on
         entity_id: script.make_event_snapshots_front_door
       - service: script.turn_on
         entity_id: script.make_event_snapshots_street
       - service: script.turn_on
         entity_id: script.make_event_snapshots_living_room
+      - service: script.turn_on
+        entity_id: script.tvdecoder_playpause #pause TV
       - delay:
           seconds: 10
       - service: script.turn_on

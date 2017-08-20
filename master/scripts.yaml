@@ -966,3 +966,10 @@ play_youtube_playlist:
         media_content_id: !secret youtube_play_playlist
         media_content_type: 'video'
 
+mail_test:
+    alias: Mail test
+    sequence:
+      - service: notify.mail_both
+        data_template:
+            title: "[homeautomation] Test"
+            message: "Test, just ignore"
