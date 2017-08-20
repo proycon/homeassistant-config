@@ -522,7 +522,8 @@ notify:
   - name: mail_both
     platform: smtp
     sender: !secret mail_sender
-    server: 127.0.0.1
+    server: localhost
+    port: 25
     encryption: starttls
     debug: true
     username: !secret mail_user
