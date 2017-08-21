@@ -526,8 +526,13 @@ notify:
     recipient: !secret xmpp_hans
   - name: mail_both
     platform: smtp
-    sender: !secret xmpp_sender
-    server: 127.0.0.1
+    sender: !secret mail_sender
+    server: localhost
+    port: 25
+    encryption: starttls
+    debug: true
+    username: !secret mail_user
+    password: !secret mail_password
     recipient:
         - !secret xmpp_proycon
         - !secret xmpp_hans

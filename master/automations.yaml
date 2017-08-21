@@ -229,13 +229,13 @@
             message: "There is sometbody at the door ({{ now() }})"
             title: "The doorbell rang"
       - service: script.turn_on
-        entity_id: script.flash_notification
-      - service: script.turn_on
         entity_id: script.make_event_snapshots_front_door
       - service: script.turn_on
         entity_id: script.make_event_snapshots_street
       - service: script.turn_on
         entity_id: script.make_event_snapshots_living_room
+      - service: script.turn_on
+        entity_id: script.tvdecoder_playpause #pause TV
       - delay:
           seconds: 10
       - service: script.turn_on
@@ -701,11 +701,11 @@
      - service: input_slider.select_value
        data:
            entity_id: input_slider.fireplace_brightness
-           option: 255
+           value: 255
      - service: input_slider.select_value
        data:
            entity_id: input_slider.dresser_ambilight_brightness
-           option: 40
+           value: 40
      - service: input_select.select_option
        data:
            entity_id: input_select.dresser_ambilight
@@ -899,7 +899,7 @@
      - service: input_slider.select_value
        data:
            entity_id: input_slider.dresser_ambilight_brightness
-           option: 20
+           value: 20
      - service: input_select.select_option
        data:
            entity_id: input_select.dresser_ambilight
