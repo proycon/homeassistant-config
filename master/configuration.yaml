@@ -81,6 +81,11 @@ history:
         - group
       entities: !include exclude.yaml
 
+influxdb:
+    host: 127.0.0.1
+    user: home-assistant
+    password: !secret api_password
+
 # View all events in a logbook
 logbook:
     include:
