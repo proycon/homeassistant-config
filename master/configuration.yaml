@@ -83,8 +83,14 @@ history:
 
 influxdb:
     host: 127.0.0.1
-    user: home-assistant
+    username: home-assistant
     password: !secret api_password
+    exclude:
+      domains:
+        - shell_command
+        - weblink
+        - group
+      entities: !include exclude.yaml
 
 # View all events in a logbook
 logbook:
