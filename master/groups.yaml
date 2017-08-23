@@ -75,11 +75,12 @@ event_cameras:
     name: Event Cameras
     icon: mdi:camera
     entities:
-        - camera.living_room_event
-        - camera.street_event
-        - camera.garden_event
-        - camera.front_door_event
-        - camera.hall_upstairs_event
+        - camera.event_1
+        - camera.event_2
+        - camera.event_3
+        - camera.event_4
+        - camera.event_5
+        - camera.event_6
 
 doors_and_windows:
     name: Doors and Windows
