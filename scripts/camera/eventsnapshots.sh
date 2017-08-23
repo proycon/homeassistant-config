@@ -1,18 +1,20 @@
 #!/bin/bash
 cd /home/homeautomation/homeassistant/snapshots/
 CAM=$1
-if [ ! -z "$2" ]; then
-    sleep $2
-fi
-if [ -f eventsnapshots.$CAM.lock ]; then
-    exit 0
-fi
-touch eventsnapshots.$CAM.lock
+while [ -f eventsnapshots.lock ]; do
+    sleep 1
+done
+touch eventsnapshots.lock
 DATE=`date +%Y-%m-%d_`
 EVENTDATE=`date +%Y-%m-%d_%H:%M:%S`
-if [ -f event.$CAM.latest.gif ]; then
-    mv event.$CAM.latest.gif event.$CAM.previous.gif
-fi
-convert -loop 0 -delay 500 $(find . -name "$DATE*$CAM*jpg" | sort | tail -n 6) $EVENTDATE.$CAM.gif
-ln -sf $EVENTDATE.$CAM.gif event.$CAM.latest.gif
-rm eventsnapshots.$CAM.lock
+#convert -loop 0 -delay 500 $(find . -name "$DATE*$CAM*jpg" | sort | tail -n 6) $EVENTDATE.$CAM.gif
+mv -f event.5.jpg event.6.jpg
+mv -f event.4.jpg event.5.jpg
+mv -f event.3.jpg event.4.jpg
+mv -f event.2.jpg event.3.jpg
+mv -f event.1.jpg event.2.jpg
+IMAGES=$(find . -name "$DATE*$CAM*jpg" | sort | tail -n 6)
+IMAGEARRAY=($IMAGES)
+FIRSTIMAGE=${IMAGEARRAY[0]}
+convert $IMAGES -append -fill yellow -pointsize 16 -gravity north -annotate +0+0 "$FIRSTIMAGE - $EVENTDATE" event.1.jpg
+rm eventsnapshots.lock

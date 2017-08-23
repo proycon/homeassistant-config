@@ -29,22 +29,26 @@
       name: garden_live
       mjpeg_url: !secret gardencam_mjpeg_url
     - platform: local_file
-      name: hall_upstairs_event
-      friendly_name: Hall upstairs Event
-      file_path: /home/homeautomation/homeassistant/snapshots/event.hallupstairs.latest.gif
+      name: event_1
+      friendly_name: Event 1
+      file_path: /home/homeautomation/homeassistant/snapshots/event.1.jpg
     - platform: local_file
-      name: street_event
-      friendly_name: Street Event
-      file_path: /home/homeautomation/homeassistant/snapshots/event.street.latest.gif
+      name: event_2
+      friendly_name: Event 2
+      file_path: /home/homeautomation/homeassistant/snapshots/event.2.jpg
     - platform: local_file
-      name: living_room_event
-      friendly_name: Living Room Event
-      file_path: /home/homeautomation/homeassistant/snapshots/event.livingroom.latest.gif
+      name: event_3
+      friendly_name: Event 3
+      file_path: /home/homeautomation/homeassistant/snapshots/event.3.jpg
     - platform: local_file
-      name: front_door_event
-      friendly_name: Front Door Event
-      file_path: /home/homeautomation/homeassistant/snapshots/event.frontdoor.latest.gif
+      name: event_4
+      friendly_name: Event 4
+      file_path: /home/homeautomation/homeassistant/snapshots/event.4.jpg
     - platform: local_file
-      name: garden_event
-      friendly_name: Garden Event
-      file_path: /home/homeautomation/homeassistant/snapshots/event.garden.latest.gif
+      name: event_5
+      friendly_name: Event 5
+      file_path: /home/homeautomation/homeassistant/snapshots/event.5.jpg
+    - platform: local_file
+      name: event_6
+      friendly_name: Event 6
+      file_path: /home/homeautomation/homeassistant/snapshots/event.6.jpg
