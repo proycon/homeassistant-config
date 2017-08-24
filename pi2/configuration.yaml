@@ -6,17 +6,22 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Amsterdam
 
+rflink:
+    host: /dev/ttyACM0
+    reconnect_interval: 10
 
 
 
-#http:
+http:
   # Uncomment this to add a password (recommended!)
   #api_password: !secret api_password
   # use_x_forwarded_for: True
   # Uncomment this if you are using SSL or running in Docker etc
   # base_url: example.duckdns.org:8123
 
-#frontend:
+config:
+
+frontend:
 
 # Checks for available updates
 # Note: This component will send some information about your system to

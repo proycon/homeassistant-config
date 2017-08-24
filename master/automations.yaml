@@ -229,18 +229,20 @@
             message: "There is sometbody at the door ({{ now() }})"
             title: "The doorbell rang"
       - service: script.turn_on
-        entity_id: script.make_event_snapshots_front_door
+        entity_id: script.tvdecoder_playpause #pause TV
       - service: script.turn_on
         entity_id: script.make_event_snapshots_street
+      - delay:
+          seconds: 1
+      - service: script.turn_on
+        entity_id: script.make_event_snapshots_front_door
+      - delay:
+          seconds: 1
       - service: script.turn_on
         entity_id: script.make_event_snapshots_living_room
       - service: script.turn_on
-        entity_id: script.tvdecoder_playpause #pause TV
-      - delay:
-          seconds: 10
-      - service: script.turn_on
         data:
-          entity_id: script.reset_ipcam
+          entity_id: script.reset_ipcam #has built-in delay
 - id: ipcam_topreset
   alias: Camera to preset
   trigger:
@@ -482,16 +484,16 @@
           option: Back
     - service: script.turn_on
       entity_id: script.make_event_snapshots_living_room
+    - delay:
+        seconds: 1
     - service: script.turn_on
       entity_id: script.make_event_snapshots_garden
     - delay:
         seconds: 2
     - service: script.turn_on
       entity_id: script.guard_light_reset
-    - delay:
-        seconds: 8
     - service: script.turn_on
-      entity_id: script.reset_ipcam
+      entity_id: script.reset_ipcam #has built-in-delay
     - service: script.turn_on
       entity_id: script.reset_fireplace
 - id: window_upstairs_opened
@@ -516,10 +518,8 @@
       data:
           entity_id: input_select.ipcam_direction
           option: Hall
-    - delay:
-        seconds: 10
     - service: script.turn_on
-      entity_id: script.reset_ipcam
+      entity_id: script.reset_ipcam #has built-in-delay
 - id: home_greeting
   alias: "Home Greeting"
   trigger: #when doors close on reentry
@@ -729,7 +729,7 @@
         entity_id: script.sirene_lights
       - service: script.turn_on
         data:
-            entity_id: script.reset_ipcam
+            entity_id: script.reset_ipcam #has built-in-delay
       - service: script.turn_on
         data:
             entity_id: script.reset_fireplace

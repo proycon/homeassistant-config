@@ -137,9 +137,6 @@ zwave:
     usb_path: /dev/ttyACM0
     debug: true
 
-rflink:
-    host: !secret pi2_ip
-    port: 1234
 
 shell_command:
     snapshot_livingroom: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh livingroom
