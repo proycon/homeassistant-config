@@ -13,8 +13,8 @@ mv -f event.4.jpg event.5.jpg
 mv -f event.3.jpg event.4.jpg
 mv -f event.2.jpg event.3.jpg
 mv -f event.1.jpg event.2.jpg
-IMAGES=$(find . -name "$DATE*$CAM*jpg" | sort | tail -n 6)
+IMAGES=$(find . -maxdepth 1 -name "$DATE*$CAM*jpg" | sort | tail -n 6)
 IMAGEARRAY=($IMAGES)
 FIRSTIMAGE=${IMAGEARRAY[0]}
-convert $IMAGES -append -fill yellow -pointsize 16 -gravity north -annotate +0+0 "$FIRSTIMAGE - $EVENTDATE" event.1.jpg
+convert $IMAGES -append -undercolor black -fill yellow -pointsize 16 -gravity north -annotate +0+0 "$FIRSTIMAGE - $EVENTDATE" event.1.jpg
 rm eventsnapshots.lock
