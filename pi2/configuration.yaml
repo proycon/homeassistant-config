@@ -59,6 +59,16 @@ discovery:
 sensor:
     - platform: rflink
       automatic_add: true
+      devices:
+          alecto_1300_air_5a81_temp:
+              sensor_type: temperature
+          alecto_1300_soil_5a82_hum:
+              sensor_type: humidity
+          alecto_1300_soil_5a82_temp:
+              sensor_type: temperature
+          alectov1_008f_rain:
+              sensor_type: total_rain
+
 
 binary_sensor:
     - platform: rpi_gpio
@@ -227,7 +237,46 @@ automation:
         topic: "home/wakeup/pi2"
     action:
         service_template: shell_command.wakeup
-
+  - id: s2m_weatherstation_air_temp
+    alias: s2m_weatherstation_air_temp
+    trigger:
+        platform: state
+        entity_id: sensor.alecto_1300_air_5a81_temp
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/air_temp"
+            payload: "{{ trigger.state }}"
+  - id: s2m_weatherstation_soil_temp
+    alias: s2m_weatherstation_soil_temp
+    trigger:
+        platform: state
+        entity_id: sensor.alecto_1300_soil_5a82_temp
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/soil_temp"
+            payload: "{{ trigger.state }}"
+  - id: s2m_weatherstation_soil_hum
+    alias: s2m_weatherstation_soil_hum
+    trigger:
+        platform: state
+        entity_id: sensor.alecto_1300_soil_5a82_hum
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/soil_hum"
+            payload: "{{ trigger.state }}"
+  - id: s2m_weatherstation_rain
+    alias: s2m_weatherstation_rain
+    trigger:
+        platform: state
+        entity_id: sensor.alectov1_008f_rain
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/rain"
+            payload: "{{ trigger.state }}"
 
 shell_command:
     start_pycec: python -m pycec
