@@ -7,9 +7,15 @@ homeassistant:
   time_zone: Europe/Amsterdam
 
 rflink:
-    host: /dev/ttyACM0
+    port: /dev/serial/by-id/usb-Arduino__www.arduino.cc__0042_95635333431351010291-if00
+    wait_for_ack: False
     reconnect_interval: 10
 
+logger:
+  default: error
+  logs:
+    rflink: debug
+    homeassistant.components.rflink: debug
 
 
 http:
@@ -33,7 +39,7 @@ frontend:
   # include_used_components: true
 
 # Discover some devices automatically
-#discovery:
+discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 #conversation:
@@ -50,7 +56,7 @@ frontend:
 # Weather Prediction
 #sensor:
 #  platform: yr
-
+sensor:
 
 binary_sensor:
     - platform: rpi_gpio
@@ -147,8 +153,8 @@ automation:
              state: '{{ trigger.payload|lower }}'
         - service: mqtt.publish
           data_template:
-              topic_template: "home/433send/get/{{ trigger.topic.split('/')[-3] }}/{{ trigger.topic.split('/')[-2] }}/{{ trigger.topic.split('/')[-1] }}"
-              payload_template: '{{ trigger.payload }}'
+              topic: "home/433send/get/{{ trigger.topic.split('/')[-3] }}/{{ trigger.topic.split('/')[-2] }}/{{ trigger.topic.split('/')[-1] }}"
+              payload: '{{ trigger.payload }}'
   - id: hdmi_cec_send
     alias: HDMI CEC Send
     trigger:
