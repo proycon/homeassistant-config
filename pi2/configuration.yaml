@@ -95,9 +95,9 @@ automation:
           topic: home/poll #an explicit re-poll of states, issued by master when it starts
     action:
         service: mqtt.publish
-        data:
+        data_template:
             topic: "home/binary_sensor/backdoor"
-            payload_template: "{{ states('binary_sensor.backdoor') | upper }}"
+            payload: "{{ states('binary_sensor.backdoor') | upper }}"
 
   - id: s2m_bedroomwindow_right
     alias: s2m_bedroomwindow_right
@@ -111,9 +111,9 @@ automation:
           topic: home/poll
     action:
         service: mqtt.publish
-        data:
+        data_template:
             topic: "home/binary_sensor/bedroomwindow_right"
-            payload_template: "{{ states('binary_sensor.bedroomwindow_right') | upper }}"
+            payload: "{{ states('binary_sensor.bedroomwindow_right') | upper }}"
   - id: s2m_bedroomwindow_left
     alias: s2m_bedroomwindow_left
     hide_entity: true
@@ -126,9 +126,9 @@ automation:
           topic: home/poll
     action:
         service: mqtt.publish
-        data:
+        data_template:
             topic: "home/binary_sensor/bedroomwindow_left"
-            payload_template: "{{ states('binary_sensor.bedroomwindow_left') | upper }}"
+            payload: "{{ states('binary_sensor.bedroomwindow_left') | upper }}"
   - id: ir_send
     alias: IR Send
     trigger:
@@ -177,7 +177,7 @@ automation:
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi2/get"
-              payload_template: '{{ trigger.payload_json.scene }}'
+              payload: '{{ trigger.payload_json.scene }}'
   - id: s2m_kodi
     alias: s2m_kodi
     trigger:
@@ -187,9 +187,9 @@ automation:
           topic: home/poll #an explicit re-poll of states, issued by master when it starts
     action:
         service: mqtt.publish
-        data:
+        data_template:
             topic: "home/kodi/get/pi2"
-            payload_template: "{{ states('switch.kodi') | upper }}"
+            payload: "{{ states('switch.kodi') | upper }}"
   - id: s2m_xorg
     alias: s2m_xorg
     trigger:
@@ -199,9 +199,9 @@ automation:
           topic: home/poll #an explicit re-poll of states, issued by master when it starts
     action:
         service: mqtt.publish
-        data:
+        data_template:
             topic: "home/xorg/get/pi2"
-            payload_template: "{{ states('switch.xorg') | upper }}"
+            payload: "{{ states('switch.xorg') | upper }}"
   - id: m2s_kodi
     alias: m2s_kodi
     trigger:

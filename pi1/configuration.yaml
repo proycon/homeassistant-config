@@ -92,9 +92,9 @@ automation:
           topic: home/poll #an explicit re-poll of states, issued by master when it starts
     action:
         service: mqtt.publish
-        data:
+        data_template:
             topic: "home/binary_sensor/frontdoor"
-            payload_template: "{{ states('binary_sensor.frontdoor') | upper }}"
+            payload: "{{ states('binary_sensor.frontdoor') | upper }}"
   - id: s2m_doorbell
     alias: s2m_doorbell
     hide_entity: true
@@ -107,9 +107,9 @@ automation:
           topic: home/poll #an explicit re-poll of states, issued by master when it starts
     action:
         service: mqtt.publish
-        data:
+        data_template:
             topic: "home/binary_sensor/doorbell"
-            payload_template: "{{ states('binary_sensor.doorbell') | upper }}"
+            payload: "{{ states('binary_sensor.doorbell') | upper }}"
   - id: s2m_kodi
     alias: s2m_kodi
     trigger:
@@ -119,9 +119,9 @@ automation:
           topic: home/poll #an explicit re-poll of states, issued by master when it starts
     action:
         service: mqtt.publish
-        data:
+        data_template:
             topic: "home/kodi/get/pi1"
-            payload_template: "{{ states('switch.kodi') | upper }}"
+            payload: "{{ states('switch.kodi') | upper }}"
   - id: s2m_xorg
     alias: s2m_xorg
     trigger:
@@ -131,9 +131,9 @@ automation:
           topic: home/poll #an explicit re-poll of states, issued by master when it starts
     action:
         service: mqtt.publish
-        data:
+        data_template:
             topic: "home/xorg/get/pi1"
-            payload_template: "{{ states('switch.xorg') | upper }}"
+            payload: "{{ states('switch.xorg') | upper }}"
   - id: m2s_kodi_on
     alias: m2s_kodi_on
     trigger:
@@ -179,9 +179,9 @@ automation:
           topic: home/poll #an explicit re-poll of states, issued by master when it starts
     action:
         service: mqtt.publish
-        data:
+        data_template:
             topic: "home/musicplayer/get/pi1"
-            payload_template: "{{ states('switch.musicplayer') | upper }}"
+            payload: "{{ states('switch.musicplayer') | upper }}"
   - id: m2s_musicplayer_on
     alias: m2s_musicplayer_on
     trigger:
@@ -238,8 +238,8 @@ automation:
              state: '{{ trigger.payload|lower }}'
         - service: mqtt.publish
           data_template:
-              topic_template: "home/433send/get/{{ trigger.topic.split('/')[-3] }}/{{ trigger.topic.split('/')[-2] }}/{{ trigger.topic.split('/')[-1] }}"
-              payload_template: '{{ trigger.payload }}'
+              topic: "home/433send/get/{{ trigger.topic.split('/')[-3] }}/{{ trigger.topic.split('/')[-2] }}/{{ trigger.topic.split('/')[-1] }}"
+              payload: '{{ trigger.payload }}'
 
 shell_command:
     start_pycec: python -m pycec
