@@ -57,6 +57,8 @@ discovery:
 #sensor:
 #  platform: yr
 sensor:
+    - platform: rflink
+      automatic_add: true
 
 binary_sensor:
     - platform: rpi_gpio
