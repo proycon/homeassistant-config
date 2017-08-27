@@ -162,6 +162,7 @@ config_sound:
     entities:
         - automation.door_notification_at_night
         - automation.doorbell
+        - automation.doorbell_sound
         - automation.front_door_still_open
         - automation.back_door_still_open
         - automation.home_greeting

@@ -258,8 +258,8 @@
       condition: template
       value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
   action:
-      - service: script.turn_on
-        entity_id: script.doorbell_sound
+    - service: script.turn_on
+      entity_id: script.doorbell_sound
 - id: ipcam_topreset
   alias: Camera to preset
   trigger:
