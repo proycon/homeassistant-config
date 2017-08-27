@@ -206,6 +206,7 @@ config_tests:
         - script.sirene_lights
         - script.mail_test
         - script.trigger_alarm_manually
+        - script.wake_up_alarm
 
 config_eventsnapshots:
     name: Event Snapshots
