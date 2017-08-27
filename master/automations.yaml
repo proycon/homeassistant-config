@@ -1246,26 +1246,6 @@
           message: "wifi router is down ({{ now() }})"
           title: "wifi router is down"
 
-- alias: Ceiling fan on
-  trigger:
-       platform: numeric_state
-       entity_id: input_slider.ceiling_fan
-       above: 0
-  action:
-      - delay:
-            seconds: 3
-      - service: switch.turn_on
-        entity_id: switch.ceiling_fan
-- alias: Ceiling fan off
-  trigger:
-       platform: numeric_state
-       entity_id: input_slider.ceiling_fan
-       below: 1
-  action:
-      - delay:
-            seconds: 3
-      - service: switch.turn_off
-        entity_id: switch.ceiling_fan
 
 
 

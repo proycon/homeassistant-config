@@ -523,12 +523,23 @@ switch pi2_xorg:
     name: Pi2 Xorg
     command_topic: "home/xorg/set/pi2"
     state_topic: "home/xorg/get/pi2"
-switch ceiling_fan:
-    platform: mqtt
-    name: Ceiling Fan
+
+fan:
+  - platform: mqtt
+    name: "Ceiling fan"
     command_topic: "home/fan"
-    payload_on: "{{ input_slider.ceiling_fan }}"
+    speed_command_topic: "home/fan"
+    payload_on: "true"
     payload_off: "off"
+    payload_low_speed: "2"
+    payload_medium_speed: "4"
+    payload_high_speed: "6"
+    speeds:
+      - low
+      - medium
+      - high
+
+
 
 
 

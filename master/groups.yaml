@@ -415,7 +415,7 @@ fans:
     name: Fans
     icon: mdi:fan
     entities:
-        - input_slider.ceiling_fan
+        - fan.ceiling_fan
 
 wake_up_alarm:
     name: Wake up alarm
