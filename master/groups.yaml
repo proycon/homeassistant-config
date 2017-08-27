@@ -180,8 +180,10 @@ config_lights:
     entities:
         - automation.lights_on_in_the_evening
         - automation.lights_off_at_night
-        - automation.morning_lights_on_hans
-        - automation.morning_lights_off_hans
+        - automation.downstairs_morning_lights_on_hans
+        - automation.downstairs_morning_lights_off_hans
+        - automation.office_morning_lights_on_hans
+        - automation.office_morning_lights_off_hans
         - automation.garden_lights_on_in_the_evening
         - automation.ignite_fireplace_in_evening
         - automation.kitchen_light_on_motion

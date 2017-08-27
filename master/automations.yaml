@@ -658,8 +658,23 @@
   action:
      - service: input_boolean.turn_off
        entity_id: input_boolean.inside_house
-- id: morning_lights_on_hans
-  alias: Morning Lights on Hans
+- id: downstairs_morning_lights_on_hans
+  alias: Downstairs Morning Lights on Hans
+  trigger:
+      - platform: time
+        at: '05:45:00'
+  condition:
+      condition: time
+      weekday:
+          - mon
+          - tue
+          - thu
+          - fri
+  action:
+       - service: switch.turn_on
+         entity_id: switch.tv_spots
+- id: office_morning_lights_on_hans
+  alias: Office Morning Lights on Hans
   trigger:
       - platform: time
         at: '05:15:00'
@@ -672,9 +687,9 @@
           - fri
   action:
        - service: switch.turn_on
-         entity_id: switch.tv_spots
-- id: morning_lights_off_hans
-  alias: Morning Lights off Hans
+         entity_id: switch.office
+- id: downstairs_morning_lights_off_hans
+  alias: Downstairs Morning Lights off Hans
   trigger:
       - platform: time
         at: '06:15:00'
@@ -688,6 +703,21 @@
   action:
        - service: switch.turn_off
          entity_id: switch.tv_spots
+- id: office_morning_lights_off_hans
+  alias: office_morning Lights off Hans
+  trigger:
+      - platform: time
+        at: '06:00:00'
+  condition:
+      condition: time
+      weekday:
+          - mon
+          - tue
+          - thu
+          - fri
+  action:
+       - service: switch.turn_off
+         entity_id: switch.office
 - id: ignite_fireplace_in_evening
   alias: Ignite fireplace in evening
   trigger:
