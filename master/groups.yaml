@@ -14,7 +14,8 @@ default_view:
         - group.all_lights
         - group.cameras
         - group.media_activities
-        - group.environment
+        - group.inside_environment
+        - group.outside_environment
         - group.wake_up_alarm
 
 
@@ -91,11 +92,22 @@ doors_and_windows:
         - binary_sensor.bedroom_window_right
         - binary_sensor.bathroom_window_sensor
 
-environment:
-    name: Environment
+outside_environment:
+    name: Outside Environment
     entities:
         - sensor.weather_symbol
         - sensor.weather_temperature
+        - sensor.outside_temperature_1
+        - sensor.outside_temperature_2
+        - sensor.outside_humidity
+        - sensor.wind_direction
+        - sensor.wind_speed
+        - sensor.wind_gusts
+        - sensor.total_rain
+
+inside_environment:
+    name: Inside Environment
+    entities:
         - sensor.temperature_living_room
         - sensor.bathroom_sensor_temperature
         - sensor.bathroom_sensor_relative_humidity

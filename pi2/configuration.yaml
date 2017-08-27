@@ -68,6 +68,18 @@ sensor:
               sensor_type: temperature
           alectov1_008f_rain:
               sensor_type: total_rain
+          alectov1_0128_hum:
+              sensor_type: humidity
+          alectov1_0128_temp:
+              sensor_type: temperature
+          alectov1_0128_windir:
+              sensor_type: winddirection
+          alectov1_0128_winsp:
+              sensor_type: windspeed
+          alectov1_0128_wings:
+              sensor_type: windgusts
+          firstline_00fc_temp:
+              sensor_type: temperature
 
 
 binary_sensor:
@@ -237,45 +249,89 @@ automation:
         topic: "home/wakeup/pi2"
     action:
         service_template: shell_command.wakeup
-  - id: s2m_weatherstation_air_temp
-    alias: s2m_weatherstation_air_temp
-    trigger:
-        platform: state
-        entity_id: sensor.alecto_1300_air_5a81_temp
-    action:
-        service: mqtt.publish
-        data_template:
-            topic: "home/weatherstation/air_temp"
-            payload: "{{ trigger.state }}"
-  - id: s2m_weatherstation_soil_temp
-    alias: s2m_weatherstation_soil_temp
-    trigger:
-        platform: state
-        entity_id: sensor.alecto_1300_soil_5a82_temp
-    action:
-        service: mqtt.publish
-        data_template:
-            topic: "home/weatherstation/soil_temp"
-            payload: "{{ trigger.state }}"
-  - id: s2m_weatherstation_soil_hum
-    alias: s2m_weatherstation_soil_hum
-    trigger:
-        platform: state
-        entity_id: sensor.alecto_1300_soil_5a82_hum
-    action:
-        service: mqtt.publish
-        data_template:
-            topic: "home/weatherstation/soil_hum"
-            payload: "{{ trigger.state }}"
   - id: s2m_weatherstation_rain
     alias: s2m_weatherstation_rain
     trigger:
-        platform: state
-        entity_id: sensor.alectov1_008f_rain
+        - platform: state
+          entity_id: sensor.alectov1_008f_rain
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
     action:
         service: mqtt.publish
         data_template:
             topic: "home/weatherstation/rain"
+            payload: "{{ trigger.state }}"
+  - id: s2m_weatherstation_temp
+    alias: s2m_weatherstation_temp
+    trigger:
+        - platform: state
+          entity_id: sensor.alectov1_0128_temp
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/temp"
+            payload: "{{ trigger.state }}"
+  - id: s2m_weatherstation2_temp
+    alias: s2m_weatherstation2_temp
+    trigger:
+        - platform: state
+          entity_id: sensor.firstline_00fc_temp
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation2/temp"
+            payload: "{{ trigger.state }}"
+  - id: s2m_weatherstation_hum
+    alias: s2m_weatherstation_hum
+    trigger:
+        - platform: state
+          entity_id: sensor.alectov1_0128_hum
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/hum"
+            payload: "{{ trigger.state }}"
+  - id: s2m_weatherstation_winddir
+    alias: s2m_weatherstation_winddir
+    trigger:
+        - platform: state
+          entity_id: sensor.alectov1_0128_windir
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/winddir"
+            payload: "{{ trigger.state }}"
+  - id: s2m_weatherstation_winsp
+    alias: s2m_weatherstation_winsp
+    trigger:
+        - platform: state
+          entity_id: sensor.alectov1_0128_winsp
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/windspeed"
+            payload: "{{ trigger.state }}"
+  - id: s2m_weatherstation_wings
+    alias: s2m_weatherstation_wings
+    trigger:
+        - platform: state
+          entity_id: sensor.alectov1_0128_wings
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/windgustspeed"
             payload: "{{ trigger.state }}"
 
 shell_command:

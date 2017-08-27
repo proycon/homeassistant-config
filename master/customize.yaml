@@ -139,5 +139,15 @@ device_tracker.wifi_router:
     icon: mdi:router-wireless
 device_tracker.kpn_router:
     icon: mdi:upload-network
+sensor.total_rain:
+    icon: mdi:weather-rainy
+sensor.wind_direction:
+    icon: mdi:weather-windy
+sensor.wind_speed:
+    icon: mdi:weather-windy
+sensor.wind_gusts:
+    icon: mdi:weather-windy
+sensor.outside_humidity:
+    icon: mdi:water-percent
 
 

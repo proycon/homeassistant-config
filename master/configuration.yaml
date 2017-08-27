@@ -309,6 +309,41 @@ sensor:
       state_topic: "home/ir_send/pi1"
       expire_after: 3
       value_template: 1
+    - platform: mqtt
+      name: Outside Temperature 1
+      unit_of_measurement: °C
+      state_topic: "home/weatherstation/temp"
+      expire_after: 3600
+    - platform: mqtt
+      name: Outside Humidity
+      unit_of_measurement: "%"
+      state_topic: "home/weatherstation/hum"
+      expire_after: 3600
+    - platform: mqtt
+      name: Wind Direction
+      unit_of_measurement: °
+      state_topic: "home/weatherstation/winddir"
+      expire_after: 3600
+    - platform: mqtt
+      name: Wind Speed
+      unit_of_measurement: km/h
+      state_topic: "home/weatherstation/windspeed"
+      expire_after: 3600
+    - platform: mqtt
+      name: Wind Gusts
+      unit_of_measurement: km/h
+      state_topic: "home/weatherstation/windgustspeed"
+      expire_after: 3600
+    - platform: mqtt
+      name: Outside Temperature 2
+      unit_of_measurement: °C
+      state_topic: "home/weatherstation2/temp"
+      expire_after: 3600
+    - platform: mqtt
+      name: Total Rain
+      unit_of_measurement: mm
+      state_topic: "home/weatherstation/rain"
+      expire_after: 3600
 
 
 
