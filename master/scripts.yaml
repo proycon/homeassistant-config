@@ -539,16 +539,31 @@ hall_speaker_full_volume:
     sequence:
         - service: shell_command.hallspeaker_fullvolume
 
+trigger_alarm_manually:
+    alias: Trigger Alarm Manually
+    sequence:
+        - service: alarm_control_panel.alarm_trigger
+          entity_id: alarm_control_panel.alarm_system
+
 alarm:
     alias: Alarm
+    sequence:
+        - service: script.turn_on #loop
+          entity_id: script.alarm_iteration
+alarm_iteration:
+    alias: Alarm Iteration
     sequence:
         - service: media_player.play_media
           data:
               entity_id: media_player.hall_speaker
               media_content_id: /home/homeautomation/homeassistant/media/alarm.ogg
               media_content_type: 'music'
+        - condition: state
+          entity_id: alarm_control_panel.alarm_system
+          state: 'triggered'
         - service: script.turn_on #loop
           entity_id: script.alarm
+
 ipcam_topreset:
     alias: Camera to preset
     sequence:
@@ -867,27 +882,6 @@ reset_fireplace:
            entity_id: "script.{% if is_state('sun.sun','below_horizon') %}ignite{% else %}extinguish{% endif %}_dresser_ambilight"
 
 
-alarm_blink:
-    alias: alarm_blink
-    sequence:
-    - delay:
-        seconds: 10
-    - service: switch.turn_on
-      entity_id: switch.back_room
-    - delay:
-        seconds: 10
-    - service: switch.turn_off
-      entity_id: switch.back_room
-    - delay:
-        seconds: 10
-    - service: switch.turn_on
-      entity_id: switch.back_room
-    - delay:
-        seconds: 10
-    - service: switch.turn_off
-      entity_id: switch.back_room
-    - service: script.turn_on
-      entity_id: script.alarm_blink
 
 wake_up_alarm:
     alias: Wake up alarm

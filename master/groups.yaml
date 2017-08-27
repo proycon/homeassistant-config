@@ -199,8 +199,8 @@ config_tests:
         - script.red_alert_lights
         - script.green_lights
         - script.sirene_lights
-        - script.alarm_blink
         - script.mail_test
+        - script.trigger_alarm_manually
 
 config_eventsnapshots:
     name: Event Snapshots

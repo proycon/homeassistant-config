@@ -251,6 +251,7 @@
   action:
       service: script.turn_on
       entity_id: script.ipcam_topreset
+
 - id: alarm_trigger
   alias: Alarm trigger
   trigger:
@@ -276,6 +277,16 @@
   action:
     - service: alarm_control_panel.alarm_trigger
       entity_id: alarm_control_panel.alarm_system
+
+
+- id: alarm_triggered
+  alias: Alarm Triggered
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.alarm_system
+      from: 'triggered'
+      to: 'disarmed'
+  action:
     - service: script.turn_on
       entity_id: script.alarm
     - service: script.turn_on
@@ -338,8 +349,6 @@
         seconds: 1
     - service: switch.turn_off
       entity_id: switch.back_room
-    - service: script.turn_on
-      entity_id: script.alarm_blink
     - delay:
         seconds: 1
     - service: script.turn_on
@@ -724,7 +733,7 @@
       - service: script.turn_off
         entity_id: script.alarm
       - service: script.turn_off
-        entity_id: script.alarm_blink
+        entity_id: script.alarm_iteration
       - service: script.turn_off
         entity_id: script.sirene_lights
       - service: script.turn_on
@@ -736,6 +745,26 @@
       - service: script.turn_on
         data:
             entity_id: script.reset_lights
+      - service: notify.xmpp_proycon
+        data_template:
+           message: "Alarm cancelled {{ now() }}"
+      - service: notify.xmpp_hans
+        data_template:
+           message: "Alarm cancelled {{ now() }}"
+      - service: notify.mail_both
+        data_template:
+           title: "[homeautomation] Alarm cancelled {{ now() }}"
+           message: "Alarm cancelled {{ now() }}"
+      - service: persistent_notification.create
+        data_template:
+           message: "Alarm cancelled {{ now() }}"
+           title: "Alarm cancelled {{ now() }}"
+      - service: notify.sms
+        data_template:
+           message: "Alarm cancelled {{ now() }}"
+           target:
+              - !secret proyphone
+              - !secret hansphone
 
 - id: kitchen_light_on_motion
   alias: Kitchen Light On Motion
@@ -1022,7 +1051,7 @@
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
       data:
-          message: Arming system in two minutes, good bye
+          message: "Arming system in two minutes, good bye"
     - delay:
         minutes: 2
     - service: alarm_control_panel.alarm_arm_away
@@ -1030,7 +1059,7 @@
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
       data:
-          message: System armed
+          message: "System armed"
 
 - alias: SoftRemote Cancel Away Switch
   trigger:
@@ -1052,7 +1081,7 @@
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
       data:
-          message: Cancelled
+          message: "Cancelled"
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.alarm_system
 
