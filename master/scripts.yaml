@@ -900,7 +900,7 @@ wake_up_alarm:
           entity_id: script.turn_tv_upstairs_on
         - service: mqtt.publish
           data:
-              command_topic: "home/wakeup/pi2"
+              topic: "home/wakeup/pi2"
               payload: "on"
         - delay:
             minutes: 45
@@ -912,7 +912,7 @@ turn_tv_upstairs_on:
     sequence:
       - service: mqtt.publish
         data:
-            command_topic: "home/hdmi_cec_send/pi2"
+            topic: "home/hdmi_cec_send/pi2"
             payload: "on 0"
 
 make_event_snapshots_living_room:
