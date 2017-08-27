@@ -268,6 +268,13 @@ input_slider:
         min: 0
         max: 59
         step: 5
+    ceiling_fan:
+        name: Ceiling Fan
+        icon: mdi:fan
+        initial: 0
+        min: 0
+        max: 6
+        step: 1
 
 input_boolean:
     inside_house:
@@ -516,6 +523,14 @@ switch pi2_xorg:
     name: Pi2 Xorg
     command_topic: "home/xorg/set/pi2"
     state_topic: "home/xorg/get/pi2"
+switch ceiling_fan:
+    platform: mqtt
+    name: Ceiling Fan
+    command_topic: "home/fan"
+    payload_on: "{{ input_slider.ceiling_fan }}"
+    payload_off: "off"
+
+
 
 
 hdmi_cec:

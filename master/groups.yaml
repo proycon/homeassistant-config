@@ -47,6 +47,7 @@ light_view:
         - group.guard_lights
         - group.fireplace
         - group.dresser_ambilight
+        - group.fans
 
 camera_view:
     name: Live Camera
@@ -409,6 +410,12 @@ dresser_ambilight:
         - input_slider.dresser_ambilight_brightness
         - script.ignite_dresser_ambilight
         - script.extinguish_dresser_ambilight
+
+fans:
+    name: Fans
+    icon: mdi:fan
+    entities:
+        - input_slider.ceiling_fan
 
 wake_up_alarm:
     name: Wake up alarm
