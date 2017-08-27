@@ -194,7 +194,8 @@ config_tests:
     entities:
         - script.flash_notification
         - script.doorbell_sound
-        - script.dog_barking_sound
+        - script.dog_sound
+        - script.chime_sound
         - script.red_alert_lights
         - script.green_lights
         - script.sirene_lights

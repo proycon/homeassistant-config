@@ -149,6 +149,8 @@ shell_command:
     snapshot_clear_locks: find "/home/homeautomation/homeassistant/snapshots/" -type f -name "*.lock" | xargs rm
     streetcam_reset_1: !secret streetcam_noir_command
     streetcam_reset_2: !secret streetcam_quality_command
+    hallspeaker_normalvolume: "amixer set Master 60%"
+    hallspeaker_fullvolume: "amixer set Master 100%"
 
 rest_command:
     ipcam_topreset:

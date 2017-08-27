@@ -513,7 +513,7 @@ doorbell_sound:
               media_content_id: /home/homeautomation/homeassistant/media/doorbell.ogg
               media_content_type: 'music'
 dog_sound:
-    alias: Dog barking sound
+    alias: Dog sound
     sequence:
         - service: media_player.play_media
           data:
