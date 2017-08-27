@@ -656,7 +656,7 @@ flash_notification:
         - service: switch.turn_off
           entity_id: switch.back_room
 guard_light_reset:
-    alias: guard_light_reset
+    alias: guard light reset
     sequence:
         - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') %}on{% else %}off{% endif %}"
           data:
@@ -664,10 +664,16 @@ guard_light_reset:
                 - switch.porch
         - delay:
             seconds: 2
-        - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') %}on{% else %}off{% endif %}"
+        - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int < 2 or states.sensor.time.state[:2]|int > 6)  %}on{% else %}off{% endif %}"
           data:
               entity_id:
                 - switch.back_room
+        - delay:
+            seconds: 2
+        - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int < 2 or states.sensor.time.state[:2]|int > 6) %}on{% else %}off{% endif %}"
+          data:
+              entity_id:
+                - switch.garden
 watch_tv:
     alias: Watch TV
     sequence:

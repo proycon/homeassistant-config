@@ -23,7 +23,7 @@
             entity_id: script.reset_fireplace
       - service: script.turn_on
         data:
-            entity_id: script.reset_ipcam
+            entity_id: script.reset_ipcam #with delay
       - service: notify.xmpp_proycon
         data:
             message: "Home automation started"
@@ -203,13 +203,15 @@
       from: "off"
       to: "on"
   condition:
-      condition: template
-      value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
-  action:
-      - service: script.turn_on
-        entity_id: script.doorbell_sound
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
+        - condition: template
+          value_template: '{% if states.automation.doorbell.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.doorbell.attributes.last_triggered)) >= 60 }} {% else %} true {% endif %}'
+  action: # sound is handled separately
       - service: script.turn_off
-        entity_id: script.reset_ipcam
+        entity_id: script.reset_ipcam #with delay
       - service: input_select.select_option
         data:
           entity_id: input_select.ipcam_direction
@@ -229,6 +231,8 @@
             message: "There is sometbody at the door ({{ now() }})"
             title: "The doorbell rang"
       - service: script.turn_on
+        entity_id: script.yellow_lights
+      - service: script.turn_on
         entity_id: script.tvdecoder_playpause #pause TV
       - service: script.turn_on
         entity_id: script.make_event_snapshots_street
@@ -243,6 +247,19 @@
       - service: script.turn_on
         data:
           entity_id: script.reset_ipcam #has built-in delay
+- id: doorbell_sound
+  alias: Doorbell Sound
+  trigger:
+      platform: state
+      entity_id: binary_sensor.doorbell
+      from: "off"
+      to: "on"
+  condition:
+      condition: template
+      value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
+  action:
+      - service: script.turn_on
+        entity_id: script.doorbell_sound
 - id: ipcam_topreset
   alias: Camera to preset
   trigger:
@@ -393,14 +410,18 @@
     - service: notify.xmpp_hans
       data:
           message: "System disarmed"
-    - service: switch.turn_on
-      entity_id: switch.porch
     - service: script.turn_on
       entity_id: script.green_lights
+    - service: switch.turn_on
+      entity_id: switch.porch
     - delay:
         seconds: 1
     - service: switch.turn_on
       entity_id: switch.hall
+    - delay:
+        seconds: 2
+    - service: switch.turn_on
+      entity_id: switch.garden
     - delay:
         seconds: 2
     - service: switch.turn_on
@@ -459,8 +480,6 @@
         seconds: 2
     - service: script.turn_on
       entity_id: script.guard_light_reset
-    - delay:
-        seconds: 6
     - service: script.turn_on
       entity_id: script.reset_ipcam
     - service: script.turn_on
@@ -534,7 +553,7 @@
   trigger: #when doors close on reentry
     - platform: state
       entity_id: binary_sensor.front_door
-      from: 'off'
+      from: 'on'
       to: 'off'
     - platform: state
       entity_id: binary_sensor.back_door
@@ -635,6 +654,25 @@
   action:
      - service: input_boolean.turn_off
        entity_id: input_boolean.hans_inside_house
+- id: coming_home_notification
+  alias: Coming Home Notification
+  trigger:
+    - platform: state
+      entity_id: device_tracker.proyphone
+      from: 'not_home'
+      to: 'home'
+    - platform: state
+      entity_id: device_tracker.hansphone
+      from: 'not_home'
+      to: 'home'
+  action:
+    - condition: time
+      after: '9:30'
+      before: '23:00'
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: Coming home
 - id: both_left_house
   alias: Both Left House
   trigger:
@@ -909,6 +947,7 @@
     platform: state
     entity_id: switch.bathroom_vent
     from: "off"
+    to: "on"
     for:
         minutes: 30
   condition:
