@@ -94,7 +94,7 @@ binary_sensor:
       device_class: opening
 
 switch:
-    platform: command_line
+  - platform: command_line
     switches:
         kodi:
             command_on: "kodi-standalone &"
@@ -104,6 +104,22 @@ switch:
             command_on: "startx &"
             command_off: "killall Xorg"
             command_state: "ps aux | grep Xorg | grep -v grep"
+  - platform: rflink
+    devices:
+        aster_0f80_02: #ON = stop ceiling fan, OFF = toggle light
+            name: fan
+        aster_0f88_01: #ON = ..., OFF = Level 1
+            name: fan
+        aster_0f88_02: #ON = level 2, OFF = ....
+            name: fan
+        aster_0f90_01: #ON = ..., OFF = level 3
+            name: fan
+        aster_0f98_01: #ON = ..., OFF = level 4
+            name: fan
+        aster_0fa0_02: #ON = level 5, OFF = ....
+            name: fan
+        aster_0fa0_01: #ON = ...., OFF = level 6
+            name: fan
 
 automation:
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
@@ -333,6 +349,69 @@ automation:
         data_template:
             topic: "home/weatherstation/windgustspeed"
             payload: "{{ states('sensor.alectov1_0128_wings') }}"
+  - id: m2s_fan_off
+    alias: m2s_fan_off
+    trigger:
+        platform: mqtt
+        topic: "home/fan"
+        payload: "off"
+    action:
+        service: switch.turn_on
+        entity_id: switch.aster_0f80_02
+  - id: m2s_fan_1
+    alias: m2s_fan_1
+    trigger:
+        platform: mqtt
+        topic: "home/fan"
+        payload: "1"
+    action:
+        service: switch.turn_off
+        entity_id: switch.aster_0f88_01
+  - id: m2s_fan_2
+    alias: m2s_fan_2
+    trigger:
+        platform: mqtt
+        topic: "home/fan"
+        payload: "2"
+    action:
+        service: switch.turn_on
+        entity_id: switch.aster_0f88_02
+  - id: m2s_fan_3
+    alias: m2s_fan_3
+    trigger:
+        platform: mqtt
+        topic: "home/fan"
+        payload: "3"
+    action:
+        service: switch.turn_off
+        entity_id: switch.aster_0f90_01
+  - id: m2s_fan_4
+    alias: m2s_fan_4
+    trigger:
+        platform: mqtt
+        topic: "home/fan"
+        payload: "4"
+    action:
+        service: switch.turn_off
+        entity_id: switch.aster_0f98_01
+  - id: m2s_fan_5
+    alias: m2s_fan_5
+    trigger:
+        platform: mqtt
+        topic: "home/fan"
+        payload: "5"
+    action:
+        service: switch.turn_on
+        entity_id: switch.aster_0fa0_02
+  - id: m2s_fan_6
+    alias: m2s_fan_6
+    trigger:
+        platform: mqtt
+        topic: "home/fan"
+        payload: "6"
+    action:
+        service: switch.turn_off
+        entity_id: switch.aster_0fa0_01
 
 shell_command:
     start_pycec: python -m pycec
