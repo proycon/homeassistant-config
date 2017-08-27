@@ -845,7 +845,6 @@
   trigger:
     platform: state
     entity_id: binary_sensor.bathroom_too_humid
-    from: "off"
     to: "on"
     for:
        minutes: 20
@@ -853,7 +852,7 @@
       condition: and
       conditions:
         - condition: time
-          after: '10:00'
+          after: '9:30'
           before: '23:00'
         - condition: state
           entity_id: switch.bathroom_vent
@@ -880,9 +879,12 @@
     platform: state
     entity_id: switch.bathroom_vent
     from: "off"
-    to: "on"
     for:
         minutes: 30
+  condition:
+    - condition: state
+      entity_id: switch.bathroom_vent
+      state: "on"
   action:
       - service: switch.turn_off
         entity_id: switch.bathroom_vent

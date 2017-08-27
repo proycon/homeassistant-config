@@ -111,6 +111,7 @@ inside_environment:
         - sensor.temperature_living_room
         - sensor.bathroom_sensor_temperature
         - sensor.bathroom_sensor_relative_humidity
+        - binary_sensor.bathroom_too_humid
         - sensor.humidity_living_room
         - sensor.fibaro_multisensor_temperature
         - sensor.fibaro_multisensor_luminance
@@ -133,7 +134,6 @@ config_view:
         - group.config_eventsnapshots
         - group.config_links
         - group.devices
-        - automation.wake_up
 
 config_links:
     name: Links
@@ -172,6 +172,7 @@ config_sound:
         - automation.bathroom_vent_on
         - automation.bathroom_vent_off
         - automation.bathroom_vent_off_after_a_while
+        - automation.wake_up
 
 config_lights:
     name: Lights
@@ -187,6 +188,7 @@ config_lights:
         - automation.kitchen_light_off
         - automation.night_light_on_motion
         - automation.night_light_off
+        - automation.wake_up
 
 config_tests:
     name: Tests
