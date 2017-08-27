@@ -107,19 +107,19 @@ switch:
   - platform: rflink
     devices:
         aster_0f80_02: #ON = stop ceiling fan, OFF = toggle light
-            name: fan
+            name: aster_0f80_02
         aster_0f88_01: #ON = ..., OFF = Level 1
-            name: fan
+            name: aster_0f88_01
         aster_0f88_02: #ON = level 2, OFF = ....
-            name: fan
+            name: aster_0f88_02
         aster_0f90_01: #ON = ..., OFF = level 3
-            name: fan
+            name: aster_0f90_01
         aster_0f98_01: #ON = ..., OFF = level 4
-            name: fan
+            name: aster_0f98_01
         aster_0fa0_02: #ON = level 5, OFF = ....
-            name: fan
+            name: aster_0fa0_02
         aster_0fa0_01: #ON = ...., OFF = level 6
-            name: fan
+            name: aster_0fa0_01
 
 automation:
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
