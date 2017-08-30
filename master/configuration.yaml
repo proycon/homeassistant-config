@@ -523,6 +523,13 @@ switch pi2_xorg:
     name: Pi2 Xorg
     command_topic: "home/xorg/set/pi2"
     state_topic: "home/xorg/get/pi2"
+switch tv:
+    platform: mqtt
+    name: TV
+    command_topic: "home/hdmi_cec_send/pi1"
+    state_topic: "home/hdmi_cec_send/pi1"
+    payload_on: "on 0"
+    payload_off: "standby 0"
 
 fan:
   - platform: mqtt
@@ -544,10 +551,10 @@ fan:
 
 
 
-hdmi_cec:
-    host: !secret pi1_ip
-    types:
-       hdmi_cec.hdmi_0: switch #will expose a switch.hdmi_0 entity
+#hdmi_cec:
+#    host: !secret pi1_ip
+#    types:
+#       hdmi_cec.hdmi_0: switch #will expose a switch.hdmi_0 entity
 
 media_player hall_speaker:
     - platform: vlc

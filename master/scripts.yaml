@@ -678,7 +678,7 @@ watch_tv:
     alias: Watch TV
     sequence:
         - service: switch.turn_on
-          entity_id: switch.hdmi_0
+          entity_id: switch.tv
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - service: switch.turn_on
@@ -694,7 +694,7 @@ listen_to_music:
     alias: Listen to Music
     sequence:
         - service: switch.turn_on
-          entity_id: switch.hdmi_0
+          entity_id: switch.tv
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - service: switch.turn_off
@@ -718,7 +718,7 @@ media_centre:
     alias: Media Centre
     sequence:
         - service: switch.turn_on
-          entity_id: switch.hdmi_0
+          entity_id: switch.tv
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - service: switch.turn_off
@@ -739,7 +739,7 @@ desktop:
     alias: Desktop
     sequence:
         - service: switch.turn_on
-          entity_id: switch.hdmi_0
+          entity_id: switch.tv
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - service: switch.turn_off
@@ -760,7 +760,7 @@ turn_media_off:
     alias: Turn media off
     sequence:
     - service: switch.turn_off
-      entity_id: switch.hdmi_0
+      entity_id: switch.tv
     - service: media_player.turn_off
       entity_id: media_player.yamaha_receiver
     - service: switch.turn_off
