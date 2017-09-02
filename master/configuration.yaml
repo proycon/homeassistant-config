@@ -411,7 +411,7 @@ binary_sensor:
         device_class: motion
       bathroom_too_humid:
         friendly_name: "Bathroom too humid"
-        value_template: '{{ states.sensor.bathroom_sensor_relative_humidity | float > 75.0 }}'
+        value_template: '{{ states("sensor.bathroom_sensor_relative_humidity") | float > 75.0 }}'
         entity_id:
             - sensor.bathroom_sensor_relative_humidity
 
