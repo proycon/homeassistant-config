@@ -906,6 +906,11 @@ wake_up_alarm:
             minutes: 45
         - service: switch.turn_off
           entity_id: switch.bedroom
+        - service: mqtt.publish
+          data:
+              topic: "home/xorg/set/pi2"
+              payload: "off"
+
 
 turn_tv_upstairs_on:
     alias: Turn TV upstairs on
