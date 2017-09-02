@@ -426,6 +426,38 @@
         seconds: 2
     - service: switch.turn_on
       entity_id: switch.back_room
+- id: already_disarmed_notification #when someone comes home and system is already disarmed (due to other person being home), signal for safe entry
+  alias: 'Already disarmed notification'
+  trigger:
+    - platform: state
+      entity_id: device_tracker.proyphone
+      from: 'not_home'
+      to: 'home'
+    - platform: state
+      entity_id: device_tracker.hansphone
+      from: 'not_home'
+      to: 'home'
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.alarm_system
+      state: 'disarmed'
+  action:
+    - service: script.turn_on
+      entity_id: script.green_lights
+    - service: switch.turn_on
+      entity_id: switch.porch
+    - delay:
+        seconds: 1
+    - service: switch.turn_on
+      entity_id: switch.hall
+    - delay:
+        seconds: 2
+    - service: switch.turn_on
+      entity_id: switch.garden
+    - delay:
+        seconds: 2
+    - service: switch.turn_on
+      entity_id: switch.back_room
 - id: front_door_still_open
   alias: "Front door still open"
   trigger:
