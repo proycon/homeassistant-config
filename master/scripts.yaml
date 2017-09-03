@@ -929,6 +929,41 @@ make_event_snapshots:
           data:
               cams: "{{ cams }}"
 
+make_event_snapshots_living_room:
+    alias: Make Event Snapshots Living Room
+    sequence:
+        - service: script.turn_on
+          entity_id: script.make_event_snapshots
+          data:
+             cams: "living_room"
+make_event_snapshots_street:
+    alias: Make Event Snapshots Street
+    sequence:
+        - service: script.turn_on
+          entity_id: script.make_event_snapshots
+          data:
+             cams: "street"
+make_event_snapshots_garden:
+    alias: Make Event Snapshots garden
+    sequence:
+        - service: script.turn_on
+          entity_id: script.make_event_snapshots
+          data:
+             cams: "garden"
+make_event_snapshots_front_door:
+    alias: Make Event Snapshots front_door
+    sequence:
+        - service: script.turn_on
+          entity_id: script.make_event_snapshots
+          data:
+             cams: "front_door"
+make_event_snapshots_hall_upstairs:
+    alias: Make Event Snapshots hall_upstairs
+    sequence:
+        - service: script.turn_on
+          entity_id: script.make_event_snapshots
+          data:
+             cams: "hall_upstairs"
 
 play_youtube_playlist:
     alias: Play YouTube
