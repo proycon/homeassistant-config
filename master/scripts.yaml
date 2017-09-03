@@ -920,41 +920,12 @@ turn_tv_upstairs_on:
             topic: "home/hdmi_cec_send/pi2"
             payload: "on 0"
 
-make_event_snapshots_living_room:
-    alias: Make Event Snapshots Living Room
+make_event_snapshots:
+    alias: Make Event Snapshots
     sequence:
         - service: shell_command.event_snapshots
           data:
-              cam: livingroom
-
-make_event_snapshots_front_door:
-    alias: Make Event Snapshots Front Door
-    sequence:
-        - service: shell_command.event_snapshots
-          data:
-              cam: frontdoor
-
-make_event_snapshots_garden:
-    alias: Make Event Snapshots Garden
-    sequence:
-        - service: shell_command.event_snapshots
-          data:
-              cam: garden
-
-make_event_snapshots_street:
-    alias: Make Event Snapshots Street
-    sequence:
-        - service: shell_command.event_snapshots
-          data:
-              cam: street
-
-make_event_snapshots_hall_upstairs:
-    alias: Make Event Snapshots Hall Upstairs
-    sequence:
-        - service: shell_command.event_snapshots
-          data:
-              cam: hallupstairs
-
+              cams: "{{ cams }}"
 
 
 play_youtube_playlist:

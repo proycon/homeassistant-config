@@ -145,7 +145,7 @@ shell_command:
     snapshot_frontdoor: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh frontdoor
     snapshot_hallupstairs: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh hallupstairs
     archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
-    event_snapshots: /home/homeautomation/homeassistant/scripts/camera/eventsnapshots.sh "{{ cam }}" "{{ delay }}"
+    event_snapshots: /home/homeautomation/homeassistant/scripts/camera/eventsnapshots.sh "{{ cams }}"
     snapshot_clear_locks: find "/home/homeautomation/homeassistant/snapshots/" -type f -name "*.lock" | xargs rm
     streetcam_reset_1: !secret streetcam_noir_command
     streetcam_reset_2: !secret streetcam_quality_command

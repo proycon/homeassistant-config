@@ -333,15 +333,9 @@
     - service: switch.turn_on
       entity_id: switch.office
     - service: script.turn_on
-      entity_id: script.make_event_snapshots_living_room
-    - service: script.turn_on
-      entity_id: script.make_event_snapshots_hall_upstairs
-    - service: script.turn_on
-      entity_id: script.make_event_snapshots_front_door
-    - service: script.turn_on
-      entity_id: script.make_event_snapshots_garden
-    - service: script.turn_on
-      entity_id: script.make_event_snapshots_street
+      entity_id: script.make_event_snapshots
+      date_template:
+          cams: living_room hall_upstairs front_door garden street
     - delay:
         seconds: 1
     - service: switch.turn_off
