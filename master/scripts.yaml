@@ -926,7 +926,7 @@ make_event_snapshots:
         - delay:
             seconds: 6
         - service: shell_command.event_snapshots
-          data:
+          data_template:
               cams: "{{ cams }}"
 
 make_event_snapshots_living_room:
