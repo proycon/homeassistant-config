@@ -935,7 +935,7 @@ make_event_snapshots_living_room:
         - service: script.turn_on
           entity_id: script.make_event_snapshots
           data:
-             cams: "living_room"
+             cams: "livingroom"
 make_event_snapshots_street:
     alias: Make Event Snapshots Street
     sequence:
@@ -963,7 +963,7 @@ make_event_snapshots_hall_upstairs:
         - service: script.turn_on
           entity_id: script.make_event_snapshots
           data:
-             cams: "hall_upstairs"
+             cams: "hallupstairs"
 
 play_youtube_playlist:
     alias: Play YouTube

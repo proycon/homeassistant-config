@@ -237,7 +237,7 @@
       - service: script.turn_on
         entity_id: script.make_event_snapshots
         data_template:
-          cams: street front_door living_room
+          cams: street frontdoor livingroom
       - service: script.turn_on
         data:
           entity_id: script.reset_ipcam #has built-in delay
@@ -329,7 +329,7 @@
     - service: script.turn_on
       entity_id: script.make_event_snapshots
       data_template:
-          cams: living_room street garden hall_upstairs front_door
+          cams: livingroom street garden hallupstairs frontdoor
     - delay:
         seconds: 1
     - service: switch.turn_off
@@ -495,7 +495,7 @@
     - service: script.turn_on
       entity_id: script.make_event_snapshots
       data_template:
-          cams: street front_door
+          cams: street frontdoor
     - delay:
         seconds: 2
     - service: script.turn_on
@@ -533,7 +533,7 @@
     - service: script.turn_on
       entity_id: script.make_event_snapshots
       data_template:
-          cams: living_room garden
+          cams: livingroom garden
     - delay:
         seconds: 2
     - service: script.turn_on
