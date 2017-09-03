@@ -920,56 +920,42 @@ turn_tv_upstairs_on:
             topic: "home/hdmi_cec_send/pi2"
             payload: "on 0"
 
-make_event_snapshots:
-    alias: Make Event Snapshots
-    sequence:
-        - delay:
-            seconds: 6
-        - service: shell_command.event_snapshots
-          data_template:
-              cams: "{{ cams }}"
 
 make_event_snapshots_living_room:
     alias: Make Event Snapshots Living Room
     sequence:
-        - service: script.turn_on
-          entity_id: script.make_event_snapshots
-          data_template:
-             cams: "livingroom"
+        - service: shell_command.event_snapshots
+          data:
+              cams: "livingroom"
 make_event_snapshots_street:
     alias: Make Event Snapshots Street
     sequence:
-        - service: script.turn_on
-          entity_id: script.make_event_snapshots
-          data_template:
-             cams: "street"
+        - service: shell_command.event_snapshots
+          data:
+              cams: "street"
 make_event_snapshots_garden:
     alias: Make Event Snapshots garden
     sequence:
-        - service: script.turn_on
-          entity_id: script.make_event_snapshots
-          data_template:
-             cams: "garden"
+        - service: shell_command.event_snapshots
+          data:
+              cams: "garden"
 make_event_snapshots_front_door:
     alias: Make Event Snapshots front_door
     sequence:
-        - service: script.turn_on
-          entity_id: script.make_event_snapshots
-          data_template:
-             cams: "front_door"
+        - service: shell_command.event_snapshots
+          data:
+              cams: "frontdoor"
 make_event_snapshots_hall_upstairs:
     alias: Make Event Snapshots hall_upstairs
     sequence:
-        - service: script.turn_on
-          entity_id: script.make_event_snapshots
-          data_template:
-             cams: "hallupstairs"
+        - service: shell_command.event_snapshots
+          data:
+              cams: "hallupstairs"
 make_event_snapshots_all:
     alias: Make Event Snapshots all
     sequence:
-        - service: script.turn_on
-          entity_id: script.make_event_snapshots
-          data_template:
+        - service: shell_command.event_snapshots
+          data:
              cams: "street livingroom garden hallupstairs frontdoor"
 
 play_youtube_playlist:

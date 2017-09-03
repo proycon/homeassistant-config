@@ -235,12 +235,13 @@
       - service: script.turn_on
         entity_id: script.tvdecoder_playpause #pause TV
       - service: script.turn_on
-        entity_id: script.make_event_snapshots
-        data_template:
-          cams: street frontdoor livingroom
-      - service: script.turn_on
         data:
           entity_id: script.reset_ipcam #has built-in delay
+      - delay:
+          seconds: 6
+      - service: shell_command.event_snapshots
+        data:
+          cams: "street frontdoor livingroom"
 - id: doorbell_sound
   alias: Doorbell Sound
   trigger:
@@ -326,10 +327,6 @@
       entity_id: script.sirene_lights
     - service: switch.turn_on
       entity_id: switch.office
-    - service: script.turn_on
-      entity_id: script.make_event_snapshots
-      data_template:
-          cams: livingroom street garden hallupstairs frontdoor
     - delay:
         seconds: 1
     - service: switch.turn_off
@@ -348,6 +345,9 @@
       entity_id: switch.midspots
     - delay:
         seconds: 1
+    - service: shell_command.event_snapshots
+      data:
+          cams: "livingroom street garden hallupstairs frontdoor"
     - service: switch.turn_off
       entity_id: switch.back_corner
     - delay:
@@ -492,10 +492,6 @@
           option: Hall
     - service: script.turn_off
       entity_id: script.green_lights
-    - service: script.turn_on
-      entity_id: script.make_event_snapshots
-      data_template:
-          cams: street frontdoor
     - delay:
         seconds: 2
     - service: script.turn_on
@@ -504,6 +500,11 @@
       entity_id: script.reset_ipcam
     - service: script.turn_on
       entity_id: script.reset_fireplace
+    - delay:
+        seconds: 3
+    - service: shell_command.event_snapshots
+      data:
+          cams: "street frontdoor livingroom"
 - id: hall_light_off
   alias: "Hall light off"
   trigger:
@@ -530,10 +531,6 @@
       data:
           entity_id: input_select.ipcam_direction
           option: Back
-    - service: script.turn_on
-      entity_id: script.make_event_snapshots
-      data_template:
-          cams: livingroom garden
     - delay:
         seconds: 2
     - service: script.turn_on
@@ -542,6 +539,11 @@
       entity_id: script.reset_ipcam #has built-in-delay
     - service: script.turn_on
       entity_id: script.reset_fireplace
+    - delay:
+        seconds: 4
+    - service: shell_command.event_snapshots
+      data:
+          cams: "livingroom garden"
 - id: window_upstairs_opened
   alias: "Window upstairs opened"
   trigger:
