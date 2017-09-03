@@ -212,6 +212,7 @@ config_tests:
 config_eventsnapshots:
     name: Event Snapshots
     entities:
+        - script.make_event_snapshots_all
         - script.make_event_snapshots_living_room
         - script.make_event_snapshots_street
         - script.make_event_snapshots_garden

@@ -964,6 +964,13 @@ make_event_snapshots_hall_upstairs:
           entity_id: script.make_event_snapshots
           data:
              cams: "hallupstairs"
+make_event_snapshots_all:
+    alias: Make Event Snapshots all
+    sequence:
+        - service: script.turn_on
+          entity_id: script.make_event_snapshots
+          data:
+             cams: "street livingroom garden hallupstairs frontdoor"
 
 play_youtube_playlist:
     alias: Play YouTube
