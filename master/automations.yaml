@@ -235,15 +235,9 @@
       - service: script.turn_on
         entity_id: script.tvdecoder_playpause #pause TV
       - service: script.turn_on
-        entity_id: script.make_event_snapshots_street
-      - delay:
-          seconds: 1
-      - service: script.turn_on
-        entity_id: script.make_event_snapshots_front_door
-      - delay:
-          seconds: 1
-      - service: script.turn_on
-        entity_id: script.make_event_snapshots_living_room
+        entity_id: script.make_event_snapshots
+        data_template:
+          cams: street front_door living_room
       - service: script.turn_on
         data:
           entity_id: script.reset_ipcam #has built-in delay
@@ -334,8 +328,8 @@
       entity_id: switch.office
     - service: script.turn_on
       entity_id: script.make_event_snapshots
-      date_template:
-          cams: living_room hall_upstairs front_door garden street
+      data_template:
+          cams: living_room street garden hall_upstairs front_door
     - delay:
         seconds: 1
     - service: switch.turn_off
@@ -499,9 +493,9 @@
     - service: script.turn_off
       entity_id: script.green_lights
     - service: script.turn_on
-      entity_id: script.make_event_snapshots_front_door
-    - service: script.turn_on
-      entity_id: script.make_event_snapshots_street
+      entity_id: script.make_event_snapshots
+      data_template:
+          cams: street front_door
     - delay:
         seconds: 2
     - service: script.turn_on
@@ -537,11 +531,9 @@
           entity_id: input_select.ipcam_direction
           option: Back
     - service: script.turn_on
-      entity_id: script.make_event_snapshots_living_room
-    - delay:
-        seconds: 1
-    - service: script.turn_on
-      entity_id: script.make_event_snapshots_garden
+      entity_id: script.make_event_snapshots
+      data_template:
+          cams: living_room garden
     - delay:
         seconds: 2
     - service: script.turn_on

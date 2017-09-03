@@ -923,6 +923,8 @@ turn_tv_upstairs_on:
 make_event_snapshots:
     alias: Make Event Snapshots
     sequence:
+        - delay:
+            seconds: 6
         - service: shell_command.event_snapshots
           data:
               cams: "{{ cams }}"
