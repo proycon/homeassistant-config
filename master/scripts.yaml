@@ -832,6 +832,11 @@ green_lights:
            entity_id: script.ignite_fireplace
          - service: script.turn_on
            entity_id: script.ignite_dresser_ambilight
+         - delay:
+                minutes: 5
+         - service: script.turn_on
+           entity_id: script.reset_fireplace
+
 
 sirene_lights:
      alias: Sirene lights
