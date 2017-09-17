@@ -610,6 +610,9 @@
           entity_id: input_boolean.proycon_inside_house
           state: "off"
         - condition: state
+          entity_id: device_tracker.proyphone
+          state: "home"
+        - condition: state
           entity_id: input_boolean.inside_house
           state: "on"
   action:
@@ -638,6 +641,9 @@
         - condition: state
           entity_id: input_boolean.hans_inside_house
           state: "off"
+        - condition: state
+          entity_id: device_tracker.hansphone
+          state: "home"
         - condition: state
           entity_id: input_boolean.inside_house
           state: "on"
