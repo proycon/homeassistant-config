@@ -263,6 +263,7 @@ shell_command:
 mqtt:
     broker: 192.168.0.1
     port: 8883
+    certificate: /etc/ssl/certs/ca-certificates.crt
     tls_insecure: true #allow non-matching hostnames
     client_id: pi1
     keepalive: 60
