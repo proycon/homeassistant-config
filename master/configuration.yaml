@@ -619,8 +619,10 @@ notify:
 #MQTT
 mqtt:
     broker: 127.0.0.1
-    port: 1883
+    port: 8883
     client_id: master
+    certificate: /etc/ssl/certs/ca-certificates.crt
+    tls_insecure: true #allow non-matching hostnames
     keepalive: 60
     username: homeassistant
     password: !secret api_password

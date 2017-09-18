@@ -424,8 +424,10 @@ shell_command:
 #MQTT
 mqtt:
     broker: 192.168.0.1
-    port: 1883
+    port: 8883
     client_id: pi2
+    certificate: /etc/ssl/certs/ca-certificates.crt
+    tls_insecure: true #allow non-matching hostnames
     keepalive: 60
     username: homeassistant
     password: !secret api_password
