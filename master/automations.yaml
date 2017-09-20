@@ -1275,6 +1275,43 @@
 
 
 
+- alias: command_switch_on
+  trigger:
+      - platform: mqtt
+        topic: home/command/switch/#
+        payload: on
+  action:
+      service: switch.turn_on
+      data_template:
+          entity_id: "switch.{{ trigger.topic.split('/')[-1] }}"
+- alias: command_switch_off
+  trigger:
+      - platform: mqtt
+        topic: home/command/switch/#
+        payload: off
+  action:
+      service: switch.turn_off
+      data_template:
+          entity_id: "switch.{{ trigger.topic.split('/')[-1] }}"
+- alias: command_script_on
+  trigger:
+      - platform: mqtt
+        topic: home/command/script/#
+        payload: on
+  action:
+      service: script.turn_on
+      data_template:
+          entity_id: "script.{{ trigger.topic.split('/')[-1] }}"
+- alias: command_script_off
+  trigger:
+      - platform: mqtt
+        topic: home/command/script/#
+        payload: off
+  action:
+      service: script.turn_off
+      data_template:
+          entity_id: "script.{{ trigger.topic.split('/')[-1] }}"
+
 
 
 

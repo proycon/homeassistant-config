@@ -391,6 +391,8 @@ binary_sensor pir_living_room:
     platform: mqtt
     name: PIR Living Room
     state_topic: "home/binary_sensor/pir_living_room"
+    payload_on: "ON"
+    payload_off: "OFF"
     device_class: motion
 
 
