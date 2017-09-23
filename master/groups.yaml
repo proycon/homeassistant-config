@@ -156,6 +156,7 @@ config_snapshots:
         - automation.living_room_snapshots
         - automation.hall_upstairs_snapshots
         - automation.street_snapshots
+        - input_boolean.flip_main_camera
 
 config_sound:
     name: Sound

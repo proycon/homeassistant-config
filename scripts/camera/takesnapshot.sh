@@ -18,13 +18,24 @@ else
     touch "$MODE.lock"
 fi
 
+FLIP=0
+if [ ! -z "$2" ]; then
+    if [[ "$2" == "ON" ]] || [[ "$2" == "on" ]] || [[ "$2" == "true" ]]; then
+        FLIP=1
+    fi
+fi
+
 if [ "$MODE" == "frontdoor" ]; then
     fswebcam -S 3 -r 640x480 -d $FRONTDOORCAM_DEV --save $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "hallupstairs" ]; then
     fswebcam -S 3 -r 640x480 -d $HALLUPSTAIRSCAM_DEV --save $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "livingroom" ]; then
     curl -sS --netrc-file $LIVINGROOMCAM_NETRC http://$LIVINGROOMCAM_IP/image/jpeg.cgi -o tmp.jpg 2>$LOGDIR/camera.$MODE.log
-    convert -flip -flop tmp.jpg $DATE.$MODE.jpg
+    if [ $FLIP -eq 1 ]; then
+        convert -flip -flop tmp.jpg $DATE.$MODE.jpg
+    else
+        mv tmp.jpg $DATE.$MODE.jpg
+    fi
 elif [ "$MODE" == "street" ]; then
     curl -sS "http://$STREETCAM_IP/snapshot.cgi?user=$STREETCAM_USER&pwd=$STREETCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "garden" ]; then

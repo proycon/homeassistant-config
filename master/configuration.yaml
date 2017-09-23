@@ -139,7 +139,7 @@ zwave:
 
 
 shell_command:
-    snapshot_livingroom: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh livingroom
+    snapshot_livingroom: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh livingroom "{{ input_boolean.flip_main_camera }}"
     snapshot_street: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh street
     snapshot_garden: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh garden
     snapshot_frontdoor: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh frontdoor
@@ -286,6 +286,9 @@ input_boolean:
     hans_inside_house:
         name: Hans inside house?
         initial: on
+    flip_main_camera:
+        name: Flip main camera
+        initial: off
 
 sensor:
     - platform: buienradar #weather prediction
