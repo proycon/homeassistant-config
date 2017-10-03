@@ -211,7 +211,7 @@ config_tests:
         - script.trigger_alarm_manually
         - script.wake_up_alarm
 
-config_timer:
+timer:
     name: Timer
     control: hidden
     entities:
