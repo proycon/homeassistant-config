@@ -528,6 +528,15 @@ chime_sound:
               entity_id: media_player.hall_speaker
               media_content_id: /home/homeautomation/homeassistant/media/chime.wav
               media_content_type: 'music'
+timer:
+    alias: Timer
+    sequence:
+        - delay: "00:{{ states.input_slider.timer.state }}:00"
+        - service: media_player.play_media
+          data:
+              entity_id: media_player.hall_speaker
+              media_content_id: /home/homeautomation/homeassistant/media/meditationend.off
+              media_content_type: 'music'
 
 hall_speaker_normal_volume:
     alias: Hall speaker Normal Volume
@@ -662,12 +671,6 @@ guard_light_reset:
           data:
               entity_id:
                 - switch.porch
-        - delay:
-            seconds: 2
-        - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int < 2 or states.sensor.time.state[:2]|int > 6)  %}on{% else %}off{% endif %}"
-          data:
-              entity_id:
-                - switch.back_room
         - delay:
             seconds: 2
         - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int < 2 or states.sensor.time.state[:2]|int > 6) %}on{% else %}off{% endif %}"

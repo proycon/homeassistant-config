@@ -135,6 +135,7 @@ config_view:
         - group.config_eventsnapshots
         - group.config_links
         - group.devices
+        - group.timer
 
 config_links:
     name: Links
@@ -209,6 +210,13 @@ config_tests:
         - script.mail_test
         - script.trigger_alarm_manually
         - script.wake_up_alarm
+
+config_timer:
+    name: Timer
+    control: hidden
+    entities:
+        - input_slider.timer
+        - script.timer
 
 config_eventsnapshots:
     name: Event Snapshots

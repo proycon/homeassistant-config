@@ -275,6 +275,14 @@ input_slider:
         min: 0
         max: 6
         step: 1
+    timer:
+        name: Timer
+        icon: mdi:av-timer
+        initial: 5
+        min: 5
+        max: 60
+        step: 5
+
 
 input_boolean:
     inside_house:
