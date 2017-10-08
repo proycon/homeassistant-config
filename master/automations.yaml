@@ -1046,6 +1046,57 @@
      - service: script.turn_on
        entity_id: script.extinguish_dresser_ambilight
 
+- alias: SoftRemote Night Scene TV already on
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 10 #Plus button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+        - condition: time
+          after: '20:30'
+          before: '07:00'
+        - condition: state
+          entity_id: binary_sensor.anybodyhome
+          state: "on"
+        - condition: state
+          entity_id: sun.sun
+          state: "below_horizon"
+        - condition: state
+          entity_id: switch.tv
+          state: "on"
+  action:
+      - service: script.turn_on
+        entity_id: script.night_scene
+
+- alias: SoftRemote Night Scene
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 10 #Plus button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+        - condition: time
+          after: '20:30'
+          before: '01:00'
+        - condition: state
+          entity_id: binary_sensor.anybodyhome
+          state: "on"
+        - condition: state
+          entity_id: sun.sun
+          state: "below_horizon"
+  action:
+      - service: script.turn_on
+        entity_id: script.night_scene
+      - service: script.turn_on
+        entity_id: script.watch_tv
+
 - alias: SoftRemote Volume up
   trigger:
     platform: event
