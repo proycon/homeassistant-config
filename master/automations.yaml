@@ -1061,7 +1061,7 @@
       - service: media_player.volume_set
         entity_id: media_player.yamaha_receiver
         data_template:
-           volume_level: '{{ states.media_player.yamaha_receiver.attributes.volume_level + 5 }}'
+           volume_level: '{{ states.media_player.yamaha_receiver.attributes.volume_level + 0.05 }}'
 
 
 - alias: SoftRemote Volume down
@@ -1079,7 +1079,7 @@
       - service: media_player.volume_set
         entity_id: media_player.yamaha_receiver
         data_template:
-           volume_level: '{{ states.media_player.yamaha_receiver.attributes.volume_level - 5 }}'
+           volume_level: '{{ states.media_player.yamaha_receiver.attributes.volume_level - 0.05 }}'
 
 
 - alias: SoftRemote Mute
