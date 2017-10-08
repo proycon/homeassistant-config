@@ -1151,7 +1151,7 @@
             state: "on"
   action:
       service: script.turn_on
-      entity_id: script.tvdecoder_channelup
+      entity_id: script.tvdecoder_channeldown
 
 - alias: SoftRemote Channel Down Switch
   trigger:
@@ -1171,7 +1171,7 @@
             state: "on"
   action:
       service: script.turn_on
-      entity_id: script.tvdecoder_channeldown
+      entity_id: script.tvdecoder_channelup
 
 - alias: SoftRemote Away Switch
   trigger:
