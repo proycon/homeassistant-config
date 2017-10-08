@@ -1133,6 +1133,46 @@
       - service: script.turn_on
         entity_id: script.lights_on
 
+- alias: SoftRemote Channel Up Switch
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 43 #Doubleclick on minus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: media_player.yamaha_receiver
+            state: "on"
+          - condition: state
+            entity_id: switch.tv
+            state: "on"
+  action:
+      service: script.turn_on
+      entity_id: script.tvdecoder_channelup
+
+- alias: SoftRemote Channel Down Switch
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 23 #Doubleclick on minus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: media_player.yamaha_receiver
+            state: "on"
+          - condition: state
+            entity_id: switch.tv
+            state: "on"
+  action:
+      service: script.turn_on
+      entity_id: script.tvdecoder_channeldown
+
 - alias: SoftRemote Away Switch
   trigger:
     platform: event
@@ -1149,6 +1189,12 @@
           - condition: state
             entity_id: alarm_control_panel.alarm_system
             state: "disarmed"
+          - condition: state
+            entity_id: media_player.yamaha_receiver
+            state: "off"
+          - condition: state
+            entity_id: switch.tv
+            state: "off"
   action:
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
@@ -1179,6 +1225,9 @@
           - condition: state
             entity_id: alarm_control_panel.alarm_system
             state: "pending"
+          - condition: state
+            entity_id: media_player.yamaha_receiver
+            state: "off"
   action:
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
