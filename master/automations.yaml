@@ -1091,6 +1091,9 @@
         - condition: state
           entity_id: sun.sun
           state: "below_horizon"
+        - condition: state
+          entity_id: switch.tv
+          state: "off"
   action:
       - service: script.turn_on
         entity_id: script.night_scene
@@ -1210,7 +1213,7 @@
     event_type: zwave.scene_activated
     event_data:
       entity_id: zwave.nodon_soft_remote
-      scene_id: 23 #Doubleclick on minus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+      scene_id: 23 #Doubleclick on plus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       condition: and
       conditions:
@@ -1223,6 +1226,23 @@
   action:
       service: script.turn_on
       entity_id: script.tvdecoder_channelup
+
+- alias: SoftRemote Watch TV
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 23 #Doubleclick on plus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: switch.tv
+            state: "off"
+  action:
+      service: script.turn_on
+      entity_id: script.watch_tv
 
 - alias: SoftRemote Away Switch
   trigger:

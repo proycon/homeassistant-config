@@ -1019,9 +1019,6 @@ night_scene:
         entity_id: switch.roof
       - wait_template: "{{ states('switch.roof') == 'off' }}"
       - service: switch.turn_off
-        entity_id: switch.tv_spots
-      - wait_template: "{{ states('switch.tv_spots') == 'off' }}"
-      - service: switch.turn_off
         entity_id: switch.kitchen
       - wait_template: "{{ states('switch.kitchen') == 'off' }}"
       - service: switch.turn_off
