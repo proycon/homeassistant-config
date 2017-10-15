@@ -534,7 +534,7 @@ chime_sound:
 timer:
     alias: Timer
     sequence:
-        - delay: "00:{{ states.input_slider.timer.state }}:00"
+        - delay: "00:{{ states.input_number.timer.state }}:00"
         - service: media_player.play_media
           data:
               entity_id: media_player.hall_speaker
@@ -589,7 +589,7 @@ ignite_fireplace:
       - service: mqtt.publish
         data_template:
             topic: "home/technofire/pi3/set"
-            payload_template: '{"scene":"{{ states.input_select.fireplace.state.replace(" ","_") |lower }}","brightness":"{{ states.input_slider.fireplace_brightness.state|int }}"}'
+            payload_template: '{"scene":"{{ states.input_select.fireplace.state.replace(" ","_") |lower }}","brightness":"{{ states.input_number.fireplace_brightness.state|int }}"}'
 extinguish_fireplace:
     alias: Extinguish Fireplace
     sequence:
@@ -603,7 +603,7 @@ ignite_dresser_ambilight:
       - service: mqtt.publish
         data_template:
             topic: "home/technofire/pi2/set"
-            payload_template: '{"scene":"{{ states.input_select.dresser_ambilight.state.replace(" ","_") |lower }}","brightness":"{{ states.input_slider.dresser_ambilight_brightness.state|int }}"}'
+            payload_template: '{"scene":"{{ states.input_select.dresser_ambilight.state.replace(" ","_") |lower }}","brightness":"{{ states.input_number.dresser_ambilight_brightness.state|int }}"}'
 extinguish_dresser_ambilight:
     alias: Extinguish dresser ambilight
     sequence:
@@ -794,13 +794,13 @@ red_alert_lights:
            data:
                entity_id: input_select.fireplace
                option: Red
-         - service: input_slider.select_value
+         - service: input_number.select_value
            data:
-               entity_id: input_slider.fireplace_brightness
+               entity_id: input_number.fireplace_brightness
                value: 255
-         - service: input_slider.select_value
+         - service: input_number.select_value
            data:
-               entity_id: input_slider.dresser_ambilight_brightness
+               entity_id: input_number.dresser_ambilight_brightness
                value: 255
          - service: input_select.select_option
            data:
@@ -820,13 +820,13 @@ green_lights:
            data:
                entity_id: input_select.fireplace
                option: Green
-         - service: input_slider.select_value
+         - service: input_number.select_value
            data:
-               entity_id: input_slider.fireplace_brightness
+               entity_id: input_number.fireplace_brightness
                value: 255
-         - service: input_slider.select_value
+         - service: input_number.select_value
            data:
-               entity_id: input_slider.dresser_ambilight_brightness
+               entity_id: input_number.dresser_ambilight_brightness
                value: 255
          - service: input_select.select_option
            data:
@@ -851,13 +851,13 @@ sirene_lights:
            data:
                entity_id: input_select.fireplace
                option: Sirene
-         - service: input_slider.select_value
+         - service: input_number.select_value
            data:
-               entity_id: input_slider.fireplace_brightness
+               entity_id: input_number.fireplace_brightness
                value: 255
-         - service: input_slider.select_value
+         - service: input_number.select_value
            data:
-               entity_id: input_slider.dresser_ambilight_brightness
+               entity_id: input_number.dresser_ambilight_brightness
                value: 255
          - service: input_select.select_option
            data:
@@ -877,13 +877,13 @@ reset_fireplace:
        data:
            entity_id: input_select.fireplace
            option: Fire
-     - service: input_slider.select_value
+     - service: input_number.select_value
        data:
-           entity_id: input_slider.fireplace_brightness
+           entity_id: input_number.fireplace_brightness
            value: 255
-     - service: input_slider.select_value
+     - service: input_number.select_value
        data:
-           entity_id: input_slider.dresser_ambilight_brightness
+           entity_id: input_number.dresser_ambilight_brightness
            value: 40
      - service: input_select.select_option
        data:
@@ -1029,9 +1029,9 @@ night_scene:
       - wait_template: "{{ states('switch.hall') == 'off' }}"
       - service: script.turn_on
         entity_id: script.ignite_fireplace
-      - service: input_slider.select_value
+      - service: input_number.select_value
         data:
-            entity_id: input_slider.dresser_ambilight_brightness
+            entity_id: input_number.dresser_ambilight_brightness
             value: 255
       - service: input_select.select_option
         data:

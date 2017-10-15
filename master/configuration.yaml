@@ -241,7 +241,7 @@ input_select:
             - Cyan
             - White
 
-input_slider:
+input_number:
     fireplace_brightness:
         name: Fireplace brightness
         min: 0
@@ -312,7 +312,7 @@ sensor:
       sensors:
           wake_up_time:
             friendly_name: 'Wake up Time'
-            value_template: '{{ "%0.02d:%0.02d" | format(states("input_slider.wake_up_hour") | int, states("input_slider.wake_up_minutes") | int) }}'
+            value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.wake_up_hour") | int, states("input_number.wake_up_minutes") | int) }}'
           wake_up_relative_time:
             friendly_name: Wake up relative time #seconds after wake up time
             value_template: "{{ states.sensor.time.state[:2]|int * 60  + states.sensor.time.state[2:4]|int  - states.sensor.wake_up_time.state[:2]|int * 60  + states.sensor.wake_up_time.state[2:4]|int }}"

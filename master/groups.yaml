@@ -225,7 +225,7 @@ timer:
     name: Timer
     control: hidden
     entities:
-        - input_slider.timer
+        - input_number.timer
         - script.timer
 
 config_eventsnapshots:
@@ -417,7 +417,7 @@ fireplace:
     control: hidden
     entities:
         - input_select.fireplace
-        - input_slider.fireplace_brightness
+        - input_number.fireplace_brightness
         - script.ignite_fireplace
         - script.extinguish_fireplace
 
@@ -427,7 +427,7 @@ dresser_ambilight:
     control: hidden
     entities:
         - input_select.dresser_ambilight
-        - input_slider.dresser_ambilight_brightness
+        - input_number.dresser_ambilight_brightness
         - script.ignite_dresser_ambilight
         - script.extinguish_dresser_ambilight
 
@@ -442,5 +442,5 @@ wake_up_alarm:
     icon: mdi:timer
     entities:
         - sensor.wake_up_time
-        - input_slider.wake_up_hour
-        - input_slider.wake_up_minutes
+        - input_number.wake_up_hour
+        - input_number.wake_up_minutes
