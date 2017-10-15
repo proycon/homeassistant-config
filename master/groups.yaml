@@ -116,8 +116,14 @@ inside_environment:
         - sensor.humidity_living_room
         - sensor.fibaro_multisensor_temperature
         - sensor.fibaro_multisensor_luminance
+        - sensor.fibaro_office_temperature
+        - sensor.fibaro_office_luminance
+        - sensor.fibaro_hall_temperature
+        - sensor.fibaro_hall_luminance
         - binary_sensor.pir_living_room
         - binary_sensor.pir_kitchen
+        - binary_sensor.pir_hall
+        - binary_sensor.pir_office
         - sensor.ir_send_activity
 
 
@@ -192,6 +198,10 @@ config_lights:
         - automation.ignite_fireplace_in_evening
         - automation.kitchen_light_on_motion
         - automation.kitchen_light_off
+        - automation.hall_light_on_motion
+        - automation.hall_light_off_after_motion
+        - automation.office_light_on_motion
+        - automation.office_light_off
         - automation.night_light_on_motion
         - automation.night_light_off
         - automation.wake_up

@@ -893,6 +893,71 @@
       - service: switch.turn_off
         entity_id: switch.kitchen
 
+- id: office_light_on_motion
+  alias: Office Light On Motion
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_office
+      from: "off"
+      to: "on"
+  condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.anybodyhome
+          state: "on"
+        - condition: numeric_state
+          entity_id: sensor.fibaro_multisensor_luminance
+          below: 40
+  action:
+      - service: switch.turn_on
+        entity_id: switch.office
+
+- id: office_light_off
+  alias: Office Light Off
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_office
+      from: "on"
+      to: "off"
+      for:
+          minutes: 15
+  action:
+      - service: switch.turn_off
+        entity_id: switch.office
+
+- id: hall_light_on_motion
+  alias: hall Light On Motion
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_hall
+      from: "off"
+      to: "on"
+  condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.anybodyhome
+          state: "on"
+        - condition: numeric_state
+          entity_id: sensor.fibaro_multisensor_luminance
+          below: 40
+  action:
+      - service: switch.turn_on
+        entity_id: switch.hall
+
+- id: hall_light_off_after_motion
+  alias: Hall Light Off after motion
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_hall
+      from: "on"
+      to: "off"
+      for:
+          minutes: 5
+  action:
+      - service: switch.turn_off
+        entity_id: switch.hall
 
 - id: wake_up
   alias: 'Wake up'
@@ -1200,9 +1265,6 @@
           - condition: state
             entity_id: media_player.yamaha_receiver
             state: "on"
-          - condition: state
-            entity_id: switch.tv
-            state: "on"
   action:
       service: script.turn_on
       entity_id: script.tvdecoder_channeldown
@@ -1219,9 +1281,6 @@
       conditions:
           - condition: state
             entity_id: media_player.yamaha_receiver
-            state: "on"
-          - condition: state
-            entity_id: switch.tv
             state: "on"
   action:
       service: script.turn_on
