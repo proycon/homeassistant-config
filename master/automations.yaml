@@ -907,8 +907,8 @@
           entity_id: binary_sensor.anybodyhome
           state: "on"
         - condition: numeric_state
-          entity_id: sensor.fibaro_multisensor_luminance
-          below: 40
+          entity_id: sensor.fibaro_office_luminance
+          below: 10
   action:
       - service: switch.turn_on
         entity_id: switch.office
@@ -940,8 +940,8 @@
           entity_id: binary_sensor.anybodyhome
           state: "on"
         - condition: numeric_state
-          entity_id: sensor.fibaro_multisensor_luminance
-          below: 40
+          entity_id: sensor.fibaro_hall_luminance
+          below: 7
   action:
       - service: switch.turn_on
         entity_id: switch.hall
