@@ -737,21 +737,6 @@
   action:
        - service: switch.turn_on
          entity_id: switch.tv_spots
-- id: office_morning_lights_on_hans
-  alias: Office Morning Lights on Hans
-  trigger:
-      - platform: time
-        at: '05:15:00'
-  condition:
-      condition: time
-      weekday:
-          - mon
-          - tue
-          - thu
-          - fri
-  action:
-       - service: switch.turn_on
-         entity_id: switch.office
 - id: downstairs_morning_lights_off_hans
   alias: Downstairs Morning Lights off Hans
   trigger:
