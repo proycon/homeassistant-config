@@ -906,7 +906,32 @@
       from: "on"
       to: "off"
       for:
-          minutes: 15
+          minutes: 30
+  action:
+      - service: switch.turn_off
+        entity_id: switch.office
+
+- id: office_light_off_night
+  alias: Office Light Off Night
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_office
+      from: "on"
+      to: "off"
+      for:
+          minutes: 3
+  condition:
+       condition: and
+       conditions:
+          - condition: time
+            after: '22:00'
+            before: '06:00'
+          - condition: state
+            entity_id: binary_sensor.anybodyhome
+            state: "on"
+          - condition: state
+            entity_id: switch.tv_spots
+            state: "off"
   action:
       - service: switch.turn_off
         entity_id: switch.office
@@ -939,7 +964,11 @@
       from: "on"
       to: "off"
       for:
-          minutes: 5
+          minutes: 2
+  condition:
+      - condition: state
+        entity_id: binary_sensor.front_door
+        state: "off"
   action:
       - service: switch.turn_off
         entity_id: switch.hall
