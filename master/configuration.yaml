@@ -364,6 +364,9 @@ sensor:
       unit_of_measurement: mm
       state_topic: "home/weatherstation/rain"
       expire_after: 3600
+    - platform: dsmr
+      port: /dev/ttyUSB1
+      dsmr_version: 4
 
 
 
