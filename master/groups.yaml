@@ -386,6 +386,7 @@ media_tv_channels:
         - script.tvdecoder_wdr
         - script.tvdecoder_arte
         - script.tvdecoder_tv5monde
+        - script.tvdecoder_antena3
         - script.tvdecoder_rai1
         - script.tvdecoder_0
         - script.tvdecoder_1
