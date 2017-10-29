@@ -99,6 +99,7 @@ for period in periods:
     print("changing last_changed datetype...")
     # change the last_changed datatype to datetime
     allqueryDF['last_changed'] = pd.to_datetime(allqueryDF['last_changed'])
+    # use it as the index of our dataframe
 
     print("plotting binary data...")
     binary = allqueryDF['domain'] == 'binary_sensor'
@@ -106,6 +107,7 @@ for period in periods:
     cdf = allqueryDF[binary & wanted].copy()
     # convert the 'state' column to a bool
     cdf['state'] = cdf['state'].map(lambda x: 1.0 if x.lower() in ('true','yes','on','open','home') else 0.0)
+    cdf.index = cdf['last_changed']
 
     groupbyName = cdf.groupby(['entity_id'])
     for key, group in groupbyName:
@@ -113,9 +115,16 @@ for period in periods:
         tempgroup = group.copy()
         tempgroup.rename(columns={'state': key}, inplace=True)
         ax = tempgroup[[key]].plot(title=entity_attributes[key]['friendly_name'], drawstyle='steps-post',legend=False, figsize=(10, 8))
+        # create a mini-dataframe for each of the groups
+        #df = groupbyName.get_group(key)
+
+        # resample the mini-dataframe on the index for each Day, get the mean and plot it
+        #if period <= 2:
+        #    bx = df['state'].resample('H').count().plot(label='Mean hourly value', legend=False)
+        #else:
+        #    bx = df['state'].resample('D').count().plot(label='Mean daily value', legend=False)
         ax.set_ylabel('State')
         ax.set_xlabel('Date')
-        ax.legend()
         ax.get_figure().savefig(os.path.join(GRAPHOUTPATH, key.lower().replace(' ','_')+'.' + str(period) + 'd.png'), bbox_inches='tight')
         plt.close("all")
 
