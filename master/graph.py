@@ -73,10 +73,10 @@ for period in periods:
 
 
     #columns = ['state_id', 'domain', 'entity_id', 'state', 'attributes', 'event_id', 'last_changed', 'last_updated', 'created']
-    columns = ['entity_id', 'state', 'last_changed']
+    columns = ['entity_id', 'domain', 'state', 'last_changed']
 
     # query to pull all rows form the states table where last_changed field is on or after the date_filter value
-    stmt = text("SELECT " + ", ".join(columns) + " FROM states where last_changed>=:date_filter")
+    stmt = text("SELECT " + ", ".join(columns) + " FROM states WHERE last_changed>=:date_filter AND state != 'unknown'")
 
     # bind parameters to the stmt value, specifying the date_filter to be a certain number of days before today
     stmt = stmt.bindparams(date_filter=datetime.now()-timedelta(days=period))
@@ -100,7 +100,28 @@ for period in periods:
     # change the last_changed datatype to datetime
     allqueryDF['last_changed'] = pd.to_datetime(allqueryDF['last_changed'])
 
-    print("charting data...")
+    print("plotting binary data...")
+    binary = allqueryDF['domain'] == 'binary_sensor'
+    wanted = allqueryDF['entity_id'].isin(group_entities)
+    cdf = allqueryDF[binary & wanted].copy()
+    # convert the 'state' column to a bool
+    cdf['state'] = cdf['state'].map(lambda x: 1.0 if x.lower() in ('true','yes','on','open','home') else 0.0)
+
+    groupbyName = cdf.groupby(['entity_id'])
+    for key, group in groupbyName:
+        print(key,file=sys.stderr)
+        tempgroup = group.copy()
+        tempgroup.rename(columns={'state': key}, inplace=True)
+        ax = tempgroup[[key]].plot(title=entity_attributes[key]['friendly_name'], drawstyle='steps-post',legend=False, figsize=(10, 8))
+        ax.set_ylabel('State')
+        ax.set_xlabel('Date')
+        ax.legend()
+        ax.get_figure().savefig(os.path.join(GRAPHOUTPATH, key.lower().replace(' ','_')+'.' + str(period) + 'd.png'), bbox_inches='tight')
+        plt.close("all")
+
+    del cdf
+
+    print("plotting numeric data...")
     # let's chart data for each of the unique units of measurement
     for unit in unit_entities.keys():
         # filter down our original dataset to only contain the unique unit of \
@@ -136,7 +157,7 @@ for period in periods:
 
             # plot the values, specify the figure size and title
             try:
-                ax = tempgroup[[key]].plot(title=key, legend=False, figsize=(10, 8))
+                ax = tempgroup[[key]].plot(title=entity_attributes[key]['friendly_name'], legend=False, figsize=(10, 8))
             except TypeError as e:
                 print("Unable to plot " + key + ": " + str(e),file=sys.stderr)
                 continue
