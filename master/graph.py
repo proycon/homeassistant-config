@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 
-from sqlalchemy import create_engine, text
+import sys
 import json
 import os.path
 from datetime import datetime, timedelta
-import pandas as pd
+from sqlalchemy import create_engine, text
+import matplotlib
+matplotlib.use('Agg') #no X
 import matplotlib.pyplot as plt
+import pandas as pd
 import yaml
+
 
 GRAPHOUTPATH = "../graphs"
 
@@ -25,12 +29,10 @@ for group, values in groups.items():
 # setting up a visual style for PyPlot, much better than the standard
 plt.style.use('fivethirtyeight')
 
-# Your database url as specified in configuration.yaml
-# If using default settings, it's \
-# sqlite:///<path to config dir>/home-assistant_v2.db
 DB_URL = secrets['db_url']
 engine = create_engine(DB_URL)
 
+print("Counting and plotting changes per entity...")
 # executing our SQL query against the database and storing the output
 entityquery = engine.execute("SELECT entity_id, COUNT(*) FROM states GROUP BY entity_id ORDER by 2 DESC")
 
@@ -40,17 +42,15 @@ entitycallsDF = pd.DataFrame(entityquery.fetchall())
 # naming the dataframe columns
 entitycallsDF.columns = ['entity', 'Number of Changes']
 
-# setting the entity name as an index of a new dataframe and sorting it \
-# by the Number of Changes
+# setting the entity name as an index of a new dataframe and sorting it by the Number of Changes
 ordered_indexed_df = entitycallsDF.set_index(['entity']).sort_values(by='Number of Changes')
 
 # displaying the data as a horizontal bar plot with a title and no legend
 changesplot = ordered_indexed_df.plot(kind='barh', title='Number of Changes to Home Assistant per entity', figsize=(15, 80), legend=False)
-
 # specifying labels for the X and Y axes
 changesplot.set_xlabel('Number of Changes')
 changesplot.set_ylabel('Entity name')
-changesplot.savefig(os.path.join(GRAPHOUTPATH,"changes.png"))
+changesplot.get_figure().savefig(os.path.join(GRAPHOUTPATH,"changes.png"))
 
 
 # query to pull all rows form the states table where last_changed field is on \
@@ -114,6 +114,7 @@ for i in allqueryDF['unit_of_measurement'].unique():
 
     # build a separate chart for each of the friendly_name values
     for key, group in groupbyName:
+        print("Processing " + key,file=sys.stderr)
 
         # since we will be plotting the 'State' column, let's rename it to \
         # match the groupby key (distinct friendly_name value)
@@ -126,13 +127,11 @@ for i in allqueryDF['unit_of_measurement'].unique():
         # create a mini-dataframe for each of the groups
         df = groupbyName.get_group(key)
 
-        # resample the mini-dataframe on the index for each Day, get the mean \
-        # and plot it
-        bx = df['state'].resample('D').mean().plot(label='Mean daily value',
-                                                   legend=False)
+        # resample the mini-dataframe on the index for each Day, get the mean and plot it
+        bx = df['state'].resample('D').mean().plot(label='Mean daily value', legend=False)
 
         # set the axis labels and display the legend
         ax.set_ylabel(i)
         ax.set_xlabel('Date')
         ax.legend()
-        ax.savefig(os.path.join(GRAPHOUTPATH, key+'.png'), bbox_inches='tight')
+        ax.get_figure().savefig(os.path.join(GRAPHOUTPATH, key+'.png'), bbox_inches='tight')

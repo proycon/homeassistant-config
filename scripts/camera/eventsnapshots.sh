@@ -23,6 +23,7 @@ for CAM in ${CAMS[@]}; do
     NUM=$((NUM+1))
     #convert -loop 0 -delay 500 $(find . -name "$DATE*$CAM*jpg" | sort | tail -n 6) $EVENTDATE.$CAM.gif
     IMAGES=$(find . -maxdepth 1 -name "$DATE*$CAM*jpg" | sort | tail -n 6)
+    echo "$EVENTDATE - $CAM - Event $NUM - Images: $IMAGES">&2
     IMAGEARRAY=($IMAGES)
     FIRSTIMAGE=${IMAGEARRAY[0]}
     convert $IMAGES -append -undercolor black -fill yellow -pointsize 16 -gravity north -annotate +0+0 "$FIRSTIMAGE - $EVENTDATE" event.$NUM.jpg &
