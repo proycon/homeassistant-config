@@ -116,15 +116,16 @@ for period in periods:
         tempgroup.rename(columns={'state': key}, inplace=True)
         ax = tempgroup[[key]].plot(title=entity_attributes[key]['friendly_name'], drawstyle='steps-post',legend=False, figsize=(10, 8))
         # create a mini-dataframe for each of the groups
-        #df = groupbyName.get_group(key)
+        df = groupbyName.get_group(key)
 
         # resample the mini-dataframe on the index for each Day, get the mean and plot it
-        #if period <= 2:
-        #    bx = df['state'].resample('H').count().plot(label='Mean hourly value', legend=False)
-        #else:
-        #    bx = df['state'].resample('D').count().plot(label='Mean daily value', legend=False)
+        if period <= 2:
+            bx = df['state'].resample('H').sum().plot(label='Hourly sum', drawstyle='steps-post',legend=False)
+        else:
+            bx = df['state'].resample('D').sum().plot(label='Daily sum', drawstyle='steps-post',legend=False)
         ax.set_ylabel('State')
         ax.set_xlabel('Date')
+        ax.legend()
         ax.get_figure().savefig(os.path.join(GRAPHOUTPATH, key.lower().replace(' ','_')+'.' + str(period) + 'd.png'), bbox_inches='tight')
         plt.close("all")
 
