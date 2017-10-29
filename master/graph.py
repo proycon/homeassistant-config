@@ -66,7 +66,7 @@ for row in infoquery.fetchall():
         unit_entities[attributes['unit_of_measurement']].add(row['entity_id'])
 
 
-periods = (2, 10,30,90,180)
+periods = (2, 10,30,60,90,180)
 
 for period in periods:
     print("Processing period: ", period,file=sys.stderr)
@@ -120,7 +120,7 @@ for period in periods:
         cdf.index = cdf['last_changed']
 
         # convert the 'state' column to a float
-        cdf['state'] = cdf['state'].astype(float)
+        cdf['state'] = cdf['state'].astype(float, errors='ignore')
 
         # create a groupby object for each of the friendly_name values
         groupbyName = cdf.groupby(['entity_id'])
@@ -135,7 +135,11 @@ for period in periods:
             tempgroup.rename(columns={'state': key}, inplace=True)
 
             # plot the values, specify the figure size and title
-            ax = tempgroup[[key]].plot(title=key, legend=False, figsize=(10, 8))
+            try:
+                ax = tempgroup[[key]].plot(title=key, legend=False, figsize=(10, 8))
+            except TypeError as e:
+                print("Unable to plot " + key + ": " + str(e),file=sys.stderr)
+                continue
 
             # create a mini-dataframe for each of the groups
             df = groupbyName.get_group(key)
