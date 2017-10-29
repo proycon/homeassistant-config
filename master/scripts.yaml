@@ -492,6 +492,21 @@ tvdecoder_tv5monde:
         data:
             topic: "home/ir_send/pi1"
             payload: '{"device":"VIP1853","key":"KEY_2"}'
+tvdecoder_antena3:
+    alias: TV Channel - Antena 3
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi1"
+            payload: '{"device":"VIP1853","key":"KEY_9"}'
+      - delay:
+            milliseconds: 400
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi1"
+            payload: '{"device":"VIP1853","key":"KEY_5"}'
+      - delay:
+            milliseconds: 400
 tvdecoder_rai1:
     alias: TV Channel - Rai 1
     sequence:

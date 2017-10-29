@@ -132,6 +132,7 @@ config_view:
     icon: mdi:settings
     view: yes
     entities:
+        - group.power_consumption
         - group.config_snapshots
         - group.config_lights
         - group.config_sound
@@ -142,6 +143,15 @@ config_view:
         - group.config_links
         - group.devices
         - group.timer
+
+power_consumption:
+    name: Power Consumption
+    entities:
+      - sensor.power_consumption_low
+      - sensor.power_consumption_normal
+      - sensor.power_production_low
+      - sensor.power_production_normal
+      - sensor.gas_consumption
 
 config_links:
     name: Links
@@ -386,6 +396,7 @@ media_tv_channels:
         - script.tvdecoder_wdr
         - script.tvdecoder_arte
         - script.tvdecoder_tv5monde
+        - script.tvdecoder_antena3
         - script.tvdecoder_rai1
         - script.tvdecoder_0
         - script.tvdecoder_1
