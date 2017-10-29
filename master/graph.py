@@ -27,7 +27,7 @@ for group, values in groups.items():
             group_entities.add(entity)
 
 # setting up a visual style for PyPlot, much better than the standard
-plt.style.use('fivethirtyeight')
+plt.style.use('ggplot')
 
 DB_URL = secrets['db_url']
 engine = create_engine(DB_URL)
@@ -51,87 +51,108 @@ changesplot = ordered_indexed_df.plot(kind='barh', title='Number of Changes to H
 changesplot.set_xlabel('Number of Changes')
 changesplot.set_ylabel('Entity name')
 changesplot.get_figure().savefig(os.path.join(GRAPHOUTPATH,"changes.png"))
+plt.close("all")
 
 
-# query to pull all rows form the states table where last_changed field is on \
-# or after the date_filter value
-stmt = text("SELECT state_id, domain, entity_id, state, attributes, event_id, last_changed, last_updated, created FROM states where last_changed>=:date_filter")
+def get_units(jsonstring):
+    if jsonstring.find('friendly_name') != -1:
+        d = json.loads(jsonstring)
+        if 'unit_of_measurement' in d:
+            return {'unit_of_measurement':d['unit_of_measurement'], 'friendly_name': d['friendly_name']}
+        else:
+            return {'friendly_name': d['friendly_name']}
+    else:
+        return {}
 
-# bind parameters to the stmt value, specifying the date_filter to be 10 days \
-# before today
-stmt = stmt.bindparams(date_filter=datetime.now()-timedelta(days=10))
 
-# execute the SQL statement
-allquery = engine.execute(stmt)
 
-# get rows from query into a pandas dataframe
-print("fetching data..")
-allqueryDF = pd.DataFrame(allquery.fetchall())
+periods = (2, 10,30)
 
-# name the dataframe rows for usability
-allqueryDF.columns = ['state_id', 'domain', 'entity_id', 'state', 'attributes', 'event_id', 'last_changed', 'last_updated',
-                      'created']
+for period in periods:
+    print("Processing period: ", period,file=sys.stderr)
 
-# split the json from the 'attributes' column and 'concat' to existing \
-# dataframe as separate columns
-print("splitting json..")
-allqueryDF = pd.concat([allqueryDF, allqueryDF['attributes'].apply(json.loads).apply(pd.Series)], axis=1)
 
-# change the last_changed datatype to datetime
-allqueryDF['last_changed'] = pd.to_datetime(allqueryDF['last_changed'])
+    columns = ['state_id', 'domain', 'entity_id', 'state', 'attributes', 'event_id', 'last_changed', 'last_updated', 'created']
 
-# let's see what units of measurement there are in our database and now in \
-# our dataframe
-print(allqueryDF['unit_of_measurement'].unique())
+    # query to pull all rows form the states table where last_changed field is on or after the date_filter value
+    stmt = text("SELECT " + ", ".join(columns) + " FROM states where last_changed>=:date_filter")
 
-# let's chart data for each of the unique units of measurement
-for i in allqueryDF['unit_of_measurement'].unique():
-    # filter down our original dataset to only contain the unique unit of \
-    # measurement, and removing the unknown values
+    # bind parameters to the stmt value, specifying the date_filter to be a certain number of days before today
+    stmt = stmt.bindparams(date_filter=datetime.now()-timedelta(days=period))
 
-    # Create variable with TRUE if unit of measurement is the one being \
-    # processed now
-    iunit = allqueryDF['unit_of_measurement'] == i
+    # execute the SQL statement
+    allquery = engine.execute(stmt)
 
-    # Create variable with TRUE if age is state is not unknown
-    notunknown = allqueryDF['state'] != 'unknown'
-    print(str(allqueryDF['entity_id']))
-    wanted = allqueryDF['entity_id'].isin(group_entities)
+    # get rows from query into a pandas dataframe
+    print("fetching data..")
+    allqueryDF = pd.DataFrame(allquery.fetchall())
 
-    # Select all rows satisfying the requirement: unit_of_measurement \
-    # matching the current unit and not having an 'unknown' status
-    cdf = allqueryDF[iunit & notunknown & wanted].copy()
+    # name the dataframe rows for usability
+    allqueryDF.columns = columns
 
-    # convert the last_changed 'object' to 'datetime' and use it as the index \
-    # of our new concatenated dataframe
-    cdf.index = cdf['last_changed']
+    # split the json from the 'attributes' column and 'concat' to existing dataframe as separate columns
+    print("splitting json..")
+    allqueryDF = pd.concat([allqueryDF, allqueryDF['attributes'].apply(get_units).apply(pd.Series)], axis=1)
+    del allqueryDF['attributes']
 
-    # convert the 'state' column to a float
-    cdf['state'] = cdf['state'].astype(float)
+    print("changing last_changed datetype...")
+    # change the last_changed datatype to datetime
+    allqueryDF['last_changed'] = pd.to_datetime(allqueryDF['last_changed'])
 
-    # create a groupby object for each of the friendly_name values
-    groupbyName = cdf.groupby(['friendly_name'])
+    print("charting data...")
+    # let's chart data for each of the unique units of measurement
+    for i in allqueryDF['unit_of_measurement'].unique():
+        # filter down our original dataset to only contain the unique unit of \
+        # measurement, and removing the unknown values
+        print(i,file=sys.stderr)
 
-    # build a separate chart for each of the friendly_name values
-    for key, group in groupbyName:
-        print("Processing " + key,file=sys.stderr)
+        # Create variable with TRUE if unit of measurement is the one being processed now
+        iunit = allqueryDF['unit_of_measurement'] == i
 
-        # since we will be plotting the 'State' column, let's rename it to \
-        # match the groupby key (distinct friendly_name value)
-        tempgroup = group.copy()
-        tempgroup.rename(columns={'state': key}, inplace=True)
+        # Create variable with TRUE if age is state is not unknown
+        notunknown = allqueryDF['state'] != 'unknown'
+        wanted = allqueryDF['entity_id'].isin(group_entities)
 
-        # plot the values, specify the figure size and title
-        ax = tempgroup[[key]].plot(title=key, legend=False, figsize=(10, 8))
+        # Select all rows satisfying the requirement: unit_of_measurement \
+        # matching the current unit and not having an 'unknown' status
+        cdf = allqueryDF[iunit & notunknown & wanted].copy()
 
-        # create a mini-dataframe for each of the groups
-        df = groupbyName.get_group(key)
+        # convert the last_changed 'object' to 'datetime' and use it as the index \
+        # of our new concatenated dataframe
+        cdf.index = cdf['last_changed']
 
-        # resample the mini-dataframe on the index for each Day, get the mean and plot it
-        bx = df['state'].resample('D').mean().plot(label='Mean daily value', legend=False)
+        # convert the 'state' column to a float
+        cdf['state'] = cdf['state'].astype(float)
 
-        # set the axis labels and display the legend
-        ax.set_ylabel(i)
-        ax.set_xlabel('Date')
-        ax.legend()
-        ax.get_figure().savefig(os.path.join(GRAPHOUTPATH, key+'.png'), bbox_inches='tight')
+        # create a groupby object for each of the friendly_name values
+        groupbyName = cdf.groupby(['friendly_name'])
+
+        # build a separate chart for each of the friendly_name values
+        for key, group in groupbyName:
+            print("Processing " + key + " (" + str(period)+")",file=sys.stderr)
+
+            # since we will be plotting the 'State' column, let's rename it to \
+            # match the groupby key (distinct friendly_name value)
+            tempgroup = group.copy()
+            tempgroup.rename(columns={'state': key}, inplace=True)
+
+            # plot the values, specify the figure size and title
+            ax = tempgroup[[key]].plot(title=key, legend=False, figsize=(10, 8))
+
+            # create a mini-dataframe for each of the groups
+            df = groupbyName.get_group(key)
+
+            # resample the mini-dataframe on the index for each Day, get the mean and plot it
+            if period <= 2:
+                bx = df['state'].resample('H').mean().plot(label='Mean hourly value', legend=False)
+            else:
+                bx = df['state'].resample('D').mean().plot(label='Mean daily value', legend=False)
+
+            # set the axis labels and display the legend
+            ax.set_ylabel(i)
+            ax.set_xlabel('Date')
+            ax.legend()
+            ax.get_figure().savefig(os.path.join(GRAPHOUTPATH, key.lower().replace(' ','_')+'.' + str(period) + 'd.png'), bbox_inches='tight')
+            plt.close("all")
+
+    del allqueryDF
