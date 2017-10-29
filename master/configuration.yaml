@@ -134,7 +134,7 @@ logbook:
 sun:
 
 zwave:
-    usb_path: /dev/ttyACM0
+    usb_path: /dev/ttyACM1
     debug: true
 
 
