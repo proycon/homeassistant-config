@@ -5,6 +5,7 @@ import json
 import os.path
 from datetime import datetime, timedelta
 from sqlalchemy import create_engine, text
+from collections import defaultdict
 import matplotlib
 matplotlib.use('Agg') #no X
 import matplotlib.pyplot as plt
@@ -53,26 +54,26 @@ changesplot.set_ylabel('Entity name')
 changesplot.get_figure().savefig(os.path.join(GRAPHOUTPATH,"changes.png"))
 plt.close("all")
 
+print("Obtaining entity information...")
 
-def get_units(jsonstring):
-    if jsonstring.find('friendly_name') != -1:
-        d = json.loads(jsonstring)
-        if 'unit_of_measurement' in d:
-            return {'unit_of_measurement':d['unit_of_measurement'], 'friendly_name': d['friendly_name']}
-        else:
-            return {'friendly_name': d['friendly_name']}
-    else:
-        return {}
+entity_attributes = {}
+unit_entities = defaultdict(set)
+infoquery = engine.execute("SELECT entity_id, attributes, max(last_changed) FROM `states` GROUP BY entity_id")
+for row in infoquery.fetchall():
+    attributes = json.loads(row['attributes'])
+    entity_attributes[row['entity_id']] = attributes
+    if 'unit_of_measurement' in attributes:
+        unit_entities[attributes['unit_of_measurement']].add(row['entity_id'])
 
 
-
-periods = (2, 10,30)
+periods = (2, 10,30,90,180)
 
 for period in periods:
     print("Processing period: ", period,file=sys.stderr)
 
 
-    columns = ['state_id', 'domain', 'entity_id', 'state', 'attributes', 'event_id', 'last_changed', 'last_updated', 'created']
+    #columns = ['state_id', 'domain', 'entity_id', 'state', 'attributes', 'event_id', 'last_changed', 'last_updated', 'created']
+    columns = ['entity_id', 'state', 'last_changed']
 
     # query to pull all rows form the states table where last_changed field is on or after the date_filter value
     stmt = text("SELECT " + ", ".join(columns) + " FROM states where last_changed>=:date_filter")
@@ -91,9 +92,9 @@ for period in periods:
     allqueryDF.columns = columns
 
     # split the json from the 'attributes' column and 'concat' to existing dataframe as separate columns
-    print("splitting json..")
-    allqueryDF = pd.concat([allqueryDF, allqueryDF['attributes'].apply(get_units).apply(pd.Series)], axis=1)
-    del allqueryDF['attributes']
+    #print("splitting json..")
+    #allqueryDF = pd.concat([allqueryDF, allqueryDF['attributes'].apply(get_units).apply(pd.Series)], axis=1)
+    #del allqueryDF['attributes']
 
     print("changing last_changed datetype...")
     # change the last_changed datatype to datetime
@@ -101,21 +102,18 @@ for period in periods:
 
     print("charting data...")
     # let's chart data for each of the unique units of measurement
-    for i in allqueryDF['unit_of_measurement'].unique():
+    for unit in unit_entities.keys():
         # filter down our original dataset to only contain the unique unit of \
         # measurement, and removing the unknown values
-        print(i,file=sys.stderr)
-
-        # Create variable with TRUE if unit of measurement is the one being processed now
-        iunit = allqueryDF['unit_of_measurement'] == i
+        print(unit,file=sys.stderr)
 
         # Create variable with TRUE if age is state is not unknown
         notunknown = allqueryDF['state'] != 'unknown'
-        wanted = allqueryDF['entity_id'].isin(group_entities)
+        wanted = allqueryDF['entity_id'].isin(group_entities & unit_entities[unit])
 
         # Select all rows satisfying the requirement: unit_of_measurement \
         # matching the current unit and not having an 'unknown' status
-        cdf = allqueryDF[iunit & notunknown & wanted].copy()
+        cdf = allqueryDF[notunknown & wanted].copy()
 
         # convert the last_changed 'object' to 'datetime' and use it as the index \
         # of our new concatenated dataframe
@@ -125,7 +123,7 @@ for period in periods:
         cdf['state'] = cdf['state'].astype(float)
 
         # create a groupby object for each of the friendly_name values
-        groupbyName = cdf.groupby(['friendly_name'])
+        groupbyName = cdf.groupby(['entity_id'])
 
         # build a separate chart for each of the friendly_name values
         for key, group in groupbyName:
@@ -149,7 +147,7 @@ for period in periods:
                 bx = df['state'].resample('D').mean().plot(label='Mean daily value', legend=False)
 
             # set the axis labels and display the legend
-            ax.set_ylabel(i)
+            ax.set_ylabel(unit)
             ax.set_xlabel('Date')
             ax.legend()
             ax.get_figure().savefig(os.path.join(GRAPHOUTPATH, key.lower().replace(' ','_')+'.' + str(period) + 'd.png'), bbox_inches='tight')
