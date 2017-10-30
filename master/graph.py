@@ -20,7 +20,7 @@ def axis_formatter(ax, period, tz):
         ax.xaxis.set_minor_locator(matplotlib.dates.MinuteLocator(byminute=(15,30,45),tz=tz))
         ax.xaxis.set_major_locator(matplotlib.dates.HourLocator(tz=tz))
     elif period <= 30:
-        ax.xaxis.set_major_formatter(matplotlib.dates.DateFormatter('%d %b (%a)'),tz=tz)
+        ax.xaxis.set_major_formatter(matplotlib.dates.DateFormatter('%d %b (%a)',tz=tz))
         ax.xaxis.set_minor_locator(matplotlib.dates.HourLocator(byhour=(6,12,18),tz=tz))
         ax.xaxis.set_major_locator(matplotlib.dates.DayLocator(tz=tz))
     else:
