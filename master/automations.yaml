@@ -228,7 +228,7 @@
             message: "The doorbell rang; there is somebody at the door, please check"
       - service: persistent_notification.create
         data_template:
-            message: "There is sometbody at the door ({{ now() }})"
+            message: "There is somebody at the door ({{ now() }})"
             title: "The doorbell rang"
       - service: script.turn_on
         entity_id: script.yellow_lights
@@ -398,10 +398,10 @@
     - service: notify.xmpp_hans
       data:
           message: "System disarmed"
-    - service: script.turn_on
-      entity_id: script.green_lights
     - service: switch.turn_on
       entity_id: switch.porch
+    - service: script.turn_on
+      entity_id: script.green_lights
     - delay:
         seconds: 1
     - service: switch.turn_on
@@ -481,6 +481,9 @@
       entity_id: binary_sensor.front_door
       from: 'off'
       to: 'on'
+  condition:
+      condition: template
+      value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
   action:
     - service: script.turn_off
       entity_id: script.reset_ipcam
