@@ -3,6 +3,7 @@
 import sys
 import json
 import os.path
+from pytz import timezone
 from datetime import datetime, timedelta
 from sqlalchemy import create_engine, text
 from collections import defaultdict
@@ -13,7 +14,22 @@ import pandas as pd
 import yaml
 
 
+def axis_formatter(ax, period, tz):
+    if period <= 2:
+        ax.xaxis.set_major_formatter(matplotlib.dates.DateFormatter('%a %d %b %Hh',tz=tz))
+        ax.xaxis.set_minor_locator(matplotlib.dates.MinuteLocator(byminute=(15,30,45),tz=tz))
+        ax.xaxis.set_major_locator(matplotlib.dates.HourLocator(tz=tz))
+    elif period <= 30:
+        ax.xaxis.set_major_formatter(matplotlib.dates.DateFormatter('%d %b (%a)'),tz=tz)
+        ax.xaxis.set_minor_locator(matplotlib.dates.HourLocator(byhour=(6,12,18),tz=tz))
+        ax.xaxis.set_major_locator(matplotlib.dates.DayLocator(tz=tz))
+    else:
+        ax.xaxis.set_major_formatter(matplotlib.dates.DateFormatter('%d %b (%a)',tz=tz))
+        ax.xaxis.set_minor_locator(matplotlib.dates.DayLocator(tz=tz))
+        ax.xaxis.set_major_locator(matplotlib.dates.WeekdayLocator(byweekday=matplotlib.dates.MO,tz=tz))
+
 GRAPHOUTPATH = "../graphs"
+binary_domains = ('binary_sensor','switch','script')
 
 with open("secrets.yaml",'rb') as f:
     secrets = yaml.load(f)
@@ -37,7 +53,7 @@ print("Counting and plotting changes per entity...")
 # executing our SQL query against the database and storing the output
 entityquery = engine.execute("SELECT entity_id, COUNT(*) FROM states GROUP BY entity_id ORDER by 2 DESC")
 
-# fetching th equery reults and reading it into a DataFrame
+# fetching the query reults and reading it into a DataFrame
 entitycallsDF = pd.DataFrame(entityquery.fetchall())
 
 # naming the dataframe columns
@@ -66,7 +82,7 @@ for row in infoquery.fetchall():
         unit_entities[attributes['unit_of_measurement']].add(row['entity_id'])
 
 
-periods = (2, 10,30,60,90,180)
+periods = (2, 10,30,60,90,180) #in days until now
 
 for period in periods:
     print("Processing period: ", period,file=sys.stderr)
@@ -97,12 +113,16 @@ for period in periods:
     #del allqueryDF['attributes']
 
     print("changing last_changed datetype...")
-    # change the last_changed datatype to datetime
-    allqueryDF['last_changed'] = pd.to_datetime(allqueryDF['last_changed'])
-    # use it as the index of our dataframe
+    #change the last_changed datatype to datetime
+    allqueryDF['last_changed'] = pd.to_datetime(allqueryDF['last_changed'], utc=True)
+    #correct timezone
+    #use it as index
+    allqueryDF.index = allqueryDF['last_changed']
+    tz = timezone('Europe/Amsterdam')
+    allqueryDF.index = allqueryDF.index.tz_localize('UTC').tz_convert('Europe/Amsterdam')
 
     print("plotting binary data...")
-    binary = allqueryDF['domain'] == 'binary_sensor'
+    binary = allqueryDF['domain'].isin(binary_domains)
     wanted = allqueryDF['entity_id'].isin(group_entities)
     cdf = allqueryDF[binary & wanted].copy()
     # convert the 'state' column to a bool
@@ -118,9 +138,11 @@ for period in periods:
         # create a mini-dataframe for each of the groups
         df = groupbyName.get_group(key)
         norm = max(df['state'].resample('H').sum())
+        #if period <= 2:
+        #    print(tempgroup[[key]])
         tempgroup[[key]] *= norm / 2
 
-        ax = tempgroup[[key]].plot(title=entity_attributes[key]['friendly_name'], drawstyle='steps-post',legend=False, figsize=(10, 8))
+        ax = tempgroup[[key]].plot(title=entity_attributes[key]['friendly_name'] + " (" + str(period) + " days)", drawstyle='steps-post',legend=False, figsize=(12, 8))
         ax.fill_between(df.index, df['state'] * (norm/2), 0, step='post', alpha=0.3,lw=0)
 
         # resample the mini-dataframe on the index for each Day, get the mean and plot it
@@ -130,6 +152,7 @@ for period in periods:
             bx = df['state'].resample('D').sum().plot(label='Daily sum', drawstyle='steps-post',legend=False)
         ax.set_ylabel('Count')
         ax.set_xlabel('Date')
+        axis_formatter(ax, period, tz)
         ax.legend()
         ax.get_figure().savefig(os.path.join(GRAPHOUTPATH, key.lower().replace(' ','_')+'.' + str(period) + 'd.png'), bbox_inches='tight')
         plt.close("all")
@@ -172,7 +195,7 @@ for period in periods:
 
             # plot the values, specify the figure size and title
             try:
-                ax = tempgroup[[key]].plot(title=entity_attributes[key]['friendly_name'], legend=False, figsize=(10, 8))
+                ax = tempgroup[[key]].plot(title=entity_attributes[key]['friendly_name'] + " (" + str(period) + " days)", legend=False, figsize=(12, 8))
             except TypeError as e:
                 print("Unable to plot " + key + ": " + str(e),file=sys.stderr)
                 continue
@@ -189,6 +212,7 @@ for period in periods:
             # set the axis labels and display the legend
             ax.set_ylabel(unit)
             ax.set_xlabel('Date')
+            axis_formatter(ax, period, tz)
             ax.legend()
             ax.get_figure().savefig(os.path.join(GRAPHOUTPATH, key.lower().replace(' ','_')+'.' + str(period) + 'd.png'), bbox_inches='tight')
             plt.close("all")
