@@ -785,11 +785,11 @@
        data:
            entity_id: input_select.fireplace
            option: Fire
-     - service: input_number.select_value
+     - service: input_number.set_value
        data:
            entity_id: input_number.fireplace_brightness
            value: 255
-     - service: input_number.select_value
+     - service: input_number.set_value
        data:
            entity_id: input_number.dresser_ambilight_brightness
            value: 40
@@ -1100,7 +1100,7 @@
           entity_id: switch.midspots
           state: "off"
   action:
-     - service: input_number.select_value
+     - service: input_number.set_value
        data:
            entity_id: input_number.dresser_ambilight_brightness
            value: 255
