@@ -135,7 +135,7 @@ sun:
 
 zwave:
     usb_path: /dev/ttyACM1
-    debug: true
+    #debug: true
 
 
 shell_command:
