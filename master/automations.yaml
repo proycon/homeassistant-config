@@ -216,6 +216,17 @@
         data:
           entity_id: input_select.ipcam_direction
           option: Front
+      - service: script.turn_on
+        entity_id: script.yellow_lights
+      - service: script.turn_on
+        entity_id: script.tvdecoder_playpause #pause TV
+      - service: script.turn_on
+        data:
+          entity_id: script.reset_ipcam #has built-in delay
+      - service: persistent_notification.create
+        data_template:
+            message: "There is somebody at the door ({{ now() }})"
+            title: "The doorbell rang"
       - service: notify.xmpp_proycon
         data_template:
           message: "The doorbell rang, there is somebody at the door ({{ now() }})"
@@ -226,17 +237,6 @@
         data_template:
             title: "[homeautomation] Doorbell rang ({{ now() }})"
             message: "The doorbell rang; there is somebody at the door, please check"
-      - service: persistent_notification.create
-        data_template:
-            message: "There is somebody at the door ({{ now() }})"
-            title: "The doorbell rang"
-      - service: script.turn_on
-        entity_id: script.yellow_lights
-      - service: script.turn_on
-        entity_id: script.tvdecoder_playpause #pause TV
-      - service: script.turn_on
-        data:
-          entity_id: script.reset_ipcam #has built-in delay
       - delay:
           seconds: 6
       - service: shell_command.event_snapshots
@@ -864,6 +864,9 @@
         - condition: numeric_state
           entity_id: sensor.fibaro_multisensor_luminance
           below: 40
+        - condition: state
+          entity_id: switch.kitchen
+          state: "off"
   action:
       - service: switch.turn_on
         entity_id: switch.kitchen
@@ -897,6 +900,9 @@
         - condition: numeric_state
           entity_id: sensor.fibaro_office_luminance
           below: 10
+        - condition: state
+          entity_id: switch.office
+          state: "off"
   action:
       - service: switch.turn_on
         entity_id: switch.office
@@ -955,6 +961,9 @@
         - condition: numeric_state
           entity_id: sensor.fibaro_hall_luminance
           below: 7
+        - condition: state
+          entity_id: switch.hall
+          state: "off"
   action:
       - service: switch.turn_on
         entity_id: switch.hall
