@@ -777,9 +777,14 @@
      event: sunset
      offset: '1:00:00'
   condition:
-     - condition: state
-       entity_id: binary_sensor.anybodyhome
-       state: "on"
+     - condition: and
+       conditions:
+         - condition: state
+           entity_id: binary_sensor.anybodyhome
+           state: "on"
+         - condition: time
+           after: '18:00'
+           before: '23:00'
   action:
      - service: input_select.select_option
        data:
