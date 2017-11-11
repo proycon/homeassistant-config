@@ -453,7 +453,7 @@ switch office:
     platform: mqtt
     name: Office
     state_topic: "home/433send/get/elro/15/A"
-    command_topic: "home/433send/set/pi1/elro/15/A"
+    command_topic: "home/433send/set/pi2/elro/15/A"
 switch front_room:
     platform: mqtt
     name: Front Room
@@ -463,17 +463,17 @@ switch midspots:
     platform: mqtt
     name: Midspots
     state_topic: "home/433send/get/elro/31/B"
-    command_topic: "home/433send/set/pi1/elro/31/B"
+    command_topic: "home/433send/set/pi2/elro/31/B"
 switch back_room:
     platform: mqtt
     name: Back room
     state_topic: "home/433send/get/elro/31/A"
-    command_topic: "home/433send/set/pi1/elro/31/A"
+    command_topic: "home/433send/set/pi2/elro/31/A"
 switch back_corner:
     platform: mqtt
     name: Back Corner
     state_topic: "home/433send/get/elro/31/C"
-    command_topic: "home/433send/set/pi1/elro/31/C"
+    command_topic: "home/433send/set/pi2/elro/31/C"
 switch kitchen:
     platform: mqtt
     name: Kitchen
@@ -483,19 +483,19 @@ switch bedroom:
     platform: mqtt
     name: Bedroom
     state_topic: "home/433send/get/elro/15/C"
-    command_topic: "home/433send/set/pi1/elro/15/C"
+    command_topic: "home/433send/set/pi2/elro/15/C"
 switch garden:
     platform: mqtt
     name: Garden
     state_topic: "home/433send/get/elro/23/A"
-    command_topic: "home/433send/set/pi1/elro/23/A"
+    command_topic: "home/433send/set/pi2/elro/23/A"
 switch balcony:
     platform: mqtt
     name: Balcony
     state_topic: "home/433send/get/newkaku/121/9"
-    command_topic: "home/433send/set/pi1/newkaku/121/9"
+    command_topic: "home/433send/set/pi2/newkaku/121/9"
     #state_topic: "home/elro/get/23/2"
-    #command_topic: "home/elro/set/pi1/23/2"
+    #command_topic: "home/elro/set/pi2/23/2"
 switch hall:
     platform: mqtt
     name: Hall
@@ -505,9 +505,9 @@ switch roof:
     platform: mqtt
     name: Roof
     state_topic: "home/433send/get/newkaku/121/8"
-    command_topic: "home/433send/set/pi1/newkaku/121/8"
+    command_topic: "home/433send/set/pi2/newkaku/121/8"
     #state_topic: "home/elro/get/23/4"
-    #command_topic: "home/elro/set/pi1/23/4"
+    #command_topic: "home/elro/set/pi2/23/4"
 switch porch:
     platform: mqtt
     name: Porch
@@ -517,9 +517,9 @@ switch bathroom_vent:
     platform: mqtt
     name: Bathroom Vent
     state_topic: "home/433send/get/newkaku/121/7"
-    command_topic: "home/433send/set/pi1/newkaku/121/7"
+    command_topic: "home/433send/set/pi2/newkaku/121/7"
     #state_topic: "home/elro/get/23/4"
-    #command_topic: "home/elro/set/pi1/23/4"
+    #command_topic: "home/elro/set/pi2/23/4"
 switch tv_decoder:
     platform: mqtt
     name: TV Decoder
