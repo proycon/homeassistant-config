@@ -114,6 +114,7 @@ inside_environment:
         - sensor.bathroom_sensor_relative_humidity
         - binary_sensor.bathroom_too_humid
         - sensor.humidity_living_room
+        - sensor.bedroom_temperature
         - sensor.fibaro_multisensor_temperature
         - sensor.fibaro_multisensor_luminance
         - sensor.fibaro_office_temperature

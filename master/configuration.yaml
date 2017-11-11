@@ -325,6 +325,10 @@ sensor:
       unit_of_measurement: "%"
       state_topic: "home/sensor/humidity_living_room"
     - platform: mqtt
+      name: Bedroom Temperature
+      unit_of_measurement: °C
+      state_topic: "home/sensor/bedroom_temperature"
+    - platform: mqtt
       name: IR Send Activity
       state_topic: "home/ir_send/pi1"
       expire_after: 3
