@@ -802,6 +802,74 @@ update_kodi_library:
           entity_id: media_player.kodi
           method: VideoLibrary.Scan
 
+watch_tv_bedroom:
+    alias: Watch TV (Bedroom)
+    sequence:
+        - service: switch.turn_on
+          entity_id: switch.tv_bedroom
+          #TODO: select source
+
+listen_to_music_bedoom:
+    alias: Listen to Music (Bedroom)
+    sequence:
+        - service: switch.turn_on
+          entity_id: switch.tv_bedroom
+        - service: switch.turn_off
+          entity_id: switch.pi2_xorg
+        - service: switch.turn_off
+          entity_id: switch.pi2_kodi
+        - delay:
+            seconds: 1
+        - service: switch.turn_on
+          entity_id: switch.pi2_music_player
+          #TODO: select source
+        - service: media_player.play_media
+          data:
+              entity_id: media_player.mpd
+
+media_centre_bedroom:
+    alias: Media Centre Bedroom
+    sequence:
+        - service: switch.turn_on
+          entity_id: switch.tv_bedroom
+        - service: switch.turn_off
+          entity_id: switch.pi2_xorg
+        - delay:
+            seconds: 1
+          #TODO: select source
+        - condition: state
+          entity_id: switch.pi2_kodi
+          state: 'off'
+        - service: switch.turn_on
+          entity_id: switch.pi2_kodi
+
+desktop_bedroom:
+    alias: Desktop Bedroom
+    sequence:
+        - service: switch.turn_on
+          entity_id: switch.tv_bedroom
+        - service: switch.turn_off
+          entity_id: switch.pi2_kodi
+        - delay:
+            seconds: 1
+        - condition: state
+          entity_id: switch.pi2_xorg
+          state: 'off'
+        - service: switch.turn_on
+          entity_id: switch.pi2_xorg
+
+turn_media_off_bedroom:
+    alias: Turn media off
+    sequence:
+    - service: switch.turn_off
+      entity_id: switch.tv_bedroom
+    - service: switch.turn_off
+      entity_id: switch.pi2_xorg
+    - service: switch.turn_off
+      entity_id: switch.pi2_kodi
+    - service: switch.turn_off
+      entity_id: switch.pi2_music_player
+
 red_alert_lights:
      alias: Red Alert Lights
      sequence:
@@ -922,8 +990,8 @@ wake_up_alarm:
           entity_id: switch.bedroom
         - delay:
             seconds: 30
-        - service: script.turn_on
-          entity_id: script.turn_tv_upstairs_on
+        - service: switch.turn_on
+          entity_id: switch.tv_bedroom
         - service: mqtt.publish
           data:
               topic: "home/wakeup/pi2"
@@ -932,13 +1000,16 @@ wake_up_alarm:
             minutes: 45
         - service: switch.turn_off
           entity_id: switch.bedroom
+        - service: switch.turn_off
+          entity_id: switch.tv_bedroom
         - service: mqtt.publish
           data:
               topic: "home/xorg/set/pi2"
               payload: "off"
 
 
-turn_tv_upstairs_on:
+
+turn_tv_upstairs_on: #obsolete now (CEC doesn't do off, using IR instead)
     alias: Turn TV upstairs on
     sequence:
       - service: mqtt.publish
@@ -1055,3 +1126,151 @@ night_scene:
       - service: script.turn_on
         entity_id: script.ignite_dresser_ambilight
 
+tv_bedroom_volup:
+    alias: Volume up (Bedroom)
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_VOLUMEUP"}'
+tv_bedroom_voldown:
+    alias: Volume down (Bedroom)
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_VOLUMEDOWN"}'
+tv_bedroom_mute:
+    alias: Mute (Bedroom)
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_MUTE"}'
+
+tv_bedroom_ok:
+    alias: OK
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_OK"}'
+tv_bedroom_back:
+    alias: Back
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_BACK"}'
+tv_bedroom_down:
+    alias: Down
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_DOWN"}'
+tv_bedroom_up:
+    alias: Up
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_UP"}'
+tv_bedroom_left:
+    alias: left
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_LEFT"}'
+tv_bedroom_right:
+    alias: right
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_RIGHT"}'
+tv_bedroom_channelup:
+    alias: Channel up
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_CHANNELUP"}'
+tv_bedroom_channeldown:
+    alias: Channel down
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_CHANNELDOWN"}'
+tv_bedroom_1:
+    alias: 1
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_1"}'
+tv_bedroom_2:
+    alias: 2
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_2"}'
+tv_bedroom_3:
+    alias: 3
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_3"}'
+tv_bedroom_4:
+    alias: 4
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_1"}'
+tv_bedroom_5:
+    alias: 5
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_5"}'
+tv_bedroom_6:
+    alias: 6
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_6"}'
+tv_bedroom_7:
+    alias: 7
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_7"}'
+tv_bedroom_8:
+    alias: 8
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_8"}'
+tv_bedroom_9:
+    alias: 9
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_9"}'
+tv_bedroom_0:
+    alias: 0
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/ir_send/pi2"
+            payload: '{"device":"tvboven","key":"KEY_0"}'
