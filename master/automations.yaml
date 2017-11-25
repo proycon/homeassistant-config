@@ -153,7 +153,7 @@
   condition:
     - condition: and
       conditions:
-          - platform: numeric_state
+          - condition: numeric_state
             entity_id: sensor.fibaro_office_luminance
             above: 20
           - condition: template
