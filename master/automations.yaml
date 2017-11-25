@@ -110,16 +110,31 @@
     - platform: numeric_state
       entity_id: sensor.fibaro_multisensor_luminance
       below: 29
+    - platform: numeric_state
+      entity_id: sensor.fibaro_hall_luminance
+      below: 8
   condition:
     - condition: and
       conditions:
+          - condition: numeric_state
+            entity_id: sensor.fibaro_multisensor_luminance
+            below: 29
+          - condition: numeric_state
+            entity_id: sensor.fibaro_hall_luminance
+            below: 8
           - condition: template
-            value_template: '{{ sensor.wake_up_relative_time > 0 }}'
+            value_template: '{{ states.sensor.wake_up_relative_time.state > 0 }}'
+          - condition: state
+            entity_id: switch.kitchen
+            state: "off"
+          - condition: state
+            entity_id: switch.hall
+            state: "off"
           - condition: state
             entity_id: sun.sun
             state: "above_horizon"
           - condition: template
-            value_template: '{% if states.automation.lights_on_in_the_evening.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on_in_the_evening.attributes.last_triggered)) > 36000 }} {% else %} true {% endif %}'
+            value_template: '{% if states.script.lights_on.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.script.lights_on.attributes.last_triggered)) > 36000 }} {% else %} true {% endif %}'
           - condition: state
             entity_id: switch.front_room
             state: "off"
@@ -138,6 +153,9 @@
   condition:
     - condition: and
       conditions:
+          - platform: numeric_state
+            entity_id: sensor.fibaro_office_luminance
+            above: 20
           - condition: template
             value_template: '{{ sensor.wake_up_relative_time > 0 }}'
           - condition: state
