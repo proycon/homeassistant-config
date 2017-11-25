@@ -7,10 +7,6 @@
   action:
       - service: script.turn_on
         entity_id: script.hall_speaker_normal_volume
-      - service: tts.picotts_say
-        entity_id: media_player.hall_speaker
-        data:
-            message: Home automation started
       - service: shell_command.snapshot_clear_locks #clear all snapshot locks on startup
       - service: script.turn_on  #trigger RPi slaves to send their known statusses again
         data:
@@ -82,16 +78,17 @@
         to: "on"
   condition:
       - condition: time
-        after: '23:00:00'
+        after: '22:00'
         before: '05:00:00'
       - condition: state
         entity_id: binary_sensor.anybodyhome
         state: "on"
+      - condition: state
+        entity_id: switch.tv_spots
+        state: "off"
   action:
-      - service: tts.picotts_say
-        entity_id: media_player.hall_speaker
-        data:
-            message: Door open
+      - service: switch.turn_on
+        entity_id: switch.bedroom
 - id: lights_on_in_the_evening
   alias: Lights on in the evening
   trigger:
@@ -372,10 +369,6 @@
   action:
     - service: alarm_control_panel.alarm_arm_away
       entity_id: alarm_control_panel.alarm_system
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: System armed
     - service: notify.xmpp_proycon
       data:
           message: "System armed"
@@ -454,11 +447,25 @@
       to: 'on'
       for:
           seconds: 30
+  condition:
+    - condition: time
+      after: '06:00'
+      before: '22:00'
   action:
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
       data:
           message: Front door still open
+    - service: notify.xmpp_proycon
+      data:
+          message: "Front door still open ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "Front door still open ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] Front door still open"
+          message: "Front door still open"
 - id: back_door_still_open
   alias: "Back door still open"
   trigger:
@@ -467,13 +474,25 @@
       to: 'on'
       for:
           seconds: 30
+  condition:
+    - condition: time
+      after: '06:00'
+      before: '22:00'
   action:
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
       data:
           message: Back door still open
-
-
+    - service: notify.xmpp_proycon
+      data:
+          message: "Back door still open ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "Back door still open ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] Back door still open"
+          message: "Back door still open"
 - id: front_door_opened
   alias: "Front door opened"
   trigger:
@@ -591,10 +610,6 @@
       entity_id: input_boolean.inside_house
     - delay:
         seconds: 3
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data_template:
-        message: Welcome home
 - id: home_greeting_proycon
   alias: "Home Greeting proycon"
   trigger: #when doors close on reentry
@@ -623,10 +638,6 @@
       entity_id: input_boolean.proycon_inside_house
     - delay:
         seconds: 3
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-        message: Hello Martin
 - id: home_greeting_hans
   alias: "Home Greeting Hans"
   trigger: #when doors close on reentry
@@ -655,10 +666,6 @@
       entity_id: input_boolean.hans_inside_house
     - delay:
         seconds: 3
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-        message: Hello Hans
 - id: proycon_left_house
   alias: Proycon Left House
   trigger:
@@ -698,10 +705,6 @@
     - condition: time
       after: '9:30'
       before: '23:00'
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Coming home
 - id: both_left_house
   alias: Both Left House
   trigger:
@@ -998,17 +1001,8 @@
   action:
     - service: script.turn_on
       entity_id: script.wake_up_alarm
-    - service: media_player.play_media
-      data:
-          entity_id: media_player.hall_speaker
-          media_content_id: /home/homeautomation/homeassistant/media/morningbell.ogg
-          media_content_type: 'music'
     - delay:
         seconds: 120
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Good morning
 
 - alias: Streetcam Reset
   trigger:
@@ -1021,15 +1015,6 @@
         seconds: 10
     - service: shell_command.streetcam_reset_2
 
-- alias: Z-Wave network is ready
-  trigger:
-    platform: event
-    event_type: zwave.network_ready
-  action:
-      - service: tts.picotts_say
-        entity_id: media_player.hall_speaker
-        data:
-            message: Zed Wave network ready
 
 - alias: Bathroom Vent On
   trigger:
@@ -1406,14 +1391,20 @@
       for:
           minutes: 5
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Pi 1 is down
     - service: persistent_notification.create
       data_template:
           message: "Pi 1 is down ({{ now() }})"
           title: "Pi 1 is down"
+    - service: notify.xmpp_proycon
+      data:
+          message: "Pi 1 is down ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "Pi 1 is down ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] Pi 1 is down"
+          message: "Pi 1 is down"
 
 - alias: Pi 2 down
   trigger:
@@ -1424,14 +1415,20 @@
       for:
           minutes: 5
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Pi 2 is down
     - service: persistent_notification.create
       data_template:
           message: "Pi 2 is down ({{ now() }})"
           title: "Pi 2 is down"
+    - service: notify.xmpp_proycon
+      data:
+          message: "Pi 2 is down ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "Pi 2 is down ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] Pi 2 is down"
+          message: "Pi 2 is down"
 
 - alias: Pi 3 down
   trigger:
@@ -1442,14 +1439,20 @@
       for:
           minutes: 5
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Pi 3 is down
     - service: persistent_notification.create
       data_template:
           message: "Pi 3 is down ({{ now() }})"
           title: "Pi 3 is down"
+    - service: notify.xmpp_proycon
+      data:
+          message: "Pi 3 is down ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "Pi 3 is down ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] Pi 3 is down"
+          message: "Pi 3 is down"
 
 - alias: kpn_router_down
   trigger:
@@ -1460,14 +1463,20 @@
       for:
           minutes: 5
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: "KPN router is down"
     - service: persistent_notification.create
       data_template:
           message: "KPN router is down ({{ now() }})"
           title: "KPN router is down"
+    - service: notify.xmpp_proycon
+      data:
+          message: "KPN router is down ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "KPN router is down ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] KPN router is down"
+          message: "KPN router is down"
 
 - alias: wifi_router_down
   trigger:
@@ -1478,16 +1487,20 @@
       for:
           minutes: 5
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: "wifi router is down"
     - service: persistent_notification.create
       data_template:
           message: "wifi router is down ({{ now() }})"
           title: "wifi router is down"
-
-
+    - service: notify.xmpp_proycon
+      data:
+          message: "wifi router is down ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "wifi router is down ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] wifi router is down"
+          message: "wifi router is down"
 
 
 - alias: command_switch_on

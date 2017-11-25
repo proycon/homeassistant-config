@@ -34,6 +34,21 @@ media_view:
         - weblink.mpd_control_interface
         - weblink.mpd_music_stream
 
+media_view_bedroom:
+    name: Media Bedroom
+    icon: mdi:television
+    view: yes
+    entities:
+        - sensor.time
+        - group.media_activities_bedroom
+        - group.media_devices_bedroom
+        - group.media_volume_bedroom
+        - group.media_tv_channels_bedroom
+        - group.media_tv_navigation_bedroom
+        - weblink.kodi_control_interface
+        - weblink.mpd_control_interface
+        - weblink.mpd_music_stream
+
 light_view:
     view: yes
     name: Lights
@@ -336,6 +351,18 @@ media_activities:
         - script.desktop
         - script.turn_media_off
 
+media_activities_bedroom:
+    name: Media Activities Bedroom
+    icon: mdi:television
+    control: hidden
+    entities:
+        - script.watch_tv_bedroom
+        - script.media_centre_bedroom
+        - script.listen_to_music_bedroom
+        - script.play_youtube_playlist_bedroom
+        - script.desktop_bedroom
+        - script.turn_media_off_bedroom
+
 media_devices:
     name: Devices
     icon: mdi:television
@@ -353,6 +380,19 @@ media_devices:
         - script.turn_tv_upstairs_on
         - script.update_kodi_library
 
+media_devices_bedroom:
+    name: Devices Bedroom
+    icon: mdi:television
+    control: hidden
+    entities:
+        - switch.tv_bedroom
+        - media_player.kodi_bedroom
+        - media_player.mpd
+        - switch.pi2_kodi
+        - switch.pi2_xorg
+        - switch.pi2_music_player
+        - script.update_kodi_library2
+
 media_volume:
     name: Volume (AVR)
     icon: mdi:volume-high
@@ -361,6 +401,15 @@ media_volume:
         - script.avr_volup
         - script.avr_mute
         - script.avr_voldown
+
+media_volume_bedroom:
+    name: Volume (AVR)
+    icon: mdi:volume-high
+    control: hidden
+    entities:
+        - script.tv_bedroom_volup
+        - script.tv_bedroom_mute
+        - script.tv_bedroom_voldown
 
 media_tv_navigation:
     name: TV Navigation
@@ -374,6 +423,19 @@ media_tv_navigation:
         - script.tvdecoder_down
         - script.tvdecoder_ok
         - script.tvdecoder_back
+
+media_tv_navigation_bedroom:
+    name: TV Navigation Bedroom
+    icon: mdi:cursor-move
+    control: hidden
+    entities:
+        - script.tv_bedroom_left
+        - script.tv_bedroom_right
+        - script.tv_bedroom_up
+        - script.tv_bedroom_down
+        - script.tv_bedroom_ok
+        - script.tv_bedroom_back
+
 
 media_tv_channels:
     name: TV Channels
@@ -410,6 +472,23 @@ media_tv_channels:
         - script.tvdecoder_8
         - script.tvdecoder_9
 
+media_tv_channels_bedroom:
+    name: TV Channels Bedroom
+    icon: mdi:television-guide
+    control: hidden
+    entities:
+        - script.tv_bedroom_channelup
+        - script.tv_bedroom_channeldown
+        - script.tv_bedroom_0
+        - script.tv_bedroom_1
+        - script.tv_bedroom_2
+        - script.tv_bedroom_3
+        - script.tv_bedroom_4
+        - script.tv_bedroom_5
+        - script.tv_bedroom_6
+        - script.tv_bedroom_7
+        - script.tv_bedroom_8
+        - script.tv_bedroom_9
 
 devices:
     name: Devices

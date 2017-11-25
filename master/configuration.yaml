@@ -550,6 +550,11 @@ switch pi2_kodi:
     name: Pi2 Kodi
     command_topic: "home/kodi/set/pi2"
     state_topic: "home/kodi/get/pi2"
+switch pi2_music_player:
+    platform: mqtt
+    name: Pi2 Music Player
+    command_topic: "home/musicplayer/set/pi2"
+    state_topic: "home/musicplayer/get/pi2"
 switch pi2_xorg:
     platform: mqtt
     name: Pi2 Xorg
@@ -562,6 +567,13 @@ switch tv:
     state_topic: "home/hdmi_cec_send/pi1"
     payload_on: "on 0"
     payload_off: "standby 0"
+switch tv_bedroom:
+    platform: mqtt
+    name: TV Bedroom
+    command_topic: "home/ir_send/pi2"
+    state_topic: "home/ir_send/pi2"
+    payload_on: '{"device":"tvboven","key":"KEY_POWER"}'
+    payload_off: '{"device":"tvboven","key":"KEY_POWER"}'
 
 fan:
   - platform: mqtt
@@ -620,6 +632,12 @@ media_player kodi:
       #      data:
       #          entity_id: script.turn_media_off
 
+media_player kodi_bedroom:
+    - platform: kodi
+      name: Kodi Bedroom
+      host: !secret pi2_ip
+      username: !secret kodi_username
+      password: !secret kodi_password
 
 notify:
   - name: xmpp_proycon
