@@ -136,10 +136,7 @@
           - condition: template
             value_template: '{% if states.script.lights_on.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.script.lights_on.attributes.last_triggered)) > 36000 }} {% else %} true {% endif %}'
           - condition: state
-            entity_id: switch.front_room
-            state: "off"
-          - condition: state
-            entity_id: switch.midspots
+            entity_id: switch.tv_spots
             state: "off"
   action:
       service: script.turn_on
