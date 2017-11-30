@@ -99,7 +99,7 @@
       condition: and
       conditions:
         - condition: template
-          value_template: '{% if states.automation.lights_on.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on.attributes.last_triggered)) > 3600 }} {% else %} true {% endif %}'
+          value_template: '{% if states.script.lights_on.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.script.lights_on.attributes.last_triggered)) > 3600 }} {% else %} true {% endif %}'
         - condition: time
           after: '16:00'
           before: '23:00'
