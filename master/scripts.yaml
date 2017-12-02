@@ -977,10 +977,10 @@ reset_fireplace:
            seconds: 1
      - service: script.turn_on
        data_template:
-           entity_id: "script.{% if is_state('sun.sun','below_horizon') %}ignite{% else %}extinguish{% endif %}_fireplace"
+           entity_id: "script.{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int > 20) %}ignite{% else %}extinguish{% endif %}_fireplace"
      - service: script.turn_on
        data_template:
-           entity_id: "script.{% if is_state('sun.sun','below_horizon') %}ignite{% else %}extinguish{% endif %}_dresser_ambilight"
+           entity_id: "script.{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int > 20) %}ignite{% else %}extinguish{% endif %}_dresser_ambilight"
 
 
 
