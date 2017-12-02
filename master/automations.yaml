@@ -1001,7 +1001,7 @@
       from: "on"
       to: "off"
       for:
-          minutes: 2
+          seconds: 90
   condition:
       - condition: state
         entity_id: binary_sensor.front_door
