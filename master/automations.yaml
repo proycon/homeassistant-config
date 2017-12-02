@@ -953,7 +953,7 @@
       from: "on"
       to: "off"
       for:
-          minutes: 3
+          minutes: 2
   condition:
        condition: and
        conditions:
