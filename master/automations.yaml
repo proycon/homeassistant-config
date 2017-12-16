@@ -99,13 +99,13 @@
       condition: and
       conditions:
         - condition: template
-          value_template: '{% if states.script.lights_on.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.script.lights_on.attributes.last_triggered)) > 3600 }} {% else %} true {% endif %}'
+          value_template: '{% if states.script.lights_on.attributes.last_triggered  %}{{(as_timestamp(now())-as_timestamp(states.script.lights_on.attributes.last_triggered)) > 3600 }}{% else %}true{% endif %}'
         - condition: time
-          after: '16:00'
-          before: '23:00'
+          after: '15:00'
+          before: '23:30'
   action:
-      service: script.turn_on
-      entity_id: script.lights_on
+      - service: script.turn_on
+        entity_id: script.lights_on
 - id: lights_on_when_dark_during_the_day
   alias: Lights on when dark during the day
   trigger:
@@ -953,7 +953,7 @@
       from: "on"
       to: "off"
       for:
-          minutes: 3
+          minutes: 2
   condition:
        condition: and
        conditions:
@@ -1001,7 +1001,7 @@
       from: "on"
       to: "off"
       for:
-          minutes: 2
+          seconds: 90
   condition:
       - condition: state
         entity_id: binary_sensor.front_door
