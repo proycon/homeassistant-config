@@ -795,7 +795,7 @@
   trigger:
      platform: sun
      event: sunset
-     offset: '1:00:00'
+     offset: '2:00:00'
   condition:
      - condition: and
        conditions:
@@ -803,7 +803,7 @@
            entity_id: binary_sensor.anybodyhome
            state: "on"
          - condition: time
-           after: '18:00'
+           after: '17:00'
            before: '23:00'
   action:
      - service: input_select.select_option
