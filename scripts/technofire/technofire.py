@@ -173,13 +173,13 @@ if __name__ == '__main__':
     elif scene == "rainbow_cycle":
         while True:
             rainbowCycle(strip)
-    elif scene == "color_cycle_fast":
+    elif scene == "colorcycle_fast":
         while True:
             colorCycle(strip)
-    elif scene == "color_cycle":
+    elif scene == "colorcycle":
         while True:
             colorCycle(strip,500)
-    elif scene == "color_cycle_slow":
+    elif scene == "colorcycle_slow":
         while True:
             colorCycle(strip,2000)
     elif scene == "rainbow_chase":
