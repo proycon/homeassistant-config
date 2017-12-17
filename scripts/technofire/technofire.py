@@ -100,14 +100,14 @@ def rainbowCycle(strip, wait_ms=20, iterations=5):
     """Draw rainbow that uniformly distributes itself across all pixels."""
     for j in range(256*iterations):
         for i in range(strip.numPixels()):
-            strip.setPixelColor(i, wheel(((i * 256 / strip.numPixels()) + j) & 255))
+            strip.setPixelColor(i, wheel(((i * 256 // strip.numPixels()) + j) & 255))
         strip.show()
         time.sleep(wait_ms/1000.0)
 
 def colorCycle(strip, wait_ms=20, iterations=5):
     for j in range(256*iterations):
         for i in range(strip.numPixels()):
-            strip.setPixelColor(i, wheel(((256 / strip.numPixels()) + j) & 255))
+            strip.setPixelColor(i, wheel(((256 // strip.numPixels()) + j) & 255))
         strip.show()
         time.sleep(wait_ms/1000.0)
 
@@ -173,13 +173,13 @@ if __name__ == '__main__':
     elif scene == "rainbow_cycle":
         while True:
             rainbowCycle(strip)
-    elif scene == "color_cycle_fast":
+    elif scene == "colorcycle_fast":
         while True:
             colorCycle(strip)
-    elif scene == "color_cycle":
+    elif scene == "colorcycle":
         while True:
             colorCycle(strip,500)
-    elif scene == "color_cycle_slow":
+    elif scene == "colorcycle_slow":
         while True:
             colorCycle(strip,2000)
     elif scene == "rainbow_chase":

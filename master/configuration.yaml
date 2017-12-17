@@ -16,6 +16,7 @@ homeassistant:
 
 # Enables the frontend
 frontend:
+    javascript_version: latest
 
 # Enables configuration UI
 config:
@@ -135,7 +136,7 @@ sun:
 
 zwave:
     usb_path: /dev/ttyACM0
-    debug: true
+    #debug: true
 
 
 shell_command:
@@ -241,7 +242,7 @@ input_select:
             - Cyan
             - White
 
-input_slider:
+input_number:
     fireplace_brightness:
         name: Fireplace brightness
         min: 0
@@ -312,7 +313,7 @@ sensor:
       sensors:
           wake_up_time:
             friendly_name: 'Wake up Time'
-            value_template: '{{ "%0.02d:%0.02d" | format(states("input_slider.wake_up_hour") | int, states("input_slider.wake_up_minutes") | int) }}'
+            value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.wake_up_hour") | int, states("input_number.wake_up_minutes") | int) }}'
           wake_up_relative_time:
             friendly_name: Wake up relative time #seconds after wake up time
             value_template: "{{ states.sensor.time.state[:2]|int * 60  + states.sensor.time.state[2:4]|int  - states.sensor.wake_up_time.state[:2]|int * 60  + states.sensor.wake_up_time.state[2:4]|int }}"
@@ -324,6 +325,10 @@ sensor:
       name: Humidity Living Room
       unit_of_measurement: "%"
       state_topic: "home/sensor/humidity_living_room"
+    - platform: mqtt
+      name: Bedroom Temperature
+      unit_of_measurement: °C
+      state_topic: "home/sensor/bedroom_temperature"
     - platform: mqtt
       name: IR Send Activity
       state_topic: "home/ir_send/pi1"
@@ -364,6 +369,9 @@ sensor:
       unit_of_measurement: mm
       state_topic: "home/weatherstation/rain"
       expire_after: 3600
+    - platform: dsmr
+      port: /dev/ttyUSB0
+      dsmr_version: 4
 
 
 
@@ -421,6 +429,18 @@ binary_sensor:
         value_template: '{{ is_state("sensor.fibaro_multisensor_burglar", "8") }}'
         entity_id:
             - sensor.fibaro_multisensor_burglar
+        device_class: motion
+      pir_hall:
+        friendly_name: "PIR Hall"
+        value_template: '{{ is_state("sensor.fibaro_hall_burglar", "8") }}'
+        entity_id:
+            - sensor.fibaro_hall_burglar
+        device_class: motion
+      pir_office:
+        friendly_name: "PIR Office"
+        value_template: '{{ is_state("sensor.fibaro_office_burglar", "8") }}'
+        entity_id:
+            - sensor.fibaro_office_burglar
         device_class: motion
       bathroom_too_humid:
         friendly_name: "Bathroom too humid"
@@ -531,6 +551,11 @@ switch pi2_kodi:
     name: Pi2 Kodi
     command_topic: "home/kodi/set/pi2"
     state_topic: "home/kodi/get/pi2"
+switch pi2_music_player:
+    platform: mqtt
+    name: Pi2 Music Player
+    command_topic: "home/musicplayer/set/pi2"
+    state_topic: "home/musicplayer/get/pi2"
 switch pi2_xorg:
     platform: mqtt
     name: Pi2 Xorg
@@ -543,6 +568,13 @@ switch tv:
     state_topic: "home/hdmi_cec_send/pi1"
     payload_on: "on 0"
     payload_off: "standby 0"
+switch tv_bedroom:
+    platform: mqtt
+    name: TV Bedroom
+    command_topic: "home/ir_send/pi2"
+    state_topic: "home/ir_send/pi2"
+    payload_on: '{"device":"tvboven","key":"KEY_POWER"}'
+    payload_off: '{"device":"tvboven","key":"KEY_POWER"}'
 
 fan:
   - platform: mqtt
@@ -601,6 +633,12 @@ media_player kodi:
       #      data:
       #          entity_id: script.turn_media_off
 
+media_player kodi_bedroom:
+    - platform: kodi
+      name: Kodi Bedroom
+      host: !secret pi2_ip
+      username: !secret kodi_username
+      password: !secret kodi_password
 
 notify:
   - name: xmpp_proycon

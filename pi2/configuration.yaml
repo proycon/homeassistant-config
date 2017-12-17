@@ -80,6 +80,10 @@ sensor:
               sensor_type: windgusts
           firstline_00fc_temp:
               sensor_type: temperature
+    - platform: onewire
+      names:
+          28-0000059319c4: Bedroom
+
 
 
 binary_sensor:
@@ -412,6 +416,18 @@ automation:
     action:
         service: switch.turn_off
         entity_id: switch.aster_0fa0_01
+  - id: s2m_bedroom_temperature
+    alias: s2m_bedroom_temperature
+    trigger:
+        - platform: state
+          entity_id: sensor.bedroom_temperature
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/sensor/bedroom_temperature"
+            payload: "{{ states('sensor.bedroom_temperature') }}"
 
 shell_command:
     start_pycec: python -m pycec

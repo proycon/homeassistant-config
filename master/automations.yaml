@@ -7,10 +7,6 @@
   action:
       - service: script.turn_on
         entity_id: script.hall_speaker_normal_volume
-      - service: tts.picotts_say
-        entity_id: media_player.hall_speaker
-        data:
-            message: Home automation started
       - service: shell_command.snapshot_clear_locks #clear all snapshot locks on startup
       - service: script.turn_on  #trigger RPi slaves to send their known statusses again
         data:
@@ -82,52 +78,67 @@
         to: "on"
   condition:
       - condition: time
-        after: '23:00:00'
+        after: '22:00'
         before: '05:00:00'
       - condition: state
         entity_id: binary_sensor.anybodyhome
         state: "on"
+      - condition: state
+        entity_id: switch.tv_spots
+        state: "off"
   action:
-      - service: tts.picotts_say
-        entity_id: media_player.hall_speaker
-        data:
-            message: Door open
+      - service: switch.turn_on
+        entity_id: switch.bedroom
 - id: lights_on_in_the_evening
   alias: Lights on in the evening
   trigger:
     - platform: sun
       event: sunset
       offset: '-00:45:00'
-    - platform: numeric_state
-      entity_id: sensor.fibaro_multisensor_luminance
-      below: 29
   condition:
-      condition: template
-      value_template: '{% if states.automation.lights_on_in_the_evening.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on_in_the_evening.attributes.last_triggered)) > 36000 }} {% else %} true {% endif %}'
+      condition: and
+      conditions:
+        - condition: template
+          value_template: '{% if states.script.lights_on.attributes.last_triggered  %}{{(as_timestamp(now())-as_timestamp(states.script.lights_on.attributes.last_triggered)) > 3600 }}{% else %}true{% endif %}'
+        - condition: time
+          after: '15:00'
+          before: '23:30'
   action:
-      service: script.turn_on
-      entity_id: script.lights_on
+      - service: script.turn_on
+        entity_id: script.lights_on
 - id: lights_on_when_dark_during_the_day
   alias: Lights on when dark during the day
   trigger:
     - platform: numeric_state
       entity_id: sensor.fibaro_multisensor_luminance
       below: 29
+    - platform: numeric_state
+      entity_id: sensor.fibaro_hall_luminance
+      below: 8
   condition:
     - condition: and
       conditions:
+          - condition: numeric_state
+            entity_id: sensor.fibaro_multisensor_luminance
+            below: 29
+          - condition: numeric_state
+            entity_id: sensor.fibaro_hall_luminance
+            below: 8
           - condition: template
-            value_template: '{{ sensor.wake_up_relative_time > 0 }}'
+            value_template: '{{ states.sensor.wake_up_relative_time.state > 0 }}'
+          - condition: state
+            entity_id: switch.kitchen
+            state: "off"
+          - condition: state
+            entity_id: switch.hall
+            state: "off"
           - condition: state
             entity_id: sun.sun
             state: "above_horizon"
           - condition: template
-            value_template: '{% if states.automation.lights_on_in_the_evening.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on_in_the_evening.attributes.last_triggered)) > 36000 }} {% else %} true {% endif %}'
+            value_template: '{% if states.script.lights_on.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.script.lights_on.attributes.last_triggered)) > 36000 }} {% else %} true {% endif %}'
           - condition: state
-            entity_id: switch.front_room
-            state: "off"
-          - condition: state
-            entity_id: switch.midspots
+            entity_id: switch.tv_spots
             state: "off"
   action:
       service: script.turn_on
@@ -141,6 +152,9 @@
   condition:
     - condition: and
       conditions:
+          - condition: numeric_state
+            entity_id: sensor.fibaro_office_luminance
+            above: 20
           - condition: template
             value_template: '{{ sensor.wake_up_relative_time > 0 }}'
           - condition: state
@@ -216,6 +230,17 @@
         data:
           entity_id: input_select.ipcam_direction
           option: Front
+      - service: script.turn_on
+        entity_id: script.yellow_lights
+      - service: script.turn_on
+        entity_id: script.tvdecoder_playpause #pause TV
+      - service: script.turn_on
+        data:
+          entity_id: script.reset_ipcam #has built-in delay
+      - service: persistent_notification.create
+        data_template:
+            message: "There is somebody at the door ({{ now() }})"
+            title: "The doorbell rang"
       - service: notify.xmpp_proycon
         data_template:
           message: "The doorbell rang, there is somebody at the door ({{ now() }})"
@@ -226,17 +251,6 @@
         data_template:
             title: "[homeautomation] Doorbell rang ({{ now() }})"
             message: "The doorbell rang; there is somebody at the door, please check"
-      - service: persistent_notification.create
-        data_template:
-            message: "There is sometbody at the door ({{ now() }})"
-            title: "The doorbell rang"
-      - service: script.turn_on
-        entity_id: script.yellow_lights
-      - service: script.turn_on
-        entity_id: script.tvdecoder_playpause #pause TV
-      - service: script.turn_on
-        data:
-          entity_id: script.reset_ipcam #has built-in delay
       - delay:
           seconds: 6
       - service: shell_command.event_snapshots
@@ -372,10 +386,6 @@
   action:
     - service: alarm_control_panel.alarm_arm_away
       entity_id: alarm_control_panel.alarm_system
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: System armed
     - service: notify.xmpp_proycon
       data:
           message: "System armed"
@@ -398,10 +408,10 @@
     - service: notify.xmpp_hans
       data:
           message: "System disarmed"
-    - service: script.turn_on
-      entity_id: script.green_lights
     - service: switch.turn_on
       entity_id: switch.porch
+    - service: script.turn_on
+      entity_id: script.green_lights
     - delay:
         seconds: 1
     - service: switch.turn_on
@@ -454,11 +464,25 @@
       to: 'on'
       for:
           seconds: 30
+  condition:
+    - condition: time
+      after: '06:00'
+      before: '22:00'
   action:
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
       data:
           message: Front door still open
+    - service: notify.xmpp_proycon
+      data:
+          message: "Front door still open ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "Front door still open ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] Front door still open"
+          message: "Front door still open"
 - id: back_door_still_open
   alias: "Back door still open"
   trigger:
@@ -467,13 +491,25 @@
       to: 'on'
       for:
           seconds: 30
+  condition:
+    - condition: time
+      after: '06:00'
+      before: '22:00'
   action:
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
       data:
           message: Back door still open
-
-
+    - service: notify.xmpp_proycon
+      data:
+          message: "Back door still open ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "Back door still open ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] Back door still open"
+          message: "Back door still open"
 - id: front_door_opened
   alias: "Front door opened"
   trigger:
@@ -481,6 +517,9 @@
       entity_id: binary_sensor.front_door
       from: 'off'
       to: 'on'
+  condition:
+      condition: template
+      value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
   action:
     - service: script.turn_off
       entity_id: script.reset_ipcam
@@ -588,10 +627,6 @@
       entity_id: input_boolean.inside_house
     - delay:
         seconds: 3
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data_template:
-        message: Welcome home
 - id: home_greeting_proycon
   alias: "Home Greeting proycon"
   trigger: #when doors close on reentry
@@ -620,10 +655,6 @@
       entity_id: input_boolean.proycon_inside_house
     - delay:
         seconds: 3
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-        message: Hello Martin
 - id: home_greeting_hans
   alias: "Home Greeting Hans"
   trigger: #when doors close on reentry
@@ -652,10 +683,6 @@
       entity_id: input_boolean.hans_inside_house
     - delay:
         seconds: 3
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-        message: Hello Hans
 - id: proycon_left_house
   alias: Proycon Left House
   trigger:
@@ -695,10 +722,6 @@
     - condition: time
       after: '9:30'
       before: '23:00'
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Coming home
 - id: both_left_house
   alias: Both Left House
   trigger:
@@ -737,21 +760,6 @@
   action:
        - service: switch.turn_on
          entity_id: switch.tv_spots
-- id: office_morning_lights_on_hans
-  alias: Office Morning Lights on Hans
-  trigger:
-      - platform: time
-        at: '05:15:00'
-  condition:
-      condition: time
-      weekday:
-          - mon
-          - tue
-          - thu
-          - fri
-  action:
-       - service: switch.turn_on
-         entity_id: switch.office
 - id: downstairs_morning_lights_off_hans
   alias: Downstairs Morning Lights off Hans
   trigger:
@@ -787,23 +795,28 @@
   trigger:
      platform: sun
      event: sunset
-     offset: '1:00:00'
+     offset: '2:00:00'
   condition:
-     - condition: state
-       entity_id: binary_sensor.anybodyhome
-       state: "on"
+     - condition: and
+       conditions:
+         - condition: state
+           entity_id: binary_sensor.anybodyhome
+           state: "on"
+         - condition: time
+           after: '17:00'
+           before: '23:00'
   action:
      - service: input_select.select_option
        data:
            entity_id: input_select.fireplace
            option: Fire
-     - service: input_slider.select_value
+     - service: input_number.set_value
        data:
-           entity_id: input_slider.fireplace_brightness
+           entity_id: input_number.fireplace_brightness
            value: 255
-     - service: input_slider.select_value
+     - service: input_number.set_value
        data:
-           entity_id: input_slider.dresser_ambilight_brightness
+           entity_id: input_number.dresser_ambilight_brightness
            value: 40
      - service: input_select.select_option
        data:
@@ -876,6 +889,9 @@
         - condition: numeric_state
           entity_id: sensor.fibaro_multisensor_luminance
           below: 40
+        - condition: state
+          entity_id: switch.kitchen
+          state: "off"
   action:
       - service: switch.turn_on
         entity_id: switch.kitchen
@@ -893,6 +909,106 @@
       - service: switch.turn_off
         entity_id: switch.kitchen
 
+- id: office_light_on_motion
+  alias: Office Light On Motion
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_office
+      from: "off"
+      to: "on"
+  condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.anybodyhome
+          state: "on"
+        - condition: numeric_state
+          entity_id: sensor.fibaro_office_luminance
+          below: 10
+        - condition: state
+          entity_id: switch.office
+          state: "off"
+  action:
+      - service: switch.turn_on
+        entity_id: switch.office
+
+- id: office_light_off
+  alias: Office Light Off
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_office
+      from: "on"
+      to: "off"
+      for:
+          minutes: 30
+  action:
+      - service: switch.turn_off
+        entity_id: switch.office
+
+- id: office_light_off_night
+  alias: Office Light Off Night
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_office
+      from: "on"
+      to: "off"
+      for:
+          minutes: 2
+  condition:
+       condition: and
+       conditions:
+          - condition: time
+            after: '22:00'
+            before: '06:00'
+          - condition: state
+            entity_id: binary_sensor.anybodyhome
+            state: "on"
+          - condition: state
+            entity_id: switch.tv_spots
+            state: "off"
+  action:
+      - service: switch.turn_off
+        entity_id: switch.office
+
+- id: hall_light_on_motion
+  alias: hall Light On Motion
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_hall
+      from: "off"
+      to: "on"
+  condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.anybodyhome
+          state: "on"
+        - condition: numeric_state
+          entity_id: sensor.fibaro_hall_luminance
+          below: 7
+        - condition: state
+          entity_id: switch.hall
+          state: "off"
+  action:
+      - service: switch.turn_on
+        entity_id: switch.hall
+
+- id: hall_light_off_after_motion
+  alias: Hall Light Off after motion
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_hall
+      from: "on"
+      to: "off"
+      for:
+          seconds: 90
+  condition:
+      - condition: state
+        entity_id: binary_sensor.front_door
+        state: "off"
+  action:
+      - service: switch.turn_off
+        entity_id: switch.hall
 
 - id: wake_up
   alias: 'Wake up'
@@ -902,17 +1018,8 @@
   action:
     - service: script.turn_on
       entity_id: script.wake_up_alarm
-    - service: media_player.play_media
-      data:
-          entity_id: media_player.hall_speaker
-          media_content_id: /home/homeautomation/homeassistant/media/morningbell.ogg
-          media_content_type: 'music'
     - delay:
         seconds: 120
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Good morning
 
 - alias: Streetcam Reset
   trigger:
@@ -925,15 +1032,6 @@
         seconds: 10
     - service: shell_command.streetcam_reset_2
 
-- alias: Z-Wave network is ready
-  trigger:
-    platform: event
-    event_type: zwave.network_ready
-  action:
-      - service: tts.picotts_say
-        entity_id: media_player.hall_speaker
-        data:
-            message: Zed Wave network ready
 
 - alias: Bathroom Vent On
   trigger:
@@ -1018,9 +1116,9 @@
           entity_id: switch.midspots
           state: "off"
   action:
-     - service: input_slider.select_value
+     - service: input_number.set_value
        data:
-           entity_id: input_slider.dresser_ambilight_brightness
+           entity_id: input_number.dresser_ambilight_brightness
            value: 255
      - service: input_select.select_option
        data:
@@ -1046,6 +1144,60 @@
      - service: script.turn_on
        entity_id: script.extinguish_dresser_ambilight
 
+- alias: SoftRemote Night Scene TV already on
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 10 #Plus button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+        - condition: time
+          after: '20:30'
+          before: '07:00'
+        - condition: state
+          entity_id: binary_sensor.anybodyhome
+          state: "on"
+        - condition: state
+          entity_id: sun.sun
+          state: "below_horizon"
+        - condition: state
+          entity_id: switch.tv
+          state: "on"
+  action:
+      - service: script.turn_on
+        entity_id: script.night_scene
+
+- alias: SoftRemote Night Scene
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 10 #Plus button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+        - condition: time
+          after: '20:30'
+          before: '01:00'
+        - condition: state
+          entity_id: binary_sensor.anybodyhome
+          state: "on"
+        - condition: state
+          entity_id: sun.sun
+          state: "below_horizon"
+        - condition: state
+          entity_id: switch.tv
+          state: "off"
+  action:
+      - service: script.turn_on
+        entity_id: script.night_scene
+      - service: script.turn_on
+        entity_id: script.watch_tv
+
 - alias: SoftRemote Volume up
   trigger:
     platform: event
@@ -1058,8 +1210,11 @@
         entity_id: media_player.yamaha_receiver
         state: "on"
   action:
-      - service: media_player.volume_up
+      - service: media_player.volume_set
         entity_id: media_player.yamaha_receiver
+        data_template:
+           volume_level: '{{ states.media_player.yamaha_receiver.attributes.volume_level + 0.05 }}'
+
 
 - alias: SoftRemote Volume down
   trigger:
@@ -1073,8 +1228,10 @@
         entity_id: media_player.yamaha_receiver
         state: "on"
   action:
-      - service: media_player.volume_down
+      - service: media_player.volume_set
         entity_id: media_player.yamaha_receiver
+        data_template:
+           volume_level: '{{ states.media_player.yamaha_receiver.attributes.volume_level - 0.05 }}'
 
 
 - alias: SoftRemote Mute
@@ -1128,6 +1285,57 @@
       - service: script.turn_on
         entity_id: script.lights_on
 
+- alias: SoftRemote Channel Up Switch
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 43 #Doubleclick on minus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: media_player.yamaha_receiver
+            state: "on"
+  action:
+      service: script.turn_on
+      entity_id: script.tvdecoder_channeldown
+
+- alias: SoftRemote Channel Down Switch
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 23 #Doubleclick on plus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: media_player.yamaha_receiver
+            state: "on"
+  action:
+      service: script.turn_on
+      entity_id: script.tvdecoder_channelup
+
+- alias: SoftRemote Watch TV
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.nodon_soft_remote
+      scene_id: 23 #Doubleclick on plus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+  condition:
+      condition: and
+      conditions:
+          - condition: state
+            entity_id: switch.tv
+            state: "off"
+  action:
+      service: script.turn_on
+      entity_id: script.watch_tv
+
 - alias: SoftRemote Away Switch
   trigger:
     platform: event
@@ -1144,6 +1352,12 @@
           - condition: state
             entity_id: alarm_control_panel.alarm_system
             state: "disarmed"
+          - condition: state
+            entity_id: media_player.yamaha_receiver
+            state: "off"
+          - condition: state
+            entity_id: switch.tv
+            state: "off"
   action:
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
@@ -1174,6 +1388,9 @@
           - condition: state
             entity_id: alarm_control_panel.alarm_system
             state: "pending"
+          - condition: state
+            entity_id: media_player.yamaha_receiver
+            state: "off"
   action:
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
@@ -1191,14 +1408,20 @@
       for:
           minutes: 5
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Pi 1 is down
     - service: persistent_notification.create
       data_template:
           message: "Pi 1 is down ({{ now() }})"
           title: "Pi 1 is down"
+    - service: notify.xmpp_proycon
+      data:
+          message: "Pi 1 is down ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "Pi 1 is down ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] Pi 1 is down"
+          message: "Pi 1 is down"
 
 - alias: Pi 2 down
   trigger:
@@ -1209,14 +1432,20 @@
       for:
           minutes: 5
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Pi 2 is down
     - service: persistent_notification.create
       data_template:
           message: "Pi 2 is down ({{ now() }})"
           title: "Pi 2 is down"
+    - service: notify.xmpp_proycon
+      data:
+          message: "Pi 2 is down ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "Pi 2 is down ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] Pi 2 is down"
+          message: "Pi 2 is down"
 
 - alias: Pi 3 down
   trigger:
@@ -1227,14 +1456,20 @@
       for:
           minutes: 5
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Pi 3 is down
     - service: persistent_notification.create
       data_template:
           message: "Pi 3 is down ({{ now() }})"
           title: "Pi 3 is down"
+    - service: notify.xmpp_proycon
+      data:
+          message: "Pi 3 is down ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "Pi 3 is down ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] Pi 3 is down"
+          message: "Pi 3 is down"
 
 - alias: kpn_router_down
   trigger:
@@ -1245,14 +1480,20 @@
       for:
           minutes: 5
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: "KPN router is down"
     - service: persistent_notification.create
       data_template:
           message: "KPN router is down ({{ now() }})"
           title: "KPN router is down"
+    - service: notify.xmpp_proycon
+      data:
+          message: "KPN router is down ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "KPN router is down ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] KPN router is down"
+          message: "KPN router is down"
 
 - alias: wifi_router_down
   trigger:
@@ -1263,16 +1504,20 @@
       for:
           minutes: 5
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: "wifi router is down"
     - service: persistent_notification.create
       data_template:
           message: "wifi router is down ({{ now() }})"
           title: "wifi router is down"
-
-
+    - service: notify.xmpp_proycon
+      data:
+          message: "wifi router is down ({{ now() }})"
+    - service: notify.xmpp_hans
+      data:
+          message: "wifi router is down ({{ now() }})"
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] wifi router is down"
+          message: "wifi router is down"
 
 
 - alias: command_switch_on

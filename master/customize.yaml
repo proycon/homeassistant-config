@@ -122,6 +122,18 @@ sensor.fibaro_multisensor_general:
     friendly_name: Kitchen Motion
 sensor.fibaro_multisensor_luminance:
     friendly_name: Kitchen Light Level
+sensor.fibaro_hall_temperature:
+    friendly_name: Hall Temperature
+sensor.fibaro_hall_general:
+    friendly_name: Hall Motion
+sensor.fibaro_hall_luminance:
+    friendly_name: Hall Light Level
+sensor.fibaro_office_temperature:
+    friendly_name: Office Temperature
+sensor.fibaro_office_general:
+    friendly_name: Office Motion
+sensor.fibaro_office_luminance:
+    friendly_name: Office Light Level
 binary_sensor.bathroom_window_sensor:
     friendly_name: Bathroom Window Sensor
     device_class: opening
