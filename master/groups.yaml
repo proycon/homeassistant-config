@@ -209,6 +209,9 @@ config_sound:
         - automation.bathroom_vent_off
         - automation.bathroom_vent_off_after_a_while
         - automation.wake_up
+        - script.soundoutput_hdmi
+        - script.soundoutput_speakers
+        - script.speech_test
 
 config_lights:
     name: Lights

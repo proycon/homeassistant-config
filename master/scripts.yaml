@@ -1295,3 +1295,24 @@ tv_bedroom_0:
         data:
             topic: "home/ir_send/pi2"
             payload: '{"device":"tvboven","key":"KEY_0"}'
+speech_test:
+    alias: Speech Test
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/say/pi1"
+              payload: "Test test, this is a test"
+soundoutput_speakers:
+    alias: Soundoutput Speakers
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/soundoutput/pi1"
+              payload: "speakers"
+soundoutput_hdmi:
+    alias: Soundoutput HDMI
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/soundoutput/pi1"
+              payload: "hdmi"
