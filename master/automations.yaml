@@ -23,6 +23,10 @@
       - service: notify.xmpp_proycon
         data:
             message: "Home automation started"
+      - service: mqtt.publish
+        data:
+            topic: "home/say/pi1"
+            payload: "Home automation started"
 
 
 #------------ Snapshots ------------------------
