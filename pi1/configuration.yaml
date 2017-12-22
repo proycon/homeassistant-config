@@ -234,11 +234,6 @@ automation:
 
 
 
-media_player speaker:
-    - platform: vlc
-      name: speaker
-      arguments: '--alsa-audio-device=hw:0,0'
-
 
 ######### SWITCH PROPAGATION SLAVE->MASTER and MASTER->SLAVE (MQTT) #########
   - id: startup
@@ -285,6 +280,12 @@ media_player speaker:
         service: shell_command.hdmi_cec_send
         data_template:
             payload: '{{ trigger.payload }}'
+
+
+media_player speaker:
+    - platform: vlc
+      name: speaker
+      arguments: '--alsa-audio-device=hw:0,0'
 
 shell_command:
     start_pycec: python -m pycec

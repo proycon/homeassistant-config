@@ -473,6 +473,10 @@
       entity_id: media_player.hall_speaker
       data:
           message: Front door still open
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Front door still open"
     - service: notify.xmpp_proycon
       data:
           message: "Front door still open ({{ now() }})"
@@ -510,6 +514,10 @@
       data_template:
           title: "[homeautomation] Back door still open"
           message: "Back door still open"
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Back door still open"
 - id: front_door_opened
   alias: "Front door opened"
   trigger:
@@ -1363,6 +1371,10 @@
       entity_id: media_player.hall_speaker
       data:
           message: "Arming system in two minutes, good bye"
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Arming system in two minutes, good bye"
     - delay:
         minutes: 2
     - service: alarm_control_panel.alarm_arm_away
