@@ -299,6 +299,7 @@ input_boolean:
         name: Flip main camera
         initial: off
 
+
 sensor:
     - platform: buienradar #weather prediction
       name: Weather

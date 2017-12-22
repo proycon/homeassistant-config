@@ -704,7 +704,7 @@ watch_tv:
         - service: mqtt.publish
           data:
               topic: "home/soundoutput/pi1"
-              payload: "hdmi"
+              payload: "speakers"
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - service: switch.turn_on
