@@ -200,8 +200,44 @@ automation:
     action:
         service_template: switch.turn_off
         entity_id: switch.musicplayer
+  - id: m2s_say
+    alias: m2s_say
+    trigger:
+        platform: mqtt
+        topic: "home/say/pi1"
+    action:
+      - service: tts.picotts_say
+        entity_id: media_player.speaker
+        data_template:
+            message: '{{ trigger.payload }}'
+  - id: m2s_soundoutput_speakers
+    alias: m2s_soundoutput_speakers
+    trigger:
+        platform: mqtt
+        topic: "home/soundoutput/pi1"
+        payload: 'speakers'
+    action:
+        service: shell_command.soundoutput
+        data:
+            outputid: '1'
+  - id: m2s_soundoutput_hdmi
+    alias: m2s_soundoutput_hdmi
+    trigger:
+        platform: mqtt
+        topic: "home/soundoutput/pi1"
+        payload: 'hdmi'
+    action:
+        service: shell_command.soundoutput
+        data:
+            outputid: '2'
 
 
+
+
+media_player speaker:
+    - platform: vlc
+      name: speaker
+      arguments: '--alsa-audio-device=hw:0,0'
 
 
 ######### SWITCH PROPAGATION SLAVE->MASTER and MASTER->SLAVE (MQTT) #########
@@ -255,9 +291,13 @@ shell_command:
     ir_send: /home/homeautomation/homeassistant/scripts/media/irsend.sh "{{ device }}" "{{ key }}"
     433send: /home/homeautomation/homeassistant/scripts/switch/433send.sh 8 "{{ protocol }}" "{{ group }}" "{{ unit }}" "{{ state }}"
     hdmi_cec_send: /home/homeautomation/homeassistant/scripts/media/hdmicecsend.sh "{{ payload }}"
+    soundoutput: sudo amixer cset numid=3 "{{ outputid }}"
 
 
 
+tts:
+  platform: picotts
+  language: 'en-GB'
 
 #MQTT
 mqtt:
