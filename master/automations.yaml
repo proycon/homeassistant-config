@@ -477,12 +477,12 @@
   action:
      - service: script.turn_on
        entity_id: script.reset_ipcam
-- id: meditation_finished
+- id: timer_finished
   trigger:
      - platform: event
        event_type: timer.finished
        event_data:
-          entity_id: timer.meditation
+          entity_id: timer.timer
   action:
      - service: media_player.play_media
        data:

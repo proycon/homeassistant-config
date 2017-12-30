@@ -16,8 +16,8 @@ default_view:
         - group.media_activities
         - group.inside_environment
         - group.outside_environment
-        - timer.meditation
         - group.wake_up_alarm
+        - group.timer
 
 
 media_view:
@@ -257,7 +257,7 @@ timer:
     control: hidden
     entities:
         - input_number.timer
-        - script.timer
+        - script.start_timer
 
 config_eventsnapshots:
     name: Event Snapshots

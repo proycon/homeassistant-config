@@ -1302,3 +1302,8 @@ soundoutput_hdmi:
           data:
               topic: "home/soundoutput/pi1"
               payload: "hdmi"
+start_timer:
+    alias: Start Timer
+    sequence:
+        - service: timer.start
+          entity_id: timer.timer
