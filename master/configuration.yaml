@@ -305,8 +305,6 @@ timer:
         duration: '00:02:00'
     reset_ipcam:
         duration: '00:05:00'
-    timer:
-        duration: '00:15:00'
 
 sensor:
     - platform: buienradar #weather prediction

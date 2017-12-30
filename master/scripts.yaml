@@ -1305,5 +1305,9 @@ soundoutput_hdmi:
 start_timer:
     alias: Start Timer
     sequence:
-        - service: timer.start
-          entity_id: timer.timer
+        - delay: '00:{{ states.input_number.timer.state | int }}:00'
+        - service: media_player.play_media
+          data:
+             entity_id: media_player.hall_speaker
+             media_content_id: /home/homeautomation/homeassistant/media/meditationend.ogg
+             media_content_type: 'music'
