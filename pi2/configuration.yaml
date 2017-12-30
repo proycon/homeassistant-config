@@ -472,31 +472,11 @@ automation:
         entity_id: media_player.speaker
         data_template:
             message: '{{ trigger.payload }}'
-  - id: m2s_soundoutput_speakers
-    alias: m2s_soundoutput_speakers
-    trigger:
-        platform: mqtt
-        topic: "home/soundoutput/pi2"
-        payload: 'speakers'
-    action:
-        service: shell_command.soundoutput
-        data:
-            outputid: '1'
-  - id: m2s_soundoutput_hdmi
-    alias: m2s_soundoutput_hdmi
-    trigger:
-        platform: mqtt
-        topic: "home/soundoutput/pi2"
-        payload: 'hdmi'
-    action:
-        service: shell_command.soundoutput
-        data:
-            outputid: '2'
 
 media_player speaker:
     - platform: vlc
       name: speaker
-      arguments: '--alsa-audio-device=hw:0,0'
+      arguments: '--alsa-audio-device=hw:1,0'
 
 shell_command:
     start_pycec: python -m pycec

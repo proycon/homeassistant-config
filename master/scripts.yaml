@@ -788,7 +788,7 @@ watch_tv_bedroom:
           entity_id: switch.tv_bedroom
           #TODO: select source
 
-listen_to_music_bedoom:
+listen_to_music_bedroom:
     alias: Listen to Music (Bedroom)
     sequence:
         - service: switch.turn_on
@@ -801,7 +801,6 @@ listen_to_music_bedoom:
             seconds: 1
         - service: switch.turn_on
           entity_id: switch.pi2_music_player
-          #TODO: select source
         - service: media_player.play_media
           data:
               entity_id: media_player.mpd
