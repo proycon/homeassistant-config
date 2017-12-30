@@ -1606,6 +1606,26 @@
       data_template:
           entity_id: "script.{{ trigger.topic.split('/')[-1] }}"
 
+- alias: office_light_button
+  trigger:
+      - platform: state
+        entity_id: sensor.fibaro_office_burglar
+        to: '3' #seismic or tamper sensor
+  action:
+        service: switch.turn_on
+        entity_id: switch.office
+
+- alias: kitchen_light_button
+  trigger:
+      - platform: state
+        entity_id: sensor.fibaro_multisensor_burglar
+        to: '3' #seismic or tamper sensor
+  action:
+        service: switch.turn_on
+        entity_id: switch.kitchen
+
+
+
 
 
 
