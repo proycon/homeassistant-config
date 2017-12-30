@@ -626,7 +626,7 @@ home_notification_lights:
   sequence:
     - condition: state
       entity_id: timer.home_notification_lights
-      state: 'idle'
+      state: "idle"
     - service: timer.start
       entity_id: timer.home_notification_lights
     - service: script.turn_on

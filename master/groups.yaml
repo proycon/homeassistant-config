@@ -240,7 +240,6 @@ config_tests:
     name: Tests
     control: hidden
     entities:
-        - script.flash_notification
         - script.doorbell_sound
         - script.dog_sound
         - script.chime_sound
@@ -250,6 +249,8 @@ config_tests:
         - script.mail_test
         - script.trigger_alarm_manually
         - script.wake_up_alarm
+        - script.home_notification_lights
+        - script.reset_guard_lights
 
 timer:
     name: Timer
