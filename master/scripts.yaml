@@ -543,15 +543,6 @@ chime_sound:
               entity_id: media_player.hall_speaker
               media_content_id: /home/homeautomation/homeassistant/media/chime.wav
               media_content_type: 'music'
-timer:
-    alias: Timer
-    sequence:
-        - delay: "00:{{ states.input_number.timer.state }}:00"
-        - service: media_player.play_media
-          data:
-              entity_id: media_player.hall_speaker
-              media_content_id: /home/homeautomation/homeassistant/media/meditationend.off
-              media_content_type: 'music'
 
 hall_speaker_normal_volume:
     alias: Hall speaker Normal Volume

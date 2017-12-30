@@ -477,6 +477,18 @@
   action:
      - service: script.turn_on
        entity_id: script.reset_ipcam
+- id: meditation_finished
+  trigger:
+     - platform: event
+       event_type: timer.finished
+       event_data:
+          entity_id: timer.meditation
+  action:
+     - service: media_player.play_media
+       data:
+          entity_id: media_player.hall_speaker
+          media_content_id: /home/homeautomation/homeassistant/media/meditationend.ogg
+          media_content_type: 'music'
 - id: front_door_still_open
   alias: "Front door still open"
   trigger:

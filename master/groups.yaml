@@ -16,6 +16,7 @@ default_view:
         - group.media_activities
         - group.inside_environment
         - group.outside_environment
+        - timer.meditation
         - group.wake_up_alarm
 
 

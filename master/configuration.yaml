@@ -276,14 +276,6 @@ input_number:
         min: 0
         max: 6
         step: 1
-    timer:
-        name: Timer
-        icon: mdi:av-timer
-        initial: 5
-        min: 5
-        max: 60
-        step: 5
-
 
 input_boolean:
     inside_house:
@@ -305,6 +297,8 @@ timer:
         duration: '00:02:00'
     reset_ipcam:
         duration: '00:05:00'
+    meditation:
+        duration: '00:15:00'
 
 sensor:
     - platform: buienradar #weather prediction
