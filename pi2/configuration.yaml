@@ -11,14 +11,14 @@ rflink:
     wait_for_ack: False
     reconnect_interval: 10
 
-logger:
-  default: error
-  logs:
-    rflink: debug
-    homeassistant.components.rflink: debug
+#logger:
+#  default: error
+#  logs:
+#    rflink: debug
+#    homeassistant.components.rflink: debug
 
 
-http:
+#http:
   # Uncomment this to add a password (recommended!)
   #api_password: !secret api_password
   # use_x_forwarded_for: True
@@ -27,7 +27,7 @@ http:
 
 config:
 
-frontend:
+#frontend:
 
 # Checks for available updates
 # Note: This component will send some information about your system to
