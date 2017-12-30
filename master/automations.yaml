@@ -17,9 +17,9 @@
       - service: script.turn_on
         data:
             entity_id: script.reset_fireplace
-      - service: script.turn_on
+      - service: timer.start
         data:
-            entity_id: script.reset_ipcam #with delay
+            entity_id: timer.reset_ipcam
       - service: notify.xmpp_proycon
         data:
             message: "Home automation started"
@@ -228,8 +228,6 @@
         - condition: template
           value_template: '{% if states.automation.doorbell.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.doorbell.attributes.last_triggered)) >= 60 }} {% else %} true {% endif %}'
   action: # sound is handled separately
-      - service: script.turn_off
-        entity_id: script.reset_ipcam #with delay
       - service: input_select.select_option
         data:
           entity_id: input_select.ipcam_direction
@@ -238,9 +236,16 @@
         entity_id: script.yellow_lights
       - service: script.turn_on
         entity_id: script.tvdecoder_playpause #pause TV
-      - service: script.turn_on
+      - service: media_player.media_pause
+        entity_id: media_player.mpd #pause music
+      - service: timer.start
         data:
-          entity_id: script.reset_ipcam #has built-in delay
+          entity_id: timer.reset_ipcam
+      - service: switch.turn_on
+        entity_id: switch.hall
+      - service: timer.start
+        data:
+          entity_id: timer.home_notification_lights
       - service: persistent_notification.create
         data_template:
             message: "There is somebody at the door ({{ now() }})"
@@ -416,22 +421,8 @@
     - service: notify.xmpp_hans
       data:
           message: "System disarmed"
-    - service: switch.turn_on
-      entity_id: switch.porch
     - service: script.turn_on
-      entity_id: script.green_lights
-    - delay:
-        seconds: 1
-    - service: switch.turn_on
-      entity_id: switch.hall
-    - delay:
-        seconds: 2
-    - service: switch.turn_on
-      entity_id: switch.garden
-    - delay:
-        seconds: 2
-    - service: switch.turn_on
-      entity_id: switch.back_room
+      entity_id: script.home_notification_lights
 - id: already_disarmed_notification #when someone comes home and system is already disarmed (due to other person being home), signal for safe entry
   alias: 'Already disarmed notification'
   trigger:
@@ -449,21 +440,43 @@
       state: 'disarmed'
   action:
     - service: script.turn_on
-      entity_id: script.green_lights
-    - service: switch.turn_on
-      entity_id: switch.porch
-    - delay:
-        seconds: 1
-    - service: switch.turn_on
-      entity_id: switch.hall
-    - delay:
-        seconds: 2
-    - service: switch.turn_on
-      entity_id: switch.garden
-    - delay:
-        seconds: 2
-    - service: switch.turn_on
-      entity_id: switch.back_room
+      entity_id: script.home_notification_lights
+- id: home_notification_lights_finished
+  trigger:
+     - platform: event
+       event_type: timer.finished
+       event_data:
+          entity_id: timer.home_notification_lights
+     - platform: event
+       event_type: timer.cancelled
+       event_data:
+          entity_id: timer.home_notification_lights
+  action:
+     - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') %}on{% else %}off{% endif %}"
+       data:
+          entity_id: switch.back_room
+     - service: script.reset_fireplace
+       entity_id: script.reset_fireplace
+     - delay:
+         seconds: 2
+     - service: script.turn_on
+       entity_id: script.reset_guard_lights
+     - delay:
+         seconds: 10
+     - condition: state
+       entity_id: binary_sensor.front_door
+       state: 'off'
+     - service: switch.turn_off
+       entity_id: switch.hall
+- id: reset_ipcam_finished
+  trigger:
+     - platform: event
+       event_type: timer.finished
+       event_data:
+          entity_id: timer.reset_ipcam
+  action:
+     - service: script.turn_on
+       entity_id: script.reset_ipcam
 - id: front_door_still_open
   alias: "Front door still open"
   trigger:
@@ -537,24 +550,16 @@
       condition: template
       value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
   action:
-    - service: script.turn_off
-      entity_id: script.reset_ipcam
     - service: switch.turn_on
       entity_id: switch.hall
     - service: input_select.select_option
       data:
           entity_id: input_select.ipcam_direction
           option: Hall
-    - service: script.turn_off
-      entity_id: script.green_lights
-    - delay:
-        seconds: 2
-    - service: script.turn_on
-      entity_id: script.guard_light_reset
-    - service: script.turn_on
-      entity_id: script.reset_ipcam
-    - service: script.turn_on
-      entity_id: script.reset_fireplace
+    - service: timer.cancel
+      entity_id: timer.home_notification_lights
+    - service: timer.start
+      entity_id: timer.reset_ipcam
     - delay:
         seconds: 3
     - service: shell_command.event_snapshots
@@ -580,8 +585,6 @@
       from: 'off'
       to: 'on'
   action:
-    - service: script.turn_off
-      entity_id: script.reset_ipcam
     - service: input_select.select_option
       data:
           entity_id: input_select.ipcam_direction
@@ -589,9 +592,9 @@
     - delay:
         seconds: 2
     - service: script.turn_on
-      entity_id: script.guard_light_reset
-    - service: script.turn_on
-      entity_id: script.reset_ipcam #has built-in-delay
+      entity_id: script.reset_guard_lights
+    - service: timer.start
+      entity_id: timer.reset_ipcam
     - service: script.turn_on
       entity_id: script.reset_fireplace
     - delay:
@@ -615,14 +618,12 @@
       from: 'off'
       to: 'on'
   action:
-    - service: script.turn_off
-      entity_id: script.reset_ipcam
     - service: input_select.select_option
       data:
           entity_id: input_select.ipcam_direction
           option: Hall
-    - service: script.turn_on
-      entity_id: script.reset_ipcam #has built-in-delay
+    - service: timer.start
+      entity_id: timer.reset_ipcam
 - id: home_greeting
   alias: "Home Greeting"
   trigger: #when doors close on reentry
@@ -875,9 +876,9 @@
         entity_id: script.alarm_iteration
       - service: script.turn_off
         entity_id: script.sirene_lights
-      - service: script.turn_on
+      - service: timer.start
         data:
-            entity_id: script.reset_ipcam #has built-in-delay
+            entity_id: timer.reset_ipcam
       - service: script.turn_on
         data:
             entity_id: script.reset_fireplace

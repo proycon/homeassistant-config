@@ -300,6 +300,12 @@ input_boolean:
         initial: off
 
 
+timer:
+    home_notification_lights:
+        duration: '00:02:00'
+    reset_ipcam:
+        duration: '00:05:00'
+
 sensor:
     - platform: buienradar #weather prediction
       name: Weather
