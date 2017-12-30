@@ -9,8 +9,8 @@ default_view:
         - binary_sensor.doorbell
         - sensor.temperature_living_room
         - sensor.time
-        - group.doors_and_windows
         - group.media_volume
+        - group.doors_and_windows
         - group.all_lights
         - group.cameras
         - group.media_activities
@@ -26,9 +26,9 @@ media_view:
     view: yes
     entities:
         - sensor.time
+        - group.media_volume
         - group.media_activities
         - group.media_devices
-        - group.media_volume
         - group.media_tv_channels
         - group.media_tv_navigation
         - weblink.kodi_control_interface
@@ -41,9 +41,9 @@ media_view_bedroom:
     view: yes
     entities:
         - sensor.time
+        - group.media_volume_bedroom
         - group.media_activities_bedroom
         - group.media_devices_bedroom
-        - group.media_volume_bedroom
         - group.media_tv_channels_bedroom
         - group.media_tv_navigation_bedroom
         - weblink.kodi_control_interface
