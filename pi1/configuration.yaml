@@ -206,7 +206,7 @@ automation:
         platform: mqtt
         topic: "home/say/pi1"
     condition:
-        platform: state
+        condition: state
         entity_id: switch.musicplayer
         state: "off"
     action:
