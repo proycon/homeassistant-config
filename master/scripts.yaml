@@ -677,8 +677,6 @@ watch_tv:
 listen_to_music:
     alias: Listen to Music
     sequence:
-        - service: switch.turn_on
-          entity_id: switch.tv
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - service: mqtt.publish
