@@ -579,7 +579,6 @@ switch tv_bedroom:
     platform: mqtt
     name: TV Bedroom
     command_topic: "home/ir_send/pi2"
-    state_topic: "home/ir_send/pi2"
     payload_on: '{"device":"tvboven","key":"KEY_POWER"}'
     payload_off: '{"device":"tvboven","key":"KEY_POWER"}'
 
