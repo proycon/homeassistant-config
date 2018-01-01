@@ -633,7 +633,7 @@ home_notification_lights:
       entity_id: script.green_lights
     - service: switch.turn_on
       entity_id: switch.porch
-    - wait_template: "{{ states('switch.porch')== 'on' }}"
+    - wait_template: "{{ states('switch.porch') == 'on' }}"
     - service: switch.turn_on
       entity_id: switch.hall
     - wait_template: "{{ states('switch.hall') == 'on' }}"
@@ -892,7 +892,7 @@ green_lights:
                entity_id: input_select.dresser_ambilight
                option: Green
          - delay:
-               seconds: 1
+               seconds: 0.1
          - service: script.turn_on
            entity_id: script.ignite_fireplace
          - service: script.turn_on
@@ -917,15 +917,11 @@ yellow_lights:
                entity_id: input_select.dresser_ambilight
                option: Yellow
          - delay:
-               seconds: 1
+               seconds: 0.1
          - service: script.turn_on
            entity_id: script.ignite_fireplace
          - service: script.turn_on
            entity_id: script.ignite_dresser_ambilight
-         - delay:
-                minutes: 3
-         - service: script.turn_on
-           entity_id: script.reset_fireplace
 
 
 sirene_lights:
