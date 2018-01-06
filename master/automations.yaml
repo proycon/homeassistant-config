@@ -466,8 +466,6 @@
      - condition: state
        entity_id: binary_sensor.front_door
        state: 'off'
-     - service: switch.turn_off
-       entity_id: switch.hall
 - id: reset_ipcam_finished
   trigger:
      - platform: event
