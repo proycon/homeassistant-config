@@ -1202,7 +1202,8 @@ watch_tv_bedroom:
     sequence:
         - service: switch.turn_on
           entity_id: switch.tv_bedroom
-          #TODO: select source
+        - service: switch.turn_on
+          entity_id: switch.tv_decoder
 
 listen_to_music_bedroom:
     alias: Listen to Music (Bedroom)
@@ -1257,6 +1258,8 @@ turn_media_off_bedroom:
     sequence:
     - service: switch.turn_off
       entity_id: switch.tv_bedroom
+    - service: switch.turn_off
+      entity_id: switch.tv_decoder
     - service: switch.turn_off
       entity_id: switch.pi2_xorg
     - service: switch.turn_off

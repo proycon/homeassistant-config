@@ -391,6 +391,7 @@ media_devices_bedroom:
     control: hidden
     entities:
         - switch.tv_bedroom
+        - switch.tv_decoder_bedroom
         - media_player.kodi_bedroom
         - media_player.mpd
         - switch.pi2_kodi
