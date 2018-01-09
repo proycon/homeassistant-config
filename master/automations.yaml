@@ -319,8 +319,7 @@
   trigger:
     - platform: state
       entity_id: alarm_control_panel.alarm_system
-      from: 'triggered'
-      to: 'disarmed'
+      to: 'triggered'
   action:
     - service: script.turn_on
       entity_id: script.alarm
