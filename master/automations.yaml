@@ -441,6 +441,7 @@
     - service: script.turn_on
       entity_id: script.home_notification_lights
 - id: home_notification_lights_finished
+  alias: "Home Notification Lights Finished"
   trigger:
      - platform: event
        event_type: timer.finished
@@ -468,6 +469,7 @@
      - service: switch.turn_off
        entity_id: switch.hall
 - id: reset_ipcam_finished
+  alias: "Reset IPCam Finished"
   trigger:
      - platform: event
        event_type: timer.finished
