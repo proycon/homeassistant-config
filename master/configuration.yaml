@@ -538,6 +538,12 @@ switch tv_decoder:
     command_topic: "home/ir_send/pi1"
     payload_on: '{"device":"VIP1853","key":"POWER"}'
     payload_off: '{"device":"VIP1853","key":"POWER"}'
+switch tv_decoder_bedroom:
+    platform: mqtt
+    name: TV Decoder Bedroom
+    command_topic: "home/ir_send/pi2"
+    payload_on: '{"device":"VIP1853","key":"POWER"}'
+    payload_off: '{"device":"VIP1853","key":"POWER"}'
 switch pi1_kodi:
     platform: mqtt
     name: Pi1 Kodi
@@ -580,8 +586,8 @@ switch tv_bedroom:
     name: TV Bedroom
     command_topic: "home/ir_send/pi2"
     state_topic: "home/ir_send/pi2"
-    payload_on: '{"device":"tvboven","key":"KEY_POWER"}'
-    payload_off: '{"device":"tvboven","key":"KEY_POWER"}'
+    payload_on: '{"device":"tvboven","key":"KEY_POWER","state":"on"}'
+    payload_off: '{"device":"tvboven","key":"KEY_POWER","state":"off"}'
 
 fan:
   - platform: mqtt

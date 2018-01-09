@@ -391,6 +391,7 @@ media_devices_bedroom:
     control: hidden
     entities:
         - switch.tv_bedroom
+        - switch.tv_decoder_bedroom
         - media_player.kodi_bedroom
         - media_player.mpd
         - switch.pi2_kodi
@@ -434,6 +435,13 @@ media_tv_navigation_bedroom:
     icon: mdi:cursor-move
     control: hidden
     entities:
+        - script.tvdecoder2_playpause
+        - script.tvdecoder2_left
+        - script.tvdecoder2_right
+        - script.tvdecoder2_up
+        - script.tvdecoder2_down
+        - script.tvdecoder2_ok
+        - script.tvdecoder2_back
         - script.tv_bedroom_left
         - script.tv_bedroom_right
         - script.tv_bedroom_up
@@ -482,19 +490,35 @@ media_tv_channels_bedroom:
     icon: mdi:television-guide
     control: hidden
     entities:
-        - script.tv_bedroom_channelup
-        - script.tv_bedroom_channeldown
-        - script.tv_bedroom_0
-        - script.tv_bedroom_1
-        - script.tv_bedroom_2
-        - script.tv_bedroom_3
-        - script.tv_bedroom_4
-        - script.tv_bedroom_5
-        - script.tv_bedroom_6
-        - script.tv_bedroom_7
-        - script.tv_bedroom_8
-        - script.tv_bedroom_9
-
+        - script.tvdecoder2_channelup
+        - script.tvdecoder2_channeldown
+        - script.tvdecoder2_npo1
+        - script.tvdecoder2_npo2
+        - script.tvdecoder2_npo3
+        - script.tvdecoder2_rtl4
+        - script.tvdecoder2_veronica
+        - script.tvdecoder2_een
+        - script.tvdecoder2_canvas
+        - script.tvdecoder2_bbc1st
+        - script.tvdecoder2_bbc1
+        - script.tvdecoder2_bbc2
+        - script.tvdecoder2_ard
+        - script.tvdecoder2_zdf
+        - script.tvdecoder2_wdr
+        - script.tvdecoder2_arte
+        - script.tvdecoder2_tv5monde
+        - script.tvdecoder2_antena3
+        - script.tvdecoder2_rai1
+        - script.tvdecoder2_0
+        - script.tvdecoder2_1
+        - script.tvdecoder2_2
+        - script.tvdecoder2_3
+        - script.tvdecoder2_4
+        - script.tvdecoder2_5
+        - script.tvdecoder2_6
+        - script.tvdecoder2_7
+        - script.tvdecoder2_8
+        - script.tvdecoder2_9
 devices:
     name: Devices
     entities:

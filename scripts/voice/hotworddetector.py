@@ -17,7 +17,8 @@ def interrupt_callback():
 
 def onhotword():
     snowboydecoder.play_audio_file("/home/homeautomation/homeassistant/media/computerbeep_5.wav")
-    os.system("rec /tmp/recording.wav rate 16k trim 0 5 silence -l 1 0.1 3% 1 1.2 3%")
+    os.system("AUDIODEV=hw:1,0 rec /tmp/recording.wav rate 16k trim 0 5 silence -l 1 0.1 3% 1 1.2 3%")
+
     snowboydecoder.play_audio_file("/home/homeautomation/homeassistant/media/computerbeep_65.wav")
 
 if len(sys.argv) == 1:
