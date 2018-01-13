@@ -415,13 +415,7 @@ media_tv_navigation:
     icon: mdi:cursor-move
     control: hidden
     entities:
-        - script.tvdecoder_playpause
-        - script.tvdecoder_left
-        - script.tvdecoder_right
-        - script.tvdecoder_up
-        - script.tvdecoder_down
-        - script.tvdecoder_ok
-        - script.tvdecoder_back
+        - script.tiles_media_tv_navigation
 
 media_tv_navigation_bedroom:
     name: TV Navigation Bedroom

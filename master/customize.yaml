@@ -351,3 +351,43 @@ script.tiles_tv_channels:
         icon: mdi:numeric-9-box
         column: 3
         row: 9
+
+script.tiles_media_tv_navigation:
+  custom_ui_state_card: state-card-tiles
+  config:
+    columns: 3
+    row_height: 50px
+    column_width: 62px
+    gap: 15px
+    color: '#555B65'
+    color_on: '#D5D619'
+    color_off: '#BBBEC2'
+    entities:
+      - entity: script.tvdecoder_playpause
+        icon: mdi:play-pause
+        column: 1
+        row: 1
+      - entity: script.tvdecoder_up
+        icon: mdi:arrow-up
+        column: 2
+        row: 1
+      - entity: script.tvdecoder_left
+        icon: mdi:arrow-left
+        column: 1
+        row: 2
+      - entity: script.tvdecoder_ok
+        icon: mdi:thumb-up
+        column: 2
+        row: 2
+      - entity: script.tvdecoder_right
+        icon: mdi:arrow-right
+        column: 3
+        row: 2
+      - entity: script.tvdecoder_down
+        icon: mdi:arrow-down
+        column: 2
+        row: 3
+      - entity: script.tvdecoder_back
+        icon: mdi:backburger
+        column: 3
+        row: 3

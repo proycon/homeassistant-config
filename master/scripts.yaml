@@ -1732,3 +1732,5 @@ tiles_media_activities:
     sequence:
 tiles_tv_channels:
     sequence:
+tiles_media_tv_navigation:
+    sequence:
