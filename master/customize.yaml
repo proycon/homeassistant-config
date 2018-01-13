@@ -391,3 +391,85 @@ script.tiles_media_tv_navigation:
         icon: mdi:backburger
         column: 3
         row: 3
+
+script.tiles_all_lights:
+  custom_ui_state_card: state-card-tiles
+  config:
+    columns: 4
+    row_height: 50px
+    column_width: 62px
+    gap: 15px
+    color: '#555B65'
+    color_on: '#D5D619'
+    color_off: '#BBBEC2'
+    entities:
+        - entity: script.lights_on
+          icon: mdi:lightbulb-on
+          label: All on
+          column: 1
+          row: 1
+        - entity: script.lights_off
+          icon: mdi:flash-off
+          label: All off
+          column: 2
+          row: 1
+        - entity: switch.tv_spots
+          icon: mdi:television
+          label: TV Spots
+          column: 1
+          row: 2
+        - entity: switch.front_room
+          icon: mdi:sofa
+          label: Front Room
+          column: 2
+          row: 2
+        - entity: switch.midspots
+          icon: mdi:spotlight
+          label: Midspots
+          column: 3
+          row: 2
+        - entity: switch.back_room
+          label: Back room
+          column: 4
+          row: 2
+        - entity: switch.back_corner
+          label: Back corner
+          column: 1
+          row: 3
+        - entity: switch.kitchen
+          icon: mdi:food-variant
+          label: Kitchen
+          column: 2
+          row: 3
+        - entity: switch.hall
+          label: Hall
+          column: 3
+          row: 3
+        - entity: switch.garden
+          icon: mdi:tree
+          label: Garden
+          column: 4
+          row: 3
+        - entity: switch.office
+          icon: mdi:briefcase
+          label: Office
+          column: 1
+          row: 4
+        - entity: switch.bedroom
+          icon: mdi:hotel
+          label: Bedroom
+          column: 2
+          row: 4
+        - entity: switch.balcony
+          label: Balcony
+          column: 3
+          row: 4
+        - entity: switch.roof
+          label: Roof
+          column: 4
+          row: 4
+        - entity: switch.porch
+          icon: mdi:door
+          label: Porch
+          column: 4
+          row: 5

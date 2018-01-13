@@ -1734,3 +1734,5 @@ tiles_tv_channels:
     sequence:
 tiles_media_tv_navigation:
     sequence:
+tiles_all_lights:
+    sequence:

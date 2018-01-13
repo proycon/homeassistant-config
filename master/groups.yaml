@@ -273,21 +273,7 @@ all_lights:
     name: Lights
     control: hidden
     entities:
-        - script.lights_on
-        - script.lights_off
-        - switch.tv_spots
-        - switch.front_room
-        - switch.midspots
-        - switch.back_room
-        - switch.back_corner
-        - switch.kitchen
-        - switch.hall
-        - switch.office
-        - switch.bedroom
-        - switch.garden
-        - switch.balcony
-        - switch.roof
-        - switch.porch
+        - script.tiles_all_lights
 
 light_shortcuts:
     name: Light Shortcuts
