@@ -397,7 +397,7 @@ script.tiles_all_lights:
   config:
     columns: 4
     row_height: 50px
-    column_width: 62px
+    column_width: 72px
     gap: 15px
     color: '#555B65'
     color_on: '#D5D619'
