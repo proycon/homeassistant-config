@@ -404,9 +404,10 @@ media_volume:
     icon: mdi:volume-high
     control: hidden
     entities:
-        - script.avr_volup
-        - script.avr_mute
-        - script.avr_voldown
+        - script.media_volume
+        # - script.avr_volup
+        #- script.avr_mute
+        #- script.avr_voldown
 
 media_volume_bedroom:
     name: Volume (AVR)

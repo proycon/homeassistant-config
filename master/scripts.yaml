@@ -1724,3 +1724,7 @@ start_timer:
              entity_id: media_player.hall_speaker
              media_content_id: /home/homeautomation/homeassistant/media/meditationend.ogg
              media_content_type: 'music'
+
+#dummy scripts to group tiles
+media_volume:
+    sequence:

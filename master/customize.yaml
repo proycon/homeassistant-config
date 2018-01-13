@@ -163,3 +163,26 @@ sensor.outside_humidity:
     icon: mdi:water-percent
 
 
+script.media_volume:
+  custom_ui_state_card: state-card-tiles
+  config:
+    columns: 3
+    row_height: 50px
+    column_width: 62px
+    gap: 15px
+    color: '#555B65'
+    color_on: '#D5D619'
+    color_off: '#BBBEC2'
+    entities:
+      - entity: script.avr_voldown
+        icon: mdi:volume-low
+        column: 1
+        row: 1
+      - entity: script.avr_mute
+        icon: mdi:volume-mute
+        column: 2
+        row: 1
+      - entity: script.avr_volup
+        icon: mdi:volume-high
+        column: 3
+        row: 1
