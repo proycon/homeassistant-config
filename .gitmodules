@@ -1,3 +1,6 @@
 [submodule "scripts/switch/433mhzforpi"]
 	path = scripts/switch/433mhzforpi
 	url = https://github.com/proycon/433mhzforrpi.git
+[submodule "master/home-assistant-tiles"]
+	path = master/home-assistant-tiles
+	url = https://github.com/c727/home-assistant-tiles

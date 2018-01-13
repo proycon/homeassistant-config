@@ -1,3 +1,5 @@
+custom:
+  primary-color: '#36454f'
 PmxDefault:
   # Primary Color
   primary-color: 'hsl(192, 96%, 48%)'
