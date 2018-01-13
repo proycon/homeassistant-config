@@ -398,7 +398,7 @@ script.tiles_all_lights:
     columns: 4
     row_height: 50px
     column_width: 72px
-    gap: 15px
+    gap: 6px
     color: '#555B65'
     color_on: '#D5D619'
     color_off: '#BBBEC2'
@@ -446,7 +446,7 @@ script.tiles_all_lights:
           column: 3
           row: 3
         - entity: switch.garden
-          icon: mdi:tree
+          icon: mdi:flower
           label: Garden
           column: 4
           row: 3
