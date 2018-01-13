@@ -5,6 +5,9 @@
       platform: homeassistant
       event: start
   action:
+      - service: frontend.set_theme
+        data:
+            name: custom
       - service: script.turn_on
         entity_id: script.hall_speaker_normal_volume
       - service: shell_command.snapshot_clear_locks #clear all snapshot locks on startup
