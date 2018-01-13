@@ -1724,5 +1724,7 @@ start_timer:
              media_content_type: 'music'
 
 #dummy scripts to group tiles
-media_volume:
+tiles_media_volume:
+    sequence:
+tiles_media_activities:
     sequence:

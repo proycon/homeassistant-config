@@ -349,12 +349,7 @@ media_activities:
     icon: mdi:television
     control: hidden
     entities:
-        - script.watch_tv
-        - script.media_centre
-        - script.listen_to_music
-        - script.play_youtube_playlist
-        - script.desktop
-        - script.turn_media_off
+        - script.tiles_media_activities
 
 media_activities_bedroom:
     name: Media Activities Bedroom
@@ -404,10 +399,7 @@ media_volume:
     icon: mdi:volume-high
     control: hidden
     entities:
-        - script.media_volume
-        # - script.avr_volup
-        #- script.avr_mute
-        #- script.avr_voldown
+        - script.tiles_media_volume
 
 media_volume_bedroom:
     name: Volume (AVR)

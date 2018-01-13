@@ -163,7 +163,7 @@ sensor.outside_humidity:
     icon: mdi:water-percent
 
 
-script.media_volume:
+script.tiles_media_volume:
   custom_ui_state_card: state-card-tiles
   config:
     columns: 3
@@ -186,3 +186,39 @@ script.media_volume:
         icon: mdi:volume-high
         column: 3
         row: 1
+
+script.tiles_media_activities:
+  custom_ui_state_card: state-card-tiles
+  config:
+    columns: 4
+    row_height: 50px
+    column_width: 62px
+    gap: 15px
+    color: '#555B65'
+    color_on: '#D5D619'
+    color_off: '#BBBEC2'
+    entities:
+      - entity: script.watch_tv
+        icon: mdi:television
+        column: 1
+        row: 1
+      - entity: script.media_centre
+        icon: mdi:kodi
+        column: 2
+        row: 1
+      - entity: script.play_youtube_playlist
+        icon: mdi:youtube-play
+        column: 3
+        row: 1
+      - entity: script.listen_to_music
+        icon: mdi:music-circle
+        column: 4
+        row: 1
+      - entity: script.desktop
+        icon: mdi:desktop-classic
+        column: 3
+        row: 2
+      - entity: script.turn_media_off
+        icon: mdi:power-plug-off
+        column: 4
+        row: 2
