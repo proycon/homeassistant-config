@@ -1736,3 +1736,12 @@ tiles_media_tv_navigation:
     sequence:
 tiles_all_lights:
     sequence:
+
+tiles_media_volume_bedroom:
+    sequence:
+tiles_media_activities_bedroom:
+    sequence:
+tiles_tv_channels_bedroom:
+    sequence:
+tiles_media_tv_navigation_bedroom:
+    sequence:

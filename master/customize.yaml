@@ -473,3 +473,255 @@ script.tiles_all_lights:
           label: Porch
           column: 4
           row: 5
+
+script.tiles_media_volume_bedroom:
+  custom_ui_state_card: state-card-tiles
+  config:
+    columns: 3
+    row_height: 50px
+    column_width: 62px
+    gap: 15px
+    color: '#555B65'
+    color_on: '#D5D619'
+    color_off: '#BBBEC2'
+    entities:
+      - entity: script.tv_bedroom_voldown
+        icon: mdi:volume-low
+        column: 1
+        row: 1
+      - entity: script.tv_bedroom_mute
+        icon: mdi:volume-mute
+        column: 2
+        row: 1
+      - entity: script.tv_bedroom_volup
+        icon: mdi:volume-high
+        column: 3
+        row: 1
+
+script.tiles_media_activities_bedroom:
+  custom_ui_state_card: state-card-tiles
+  config:
+    columns: 4
+    row_height: 50px
+    column_width: 62px
+    gap: 15px
+    color: '#555B65'
+    color_on: '#D5D619'
+    color_off: '#BBBEC2'
+    entities:
+      - entity: script.watch_tv_bedroom
+        icon: mdi:television
+        column: 1
+        row: 1
+      - entity: script.media_centre_bedroom
+        icon: mdi:kodi
+        column: 2
+        row: 1
+      - entity: script.play_youtube_playlist_bedroom
+        icon: mdi:youtube-play
+        column: 3
+        row: 1
+      - entity: script.listen_to_music_bedroom
+        icon: mdi:music-circle
+        column: 4
+        row: 1
+      - entity: script.desktop_bedroom
+        icon: mdi:desktop-classic
+        column: 3
+        row: 2
+      - entity: script.turn_media_off_bedroom
+        icon: mdi:power-plug-off
+        column: 4
+        row: 2
+
+script.tiles_tv_channels_bedroom:
+  custom_ui_state_card: state-card-tiles
+  config:
+    columns: 4
+    row_height: 50px
+    column_width: 62px
+    gap: 15px
+    color: '#555B65'
+    color_on: '#D5D619'
+    color_off: '#BBBEC2'
+    entities:
+      - entity: script.tvdecoder2_channeldown
+        icon: mdi:minus-circle
+        column: 1
+        row: 1
+      - entity: script.tvdecoder2_channelup
+        icon: mdi:plus-circle
+        column: 2
+        row: 1
+      - entity: script.tvdecoder2_npo1
+        label: NPO1
+        column: 1
+        row: 2
+      - entity: script.tvdecoder2_npo2
+        label: NPO2
+        column: 2
+        row: 2
+      - entity: script.tvdecoder2_npo3
+        label: NPO3
+        column: 3
+        row: 2
+      - entity: script.tvdecoder2_rtl4
+        label: RTL4
+        column: 4
+        row: 2
+      - entity: script.tvdecoder2_veronica
+        label: Ver
+        column: 1
+        row: 3
+      - entity: script.tvdecoder2_een
+        label: Eén
+        column: 3
+        row: 3
+      - entity: script.tvdecoder2_canvas
+        label: Canv
+        column: 4
+        row: 3
+      - entity: script.tvdecoder2_bbc1st
+        label: BBC1st
+        column: 1
+        row: 4
+      - entity: script.tvdecoder2_bbc1
+        label: BBC1
+        column: 3
+        row: 4
+      - entity: script.tvdecoder2_bbc2
+        label: BBC2
+        column: 4
+        row: 4
+      - entity: script.tvdecoder2_ard
+        label: ARD
+        column: 1
+        row: 5
+      - entity: script.tvdecoder2_zdf
+        label: ZDF
+        column: 2
+        row: 5
+      - entity: script.tvdecoder2_wdr
+        label: WDR
+        column: 3
+        row: 5
+      - entity: script.tvdecoder2_arte
+        label: Arte
+        column: 4
+        row: 5
+      - entity: script.tvdecoder2_tv5monde
+        label: TV5
+        column: 1
+        row: 6
+      - entity: script.tvdecoder2_antena3
+        label: Ant3
+        column: 2
+        row: 6
+      - entity: script.tvdecoder2_rai1
+        label: Rai1
+        column: 3
+        row: 6
+      - entity: script.tvdecoder2_1
+        icon: mdi:numeric-1-box
+        column: 1
+        row: 7
+      - entity: script.tvdecoder2_2
+        icon: mdi:numeric-2-box
+        column: 2
+        row: 7
+      - entity: script.tvdecoder2_3
+        icon: mdi:numeric-3-box
+        column: 3
+        row: 7
+      - entity: script.tvdecoder2_0
+        icon: mdi:numeric-0-box
+        column: 4
+        row: 7
+      - entity: script.tvdecoder2_4
+        icon: mdi:numeric-4-box
+        column: 1
+        row: 8
+      - entity: script.tvdecoder2_5
+        icon: mdi:numeric-5-box
+        column: 2
+        row: 8
+      - entity: script.tvdecoder2_6
+        icon: mdi:numeric-6-box
+        column: 3
+        row: 8
+      - entity: script.tvdecoder2_7
+        icon: mdi:numeric-7-box
+        column: 1
+        row: 9
+      - entity: script.tvdecoder2_8
+        icon: mdi:numeric-8-box
+        column: 2
+        row: 9
+      - entity: script.tvdecoder2_9
+        icon: mdi:numeric-9-box
+        column: 3
+        row: 9
+
+script.tiles_media_tv_navigation_bedroom:
+  custom_ui_state_card: state-card-tiles
+  config:
+    columns: 3
+    row_height: 50px
+    column_width: 62px
+    gap: 15px
+    color: '#555B65'
+    color_on: '#D5D619'
+    color_off: '#BBBEC2'
+    entities:
+      - entity: script.tvdecoder2_playpause
+        icon: mdi:play-pause
+        column: 1
+        row: 1
+      - entity: script.tvdecoder2_up
+        icon: mdi:arrow-up
+        column: 2
+        row: 1
+      - entity: script.tvdecoder2_left
+        icon: mdi:arrow-left
+        column: 1
+        row: 2
+      - entity: script.tvdecoder2_ok
+        icon: mdi:thumb-up
+        column: 2
+        row: 2
+      - entity: script.tvdecoder2_right
+        icon: mdi:arrow-right
+        column: 3
+        row: 2
+      - entity: script.tvdecoder2_down
+        icon: mdi:arrow-down
+        column: 2
+        row: 3
+      - entity: script.tvdecoder2_back
+        icon: mdi:backburger
+        column: 3
+        row: 3
+      - entity: script.tv_bedroom_up
+        icon: mdi:arrow-up
+        column: 2
+        row: 4
+      - entity: script.tv_bedroom_left
+        icon: mdi:arrow-left
+        column: 1
+        row: 5
+      - entity: script.tv_bedroom_ok
+        icon: mdi:thumb-up
+        column: 2
+        row: 5
+      - entity: script.tv_bedroom_right
+        icon: mdi:arrow-right
+        column: 3
+        row: 6
+      - entity: script.tv_bedroom_down
+        icon: mdi:arrow-down
+        column: 2
+        row: 6
+      - entity: script.tv_bedroom_back
+        icon: mdi:backburger
+        column: 3
+        row: 6
