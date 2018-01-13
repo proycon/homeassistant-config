@@ -1187,6 +1187,8 @@ turn_media_off:
       entity_id: switch.pi1_kodi
     - service: switch.turn_off
       entity_id: switch.pi1_music_player
+    - service: media_player.stop
+      entity_id: media_player.mpd
 
 update_kodi_library:
     alias: Update Kodi Library
