@@ -1730,3 +1730,5 @@ tiles_media_volume:
     sequence:
 tiles_media_activities:
     sequence:
+tiles_tv_channels:
+    sequence:

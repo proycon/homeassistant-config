@@ -448,35 +448,7 @@ media_tv_channels:
     icon: mdi:television-guide
     control: hidden
     entities:
-        - script.tvdecoder_channelup
-        - script.tvdecoder_channeldown
-        - script.tvdecoder_npo1
-        - script.tvdecoder_npo2
-        - script.tvdecoder_npo3
-        - script.tvdecoder_rtl4
-        - script.tvdecoder_veronica
-        - script.tvdecoder_een
-        - script.tvdecoder_canvas
-        - script.tvdecoder_bbc1st
-        - script.tvdecoder_bbc1
-        - script.tvdecoder_bbc2
-        - script.tvdecoder_ard
-        - script.tvdecoder_zdf
-        - script.tvdecoder_wdr
-        - script.tvdecoder_arte
-        - script.tvdecoder_tv5monde
-        - script.tvdecoder_antena3
-        - script.tvdecoder_rai1
-        - script.tvdecoder_0
-        - script.tvdecoder_1
-        - script.tvdecoder_2
-        - script.tvdecoder_3
-        - script.tvdecoder_4
-        - script.tvdecoder_5
-        - script.tvdecoder_6
-        - script.tvdecoder_7
-        - script.tvdecoder_8
-        - script.tvdecoder_9
+        - script.tiles_tv_channels
 
 media_tv_channels_bedroom:
     name: TV Channels Bedroom
