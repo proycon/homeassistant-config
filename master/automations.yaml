@@ -777,6 +777,8 @@
   action:
      - service: input_boolean.turn_off
        entity_id: input_boolean.inside_house
+     - service: script.turn_on
+       entity_id: script.turn_media_off
 - id: downstairs_morning_lights_on_hans
   alias: Downstairs Morning Lights on Hans
   trigger:
