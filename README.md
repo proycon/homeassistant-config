@@ -42,7 +42,7 @@ I have the following devices:
     * GPIO: 433.92Mhz Transmitter for lights (see also https://github.com/proycon/433mhzforrpi/)
     * GPIO: Door/doorbell sensors (wired, reed contacts)
     * GPIO: IR LED for remote control of TV/audio
-* **Slave**: Raspberry Pi 2 (Raspbian) ([GPIO wiring schematic](https://github.com/proycon/homeassistant-config/blob/master/docs/pi2.svg)r)]
+* **Slave**: Raspberry Pi 2 (Raspbian) ([GPIO wiring schematic](https://github.com/proycon/homeassistant-config/blob/master/docs/pi2.svg))
     * GPIO: 433.92Mhz Transmitter for lights
     * GPIO: Door/window sensors (wired, reed contacts)
     * GPIO: Neopixels LED for ambilight in living room
@@ -62,7 +62,7 @@ I have the following devices:
 * **433 Mhz**
     * Many Klik-aan-klik-Uit Adapters or older ELRO adapters for all lights
     * 1x [RFLink Transceiver](http://www.rflink.nl/), based on Arduino Mega, connected to Pi2
-        * 1x ALECTO WS-4500 Weather Station (mouted outside for wind, rain, temperature)
+        * 1x ALECTO WS-4500 Weather Station (mounted outside for wind, rain, temperature)
 * **Z-Wave**
     * Aeotec Z-Stick
     * 3x [Fibaro Motion/light/temperature sensor](https://www.fibaro.com/en/products/motion-sensor/)
