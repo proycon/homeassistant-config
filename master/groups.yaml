@@ -292,6 +292,8 @@ living_lights:
     entities:
         - switch.tv_spots
         - switch.front_room
+        - switch.technofire
+        - switch.ambilight
         - switch.midspots
         - switch.back_room
         - switch.back_corner
