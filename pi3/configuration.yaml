@@ -90,7 +90,7 @@ automation:
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi3/state"
-              payload: '{% if trigger.topic.split("/")[-2].scene == "off" %}OFF{% else %}ON{% endif %}'
+              payload: '{% if trigger.topic.split("/")[-2] == "off" or trigger.payload == "OFF" %}OFF{% else %}ON{% endif %}'
   - id: s2m_pir
     alias: s2m_pir
     trigger:

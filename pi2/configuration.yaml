@@ -238,8 +238,8 @@ automation:
              brightness: '{{ trigger.topic.split("/")[-1] }}'
         - service: mqtt.publish
           data_template:
-              topic: "home/technofire/pi3/state"
-              payload: '{% if trigger.topic.split("/")[-2].scene == "off" %}OFF{% else %}ON{% endif %}'
+              topic: "home/technofire/pi2/state"
+              payload: '{% if trigger.topic.split("/")[-2] == "off" or trigger.payload == "OFF" %}OFF{% else %}ON{% endif %}'
   - id: s2m_kodi
     alias: s2m_kodi
     trigger:
