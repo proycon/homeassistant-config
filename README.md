@@ -3,7 +3,7 @@ Home Assistant Configuration
 
 This repository contains my elaborate home automation configuration, using [Home Assistant](https://home-assistant.io).
 
-Overview
+Introduction
 ------------
 
 Prior to Home Assistant, I ran my own custom-built home automation software. This got too time consuming to maintain and
@@ -14,7 +14,8 @@ was getting them to communicate properly with Home Assistant. I decided on simpl
 (EventStream solutions did not work properly for me), have the master instance control as much as possible, and the
 slaves as bare as possible, with communication proceeding over MQTT.
 
-**My goals:**
+Goals
+--------
 
 * Automate and integrate as much as possible:
     * Lights
@@ -24,6 +25,9 @@ slaves as bare as possible, with communication proceeding over MQTT.
     * Lots of environment sensors for automations
 * **Open-source** and **no** third-party cloud solutions, I like to own and safeguard my data!
 * Security/Alarm system
+
+Devices
+-----------
 
 I have the following devices:
 
@@ -56,9 +60,9 @@ I have the following devices:
     * Front door
     * Hallway
 * **433 Mhz**
-    * Klik-aan-klik-Uit Adapters or older ELRO adapters for all lights
-    * [RFLink Transceiver](http://www.rflink.nl/), based on Arduino Mega, connected to Pi2
-    * ALECTO WS-4500 Weather Station
+    * Many Klik-aan-klik-Uit Adapters or older ELRO adapters for all lights
+    * 1x [RFLink Transceiver](http://www.rflink.nl/), based on Arduino Mega, connected to Pi2
+        * 1x ALECTO WS-4500 Weather Station (mouted outside for wind, rain, temperature)
 * **Z-Wave**
     * Aeotec Z-Stick
     * 3x [Fibaro Motion/light/temperature sensor](https://www.fibaro.com/en/products/motion-sensor/)
@@ -66,8 +70,10 @@ I have the following devices:
     * 2x Nodon Softremote buttons for scene selection/quick remote functionality
     * 1x Philiotech Temperature/Humidity Sensor for bathroom
 
+Interface
+------------
 
-
+Some screenshots of the interface:
 
 
 
