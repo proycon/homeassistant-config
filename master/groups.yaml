@@ -2,15 +2,19 @@ default_view:
     view: yes
     icon: mdi:home
     entities:
+        - sensor.time
         - binary_sensor.anybodyhome
         - alarm_control_panel.alarm_system
         - device_tracker.proyphone
         - device_tracker.hansphone
         - binary_sensor.doorbell
+        - binary_sensor.front_door
+        - binary_sensor.back_door
+        - binary_sensor.bedroom_window_left
+        - binary_sensor.bedroom_window_right
+        - binary_sensor.bathroom_window_sensor
         - sensor.temperature_living_room
-        - sensor.time
         - group.media_volume
-        - group.doors_and_windows
         - group.all_lights
         - group.cameras
         - group.media_activities
@@ -37,7 +41,7 @@ media_view:
 
 media_view_bedroom:
     name: Media Bedroom
-    icon: mdi:television
+    icon: mdi:hotel
     view: yes
     entities:
         - sensor.time
