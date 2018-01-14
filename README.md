@@ -78,7 +78,7 @@ I have the following devices:
 Interface
 ------------
 
-Some screenshots of the interface:
+Some screenshots of the interface, featuring [home assistant tiles](https://github.com/c727/home-assistant-tiles/):
 
 ![Main screenshot](https://raw.githubusercontent.com/proycon/homeassistant-config/master/docs/screenshot_main.png)
 
