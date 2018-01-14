@@ -468,6 +468,16 @@ script.tiles_all_lights:
           label: Roof
           column: 4
           row: 4
+        - entity: switch.technofire
+          icon: mdi:fire
+          label: Fireplace
+          column: 1
+          row: 5
+        - entity: switch.ambilight
+          icon: mdi:candle
+          label: Ambilight
+          column: 2
+          row: 5
         - entity: switch.porch
           icon: mdi:door
           label: Porch

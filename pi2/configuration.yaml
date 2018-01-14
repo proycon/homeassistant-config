@@ -212,11 +212,11 @@ automation:
         service: shell_command.hdmi_cec_send
         data_template:
             payload: '{{ trigger.payload }}'
-  - id: technofire
-    alias: Technofire
+  - id: technofire_json
+    alias: Technofire JSON
     trigger:
         platform: mqtt
-        topic: "home/technofire/pi2/set"
+        topic: "home/technofire/pi2/jsonset"
     action:
         - service: shell_command.technofire
           data_template:
@@ -224,8 +224,22 @@ automation:
              brightness: '{{ trigger.payload_json.brightness }}'
         - service: mqtt.publish
           data_template:
-              topic: "home/technofire/pi2/get"
-              payload: '{{ trigger.payload_json.scene }}'
+              topic: "home/technofire/pi2/state"
+              payload: '{% if trigger.payload_json.scene == "off" %}OFF{% else %}ON{% endif %}'
+  - id: technofire
+    alias: Technofire
+    trigger:
+        platform: mqtt
+        topic: "home/technofire/pi2/set/#"
+    action:
+        - service: shell_command.technofire
+          data_template:
+             scene: '{{ trigger.topic.split("/")[-2] }}'
+             brightness: '{{ trigger.topic.split("/")[-1] }}'
+        - service: mqtt.publish
+          data_template:
+              topic: "home/technofire/pi3/state"
+              payload: '{% if trigger.topic.split("/")[-2].scene == "off" %}OFF{% else %}ON{% endif %}'
   - id: s2m_kodi
     alias: s2m_kodi
     trigger:
