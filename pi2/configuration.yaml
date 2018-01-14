@@ -105,8 +105,8 @@ switch:
             command_off: "killall kodi-standalone kodi kodi_v7.bin"
             command_state: "ps aux | grep kodi | grep -v grep"
         xorg:
-            command_on: "killall Xorg; startx &"
-            command_off: "killall Xorg"
+            command_on: "sudo killall Xorg; startx &"
+            command_off: "sudo killall Xorg"
             command_state: "ps aux | grep Xorg | grep -v grep"
         musicplayer:
             command_on: "killall vlc; cvlc -A alsa --alsa-audio-device hw:0,0 http://192.168.0.1:8000/stream.mp3 >/dev/null 2>/dev/null &"
