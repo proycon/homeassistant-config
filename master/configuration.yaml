@@ -594,10 +594,12 @@ switch tv_bedroom:
     payload_off: '{"device":"tvboven","key":"KEY_POWER","state":"off"}'
 switch technofire:
     platform: mqtt
+    name: Technofire
     command_topic: "home/technofire/pi3/set/fire/255"
     state_topic: "home/technofire/pi3/state"
 switch ambilight:
     platform: mqtt
+    name: Ambilight
     command_topic: "home/technofire/pi2/set/lamp/40"
     state_topic: "home/technofire/pi2/state"
 
