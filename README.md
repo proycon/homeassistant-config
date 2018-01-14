@@ -36,7 +36,7 @@ I have the following devices:
     * 16GB RAM
     * Aeotec Z-Stick
     * *Webserver*: Apache
-    * *MQTT Broker:* Mopidy
+    * *MQTT Broker:* Mosquitto
     * *Audio streaming:* [Mopidy](https://www.mopidy.com/) (MPD) + Modidy-spotify + Iris + Icecast
     * *Messaging:* XMPP (Prosody)
 * **Slave**: Raspberry Pi 1 (Raspbian) ([GPIO wiring schematic](https://github.com/proycon/homeassistant-config/blob/master/docs/pi1.svg))
