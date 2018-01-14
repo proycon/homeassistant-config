@@ -39,7 +39,7 @@ I have the following devices:
     * *Audio streaming:* [Mopidy](https://www.mopidy.com/) (MPD) + Modidy-spotify + Iris + Icecast
     * *Messaging:* XMPP (Prosody)
 * **Slave**: Raspberry Pi 1 (Raspbian) ([GPIO wiring schematic](https://github.com/proycon/homeassistant-config/blob/master/docs/pi1.svg))
-    * GPIO: 433.92Mhz Transmitter for lights
+    * GPIO: 433.92Mhz Transmitter for lights (see also https://github.com/proycon/433mhzforrpi/)
     * GPIO: Door/doorbell sensors (wired, reed contacts)
     * GPIO: IR LED for remote control of TV/audio
 * **Slave**: Raspberry Pi 2 (Raspbian) ([GPIO wiring schematic](https://github.com/proycon/homeassistant-config/blob/master/docs/pi2.svg)r)]
@@ -50,7 +50,7 @@ I have the following devices:
     * GPIO: IR Receiver
 * **Slave**: Raspberry Pi 3 (Raspbian)
     * GPIO: [DH-22 temperature/humidity sensor](https://www.adafruit.com/product/385)
-    * GPIO: Neopixels LED fireplace ([video](https://www.youtube.com/watch?v=i18eXQIXzXg))
+    * GPIO: Neopixels LED fireplace ([video](https://www.youtube.com/watch?v=i18eXQIXzXg), [sources](https://github.com/proycon/homeassistant-config/tree/master/scripts/technofire))
     * GPIO: [PIR sensor](https://www.adafruit.com/product/189)
 * **IP Cams**
     * Living room (D-Link 5222-L)
