@@ -85,8 +85,8 @@ automation:
     action:
         - service: shell_command.technofire
           data_template:
-             scene: '{{ trigger.topic.split("/")[-2] }}'
-             brightness: '{{ trigger.topic.split("/")[-1] }}'
+             scene: '{% if trigger.payload == "OFF" %}off{% else %}{{ trigger.topic.split("/")[-2] }}{% endif %}'
+             brightness: '{% if trigger.payload == "OFF" %}0{% else %}{{ trigger.topic.split("/")[-1] }}{% endif %}'
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi3/state"

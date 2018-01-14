@@ -234,7 +234,7 @@ automation:
     action:
         - service: shell_command.technofire
           data_template:
-             scene: '{{ trigger.topic.split("/")[-2] }}'
+             scene: '{% if trigger.payload == "OFF" %}off{% else %}{{ trigger.topic.split("/")[-2] }}{% endif %}'
              brightness: '{{ trigger.topic.split("/")[-1] }}'
         - service: mqtt.publish
           data_template:
