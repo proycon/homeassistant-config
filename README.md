@@ -69,6 +69,8 @@ I have the following devices:
     * 1x Neo Coolcam Door/window sensor
     * 2x Nodon Softremote buttons for scene selection/quick remote functionality
     * 1x Philiotech Temperature/Humidity Sensor for bathroom
+ * **Other**
+    * *Slimme Meter* for power consumption, connected to main server
 
 Interface
 ------------
