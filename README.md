@@ -75,6 +75,11 @@ Interface
 
 Some screenshots of the interface:
 
+![Main screenshot](https://raw.githubusercontent.com/proycon/homeassistant-config/master/docs/screenshot_main.png)
+
+![Media controls](https://raw.githubusercontent.com/proycon/homeassistant-config/master/docs/screenshot_tv.png)
+
+![Camera](https://raw.githubusercontent.com/proycon/homeassistant-config/master/docs/screenshot_cam.png)
 
 
 
