@@ -1009,28 +1009,28 @@ ignite_fireplace:
     sequence:
       - service: mqtt.publish
         data_template:
-            topic: "home/technofire/pi3/set"
+            topic: "home/technofire/pi3/jsonset"
             payload_template: '{"scene":"{{ states.input_select.fireplace.state.replace(" ","_") |lower }}","brightness":"{{ states.input_number.fireplace_brightness.state|int }}"}'
 extinguish_fireplace:
     alias: Extinguish Fireplace
     sequence:
       - service: mqtt.publish
         data:
-            topic: "home/technofire/pi3/set"
+            topic: "home/technofire/pi3/jsonset"
             payload: '{"scene":"off","brightness":"0"}'
 ignite_dresser_ambilight:
     alias: Ignite dresser ambilight
     sequence:
       - service: mqtt.publish
         data_template:
-            topic: "home/technofire/pi2/set"
+            topic: "home/technofire/pi2/jsonset"
             payload_template: '{"scene":"{{ states.input_select.dresser_ambilight.state.replace(" ","_") |lower }}","brightness":"{{ states.input_number.dresser_ambilight_brightness.state|int }}"}'
 extinguish_dresser_ambilight:
     alias: Extinguish dresser ambilight
     sequence:
       - service: mqtt.publish
         data:
-            topic: "home/technofire/pi2/set"
+            topic: "home/technofire/pi2/jsonset"
             payload: '{"scene":"off","brightness":"0"}'
 reset_ipcam:
     alias: Reset IPcam
@@ -1205,7 +1205,27 @@ watch_tv_bedroom:
         - service: switch.turn_on
           entity_id: switch.tv_bedroom
         - service: switch.turn_on
-          entity_id: switch.tv_decoder
+          entity_id: switch.tv_decoder_bedroom
+        - delay:
+            seconds: 4
+        - service: mqtt.publish #start switch source sequence
+          data:
+             topic: "home/ir_send/pi2"
+             payload: '{"device":"tvboven","key":"KEY_MODE","state":"on"}'
+        - delay:
+            seconds: 1
+        - service: mqtt.publish
+          data:
+             topic: "home/ir_send/pi2"
+             payload: '{"device":"tvboven","key":"KEY_UP","state":"on"}'
+        - delay:
+            seconds: 1
+        - service: mqtt.publish
+          data:
+             topic: "home/ir_send/pi2"
+             payload: '{"device":"tvboven","key":"KEY_OK","state":"on"}'
+
+
 
 listen_to_music_bedroom:
     alias: Listen to Music (Bedroom)
@@ -1261,7 +1281,7 @@ turn_media_off_bedroom:
     - service: switch.turn_off
       entity_id: switch.tv_bedroom
     - service: switch.turn_off
-      entity_id: switch.tv_decoder
+      entity_id: switch.tv_decoder_bedroom
     - service: switch.turn_off
       entity_id: switch.pi2_xorg
     - service: switch.turn_off

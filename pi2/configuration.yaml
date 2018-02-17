@@ -105,8 +105,8 @@ switch:
             command_off: "killall kodi-standalone kodi kodi_v7.bin"
             command_state: "ps aux | grep kodi | grep -v grep"
         xorg:
-            command_on: "killall Xorg; startx &"
-            command_off: "killall Xorg"
+            command_on: "sudo killall Xorg; startx &"
+            command_off: "sudo killall Xorg"
             command_state: "ps aux | grep Xorg | grep -v grep"
         musicplayer:
             command_on: "killall vlc; cvlc -A alsa --alsa-audio-device hw:0,0 http://192.168.0.1:8000/stream.mp3 >/dev/null 2>/dev/null &"
@@ -212,11 +212,11 @@ automation:
         service: shell_command.hdmi_cec_send
         data_template:
             payload: '{{ trigger.payload }}'
-  - id: technofire
-    alias: Technofire
+  - id: technofire_json
+    alias: Technofire JSON
     trigger:
         platform: mqtt
-        topic: "home/technofire/pi2/set"
+        topic: "home/technofire/pi2/jsonset"
     action:
         - service: shell_command.technofire
           data_template:
@@ -224,8 +224,22 @@ automation:
              brightness: '{{ trigger.payload_json.brightness }}'
         - service: mqtt.publish
           data_template:
-              topic: "home/technofire/pi2/get"
-              payload: '{{ trigger.payload_json.scene }}'
+              topic: "home/technofire/pi2/state"
+              payload: '{% if trigger.payload_json.scene == "off" %}OFF{% else %}ON{% endif %}'
+  - id: technofire
+    alias: Technofire
+    trigger:
+        platform: mqtt
+        topic: "home/technofire/pi2/set/#"
+    action:
+        - service: shell_command.technofire
+          data_template:
+             scene: '{% if trigger.payload == "OFF" %}off{% else %}{{ trigger.topic.split("/")[-2] }}{% endif %}'
+             brightness: '{{ trigger.topic.split("/")[-1] }}'
+        - service: mqtt.publish
+          data_template:
+              topic: "home/technofire/pi2/state"
+              payload: '{% if trigger.topic.split("/")[-2] == "off" or trigger.payload == "OFF" %}OFF{% else %}ON{% endif %}'
   - id: s2m_kodi
     alias: s2m_kodi
     trigger:

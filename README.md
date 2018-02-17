@@ -35,14 +35,15 @@ I have the following devices:
     * Quad core
     * 16GB RAM
     * Aeotec Z-Stick
-    * Apache webserver
+    * *Webserver*: Apache
+    * *MQTT Broker:* Mosquitto
     * *Audio streaming:* [Mopidy](https://www.mopidy.com/) (MPD) + Modidy-spotify + Iris + Icecast
     * *Messaging:* XMPP (Prosody)
 * **Slave**: Raspberry Pi 1 (Raspbian) ([GPIO wiring schematic](https://github.com/proycon/homeassistant-config/blob/master/docs/pi1.svg))
-    * GPIO: 433.92Mhz Transmitter for lights
+    * GPIO: 433.92Mhz Transmitter for lights (see also https://github.com/proycon/433mhzforrpi/)
     * GPIO: Door/doorbell sensors (wired, reed contacts)
     * GPIO: IR LED for remote control of TV/audio
-* **Slave**: Raspberry Pi 2 (Raspbian) ([GPIO wiring schematic](https://github.com/proycon/homeassistant-config/blob/master/docs/pi2.svg)r)]
+* **Slave**: Raspberry Pi 2 (Raspbian) ([GPIO wiring schematic](https://github.com/proycon/homeassistant-config/blob/master/docs/pi2.svg))
     * GPIO: 433.92Mhz Transmitter for lights
     * GPIO: Door/window sensors (wired, reed contacts)
     * GPIO: Neopixels LED for ambilight in living room
@@ -50,7 +51,7 @@ I have the following devices:
     * GPIO: IR Receiver
 * **Slave**: Raspberry Pi 3 (Raspbian)
     * GPIO: [DH-22 temperature/humidity sensor](https://www.adafruit.com/product/385)
-    * GPIO: Neopixels LED fireplace ([video](https://www.youtube.com/watch?v=i18eXQIXzXg))
+    * GPIO: Neopixels LED fireplace ([video](https://www.youtube.com/watch?v=i18eXQIXzXg), [sources](https://github.com/proycon/homeassistant-config/tree/master/scripts/technofire))
     * GPIO: [PIR sensor](https://www.adafruit.com/product/189)
 * **IP Cams**
     * Living room (D-Link 5222-L)
@@ -62,18 +63,22 @@ I have the following devices:
 * **433 Mhz**
     * Many Klik-aan-klik-Uit Adapters or older ELRO adapters for all lights
     * 1x [RFLink Transceiver](http://www.rflink.nl/), based on Arduino Mega, connected to Pi2
-        * 1x ALECTO WS-4500 Weather Station (mouted outside for wind, rain, temperature)
+        * 1x ALECTO WS-4500 Weather Station (mounted outside for wind, rain, temperature)
 * **Z-Wave**
     * Aeotec Z-Stick
     * 3x [Fibaro Motion/light/temperature sensor](https://www.fibaro.com/en/products/motion-sensor/)
     * 1x Neo Coolcam Door/window sensor
     * 2x Nodon Softremote buttons for scene selection/quick remote functionality
     * 1x Philiotech Temperature/Humidity Sensor for bathroom
+ * **Other**
+    * *Slimme Meter* for power consumption, connected to main server
+    * Speakers throughout the house for text-to-speech notifications
+    * Wake up timer through bedroom TV
 
 Interface
 ------------
 
-Some screenshots of the interface:
+Some screenshots of the interface, featuring [home assistant tiles](https://github.com/c727/home-assistant-tiles/):
 
 ![Main screenshot](https://raw.githubusercontent.com/proycon/homeassistant-config/master/docs/screenshot_main.png)
 
