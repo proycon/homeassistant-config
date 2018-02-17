@@ -714,6 +714,92 @@
       data:
           topic: "home/say/pi1"
           payload: "Hello Hans"
+- id: home_greeting_guest
+  alias: "Home Greeting Guest"
+  trigger: #when doors close on reentry
+    - platform: state
+      entity_id: binary_sensor.front_door
+      from: 'on'
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.back_door
+      from: 'on'
+      to: 'off'
+  condition: #and we were not home
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.guest_inside_house
+          state: "off"
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: device_tracker.chris
+              state: "home"
+            - condition: state
+              entity_id: device_tracker.evelynda
+              state: "home"
+            - condition: state
+              entity_id: device_tracker.erik
+              state: "home"
+            - condition: state
+              entity_id: device_tracker.patrick
+              state: "home"
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.guest_inside_house
+    - delay:
+        seconds: 20
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Hello Visitor"
+- id: guest_left_house
+  alias: Guest Left House
+  trigger:
+    - platform: state
+      entity_id: device_tracker.chris
+      from: 'home'
+      to: 'not_home'
+      for:
+          minutes: 10
+    - platform: state
+      entity_id: device_tracker.evelynda
+      from: 'home'
+      to: 'not_home'
+      for:
+          minutes: 10
+    - platform: state
+      entity_id: device_tracker.erik
+      from: 'home'
+      to: 'not_home'
+      for:
+          minutes: 10
+    - platform: state
+      entity_id: device_tracker.patrick
+      from: 'home'
+      to: 'not_home'
+      for:
+          minutes: 10
+  conditions:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: device_tracker.chris
+          state: "not_home"
+        - condition: state
+          entity_id: device_tracker.evelynda
+          state: "not_home"
+        - condition: state
+          entity_id: device_tracker.erik
+          state: "not_home"
+        - condition: state
+          entity_id: device_tracker.patrick
+          state: "not_home"
+  action:
+     - service: input_boolean.turn_off
+       entity_id: input_boolean.guest_inside_house
+
 - id: proycon_left_house
   alias: Proycon Left House
   trigger:
@@ -768,6 +854,10 @@
       entity_id: input_boolean.hans_inside_house
       from: 'on'
       to: 'off'
+    - platform: state
+      entity_id: input_boolean.guest_inside_house
+      from: 'on'
+      to: 'off'
   condition:
     - condition: and
       conditions:
@@ -776,6 +866,9 @@
           state: "off"
         - condition: state
           entity_id: input_boolean.hans_inside_house
+          state: "off"
+        - condition: state
+          entity_id: input_boolean.guest_inside_house
           state: "off"
   action:
      - service: input_boolean.turn_off

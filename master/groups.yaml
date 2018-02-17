@@ -7,6 +7,7 @@ default_view:
         - alarm_control_panel.alarm_system
         - device_tracker.proyphone
         - device_tracker.hansphone
+        - input_boolean.guest_inside_house
         - binary_sensor.doorbell
         - binary_sensor.front_door
         - binary_sensor.back_door
