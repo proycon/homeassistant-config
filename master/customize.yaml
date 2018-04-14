@@ -163,7 +163,7 @@ sensor.outside_humidity:
     icon: mdi:water-percent
 
 
-script.tiles_media_volume:
+input_text.tiles_media_volume:
   custom_ui_state_card: state-card-tiles
   config:
     columns: 3
@@ -187,7 +187,7 @@ script.tiles_media_volume:
         column: 3
         row: 1
 
-script.tiles_media_activities:
+input_text.tiles_media_activities:
   custom_ui_state_card: state-card-tiles
   config:
     columns: 4
@@ -224,7 +224,7 @@ script.tiles_media_activities:
         row: 2
 
 
-script.tiles_tv_channels:
+input_text.tiles_tv_channels:
   custom_ui_state_card: state-card-tiles
   config:
     columns: 4
@@ -352,7 +352,7 @@ script.tiles_tv_channels:
         column: 3
         row: 9
 
-script.tiles_media_tv_navigation:
+input_text.tiles_media_tv_navigation:
   custom_ui_state_card: state-card-tiles
   config:
     columns: 3
@@ -392,7 +392,7 @@ script.tiles_media_tv_navigation:
         column: 3
         row: 3
 
-script.tiles_all_lights:
+input_text.tiles_all_lights:
   custom_ui_state_card: state-card-tiles
   config:
     columns: 4
@@ -484,7 +484,7 @@ script.tiles_all_lights:
           column: 4
           row: 5
 
-script.tiles_media_volume_bedroom:
+input_text.tiles_media_volume_bedroom:
   custom_ui_state_card: state-card-tiles
   config:
     columns: 3
@@ -508,7 +508,7 @@ script.tiles_media_volume_bedroom:
         column: 3
         row: 1
 
-script.tiles_media_activities_bedroom:
+input_text.tiles_media_activities_bedroom:
   custom_ui_state_card: state-card-tiles
   config:
     columns: 4
@@ -544,7 +544,7 @@ script.tiles_media_activities_bedroom:
         column: 4
         row: 2
 
-script.tiles_tv_channels_bedroom:
+input_text.tiles_tv_channels_bedroom:
   custom_ui_state_card: state-card-tiles
   config:
     columns: 4
@@ -672,7 +672,7 @@ script.tiles_tv_channels_bedroom:
         column: 3
         row: 9
 
-script.tiles_media_tv_navigation_bedroom:
+input_text.tiles_media_tv_navigation_bedroom:
   custom_ui_state_card: state-card-tiles
   config:
     columns: 3

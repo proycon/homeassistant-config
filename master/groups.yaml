@@ -278,7 +278,7 @@ all_lights:
     name: Lights
     control: hidden
     entities:
-        - script.tiles_all_lights
+        - input_text.tiles_all_lights
 
 light_shortcuts:
     name: Light Shortcuts
@@ -342,14 +342,14 @@ media_activities:
     icon: mdi:television
     control: hidden
     entities:
-        - script.tiles_media_activities
+        - input_text.tiles_media_activities
 
 media_activities_bedroom:
     name: Media Activities Bedroom
     icon: mdi:television
     control: hidden
     entities:
-        - script.tiles_media_activities_bedroom
+        - input_text.tiles_media_activities_bedroom
 
 media_devices:
     name: Devices
@@ -387,28 +387,28 @@ media_volume:
     icon: mdi:volume-high
     control: hidden
     entities:
-        - script.tiles_media_volume
+        - input_text.tiles_media_volume
 
 media_volume_bedroom:
     name: Volume (AVR)
     icon: mdi:volume-high
     control: hidden
     entities:
-        - script.tiles_media_volume_bedroom
+        - input_text.tiles_media_volume_bedroom
 
 media_tv_navigation:
     name: TV Navigation
     icon: mdi:cursor-move
     control: hidden
     entities:
-        - script.tiles_media_tv_navigation
+        - input_text.tiles_media_tv_navigation
 
 media_tv_navigation_bedroom:
     name: TV Navigation Bedroom
     icon: mdi:cursor-move
     control: hidden
     entities:
-        - script.tiles_media_tv_navigation_bedroom
+        - input_text.tiles_media_tv_navigation_bedroom
 
 
 media_tv_channels:
@@ -416,14 +416,14 @@ media_tv_channels:
     icon: mdi:television-guide
     control: hidden
     entities:
-        - script.tiles_tv_channels
+        - input_text.tiles_tv_channels
 
 media_tv_channels_bedroom:
     name: TV Channels Bedroom
     icon: mdi:television-guide
     control: hidden
     entities:
-        - script.tiles_tv_channels_bedroom
+        - input_text.tiles_tv_channels_bedroom
 
 devices:
     name: Devices
