@@ -307,15 +307,24 @@ input_boolean:
         initial: off
 
 input_text:  #dummy elements to group tiles
-    tiles_media_volume: {}
-    tiles_media_activities: {}
-    tiles_tv_channels: {}
-    tiles_media_tv_navigation: {}
-    tiles_all_lights: {}
-    tiles_media_volume_bedroom: {}
-    tiles_media_activities_bedroom: {}
-    tiles_tv_channels_bedroom: {}
-    tiles_media_tv_navigation_bedroom: {}
+    tiles_media_volume:
+        name: tiles_media_volume
+    tiles_media_activities:
+        name: tiles_media_activities
+    tiles_tv_channels:
+        name: tiles_tv_channels
+    tiles_media_tv_navigation:
+        name: tiles_media_tv_navigation
+    tiles_all_lights:
+        name: tiles_all_lights
+    tiles_media_volume_bedroom:
+        name: tiles_media_volume_bedroom
+    tiles_media_activities_bedroom:
+        name: tiles_media_activities_bedroom
+    tiles_tv_channels_bedroom:
+        name: tiles_tv_channels_bedroom
+    tiles_media_tv_navigation_bedroom:
+        name: tiles_media_tv_navigation_bedroom
 
 
 timer:
