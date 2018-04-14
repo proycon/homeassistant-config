@@ -306,6 +306,17 @@ input_boolean:
         name: Flip main camera
         initial: off
 
+input_text:  #dummy elements to group tiles
+    tiles_media_volume: {}
+    tiles_media_activities: {}
+    tiles_tv_channels: {}
+    tiles_media_tv_navigation: {}
+    tiles_all_lights: {}
+    tiles_media_volume_bedroom: {}
+    tiles_media_activities_bedroom: {}
+    tiles_tv_channels_bedroom: {}
+    tiles_media_tv_navigation_bedroom: {}
+
 
 timer:
     home_notification_lights:

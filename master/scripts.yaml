@@ -1745,23 +1745,3 @@ start_timer:
              media_content_id: /home/homeautomation/homeassistant/media/meditationend.ogg
              media_content_type: 'music'
 
-#dummy scripts to group tiles
-tiles_media_volume:
-    sequence:
-tiles_media_activities:
-    sequence:
-tiles_tv_channels:
-    sequence:
-tiles_media_tv_navigation:
-    sequence:
-tiles_all_lights:
-    sequence:
-
-tiles_media_volume_bedroom:
-    sequence:
-tiles_media_activities_bedroom:
-    sequence:
-tiles_tv_channels_bedroom:
-    sequence:
-tiles_media_tv_navigation_bedroom:
-    sequence:
