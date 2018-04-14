@@ -699,11 +699,13 @@ notify:
     sender: !secret xmpp_sender
     password: !secret xmpp_password
     recipient: !secret xmpp_proycon
+    verify: false
   - name: xmpp_hans
     platform: xmpp
     sender: !secret xmpp_sender
     password: !secret xmpp_password
     recipient: !secret xmpp_hans
+    verify: false
   - name: mail_both
     platform: smtp
     sender: !secret mail_sender
