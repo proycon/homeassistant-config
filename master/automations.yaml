@@ -1279,7 +1279,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.nodon_soft_remote
+      entity_id: zwave.downstairs_remote
       scene_id: 10 #Plus button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       condition: and
@@ -1305,7 +1305,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.nodon_soft_remote
+      entity_id: zwave.downstairs_remote
       scene_id: 10 #Plus button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       condition: and
@@ -1333,7 +1333,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.nodon_soft_remote
+      entity_id: zwave.downstairs_remote
       scene_id: 20 #Plus button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       - condition: state
@@ -1351,7 +1351,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.nodon_soft_remote
+      entity_id: zwave.downstairs_remote
       scene_id: 40 #Minus button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       - condition: state
@@ -1369,7 +1369,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.nodon_soft_remote
+      entity_id: zwave.downstairs_remote
       scene_id: 30 #Open circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       - condition: state
@@ -1384,7 +1384,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.nodon_soft_remote
+      entity_id: zwave.downstairs_remote
       scene_id: 13 #Doubleclick on closed circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       condition: and
@@ -1403,7 +1403,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.nodon_soft_remote
+      entity_id: zwave.downstairs_remote
       scene_id: 33 #Doubleclick on open circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       condition: and
@@ -1420,7 +1420,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.nodon_soft_remote
+      entity_id: zwave.downstairs_remote
       scene_id: 43 #Doubleclick on minus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       condition: and
@@ -1437,7 +1437,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.nodon_soft_remote
+      entity_id: zwave.downstairs_remote
       scene_id: 23 #Doubleclick on plus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       condition: and
@@ -1454,7 +1454,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.nodon_soft_remote
+      entity_id: zwave.downstairs_remote
       scene_id: 23 #Doubleclick on plus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       condition: and
@@ -1471,7 +1471,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.nodon_soft_remote
+      entity_id: zwave.downstairs_remote
       scene_id: 43 #Doubleclick on minus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       condition: and
@@ -1511,7 +1511,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.nodon_soft_remote
+      entity_id: zwave.downstairs_remote
       scene_id: 43 #Doubleclick on minus circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
   condition:
       condition: and
