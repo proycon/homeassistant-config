@@ -37,7 +37,9 @@ elif [ "$MODE" == "livingroom" ]; then
         mv tmp.jpg $DATE.$MODE.jpg
     fi
 elif [ "$MODE" == "street" ]; then
-    curl -sS "http://$STREETCAM_IP/snapshot.cgi?user=$STREETCAM_USER&pwd=$STREETCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
+    curl -sS "http://$STREETCAM_IP:88/CGIProxy.fcgi?usr=$STREETCAM_USER&pwd=$STREETCAM_PASSWORD_" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
+elif [ "$MODE" == "oldstreet" ]; then
+    curl -sS "http://$OLDSTREETCAM_IP/snapshot.cgi?user=$STREETCAM_USER&pwd=$STREETCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "garden" ]; then
     curl -sS "http://$GARDENCAM_IP/snapshot.cgi?user=$GARDENCAM_USER&pwd=$GARDENCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 else
