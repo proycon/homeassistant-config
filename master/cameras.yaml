@@ -20,10 +20,14 @@
       authentication: basic
       user: !secret ipcam_user
       password: !secret ipcam_password
+    - platform: ffmpeg
+      name: streetcam_live
+      friendly_name: Streetcam live
+      input: streetcam_rtsp_url
     - platform: mjpeg
-      friendly_name: Street Live
-      name: street_live
-      mjpeg_url: !secret streetcam_mjpeg_url
+      friendly_name: OldStreet Live
+      name: oldstreet_live
+      mjpeg_url: !secret oldstreetcam_mjpeg_url
     - platform: mjpeg
       friendly_name: Garden Live
       name: garden_live

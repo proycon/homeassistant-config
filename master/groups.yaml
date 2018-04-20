@@ -87,7 +87,7 @@ camera_view:
         - binary_sensor.bedroom_window_right
         - binary_sensor.bathroom_window_sensor
         - camera.living_room_live
-        - camera.street_live
+        - camera.streetcam_live
         - camera.garden_live
         - camera.hall_upstairs
         - camera.front_door
