@@ -58,7 +58,7 @@
   hide_entity: False
   trigger:
     platform: time
-    seconds: '/3' #every three seconds
+    seconds: '/1' #every second
   action:
     - service: shell_command.snapshot_street
 - alias: Garden snapshots
