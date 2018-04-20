@@ -1151,16 +1151,16 @@
     - delay:
         seconds: 120
 
-- alias: Streetcam Reset
+- alias: OldStreetcam Reset
   trigger:
     platform: time
     minutes: "/10"
     seconds: 00
   action:
-    - service: shell_command.streetcam_reset_1
+    - service: shell_command.oldstreetcam_reset_1
     - delay:
         seconds: 10
-    - service: shell_command.streetcam_reset_2
+    - service: shell_command.oldstreetcam_reset_2
 
 
 - alias: Bathroom Vent On

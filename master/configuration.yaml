@@ -153,8 +153,8 @@ shell_command:
     archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
     event_snapshots: /home/homeautomation/homeassistant/scripts/camera/eventsnapshots.sh "{{ cams }}"
     snapshot_clear_locks: find "/home/homeautomation/homeassistant/snapshots/" -type f -name "*.lock" | xargs rm
-    streetcam_reset_1: !secret streetcam_noir_command
-    streetcam_reset_2: !secret streetcam_quality_command
+    oldstreetcam_reset_1: !secret oldstreetcam_noir_command
+    oldstreetcam_reset_2: !secret oldstreetcam_quality_command
     hallspeaker_normalvolume: "amixer set Master 60%"
     hallspeaker_fullvolume: "amixer set Master 100%"
 
