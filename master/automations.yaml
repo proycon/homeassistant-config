@@ -461,7 +461,7 @@
      - service: script.reset_fireplace
        entity_id: script.reset_fireplace
      - delay:
-         seconds: 2
+         seconds: 3
      - service: script.turn_on
        entity_id: script.reset_guard_lights
      - delay:
