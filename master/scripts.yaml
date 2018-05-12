@@ -1222,18 +1222,18 @@ watch_tv_bedroom:
           entity_id: switch.tv_decoder_bedroom
         - delay:
             seconds: 5
-        - service: mqtt.publish #start switch source sequence
+        - service: mqtt.publish #start switch source sequence, triggers some "disconnect anynet device notice"
           data:
              topic: "home/ir_send/pi2"
              payload: '{"device":"tvboven","key":"KEY_MODE","state":"on"}'
         - delay:
             seconds: 5
-        - service: mqtt.publish #start switch source sequence
+        - service: mqtt.publish #start switch source sequence again
           data:
              topic: "home/ir_send/pi2"
              payload: '{"device":"tvboven","key":"KEY_MODE","state":"on"}'
         - delay:
-            seconds: 5
+            seconds: 2
         - service: mqtt.publish
           data:
              topic: "home/ir_send/pi2"
