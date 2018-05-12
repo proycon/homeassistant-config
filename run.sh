@@ -11,6 +11,9 @@ if [ ! -d "$HADIR/env" ]; then
     echo "Virtualenv not setup yet for $HOST" >&2
     ./setup.py
 fi
+if [ -d "$HADIR/snapshots" ]; then
+    rm $HADIR/snapshots/*.lock
+fi
 
 . $HADIR/env/bin/activate
 
