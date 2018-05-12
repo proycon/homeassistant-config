@@ -1227,7 +1227,13 @@ watch_tv_bedroom:
              topic: "home/ir_send/pi2"
              payload: '{"device":"tvboven","key":"KEY_MODE","state":"on"}'
         - delay:
-            seconds: 2
+            seconds: 5
+        - service: mqtt.publish #start switch source sequence
+          data:
+             topic: "home/ir_send/pi2"
+             payload: '{"device":"tvboven","key":"KEY_MODE","state":"on"}'
+        - delay:
+            seconds: 5
         - service: mqtt.publish
           data:
              topic: "home/ir_send/pi2"
