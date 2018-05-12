@@ -495,9 +495,9 @@ input_text.tiles_all_lights:
 input_text.tiles_media_volume_bedroom:
   custom_ui_state_card: state-card-tiles
   config:
-    columns: 3
+    columns: 5
     row_height: 50px
-    column_width: 62px
+    column_width: 50px
     gap: 15px
     color: '#555B65'
     color_on: '#D5D619'
@@ -514,6 +514,14 @@ input_text.tiles_media_volume_bedroom:
       - entity: script.tv_bedroom_volup
         icon: mdi:volume-high
         column: 3
+        row: 1
+      - entity: script.tvdecoder2_channeldown
+        icon: mdi:minus-circle
+        column: 4
+        row: 1
+      - entity: script.tvdecoder2_channelup
+        icon: mdi:plus-circle
+        column: 5
         row: 1
 
 input_text.tiles_media_activities_bedroom:
