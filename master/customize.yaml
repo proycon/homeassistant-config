@@ -144,7 +144,7 @@ sensor.humidity_living_room:
 script.repoll_slaves:
     icon: mdi:reload
 script.play_youtube_playlist:
-    icon: mdi:youtube-play
+    icon: mdi:youtube
 device_tracker.mhysa:
     icon: mdi:desktop-classic
 device_tracker.wifi_router:
@@ -215,7 +215,7 @@ input_text.tiles_media_activities:
         column: 2
         row: 1
       - entity: script.play_youtube_playlist
-        icon: mdi:youtube-play
+        icon: mdi:youtube
         column: 3
         row: 1
       - entity: script.listen_to_music
@@ -544,7 +544,7 @@ input_text.tiles_media_activities_bedroom:
         column: 2
         row: 1
       - entity: script.play_youtube_playlist_bedroom
-        icon: mdi:youtube-play
+        icon: mdi:youtube
         column: 3
         row: 1
       - entity: script.listen_to_music_bedroom
