@@ -68,7 +68,7 @@ panel_iframe:
     url: !secret wifi_router_url
     icon: mdi:router-wireless
   wanrouter:
-    title: 'WANi/KPN Router'
+    title: 'WAN/KPN Router'
     url: !secret kpn_router_url
     icon: mdi:upload-network
 

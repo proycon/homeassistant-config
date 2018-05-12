@@ -166,9 +166,9 @@ sensor.outside_humidity:
 input_text.tiles_media_volume:
   custom_ui_state_card: state-card-tiles
   config:
-    columns: 3
+    columns: 5
     row_height: 50px
-    column_width: 62px
+    column_width: 50px
     gap: 15px
     color: '#555B65'
     color_on: '#D5D619'
@@ -185,6 +185,14 @@ input_text.tiles_media_volume:
       - entity: script.avr_volup
         icon: mdi:volume-high
         column: 3
+        row: 1
+      - entity: script.tvdecoder_channeldown
+        icon: mdi:minus-circle
+        column: 1
+        row: 1
+      - entity: script.tvdecoder_channelup
+        icon: mdi:plus-circle
+        column: 2
         row: 1
 
 input_text.tiles_media_activities:
