@@ -1068,6 +1068,8 @@ reset_guard_lights:
               entity_id:
                 - switch.porch
         - wait_template: "{{ states('switch.porch') == 'on' }}"
+        - delay:
+            seconds: 2
         - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int < 2 or states.sensor.time.state[:2]|int > 6) %}on{% else %}off{% endif %}"
           data:
               entity_id:
