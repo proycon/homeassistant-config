@@ -1216,20 +1216,34 @@ watch_tv_bedroom:
     sequence:
         - service: switch.turn_on
           entity_id: switch.tv_bedroom
+        - delay:
+            seconds: 2
         - service: switch.turn_on
           entity_id: switch.tv_decoder_bedroom
         - delay:
-            seconds: 4
+            seconds: 5
         - service: mqtt.publish #start switch source sequence
           data:
              topic: "home/ir_send/pi2"
              payload: '{"device":"tvboven","key":"KEY_MODE","state":"on"}'
         - delay:
+            seconds: 2
+        - service: mqtt.publish
+          data:
+             topic: "home/ir_send/pi2"
+             payload: '{"device":"tvboven","key":"KEY_DOWN","state":"on"}'
+        - delay:
             seconds: 1
         - service: mqtt.publish
           data:
              topic: "home/ir_send/pi2"
-             payload: '{"device":"tvboven","key":"KEY_UP","state":"on"}'
+             payload: '{"device":"tvboven","key":"KEY_DOWN","state":"on"}'
+        - delay:
+            seconds: 1
+        - service: mqtt.publish
+          data:
+             topic: "home/ir_send/pi2"
+             payload: '{"device":"tvboven","key":"KEY_DOWN","state":"on"}'
         - delay:
             seconds: 1
         - service: mqtt.publish
