@@ -188,11 +188,11 @@ input_text.tiles_media_volume:
         row: 1
       - entity: script.tvdecoder_channeldown
         icon: mdi:minus-circle
-        column: 1
+        column: 4
         row: 1
       - entity: script.tvdecoder_channelup
         icon: mdi:plus-circle
-        column: 2
+        column: 5
         row: 1
 
 input_text.tiles_media_activities:
