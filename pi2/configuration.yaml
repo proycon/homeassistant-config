@@ -279,7 +279,7 @@ automation:
         topic: "home/xorg/set/pi2"
     action:
         service_template: switch.turn_{{trigger.payload|lower}}
-        entity_id: switch.kodi
+        entity_id: switch.xorg
   - id: m2s_wakeup
     alias: m2s_wakeup
     trigger:
