@@ -108,6 +108,11 @@ tvdecoder_channelup:
         data:
             topic: "home/ir_send/pi1"
             payload: '{"device":"VIP1853","key":"CHANNEL_UP"}'
+      - condition: state
+        entity_id: switch.tv
+        state: 'off'
+      - service: script.turn_on
+        entity_id: script.watch_tv
 tvdecoder_channeldown:
     alias: Channel down
     sequence:
@@ -526,6 +531,11 @@ tvdecoder2_channelup:
         data:
             topic: "home/ir_send/pi2"
             payload: '{"device":"VIP1853","key":"CHANNEL_UP"}'
+      - condition: state
+        entity_id: switch.tv_bedroom
+        state: 'off'
+      - service: script.turn_on
+        entity_id: script.watch_tv_bedroom
 tvdecoder2_channeldown:
     alias: Channel down
     sequence:
