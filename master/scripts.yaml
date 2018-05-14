@@ -1777,3 +1777,33 @@ start_timer:
              media_content_id: /home/homeautomation/homeassistant/media/meditationend.ogg
              media_content_type: 'music'
 
+vacuum_turn_on:
+    alias: Vacuum turn on
+    sequence:
+        service: vacuum.turn_on
+        data:
+            entity_id: vacuum.robot
+vacuum_turn_off:
+    alias: Vacuum turn off
+    sequence:
+        service: vacuum.turn_off
+        data:
+            entity_id: vacuum.robot
+vacuum_pause:
+    alias: Vacuum pause
+    sequence:
+        service: vacuum.pause
+        data:
+            entity_id: vacuum.robot
+vacuum_return_to_home:
+    alias: Vacuum return to home
+    sequence:
+        service: vacuum.return_to_home
+        data:
+            entity_id: vacuum.robot
+vacuum_locate:
+    alias: Vacuum locate
+    sequence:
+        service: vacuum.locate
+        data:
+            entity_id: vacuum.robot
