@@ -23,6 +23,7 @@ default_view:
         - group.outside_environment
         - group.wake_up_alarm
         - group.timer
+        - group.robot
 
 
 media_view:
@@ -462,6 +463,12 @@ fans:
     icon: mdi:fan
     entities:
         - fan.ceiling_fan
+
+robot:
+    name: Robot
+    icon: mdi:robot
+    entities:
+        - input_text.tiles_robot
 
 wake_up_alarm:
     name: Wake up alarm

@@ -751,3 +751,35 @@ input_text.tiles_media_tv_navigation_bedroom:
         icon: mdi:backburger
         column: 3
         row: 6
+
+input_text.tiles_robot:
+  custom_ui_state_card: state-card-tiles
+  config:
+    columns: 3
+    row_height: 65px
+    column_width: 50px
+    gap: 15px
+    color: '#555B65'
+    color_on: '#D5D619'
+    color_off: '#BBBEC2'
+    entities:
+      - entity: vacuum.turn_on
+        icon: mdi:play
+        column: 1
+        row: 1
+      - entity: vacuum.pause
+        icon: mdi:pause
+        column: 2
+        row: 1
+      - entity: vacuum.turn_off
+        icon: mdi:stop
+        column: 3
+        row: 2
+      - entity: vacuum.return_to_home
+        icon: mdi:home
+        column: 3
+        row: 2
+      - entity: vacuum.locate
+        icon: mdi:help
+        column: 2
+        row: 2
