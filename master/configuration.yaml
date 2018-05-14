@@ -306,9 +306,6 @@ input_boolean:
     flip_main_camera:
         name: Flip main camera
         initial: off
-    robot:
-        name: Robot
-        initial: off
 
 input_text:  #dummy elements to group tiles
     tiles_media_volume:
