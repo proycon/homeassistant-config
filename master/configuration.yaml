@@ -306,6 +306,9 @@ input_boolean:
     flip_main_camera:
         name: Flip main camera
         initial: off
+    robot:
+        name: Robot
+        initial: off
 
 input_text:  #dummy elements to group tiles
     tiles_media_volume:
@@ -326,6 +329,8 @@ input_text:  #dummy elements to group tiles
         name: tiles_tv_channels_bedroom
     tiles_media_tv_navigation_bedroom:
         name: tiles_media_tv_navigation_bedroom
+    tiles_robot:
+        name: tiles_robot
 
 
 timer:
@@ -653,9 +658,11 @@ fan:
       - high
 
 
-
-
-
+vacuum:
+  - name: robot
+    platform: xiaomi_miio
+    host: !secret roboip
+    token: !secret robotoken
 
 #hdmi_cec:
 #    host: !secret pi1_ip
