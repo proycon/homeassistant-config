@@ -763,23 +763,23 @@ input_text.tiles_robot:
     color_on: '#D5D619'
     color_off: '#BBBEC2'
     entities:
-      - entity: script.turn_on
+      - entity: script.vacuum_turn_on
         icon: mdi:play
         column: 1
         row: 1
-      - entity: script.pause
+      - entity: script.vacuum_pause
         icon: mdi:pause
         column: 2
         row: 1
-      - entity: script.turn_off
+      - entity: script.vacuum_turn_off
         icon: mdi:stop
         column: 3
-        row: 2
-      - entity: script.return_to_home
+        row: 1
+      - entity: script.vacuum_return_to_home
         icon: mdi:home
         column: 3
         row: 2
-      - entity: script.locate
+      - entity: script.vacuum_locate
         icon: mdi:help
         column: 2
         row: 2
