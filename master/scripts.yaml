@@ -1262,8 +1262,6 @@ watch_tv_bedroom:
 listen_to_music_bedroom:
     alias: Listen to Music (Bedroom)
     sequence:
-        - service: switch.turn_on
-          entity_id: switch.tv_bedroom
         - service: switch.turn_off
           entity_id: switch.pi2_xorg
         - service: switch.turn_off
