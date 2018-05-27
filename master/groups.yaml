@@ -470,6 +470,11 @@ robot:
     control: hidden
     entities:
         - input_text.tiles_robot
+        - sensor.robot_battery
+        - sensor.robot_cleaning_count
+        - sensor.robot_fan_speed
+        - sensor.last_cleaning_duration
+        - sensor.last_cleaning_time
 
 wake_up_alarm:
     name: Wake up alarm

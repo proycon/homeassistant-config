@@ -354,6 +354,21 @@ sensor:
           wake_up_relative_time:
             friendly_name: Wake up relative time #seconds after wake up time
             value_template: "{{ states.sensor.time.state[:2]|int * 60  + states.sensor.time.state[2:4]|int  - states.sensor.wake_up_time.state[:2]|int * 60  + states.sensor.wake_up_time.state[2:4]|int }}"
+          robot_battery:
+            friendly_name: Robot Battery
+            value_template: "{{ states.vacuum.robot.attributes.battery_level }}"
+          robot_cleaning_count:
+            friendly_name: Robot Cleaning Count
+            value_template: "{{ states.vacuum.robot.attributes.cleaning_count }}"
+          robot_fan_speed:
+            friendly_name: Robot Fan Speed
+            value_template: "{{ states.vacuum.robot.attributes.fan_speed }}"
+          last_cleaning_duration:
+            friendly_name: Last Cleaning Duration
+            value_template: "{{ states.vacuum.robot.attributes.cleaning_time }}"
+          last_cleaning_time:
+            friendly_name: Last Cleaning Time
+            value_template: "{{ states.script.vacuum_turn_on.attributes.last_triggered }}"
     - platform: mqtt
       name: Temperature Living Room
       unit_of_measurement: °C
