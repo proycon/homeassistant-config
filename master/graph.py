@@ -131,18 +131,19 @@ for period in periods:
 
     groupbyName = cdf.groupby(['entity_id'])
     for key, group in groupbyName:
-        print(key,file=sys.stderr)
+        name = entity_attributes[key]['friendly_name']
+        print(key+": " + name,file=sys.stderr)
         tempgroup = group.copy()
-        tempgroup.rename(columns={'state': key}, inplace=True)
+        tempgroup.rename(columns={'state': name}, inplace=True)
 
         # create a mini-dataframe for each of the groups
         df = groupbyName.get_group(key)
         norm = max(df['state'].resample('H').sum())
         #if period <= 2:
         #    print(tempgroup[[key]])
-        tempgroup[[key]] *= norm / 2
+        tempgroup[[name]] *= norm / 2
 
-        ax = tempgroup[[key]].plot(title=entity_attributes[key]['friendly_name'] + " (" + str(period) + " days)", drawstyle='steps-post',legend=False, figsize=(12, 8))
+        ax = tempgroup[[name]].plot(title=name + " (" + str(period) + " days)", drawstyle='steps-post',legend=False, figsize=(12, 8))
         ax.fill_between(df.index, df['state'] * (norm/2), 0, step='post', alpha=0.3,lw=0)
 
         # resample the mini-dataframe on the index for each Day, get the mean and plot it
@@ -186,16 +187,17 @@ for period in periods:
 
         # build a separate chart for each of the friendly_name values
         for key, group in groupbyName:
-            print("Processing " + key + " (" + str(period)+")",file=sys.stderr)
+            name = entity_attributes[key]['friendly_name']
+            print("Processing " + key + " (" + str(period)+"): " + name,file=sys.stderr)
 
             # since we will be plotting the 'State' column, let's rename it to \
             # match the groupby key (distinct friendly_name value)
             tempgroup = group.copy()
-            tempgroup.rename(columns={'state': key}, inplace=True)
+            tempgroup.rename(columns={'state': name}, inplace=True)
 
             # plot the values, specify the figure size and title
             try:
-                ax = tempgroup[[key]].plot(title=entity_attributes[key]['friendly_name'] + " (" + str(period) + " days)", legend=False, figsize=(12, 8))
+                ax = tempgroup[[name]].plot(title=name + " (" + str(period) + " days)", legend=False, figsize=(12, 8))
             except TypeError as e:
                 print("Unable to plot " + key + ": " + str(e),file=sys.stderr)
                 continue
