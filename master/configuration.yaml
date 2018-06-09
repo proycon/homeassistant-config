@@ -205,6 +205,9 @@ input_select:
             - TV
             - Couch
             - Front
+            - Bed Jaiko
+            - Floor
+            - Mand Jaiko
     fireplace:
         name: Fireplace
         options:
