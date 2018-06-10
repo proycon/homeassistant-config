@@ -166,6 +166,7 @@ config_view:
         - group.config_links
         - group.devices
         - group.timer
+        - group.battery_stats
 
 power_consumption:
     name: Power Consumption
@@ -484,3 +485,14 @@ wake_up_alarm:
         - sensor.wake_up_time
         - input_number.wake_up_hour
         - input_number.wake_up_minutes
+
+battery_stats:
+    name: Battery Stats
+    icon: mdi:battery
+    entities:
+        - sensor.office_fibaro_battery
+        - sensor.kitchen_fibaro_battery
+        - sensor.hall_fibaro_battery
+        - sensor.bathroom_humidity_battery
+        - sensor.bathroom_window_battery
+        - sensor.downstairs_remote_battery

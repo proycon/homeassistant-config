@@ -372,6 +372,24 @@ sensor:
           last_cleaning_time:
             friendly_name: Last Cleaning Time
             value_template: "{{ states.script.vacuum_turn_on.attributes.last_triggered }}"
+          office_fibaro_battery:
+            friendly_name: Office Fibaro Battery
+            value_template: "{{ states.zwave.fibaro_office.attributes.battery_level }}"
+          kitchen_fibaro_battery:
+            friendly_name: Kitchen Fibaro Battery
+            value_template: "{{ states.zwave.fibaro_multisensor.attributes.battery_level }}"
+          hall_fibaro_battery:
+            friendly_name: Hall Fibaro Battery
+            value_template: "{{ states.zwave.fibaro_hall.attributes.battery_level }}"
+          bathroom_humidity_battery:
+            friendly_name: Bathroom Humidity Battery
+            value_template: "{{ states.zwave.bathroom_sensor.attributes.battery_level }}"
+          bathroom_window_battery:
+            friendly_name: Bathroom Window Battery
+            value_template: "{{ states.zwave.bathroom_window.attributes.battery_level }}"
+          downstairs_remote_battery:
+            friendly_name: Downstairs remote battery
+            value_template: "{{ states.zwave.downstairs_remote_battery.attributes.battery_level }}"
     - platform: mqtt
       name: Temperature Living Room
       unit_of_measurement: °C
