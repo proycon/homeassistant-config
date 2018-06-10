@@ -1546,6 +1546,12 @@ mail_test:
         data_template:
             title: "[homeautomation] Test"
             message: "Test, just ignore"
+matrix_test:
+    alias: Matrix test
+    sequence:
+      - service: notify.matrix
+        data:
+            message: "(Test, just ignore)"
 
 night_scene:
     alias: Turn on night scene

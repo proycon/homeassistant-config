@@ -253,6 +253,7 @@ config_tests:
         - script.green_lights
         - script.sirene_lights
         - script.mail_test
+        - script.matrix_test
         - script.trigger_alarm_manually
         - script.wake_up_alarm
         - script.home_notification_lights

@@ -723,6 +723,16 @@ media_player kodi_bedroom:
       username: !secret kodi_username
       password: !secret kodi_password
 
+matrix:
+  homeserver: https://matrix.org
+  username: !secret matrix_id
+  password: !secret matrix_password
+  rooms:
+    - !secret matrix_room
+  commands:
+    - word: "lights_on"
+      name: lights_on #hook not implemented yet
+
 notify:
   - name: xmpp_proycon
     platform: xmpp
@@ -751,6 +761,9 @@ notify:
   - name: sms
     platform: message_bird
     api_key: !secret messagebird_apikey
+  - name: matrix
+    platform: matrix
+    default_room: !secret matrix_room
 
 #MQTT
 mqtt:

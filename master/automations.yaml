@@ -26,6 +26,9 @@
       - service: notify.xmpp_proycon
         data:
             message: "Home automation started"
+      - service: notify.matrix
+        data:
+            message: "Home automation started"
       - service: mqtt.publish
         data:
             topic: "home/say/pi1"
@@ -263,6 +266,9 @@
         data_template:
             title: "[homeautomation] Doorbell rang ({{ now() }})"
             message: "The doorbell rang; there is somebody at the door, please check"
+      - service: notify.matrix
+        data_template:
+          message: "The doorbell rang, there is somebody at the door ({{ now() }})"
       - delay:
           seconds: 6
       - service: shell_command.event_snapshots
@@ -338,6 +344,9 @@
       data_template:
           title: "[homeautomation] INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now() }})!!! CHECK IMMEDIATELY!!!"
           message: "INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now() }})!!! CHECK IMMEDIATELY!!!"
+    - service: notify.matrix
+      data:
+          message: "INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now() }})!!! CHECK IMMEDIATELY!!!"
     - service: persistent_notification.create
       data_template:
         message: "ALARM TRIGGERED!!!"
@@ -407,6 +416,9 @@
     - service: notify.xmpp_hans
       data:
           message: "System armed"
+    - service: notify.matrix
+      data:
+          message: "System armed"
 - id: disarm_when_home
   alias: 'Disarm when home'
   trigger:
@@ -421,6 +433,9 @@
       data:
           message: "System disarmed"
     - service: notify.xmpp_hans
+      data:
+          message: "System disarmed"
+    - service: notify.matrix
       data:
           message: "System disarmed"
     - service: script.turn_on
@@ -510,6 +525,9 @@
       data_template:
           title: "[homeautomation] Front door still open"
           message: "Front door still open"
+    - service: notify.matrix
+      data:
+          message: "Front door still open ({{ now() }})"
 - id: back_door_still_open
   alias: "Back door still open"
   trigger:
@@ -996,6 +1014,9 @@
         data_template:
            message: "Alarm cancelled {{ now() }}"
            title: "Alarm cancelled {{ now() }}"
+      - service: notify.matrix
+        data:
+           message: "Alarm cancelled ({{ now() }})"
       - service: notify.sms
         data_template:
            message: "Alarm cancelled {{ now() }}"
@@ -1552,6 +1573,9 @@
     - service: notify.xmpp_hans
       data:
           message: "Pi 1 is down ({{ now() }})"
+    - service: notify.matrix
+      data:
+          message: "Pi 1 is down ({{ now() }})"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Pi 1 is down"
@@ -1574,6 +1598,9 @@
       data:
           message: "Pi 2 is down ({{ now() }})"
     - service: notify.xmpp_hans
+      data:
+          message: "Pi 2 is down ({{ now() }})"
+    - service: notify.matrix
       data:
           message: "Pi 2 is down ({{ now() }})"
     - service: notify.mail_both
@@ -1600,6 +1627,9 @@
     - service: notify.xmpp_hans
       data:
           message: "Pi 3 is down ({{ now() }})"
+    - service: notify.matrix
+      data:
+          message: "Pi 3 is down ({{ now() }})"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Pi 3 is down"
@@ -1624,6 +1654,9 @@
     - service: notify.xmpp_hans
       data:
           message: "KPN router is down ({{ now() }})"
+    - service: notify.matrix
+      data:
+          message: "KPN router is down ({{ now() }})"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] KPN router is down"
@@ -1646,6 +1679,9 @@
       data:
           message: "wifi router is down ({{ now() }})"
     - service: notify.xmpp_hans
+      data:
+          message: "wifi router is down ({{ now() }})"
+    - service: notify.matrix
       data:
           message: "wifi router is down ({{ now() }})"
     - service: notify.mail_both
