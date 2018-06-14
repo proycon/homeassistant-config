@@ -1402,11 +1402,17 @@
 
 - alias: Master off switch
   trigger:
-    platform: event
-    event_type: zwave.scene_activated
-    event_data:
-      entity_id: zwave.downstairs_remote
-      scene_id: 13 #Doubleclick on closed circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          entity_id: zwave.downstairs_remote
+          scene_id: 13 #Doubleclick on closed circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
+      - platform: event
+        event_type: zwave.scene_activated
+        event_data:
+          entity_id: zwave.remote8
+          scene_id: 1
+          scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       condition: and
       conditions:
@@ -1419,7 +1425,7 @@
       - service: script.turn_on
         entity_id: script.turn_media_off
 
-- alias: SoftRemote Master on switch
+- alias: Master on switch
   trigger:
     platform: event
     event_type: zwave.scene_activated
@@ -1782,3 +1788,50 @@
       entity_id: script.lights_off
 
 
+- id: remote_fireplace_on
+  alias: remote8_fireplace_on
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remote8
+        scene_id: 3
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: input_select.select_option
+       data:
+           entity_id: input_select.fireplace
+           option: Fire
+     - service: input_number.set_value
+       data:
+           entity_id: input_number.fireplace_brightness
+           value: 255
+     - service: input_number.set_value
+       data:
+           entity_id: input_number.dresser_ambilight_brightness
+           value: 40
+     - service: input_select.select_option
+       data:
+           entity_id: input_select.dresser_ambilight
+           option: Lamp
+     - delay:
+           seconds: 1
+     - service: script.turn_on
+       entity_id: script.ignite_fireplace
+     - service: script.turn_on
+       entity_id: script.ignite_dresser_ambilight
+
+- id: remote_fireplace_off
+  alias: remote8_fireplace_off
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remote8
+        scene_id: 3
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.extinguish_dresser_ambilight
+     - service: script.turn_on
+       entity_id: script.extinguish_fireplace
