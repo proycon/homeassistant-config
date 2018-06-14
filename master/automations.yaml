@@ -1787,6 +1787,18 @@
       service: script.turn_on
       entity_id: script.lights_off
 
+- id: remote_night_scene
+  alias: remote_night_scene
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 2
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+      service: script.turn_on
+      entity_id: script.night_scene
 
 - id: remote_fireplace_on
   alias: remote8_fireplace_on
@@ -1882,3 +1894,33 @@
   action:
      - service: script.turn_on
        entity_id: script.turn_media_off
+
+- id: remote_music_on
+  alias: remote_music_on
+  condition: #so we don't accidentally start music when TV is on
+    - condition: state
+      entity_id: switch.tv
+      state: "off"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 6
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.listen_to_music
+
+- id: remote_music_next
+  alias: remote_music_next
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 6
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: media_player.media_next_track
+       entity_id: media_player.mpd
