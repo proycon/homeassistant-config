@@ -143,10 +143,13 @@ inside_environment:
         - sensor.fibaro_office_luminance
         - sensor.fibaro_hall_temperature
         - sensor.fibaro_hall_luminance
+        - sensor.dogsensor_temperature
+        - sensor.dogsensor_luminance
         - binary_sensor.pir_living_room
         - binary_sensor.pir_kitchen
         - binary_sensor.pir_hall
         - binary_sensor.pir_office
+        - binary_sensor.pir_jaiko
         - sensor.ir_send_activity
 
 

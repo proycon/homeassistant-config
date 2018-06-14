@@ -525,6 +525,12 @@ binary_sensor:
         entity_id:
             - sensor.fibaro_office_burglar
         device_class: motion
+      pir_jaiko:
+        friendly_name: "PIR Jaiko"
+        value_template: '{{ is_state("sensor.dogsensor_burglar", "8") }}'
+        entity_id:
+            - sensor.dogsensor_burglar
+        device_class: motion
       bathroom_too_humid:
         friendly_name: "Bathroom too humid"
         value_template: '{{ states("sensor.bathroom_sensor_relative_humidity") | float > 75.0 }}'

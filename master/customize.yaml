@@ -134,6 +134,12 @@ sensor.fibaro_office_general:
     friendly_name: Office Motion
 sensor.fibaro_office_luminance:
     friendly_name: Office Light Level
+sensor.dogsensor_temperature:
+    friendly_name: Living Room Temperature (Bench)
+sensor.dogsensor_general:
+    friendly_name: Jaiko Motion
+sensor.dogsensor_luminance:
+    friendly_name: Living Room Light Level
 binary_sensor.bathroom_window_sensor:
     friendly_name: Bathroom Window Sensor
     device_class: opening
