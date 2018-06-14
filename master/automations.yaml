@@ -1835,3 +1835,50 @@
        entity_id: script.extinguish_dresser_ambilight
      - service: script.turn_on
        entity_id: script.extinguish_fireplace
+
+- id: remote_tv_on
+  alias: remote_tv_on
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "off"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 5
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.watch_tv
+
+- id: remote_mute
+  alias: remote_mute
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 5
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.avr_mute
+
+- id: remote_media_off
+  alias: remote_media_off
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 5
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.turn_media_off
