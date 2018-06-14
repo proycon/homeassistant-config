@@ -1747,13 +1747,38 @@
 
 
 
-- id: scene1
-  alias: scene1
+- id: remote_lights_on
+  alias: remote8_lights_on
+  condition:
+      - condition: state
+        entity_id: switch.midspots
+        state: "off"
   trigger:
     - platform: event
       event_type: zwave.scene_activated
       event_data:
-        entity_id: zwave.scenecontroller_1
+        entity_id: zwave.remote8
         scene_id: 1
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+      service: script.turn_on
+      entity_id: script.lights_on
+
+- id: remote_lights_off
+  alias: remote8_lights_off
+  condition:
+      - condition: state
+        entity_id: switch.tv_spots
+        state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remote8
+        scene_id: 1
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+      service: script.turn_on
+      entity_id: script.lights_off
+
 

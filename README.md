@@ -70,6 +70,7 @@ I have the following devices:
     * 1x Neo Coolcam Door/window sensor
     * 2x Nodon Softremote buttons for scene selection/quick remote functionality
     * 1x Philiotech Temperature/Humidity Sensor for bathroom
+    * 1x Remotec ZRC-90 remote
  * **Other**
     * *Slimme Meter* for power consumption, connected to main server
     * Speakers throughout the house for text-to-speech notifications
