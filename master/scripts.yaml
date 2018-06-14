@@ -1572,20 +1572,8 @@ night_scene:
         entity_id: switch.midspots
       - wait_template: "{{ states('switch.midspots') == 'off' }}"
       - service: switch.turn_off
-        entity_id: switch.garden
-      - wait_template: "{{ states('switch.garden') == 'off' }}"
-      - service: switch.turn_off
-        entity_id: switch.balcony
-      - wait_template: "{{ states('switch.balcony') == 'off' }}"
-      - service: switch.turn_off
-        entity_id: switch.roof
-      - wait_template: "{{ states('switch.roof') == 'off' }}"
-      - service: switch.turn_off
         entity_id: switch.kitchen
       - wait_template: "{{ states('switch.kitchen') == 'off' }}"
-      - service: switch.turn_off
-        entity_id: switch.office
-      - wait_template: "{{ states('switch.office') == 'off' }}"
       - service: switch.turn_off
         entity_id: switch.hall
       - wait_template: "{{ states('switch.hall') == 'off' }}"
@@ -1599,6 +1587,43 @@ night_scene:
         data:
             entity_id: input_select.dresser_ambilight
             option: Purple
+      - service: script.turn_on
+        entity_id: script.ignite_dresser_ambilight
+
+evening_scene:
+    alias: Turn on evening scene
+    sequence:
+      - service: switch.turn_on
+        entity_id: switch.tv_spots
+      - wait_template: "{{ states('switch.tv_spots') == 'on' }}"
+      - service: switch.turn_on
+        entity_id: switch.back_corner
+      - wait_template: "{{ states('switch.back_corner') == 'on' }}"
+      - service: switch.turn_on
+        entity_id: switch.back_room
+      - wait_template: "{{ states('switch.back_room') == 'on' }}"
+      - service: switch.turn_off
+        entity_id: switch.front_room
+      - wait_template: "{{ states('switch.front_room') == 'off' }}"
+      - service: switch.turn_off
+        entity_id: switch.midspots
+      - wait_template: "{{ states('switch.midspots') == 'off' }}"
+      - service: switch.turn_off
+        entity_id: switch.kitchen
+      - wait_template: "{{ states('switch.kitchen') == 'off' }}"
+      - service: switch.turn_off
+        entity_id: switch.hall
+      - wait_template: "{{ states('switch.hall') == 'off' }}"
+      - service: script.turn_on
+        entity_id: script.ignite_fireplace
+      - service: input_number.set_value
+        data:
+            entity_id: input_number.dresser_ambilight_brightness
+            value: 125
+      - service: input_select.select_option
+        data:
+            entity_id: input_select.dresser_ambilight
+            option: Lamp
       - service: script.turn_on
         entity_id: script.ignite_dresser_ambilight
 

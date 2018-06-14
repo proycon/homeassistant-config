@@ -1800,8 +1800,25 @@
       service: script.turn_on
       entity_id: script.night_scene
 
+- id: remote_evening_scene
+  alias: remote_evening_scene
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 2
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+      service: script.turn_on
+      entity_id: script.evening_scene
+
 - id: remote_fireplace_on
   alias: remote8_fireplace_on
+  condition:
+      - condition: state
+        entity_id: switch.technofire
+        state: "off"
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -1835,6 +1852,29 @@
 
 - id: remote_fireplace_off
   alias: remote8_fireplace_off
+  condition:
+      - condition: state
+        entity_id: switch.technofire
+        state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 3
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.extinguish_dresser_ambilight
+     - service: script.turn_on
+       entity_id: script.extinguish_fireplace
+
+- id: remote_ambilight_cycle
+  alias: remote8_ambilight_cycle
+  condition:
+      - condition: state
+        entity_id: switch.technofire
+        state: "off"
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -1843,10 +1883,28 @@
         scene_id: 3
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
+     - service: input_select.select_option
+       data:
+           entity_id: input_select.fireplace
+           option: Fire
+     - service: input_number.set_value
+       data:
+           entity_id: input_number.fireplace_brightness
+           value: 255
+     - service: input_number.set_value
+       data:
+           entity_id: input_number.dresser_ambilight_brightness
+           value: 40
+     - service: input_select.select_option
+       data:
+           entity_id: input_select.dresser_ambilight
+           option: Colorcycle Slow
+     - delay:
+           seconds: 1
      - service: script.turn_on
-       entity_id: script.extinguish_dresser_ambilight
+       entity_id: script.ignite_fireplace
      - service: script.turn_on
-       entity_id: script.extinguish_fireplace
+       entity_id: script.ignite_dresser_ambilight
 
 - id: remote_tv_on
   alias: remote_tv_on
@@ -1924,3 +1982,37 @@
   action:
      - service: media_player.media_next_track
        entity_id: media_player.mpd
+
+- id: remote_robot_on
+  alias: remote_robot_on
+  condition: #so we don't accidentally start robot when TV is on
+    - condition: state
+      entity_id: switch.tv
+      state: "off"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 7
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.vacuum_turn_on
+
+- id: remote_robot_off
+  alias: remote_robot_off
+  condition: #so we don't accidentally start robot when TV is on
+    - condition: state
+      entity_id: switch.tv
+      state: "off"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 7
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.vacuum_turn_off
