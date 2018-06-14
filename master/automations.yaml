@@ -1410,7 +1410,7 @@
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.remote8
+          entity_id: zwave.remotec_zrc90
           scene_id: 1
           scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
@@ -1763,7 +1763,7 @@
     - platform: event
       event_type: zwave.scene_activated
       event_data:
-        entity_id: zwave.remote8
+        entity_id: zwave.remotec_zrc90
         scene_id: 1
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
@@ -1780,7 +1780,7 @@
     - platform: event
       event_type: zwave.scene_activated
       event_data:
-        entity_id: zwave.remote8
+        entity_id: zwave.remotec_zrc90
         scene_id: 1
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
@@ -1794,7 +1794,7 @@
     - platform: event
       event_type: zwave.scene_activated
       event_data:
-        entity_id: zwave.remote8
+        entity_id: zwave.remotec_zrc90
         scene_id: 3
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
@@ -1827,7 +1827,7 @@
     - platform: event
       event_type: zwave.scene_activated
       event_data:
-        entity_id: zwave.remote8
+        entity_id: zwave.remotec_zrc90
         scene_id: 3
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
