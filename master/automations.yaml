@@ -1747,6 +1747,13 @@
 
 
 
-
-
+- id: scene1
+  alias: scene1
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.scenecontroller_1
+        scene_id: 1
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
 
