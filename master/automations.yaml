@@ -174,7 +174,7 @@
             entity_id: switch.kitchen
             state: "off"
           - condition: template
-            value_template: '{% if states.automation.lights_on_when_dark_during_the_day.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.lights_on_when_dark_during_the_day.attributes.last_triggered)) < 21600 }} {% else %} true {% endif %}'
+            value_template: '{% if states.automation.lights_on_when_dark_during_the_day.attributes.last_triggered  %} {{(as_timestamp(now()) - as_timestamp(states.automation.lights_on_when_dark_during_the_day.attributes.last_triggered)) < 21600 }} {% else %} true {% endif %}'
           - condition: state
             entity_id: switch.front_room
             state: "on"
@@ -230,7 +230,7 @@
       condition: and
       conditions:
         - condition: template
-          value_template: "{{ states('sensor.ir_send_activity') == 'unknow().strftime('%Y-%m-%d [%H:%M:%S]')n' }}"
+          value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
         - condition: template
           value_template: '{% if states.automation.doorbell.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.doorbell.attributes.last_triggered)) >= 60 }} {% else %} true {% endif %}'
   action: # sound is handled separately
@@ -283,7 +283,7 @@
       to: "on"
   condition:
       condition: template
-      value_template: "{{ states('sensor.ir_send_activity') == 'unknow().strftime('%Y-%m-%d [%H:%M:%S]')n' }}"
+      value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
   action:
     - service: script.turn_on
       entity_id: script.doorbell_sound
@@ -571,7 +571,7 @@
       to: 'on'
   condition:
       condition: template
-      value_template: "{{ states('sensor.ir_send_activity') == 'unknow().strftime('%Y-%m-%d [%H:%M:%S]')n' }}"
+      value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
   action:
     - service: switch.turn_on
       entity_id: switch.hall
