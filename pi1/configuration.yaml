@@ -205,10 +205,6 @@ automation:
     trigger:
         platform: mqtt
         topic: "home/say/pi1"
-    condition:
-        condition: state
-        entity_id: switch.musicplayer
-        state: "off"
     action:
       - service: tts.picotts_say
         entity_id: media_player.speaker
