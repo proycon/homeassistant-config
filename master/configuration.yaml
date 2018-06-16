@@ -310,8 +310,10 @@ input_boolean:
         name: Flip main camera
         initial: off
 
-input_text:  #dummy elements to group tiles
-    tiles_media_volume:
+input_text:
+    say:
+        name: say
+    tiles_media_volume: #dummy elements to group tiles
         name: tiles_media_volume
     tiles_media_activities:
         name: tiles_media_activities

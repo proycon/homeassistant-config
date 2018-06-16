@@ -24,6 +24,7 @@ default_view:
         - group.wake_up_alarm
         - group.timer
         - group.robot
+        - group.say
 
 
 media_view:
@@ -499,3 +500,9 @@ battery_stats:
         - sensor.bathroom_humidity_battery
         - sensor.bathroom_window_battery
         - sensor.downstairs_remote_battery
+say:
+    name: Say
+    icon: mdi:voice
+    entities:
+        - input_text.say
+        - script.say

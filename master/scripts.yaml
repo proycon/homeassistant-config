@@ -1782,6 +1782,14 @@ speech_test:
           data:
               topic: "home/say/pi1"
               payload: "Test test, this is a test"
+say:
+    alias: Say
+    sequence:
+        - service: mqtt.publish
+          data_template:
+              topic: "home/say/pi1"
+              payload: "{{ states.input_text.say.state }}"
+
 soundoutput_speakers:
     alias: Soundoutput Speakers
     sequence:
