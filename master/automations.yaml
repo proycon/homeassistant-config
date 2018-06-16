@@ -28,7 +28,7 @@
             message: "Home automation started"
       - service: notify.matrix
         data:
-            message: "Home automation started ({{now().strftime('%Y-%m-%d [%H:%M:%S]')}})"
+            message: "Home automation started @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
       - service: mqtt.publish
         data:
             topic: "home/say/pi1"
@@ -268,7 +268,7 @@
             message: "The doorbell rang; there is somebody at the door, please check"
       - service: notify.matrix
         data_template:
-          message: "The doorbell rang, there is somebody at the door ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+            message: "The doorbell rang, there is somebody at the door - {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
       - delay:
           seconds: 6
       - service: shell_command.event_snapshots
@@ -336,24 +336,24 @@
       entity_id: script.hall_speaker_full_volume
     - service: notify.xmpp_proycon
       data_template:
-          message: "INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})!!! CHECK IMMEDIATELY!!!"
+          message: "INTRUDER ALERT!! ALARM TRIGGERED AT {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
     - service: notify.xmpp_hans
       data_template:
-          message: "INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})!!! CHECK IMMEDIATELY!!!"
+          message: "INTRUDER ALERT!! ALARM TRIGGERED AT {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
     - service: notify.mail_both
       data_template:
-          title: "[homeautomation] INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})!!! CHECK IMMEDIATELY!!!"
-          message: "INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})!!! CHECK IMMEDIATELY!!!"
+          title: "[homeautomation] INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
+          message: "INTRUDER ALERT!! ALARM TRIGGERED AT {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
     - service: notify.matrix
       data:
-          message: "INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})!!! CHECK IMMEDIATELY!!!"
+          message: "INTRUDER ALERT!! ALARM TRIGGERED AT {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
     - service: persistent_notification.create
       data_template:
         message: "ALARM TRIGGERED!!!"
-        title: "INTRUDER ALTER!!! ALARM TRIGGERED AT ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})!!! CHECK IMMEDIATELY!!!"
+        title: "INTRUDER ALTER!!! ALARM TRIGGERED AT {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
     - service: notify.sms
       data_template:
-          message: "INTRUDER ALTER!!! ALARM TRIGGERED AT ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})!!! CHECK IMMEDIATELY!!!"
+          message: "INTRUDER ALTER!!! ALARM TRIGGERED AT {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
           target:
               - !secret proyphone
               - !secret hansphone
@@ -412,13 +412,13 @@
           payload: "System armed"
     - service: notify.xmpp_proycon
       data:
-          message: "System armed ({{now().strftime('%Y-%m-%d [%H:%M:%S]')}})"
+          message: "System armed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
     - service: notify.xmpp_hans
       data:
-          message: "System armed ({{now().strftime('%Y-%m-%d [%H:%M:%S]')}})"
+          message: "System armed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
     - service: notify.matrix
       data:
-          message: "System armed ({{now().strftime('%Y-%m-%d [%H:%M:%S]')}})"
+          message: "System armed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
 - id: disarm_when_home
   alias: 'Disarm when home'
   trigger:
@@ -431,13 +431,13 @@
       entity_id: alarm_control_panel.alarm_system
     - service: notify.xmpp_proycon
       data:
-          message: "System disarmed ({{now().strftime('%Y-%m-%d [%H:%M:%S]')}})"
+          message: "System disarmed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
     - service: notify.xmpp_hans
       data:
-          message: "System disarmed ({{now().strftime('%Y-%m-%d [%H:%M:%S]')}})"
+          message: "System disarmed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
     - service: notify.matrix
       data:
-          message: "System disarmed ({{now().strftime('%Y-%m-%d [%H:%M:%S]')}})"
+          message: "System disarmed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
     - service: script.turn_on
       entity_id: script.home_notification_lights
 - id: already_disarmed_notification #when someone comes home and system is already disarmed (due to other person being home), signal for safe entry
@@ -517,17 +517,17 @@
           payload: "Front door still open"
     - service: notify.xmpp_proycon
       data:
-          message: "Front door still open ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Front door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.xmpp_hans
       data:
-          message: "Front door still open ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Front door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Front door still open"
           message: "Front door still open"
     - service: notify.matrix
       data:
-          message: "Front door still open ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Front door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
 - id: back_door_still_open
   alias: "Back door still open"
   trigger:
@@ -547,10 +547,10 @@
           message: Back door still open
     - service: notify.xmpp_proycon
       data:
-          message: "Back door still open ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Back door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.xmpp_hans
       data:
-          message: "Back door still open ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Back door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Back door still open"
@@ -561,7 +561,7 @@
           payload: "Back door still open"
     - service: notify.matrix
       data:
-          message: "Back door still open ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Back door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
 - id: front_door_opened
   alias: "Front door opened"
   trigger:
@@ -1005,10 +1005,10 @@
             entity_id: script.reset_lights
       - service: notify.xmpp_proycon
         data_template:
-           message: "Alarm cancelled {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+           message: "Alarm cancelled @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
       - service: notify.xmpp_hans
         data_template:
-           message: "Alarm cancelled {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+           message: "Alarm cancelled @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
       - service: notify.mail_both
         data_template:
            title: "[homeautomation] Alarm cancelled {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
@@ -1019,10 +1019,10 @@
            title: "Alarm cancelled {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
       - service: notify.matrix
         data:
-           message: "Alarm cancelled ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+           message: "Alarm cancelled @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
       - service: notify.sms
         data_template:
-           message: "Alarm cancelled {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+           message: "Alarm cancelled @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
            target:
               - !secret proyphone
               - !secret hansphone
@@ -1574,17 +1574,17 @@
   action:
     - service: persistent_notification.create
       data_template:
-          message: "Pi 1 is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Pi 1 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
           title: "Pi 1 is down"
     - service: notify.xmpp_proycon
       data:
-          message: "Pi 1 is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Pi 1 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.xmpp_hans
       data:
-          message: "Pi 1 is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Pi 1 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.matrix
       data:
-          message: "Pi 1 is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Pi 1 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Pi 1 is down"
@@ -1601,17 +1601,17 @@
   action:
     - service: persistent_notification.create
       data_template:
-          message: "Pi 2 is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Pi 2 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
           title: "Pi 2 is down"
     - service: notify.xmpp_proycon
       data:
-          message: "Pi 2 is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Pi 2 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.xmpp_hans
       data:
-          message: "Pi 2 is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Pi 2 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.matrix
       data:
-          message: "Pi 2 is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Pi 2 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Pi 2 is down"
@@ -1628,17 +1628,17 @@
   action:
     - service: persistent_notification.create
       data_template:
-          message: "Pi 3 is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Pi 3 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
           title: "Pi 3 is down"
     - service: notify.xmpp_proycon
       data:
-          message: "Pi 3 is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Pi 3 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.xmpp_hans
       data:
-          message: "Pi 3 is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Pi 3 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.matrix
       data:
-          message: "Pi 3 is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "Pi 3 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Pi 3 is down"
@@ -1655,17 +1655,17 @@
   action:
     - service: persistent_notification.create
       data_template:
-          message: "KPN router is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "KPN router is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
           title: "KPN router is down"
     - service: notify.xmpp_proycon
       data:
-          message: "KPN router is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "KPN router is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.xmpp_hans
       data:
-          message: "KPN router is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "KPN router is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.matrix
       data:
-          message: "KPN router is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "KPN router is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] KPN router is down"
@@ -1682,17 +1682,17 @@
   action:
     - service: persistent_notification.create
       data_template:
-          message: "wifi router is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "wifi router is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
           title: "wifi router is down"
     - service: notify.xmpp_proycon
       data:
-          message: "wifi router is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "wifi router is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.xmpp_hans
       data:
-          message: "wifi router is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "wifi router is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.matrix
       data:
-          message: "wifi router is down ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
+          message: "wifi router is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] wifi router is down"
