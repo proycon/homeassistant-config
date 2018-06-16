@@ -559,6 +559,9 @@
       data:
           topic: "home/say/pi1"
           payload: "Back door still open"
+    - service: notify.matrix
+      data:
+          message: "Back door still open ({{ now() }})"
 - id: front_door_opened
   alias: "Front door opened"
   trigger:
