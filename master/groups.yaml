@@ -14,6 +14,7 @@ default_view:
         - binary_sensor.bedroom_window_left
         - binary_sensor.bedroom_window_right
         - binary_sensor.bathroom_window_sensor
+        - binary_sensor.noise
         - sensor.temperature_living_room
         - group.media_volume
         - group.all_lights
@@ -24,7 +25,7 @@ default_view:
         - group.wake_up_alarm
         - group.timer
         - group.robot
-        - group.say
+        - group.sound
 
 
 media_view:
@@ -133,6 +134,7 @@ inside_environment:
     name: Inside Environment
     entities:
         - sensor.temperature_living_room
+        - sensor.dogsensor_temperature
         - sensor.bathroom_sensor_temperature
         - sensor.bathroom_sensor_relative_humidity
         - binary_sensor.bathroom_too_humid
@@ -144,7 +146,6 @@ inside_environment:
         - sensor.fibaro_office_luminance
         - sensor.fibaro_hall_temperature
         - sensor.fibaro_hall_luminance
-        - sensor.dogsensor_temperature
         - sensor.dogsensor_luminance
         - binary_sensor.pir_living_room
         - binary_sensor.pir_kitchen
@@ -500,9 +501,10 @@ battery_stats:
         - sensor.bathroom_humidity_battery
         - sensor.bathroom_window_battery
         - sensor.downstairs_remote_battery
-say:
-    name: Say
+sound:
+    name: Sound
     icon: mdi:voice
     entities:
         - input_text.say
         - script.say
+        - switch.noise_detector

@@ -43,6 +43,10 @@ homeassistant:
 # Weather Prediction
 #sensor:
 #  platform: yr
+#
+
+ffmpeg:
+    ffmpeg_bin: /usr/bin/avconv
 
 
 binary_sensor:
@@ -61,6 +65,17 @@ binary_sensor:
       pull_mode: DOWN
       invert_logic: false
       bouncetime: 60
+    - id: noisedetector
+      platform: ffmpeg_noise
+      input: !secret noisedetector_input
+      extra_arguments: -filter:a highpass=f=300,lowpass=f=2500,volume=volume=2 -codec:a libmp3lame -ar 16000
+      output: !secret noisedetector_output
+      initial_state: false
+      duration: 2
+      reset: 60
+      peak: -32
+
+
 
 switch:
     platform: command_line
@@ -77,6 +92,10 @@ switch:
             command_on: "killall vlc; cvlc http://192.168.0.1:8000/stream.mp3 >/dev/null 2>/dev/null &"
             command_off: "killall vlc"
             command_state: "ps aux | grep vlc | grep -v grep"
+        noisedetector:
+            command_on: "avconv -f alsa -i hw:1,0 -vn -f rtp rtp://236.0.0.1:2000"
+            command_off: "killall avconv"
+            command_state: "ps aux | grep avconv | grep -v grep"
 
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
 automation:
@@ -230,6 +249,63 @@ automation:
         service: shell_command.soundoutput
         data:
             outputid: '2'
+  - id: m2s_noisedetector_on
+    alias: m2s_noisedetector_on
+    trigger:
+        platform: mqtt
+        topic: "home/noisedetector/set/pi1"
+        payload: 'ON'
+    action:
+      - service: mqtt.publish
+        data:
+            topic: "home/say/pi1"
+            payload: "Remote listening started"
+      - service: switch.turn_on
+        entity_id: switch.noisedetector
+      - service: ffmpeg.start
+        entity_id: binary_sensor.noisedetector
+  - id: m2s_noisedetector_off
+    alias: m2s_noisedetector_off
+    trigger:
+        platform: mqtt
+        topic: "home/noisedetector/set/pi1"
+        payload: 'OFF'
+    action:
+      - service: ffmpeg.stop
+        entity_id: binary_sensor.noisedetector
+      - service: switch.turn_off
+        entity_id: switch.noisedetector
+      - service: mqtt.publish
+        data:
+            topic: "home/say/pi1"
+            payload: "Remote listening stopped"
+  - id: s2m_noisedetector_sensor
+    alias: s2m_noisedetector_sensor
+    hide_entity: true
+    trigger:
+        - platform: state
+          entity_id: binary_sensor.noisedetector
+        - platform: homeassistant
+          event: start
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/binary_sensor/noise"
+            payload: "{{ states('binary_sensor.noisedetector') | upper }}"
+  - id: s2m_noisedetector
+    alias: s2m_noisedetector
+    trigger:
+        - platform: state
+          entity_id: switch.noisedetector
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/noisedetector/get/pi1"
+            payload: "{{ states('switch.noisedetector') | upper }}"
 
 
 
