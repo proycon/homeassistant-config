@@ -317,6 +317,8 @@ input_text:
         initial: hello
     youtube_link:
         name: Youtube Link
+    youtube_link_bedroom:
+        name: Youtube Link Bedroom
     tiles_media_volume: #dummy elements to group tiles
         name: tiles_media_volume
     tiles_media_activities:
