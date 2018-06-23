@@ -93,7 +93,7 @@ switch:
             command_off: "killall vlc"
             command_state: "ps aux | grep vlc | grep -v grep"
         noisedetector:
-            command_on: "avconv -f alsa -i hw:1,0 -vn -f rtp rtp://236.0.0.1:2000"
+            command_on: "avconv -f alsa -i hw:1,0 -vn -f rtp rtp://236.0.0.1:2000 &"
             command_off: "killall avconv"
             command_state: "ps aux | grep avconv | grep -v grep"
 

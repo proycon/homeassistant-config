@@ -1666,3 +1666,33 @@ vacuum_locate:
         service: vacuum.locate
         data:
             entity_id: vacuum.robot
+
+play_youtube_link:
+    alias: Play Youtube link
+    sequence:
+       - service: script.turn_on
+         entity_id: script.media_centre
+       - wait_template: "{{ states.switch.pi1_kodi.state == 'on' }}"
+       - delay:
+           seconds: 4
+       - service: media_player.kodi
+         data_template:
+              entity_id: media_player.tv
+              media_content_id: "plugin://plugin.video.youtube/play/?video_id={{states.input_text.youtube_link.state}}"
+              media_content_type: video
+
+
+
+play_youtube_link_bedroom:
+    alias: Play Youtube link bedroom
+    sequence:
+       - service: script.turn_on
+         entity_id: script.media_centre_bedroom
+       - wait_template: "{{ states.switch.pi2_kodi.state == 'on' }}"
+       - delay:
+           seconds: 4
+       - service: media_player.kodi_bedroom
+         data_template:
+              entity_id: media_player.tv
+              media_content_id: "plugin://plugin.video.youtube/play/?video_id={{states.input_text.youtube_link.state}}"
+              media_content_type: video
