@@ -1694,5 +1694,5 @@ play_youtube_link_bedroom:
        - service: media_player.play_media
          data_template:
               entity_id: media_player.kodi_bedroom
-              media_content_id: "plugin://plugin.video.youtube/play/?video_id={{states.input_text.youtube_link.state}}"
+              media_content_id: "plugin://plugin.video.youtube/play/?video_id={{states.input_text.youtube_link_bedroom.state}}"
               media_content_type: video
