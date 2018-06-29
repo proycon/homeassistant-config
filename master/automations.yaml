@@ -2067,6 +2067,10 @@
           payload: "in"
     - service: script.turn_on
       entity_id: script.blue_lights
+    - service: input_select.select_option
+      data:
+          entity_id: input_select.ipcam_direction
+          option: "Bed Jaiko"
     - service: notify.matrix
       data:
           message: "Jaiko in crate @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
@@ -2083,6 +2087,19 @@
   action:
     - service: script.reset_fireplace
       entity_id: script.reset_fireplace
+
+- id: post_crate_reset
+  alias: Post crate reset
+  trigger:
+      platform: state
+      entity_id: input_boolean.jaiko_crated
+      from: "on"
+      to: "off"
+      for:
+          minutes: 2
+  action:
+    - service: timer.start
+      entity_id: timer.reset_ipcam
 
 - id: uncrate
   trigger:

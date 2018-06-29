@@ -864,13 +864,15 @@ extinguish_dresser_ambilight:
         data:
             topic: "home/technofire/pi2/jsonset"
             payload: '{"scene":"off","brightness":"0"}'
+
 reset_ipcam:
     alias: Reset IPcam
     sequence:
       - service: input_select.select_option
-        data:
+        data_template:
           entity_id: input_select.ipcam_direction
-          option: Back
+          option: "{% if states('input_boolean.jaiko_crated') == 'on' %}Bed Jaiko{% else %}Back{% endif %}"
+
 home_notification_lights:
   alias: Home Notification Lights
   sequence:
