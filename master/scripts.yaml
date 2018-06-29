@@ -1223,7 +1223,7 @@ blue_lights:
          - service: input_select.select_option
            data:
                entity_id: input_select.fireplace
-               option: blue
+               option: Blue
          - service: input_number.set_value
            data:
                entity_id: input_number.fireplace_brightness
@@ -1235,9 +1235,9 @@ blue_lights:
          - service: input_select.select_option
            data:
                entity_id: input_select.dresser_ambilight
-               option: blue
+               option: Blue
          - delay:
-               seconds: 0.1
+               seconds: 1
          - service: script.turn_on
            entity_id: script.ignite_fireplace
          - service: script.turn_on

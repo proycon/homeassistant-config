@@ -2061,17 +2061,26 @@
       from: "off"
       to: "on"
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
+    - service: mqtt.publish
       data:
-          message: "in"
+          topic: "home/say/pi1"
+          payload: "in"
     - service: script.turn_on
       entity_id: script.blue_lights
     - service: notify.matrix
       data:
           message: "Jaiko in crate @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
-    - delay:
-        minutes: 2
+
+- id: crate_lights_off
+  alias: Crate lights off
+  trigger:
+      platform: state
+      entity_id: input_boolean.jaiko_crated
+      from: "off"
+      to: "on"
+      for:
+          minutes: 2
+  action:
     - service: script.reset_fireplace
       entity_id: script.reset_fireplace
 
@@ -2082,10 +2091,10 @@
         from: "on"
         to: "off"
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
+    - service: mqtt.publish
       data:
-          message: "out"
+          topic: "home/say/pi1"
+          payload: "out"
     - service: notify.matrix
       data:
           message: "Jaiko out of crate @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
