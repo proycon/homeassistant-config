@@ -310,6 +310,9 @@ input_boolean:
     flip_main_camera:
         name: Flip main camera
         initial: off
+    jaiko_crated:
+        name: Jaiko crated
+        initial: off
 
 input_text:
     say:
@@ -550,7 +553,12 @@ binary_sensor:
         value_template: '{{ states("sensor.bathroom_sensor_relative_humidity") | float > 75.0 }}'
         entity_id:
             - sensor.bathroom_sensor_relative_humidity
-
+      jaiko_crated:
+        friendly_name: "Jaiko crated"
+        value_template: '{{ states("input_boolean.jaiko_crated") }}'
+        entity_id:
+            - input_boolean.jaiko_crated
+        device_class: occupancy
 
 switch tv_spots:
     platform: mqtt

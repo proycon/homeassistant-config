@@ -1217,6 +1217,31 @@ yellow_lights:
            entity_id: script.ignite_fireplace
          - service: script.turn_on
            entity_id: script.ignite_dresser_ambilight
+blue_lights:
+     alias: Blue Lights
+     sequence:
+         - service: input_select.select_option
+           data:
+               entity_id: input_select.fireplace
+               option: blue
+         - service: input_number.set_value
+           data:
+               entity_id: input_number.fireplace_brightness
+               value: 255
+         - service: input_number.set_value
+           data:
+               entity_id: input_number.dresser_ambilight_brightness
+               value: 255
+         - service: input_select.select_option
+           data:
+               entity_id: input_select.dresser_ambilight
+               option: blue
+         - delay:
+               seconds: 0.1
+         - service: script.turn_on
+           entity_id: script.ignite_fireplace
+         - service: script.turn_on
+           entity_id: script.ignite_dresser_ambilight
 
 
 sirene_lights:

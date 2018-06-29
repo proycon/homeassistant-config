@@ -2019,3 +2019,73 @@
   action:
      - service: script.turn_on
        entity_id: script.vacuum_turn_off
+
+- id: remote_crate
+  alias: remote_crate
+  condition:
+      - condition: state
+        entity_id: input_boolean.jaiko_crated
+        state: "off"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 4
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.jaiko_crated
+
+- id: remote_uncrate
+  alias: remote_uncrate
+  condition:
+      - condition: state
+        entity_id: input_boolean.jaiko_crated
+        state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 4
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.jaiko_crated
+
+- id: crate
+  trigger:
+      - platform: state
+        entity_id: input_boolean.jaiko_crated
+        from: off
+        to: on
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: in
+    - service: script.turn_on
+      entity_id: script.blue_lights
+    - service: notify.matrix
+      data:
+          message: "Jaiko in crate @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
+    - delay:
+        minutes: 2
+    - service: script.reset_fireplace
+      entity_id: script.reset_fireplace
+
+- id: uncrate
+  trigger:
+      - platform: state
+        entity_id: input_boolean.jaiko_crated
+        from: on
+        to: off
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: out
+    - service: notify.matrix
+      data:
+          message: "Jaiko out of crate @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"

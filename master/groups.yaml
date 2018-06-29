@@ -25,6 +25,7 @@ default_view:
         - group.wake_up_alarm
         - group.timer
         - group.robot
+        - group.jaiko
         - group.sound
 
 
@@ -512,3 +513,10 @@ sound:
         - input_text.say
         - script.say
         - switch.noise_detector
+
+jaiko:
+    name: Jaiko
+    icon: mdi:dog
+    entities:
+        - input_boolean.jaiko_crated
+
