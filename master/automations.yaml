@@ -2056,15 +2056,15 @@
 
 - id: crate
   trigger:
-      - platform: state
-        entity_id: input_boolean.jaiko_crated
-        from: off
-        to: on
+    - platform: state
+      entity_id: input_boolean.jaiko_crated
+      from: "off"
+      to: "on"
   action:
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
       data:
-          message: in
+          message: "in"
     - service: script.turn_on
       entity_id: script.blue_lights
     - service: notify.matrix
@@ -2079,13 +2079,13 @@
   trigger:
       - platform: state
         entity_id: input_boolean.jaiko_crated
-        from: on
-        to: off
+        from: "on"
+        to: "off"
   action:
     - service: tts.picotts_say
       entity_id: media_player.hall_speaker
       data:
-          message: out
+          message: "out"
     - service: notify.matrix
       data:
           message: "Jaiko out of crate @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
