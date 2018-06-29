@@ -187,7 +187,7 @@ device_tracker:
 
 # Text to speech
 tts:
-  platform: picotts
+  platform: google
   language: 'en-GB'
 
 group: !include groups.yaml
