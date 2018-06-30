@@ -524,7 +524,7 @@ dog:
         - alarm_control_panel.alarm_system
         - binary_sensor.jaiko_crated
         - binary_sensor.noise
-        - sensor.temperature_living_room
+        - sensor.dogsensor_temperature
         - sensor.time
         - binary_sensor.noise
         - binary_sensor.pir_jaiko
