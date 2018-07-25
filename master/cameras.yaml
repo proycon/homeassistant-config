@@ -13,6 +13,9 @@
     - platform: local_file
       name: Garden
       file_path: /home/homeautomation/homeassistant/snapshots/_garden.jpg
+    - platform: local_file
+      name: Jaiko
+      file_path: /home/homeautomation/homeassistant/snapshots/_jaiko.jpg
     - platform: mjpeg
       name: living_room_live
       friendly_name: Living Room Live
@@ -21,13 +24,9 @@
       user: !secret ipcam_user
       password: !secret ipcam_password
     - platform: mjpeg
-      friendly_name: Streetcam Live
-      name: streetcam_live
-      mjpeg_url: !secret oldstreetcam_mjpeg_url
-    - platform: mjpeg
-      friendly_name: OldStreet Live
-      name: oldstreet_live
-      mjpeg_url: !secret oldstreetcam_mjpeg_url
+      friendly_name: Jaikocam Live
+      name: jaikocam_live
+      mjpeg_url: !secret jaikocam_mjpeg_url
     - platform: mjpeg
       friendly_name: Garden Live
       name: garden_live

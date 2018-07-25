@@ -92,7 +92,7 @@ camera_view:
         - binary_sensor.bedroom_window_right
         - binary_sensor.bathroom_window_sensor
         - camera.living_room_live
-        - camera.streetcam_live
+        - camera.jaikocam_live
         - camera.garden_live
         - camera.hall_upstairs
         - camera.front_door
@@ -528,6 +528,7 @@ dog:
         - sensor.time
         - binary_sensor.noise
         - binary_sensor.pir_jaiko
+        - camera.jaikocam_live
         - camera.living_room
         - input_select.ipcam_direction
         - group.jaiko

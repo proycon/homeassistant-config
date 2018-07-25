@@ -152,11 +152,12 @@ shell_command:
     snapshot_garden: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh garden
     snapshot_frontdoor: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh frontdoor
     snapshot_hallupstairs: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh hallupstairs
+    snapshot_jaiko: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh jaiko
     archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
     event_snapshots: /home/homeautomation/homeassistant/scripts/camera/eventsnapshots.sh "{{ cams }}"
     snapshot_clear_locks: find "/home/homeautomation/homeassistant/snapshots/" -type f -name "*.lock" | xargs rm
-    oldstreetcam_reset_1: !secret oldstreetcam_noir_command
-    oldstreetcam_reset_2: !secret oldstreetcam_quality_command
+    jaikocam_reset_1: !secret jaikocam_noir_command
+    jaikocam_reset_2: !secret jaikocam_quality_command
     hallspeaker_normalvolume: "amixer set Master 60%"
     hallspeaker_fullvolume: "amixer set Master 100%"
 
@@ -565,7 +566,7 @@ binary_sensor:
             - sensor.bathroom_sensor_relative_humidity
       jaiko_crated:
         friendly_name: "Jaiko crated"
-        value_template: '{{ states("input_boolean.jaiko_crated") }}'
+        value_template: '{% if is_state("input_boolean.jaiko_crated","on") %}True{% else %}False{% endif %}'
         entity_id:
             - input_boolean.jaiko_crated
         device_class: occupancy

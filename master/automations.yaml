@@ -71,6 +71,17 @@
     seconds: '/5' #every five seconds
   action:
     - service: shell_command.snapshot_garden
+- alias: Jaiko snapshots
+  hide_entity: False
+  trigger:
+    platform: time
+    seconds: '/10' #every ten seconds
+  condition:
+    - condition: state
+      entity_id: input_boolean.jaiko_crated
+      state: "on"
+  action:
+    - service: shell_command.snapshot_jaiko
 - alias: Daily snapshot archiving
   hide_entity: False
   trigger:
@@ -1154,16 +1165,16 @@
     - delay:
         seconds: 120
 
-- alias: OldStreetcam Reset
-  trigger:
-    platform: time
-    minutes: "/10"
-    seconds: 00
-  action:
-    - service: shell_command.oldstreetcam_reset_1
-    - delay:
-        seconds: 10
-    - service: shell_command.oldstreetcam_reset_2
+#- alias: OldStreetcam Reset
+#  trigger:
+#    platform: time
+#    minutes: "/10"
+#    seconds: 00
+#  action:
+#    - service: shell_command.oldstreetcam_reset_1
+#    - delay:
+#        seconds: 10
+#   - service: shell_command.oldstreetcam_reset_2
 
 
 - alias: Bathroom Vent On
@@ -2045,7 +2056,7 @@
           topic: "home/say/pi1"
           payload: "in"
     - service: script.turn_on
-      entity_id: script.blue_lights
+      entity_id: script.red_lights
     - service: input_select.select_option
       data:
           entity_id: input_select.ipcam_direction
@@ -2062,7 +2073,7 @@
       from: "off"
       to: "on"
       for:
-          minutes: 2
+          minutes: 1
   action:
     - service: script.reset_fireplace
       entity_id: script.reset_fireplace
@@ -2075,7 +2086,7 @@
       from: "on"
       to: "off"
       for:
-          minutes: 2
+          minutes: 1
   action:
     - service: timer.start
       entity_id: timer.reset_ipcam
