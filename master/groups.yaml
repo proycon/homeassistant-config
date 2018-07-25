@@ -156,6 +156,40 @@ inside_environment:
         - binary_sensor.pir_jaiko
         - sensor.ir_send_activity
 
+dog:
+    name: Dog
+    icon: mdi:paw
+    view: yes
+    entities:
+        - binary_sensor.anybodyhome
+        - alarm_control_panel.alarm_system
+        - binary_sensor.jaiko_crated
+        - binary_sensor.noise
+        - sensor.dogsensor_temperature
+        - sensor.time
+        - binary_sensor.noise
+        - binary_sensor.pir_jaiko
+        - camera.jaikocam_live
+        - camera.living_room
+        - group.jaiko
+
+
+jaiko:
+    name: Jaiko
+    icon: mdi:paw
+    entities:
+        - input_boolean.jaiko_crated
+        - input_select.ipcam_direction
+        - weblink.jaikocam_stream
+
+
+crate:
+    name: Crate
+    icon: mdi:paw
+    entities:
+        - binary_sensor.pir_jaiko
+        - sensor.pir_statistics_jaiko_short
+        - sensor.pir_statistics_jaiko_long
 
 config_view:
     name: Configuration
@@ -516,37 +550,3 @@ sound:
         - script.say
         - switch.noise_detector
 
-dog:
-    name: Dog
-    icon: mdi:paw
-    view: yes
-    entities:
-        - binary_sensor.anybodyhome
-        - alarm_control_panel.alarm_system
-        - binary_sensor.jaiko_crated
-        - binary_sensor.noise
-        - sensor.dogsensor_temperature
-        - sensor.time
-        - binary_sensor.noise
-        - binary_sensor.pir_jaiko
-        - camera.jaikocam_live
-        - camera.living_room
-        - group.jaiko
-
-
-jaiko:
-    name: Jaiko
-    icon: mdi:paw
-    entities:
-        - input_boolean.jaiko_crated
-        - input_select.ipcam_direction
-        - weblink.jaikocam_stream
-
-
-crate:
-    name: Crate
-    icon: mdi:paw
-    entities:
-        - binary_sensor.pir_jaiko
-        - sensor.pir_statistics_jaiko_short
-        - sensor.pir_statistics_jaiko_long
