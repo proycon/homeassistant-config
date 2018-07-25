@@ -53,6 +53,12 @@ weblink:
         - name: KPN Router
           url: !secret kpn_router_url
           icon: mdi:upload-network
+        - name: Jaikocam Stream
+          url: !secret jaikocam_mjpeg_url
+          icon: mdi:paw
+
+
+
 
 
 # Checks for available updates
