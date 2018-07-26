@@ -756,6 +756,9 @@
             - condition: state
               entity_id: device_tracker.patrick
               state: "home"
+            - condition: state
+              entity_id: device_tracker.netty
+              state: "home"
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.guest_inside_house
@@ -788,6 +791,12 @@
           minutes: 10
     - platform: state
       entity_id: device_tracker.patrick
+      from: 'home'
+      to: 'not_home'
+      for:
+          minutes: 10
+    - platform: state
+      entity_id: device_tracker.netty
       from: 'home'
       to: 'not_home'
       for:
