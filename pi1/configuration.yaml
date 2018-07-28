@@ -306,7 +306,17 @@ automation:
         data_template:
             topic: "home/noisedetector/get/pi1"
             payload: "{{ states('switch.noisedetector') | upper }}"
-
+  - id: m2s_play_media
+    alias: m2s_play_media
+    trigger:
+        platform: mqtt
+        topic: "home/sound/pi1"
+    action:
+        - service: media_player.play_media
+          data_template:
+              entity_id: media_player.speaker
+              media_content_id: "/home/homeautomation/homeassistant/media/{{ trigger.payload }}"
+              media_content_type: 'music'
 
 
 

@@ -263,7 +263,7 @@
           seconds: 6
       - service: shell_command.event_snapshots
         data:
-          cams: "street frontdoor livingroom"
+          cams: "street frontdoor"
 - id: doorbell_sound
   alias: Doorbell Sound
   trigger:
@@ -577,7 +577,7 @@
         seconds: 3
     - service: shell_command.event_snapshots
       data:
-          cams: "street frontdoor livingroom"
+          cams: "street frontdoor"
 - id: hall_light_off
   alias: "Hall light off"
   trigger:
@@ -614,7 +614,7 @@
         seconds: 4
     - service: shell_command.event_snapshots
       data:
-          cams: "livingroom garden"
+          cams: "livingroom"
 - id: window_upstairs_opened
   alias: "Window upstairs opened"
   trigger:
