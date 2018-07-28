@@ -60,6 +60,23 @@ media_view_bedroom:
         - weblink.mpd_control_interface
         - weblink.mpd_music_stream
 
+dog:
+    name: Dog
+    icon: mdi:paw
+    view: yes
+    entities:
+        - binary_sensor.anybodyhome
+        - alarm_control_panel.alarm_system
+        - binary_sensor.jaiko_crated
+        - binary_sensor.noise
+        - sensor.dogsensor_temperature
+        - sensor.time
+        - binary_sensor.noise
+        - binary_sensor.pir_jaiko
+        - camera.jaikocam_live
+        - camera.living_room
+        - group.jaiko
+
 light_view:
     view: yes
     name: Lights
@@ -179,23 +196,6 @@ inside_environment:
         - binary_sensor.pir_office
         - binary_sensor.pir_jaiko
         - sensor.ir_send_activity
-
-dog:
-    name: Dog
-    icon: mdi:paw
-    view: yes
-    entities:
-        - binary_sensor.anybodyhome
-        - alarm_control_panel.alarm_system
-        - binary_sensor.jaiko_crated
-        - binary_sensor.noise
-        - sensor.dogsensor_temperature
-        - sensor.time
-        - binary_sensor.noise
-        - binary_sensor.pir_jaiko
-        - camera.jaikocam_live
-        - camera.living_room
-        - group.jaiko
 
 
 jaiko:
