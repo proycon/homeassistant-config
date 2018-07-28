@@ -109,6 +109,12 @@ event_cameras:
         - camera.event_4
         - camera.event_5
         - camera.event_6
+        - camera.event_7
+        - camera.event_8
+        - camera.event_9
+        - camera.event_10
+        - camera.event_11
+        - camera.event_12
 
 doors_and_windows:
     name: Doors and Windows
