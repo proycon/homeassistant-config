@@ -794,6 +794,54 @@ chime_sound:
               media_content_id: /home/homeautomation/homeassistant/media/chime.wav
               media_content_type: 'music'
 
+command_zit:
+    alias: "Command Zit"
+    sequence:
+      - service: mqtt.publish
+        data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'zit1.ogg'
+
+command_nee:
+    alias: "Command Nee"
+    sequence:
+      - service: mqtt.publish
+        data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'nee1.ogg'
+
+command_stil:
+    alias: "Command Stil"
+    sequence:
+      - service: mqtt.publish
+        data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'stil1.ogg'
+
+command_rustig:
+    alias: "Command Rustig"
+    sequence:
+      - service: mqtt.publish
+        data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'rustig1.ogg'
+
+command_lig:
+    alias: "Command Lig"
+    sequence:
+      - service: mqtt.publish
+        data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'lig1.ogg'
+
+command_goedzo:
+    alias: "Command Goedzo"
+    sequence:
+      - service: mqtt.publish
+        data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'goedzo1.ogg'
+
 hall_speaker_normal_volume:
     alias: Hall speaker Normal Volume
     sequence:

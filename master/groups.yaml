@@ -76,6 +76,7 @@ dog:
         - camera.jaikocam_live
         - camera.living_room
         - group.jaiko
+        - group.dog_commands
 
 light_view:
     view: yes
@@ -573,3 +574,12 @@ sound:
         - script.say
         - switch.noise_detector
 
+dog_commands:
+    name: Dog commmands
+    icon: mdi:paw
+    entities:
+        -  script.command_nee
+        -  script.command_zit
+        -  script.command_lig
+        -  script.command_rustig
+        -  script.command_goedzo
