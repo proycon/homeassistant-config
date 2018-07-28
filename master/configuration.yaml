@@ -408,6 +408,21 @@ sensor:
           downstairs_remote_battery:
             friendly_name: Downstairs remote battery
             value_template: "{{ states.zwave.downstairs_remote_battery.attributes.battery_level }}"
+          last_movement_jaiko:
+            friendly_name: Last movement Jaiko
+            value_template: "{{ states.binary_sensor.pir_jaiko.last_updated.strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          last_movement_kitchen:
+            friendly_name: Last movement Kitchen
+            value_template: "{{ states.binary_sensor.pir_kitchen.last_updated.strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          last_movement_hall:
+            friendly_name: Last movement Hall
+            value_template: "{{ states.binary_sensor.pir_hall.last_updated.strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          last_movement_office:
+            friendly_name: Last movement Office
+            value_template: "{{ states.binary_sensor.pir_office.last_updated.strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          last_movement_living_room:
+            friendly_name: Last movement living room
+            value_template: "{{ states.binary_sensor.pir_living_room.last_updated.strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - platform: mqtt
       name: Temperature Living Room
       unit_of_measurement: °C

@@ -75,8 +75,27 @@ light_view:
         - group.dresser_ambilight
         - group.fans
 
+
+history_view:
+    name: History
+    icon: mdi:timetable
+    view: yes
+    entities:
+        - group.event_cameras
+        - group.pir_last
+        - group.last_movements
+
+last_movements:
+    name: Last movements
+    entities:
+        - sensor.last_movement_jaiko
+        - sensor.last_movement_hall
+        - sensor.last_movement_living_room
+        - sensor.last_movement_kitchen
+        - sensor.last_movement_office
+
 camera_view:
-    name: Live Camera
+    name: Live Cameras
     icon: mdi:camcorder
     view: yes
     entities:
@@ -97,7 +116,6 @@ camera_view:
         - camera.hall_upstairs
         - camera.front_door
         - input_select.ipcam_direction
-        - group.event_cameras
 
 event_cameras:
     name: Event Cameras
