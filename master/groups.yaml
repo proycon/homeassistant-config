@@ -98,9 +98,8 @@ history_view:
     icon: mdi:timetable
     view: yes
     entities:
-        - group.event_cameras
-        - group.pir_last
         - group.last_movements
+        - group.event_cameras
 
 last_movements:
     name: Last movements
