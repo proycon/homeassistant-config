@@ -11,6 +11,12 @@ else
     CAMS=($1)
     NUMCAMS=${#CAMS[@]}
 fi
+mv -f event.11.jpg event.$((NUMCAMS+11)).jpg
+mv -f event.10.jpg event.$((NUMCAMS+10)).jpg
+mv -f event.9.jpg event.$((NUMCAMS+9)).jpg
+mv -f event.8.jpg event.$((NUMCAMS+8)).jpg
+mv -f event.7.jpg event.$((NUMCAMS+7)).jpg
+mv -f event.6.jpg event.$((NUMCAMS+6)).jpg
 mv -f event.5.jpg event.$((NUMCAMS+5)).jpg
 mv -f event.4.jpg event.$((NUMCAMS+4)).jpg
 mv -f event.3.jpg event.$((NUMCAMS+3)).jpg

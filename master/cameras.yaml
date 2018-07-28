@@ -55,3 +55,27 @@
       name: event_6
       friendly_name: Event 6
       file_path: /home/homeautomation/homeassistant/snapshots/event.6.jpg
+    - platform: local_file
+      name: event_7
+      friendly_name: Event 7
+      file_path: /home/homeautomation/homeassistant/snapshots/event.7.jpg
+    - platform: local_file
+      name: event_8
+      friendly_name: Event 8
+      file_path: /home/homeautomation/homeassistant/snapshots/event.8.jpg
+    - platform: local_file
+      name: event_9
+      friendly_name: Event 9
+      file_path: /home/homeautomation/homeassistant/snapshots/event.9.jpg
+    - platform: local_file
+      name: event_10
+      friendly_name: Event 10
+      file_path: /home/homeautomation/homeassistant/snapshots/event.10.jpg
+    - platform: local_file
+      name: event_11
+      friendly_name: Event 11
+      file_path: /home/homeautomation/homeassistant/snapshots/event.11.jpg
+    - platform: local_file
+      name: event_12
+      friendly_name: Event 12
+      file_path: /home/homeautomation/homeassistant/snapshots/event.12.jpg
