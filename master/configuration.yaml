@@ -33,6 +33,8 @@ http:
   ip_ban_enabled: True
   login_attempts_threshold: 5
 
+ffmpeg:
+
 weblink:
     entities:
         - name: Kodi Control Interface
@@ -56,7 +58,6 @@ weblink:
         - name: Jaikocam Stream
           url: !secret jaikocam_mjpeg_url
           icon: mdi:paw
-
 
 
 

@@ -23,10 +23,12 @@
       authentication: basic
       user: !secret ipcam_user
       password: !secret ipcam_password
-    - platform: mjpeg
+    - platform: onvif
       friendly_name: Jaikocam Live
       name: jaikocam_live
-      mjpeg_url: !secret jaikocam_mjpeg_url
+      host: !secret jaikocam_ip
+      username: !secret jaikocam_user
+      password: !secret jaikocam_pass
     - platform: mjpeg
       friendly_name: Garden Live
       name: garden_live
