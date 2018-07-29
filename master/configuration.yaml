@@ -541,7 +541,7 @@ binary_sensor:
     sensors:
       anybodyhome:
         friendly_name: "Anybody home?"
-        value_template: '{% if is_state("device_tracker.proyphone","home") or is_state("device_tracker.hansphone","home") or is_state("device_tracker.chris","home") or is_state("device_tracker.erik","home") or is_state("device_tracker.patrick","home") or is_state("device_tracker.netty","home") %}True{% else %}False{% endif %}'
+        value_template: '{% if is_state("device_tracker.proyphone","home") or is_state("device_tracker.hansphone","home") or is_state("device_tracker.chris","home") or is_state("device_tracker.erik","home") or is_state("device_tracker.patrick","home") or is_state("device_tracker.netty","home") or is_state("device_tracker.jan","home") %}True{% else %}False{% endif %}'
         entity_id:
             - device_tracker.proyphone
             - device_tracker.hansphone
@@ -549,6 +549,7 @@ binary_sensor:
             - device_tracker.erik
             - device_tracker.patrick
             - device_tracker.netty
+            - device_tracker.jan
         device_class: occupancy
       guest_inside:
         friendly_name: "Guest inside?"

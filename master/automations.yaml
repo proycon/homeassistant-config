@@ -770,6 +770,9 @@
             - condition: state
               entity_id: device_tracker.netty
               state: "home"
+            - condition: state
+              entity_id: device_tracker.jan
+              state: "home"
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.guest_inside_house
@@ -779,6 +782,7 @@
       data:
           topic: "home/say/pi1"
           payload: "Hello Visitor"
+
 - id: guest_left_house
   alias: Guest Left House
   trigger:
@@ -812,6 +816,12 @@
       to: 'not_home'
       for:
           minutes: 10
+    - platform: state
+      entity_id: device_tracker.jan
+      from: 'home'
+      to: 'not_home'
+      for:
+          minutes: 10
   condition:
     - condition: and
       conditions:
@@ -826,6 +836,12 @@
           state: "not_home"
         - condition: state
           entity_id: device_tracker.patrick
+          state: "not_home"
+        - condition: state
+          entity_id: device_tracker.netty
+          state: "not_home"
+        - condition: state
+          entity_id: device_tracker.jan
           state: "not_home"
   action:
      - service: input_boolean.turn_off
