@@ -75,11 +75,22 @@
   hide_entity: False
   trigger:
     platform: time
-    seconds: '/10' #every ten seconds
+    seconds: '/5' #every five seconds
   condition:
     - condition: state
       entity_id: input_boolean.jaiko_crated
       state: "on"
+  action:
+    - service: shell_command.snapshot_jaiko
+- alias: Jaiko snapshots uncrated
+  hide_entity: False
+  trigger:
+    platform: time
+    seconds: '/60' #every minute
+  condition:
+    - condition: state
+      entity_id: input_boolean.jaiko_crated
+      state: "off"
   action:
     - service: shell_command.snapshot_jaiko
 - alias: Daily snapshot archiving
