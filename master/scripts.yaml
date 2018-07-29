@@ -800,7 +800,7 @@ command_zit:
       - service: mqtt.publish
         data_template:
             topic: "home/sound/pi1"
-            payload_template: 'zit1.ogg'
+            payload_template: 'dog/zit1.ogg'
 
 command_nee:
     alias: "Command Nee"
@@ -808,7 +808,7 @@ command_nee:
       - service: mqtt.publish
         data_template:
             topic: "home/sound/pi1"
-            payload_template: 'nee1.ogg'
+            payload_template: 'dog/nee1.ogg'
 
 command_stil:
     alias: "Command Stil"
@@ -816,7 +816,7 @@ command_stil:
       - service: mqtt.publish
         data_template:
             topic: "home/sound/pi1"
-            payload_template: 'stil1.ogg'
+            payload_template: 'dog/stil1.ogg'
 
 command_rustig:
     alias: "Command Rustig"
@@ -824,7 +824,7 @@ command_rustig:
       - service: mqtt.publish
         data_template:
             topic: "home/sound/pi1"
-            payload_template: 'rustig1.ogg'
+            payload_template: 'dog/rustig1.ogg'
 
 command_lig:
     alias: "Command Lig"
@@ -832,7 +832,7 @@ command_lig:
       - service: mqtt.publish
         data_template:
             topic: "home/sound/pi1"
-            payload_template: 'lig1.ogg'
+            payload_template: 'dog/lig1.ogg'
 
 command_goedzo:
     alias: "Command Goedzo"
@@ -840,7 +840,7 @@ command_goedzo:
       - service: mqtt.publish
         data_template:
             topic: "home/sound/pi1"
-            payload_template: 'goedzo1.ogg'
+            payload_template: 'dog/goedzo1.ogg'
 
 hall_speaker_normal_volume:
     alias: Hall speaker Normal Volume
