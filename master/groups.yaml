@@ -582,4 +582,5 @@ dog_commands:
         -  script.command_zit
         -  script.command_lig
         -  script.command_rustig
+        -  script.command_stil
         -  script.command_goedzo
