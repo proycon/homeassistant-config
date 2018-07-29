@@ -56,7 +56,7 @@ weblink:
           url: !secret kpn_router_url
           icon: mdi:upload-network
         - name: Jaikocam Stream
-          url: !secret jaikocam_mjpeg_url
+          url: !secret jaikocam_rtsp_url
           icon: mdi:paw
 
 

@@ -73,7 +73,7 @@ dog:
         - sensor.time
         - binary_sensor.noise
         - binary_sensor.pir_jaiko
-        - camera.jaikocam_live
+        - camera.jaiko
         - camera.living_room
         - group.jaiko
         - group.dog_commands
