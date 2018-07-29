@@ -39,7 +39,7 @@ elif [ "$MODE" == "livingroom" ]; then
 elif [ "$MODE" == "street" ]; then
     curl -sS "http://$STREETCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$STREETCAM_USER&pwd=$STREETCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "jaiko" ]; then
-    curl -sS "http://$JAIKOCAM_IP/snapshot.cgi?user=$JAIKOCAM_USER&pwd=$JAIKOCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
+    curl -sS "http://$JAIKOCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$JAIKOCAM_USER&pwd=$JAIKOCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 elif [ "$MODE" == "garden" ]; then
     curl -sS "http://$GARDENCAM_IP/snapshot.cgi?user=$GARDENCAM_USER&pwd=$GARDENCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 else
