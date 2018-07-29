@@ -232,6 +232,7 @@ config_view:
         - group.devices
         - group.timer
         - group.battery_stats
+        - group.visitors
 
 power_consumption:
     name: Power Consumption
@@ -584,3 +585,14 @@ dog_commands:
         -  script.command_rustig
         -  script.command_stil
         -  script.command_goedzo
+
+visitors:
+    name: Visitors
+    icon: mdi:account-multiple
+    entities:
+        - device_tracker.chris
+        - device_tracker.evelynda
+        - device_tracker.jan
+        - device_tracker.netty
+        - device_tracker.erik
+        - device_tracker.patrick
