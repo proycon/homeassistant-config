@@ -119,7 +119,7 @@ for period in periods:
     #use it as index
     allqueryDF.index = allqueryDF['last_changed']
     tz = timezone('Europe/Amsterdam')
-    allqueryDF.index = allqueryDF.index.tz_localize('UTC').tz_convert('Europe/Amsterdam')
+    allqueryDF.index = allqueryDF.index.tz_convert('Europe/Amsterdam')
 
     print("plotting binary data...")
     binary = allqueryDF['domain'].isin(binary_domains)
