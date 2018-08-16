@@ -28,7 +28,14 @@ EVENTDATE=`date +%Y-%m-%d_%H:%M:%S`
 for CAM in ${CAMS[@]}; do
     NUM=$((NUM+1))
     #convert -loop 0 -delay 500 $(find . -name "$DATE*$CAM*jpg" | sort | tail -n 6) $EVENTDATE.$CAM.gif
-    IMAGES=$(find . -maxdepth 1 -name "$DATE*$CAM*jpg" | sort | tail -n 6)
+    if [ "$CAM" = "street" ]; then
+        LENGTH=15
+    elif [ "$CAM" = "garden" ]; then
+        LENGTH=6
+    else
+        LENGTH=10
+    fi
+    IMAGES=$(find . -maxdepth 1 -name "$DATE*$CAM*jpg" | sort | tail -n $LENGTH)
     echo "$EVENTDATE - $CAM - Event $NUM - Images: $IMAGES">&2
     IMAGEARRAY=($IMAGES)
     FIRSTIMAGE=${IMAGEARRAY[0]}
