@@ -205,6 +205,9 @@ jaiko:
         - input_boolean.jaiko_crated
         - input_select.ipcam_direction
         - weblink.jaikocam_stream
+        - script.jaiko_fed
+        - script.jaiko_peed
+        - script.jaiko_pooped
 
 
 crate:

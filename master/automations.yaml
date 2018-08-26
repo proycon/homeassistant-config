@@ -2141,3 +2141,4 @@
     - service: notify.matrix
       data:
           message: "Jaiko out of crate @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
+

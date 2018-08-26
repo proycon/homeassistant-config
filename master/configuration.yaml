@@ -320,6 +320,7 @@ input_boolean:
         name: Jaiko crated
         initial: off
 
+
 input_text:
     say:
         name: say

@@ -921,6 +921,32 @@ reset_ipcam:
           entity_id: input_select.ipcam_direction
           option: "{% if states('input_boolean.jaiko_crated') == 'on' %}Bed Jaiko{% else %}Back{% endif %}"
 
+#register
+jaiko_fed:
+    alias: Jaiko fed
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/say/pi1"
+              payload: "Ok"
+
+jaiko_peed:
+    alias: Jaiko peed
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/say/pi1"
+              payload: "Ok"
+
+jaiko_pooped:
+    alias: Jaiko pooped
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/say/pi1"
+              payload: "Ok"
+
+
 home_notification_lights:
   alias: Home Notification Lights
   sequence:
