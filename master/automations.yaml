@@ -2080,6 +2080,32 @@
     - service: input_boolean.turn_off
       entity_id: input_boolean.jaiko_crated
 
+- id: remote_pee
+  alias: remote_pee
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 6
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+    - service: script.turn_on
+      entity_id: script.jaiko_peed
+
+- id: remote_pooped
+  alias: remote_pooped
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 6
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+    - service: script.turn_on
+      entity_id: script.jaiko_pooped
+
 - id: crate
   trigger:
     - platform: state
@@ -2088,9 +2114,9 @@
       to: "on"
   action:
     - service: mqtt.publish
-      data:
-          topic: "home/say/pi1"
-          payload: "in"
+      data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_65.ogg'
     - service: script.turn_on
       entity_id: script.red_lights
     - service: input_select.select_option
@@ -2135,10 +2161,23 @@
         to: "off"
   action:
     - service: mqtt.publish
-      data:
-          topic: "home/say/pi1"
-          payload: "out"
+      data_template:
+        topic: "home/sound/pi1"
+        payload_template: 'computerbeep_65.ogg'
     - service: notify.matrix
       data:
           message: "Jaiko out of crate @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
 
+
+- id: notify_livingroom_movement
+  alias: Notify Livingroom Movement
+  condition:
+      - condition: state
+        entity_id: input_boolean.notify_livingroom_movement
+        state: "on"
+  action:
+    - service: notify.matrix
+      data:
+          message: "Reporting movement in living room as requested (once) @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.notify_livingroom_movement

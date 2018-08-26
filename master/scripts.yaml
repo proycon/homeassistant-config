@@ -926,25 +926,25 @@ jaiko_fed:
     alias: Jaiko fed
     sequence:
         - service: mqtt.publish
-          data:
-              topic: "home/say/pi1"
-              payload: "Ok"
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_65.ogg'
 
 jaiko_peed:
     alias: Jaiko peed
     sequence:
         - service: mqtt.publish
-          data:
-              topic: "home/say/pi1"
-              payload: "Ok"
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_65.ogg'
 
 jaiko_pooped:
     alias: Jaiko pooped
     sequence:
         - service: mqtt.publish
-          data:
-              topic: "home/say/pi1"
-              payload: "Ok"
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_65.ogg'
 
 
 home_notification_lights:

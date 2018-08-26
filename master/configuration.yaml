@@ -320,6 +320,10 @@ input_boolean:
     jaiko_crated:
         name: Jaiko crated
         initial: off
+    notify_livingroom_movement:
+        name: Notify Livingroom Movement
+        initial: off
+
 
 
 input_text:
