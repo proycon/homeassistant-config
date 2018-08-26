@@ -215,6 +215,7 @@ input_select:
             - Bed Jaiko
             - Floor
             - Mand Jaiko
+            - Front table
     fireplace:
         name: Fireplace
         options:

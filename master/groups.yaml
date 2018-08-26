@@ -205,9 +205,15 @@ jaiko:
         - input_boolean.jaiko_crated
         - input_select.ipcam_direction
         - weblink.jaikocam_stream
+        - sensor.last_fed_jaiko
+        - sensor.last_movement_jaiko
+        - sensor.last_movement_living_room
         - script.jaiko_fed
+        - sensor.last_fed_jaiko
         - script.jaiko_peed
+        - sensor.last_peed_jaiko
         - script.jaiko_pooped
+        - sensor.last_pooped_jaiko
 
 
 crate:

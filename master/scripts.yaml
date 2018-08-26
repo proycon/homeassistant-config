@@ -883,7 +883,7 @@ ipcam_topreset:
         - service: rest_command.ipcam_topreset
           data_template:
               ip: !secret ipcam_ip
-              index: '{% if is_state("input_select.ipcam_direction","Hall") %}0{% elif is_state("input_select.ipcam_direction","Dresser") %}1{% elif is_state("input_select.ipcam_direction","Back") %}2{% elif is_state("input_select.ipcam_direction","TV") %}3{% elif is_state("input_select.ipcam_direction","Couch") %}4{% elif is_state("input_select.ipcam_direction","Front") %}5{% elif is_state("input_select.ipcam_direction","Bed Jaiko") %}6{% elif is_state("input_select.ipcam_direction","Floor") %}7{% elif is_state("input_select.ipcam_direction","Mand Jaiko") %}8{% endif %}'
+              index: '{% if is_state("input_select.ipcam_direction","Hall") %}0{% elif is_state("input_select.ipcam_direction","Dresser") %}1{% elif is_state("input_select.ipcam_direction","Back") %}2{% elif is_state("input_select.ipcam_direction","TV") %}3{% elif is_state("input_select.ipcam_direction","Couch") %}4{% elif is_state("input_select.ipcam_direction","Front") %}5{% elif is_state("input_select.ipcam_direction","Bed Jaiko") %}6{% elif is_state("input_select.ipcam_direction","Floor") %}7{% elif is_state("input_select.ipcam_direction","Mand Jaiko") %}8{% elif is_state("input_select.ipcam_direction","Front table") %}9{% endif %}'
 ignite_fireplace:
     alias: Ignite Fireplace
     sequence:
