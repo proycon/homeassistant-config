@@ -424,6 +424,15 @@ sensor:
           last_movement_living_room:
             friendly_name: Last movement living room
             value_template: "{{ states.binary_sensor.pir_living_room.last_updated.astimezone().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          last_fed_jaiko:
+            friendly_name: Last fed Jaiko
+            value_template: "{{ states.script.jaiko_fed.last_triggered.astimezone().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          last_peed_jaiko:
+            friendly_name: Last peed Jaiko
+            value_template: "{{ states.script.jaiko_peed.last_triggered.astimezone().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          last_pooped_jaiko:
+            friendly_name: Last pooped Jaiko
+            value_template: "{{ states.script.jaiko_pooped.last_triggered.astimezone().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - platform: mqtt
       name: Temperature Living Room
       unit_of_measurement: °C
