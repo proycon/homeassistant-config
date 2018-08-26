@@ -2171,6 +2171,15 @@
 
 - id: notify_livingroom_movement
   alias: Notify Livingroom Movement
+  trigger:
+      - platform: state
+        entity_id: binary_sensor.pir_living_room
+        from: "off"
+        to: "on"
+      - platform: state
+        entity_id: binary_sensor.pir_jaiko
+        from: "off"
+        to: "on"
   condition:
       - condition: state
         entity_id: input_boolean.notify_livingroom_movement
@@ -2179,5 +2188,9 @@
     - service: notify.matrix
       data:
           message: "Reporting movement in living room as requested (once) @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi1"
+        payload_template: 'chime.wav'
     - service: input_boolean.turn_off
       entity_id: input_boolean.notify_livingroom_movement
