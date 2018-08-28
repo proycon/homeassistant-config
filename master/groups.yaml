@@ -365,6 +365,8 @@ light_shortcuts:
     entities:
         - script.lights_on
         - script.lights_off
+        - script.evening_scene
+        - script.night_scene
 
 living_lights:
     name: Living Room lights
