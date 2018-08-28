@@ -1118,42 +1118,47 @@ watch_tv_bedroom:
             seconds: 2
         - service: switch.turn_on
           entity_id: switch.tv_decoder_bedroom
-        - delay:
-            seconds: 5
-        - service: mqtt.publish #start switch source sequence, triggers some "disconnect anynet device notice"
-          data:
-             topic: "home/ir_send/pi2"
-             payload: '{"device":"tvboven","key":"KEY_MODE","state":"on"}'
-        - delay:
-            seconds: 5
-        - service: mqtt.publish #start switch source sequence again
-          data:
-             topic: "home/ir_send/pi2"
-             payload: '{"device":"tvboven","key":"KEY_MODE","state":"on"}'
-        - delay:
-            seconds: 2
-        - service: mqtt.publish
-          data:
-             topic: "home/ir_send/pi2"
-             payload: '{"device":"tvboven","key":"KEY_DOWN","state":"on"}'
-        - delay:
-            seconds: 1
-        - service: mqtt.publish
-          data:
-             topic: "home/ir_send/pi2"
-             payload: '{"device":"tvboven","key":"KEY_DOWN","state":"on"}'
-        - delay:
-            seconds: 1
-        - service: mqtt.publish
-          data:
-             topic: "home/ir_send/pi2"
-             payload: '{"device":"tvboven","key":"KEY_DOWN","state":"on"}'
-        - delay:
-            seconds: 1
-        - service: mqtt.publish
-          data:
-             topic: "home/ir_send/pi2"
-             payload: '{"device":"tvboven","key":"KEY_OK","state":"on"}'
+        - condition: state
+          entity_id: sun.sun
+          state: 'below_horizon'
+        - service: switch.turn_on
+          entity_id: switch.bedroom
+       #- delay:
+       #    seconds: 5
+       #- service: mqtt.publish #start switch source sequence, triggers some "disconnect anynet device notice"
+       #  data:
+       #     topic: "home/ir_send/pi2"
+       #     payload: '{"device":"tvboven","key":"KEY_MODE","state":"on"}'
+       #- delay:
+       #    seconds: 5
+       #- service: mqtt.publish #start switch source sequence again
+       #  data:
+       #     topic: "home/ir_send/pi2"
+       #     payload: '{"device":"tvboven","key":"KEY_MODE","state":"on"}'
+       #- delay:
+       #    seconds: 2
+       #- service: mqtt.publish
+       #  data:
+       #     topic: "home/ir_send/pi2"
+       #     payload: '{"device":"tvboven","key":"KEY_DOWN","state":"on"}'
+       #- delay:
+       #    seconds: 1
+       #- service: mqtt.publish
+       #  data:
+       #     topic: "home/ir_send/pi2"
+       #     payload: '{"device":"tvboven","key":"KEY_DOWN","state":"on"}'
+       #- delay:
+       #    seconds: 1
+       #- service: mqtt.publish
+       #  data:
+       #     topic: "home/ir_send/pi2"
+       #     payload: '{"device":"tvboven","key":"KEY_DOWN","state":"on"}'
+       #- delay:
+       #    seconds: 1
+       #- service: mqtt.publish
+       #  data:
+       #     topic: "home/ir_send/pi2"
+       #     payload: '{"device":"tvboven","key":"KEY_OK","state":"on"}'
 
 
 
