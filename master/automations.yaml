@@ -2164,3 +2164,65 @@
         payload_template: 'chime.wav'
     - service: input_boolean.turn_off
       entity_id: input_boolean.notify_livingroom_movement
+
+- id: reset_wake_time
+  alias: reset wake time #for the NEXT day!
+  trigger:
+      - platform: time
+        at: '14:00:00'
+  condition:
+      condition: time
+      weekday:
+          - sun
+          - mon
+          - wed
+          - thu
+  action:
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_hour
+             value: 8
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_minutes
+             value: 15
+
+- id: reset_wake_time_weekend
+  alias: reset wake time weekend #for the NEXT day!
+  trigger:
+      - platform: time
+        at: '14:00:00'
+  condition:
+      condition: time
+      weekday:
+          - fri
+          - sat
+  action:
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_hour
+             value: 10
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_minutes
+             value: 15
+
+- id: reset_wake_time_wednesday
+  alias: reset wake time wednesday #for the NEXT day!
+  trigger:
+      - platform: time
+        at: '14:00:00'
+  condition:
+      condition: time
+      weekday:
+          - tue
+  action:
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_hour
+             value: 9
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_minutes
+             value: 00
+

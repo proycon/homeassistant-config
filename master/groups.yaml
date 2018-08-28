@@ -315,6 +315,9 @@ config_lights:
         - automation.night_light_on_motion
         - automation.night_light_off
         - automation.wake_up
+        - automation.reset_wake_time
+        - automation.reset_wake_time_wednesday
+        - automation.reset_wake_time_weekend
 
 config_tests:
     name: Tests

@@ -275,14 +275,14 @@ input_number:
     wake_up_hour:
         name: Wake up Hour
         icon: mdi:timer
-        initial: 9
+        initial: 8
         min: 0
         max: 23
         step: 1
     wake_up_minutes:
         name: Wake up Minutes
         icon: mdi:timer
-        initial: 0
+        initial: 15
         min: 0
         max: 59
         step: 5
