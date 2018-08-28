@@ -922,36 +922,6 @@
        entity_id: input_boolean.inside_house
      - service: script.turn_on
        entity_id: script.turn_media_off
-- id: downstairs_morning_lights_on_hans
-  alias: Downstairs Morning Lights on Hans
-  trigger:
-      - platform: time
-        at: '05:45:00'
-  condition:
-      condition: time
-      weekday:
-          - mon
-          - tue
-          - thu
-          - fri
-  action:
-       - service: switch.turn_on
-         entity_id: switch.tv_spots
-- id: downstairs_morning_lights_off_hans
-  alias: Downstairs Morning Lights off Hans
-  trigger:
-      - platform: time
-        at: '06:15:00'
-  condition:
-      condition: time
-      weekday:
-          - mon
-          - tue
-          - thu
-          - fri
-  action:
-       - service: switch.turn_off
-         entity_id: switch.tv_spots
 - id: office_morning_lights_off_hans
   alias: office_morning Lights off Hans
   trigger:
