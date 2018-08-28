@@ -1386,24 +1386,32 @@ wake_up_alarm:
     sequence:
         - service: switch.turn_on
           entity_id: switch.bedroom
-        - delay:
-            seconds: 30
-        - service: switch.turn_on
-          entity_id: switch.tv_bedroom
         - service: mqtt.publish
           data:
-              topic: "home/wakeup/pi2"
-              payload: "on"
+              topic: "home/soundoutput/pi2"
+              payload: "speakers"
         - delay:
-            minutes: 45
-        - service: switch.turn_off
-          entity_id: switch.bedroom
-        - service: switch.turn_off
-          entity_id: switch.tv_bedroom
+            seconds: 2
         - service: mqtt.publish
-          data:
-              topic: "home/xorg/set/pi2"
-              payload: "off"
+          data_template:
+                topic: "home/sound/pi2"
+                payload_template: 'morningbells_long.ogg'
+       #- service: switch.turn_on
+       #  entity_id: switch.tv_bedroom
+       #- service: mqtt.publish
+       #  data:
+       #      topic: "home/wakeup/pi2"
+       #      payload: "on"
+       #- delay:
+       #    minutes: 45
+       #- service: switch.turn_off
+       #  entity_id: switch.bedroom
+       #- service: switch.turn_off
+       #  entity_id: switch.tv_bedroom
+       #- service: mqtt.publish
+       #  data:
+       #      topic: "home/xorg/set/pi2"
+       #      payload: "off"
 
 
 
