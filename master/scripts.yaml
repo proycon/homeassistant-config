@@ -928,7 +928,7 @@ jaiko_fed:
         - service: mqtt.publish
           data_template:
             topic: "home/sound/pi1"
-            payload_template: 'computerbeep_65.ogg'
+            payload_template: 'computerbeep_65.wav'
 
 jaiko_peed:
     alias: Jaiko peed
@@ -936,7 +936,7 @@ jaiko_peed:
         - service: mqtt.publish
           data_template:
             topic: "home/sound/pi1"
-            payload_template: 'computerbeep_65.ogg'
+            payload_template: 'computerbeep_65.wav'
 
 jaiko_pooped:
     alias: Jaiko pooped
@@ -944,7 +944,7 @@ jaiko_pooped:
         - service: mqtt.publish
           data_template:
             topic: "home/sound/pi1"
-            payload_template: 'computerbeep_65.ogg'
+            payload_template: 'computerbeep_65.wav'
 
 
 home_notification_lights:

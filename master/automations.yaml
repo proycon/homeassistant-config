@@ -2116,7 +2116,7 @@
     - service: mqtt.publish
       data_template:
             topic: "home/sound/pi1"
-            payload_template: 'computerbeep_65.ogg'
+            payload_template: 'computerbeep_65.wav'
     - service: script.turn_on
       entity_id: script.red_lights
     - service: input_select.select_option
@@ -2163,7 +2163,7 @@
     - service: mqtt.publish
       data_template:
         topic: "home/sound/pi1"
-        payload_template: 'computerbeep_65.ogg'
+        payload_template: 'computerbeep_65.wav'
     - service: notify.matrix
       data:
           message: "Jaiko out of crate @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
