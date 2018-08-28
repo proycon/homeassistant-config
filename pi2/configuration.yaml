@@ -490,6 +490,17 @@ automation:
         entity_id: media_player.speaker
         data_template:
             message: '{{ trigger.payload }}'
+  - id: m2s_play_media
+    alias: m2s_play_media
+    trigger:
+        platform: mqtt
+        topic: "home/sound/pi2"
+    action:
+        - service: media_player.play_media
+          data_template:
+              entity_id: media_player.speaker
+              media_content_id: "/home/homeautomation/homeassistant/media/{{ trigger.payload }}"
+              media_content_type: 'music'
 
 media_player speaker:
     - platform: vlc
