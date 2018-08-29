@@ -2076,6 +2076,19 @@
     - service: script.turn_on
       entity_id: script.jaiko_pooped
 
+- id: remote_fed
+  alias: remote_fed
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 8
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+    - service: script.turn_on
+      entity_id: script.jaiko_fed
+
 - id: crate
   trigger:
     - platform: state
