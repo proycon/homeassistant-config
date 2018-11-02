@@ -86,7 +86,7 @@
   hide_entity: False
   trigger:
     platform: time
-    seconds: '/20' #every twenty seconds
+    seconds: '/30' #every thirty seconds
   condition:
     - condition: state
       entity_id: input_boolean.jaiko_crated
