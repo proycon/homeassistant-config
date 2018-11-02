@@ -542,10 +542,6 @@
       after: '06:00'
       before: '22:00'
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Back door still open
     - service: notify.xmpp_proycon
       data:
           message: "Back door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
@@ -699,7 +695,7 @@
     - service: input_boolean.turn_on
       entity_id: input_boolean.proycon_inside_house
     - delay:
-        seconds: 20
+        seconds: 10
     - service: mqtt.publish
       data:
           topic: "home/say/pi1"
@@ -731,7 +727,7 @@
     - service: input_boolean.turn_on
       entity_id: input_boolean.hans_inside_house
     - delay:
-        seconds: 20
+        seconds: 10
     - service: mqtt.publish
       data:
           topic: "home/say/pi1"
@@ -2198,7 +2194,7 @@
        - service: input_number.set_value
          data:
              entity_id: input_number.wake_up_minutes
-             value: 15
+             value: 30
 
 - id: reset_wake_time_weekend
   alias: reset wake time weekend #for the NEXT day!
