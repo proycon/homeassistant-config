@@ -1285,7 +1285,7 @@
           minutes: 5
   condition:
       condition: template
-      value_template: '{% if states.automation.night_light_on_motion.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.night_light_on_motion.attributes.last_triggered)) < 400 }} {% else %} false {% endif %}'
+      value_template: '{% if states.automation.night_light_on_motion.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.night_light_on_motion.attributes.last_triggered)) < 90 }} {% else %} false {% endif %}'
   action:
      - service: script.turn_on
        entity_id: script.extinguish_dresser_ambilight
