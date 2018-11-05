@@ -24,14 +24,18 @@ frontend:
     themes: !include themes.yaml
 
 # Enables configuration UI
-config:
 
 http:
   api_password: !secret api_password
+  trusted_proxies:
+    - 127.0.0.1
+    - ::1
   use_x_forwarded_for: True
   base_url: !secret base_url
   ip_ban_enabled: True
   login_attempts_threshold: 5
+
+config:
 
 ffmpeg:
 
@@ -428,6 +432,21 @@ sensor:
           last_movement_living_room:
             friendly_name: Last movement living room
             value_template: "{{ states.binary_sensor.pir_living_room.last_updated.astimezone().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          last_movement_front_door:
+            friendly_name: Last movement front door
+            value_template: "{{ states.binary_sensor.front_door.last_updated.astimezone().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          last_movement_back_door:
+            friendly_name: Last movement back door
+            value_template: "{{ states.binary_sensor.back_door.last_updated.astimezone().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          last_movement_bedroom_window_left:
+            friendly_name: Last movement bedroom window left
+            value_template: "{{ states.binary_sensor.bedroom_window_left.last_updated.astimezone().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          last_movement_bedroom_window_right:
+            friendly_name: Last movement bedroom window right
+            value_template: "{{ states.binary_sensor.bedroom_window_right.last_updated.astimezone().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          last_movement_bathroom_window:
+            friendly_name: Last movement bathroom_window_sensor
+            value_template: "{{ states.binary_sensor.bathroom_window_sensor.last_updated.astimezone().strftime('%Y-%m-%d [%H:%M:%S]') }}"
           last_fed_jaiko:
             friendly_name: Last fed Jaiko
             value_template: "{{ states.script.jaiko_fed.attributes.last_triggered.astimezone().strftime('%Y-%m-%d [%H:%M:%S]') }}"

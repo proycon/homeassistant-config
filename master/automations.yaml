@@ -86,7 +86,7 @@
   hide_entity: False
   trigger:
     platform: time
-    seconds: '/20' #every twenty seconds
+    seconds: '/30' #every thirty seconds
   condition:
     - condition: state
       entity_id: input_boolean.jaiko_crated
@@ -542,10 +542,6 @@
       after: '06:00'
       before: '22:00'
   action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Back door still open
     - service: notify.xmpp_proycon
       data:
           message: "Back door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
@@ -699,7 +695,7 @@
     - service: input_boolean.turn_on
       entity_id: input_boolean.proycon_inside_house
     - delay:
-        seconds: 20
+        seconds: 10
     - service: mqtt.publish
       data:
           topic: "home/say/pi1"
@@ -731,7 +727,7 @@
     - service: input_boolean.turn_on
       entity_id: input_boolean.hans_inside_house
     - delay:
-        seconds: 20
+        seconds: 10
     - service: mqtt.publish
       data:
           topic: "home/say/pi1"
@@ -1289,7 +1285,7 @@
           minutes: 5
   condition:
       condition: template
-      value_template: '{% if states.automation.night_light_on_motion.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.night_light_on_motion.attributes.last_triggered)) < 400 }} {% else %} false {% endif %}'
+      value_template: '{% if states.automation.night_light_on_motion.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.night_light_on_motion.attributes.last_triggered)) < 90 }} {% else %} false {% endif %}'
   action:
      - service: script.turn_on
        entity_id: script.extinguish_dresser_ambilight
@@ -2076,6 +2072,19 @@
     - service: script.turn_on
       entity_id: script.jaiko_pooped
 
+- id: remote_fed
+  alias: remote_fed
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 8
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+    - service: script.turn_on
+      entity_id: script.jaiko_fed
+
 - id: crate
   trigger:
     - platform: state
@@ -2185,7 +2194,7 @@
        - service: input_number.set_value
          data:
              entity_id: input_number.wake_up_minutes
-             value: 15
+             value: 30
 
 - id: reset_wake_time_weekend
   alias: reset wake time weekend #for the NEXT day!

@@ -110,6 +110,11 @@ last_movements:
         - sensor.last_movement_living_room
         - sensor.last_movement_kitchen
         - sensor.last_movement_office
+        - sensor.last_movement_front_door
+        - sensor.last_movement_back_door
+        - sensor.last_movement_bedroom_window_left
+        - sensor.last_movement_bedroom_window_right
+        - sensor.last_movement_bathroom_window
 
 camera_view:
     name: Live Cameras
