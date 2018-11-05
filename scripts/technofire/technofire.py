@@ -66,6 +66,23 @@ def colorWipe(strip, color, wait_ms=50):
         strip.show()
         time.sleep(wait_ms/1000.0)
 
+def knightrider(strip, wait_ms=50, iterations=10):
+    color=Color(255,0,0)
+    length=4
+    for i in range(0, strip.numPixels()- length):
+        for j in range(0,length):
+            strip.setPixelColor(i+j, color)
+        strip.show()
+        time.sleep(wait_ms/1000.0)
+        strip.setPixelColor(i, 0)
+    size = strip.numPixels()
+    for i in range(size-length, 0,-1):
+        for j in range(0,length):
+            strip.setPixelColor(i+j, color)
+        strip.show()
+        time.sleep(wait_ms/1000.0)
+        strip.setPixelColor(i+length, 0)
+
 def theaterChase(strip, color, wait_ms=50, iterations=10):
     """Movie theater light style chaser animation."""
     for j in range(iterations):
@@ -167,6 +184,9 @@ if __name__ == '__main__':
     elif scene == "blue_chase":
         while True:
             theaterChase(strip, Color(0,   0,   127))  # Red theater chase
+    elif scene == "knightrider":
+        while True:
+            knightrider(strip)
     elif scene == "rainbow":
         while True:
             rainbow(strip)
