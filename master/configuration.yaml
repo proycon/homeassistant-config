@@ -46,7 +46,7 @@ zone:
     latitude: !secret latitude
     longitude: !secret longitude
     radius: 20
-    icon: mdi:account-multiple
+    icon: mdi:home
 
 weblink:
     entities:
