@@ -195,9 +195,9 @@ device_tracker:
           wifi_router: !secret wifi_router_ip
           kpn_router: !secret kpn_router_ip
     - platform: traccar
-          username: !secret traccar_user
-          password: !secret traccar_password
-          host: !secret traccar_host
+      username: !secret traccar_user
+      password: !secret traccar_password
+      host: !secret traccar_host
 
 # Text to speech
 tts:
