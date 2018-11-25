@@ -39,6 +39,8 @@ config:
 
 ffmpeg:
 
+map:
+
 weblink:
     entities:
         - name: Kodi Control Interface
