@@ -4,6 +4,7 @@ homeassistant:
   # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude
   longitude: !secret longitude
+  radius: 20
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 161
   # metric for Metric, imperial for Imperial
