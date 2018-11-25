@@ -4,7 +4,6 @@ homeassistant:
   # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude
   longitude: !secret longitude
-  radius: 20
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 161
   # metric for Metric, imperial for Imperial
@@ -41,6 +40,13 @@ config:
 ffmpeg:
 
 map:
+
+zone:
+  - name: Home
+    latitude: !secret latitude
+    longitude: !secret longitude
+    radius: 20
+    icon: mdi:account-multiple
 
 weblink:
     entities:
