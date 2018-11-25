@@ -57,7 +57,7 @@ class TraccarDeviceScanner(object):
                     _gps_accuracy=position_id['accuracy']
                     _attrs = {
                         'totalDistance': position_id['attributes']['totalDistance'],
-                        'ip': position_id['attributes']['ip'],
+                        'ip': position_id['attributes'].get('ip','127.0.0.1'),
                         'protocol': position_id['protocol'],
                         'speed': position_id['speed'],
                         'address': position_id['address'],
