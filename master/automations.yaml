@@ -294,7 +294,10 @@
       platform: state
       entity_id: input_select.ipcam_direction
   action:
-      service: script.turn_on
+    - service: timer.cancel
+      data:
+        entity_id: timer.reset_ipcam
+    - service: script.turn_on
       entity_id: script.ipcam_topreset
 
 - id: alarm_trigger
