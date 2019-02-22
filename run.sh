@@ -3,7 +3,7 @@
 HOST=$(hostname)
 HADIR=/home/homeautomation/homeassistant/
 cd $HADIR
-if [ $HOST == "roma" ]; then
+if [ $HOST == "roma" ] || [ $HOST == "homeautomation" ]; then
     HOST="master"
 fi
 
