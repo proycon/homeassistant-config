@@ -26,7 +26,6 @@ frontend:
 # Enables configuration UI
 
 http:
-  api_password: !secret api_password
   trusted_proxies:
     - 127.0.0.1
     - ::1
