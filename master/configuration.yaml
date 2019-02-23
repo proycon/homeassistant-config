@@ -881,7 +881,7 @@ notify:
   - name: mail_both
     platform: smtp
     sender: !secret mail_sender
-    server: localhost
+    server: anaproy.nl
     port: 25
     encryption: starttls
     debug: true
