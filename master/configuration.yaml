@@ -29,7 +29,6 @@ http:
   api_password: !secret api_password
   trusted_proxies:
     - 127.0.0.1
-    - 10.252.116.1
     - ::1
   use_x_forwarded_for: True
   base_url: !secret base_url
@@ -832,7 +831,7 @@ media_player yamaha_receiver:
 
 media_player mpd:
   - platform: mpd
-    host: 127.0.0.1
+    host: anaproy.nl
     password: !secret mpd_password
 
 media_player kodi:
