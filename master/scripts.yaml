@@ -783,7 +783,7 @@ dog_sound:
         - service: media_player.play_media
           data:
               entity_id: media_player.hall_speaker
-              media_content_id: /home/homeautomation/homeassistant/media/dog.wav
+              media_content_id: file:///home/homeautomation/homeassistant/media/dog.wav
               media_content_type: 'music'
 chime_sound:
     alias: Chime sound
@@ -791,7 +791,7 @@ chime_sound:
         - service: media_player.play_media
           data:
               entity_id: media_player.hall_speaker
-              media_content_id: /home/homeautomation/homeassistant/media/chime.wav
+              media_content_id: file:///home/homeautomation/homeassistant/media/chime.wav
               media_content_type: 'music'
 
 command_zit:
@@ -869,7 +869,7 @@ alarm_iteration:
         - service: media_player.play_media
           data:
               entity_id: media_player.hall_speaker
-              media_content_id: /home/homeautomation/homeassistant/media/alarm.ogg
+              media_content_id: file:///home/homeautomation/homeassistant/media/alarm.ogg
               media_content_type: 'music'
         - condition: state
           entity_id: alarm_control_panel.alarm_system
@@ -1751,7 +1751,7 @@ start_timer:
         - service: media_player.play_media
           data:
              entity_id: media_player.hall_speaker
-             media_content_id: /home/homeautomation/homeassistant/media/meditationend.ogg
+             media_content_id: file:///home/homeautomation/homeassistant/media/meditationend.ogg
              media_content_type: 'music'
 
 vacuum_turn_on:
