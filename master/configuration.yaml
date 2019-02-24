@@ -817,9 +817,9 @@ vacuum:
 #       hdmi_cec.hdmi_0: switch #will expose a switch.hdmi_0 entity
 
 media_player hall_speaker:
-    - platform: vlc
+    - platform: gstreamer
       name: Hall speaker
-      arguments: '--alsa-audio-device=hw:0,0'
+      pipeline: "audioconvert ! audioresample ! pulsesink" #relies on PULSE_SERVER being set as environment variable in case of remote server!
 
 media_player yamaha_receiver:
   - platform: yamaha

@@ -6,6 +6,9 @@ cd $HADIR
 if [ $HOST == "roma" ] || [ $HOST == "homeautomation" ]; then
     HOST="master"
 fi
+if [ $HOST == "homeautomation" ]; then
+    export PULSE_SERVER="10.252.116.1"
+fi
 
 if [ ! -d "$HADIR/env" ]; then
     echo "Virtualenv not setup yet for $HOST" >&2
