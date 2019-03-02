@@ -382,7 +382,6 @@ timer:
 
 sensor:
     - platform: buienradar #weather prediction
-      name: Weather
       monitored_conditions:
           - symbol
           - temperature
