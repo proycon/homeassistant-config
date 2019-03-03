@@ -7,6 +7,8 @@ resources:
     type: js
   - url: /local/custom-ui/layout-card.js
     type: js
+  - url: /local/custom-ui/gap-card.js
+    type: js
 views:
   - id: home
     icon: mdi:home
@@ -40,15 +42,25 @@ views:
                       state_image:
                           "home": "/local/presence/hans_in.jpg"
                           "not_home": "/local/presence/hans_out.jpg"
-                    - type:  entity
+                    - type:  picture-entity
                       entity: alarm_control_panel.alarm_system
+                      state_image:
+                          "disarmed": "/local/icons/ok.png"
+                          "armed": "/local/icons/watching.png"
+                          "triggered": "/local/icons/alert.png"
                 - type: horizontal-stack
                   cards:
                     - type: entity-button
-                      entity: script.lights_on
+                      icon: mdi:sleep
+                      entity: script.lights_off
                       tap_action:
                           action: call-service
-                          service: script.lights_on
+                          service: script.lights_off
+                      hold_action:
+                        - action: call-service
+                          service: script.turn_media_off
+                        - action: call-service
+                          service: script.lights_off
                     - type: entity-button
                       entity: script.night_scene
                       icon: mdi:weather-night
@@ -56,39 +68,12 @@ views:
                           action: call-service
                           service: script.night_scene
                     - type: entity-button
-                      icon: mdi:sleep
-                      entity: script.lights_off
+                      entity: script.lights_on
                       tap_action:
                           action: call-service
-                          service: script.lights_off
+                          service: script.lights_on
                 - type: horizontal-stack
                   cards:
-                    - type: entity-button
-                      entity: script.avr_voldown
-                      icon: mdi:volume-low
-                      tap_action:
-                          action: call-service
-                          service: script.avr_voldown
-                    - type: entity-button
-                      entity: script.avr_mute
-                      icon: mdi:volume-mute
-                      tap_action:
-                          action: call-service
-                          service: script.avr_mute
-                    - type: entity-button
-                      entity: script.avr_volup
-                      icon: mdi:volume-high
-                      tap_action:
-                          action: call-service
-                          service: script.avr_volup
-                - type: horizontal-stack
-                  cards:
-                    - type: entity-button
-                      entity: script.tvdecoder_channeldown
-                      icon: mdi:minus-circle
-                      tap_action:
-                          action: call-service
-                          entity: script.tvdecoder_channeldown
                     - type: entity-button
                       entity: script.tvdecoder_playpause
                       icon: mdi:play-pause
@@ -96,11 +81,78 @@ views:
                           action: call-service
                           service: script.tvdecoder_playpause
                     - type: entity-button
-                      entity: script.tvdecoder_up
+                      entity: script.tvdecoder_channeldown
+                      icon: mdi:minus-circle
+                      tap_action:
+                          action: call-service
+                          entity: script.tvdecoder_channeldown
+                    - type: entity-button
+                      entity: script.tvdecoder_channelup
                       icon: mdi:plus-circle
                       tap_action:
                           action: call-service
-                          entity: script.tvdecoder_up
+                          entity: script.tvdecoderchannelup
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: script.avr_mute
+                      icon: mdi:volume-mute
+                      tap_action:
+                          action: call-service
+                          service: script.avr_mute
+                    - type: entity-button
+                      entity: script.avr_voldown
+                      icon: mdi:volume-low
+                      tap_action:
+                          action: call-service
+                          service: script.avr_voldown
+                    - type: entity-button
+                      entity: script.avr_volup
+                      icon: mdi:volume-high
+                      tap_action:
+                          action: call-service
+                          service: script.avr_volup
+            - type: vertical-stack
+              cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: entity-button
+                        entity: script.watch_tv
+                        tap_action:
+                            action: call-service
+                            service: script.watch_tv
+                      - type: entity-button
+                        entity: script.listen_to_music
+                        tap_action:
+                            action: call-service
+                            service: script.listen_to_music
+                      - type: entity-button
+                        entity: script.media_centre
+                        tap_action:
+                            action: call-service
+                            service: script.media_centre
+                      - type: entity-button
+                        icon: mdi:robot
+                        name: "Start clean-up"
+                        entity: vacuum.robot
+                        tap_action:
+                           action: call-service
+                           service: vacuum.turn_on
+                           entity_id: vacuum.robot 
+                        hold_action:
+                           action: call-service
+                           service: vacuum.return_to_home
+                           entity_id: vacuum.robot 
+                      - type: entity-button
+                        entity: script.turn_media_off
+                        tap_action:
+                            action: call-service
+                            service: script.turn_media_off
+                        hold_action:
+                          - action: call-service
+                            service: script.turn_media_off
+                          - action: call-service
+                            service: script.lights_off
             - break
             - type: picture-elements
               image: /local/floorplans/downstairs.png
@@ -670,6 +722,262 @@ views:
                   entity: camera.jaiko
                 - type: picture-entity
                   entity: camera.garden
+  - id: media
+    icon: mdi:television
+    title: Media
+    panel: true
+    cards:
+        - type: custom:layout-card
+          layout: horizontal
+          column_width: 400
+          cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: script.tvdecoder_playpause
+                      icon: mdi:play-pause
+                      tap_action:
+                          action: call-service
+                          service: script.tvdecoder_playpause
+                    - type: entity-button
+                      entity: script.tvdecoder_channeldown
+                      icon: mdi:minus-circle
+                      tap_action:
+                          action: call-service
+                          entity: script.tvdecoder_channeldown
+                    - type: entity-button
+                      entity: script.tvdecoder_channelup
+                      icon: mdi:plus-circle
+                      tap_action:
+                          action: call-service
+                          entity: script.tvdecoderchannelup
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: script.avr_mute
+                      icon: mdi:volume-mute
+                      tap_action:
+                          action: call-service
+                          service: script.avr_mute
+                    - type: entity-button
+                      entity: script.avr_voldown
+                      icon: mdi:volume-low
+                      tap_action:
+                          action: call-service
+                          service: script.avr_voldown
+                    - type: entity-button
+                      entity: script.avr_volup
+                      icon: mdi:volume-high
+                      tap_action:
+                          action: call-service
+                          service: script.avr_volup
+                - break
+                - type: vertical-stack
+                  cards:
+                    - type: horizontal-stack
+                      cards:
+                        - type: custom:gap-card
+                        - type: entity-button
+                          entity: script.tvdecoder_up
+                          icon: mdi:arrow-up
+                          name: ""
+                          tap_action:
+                            action: call-service
+                            service: script.tvdecoder_up
+                        - type: custom:gap-card
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder_left
+                          icon: mdi:arrow-left
+                          name: ""
+                          tap_action:
+                            action: call-service
+                            service: script.tvdecoder_left
+                        - type: entity-button
+                          entity: script.tvdecoder_ok
+                          icon: mdi:thumb-up
+                          name: ""
+                          tap_action:
+                            action: call-service
+                            service: script.tvdecoder_ok
+                        - type: entity-button
+                          entity: script.tvdecoder_right
+                          icon: mdi:arrow-right
+                          name: ""
+                          tap_action:
+                            action: call-service
+                            service: script.tvdecoder_right
+                    - type: horizontal-stack
+                      cards:
+                          - type: custom:gap-card
+                          - type: entity-button
+                            entity: script.tvdecoder_down
+                            icon: mdi:arrow-down
+                            name: ""
+                            tap_action:
+                                action: call-service
+                                service: script.tvdecoder_down
+                          - type: entity-button
+                            entity: script.tvdecoder_back
+                            icon: mdi:backburger
+                            name: ""
+                            tap_action:
+                                action: call-service
+                                service: script.tvdecoder_back
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder_npo1
+                          icon: none
+                          name: "NPO1"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_npo1
+                        - type: entity-button
+                          entity: script.tvdecoder_npo2
+                          icon: none
+                          name: "NPO2"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_npo2
+                        - type: entity-button
+                          entity: script.tvdecoder_npo3
+                          icon: none
+                          name: "NPO3"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_npo3
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder_rtl4
+                          icon: none
+                          name: "RTL4"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_rtl4
+                        - type: entity-button
+                          entity: script.tvdecoder_veronica
+                          icon: none
+                          name: "Veronica"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_veronica
+                        - type: custom:gap-card
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder_een
+                          icon: none
+                          name: "Eén"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_een
+                        - type: entity-button
+                          entity: script.tvdecoder_canvas
+                          icon: none
+                          name: "Canvas"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_canvas
+                        - type: custom:gap-card
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder_bbc1st
+                          icon: none
+                          name: "BBC First"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_bbc1st
+                        - type: entity-button
+                          entity: script.tvdecoder_bbc1
+                          icon: none
+                          name: "BBC One"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_bbc1
+                        - type: entity-button
+                          entity: script.tvdecoder_bbc2
+                          icon: none
+                          name: "BBC Two"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_bbc2
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder_ard
+                          icon: none
+                          name: "ARD"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_ard
+                        - type: entity-button
+                          entity: script.tvdecoder_zdf
+                          icon: none
+                          name: "ZDF"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_zdf
+                        - type: entity-button
+                          entity: script.tvdecoder_wdr
+                          icon: none
+                          name: "WDR"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_wdr
+                        - type: entity-button
+                          entity: script.tvdecoder_arte
+                          icon: none
+                          name: "Arte"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_arte
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder_tv5monde
+                          icon: none
+                          name: "TV5 Monde"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_tv5monde
+                        - type: entity-button
+                          entity: script.tvdecoder_rai1
+                          icon: none
+                          name: "Rai Uno"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_rai1
+                        - type: entity-button
+                          entity: script.tvdecoder_antena3
+                          icon: none
+                          name: "Antena 3"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder_antena3
+                - type: entities
+                  title: Devices
+                  entities:
+                    - switch.tv_decoder
+                    - switch.tv
+                    - switch.pi1_kodi
+                    - switch.pi1_xorg
+                    - switch.pi1_music_player
+                    - script.turn_tv_upstairs_on
+                    - script.update_kodi_library
+                  show_header_toggle: false
+                - type: vertical-stack
+                  cards:
+                    - type: media-control
+                      entity: media_player.yamaha_receiver
+                    - type: media-control
+                      entity: media_player.mpd
+                    - type: media-control
+                      entity: media_player.kodi
+              
   - path: oldview
     title: oldview
     badges:
