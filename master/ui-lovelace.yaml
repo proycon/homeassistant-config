@@ -1062,7 +1062,13 @@ views:
                       entities:
                          - input_text.youtube_link
                          - script.play_youtube_link
-
+                - type: entities
+                  entities:
+                      - input_text.say
+                      - script.say
+                        #- switch.noise_detector
+                  title: Text-to-Speech
+                  show_header_toggle: false
   - path: oldview
     title: oldview
     badges:
