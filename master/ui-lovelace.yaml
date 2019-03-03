@@ -340,11 +340,19 @@ views:
                     style:
                        top: 33%
                        left: 49%
-                  - type: state-icon
+                  - type: image
                     entity: binary_sensor.front_door
+                    image: /local/icons/closed.png
+                    state_image:
+                       'on': /local/icons/open.png
+                    state_filter:
+                      'on': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px red)
+                      'off': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px black)
                     style:
-                       top: 94%
+                       top: 98%
                        left: 31%
+                       width: 5%
+                       padding: 50px 50px 100px 50px
                   - type: state-icon
                     entity: binary_sensor.doorbell
                     style:
@@ -360,11 +368,19 @@ views:
                     style:
                        top: 60%
                        left: 66%
-                  - type: state-icon
+                  - type: image
                     entity: binary_sensor.back_door
+                    image: /local/icons/closed.png
+                    state_image:
+                       'on': /local/icons/open.png
+                    state_filter:
+                      'on': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px red)
+                      'off': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px black)
                     style:
-                       top: 6%
+                       top: 9%
                        left: 70%
+                       width: 5%
+                       padding: 50px 50px 100px 50px
                   - type: state-label
                     entity: sensor.dogsensor_temperature
                     style:
@@ -563,21 +579,45 @@ views:
                     style:
                        top: 75%
                        left: 64%
-                  - type: state-icon
+                  - type: image
                     entity: binary_sensor.bathroom_window_sensor
+                    image: /local/icons/closed.png
+                    state_image:
+                       'on': /local/icons/open.png
+                    state_filter:
+                      'on': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px red)
+                      'off': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px black)
                     style:
-                       top: 27%
+                       top: 30%
                        left: 26%
-                  - type: state-icon
-                    entity: binary_sensor.bedroom_window_left
+                       width: 5%
+                       padding: 50px 50px 100px 50px
+                  - type: image
+                    entity: binary_sensor.bathroom_window_sensor
+                    image: /local/icons/closed.png
+                    state_image:
+                       'on': /local/icons/open.png
+                    state_filter:
+                      'on': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px red)
+                      'off': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px black)
                     style:
-                       top: 27%
+                       top: 30%
                        left: 47%
-                  - type: state-icon
+                       width: 5%
+                       padding: 50px 50px 100px 50px
+                  - type: image
                     entity: binary_sensor.bedroom_window_right
+                    image: /local/icons/closed.png
+                    state_image:
+                       'on': /local/icons/open.png
+                    state_filter:
+                      'on': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px red)
+                      'off': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px black)
                     style:
-                       top: 27%
+                       top: 30%
                        left: 75%
+                       width: 5%
+                       padding: 50px 50px 100px 50px
                   - type: state-label
                     entity: sensor.bathroom_sensor_temperature
                     style:
