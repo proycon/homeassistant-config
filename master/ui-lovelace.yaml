@@ -76,13 +76,13 @@ views:
                       icon: mdi:minus-circle
                       tap_action:
                           action: call-service
-                          entity: script.tvdecoder_channeldown
+                          service: script.tvdecoder_channeldown
                     - type: entity-button
                       entity: script.tvdecoder_channelup
                       icon: mdi:plus-circle
                       tap_action:
                           action: call-service
-                          entity: script.tvdecoderchannelup
+                          service: script.tvdecoder_channelup
                 - type: horizontal-stack
                   cards:
                     - type: entity-button
@@ -775,13 +775,13 @@ views:
                       icon: mdi:minus-circle
                       tap_action:
                           action: call-service
-                          entity: script.tvdecoder_channeldown
+                          service: script.tvdecoder_channeldown
                     - type: entity-button
                       entity: script.tvdecoder_channelup
                       icon: mdi:plus-circle
                       tap_action:
                           action: call-service
-                          entity: script.tvdecoderchannelup
+                          service: script.tvdecoder_channelup
                 - type: horizontal-stack
                   cards:
                     - type: entity-button

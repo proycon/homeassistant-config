@@ -832,7 +832,7 @@ media_player yamaha_receiver:
 
 media_player mpd:
   - platform: mpd
-    host: anaproy.nl
+    host: !secret mpd_host
     password: !secret mpd_password
 
 media_player kodi:
