@@ -1037,22 +1037,31 @@ views:
                       entity: media_player.mpd
                     - type: media-control
                       entity: media_player.kodi
-                - type: entities
-                  title: Interfaces
-                  show_header_toggle: false
-                  entities:
-                  - type: weblink
-                    url: 'http://192.168.0.12:8080/'
-                    name: Media Browser & Player (Kodi)
-                    icon: 'mdi:kodi'
-                  - type: weblink
-                    url: 'http://mediaserver.anaproy.lxd:6601/iris'
-                    name: Music Browser & Player (Iris)
-                    icon: 'mdi:music-box-outline'
-                  - type: weblink
-                    url: 'http://anaproy.nl:8000/stream.mp3'
-                    name: Play Music Stream here
-                    icon: 'mdi:play-circle'
+                - type: vertical-stack
+                  cards:
+                    - type: entities
+                      title: Interfaces
+                      show_header_toggle: false
+                      entities:
+                      - type: weblink
+                        url: 'http://192.168.0.12:8080/'
+                        name: Media Browser & Player (Kodi)
+                        icon: 'mdi:kodi'
+                      - type: weblink
+                        url: 'http://mediaserver.anaproy.lxd:6601/iris'
+                        name: Music Browser & Player (Iris)
+                        icon: 'mdi:music-box-outline'
+                      - type: weblink
+                        url: 'http://anaproy.nl:8000/stream.mp3'
+                        name: Play Music Stream here
+                        icon: 'mdi:play-circle'
+                    - type: entities
+                      title: YouTube
+                      icon: mdi:youtube
+                      show_header_toggle: false
+                      entities:
+                         - input_text.youtube_link
+                         - script.play_youtube_link
 
   - path: oldview
     title: oldview

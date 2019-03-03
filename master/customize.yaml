@@ -151,6 +151,8 @@ script.repoll_slaves:
     icon: mdi:reload
 script.play_youtube_playlist:
     icon: mdi:youtube
+script.play_youtube_link:
+    icon: mdi:youtube
 device_tracker.mhysa:
     icon: mdi:desktop-classic
 device_tracker.wifi_router:
