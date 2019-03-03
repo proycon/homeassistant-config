@@ -24,8 +24,84 @@ views:
     cards:
         - type: custom:layout-card
           layout: horizontal
-          column_width: 400px
+          column_width: 400
           cards:
+            - type: vertical-stack
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type:  picture-entity
+                      entity: device_tracker.proyphone
+                      state_image:
+                          "home": "/local/presence/proycon_in.jpg"
+                          "not_home": "/local/presence/proycon_out.jpg"
+                    - type:  picture-entity
+                      entity: device_tracker.hansphone
+                      state_image:
+                          "home": "/local/presence/hans_in.jpg"
+                          "not_home": "/local/presence/hans_out.jpg"
+                    - type:  entity
+                      entity: alarm_control_panel.alarm_system
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: script.lights_on
+                      tap_action:
+                          action: call-service
+                          service: script.lights_on
+                    - type: entity-button
+                      entity: script.night_scene
+                      icon: mdi:weather-night
+                      tap_action:
+                          action: call-service
+                          service: script.night_scene
+                    - type: entity-button
+                      icon: mdi:sleep
+                      entity: script.lights_off
+                      tap_action:
+                          action: call-service
+                          service: script.lights_off
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: script.avr_voldown
+                      icon: mdi:volume-low
+                      tap_action:
+                          action: call-service
+                          service: script.avr_voldown
+                    - type: entity-button
+                      entity: script.avr_mute
+                      icon: mdi:volume-mute
+                      tap_action:
+                          action: call-service
+                          service: script.avr_mute
+                    - type: entity-button
+                      entity: script.avr_volup
+                      icon: mdi:volume-high
+                      tap_action:
+                          action: call-service
+                          service: script.avr_volup
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: script.tvdecoder_channeldown
+                      icon: mdi:minus-circle
+                      tap_action:
+                          action: call-service
+                          entity: script.tvdecoder_channeldown
+                    - type: entity-button
+                      entity: script.tvdecoder_playpause
+                      icon: mdi:play-pause
+                      tap_action:
+                          action: call-service
+                          service: script.tvdecoder_playpause
+                    - type: entity-button
+                      entity: script.tvdecoder_up
+                      icon: mdi:plus-circle
+                      tap_action:
+                          action: call-service
+                          entity: script.tvdecoder_up
+            - break
             - type: picture-elements
               image: /local/floorplans/downstairs.png
               elements:
@@ -253,7 +329,7 @@ views:
                       left: 50%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -263,7 +339,7 @@ views:
                       left: 50%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -273,7 +349,7 @@ views:
                       left: 80%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -283,7 +359,7 @@ views:
                       left: 80%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -293,7 +369,7 @@ views:
                       left: 28%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -303,7 +379,7 @@ views:
                       left: 28%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -313,7 +389,7 @@ views:
                       left: 31%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -323,7 +399,7 @@ views:
                       left: 31%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-icon
@@ -338,7 +414,7 @@ views:
                       left: 90%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -348,7 +424,7 @@ views:
                       left: 5%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
             - type: picture-elements
@@ -466,7 +542,7 @@ views:
                       left: 30%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -476,7 +552,7 @@ views:
                       left: 30%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -486,7 +562,7 @@ views:
                       left: 70%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -496,7 +572,7 @@ views:
                       left: 70%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -506,7 +582,7 @@ views:
                       left: 74%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -516,7 +592,7 @@ views:
                       left: 80%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -526,7 +602,7 @@ views:
                       left: 80%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -536,7 +612,7 @@ views:
                       left: 80%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -544,10 +620,10 @@ views:
                     prefix: "Wind "
                     style:
                       top: 16%
-                      left: 78%
+                      left: 76%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -558,7 +634,7 @@ views:
                       left: 93%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -568,7 +644,7 @@ views:
                       left: 81%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
                   - type: state-label
@@ -578,17 +654,22 @@ views:
                       left: 5%
                       background: center
                       text-align: center
-                      font-size: 10px
+                      font-size: 0.7em
                       color: black
                       font-family: Helvetica
-            - type: picture-entity
-              entity: camera.living_room
-            - type: picture-entity
-              entity: camera.street
-            - type: picture-entity
-              entity: camera.jaiko
-            - type: picture-entity
-              entity: camera.garden
+            - type: vertical-stack
+              cards:
+                - type: picture-entity
+                  entity: camera.living_room
+                - type: entities
+                  entities:
+                    - input_select.ipcam_direction
+                - type: picture-entity
+                  entity: camera.street
+                - type: picture-entity
+                  entity: camera.jaiko
+                - type: picture-entity
+                  entity: camera.garden
   - path: oldview
     title: oldview
     badges:
