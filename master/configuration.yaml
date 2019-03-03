@@ -52,7 +52,7 @@ weblink:
         - name: Kodi Control Interface
           url: !secret kodi_pi1_url
           icon: mdi:kodi
-        - name: MPD Control Interface
+        - name: Iris - MPD Control Interface
           url: !secret mpd_url
           icon: mdi:music-box-outline
         - name: MPD Music Stream
