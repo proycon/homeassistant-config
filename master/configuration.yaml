@@ -382,7 +382,6 @@ timer:
 
 sensor:
     - platform: buienradar #weather prediction
-      name: Weather
       monitored_conditions:
           - symbol
           - temperature
@@ -881,7 +880,7 @@ notify:
   - name: mail_both
     platform: smtp
     sender: !secret mail_sender
-    server: anaproy.nl
+    server: !secret mail_server
     port: 25
     encryption: starttls
     debug: true

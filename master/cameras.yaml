@@ -18,66 +18,51 @@
       file_path: /home/homeautomation/homeassistant/snapshots/_jaiko.jpg
     - platform: mjpeg
       name: living_room_live
-      friendly_name: Living Room Live
       mjpeg_url: !secret ipcam_mjpeg_url
       authentication: basic
-      user: !secret ipcam_user
+      username: !secret ipcam_user
       password: !secret ipcam_password
     - platform: onvif
-      friendly_name: Jaikocam Live
-      name: jaikocam_live
+      name: Jaikocam Live
       host: !secret jaikocam_ip
       username: !secret jaikocam_user
       password: !secret jaikocam_pass
     - platform: mjpeg
-      friendly_name: Garden Live
-      name: garden_live
+      name: Garden Live
       mjpeg_url: !secret gardencam_mjpeg_url
     - platform: local_file
-      name: event_1
-      friendly_name: Event 1
+      name: Event 1
       file_path: /home/homeautomation/homeassistant/snapshots/event.1.jpg
     - platform: local_file
-      name: event_2
-      friendly_name: Event 2
+      name: Event 2
       file_path: /home/homeautomation/homeassistant/snapshots/event.2.jpg
     - platform: local_file
-      name: event_3
-      friendly_name: Event 3
+      name: Event 3
       file_path: /home/homeautomation/homeassistant/snapshots/event.3.jpg
     - platform: local_file
-      name: event_4
-      friendly_name: Event 4
+      name: Event 4
       file_path: /home/homeautomation/homeassistant/snapshots/event.4.jpg
     - platform: local_file
-      name: event_5
-      friendly_name: Event 5
+      name: Event 5
       file_path: /home/homeautomation/homeassistant/snapshots/event.5.jpg
     - platform: local_file
-      name: event_6
-      friendly_name: Event 6
+      name: Event 6
       file_path: /home/homeautomation/homeassistant/snapshots/event.6.jpg
     - platform: local_file
-      name: event_7
-      friendly_name: Event 7
+      name: Event 7
       file_path: /home/homeautomation/homeassistant/snapshots/event.7.jpg
     - platform: local_file
-      name: event_8
-      friendly_name: Event 8
+      name: Event 8
       file_path: /home/homeautomation/homeassistant/snapshots/event.8.jpg
     - platform: local_file
-      name: event_9
-      friendly_name: Event 9
+      name: Event 9
       file_path: /home/homeautomation/homeassistant/snapshots/event.9.jpg
     - platform: local_file
-      name: event_10
-      friendly_name: Event 10
+      name: Event 10
       file_path: /home/homeautomation/homeassistant/snapshots/event.10.jpg
     - platform: local_file
-      name: event_11
-      friendly_name: Event 11
+      name: Event 11
       file_path: /home/homeautomation/homeassistant/snapshots/event.11.jpg
     - platform: local_file
-      name: event_12
-      friendly_name: Event 12
+      name: Event 12
       file_path: /home/homeautomation/homeassistant/snapshots/event.12.jpg

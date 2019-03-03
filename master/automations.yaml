@@ -39,42 +39,42 @@
 - alias: Frontdoor snapshots
   hide_entity: False
   trigger:
-    platform: time
+    platform: time_pattern
     seconds: '/9' #every ten seconds
   action:
     - service: shell_command.snapshot_frontdoor
 - alias: Hall upstairs snapshots
   hide_entity: False
   trigger:
-    platform: time
+    platform: time_pattern
     seconds: '/11' #every eleven seconds
   action:
     - service: shell_command.snapshot_hallupstairs
 - alias: Living room snapshots
   hide_entity: False
   trigger:
-    platform: time
+    platform: time_pattern
     seconds: '/3' #every five seconds
   action:
     - service: shell_command.snapshot_livingroom
 - alias: Street snapshots
   hide_entity: False
   trigger:
-    platform: time
+    platform: time_pattern
     seconds: '/1' #every second
   action:
     - service: shell_command.snapshot_street
 - alias: Garden snapshots
   hide_entity: False
   trigger:
-    platform: time
+    platform: time_pattern
     seconds: '/5' #every five seconds
   action:
     - service: shell_command.snapshot_garden
 - alias: Jaiko snapshots
   hide_entity: False
   trigger:
-    platform: time
+    platform: time_pattern
     seconds: '/5' #every five seconds
   condition:
     - condition: state
@@ -85,7 +85,7 @@
 - alias: Jaiko snapshots uncrated
   hide_entity: False
   trigger:
-    platform: time
+    platform: time_pattern
     seconds: '/30' #every thirty seconds
   condition:
     - condition: state
