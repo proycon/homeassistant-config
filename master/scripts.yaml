@@ -1023,6 +1023,13 @@ listen_to_music:
           entity_id: media_player.yamaha_receiver
           data:
               source: HDMI2
+        - delay:
+            seconds: 1
+        - service: media_player.turn_on
+          data:
+              entity_id: media_player.mpd
+        - delay:
+            seconds: 1
         - service: media_player.play_media
           data:
               entity_id: media_player.mpd

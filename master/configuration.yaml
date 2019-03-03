@@ -813,6 +813,9 @@ vacuum:
     host: !secret roboip
     token: !secret robotoken
 
+weather:
+    - platform: buienradar
+
 #hdmi_cec:
 #    host: !secret pi1_ip
 #    types:

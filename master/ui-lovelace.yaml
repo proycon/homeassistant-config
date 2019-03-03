@@ -731,6 +731,18 @@ views:
                       color: black
                       font-family: Helvetica
                   - type: state-label
+                    entity: sensor.total_rain
+                    prefix: "Rain "
+                    suffix: "   (total)"
+                    style:
+                      top: 20%
+                      left: 81%
+                      background: center
+                      text-align: center
+                      font-size: 0.7em
+                      color: black
+                      font-family: Helvetica
+                  - type: state-label
                     entity: sensor.time
                     style:
                       top: 2%
@@ -753,6 +765,23 @@ views:
                   entity: camera.jaiko
                 - type: picture-entity
                   entity: camera.garden
+            - type: weather-forecast
+              entity: weather.br_unknown_station
+            - type: vertical-stack
+              cards:
+                - type: entities
+                  entities:
+                    - sensor.wake_up_time
+                    - input_number.wake_up_hour
+                    - input_number.wake_up_minutes
+                  title: Wake up alarm
+                  show_header_toggle: false
+                - type: entities
+                  entities:
+                    - input_number.timer
+                    - script.start_timer
+                  title: Timer
+                  show_header_toggle: false
   - id: media
     icon: mdi:television
     title: Media
@@ -1008,6 +1037,31 @@ views:
                       entity: media_player.mpd
                     - type: media-control
                       entity: media_player.kodi
+                - type: vertical-stack
+                  cards:
+                    - type: entities
+                      title: Interfaces
+                      show_header_toggle: false
+                      entities:
+                      - type: weblink
+                        url: 'http://192.168.0.12:8080/'
+                        name: Media Browser & Player (Kodi)
+                        icon: 'mdi:kodi'
+                      - type: weblink
+                        url: 'http://mediaserver.anaproy.lxd:6601/iris'
+                        name: Music Browser & Player (Iris)
+                        icon: 'mdi:music-box-outline'
+                      - type: weblink
+                        url: 'http://anaproy.nl:8000/stream.mp3'
+                        name: Play Music Stream here
+                        icon: 'mdi:play-circle'
+                    - type: entities
+                      title: YouTube
+                      icon: mdi:youtube
+                      show_header_toggle: false
+                      entities:
+                         - input_text.youtube_link
+                         - script.play_youtube_link
 
   - path: oldview
     title: oldview
