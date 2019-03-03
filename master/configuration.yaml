@@ -24,6 +24,9 @@ frontend:
     themes: !include themes.yaml
 
 # Enables configuration UI
+lovelace:
+    mode: yaml
+
 
 http:
   trusted_proxies:
