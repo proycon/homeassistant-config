@@ -218,6 +218,11 @@ views:
                    top: 94%
                    left: 31%
               - type: state-icon
+                entity: binary_sensor.doorbell
+                style:
+                   top: 97%
+                   left: 23%
+              - type: state-icon
                 entity: binary_sensor.pir_hall
                 style:
                    top: 80%
@@ -312,6 +317,31 @@ views:
                   font-size: 10px
                   color: black
                   font-family: Helvetica
+              - type: state-icon
+                entity: binary_sensor.pir_kitchen
+                style:
+                   top: 45%
+                   left: 31%
+              - type: state-label
+                entity: sensor.outside_temperature_1
+                style:
+                  top: 2%
+                  left: 90%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.time
+                style:
+                  top: 2%
+                  left: 5%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
         - type: picture-elements
           image: /local/floorplans/upstairs.png
           elements:
@@ -383,6 +413,173 @@ views:
                   left: 81%
                   width: 7%
                   padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.bathroom_vent
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/vent_off.png
+                state_image:
+                  'on': /local/icons/vent_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 51%
+                  left: 19%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: state-icon
+                entity: binary_sensor.pir_office
+                style:
+                   top: 75%
+                   left: 64%
+              - type: state-icon
+                entity: binary_sensor.bathroom_window_sensor
+                style:
+                   top: 27%
+                   left: 26%
+              - type: state-icon
+                entity: binary_sensor.bedroom_window_left
+                style:
+                   top: 27%
+                   left: 47%
+              - type: state-icon
+                entity: binary_sensor.bedroom_window_right
+                style:
+                   top: 27%
+                   left: 75%
+              - type: state-label
+                entity: sensor.bathroom_sensor_temperature
+                style:
+                  top: 45%
+                  left: 30%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.bathroom_sensor_relative_humidity
+                style:
+                  top: 47%
+                  left: 30%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.fibaro_office_temperature
+                style:
+                  top: 75%
+                  left: 70%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.fibaro_office_luminance
+                style:
+                  top: 77%
+                  left: 70%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.bedroom_temperature
+                style:
+                  top: 37%
+                  left: 74%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.outside_temperature_1
+                style:
+                  top: 10%
+                  left: 80%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.outside_temperature_2
+                style:
+                  top: 12%
+                  left: 80%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.outside_humidity
+                style:
+                  top: 14%
+                  left: 80%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.wind_speed
+                prefix: "Wind "
+                style:
+                  top: 16%
+                  left: 78%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.wind_gusts
+                suffix: " gusts"
+                style:
+                  top: 16%
+                  left: 93%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.wind_direction
+                style:
+                  top: 18%
+                  left: 81%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.time
+                style:
+                  top: 2%
+                  left: 5%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+        - type: picture-entity
+          entity: camera.living_room
+        - type: picture-entity
+          entity: camera.street
+        - type: picture-entity
+          entity: camera.jaiko
+        - type: picture-entity
+          entity: camera.garden
   - path: oldview
     title: oldview
     badges:
