@@ -140,6 +140,23 @@ views:
                   width: 7%
                   padding: 50px 50px 100px 50px
               - type: image
+                entity: switch.technofire
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 70%
+                  left: 80%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
                 entity: switch.hall
                 tap_action:
                     action: toggle
@@ -173,31 +190,199 @@ views:
                   left: 38%
                   width: 7%
                   padding: 50px 50px 100px 50px
-              - type: state-label
-                entity: sensor.dogsensor_temperature
+              - type: image
+                entity: switch.garden
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
                 style:
-                  top: 40%
-                  left: 50%
-                  background: center
-                  text-align: center
-                  font-size: 10px
-                  color: blue
-                  font-family: Helvetica
+                  top: 6%
+                  left: 60%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
               - type: state-icon
                 entity: binary_sensor.pir_jaiko
                 style:
-                   top: 38%
-                   left: 50%
+                   top: 33%
+                   left: 49%
               - type: state-icon
                 entity: binary_sensor.front_door
                 style:
                    top: 94%
                    left: 31%
               - type: state-icon
+                entity: binary_sensor.pir_hall
+                style:
+                   top: 80%
+                   left: 31%
+              - type: state-icon
+                entity: binary_sensor.pir_living_room
+                style:
+                   top: 60%
+                   left: 66%
+              - type: state-icon
                 entity: binary_sensor.back_door
                 style:
                    top: 6%
                    left: 70%
+              - type: state-label
+                entity: sensor.dogsensor_temperature
+                style:
+                  top: 36%
+                  left: 50%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.dogsensor_luminance
+                style:
+                  top: 38%
+                  left: 50%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.temperature_living_room
+                style:
+                  top: 58%
+                  left: 80%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.humidity_living_room
+                style:
+                  top: 59%
+                  left: 80%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.fibaro_hall_temperature
+                style:
+                  top: 90%
+                  left: 28%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.fibaro_hall_luminance
+                style:
+                  top: 92%
+                  left: 28%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.fibaro_multisensor_temperature #kitchen
+                style:
+                  top: 40%
+                  left: 31%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.fibaro_multisensor_luminance #kitchen
+                style:
+                  top: 42%
+                  left: 31%
+                  background: center
+                  text-align: center
+                  font-size: 10px
+                  color: black
+                  font-family: Helvetica
+        - type: picture-elements
+          image: /local/floorplans/upstairs.png
+          elements:
+              - type: image
+                entity: switch.office
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 94%
+                  left: 63%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.bedroom
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 49%
+                  left: 81%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.roof
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 27%
+                  left: 41%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.balcony
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 10%
+                  left: 81%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
   - path: oldview
     title: oldview
     badges:
