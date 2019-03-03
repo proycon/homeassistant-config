@@ -8,6 +8,14 @@ views:
     icon: mdi:home
     title: Home
     #theme: darkgreen
+    badges:
+      - binary_sensor.anybodyhome
+      - binary_sensor.guest_inside
+      - binary_sensor.jaiko_crated
+      - binary_sensor.noise
+      - device_tracker.proyphone
+      - device_tracker.hansphone
+      - sensor.time
     cards:
         - type: picture-elements
           image: /local/floorplans/downstairs.png
@@ -23,27 +31,173 @@ views:
                   'on': /local/icons/light_bulb_on.png
                 state_filter:
                   'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
-                  'off': brightness(80%) saturate(0.8)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
                 style:
-                  top: 38%
-                  left: 50%
+                  top: 80%
+                  left: 48%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.front_room
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 90%
+                  left: 85%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.midspots
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 33%
+                  left: 65%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.back_room
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 12%
+                  left: 85%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.back_corner
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 27%
+                  left: 20%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.kitchen
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 40%
+                  left: 38%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.ambilight
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 51%
+                  left: 46%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.hall
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 84%
+                  left: 38%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.porch
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 100%
+                  left: 38%
                   width: 7%
                   padding: 50px 50px 100px 50px
               - type: state-label
                 entity: sensor.dogsensor_temperature
                 style:
-                  top: 43%
+                  top: 40%
                   left: 50%
                   background: center
                   text-align: center
-                  font-size: 12px
+                  font-size: 10px
                   color: blue
                   font-family: Helvetica
-          - type: state-icon
-            entity: binary_sensor.pir_jaiko
-            style:
-              top: 95%
-              left: 32%
+              - type: state-icon
+                entity: binary_sensor.pir_jaiko
+                style:
+                   top: 38%
+                   left: 50%
+              - type: state-icon
+                entity: binary_sensor.front_door
+                style:
+                   top: 94%
+                   left: 31%
+              - type: state-icon
+                entity: binary_sensor.back_door
+                style:
+                   top: 6%
+                   left: 70%
   - path: oldview
     title: oldview
     badges:
