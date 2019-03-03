@@ -14,15 +14,6 @@ views:
     icon: mdi:home
     title: Home
     panel: true
-    #theme: darkgreen
-    badges:
-      - binary_sensor.anybodyhome
-      - binary_sensor.guest_inside
-      - binary_sensor.jaiko_crated
-      - binary_sensor.noise
-      - device_tracker.proyphone
-      - device_tracker.hansphone
-      - sensor.time
     cards:
         - type: custom:layout-card
           layout: horizontal
@@ -138,11 +129,11 @@ views:
                         tap_action:
                            action: call-service
                            service: vacuum.turn_on
-                           entity_id: vacuum.robot 
+                           entity_id: vacuum.robot
                         hold_action:
                            action: call-service
                            service: vacuum.return_to_home
-                           entity_id: vacuum.robot 
+                           entity_id: vacuum.robot
                       - type: entity-button
                         entity: script.turn_media_off
                         tap_action:
@@ -977,7 +968,7 @@ views:
                       entity: media_player.mpd
                     - type: media-control
                       entity: media_player.kodi
-              
+
   - path: oldview
     title: oldview
     badges:
