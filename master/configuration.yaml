@@ -550,25 +550,25 @@ binary_sensor frontdoor:
     platform: mqtt
     name: Front Door
     state_topic: "home/binary_sensor/frontdoor"
-    device_class: opening
+    device_class: door
 
 binary_sensor backdoor:
     platform: mqtt
     name: Back Door
     state_topic: "home/binary_sensor/backdoor"
-    device_class: opening
+    device_class: door
 
 binary_sensor bedroomwindow_right:
     platform: mqtt
     name: Bedroom window Right
     state_topic: "home/binary_sensor/bedroomwindow_right"
-    device_class: opening
+    device_class: door
 
 binary_sensor bedroomwindow_left:
     platform: mqtt
     name: Bedroom window Left
     state_topic: "home/binary_sensor/bedroomwindow_left"
-    device_class: opening
+    device_class: door
 
 
 binary_sensor noise:
