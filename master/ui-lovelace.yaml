@@ -949,6 +949,42 @@ views:
                   url: !secret windy_url
             - type: vertical-stack
               cards:
+                  - type: entities
+                    name: Jaiko
+                    icon: mdi:dog
+                    entities:
+                        - input_boolean.jaiko_crated
+                        - sensor.last_fed_jaiko
+                        - sensor.last_peed_jaiko
+                        - sensor.last_pooped_jaiko
+                  - type: horizontal-stack
+                    cards:
+                    - type: entity-button
+                      icon: mdi:bed-empty
+                      entity: input_boolean.jaiko_crated
+                      tap_action:
+                          action: call-service
+                          service: input_boolean.toggle
+                    - type: entity-button
+                      icon: mdi:bone
+                      entity: script.jaiko_fed
+                      tap_action:
+                          action: call-service
+                          service: script.jaiko_fed
+                    - type: entity-button
+                      icon: mdi:water
+                      entity: script.jaiko_peed
+                      tap_action:
+                          action: call-service
+                          service: script.jaiko_peed
+                    - type: entity-button
+                      icon: mdi:emoticon-poop
+                      entity: script.jaiko_pooped
+                      tap_action:
+                          action: call-service
+                          service: script.jaiko_pooped
+            - type: vertical-stack
+              cards:
                 - type: entities
                   entities:
                     - sensor.wake_up_time
@@ -1589,6 +1625,8 @@ views:
               title: Presence (48h)
               hours_to_show: 48
               entities:
+                  - entity: binary_sensor.anybodyhome
+                    name: Anybody home?
                   - entity: device_tracker.proyphone
                     name: Maarten
                   - entity: device_tracker.hansphone
@@ -1622,274 +1660,47 @@ views:
           title: Visitors (30days)
           hours_to_show: 720
           entities:
+                - binary_sensor.guest_inside
                 - device_tracker.chris
                 - device_tracker.evelynda
                 - device_tracker.jan
                 - device_tracker.netty
                 - device_tracker.erik
                 - device_tracker.patrick
+  - path: events
+    title: Event Photos
+    panel: true
+    icon: mdi:camera
+    cards:
+     - type: custom:layout-card
+       layout: horizontal
+       max_columns: 4
+       cards:
+          - type: picture-entity
+            entity: camera.event_1
+          - type: picture-entity
+            entity: camera.event_2
+          - type: picture-entity
+            entity: camera.event_3
+          - type: picture-entity
+            entity: camera.event_4
+          - type: picture-entity
+            entity: camera.event_5
+          - type: picture-entity
+            entity: camera.event_6
+          - type: picture-entity
+            entity: camera.event_7
+          - type: picture-entity
+            entity: camera.event_8
+          - type: picture-entity
+            entity: camera.event_9
+          - type: picture-entity
+            entity: camera.event_10
+          - type: picture-entity
+            entity: camera.event_11
+          - type: picture-entity
+            entity: camera.event_12
 
-
-  - path: oldview
-    title: oldview
-    enabled: false
-    badges:
-      - binary_sensor.anybodyhome
-      - binary_sensor.guest_inside
-      - binary_sensor.doorbell
-      - binary_sensor.front_door
-      - binary_sensor.back_door
-      - binary_sensor.bedroom_window_left
-      - binary_sensor.bedroom_window_right
-      - binary_sensor.bathroom_window_sensor
-      - binary_sensor.jaiko_crated
-      - binary_sensor.noise
-      - device_tracker.proyphone
-      - device_tracker.hansphone
-      - sensor.time
-    cards:
-      - type: entities
-        entities:
-          - input_text.tiles_media_volume
-        title: Volume (AVR)
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - input_text.tiles_all_lights
-        title: Lights
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - input_select.ipcam_direction
-        title: Cameras
-        show_header_toggle: false
-      - type: picture-entity
-        entity: camera.living_room
-      - type: picture-entity
-        entity: camera.street
-      - type: picture-entity
-        entity: camera.jaiko
-      - type: picture-entity
-        entity: camera.front_door
-      - type: picture-entity
-        entity: camera.hall_upstairs
-      - type: picture-entity
-        entity: camera.garden
-      - type: entities
-        entities:
-          - input_text.tiles_media_activities
-          - input_text.youtube_link
-          - script.play_youtube_link
-        title: Media Activities
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - sensor.temperature_living_room
-          - sensor.dogsensor_temperature
-          - sensor.bathroom_sensor_temperature
-          - sensor.bathroom_sensor_relative_humidity
-          - binary_sensor.bathroom_too_humid
-          - sensor.humidity_living_room
-          - sensor.bedroom_temperature
-          - sensor.fibaro_multisensor_temperature
-          - sensor.fibaro_multisensor_luminance
-          - sensor.fibaro_office_temperature
-          - sensor.fibaro_office_luminance
-          - sensor.fibaro_hall_temperature
-          - sensor.fibaro_hall_luminance
-          - sensor.dogsensor_luminance
-          - binary_sensor.pir_living_room
-          - binary_sensor.pir_kitchen
-          - binary_sensor.pir_hall
-          - binary_sensor.pir_office
-          - binary_sensor.pir_jaiko
-          - sensor.ir_send_activity
-        title: Inside Environment
-        show_header_toggle: true
-      - type: entities
-        entities:
-          - sensor.weather_symbol
-          - sensor.weather_temperature
-          - sensor.outside_temperature_1
-          - sensor.outside_temperature_2
-          - sensor.outside_humidity
-          - sensor.wind_direction
-          - sensor.wind_speed
-          - sensor.wind_gusts
-          - sensor.total_rain
-        title: Outside Environment
-        show_header_toggle: true
-      - type: entities
-        entities:
-          - sensor.wake_up_time
-          - input_number.wake_up_hour
-          - input_number.wake_up_minutes
-        title: Wake up alarm
-        show_header_toggle: true
-      - type: entities
-        entities:
-          - input_number.timer
-          - script.start_timer
-        title: Timer
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - input_text.tiles_robot
-          - sensor.robot_battery
-          - sensor.robot_cleaning_count
-          - sensor.robot_fan_speed
-          - sensor.last_cleaning_duration
-          - sensor.last_cleaning_time
-        title: Robot
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - input_boolean.jaiko_crated
-          - input_boolean.notify_livingroom_movement
-          - input_select.ipcam_direction
-          - type: weblink
-            url: 'rtsp://192.168.3.108/videoMain'
-            name: Jaikocam Stream
-            icon: 'mdi:paw'
-          - sensor.last_movement_jaiko
-          - sensor.last_movement_living_room
-          - script.jaiko_fed
-          - sensor.last_fed_jaiko
-          - script.jaiko_peed
-          - sensor.last_peed_jaiko
-          - script.jaiko_pooped
-          - sensor.last_pooped_jaiko
-        title: Jaiko
-        show_header_toggle: true
-      - type: entities
-        entities:
-          - input_text.say
-          - script.say
-          - switch.noise_detector
-        title: Sound
-        show_header_toggle: true
-      - type: alarm-panel
-        entity: alarm_control_panel.alarm_system
-    icon: 'mdi:home'
-  - path: media_view
-    title: Media
-    badges:
-      - sensor.time
-    cards:
-      - type: entities
-        entities:
-          - input_text.tiles_media_volume
-        title: Volume (AVR)
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - input_text.tiles_media_activities
-          - input_text.youtube_link
-          - script.play_youtube_link
-        title: Media Activities
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - switch.tv_decoder
-          - switch.tv
-          - switch.pi1_kodi
-          - switch.pi1_xorg
-          - switch.pi1_music_player
-          - script.turn_tv_upstairs_on
-          - script.update_kodi_library
-        title: Devices
-        show_header_toggle: false
-      - type: media-control
-        entity: media_player.yamaha_receiver
-      - type: media-control
-        entity: media_player.kodi
-      - type: media-control
-        entity: media_player.mpd
-      - type: media-control
-        entity: media_player.hall_speaker
-      - type: entities
-        entities:
-          - input_text.tiles_tv_channels
-        title: TV Channels
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - input_text.tiles_media_tv_navigation
-        title: TV Navigation
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - type: weblink
-            url: 'http://192.168.0.12:8080/'
-            name: Kodi Control Interface
-            icon: 'mdi:kodi'
-          - type: weblink
-            url: 'http://mediaserver.anaproy.lxd:6601/iris'
-            name: MPD Control Interface
-            icon: 'mdi:music-box-outline'
-          - type: weblink
-            url: 'http://anaproy.nl:8000/stream.mp3'
-            name: MPD Music Stream
-            icon: 'mdi:play-circle'
-        title: Weblink
-    icon: 'mdi:television'
-  - path: media_view_bedroom
-    title: Media Bedroom
-    badges:
-      - sensor.time
-    cards:
-      - type: entities
-        entities:
-          - input_text.tiles_media_volume_bedroom
-        title: Volume (AVR)
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - input_text.tiles_media_activities_bedroom
-          - input_text.youtube_link_bedroom
-          - script.play_youtube_link_bedroom
-        title: Media Activities Bedroom
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - switch.tv_bedroom
-          - switch.tv_decoder_bedroom
-          - switch.pi2_kodi
-          - switch.pi2_xorg
-          - switch.pi2_music_player
-          - script.update_kodi_library2
-        title: Devices Bedroom
-        show_header_toggle: false
-      - type: media-control
-        entity: media_player.kodi_bedroom
-      - type: media-control
-        entity: media_player.mpd
-      - type: entities
-        entities:
-          - input_text.tiles_tv_channels_bedroom
-        title: TV Channels Bedroom
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - input_text.tiles_media_tv_navigation_bedroom
-        title: TV Navigation Bedroom
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - type: weblink
-            url: 'http://192.168.0.12:8080/'
-            name: Kodi Control Interface
-            icon: 'mdi:kodi'
-          - type: weblink
-            url: 'http://mediaserver.anaproy.lxd:6601/iris'
-            name: MPD Control Interface
-            icon: 'mdi:music-box-outline'
-          - type: weblink
-            url: 'http://anaproy.nl:8000/stream.mp3'
-            name: MPD Music Stream
-            icon: 'mdi:play-circle'
-        title: Weblink
-    icon: 'mdi:hotel'
   - path: dog
     title: Dog
     badges:
@@ -2001,80 +1812,6 @@ views:
         title: Fans
         show_header_toggle: true
     icon: 'mdi:lightbulb'
-  - path: history_view
-    title: History
-    badges: []
-    cards:
-      - type: entities
-        entities:
-          - sensor.last_movement_jaiko
-          - sensor.last_movement_hall
-          - sensor.last_movement_living_room
-          - sensor.last_movement_kitchen
-          - sensor.last_movement_office
-          - sensor.last_movement_front_door
-          - sensor.last_movement_back_door
-          - sensor.last_movement_bedroom_window_left
-          - sensor.last_movement_bedroom_window_right
-          - sensor.last_movement_bathroom_window
-        title: Last movements
-        show_header_toggle: true
-      - type: picture-entity
-        entity: camera.event_1
-      - type: picture-entity
-        entity: camera.event_2
-      - type: picture-entity
-        entity: camera.event_3
-      - type: picture-entity
-        entity: camera.event_4
-      - type: picture-entity
-        entity: camera.event_5
-      - type: picture-entity
-        entity: camera.event_6
-      - type: picture-entity
-        entity: camera.event_7
-      - type: picture-entity
-        entity: camera.event_8
-      - type: picture-entity
-        entity: camera.event_9
-      - type: picture-entity
-        entity: camera.event_10
-      - type: picture-entity
-        entity: camera.event_11
-      - type: picture-entity
-        entity: camera.event_12
-    icon: 'mdi:timetable'
-  - path: camera_view
-    title: Live Cameras
-    badges:
-      - binary_sensor.anybodyhome
-      - binary_sensor.front_door
-      - binary_sensor.doorbell
-      - binary_sensor.back_door
-      - binary_sensor.bedroom_window_left
-      - binary_sensor.bedroom_window_right
-      - binary_sensor.bathroom_window_sensor
-      - device_tracker.proyphone
-      - device_tracker.hansphone
-      - sensor.time
-    cards:
-      - type: alarm-panel
-        entity: alarm_control_panel.alarm_system
-      - type: picture-entity
-        entity: camera.living_room_live
-      - type: picture-entity
-        entity: camera.jaikocam_live
-      - type: picture-entity
-        entity: camera.garden_live
-      - type: picture-entity
-        entity: camera.hall_upstairs
-      - type: picture-entity
-        entity: camera.front_door
-      - type: entities
-        entities:
-          - input_select.ipcam_direction
-        title: Input select
-    icon: 'mdi:camcorder'
   - path: config_view
     title: Configuration
     badges: []

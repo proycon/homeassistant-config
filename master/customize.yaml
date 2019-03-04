@@ -169,6 +169,8 @@ sensor.wind_gusts:
     icon: mdi:weather-windy
 sensor.outside_humidity:
     icon: mdi:water-percent
+input_boolean.jaiko_crated:
+    icon: mdi:bed-empty
 
 
 input_text.tiles_media_volume:
