@@ -486,6 +486,38 @@ views:
                       font-size: 0.7em
                       color: black
                       font-family: Helvetica
+                  - type: image
+                    entity: switch.tv
+                    tap_action:
+                        action: call-service
+                        service: script.watch_tv
+                    image: /local/icons/tv_off.png
+                    state_image:
+                      'on': /local/icons/tv_on.png
+                    state_filter:
+                      'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                      'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                    style:
+                      top: 87%
+                      left: 48%
+                      width: 7%
+                      padding: 50px 50px 100px 50px
+                  - type: image
+                    entity: media_player.yamaha_receiver
+                    tap_action:
+                        action: call-service
+                        service: script.listen_to_music
+                    image: /local/icons/speaker_off.png
+                    state_image:
+                      'on': /local/icons/speaker_on.png
+                    state_filter:
+                      'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                      'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                    style:
+                      top: 93%
+                      left: 48%
+                      width: 4%
+                      padding: 50px 50px 100px 50px
             - type: picture-elements
               image: /local/floorplans/upstairs.png
               elements:
@@ -593,7 +625,7 @@ views:
                        width: 5%
                        padding: 50px 50px 100px 50px
                   - type: image
-                    entity: binary_sensor.bathroom_window_sensor
+                    entity: binary_sensor.bedroom_window_left
                     image: /local/icons/closed.png
                     state_image:
                        'on': /local/icons/open.png
