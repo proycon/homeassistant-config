@@ -11,6 +11,7 @@ resources:
     type: js
 views:
   - id: home
+    path: home
     icon: mdi:home
     title: Home
     panel: true
@@ -894,6 +895,38 @@ views:
                       font-size: 0.7em
                       color: black
                       font-family: Helvetica
+                  - type: image
+                    entity: switch.tv_bedroom
+                    tap_action:
+                        action: call-service
+                        service: script.watch_tv_bedroom
+                    image: /local/icons/tv_off.png
+                    state_image:
+                      'on': /local/icons/tv_on.png
+                    state_filter:
+                      'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                      'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                    style:
+                      top: 40%
+                      left: 81%
+                      width: 7%
+                      padding: 0px
+                  - type: image
+                    entity: script.pi2_music_player
+                    tap_action:
+                        action: call-service
+                        service: script.listen_to_music_bedroom
+                    image: /local/icons/speaker_off.png
+                    state_image:
+                      'on': /local/icons/speaker_on.png
+                    state_filter:
+                      'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                      'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                    style:
+                      top: 34%
+                      left: 83%
+                      width: 4%
+                      padding: 0px
             - type: vertical-stack
               cards:
                 - type: picture-entity
@@ -911,13 +944,9 @@ views:
               cards:
                 - type: weather-forecast
                   entity: weather.br_unknown_station
-                - type: entities
-                  show_header_toggle: false
-                  entities:
-                      - type: weblink
-                        url: 'https://www.buienradar.nl/weer/eindhoven/nl/2756253'
-                        name: Buienradar
-                        icon: 'mdi:weather-pouring'
+                - type: iframe
+                  aspect_ratio: 90%
+                  url: !secret windy_url
             - type: vertical-stack
               cards:
                 - type: entities
@@ -1220,8 +1249,309 @@ views:
                         #- switch.noise_detector
                   title: Text-to-Speech
                   show_header_toggle: false
+  - id: mediabedroom
+    icon: mdi:hotel
+    title: Media Bedroom
+    panel: true
+    cards:
+        - type: custom:layout-card
+          layout: horizontal
+          column_width: 400
+          cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: script.tvdecoder2_playpause
+                      icon: mdi:play-pause
+                      tap_action:
+                          action: call-service
+                          service: script.tvdecoder2_playpause
+                    - type: entity-button
+                      entity: script.tvdecoder2_channeldown
+                      icon: mdi:minus-circle
+                      tap_action:
+                          action: call-service
+                          service: script.tvdecoder2_channeldown
+                    - type: entity-button
+                      entity: script.tvdecoder2_channelup
+                      icon: mdi:plus-circle
+                      tap_action:
+                          action: call-service
+                          service: script.tvdecoder2_channelup
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: script.avr_mute
+                      icon: mdi:volume-mute
+                      tap_action:
+                          action: call-service
+                          service: script.avr_mute
+                    - type: entity-button
+                      entity: script.avr_voldown
+                      icon: mdi:volume-low
+                      tap_action:
+                          action: call-service
+                          service: script.avr_voldown
+                    - type: entity-button
+                      entity: script.avr_volup
+                      icon: mdi:volume-high
+                      tap_action:
+                          action: call-service
+                          service: script.avr_volup
+                - break
+                - type: vertical-stack
+                  cards:
+                    - type: horizontal-stack
+                      cards:
+                        - type: custom:gap-card
+                        - type: entity-button
+                          entity: script.tvdecoder2_up
+                          icon: mdi:arrow-up
+                          name: ""
+                          tap_action:
+                            action: call-service
+                            service: script.tvdecoder2_up
+                        - type: custom:gap-card
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder2_left
+                          icon: mdi:arrow-left
+                          name: ""
+                          tap_action:
+                            action: call-service
+                            service: script.tvdecoder2_left
+                        - type: entity-button
+                          entity: script.tvdecoder2_ok
+                          icon: mdi:thumb-up
+                          name: ""
+                          tap_action:
+                            action: call-service
+                            service: script.tvdecoder2_ok
+                        - type: entity-button
+                          entity: script.tvdecoder2_right
+                          icon: mdi:arrow-right
+                          name: ""
+                          tap_action:
+                            action: call-service
+                            service: script.tvdecoder2_right
+                    - type: horizontal-stack
+                      cards:
+                          - type: custom:gap-card
+                          - type: entity-button
+                            entity: script.tvdecoder2_down
+                            icon: mdi:arrow-down
+                            name: ""
+                            tap_action:
+                                action: call-service
+                                service: script.tvdecoder2_down
+                          - type: entity-button
+                            entity: script.tvdecoder2_back
+                            icon: mdi:backburger
+                            name: ""
+                            tap_action:
+                                action: call-service
+                                service: script.tvdecoder2_back
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder2_npo1
+                          icon: none
+                          name: "NPO1"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_npo1
+                        - type: entity-button
+                          entity: script.tvdecoder2_npo2
+                          icon: none
+                          name: "NPO2"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_npo2
+                        - type: entity-button
+                          entity: script.tvdecoder2_npo3
+                          icon: none
+                          name: "NPO3"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_npo3
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder2_rtl4
+                          icon: none
+                          name: "RTL4"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_rtl4
+                        - type: entity-button
+                          entity: script.tvdecoder2_veronica
+                          icon: none
+                          name: "Veronica"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_veronica
+                        - type: custom:gap-card
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder2_een
+                          icon: none
+                          name: "Eén"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_een
+                        - type: entity-button
+                          entity: script.tvdecoder2_canvas
+                          icon: none
+                          name: "Canvas"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_canvas
+                        - type: custom:gap-card
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder2_bbc1st
+                          icon: none
+                          name: "BBC First"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_bbc1st
+                        - type: entity-button
+                          entity: script.tvdecoder2_bbc1
+                          icon: none
+                          name: "BBC One"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_bbc1
+                        - type: entity-button
+                          entity: script.tvdecoder2_bbc2
+                          icon: none
+                          name: "BBC Two"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_bbc2
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder2_ard
+                          icon: none
+                          name: "ARD"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_ard
+                        - type: entity-button
+                          entity: script.tvdecoder2_zdf
+                          icon: none
+                          name: "ZDF"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_zdf
+                        - type: entity-button
+                          entity: script.tvdecoder2_wdr
+                          icon: none
+                          name: "WDR"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_wdr
+                        - type: entity-button
+                          entity: script.tvdecoder2_arte
+                          icon: none
+                          name: "Arte"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_arte
+                    - type: horizontal-stack
+                      cards:
+                        - type: entity-button
+                          entity: script.tvdecoder2_tv5monde
+                          icon: none
+                          name: "TV5 Monde"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_tv5monde
+                        - type: entity-button
+                          entity: script.tvdecoder2_rai1
+                          icon: none
+                          name: "Rai Uno"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_rai1
+                        - type: entity-button
+                          entity: script.tvdecoder2_antena3
+                          icon: none
+                          name: "Antena 3"
+                          tap_action:
+                              action: call-service
+                              service: script.tvdecoder2_antena3
+                - type: entities
+                  title: Devices
+                  entities:
+                    - switch.tv_decoder_bedroom
+                    - switch.tv_bedroom
+                    - switch.pi2_kodi
+                    - switch.pi2_xorg
+                    - switch.pi2_music_player
+                    - script.turn_tv_upstairs_on
+                  show_header_toggle: false
+                - type: vertical-stack
+                  cards:
+                    - type: media-control
+                      entity: media_player.mpd
+                    - type: media-control
+                      entity: media_player.kodi_bedroom
+                - type: vertical-stack
+                  cards:
+                    - type: entities
+                      title: Interfaces
+                      show_header_toggle: false
+                      entities:
+                      - type: weblink
+                        url: 'http://192.168.3.100:8080/'
+                        name: Media Browser & Player (Kodi)
+                        icon: 'mdi:kodi'
+                      - type: weblink
+                        url: 'http://mediaserver.anaproy.lxd:6601/iris'
+                        name: Music Browser & Player (Iris)
+                        icon: 'mdi:music-box-outline'
+                      - type: weblink
+                        url: 'http://anaproy.nl:8000/stream.mp3'
+                        name: Play Music Stream here
+                        icon: 'mdi:play-circle'
+                    - type: entities
+                      title: YouTube
+                      icon: mdi:youtube
+                      show_header_toggle: false
+                      entities:
+                         - input_text.youtube_link
+                         - script.play_youtube_link
+  - path: history
+    icon: 'mdi:chart-line'
+    title: History
+    cards:
+        - type: history-graph
+          title: Temperature
+          entities:
+            - entity: sensor.temperature_living_room
+              name: Living
+            - entity: sensor.dogsensor_temperature
+              name: Living (crate)
+            - entity: sensor.fibaro_multisensor_temperature
+              name: Kitchen
+            - entity: sensor.fibaro_hall_temperature
+              name: Hall
+            - entity: sensor.fibaro_office_temperature
+              name: Office
+            - entity: sensor.bedroom_temperature
+              name: Bedroom
+            - entity: sensor.outside_temperature_1
+              name: Outside
+            - entity: sensor.weather_temperature
+              name: Buienradar
   - path: oldview
     title: oldview
+    enabled: false
     badges:
       - binary_sensor.anybodyhome
       - binary_sensor.guest_inside
