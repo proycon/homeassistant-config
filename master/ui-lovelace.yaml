@@ -1529,9 +1529,15 @@ views:
   - path: history
     icon: 'mdi:chart-line'
     title: History
+    panel: true
     cards:
+     - type: custom:layout-card
+       layout: auto
+       max_columns: 3
+       cards:
         - type: history-graph
-          title: Temperature
+          title: Temperature (48h)
+          hours_to_show: 48
           entities:
             - entity: sensor.temperature_living_room
               name: Living
@@ -1545,10 +1551,85 @@ views:
               name: Office
             - entity: sensor.bedroom_temperature
               name: Bedroom
+            - entity: sensor.bathroom_sensor_temperature
+              name: Bathroom
             - entity: sensor.outside_temperature_1
               name: Outside
             - entity: sensor.weather_temperature
               name: Buienradar
+        - type: history-graph
+          title: Luminance (48h)
+          hours_to_show: 48
+          entities:
+            - entity: sensor.fibaro_multisensor_luminance
+              name: Kitchen
+            - entity: sensor.fibaro_hall_luminance
+              name: Hall
+            - entity: sensor.fibaro_office_luminance
+              name: Office
+        - type: vertical-stack
+          cards:
+            - type: history-graph
+              title: Doors & Windows (48h)
+              hours_to_show: 48
+              entities:
+                  - entity: binary_sensor.doorbell
+                    name: Doorbell
+                  - entity: binary_sensor.front_door
+                    name: Front Door
+                  - entity: binary_sensor.back_door
+                    name: Back Door
+                  - entity: binary_sensor.bathroom_window_sensor
+                    name: Bathroom W.
+                  - entity: binary_sensor.bedroom_window_left
+                    name: Bedroom Left
+                  - entity: binary_sensor.bedroom_window_right
+                    name: Bedroom Right
+            - type: history-graph
+              title: Presence (48h)
+              hours_to_show: 48
+              entities:
+                  - entity: device_tracker.proyphone
+                    name: Maarten
+                  - entity: device_tracker.hansphone
+                    name: Hans
+                  - entity: alarm_control_panel.alarm_system
+                    name: Alarm System
+        - type: history-graph
+          title: Jaiko (24h)
+          hours_to_show: 24
+          entities:
+              - entity: binary_sensor.jaiko_crated
+                name: Crated
+              - entity: sensor.last_fed_jaiko
+                name: Fed
+              - entity: sensor.last_peed_jaiko
+                name: Peed
+              - entity: sensor.last_pooped_jaiko
+                name: pooped
+        - type: history-graph
+          title: Media (24h)
+          hours_to_show: 24
+          entities:
+              - entity: switch.tv
+              - entity: switch.tv_bedroom
+              - entity: media_player.yamaha_receiver
+                name: AVR
+              - entity: media_player.mpd
+              - entity: media_player.kodi
+              - entity: media_player.kodi_bedroom
+        - type: history-graph
+          title: Visitors (30days)
+          hours_to_show: 720
+          entities:
+                - device_tracker.chris
+                - device_tracker.evelynda
+                - device_tracker.jan
+                - device_tracker.netty
+                - device_tracker.erik
+                - device_tracker.patrick
+
+
   - path: oldview
     title: oldview
     enabled: false
