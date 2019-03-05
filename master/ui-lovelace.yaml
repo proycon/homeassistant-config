@@ -1594,6 +1594,28 @@ views:
             - entity: sensor.weather_temperature
               name: Buienradar
         - type: history-graph
+          title: Temperature (7d)
+          hours_to_show: 168
+          entities:
+            - entity: sensor.temperature_living_room
+              name: Living
+            - entity: sensor.dogsensor_temperature
+              name: Living (crate)
+            - entity: sensor.fibaro_multisensor_temperature
+              name: Kitchen
+            - entity: sensor.fibaro_hall_temperature
+              name: Hall
+            - entity: sensor.fibaro_office_temperature
+              name: Office
+            - entity: sensor.bedroom_temperature
+              name: Bedroom
+            - entity: sensor.bathroom_sensor_temperature
+              name: Bathroom
+            - entity: sensor.outside_temperature_1
+              name: Outside
+            - entity: sensor.weather_temperature
+              name: Buienradar
+        - type: history-graph
           title: Luminance (48h)
           hours_to_show: 48
           entities:
