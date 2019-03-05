@@ -8,8 +8,6 @@
       - service: frontend.set_theme
         data:
             name: proyslate
-      - service: script.turn_on
-        entity_id: script.hall_speaker_normal_volume
       - service: shell_command.snapshot_clear_locks #clear all snapshot locks on startup
       - service: script.turn_on  #trigger RPi slaves to send their know().strftime('%Y-%m-%d [%H:%M:%S]')n statusses again
         data:
@@ -336,8 +334,6 @@
   action:
     - service: script.turn_on
       entity_id: script.alarm
-    - service: script.turn_on
-      entity_id: script.hall_speaker_full_volume
     - service: notify.xmpp_proycon
       data_template:
           message: "INTRUDER ALERT!! ALARM TRIGGERED AT {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"

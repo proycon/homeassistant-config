@@ -999,6 +999,7 @@ views:
                   title: Timer
                   show_header_toggle: false
   - id: media
+    path: media
     icon: mdi:television
     title: Media
     panel: true
@@ -1288,6 +1289,7 @@ views:
                   title: Text-to-Speech
                   show_header_toggle: false
   - id: mediabedroom
+    path: mediabedroom
     icon: mdi:hotel
     title: Media Bedroom
     panel: true

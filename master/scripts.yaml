@@ -842,15 +842,6 @@ command_goedzo:
             topic: "home/sound/pi1"
             payload_template: 'dog/goedzo1.ogg'
 
-hall_speaker_normal_volume:
-    alias: Hall speaker Normal Volume
-    sequence:
-        - service: shell_command.hallspeaker_normalvolume
-
-hall_speaker_full_volume:
-    alias: Hall speaker Full Volume
-    sequence:
-        - service: shell_command.hallspeaker_fullvolume
 
 trigger_alarm_manually:
     alias: Trigger Alarm Manually

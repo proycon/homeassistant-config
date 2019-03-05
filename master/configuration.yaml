@@ -178,8 +178,6 @@ shell_command:
     archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
     event_snapshots: /home/homeautomation/homeassistant/scripts/camera/eventsnapshots.sh "{{ cams }}"
     snapshot_clear_locks: find "/home/homeautomation/homeassistant/snapshots/" -type f -name "*.lock" | xargs rm
-    hallspeaker_normalvolume: "amixer set Master 60%"
-    hallspeaker_fullvolume: "amixer set Master 100%"
 
 rest_command:
     ipcam_topreset:
