@@ -1253,6 +1253,8 @@ views:
                       entity: media_player.mpd
                     - type: media-control
                       entity: media_player.kodi
+                    - type: media-control
+                      entity: media_player.hall_speaker
                 - type: vertical-stack
                   cards:
                     - type: entities
@@ -1862,7 +1864,6 @@ views:
         entities:
           - automation.lights_on_in_the_evening
           - automation.lights_off_at_night
-          - automation.office_morning_lights_on_hans
           - automation.office_morning_lights_off_hans
           - automation.garden_lights_on_in_the_evening
           - automation.ignite_fireplace_in_evening
@@ -1882,7 +1883,6 @@ views:
         show_header_toggle: true
       - type: entities
         entities:
-          - automation.door_notification_at_night
           - automation.doorbell
           - automation.doorbell_sound
           - automation.front_door_still_open
