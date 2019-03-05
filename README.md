@@ -75,6 +75,7 @@ I have the following devices:
     * *Slimme Meter* for power consumption, connected to main server
     * Speakers throughout the house for text-to-speech notifications
     * Wake up timer through bedroom TV
+    * Xiaomi Roborock S2 (rooted, access over ssh with root@$IP, using my normal personal ssh keypair)
 
 Interface
 ------------
