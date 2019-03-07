@@ -1250,6 +1250,13 @@ views:
                   cards:
                     - type: media-control
                       entity: media_player.yamaha_receiver
+                    - type: entities
+                      entities:
+                          - script.mpc_clear
+                          - input_select.mpc_type
+                          - input_text.mpc_search
+                          - input_select.mpc_filter
+                          - script.mpc_play
                     - type: media-control
                       entity: media_player.mpd
                     - type: media-control

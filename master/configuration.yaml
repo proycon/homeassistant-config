@@ -176,6 +176,8 @@ shell_command:
     snapshot_hallupstairs: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh hallupstairs
     snapshot_jaiko: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh jaiko
     archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
+    mpcclear: mpc clear
+    mpc: /home/homeautomation/homeassistant/scripts/media/mpc.sh "{{ type }}" "{{ value }}" "{{ filter }}"
     event_snapshots: /home/homeautomation/homeassistant/scripts/camera/eventsnapshots.sh "{{ cams }}"
     snapshot_clear_locks: find "/home/homeautomation/homeassistant/snapshots/" -type f -name "*.lock" | xargs rm
 
@@ -277,6 +279,24 @@ input_select:
             - Purple
             - Cyan
             - White
+    mpc_type:
+        name: Type
+        options:
+            - title
+            - genre
+            - artist
+            - album
+            - composer
+            - filename
+    mpc_filter:
+        name: Filter
+        options:
+            - "no"
+            - "track"
+            - "local:track"
+            - "spotify:track"
+            - "spotify:artist"
+            - "spotify:album"
 
 input_number:
     fireplace_brightness:
@@ -353,26 +373,10 @@ input_text:
         name: Youtube Link
     youtube_link_bedroom:
         name: Youtube Link Bedroom
-    tiles_media_volume: #dummy elements to group tiles
-        name: tiles_media_volume
-    tiles_media_activities:
-        name: tiles_media_activities
-    tiles_tv_channels:
-        name: tiles_tv_channels
-    tiles_media_tv_navigation:
-        name: tiles_media_tv_navigation
-    tiles_all_lights:
-        name: tiles_all_lights
-    tiles_media_volume_bedroom:
-        name: tiles_media_volume_bedroom
-    tiles_media_activities_bedroom:
-        name: tiles_media_activities_bedroom
-    tiles_tv_channels_bedroom:
-        name: tiles_tv_channels_bedroom
-    tiles_media_tv_navigation_bedroom:
-        name: tiles_media_tv_navigation_bedroom
-    tiles_robot:
-        name: tiles_robot
+    mpc_search:
+        name: Value
+
+
 
 
 timer:

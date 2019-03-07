@@ -358,11 +358,6 @@ config_eventsnapshots:
         - script.make_event_snapshots_front_door
         - script.make_event_snapshots_hall_upstairs
 
-all_lights:
-    name: Lights
-    control: hidden
-    entities:
-        - input_text.tiles_all_lights
 
 light_shortcuts:
     name: Light Shortcuts
@@ -429,7 +424,6 @@ media_activities:
     icon: mdi:television
     control: hidden
     entities:
-        - input_text.tiles_media_activities
         - input_text.youtube_link
         - script.play_youtube_link
 
@@ -438,7 +432,6 @@ media_activities_bedroom:
     icon: mdi:television
     control: hidden
     entities:
-        - input_text.tiles_media_activities_bedroom
         - input_text.youtube_link_bedroom
         - script.play_youtube_link_bedroom
 
@@ -473,48 +466,6 @@ media_devices_bedroom:
         - switch.pi2_music_player
         - script.update_kodi_library2
 
-media_volume:
-    name: Volume (AVR)
-    icon: mdi:volume-high
-    control: hidden
-    entities:
-        - input_text.tiles_media_volume
-
-media_volume_bedroom:
-    name: Volume (AVR)
-    icon: mdi:volume-high
-    control: hidden
-    entities:
-        - input_text.tiles_media_volume_bedroom
-
-media_tv_navigation:
-    name: TV Navigation
-    icon: mdi:cursor-move
-    control: hidden
-    entities:
-        - input_text.tiles_media_tv_navigation
-
-media_tv_navigation_bedroom:
-    name: TV Navigation Bedroom
-    icon: mdi:cursor-move
-    control: hidden
-    entities:
-        - input_text.tiles_media_tv_navigation_bedroom
-
-
-media_tv_channels:
-    name: TV Channels
-    icon: mdi:television-guide
-    control: hidden
-    entities:
-        - input_text.tiles_tv_channels
-
-media_tv_channels_bedroom:
-    name: TV Channels Bedroom
-    icon: mdi:television-guide
-    control: hidden
-    entities:
-        - input_text.tiles_tv_channels_bedroom
 
 devices:
     name: Devices
@@ -559,7 +510,6 @@ robot:
     icon: mdi:robot
     control: hidden
     entities:
-        - input_text.tiles_robot
         - sensor.robot_battery
         - sensor.robot_cleaning_count
         - sensor.robot_fan_speed

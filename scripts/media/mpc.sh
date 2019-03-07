@@ -1,6 +1,5 @@
 #!/bin/bash
-mpc clear
-if [ -z "$3" ]; then
+if [ -z "$3" ] || [[ "$3" == "no" ]]; then
     mpc search "$1" "$2" | mpc add
 elif [ -z "$4" ]; then
     mpc search "$1" "$2" | grep -e "$3" | mpc add
