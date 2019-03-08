@@ -1807,3 +1807,19 @@ play_youtube_link_bedroom:
               entity_id: media_player.kodi_bedroom
               media_content_id: "plugin://plugin.video.youtube/play/?video_id={{states.input_text.youtube_link_bedroom.state}}"
               media_content_type: video
+
+mpc_clear:
+    alias: Clear playlist
+    sequence:
+        - service: shell_command.mpcclear
+
+mpc_play:
+    alias: Search and play music
+    sequence:
+        - service: shell_command.mpc
+          data:
+              genre: "{{states.input_select.mpc_type.state}}"
+              value: "{{states.input_text.mpc_search.state}}"
+              filter: "livingroom"
+
+
