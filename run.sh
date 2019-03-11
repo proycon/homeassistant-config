@@ -3,11 +3,11 @@
 HOST=$(hostname)
 HADIR=/home/homeautomation/homeassistant/
 cd $HADIR
-if [ $HOST == "roma" ] || [ $HOST == "homeautomation" ]; then
-    HOST="master"
-fi
 if [ $HOST == "homeautomation" ]; then
     export PULSE_SERVER="10.252.116.1"
+fi
+if [ $HOST == "roma" ] || [ $HOST == "homeautomation" ]; then
+    HOST="master"
 fi
 
 if [ ! -d "$HADIR/env" ]; then
