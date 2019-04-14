@@ -1242,6 +1242,31 @@ views:
                           tap_action:
                               action: call-service
                               service: script.tvdecoder_antena3
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: script.watch_tv
+                      tap_action:
+                          action: call-service
+                          service: script.watch_tv
+                    - type: entity-button
+                      entity: script.listen_to_music
+                      tap_action:
+                          action: call-service
+                          service: script.listen_to_music
+                    - type: entity-button
+                      entity: script.media_centre
+                      tap_action:
+                          action: call-service
+                          service: script.media_centre
+                    - type: entity-button
+                      entity: script.turn_media_off
+                      tap_action:
+                          action: call-service
+                          service: script.turn_media_off
+                      hold_action:
+                        - action: call-service
+                          service: script.turn_media_off
                 - type: entities
                   title: Devices
                   entities:
