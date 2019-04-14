@@ -945,7 +945,6 @@ views:
                 - type: weather-forecast
                   entity: weather.br_unknown_station
                 - type: entities
-                  title: Interfaces
                   show_header_toggle: false
                   entities:
                     - type: weblink
