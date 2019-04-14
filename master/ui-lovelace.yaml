@@ -944,9 +944,13 @@ views:
               cards:
                 - type: weather-forecast
                   entity: weather.br_unknown_station
-                - type: iframe
-                  aspect_ratio: 90%
-                  url: !secret windy_url
+                - type: weblink
+                  url: 'https://www.buienradar.nl/weer/eindhoven/nl/2756253'
+                  name: Buienradar
+                  icon: 'mdi:weather-pouring'
+               #- type: iframe
+               #  aspect_ratio: 90%
+               #  url: !secret windy_url
             - type: vertical-stack
               cards:
                   - type: entities
