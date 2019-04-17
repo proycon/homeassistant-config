@@ -1770,7 +1770,7 @@ vacuum_pause:
 vacuum_return_to_home:
     alias: Vacuum return to home
     sequence:
-        service: vacuum.return_to_home
+        service: vacuum.return_to_base
         entity_id: vacuum.robot
 vacuum_locate:
     alias: Vacuum locate

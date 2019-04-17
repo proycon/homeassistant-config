@@ -129,11 +129,11 @@ views:
                         entity: vacuum.robot
                         tap_action:
                            action: call-service
-                           service: vacuum.turn_on
+                           service: vacuum.start
                            entity_id: vacuum.robot
                         hold_action:
                            action: call-service
-                           service: vacuum.return_to_home
+                           service: vacuum.return_to_base
                            entity_id: vacuum.robot
                       - type: entity-button
                         entity: script.turn_media_off
