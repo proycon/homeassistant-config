@@ -4,5 +4,5 @@
   "documentation": "https://github.com/laetificat/anna-ha",
   "dependencies": [],
   "codeowners": ["@laetificat","CoMPaTech"],
-  "requirements": ["haanna==0.6.2"]
+  "requirements": ["haanna==0.6.1"]
 }
