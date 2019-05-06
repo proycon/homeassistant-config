@@ -2185,8 +2185,10 @@
         scene_id: 1
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
-     - service: script.turn_on
-       entity_id: script.avr_volup
+      - service: media_player.volume_set
+        entity_id: media_player.yamaha_receiver
+        data_template:
+           volume_level: '{{ states.media_player.yamaha_receiver.attributes.volume_level + 0.05 }}'
 
 - id: remote_volume_down
   condition:
@@ -2201,8 +2203,10 @@
         scene_id: 5
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
-     - service: script.turn_on
-       entity_id: script.avr_voldown
+      - service: media_player.volume_set
+        entity_id: media_player.yamaha_receiver
+        data_template:
+           volume_level: '{{ states.media_player.yamaha_receiver.attributes.volume_level - 0.05 }}'
 
 - id: remote_playpause_tv
   condition:
