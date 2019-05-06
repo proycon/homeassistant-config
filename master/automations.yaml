@@ -2594,7 +2594,7 @@
   trigger:
       - platform: time
         at: '08:45:00'
-   action:
+  action:
        - service: climate.set_temperature
          entity_id: climate.thermostat
          temperature: 21
@@ -2603,7 +2603,7 @@
   trigger:
       - platform: time
         at: '23:30:00'
-   action:
+  action:
        - service: climate.set_temperature
          entity_id: climate.thermostat
          temperature: 18
