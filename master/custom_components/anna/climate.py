@@ -37,14 +37,14 @@ from homeassistant.components.climate.const import (
     SERVICE_SET_HOLD_MODE)
 
 from homeassistant.const import (
-    CONF_NAME, 
-    CONF_HOST, 
-    CONF_PORT, 
-    CONF_USERNAME, 
-    CONF_PASSWORD, 
-    TEMP_CELSIUS, 
-    ATTR_TEMPERATURE, 
-    STATE_ON, 
+    CONF_NAME,
+    CONF_HOST,
+    CONF_PORT,
+    CONF_USERNAME,
+    CONF_PASSWORD,
+    TEMP_CELSIUS,
+    ATTR_TEMPERATURE,
+    STATE_ON,
     STATE_OFF)
 
 import homeassistant.helpers.config_validation as cv
@@ -223,7 +223,7 @@ class ThermostatDevice(ClimateDevice):
         _LOGGER.debug("Anna: Adjusting temperature")
         import haanna
         temperature = kwargs.get(ATTR_TEMPERATURE)
-        if temperature is not None and temperature > CONF_MIN_TEMP and temperature < CONF_MAX_TEMP:
+        if temperature is not None and temperature > float(config.get(CONF_MIN_TEMP)) and temperature < float(config.get(CONF_MAX_TEMP)):
             self._temperature = temperature
             domain_objects = self._api.get_domain_objects()
             self._api.set_temperature(domain_objects, temperature)
