@@ -408,6 +408,9 @@ sensor:
           wake_up_relative_time:
             friendly_name: Wake up relative time #seconds after wake up time
             value_template: "{{ states.sensor.time.state[:2]|int * 60  + states.sensor.time.state[2:4]|int  - states.sensor.wake_up_time.state[:2]|int * 60  + states.sensor.wake_up_time.state[2:4]|int }}"
+          temperature_thermostat:
+            friendly_name: Temperature Thermostat
+            value_template: "{{ states.climate.thermostat.attributes.current_temperature }}"
           robot_battery:
             friendly_name: Robot Battery
             value_template: "{{ states.vacuum.robot.attributes.battery_level }}"
