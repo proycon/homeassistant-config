@@ -376,8 +376,14 @@ input_text:
     mpc_search:
         name: Value
 
-
-
+climate:
+    - platform: anna
+      name: Thermostat
+      username: !secret thermostat_user
+      password: !secret thermostat_password
+      host: !secret thermostat_ip
+      port: 80
+      scan_interval: 10
 
 timer:
     home_notification_lights:
