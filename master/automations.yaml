@@ -1968,7 +1968,6 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 8
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
   action:
      - service: script.turn_on
        entity_id: script.avr_mute
