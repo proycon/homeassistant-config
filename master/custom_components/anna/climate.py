@@ -223,7 +223,7 @@ class ThermostatDevice(ClimateDevice):
         _LOGGER.debug("Anna: Adjusting temperature")
         import haanna
         temperature = kwargs.get(ATTR_TEMPERATURE)
-        if temperature is not None and temperature > float(config.get(CONF_MIN_TEMP)) and temperature < float(config.get(CONF_MAX_TEMP)):
+        if temperature is not None and temperature >= self.min_temp() and temperature <= self.max_temp():
             self._temperature = temperature
             domain_objects = self._api.get_domain_objects()
             self._api.set_temperature(domain_objects, temperature)
