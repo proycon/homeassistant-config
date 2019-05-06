@@ -2574,3 +2574,36 @@
              entity_id: input_number.wake_up_minutes
              value: 00
 
+- id: thermostat_morning_hanswork
+  trigger:
+      - platform: time
+        at: '05:00:00'
+  condition:
+      condition: time
+      weekday:
+          - mon
+          - tue
+          - thu
+          - fri
+   action:
+       - service: climate.set_temperature
+         entity_id: climate.thermostat
+         temperature: 21
+
+- id: thermostat_morning_default
+  trigger:
+      - platform: time
+        at: '08:45:00'
+   action:
+       - service: climate.set_temperature
+         entity_id: climate.thermostat
+         temperature: 21
+
+- id: thermostat_evening
+  trigger:
+      - platform: time
+        at: '23:30:00'
+   action:
+       - service: climate.set_temperature
+         entity_id: climate.thermostat
+         temperature: 18
