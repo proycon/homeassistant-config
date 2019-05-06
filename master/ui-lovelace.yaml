@@ -447,6 +447,17 @@ views:
                       color: black
                       font-family: Helvetica
                   - type: state-label
+                    entity: sensor.temperature_thermostat
+                    suffix: " C"
+                    style:
+                      top: 59%
+                      left: 47%
+                      background: center
+                      text-align: center
+                      font-size: 0.7em
+                      color: black
+                      font-family: Helvetica
+                  - type: state-label
                     entity: sensor.temperature_living_room
                     style:
                       top: 58%
@@ -1622,6 +1633,8 @@ views:
           title: Temperature (48h)
           hours_to_show: 48
           entities:
+            - entity: sensor.temperature_thermostat
+              name: Living (therm)
             - entity: sensor.temperature_living_room
               name: Living
             - entity: sensor.dogsensor_temperature
@@ -1644,6 +1657,8 @@ views:
           title: Temperature (7d)
           hours_to_show: 168
           entities:
+            - entity: sensor.temperature_thermostat
+              name: Living (therm)
             - entity: sensor.temperature_living_room
               name: Living
             - entity: sensor.dogsensor_temperature
