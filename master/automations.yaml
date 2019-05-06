@@ -1777,6 +1777,12 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 1
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 7
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
       service: script.turn_on
       entity_id: script.lights_off
@@ -1790,6 +1796,12 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 2
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 7
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
       service: script.turn_on
       entity_id: script.night_scene
@@ -1819,6 +1831,12 @@
       event_data:
         entity_id: zwave.remotec_zrc90
         scene_id: 3
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 7
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
      - service: input_select.select_option
@@ -1906,6 +1924,14 @@
     - condition: state
       entity_id: switch.tv
       state: "off"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.mpd
+          state: "off"
+        - condition: state
+          entity_id: media_player.mpd
+          state: "paused"
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -1913,6 +1939,12 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 5
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 2
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
      - service: script.turn_on
        entity_id: script.watch_tv
@@ -1930,6 +1962,13 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 5
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 8
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
   action:
      - service: script.turn_on
        entity_id: script.avr_mute
@@ -1943,6 +1982,12 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 5
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 8
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
      - service: script.turn_on
        entity_id: script.turn_media_off
@@ -1960,12 +2005,30 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 6
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 4
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
      - service: script.turn_on
        entity_id: script.listen_to_music
 
 - id: remote_music_next
   alias: remote_music_next
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "off"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.mpd
+          state: "playing"
+        - condition: state
+          entity_id: media_player.mpd
+          state: "paused"
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -1973,9 +2036,266 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 6
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 2
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
      - service: media_player.media_next_track
        entity_id: media_player.mpd
+
+- id: remote_music_prev
+  alias: remote_music_prev
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "off"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.mpd
+          state: "playing"
+        - condition: state
+          entity_id: media_player.mpd
+          state: "paused"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 6
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 6
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: media_player.media_previous_track
+       entity_id: media_player.mpd
+
+- id: remote_channel_next
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 2
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder_channelup
+
+- id: remote_cursor_right
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 2
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder_right
+
+- id: remote_cursor_left
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 6
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder_left
+
+- id: remote_cursor_up
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 5
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder_up
+
+- id: remote_cursor_down
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 1
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder_up
+
+- id: remote_channel_prev
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 6
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder_channeldown
+
+- id: remote_volume_up
+  condition:
+    - condition: state
+      entity_id: media_player.yamaha_receiver
+      state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 1
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.avr_volup
+
+- id: remote_volume_down
+  condition:
+    - condition: state
+      entity_id: media_player.yamaha_receiver
+      state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 5
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.avr_voldown
+
+- id: remote_playpause_tv
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 3
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder_playpause
+
+- id: remote_music_pause
+  alias: remote_music_pause
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "off"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.mpd
+          state: "playing"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 3
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: media_player.media_pause
+       entity_id: media_player.mpd
+
+- id: remote_music_unpause
+  alias: remote_music_unpause
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "off"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.mpd
+          state: "paused"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 3
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: media_player.media_play
+       entity_id: media_player.mpd
+
+- id: remote_tv_ok
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 3
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder_ok
+
+- id: remote_tv_back
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "on"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 3
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder_back
 
 - id: remote_robot_on
   alias: remote_robot_on
