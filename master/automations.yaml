@@ -2587,8 +2587,9 @@
           - fri
   action:
       - service: climate.set_temperature
-        entity_id: climate.thermostat
-        temperature: 21
+        data:
+            entity_id: climate.thermostat
+            temperature: 21
 
 - id: thermostat_morning_hanswork_reset
   trigger:
@@ -2603,8 +2604,9 @@
           - fri
   action:
       - service: climate.set_temperature
-        entity_id: climate.thermostat
-        temperature: 18
+        data:
+            entity_id: climate.thermostat
+            temperature: 18
 
 - id: thermostat_morning_default
   trigger:
@@ -2612,8 +2614,9 @@
         at: '08:45:00'
   action:
       - service: climate.set_temperature
-        entity_id: climate.thermostat
-        temperature: 21
+        data:
+            entity_id: climate.thermostat
+            temperature: 21
 
 - id: thermostat_evening
   trigger:
@@ -2621,5 +2624,6 @@
         at: '23:30:00'
   action:
       - service: climate.set_temperature
-        entity_id: climate.thermostat
-        temperature: 18
+        data:
+            entity_id: climate.thermostat
+            temperature: 18
