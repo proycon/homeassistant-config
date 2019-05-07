@@ -2135,7 +2135,7 @@
       event_data:
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 5
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_up
@@ -2151,7 +2151,7 @@
       event_data:
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 1
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_up
