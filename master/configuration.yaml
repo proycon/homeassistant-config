@@ -411,6 +411,9 @@ sensor:
           temperature_thermostat:
             friendly_name: Temperature Thermostat
             value_template: "{{ states.climate.thermostat.attributes.current_temperature }}"
+          target_temperature_thermostat:
+            friendly_name: Target Temperature
+            value_template: "{{ states.climate.thermostat.attributes.temperature }}"
           robot_battery:
             friendly_name: Robot Battery
             value_template: "{{ states.vacuum.robot.attributes.battery_level }}"
