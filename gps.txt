@@ -1,0 +1,36 @@
+Vjoycar T630
+
+traccar: tk103 , port 5002
+
+*apn*portalmmm.nl*** - Set APN (two null params are empty user and pass)
+*setip*octet1*octet2*octet3*octet4*port* - Set upload server
+*master*$pw*+316....... - Set master phone
+
+*status* or 0000
+
+*sensitive*x - Set vibration sensitivity (1 (most, default) -5 (least)
+
+*check*x - upload location every $x hours regardless of motion or routetrack
+*checkm*x - upload location every $x minutes regardless of motion or routetrack
+
+*sleepv* - sleep until motion, on for 12 mins, sleep again if no motion/command  (only motion awakens it!)
+*sleepv*x* - sleep until motion for x hours
+*sleepoff*
+
+*locate*
+*locatemap*
+
+*uploadalert*on* - All alerts will be uploaded to server (like battery)
+*onlineon* - Enable online control function (data will be uploaded every 30 secs for 15 mins), tracking commands
+accepted from server
+*onlineoff* - End online control function
+*callback* - The  device  will  call  the master   phone   number and enabling  the  Maser Controller to listen when the call is accepted
+
+*routetrack*$time - real time tracking, 1-98 represents hours of accumulated data, 99 means always on. Sends 6 location
+each minute whilst active.
+*routetrackoff*
+*rsamping*1-999* - for routetrack mode: data collection interval (seconds), defaults to 10
+*rupload*1-999* - for routetrack mode: data upload interval (seconds), defaults to 60, should not be less
+
+
+
