@@ -903,7 +903,6 @@ notify:
     sender: !secret mail_sender
     server: !secret mail_server
     port: 25
-    encryption: starttls
     debug: true
     username: !secret mail_user
     password: !secret mail_password
