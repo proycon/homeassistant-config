@@ -903,9 +903,11 @@ notify:
     sender: !secret mail_sender
     server: !secret mail_server
     port: 25
+    timeout: 10
+    encryption: none
     debug: true
-    username: !secret mail_user
-    password: !secret mail_password
+    #username: !secret mail_user
+    #password: !secret mail_password
     recipient:
         - !secret xmpp_proycon
         - !secret xmpp_hans
