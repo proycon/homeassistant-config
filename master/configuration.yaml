@@ -209,6 +209,7 @@ device_tracker:
       username: !secret traccar_user
       password: !secret traccar_password
       host: !secret traccar_host
+      monitored_conditions: ['all_events']
 
 # Text to speech
 tts:
