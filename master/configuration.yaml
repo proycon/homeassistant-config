@@ -164,7 +164,7 @@ logbook:
 sun:
 
 zwave:
-    usb_path: /dev/ttyACM0
+    usb_path: /dev/ttyACM-zwave
     #debug: true
 
 
@@ -536,7 +536,7 @@ sensor:
       state_topic: "home/weatherstation/rain"
       expire_after: 3600
     - platform: dsmr
-      port: /dev/ttyUSB0
+      port: /dev/ttyUSB-P1
       dsmr_version: 4
     - platform: statistics
       name: PIR Statistics Jaiko Short
