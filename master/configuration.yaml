@@ -47,7 +47,7 @@ zone:
   - name: Home
     latitude: !secret latitude
     longitude: !secret longitude
-    radius: 20
+    radius: 10
     icon: mdi:home
 
 weblink:
