@@ -209,6 +209,7 @@ device_tracker:
       username: !secret traccar_user
       password: !secret traccar_password
       host: !secret traccar_host
+      port: !secret traccar_port
       monitored_conditions: ['all_events']
 
 # Text to speech
