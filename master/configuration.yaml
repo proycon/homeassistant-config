@@ -379,7 +379,7 @@ input_text:
         name: Value
 
 climate:
-    - platform: anna
+    - platform: plugwise
       name: Thermostat
       username: !secret thermostat_user
       password: !secret thermostat_password
