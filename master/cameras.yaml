@@ -13,20 +13,12 @@
     - platform: local_file
       name: Garden
       file_path: /home/homeautomation/homeassistant/snapshots/_garden.jpg
-    - platform: local_file
-      name: Jaiko
-      file_path: /home/homeautomation/homeassistant/snapshots/_jaiko.jpg
     - platform: mjpeg
       name: living_room_live
       mjpeg_url: !secret ipcam_mjpeg_url
       authentication: basic
       username: !secret ipcam_user
       password: !secret ipcam_password
-    - platform: onvif
-      name: Jaikocam Live
-      host: !secret jaikocam_ip
-      username: !secret jaikocam_user
-      password: !secret jaikocam_pass
     - platform: mjpeg
       name: Garden Live
       mjpeg_url: !secret gardencam_mjpeg_url

@@ -948,8 +948,6 @@ views:
                 - type: picture-entity
                   entity: camera.street
                 - type: picture-entity
-                  entity: camera.jaiko
-                - type: picture-entity
                   entity: camera.garden
             - type: vertical-stack
               cards:
@@ -1826,8 +1824,6 @@ views:
         show_header_toggle: true
       - type: alarm-panel
         entity: alarm_control_panel.alarm_system
-      - type: picture-entity
-        entity: camera.jaiko
       - type: picture-entity
         entity: camera.living_room
     icon: 'mdi:paw'
