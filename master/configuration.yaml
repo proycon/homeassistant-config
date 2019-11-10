@@ -121,6 +121,8 @@ influxdb:
         - group
       entities: !include exclude.yaml
 
+system_health:
+
 # View all events in a logbook
 logbook:
     include:
@@ -356,9 +358,6 @@ input_boolean:
         initial: off
     flip_main_camera:
         name: Flip main camera
-        initial: off
-    jaiko_crated:
-        name: Jaiko crated
         initial: off
     notify_livingroom_movement:
         name: Notify Livingroom Movement
@@ -651,12 +650,6 @@ binary_sensor:
         value_template: '{{ states("sensor.bathroom_sensor_relative_humidity") | float > 75.0 }}'
         entity_id:
             - sensor.bathroom_sensor_relative_humidity
-      jaiko_crated:
-        friendly_name: "Jaiko crated"
-        value_template: '{% if is_state("input_boolean.jaiko_crated","on") %}True{% else %}False{% endif %}'
-        entity_id:
-            - input_boolean.jaiko_crated
-        device_class: occupancy
 
 switch tv_spots:
     platform: mqtt

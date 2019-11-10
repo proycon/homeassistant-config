@@ -973,18 +973,11 @@ views:
                     name: Jaiko
                     icon: mdi:dog
                     entities:
-                        - input_boolean.jaiko_crated
                         - sensor.last_fed_jaiko
                         - sensor.last_peed_jaiko
                         - sensor.last_pooped_jaiko
                   - type: horizontal-stack
                     cards:
-                    - type: entity-button
-                      icon: mdi:bed-empty
-                      entity: input_boolean.jaiko_crated
-                      tap_action:
-                          action: call-service
-                          service: input_boolean.toggle
                     - type: entity-button
                       icon: mdi:bone
                       entity: script.jaiko_fed
@@ -1636,7 +1629,7 @@ views:
             - entity: sensor.temperature_living_room
               name: Living
             - entity: sensor.dogsensor_temperature
-              name: Living (crate)
+              name: Living (backroom)
             - entity: sensor.fibaro_multisensor_temperature
               name: Kitchen
             - entity: sensor.fibaro_hall_temperature
@@ -1660,7 +1653,7 @@ views:
             - entity: sensor.temperature_living_room
               name: Living
             - entity: sensor.dogsensor_temperature
-              name: Living (crate)
+              name: Living (backroom)
             - entity: sensor.fibaro_multisensor_temperature
               name: Kitchen
             - entity: sensor.fibaro_hall_temperature
@@ -1719,8 +1712,6 @@ views:
           title: Jaiko (24h)
           hours_to_show: 24
           entities:
-              - entity: binary_sensor.jaiko_crated
-                name: Crated
               - entity: sensor.last_fed_jaiko
                 name: Fed
               - entity: sensor.last_peed_jaiko
@@ -1787,7 +1778,6 @@ views:
     title: Dog
     badges:
       - binary_sensor.anybodyhome
-      - binary_sensor.jaiko_crated
       - binary_sensor.noise
       - binary_sensor.pir_jaiko
       - sensor.dogsensor_temperature
@@ -1795,7 +1785,6 @@ views:
     cards:
       - type: entities
         entities:
-          - input_boolean.jaiko_crated
           - input_boolean.notify_livingroom_movement
           - input_select.ipcam_direction
           - type: weblink

@@ -2329,39 +2329,6 @@
      - service: script.turn_on
        entity_id: script.vacuum_pause
 
-- id: remote_crate
-  alias: remote_crate
-  condition:
-      - condition: state
-        entity_id: input_boolean.jaiko_crated
-        state: "off"
-  trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 4
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-  action:
-    - service: input_boolean.turn_on
-      entity_id: input_boolean.jaiko_crated
-
-- id: remote_uncrate
-  alias: remote_uncrate
-  condition:
-      - condition: state
-        entity_id: input_boolean.jaiko_crated
-        state: "on"
-  trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 4
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-  action:
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.jaiko_crated
 
 - id: remote_pee
   alias: remote_pee
@@ -2402,67 +2369,7 @@
     - service: script.turn_on
       entity_id: script.jaiko_fed
 
-- id: crate
-  trigger:
-    - platform: state
-      entity_id: input_boolean.jaiko_crated
-      from: "off"
-      to: "on"
-  action:
-    - service: mqtt.publish
-      data_template:
-            topic: "home/sound/pi1"
-            payload_template: 'computerbeep_65.wav'
-    - service: script.turn_on
-      entity_id: script.red_lights
-    - service: input_select.select_option
-      data:
-          entity_id: input_select.ipcam_direction
-          option: "Bed Jaiko"
-    - service: notify.matrix
-      data:
-          message: "Jaiko in crate @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
 
-- id: crate_lights_off
-  alias: Crate lights off
-  trigger:
-      platform: state
-      entity_id: input_boolean.jaiko_crated
-      from: "off"
-      to: "on"
-      for:
-          minutes: 1
-  action:
-    - service: script.reset_fireplace
-      entity_id: script.reset_fireplace
-
-- id: post_crate_reset
-  alias: Post crate reset
-  trigger:
-      platform: state
-      entity_id: input_boolean.jaiko_crated
-      from: "on"
-      to: "off"
-      for:
-          minutes: 1
-  action:
-    - service: timer.start
-      entity_id: timer.reset_ipcam
-
-- id: uncrate
-  trigger:
-      - platform: state
-        entity_id: input_boolean.jaiko_crated
-        from: "on"
-        to: "off"
-  action:
-    - service: mqtt.publish
-      data_template:
-        topic: "home/sound/pi1"
-        payload_template: 'computerbeep_65.wav'
-    - service: notify.matrix
-      data:
-          message: "Jaiko out of crate @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
 
 
 - id: notify_livingroom_movement
