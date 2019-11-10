@@ -122,8 +122,6 @@ system_health:
 
 mobile_app:
 
-zeroconf:
-
 # View all events in a logbook
 logbook:
     include:
