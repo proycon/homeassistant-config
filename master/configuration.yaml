@@ -70,12 +70,6 @@ weblink:
         - name: KPN Router
           url: !secret kpn_router_url
           icon: mdi:upload-network
-        - name: Jaikocam Stream
-          url: !secret jaikocam_rtsp_url
-          icon: mdi:paw
-
-
-
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -91,6 +85,9 @@ discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
+
+
+
 
 recorder:
     db_url: !secret db_url
@@ -122,6 +119,10 @@ influxdb:
       entities: !include exclude.yaml
 
 system_health:
+
+mobile_app:
+
+zeroconf:
 
 # View all events in a logbook
 logbook:
