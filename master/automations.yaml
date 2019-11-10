@@ -69,28 +69,6 @@
     seconds: '/5' #every five seconds
   action:
     - service: shell_command.snapshot_garden
-- alias: Jaiko snapshots
-  hide_entity: False
-  trigger:
-    platform: time_pattern
-    seconds: '/5' #every five seconds
-  condition:
-    - condition: state
-      entity_id: input_boolean.jaiko_crated
-      state: "on"
-  action:
-    - service: shell_command.snapshot_jaiko
-- alias: Jaiko snapshots uncrated
-  hide_entity: False
-  trigger:
-    platform: time_pattern
-    seconds: '/30' #every thirty seconds
-  condition:
-    - condition: state
-      entity_id: input_boolean.jaiko_crated
-      state: "off"
-  action:
-    - service: shell_command.snapshot_jaiko
 - alias: Daily snapshot archiving
   hide_entity: False
   trigger:

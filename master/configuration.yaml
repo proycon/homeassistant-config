@@ -174,7 +174,6 @@ shell_command:
     snapshot_garden: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh garden
     snapshot_frontdoor: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh frontdoor
     snapshot_hallupstairs: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh hallupstairs
-    snapshot_jaiko: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh jaiko
     archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
     mpcclear: mpc clear
     mpc: /home/homeautomation/homeassistant/scripts/media/mpc.sh "{{ type }}" "{{ value }}" "{{ filter }}"
