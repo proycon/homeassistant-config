@@ -107,16 +107,16 @@ history:
         - group
       entities: !include exclude.yaml
 
-influxdb:
-    host: 127.0.0.1
-    username: home-assistant
-    password: !secret api_password
-    exclude:
-      domains:
-        - shell_command
-        - weblink
-        - group
-      entities: !include exclude.yaml
+#influxdb:
+#   host: 127.0.0.1
+#   username: home-assistant
+#   password: !secret api_password
+#   exclude:
+#     domains:
+#       - shell_command
+#       - weblink
+#       - group
+#     entities: !include exclude.yaml
 
 system_health:
 
