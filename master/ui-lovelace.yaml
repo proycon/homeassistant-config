@@ -1709,6 +1709,34 @@ views:
                   - entity: alarm_control_panel.alarm_system
                     name: Alarm System
         - type: history-graph
+          title: Power (48h)
+          hours_to_show: 48
+          entities:
+            - entity: sensor.power_consumption
+              name: Power consumption
+            - entity: sensor.power_production
+              name: Power production
+        - type: history-graph
+          title: Power (7d)
+          hours_to_show: 168
+          entities:
+            - entity: sensor.power_consumption
+              name: Power consumption
+            - entity: sensor.power_production
+              name: Power production
+        - type: history-graph
+          title: Gas (48h)
+          hours_to_show: 48
+          entities:
+            - entity: sensor.hourly_gas_consumption
+              name: Hourly gas consumption
+        - type: history-graph
+          title: Gas (7d)
+          hours_to_show: 168
+          entities:
+            - entity: sensor.hourly_gas_consumption
+              name: Hourly gas consumption
+        - type: history-graph
           title: Jaiko (24h)
           hours_to_show: 24
           entities:
