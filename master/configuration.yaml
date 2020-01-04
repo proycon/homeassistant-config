@@ -70,6 +70,12 @@ weblink:
         - name: KPN Router
           url: !secret kpn_router_url
           icon: mdi:upload-network
+        - name: Syncthing proycon
+          url: https://mediaserver.anaproy.lxd:8383
+          icon: mdi:sync
+        - name: Syncthing Hans
+          url: https://mediaserver.anaproy.lxd:8384
+          icon: mdi:sync
 
 # Checks for available updates
 # Note: This component will send some information about your system to
