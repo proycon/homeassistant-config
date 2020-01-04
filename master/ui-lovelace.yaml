@@ -2000,42 +2000,6 @@ views:
         show_header_toggle: true
       - type: entities
         entities:
-          - type: weblink
-            url: 'http://192.168.0.12:8080/'
-            name: Kodi Control Interface
-            icon: 'mdi:kodi'
-          - type: weblink
-            url: 'http://mediaserver.anaproy.lxd:6601/iris'
-            name: MPD Control Interface
-            icon: 'mdi:music-box-outline'
-          - type: weblink
-            url: 'http://anaproy.nl:8000/stream.mp3'
-            name: MPD Music Stream
-            icon: 'mdi:play-circle'
-          - type: weblink
-            url: "http://192.168.3.1"
-            name: Wifi Router
-            icon: 'mdi:router-wireless'
-          - type: weblink
-            url: 'http://192.168.0.4'
-            name: IPCam
-            icon: 'mdi:camcorder'
-          - type: weblink
-            url: 'http://192.168.2.254'
-            name: KPN Router
-            icon: 'mdi:upload-network'
-          - type: weblink
-            url: 'http://mediaserver.anaproy.lxd:8383'
-            name: Syncthing proycon
-            icon: 'mdi:sync'
-          - type: weblink
-            url: 'http://mediaserver.anaproy.lxd:8384'
-            name: Syncthing hans
-            icon: 'mdi:sync'
-        title: Links
-        show_header_toggle: true
-      - type: entities
-        entities:
           - device_tracker.caprica
           - device_tracker.mhysa
           - device_tracker.pi1
@@ -2080,6 +2044,46 @@ views:
           - switch.bathroom_vent
         title: Switch
     icon: 'mdi:settings'
+  - path: links
+    icon: 'mdi:link'
+    name: Links
+    cards:
+      - type: entities
+        entities:
+          - type: weblink
+            url: 'http://192.168.0.12:8080/'
+            name: Kodi Control Interface
+            icon: 'mdi:kodi'
+          - type: weblink
+            url: 'http://mediaserver.anaproy.lxd:6601/iris'
+            name: MPD Control Interface
+            icon: 'mdi:music-box-outline'
+          - type: weblink
+            url: 'http://anaproy.nl:8000/stream.mp3'
+            name: MPD Music Stream
+            icon: 'mdi:play-circle'
+          - type: weblink
+            url: "http://192.168.3.1"
+            name: Wifi Router
+            icon: 'mdi:router-wireless'
+          - type: weblink
+            url: 'http://192.168.0.4'
+            name: IPCam
+            icon: 'mdi:camcorder'
+          - type: weblink
+            url: 'http://192.168.2.254'
+            name: KPN Router
+            icon: 'mdi:upload-network'
+          - type: weblink
+            url: 'http://mediaserver.anaproy.lxd:8383'
+            name: Syncthing proycon
+            icon: 'mdi:sync'
+          - type: weblink
+            url: 'http://mediaserver.anaproy.lxd:8384'
+            name: Syncthing hans
+            icon: 'mdi:sync'
+        title: Links
+        show_header_toggle: true
 
 
 
