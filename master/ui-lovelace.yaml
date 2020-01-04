@@ -2012,7 +2012,10 @@ views:
             url: 'http://anaproy.nl:8000/stream.mp3'
             name: MPD Music Stream
             icon: 'mdi:play-circle'
-          - weblink.anaproyboven_router
+          - type: weblink
+            url: "http://192.168.3.1"
+            name: Wifi Router
+            icon: 'mdi:router-wireless'
           - type: weblink
             url: 'http://192.168.0.4'
             name: IPCam
@@ -2021,6 +2024,14 @@ views:
             url: 'http://192.168.2.254'
             name: KPN Router
             icon: 'mdi:upload-network'
+          - type: weblink
+            url: 'http://mediaserver.anaproy.lxd:8383'
+            name: Syncthing proycon
+            icon: 'mdi:sync'
+          - type: weblink
+            url: 'http://mediaserver.anaproy.lxd:8384'
+            name: Syncthing hans
+            icon: 'mdi:sync'
         title: Links
         show_header_toggle: true
       - type: entities
@@ -2030,7 +2041,6 @@ views:
           - device_tracker.pi1
           - device_tracker.pi2
           - device_tracker.pi3
-          - device_tracker.wifi_router
           - device_tracker.kpn_router
           - device_tracker.gardencam
         title: Devices

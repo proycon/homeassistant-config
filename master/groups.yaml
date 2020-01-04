@@ -263,9 +263,11 @@ config_links:
         - weblink.kodi_control_interface
         - weblink.mpd_control_interface
         - weblink.mpd_music_stream
-        - weblink.anaproyboven_router
+        - weblink.wiki_router
         - weblink.ipcam
         - weblink.kpn_router
+        - weblink.syncthing_proycon
+        - weblink.syncthing_hans
 
 config_snapshots:
     name: Snapshots
