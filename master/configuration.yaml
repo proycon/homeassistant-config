@@ -199,7 +199,7 @@ alarm_control_panel:
       trigger_time: 5
 
 device_tracker:
-    - platform: tplink
+    - platform: luci
       host: !secret wifirouter_host
       username: !secret wifirouter_user
       password: !secret wifirouter_pass
