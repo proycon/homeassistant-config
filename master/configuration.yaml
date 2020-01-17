@@ -923,6 +923,7 @@ mqtt:
     client_id: master
     certificate: /etc/ssl/certs/ca-certificates.crt
     tls_insecure: true #allow non-matching hostnames
+    tls_version: '1.2'
     keepalive: 60
     username: homeassistant
     password: !secret api_password

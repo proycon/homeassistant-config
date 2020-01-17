@@ -139,6 +139,7 @@ mqtt:
     port: 8883
     certificate: /etc/ssl/certs/ca-certificates.crt
     tls_insecure: true #allow non-matching hostnames
+    tls_version: '1.2'
     client_id: pi3
     keepalive: 60
     username: homeassistant
