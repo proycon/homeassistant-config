@@ -22,13 +22,18 @@ apt install aptitude tmux git gcc make zsh kodi kodi-audioencoder-flac kodi-audi
 
 echo "homeautomation    ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/030_homeautomation
 
-sed -i s/audio=on/audio=off/ /boot/config.txt
 
 
-if grep "MYSETUP: LIRC" /boot/config.txt; then
-    echo "lirc already set up"
+if grep "MYSETUP" /boot/config.txt; then
+    echo "already set up"
 else
-    echo "#MYSETUP: LIRC" >> /boot/config.txt
+    echo "#MYSETUP" >> /boot/config.txt
+    if [ $PI -eq 1 ] || [ $PI -eq 2 ]; then
+        #set default device to USB audio and disable internal sound
+        sed -i s/audio=on/audio=off/ /boot/config.txt
+        sed -i s/defaults.ctl.card 0/defaults.ctl.card 1/ /usr/share/alsa/alsa.conf
+        sed -i s/defaults.pcm.card 0/defaults.pcm.card 1/ /usr/share/alsa/alsa.conf
+    fi
     if [ $PI -eq 1 ]; then
         echo "dtoverlay=gpio-ir-tx,gpio_out_pin=17" >> /boot/config.txt
     elif [ $PI -eq 2 ]; then
