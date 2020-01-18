@@ -366,7 +366,7 @@ automation:
 media_player speaker:
     - platform: vlc
       name: speaker
-      arguments: '--alsa-audio-device=hw:1,0'
+      arguments: '--alsa-audio-device=hw:3,0'
 
 shell_command:
     start_pycec: python -m pycec
