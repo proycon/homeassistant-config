@@ -56,21 +56,20 @@ binary_sensor:
       pull_mode: DOWN
       invert_logic: true
       bouncetime: 60
-      device_class: opening
     - platform: rpi_gpio
       ports:
         18: doorbell
       pull_mode: DOWN
       invert_logic: false
       bouncetime: 60
-    - platform: ffmpeg_noise
-      input: !secret noisedetector_input
-      extra_arguments: -filter:a highpass=f=300,lowpass=f=2500,volume=volume=2 -codec:a libmp3lame -ar 16000
-      output: !secret noisedetector_output
-      initial_state: false
-      duration: 2
-      reset: 60
-      peak: -32
+   #- platform: ffmpeg_noise
+   #  input: !secret noisedetector_input
+   #  extra_arguments: -filter:a highpass=f=300,lowpass=f=2500,volume=volume=2 -codec:a libmp3lame -ar 16000
+   #  output: !secret noisedetector_output
+   #  initial_state: false
+   #  duration: 2
+   #  reset: 60
+   #  peak: -32
 
 
 
