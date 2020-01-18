@@ -50,23 +50,20 @@ ffmpeg:
 
 
 binary_sensor:
-    - id: frontdoor
-      platform: rpi_gpio
+    - platform: rpi_gpio
       ports:
         25: frontdoor
       pull_mode: DOWN
       invert_logic: true
       bouncetime: 60
       device_class: opening
-    - id: doorbell
-      platform: rpi_gpio
+    - platform: rpi_gpio
       ports:
         18: doorbell
       pull_mode: DOWN
       invert_logic: false
       bouncetime: 60
-    - id: noisedetector
-      platform: ffmpeg_noise
+    - platform: ffmpeg_noise
       input: !secret noisedetector_input
       extra_arguments: -filter:a highpass=f=300,lowpass=f=2500,volume=volume=2 -codec:a libmp3lame -ar 16000
       output: !secret noisedetector_output
