@@ -17,9 +17,13 @@ apt upgrade || exit 2
 systemctl enable ssh || exit 2
 
 systemctl set-default multi-user.target || exit 2 #no graphical UI by default
-ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
 
-apt install aptitude tmux git gcc make zsh kodi kodi-audioencoder-flac kodi-audioencoder-lame kodi-audioencoder-vorbis wiringpi python3-virtualenv || exit 1
+apt install aptitude tmux git gcc make zsh kodi kodi-audioencoder-flac kodi-audioencoder-lame kodi-audioencoder-vorbis wiringpi python3-virtualenv libcec-dev || exit 1
+
+echo "homeautomation    ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/030_homeautomation
+
+sed -i s/audio=on/audio=off/ /boot/config.txt
+
 
 if grep "MYSETUP: LIRC" /boot/config.txt; then
     echo "lirc already set up"
@@ -30,6 +34,7 @@ else
     elif [ $PI -eq 2 ]; then
         echo "dtoverlay=gpio-ir,gpio_pin=24" >> /boot/config.txt
         echo "dtoverlay=gpio-ir-tx,gpio_pin=4" >> /boot/config.txt
+        echo "dtoverlay=w1-gpio,gpiopin=11" >> /boot/config.txt
     fi
 
     echo "REBOOT FIRST NOW AND THEN RUN THIS SCRIPT AGAIN"
@@ -40,7 +45,12 @@ apt install lirc lirc-compat-remotes || exit 1
 
 if [ ! -d /home/homeautomation ]; then
     useradd -s /bin/bash -m -d /home/homeautomation -G pi,adm,dialout,cdrom,sudo,audio,video,plugdev,users,input,netdev,spi,i2c,gpio homeautomation || exit 1
+    sudo -u homeautomation mkdir /home/homeautomation/bin
+    sudo -u homeautomation mkdir /home/homeautomation/Server
+    echo "sshfs -o reconnect,workaround=rename,idmap=user,follow_symlinks,allow_other,ro proycon@mediaserver.anaproy.lxd:/mediashare /home/homeautomation/Server" > /home/homeautomation/bin/mountssh
+    chmod a+x /home/homeautomation/bin/mountssh
 fi
+
 
 if [ ! -d /home/homeautomation/homeassistant ]; then
     cd /home/homeautomation

@@ -10,6 +10,7 @@ fi
 . env/bin/activate
 
 pip install -U homeassistant
+pip install pycec
 
 ln -sf $HADIR/scripts $HADIR/master/scripts
 ln -sf $HADIR/scripts $HADIR/pi1/scripts
