@@ -46,7 +46,6 @@ homeassistant:
 #
 
 ffmpeg:
-    ffmpeg_bin: /usr/bin/avconv
 
 
 binary_sensor:
@@ -88,10 +87,10 @@ switch:
             command_on: "killall vlc; cvlc http://192.168.0.1:8000/stream.mp3 >/dev/null 2>/dev/null &"
             command_off: "killall vlc"
             command_state: "ps aux | grep vlc | grep -v grep"
-        noisedetector:
-            command_on: "avconv -f alsa -i hw:1,0 -vn -f rtp rtp://236.0.0.1:2000 &"
-            command_off: "killall avconv"
-            command_state: "ps aux | grep avconv | grep -v grep"
+       #noisedetector:
+       #    command_on: "avconv -f alsa -i hw:1,0 -vn -f rtp rtp://236.0.0.1:2000 &"
+       #    command_off: "killall avconv"
+       #    command_state: "ps aux | grep avconv | grep -v grep"
 
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
 automation:
