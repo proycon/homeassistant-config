@@ -124,17 +124,10 @@ views:
                             action: call-service
                             service: script.media_centre
                       - type: entity-button
-                        icon: mdi:robot
-                        name: "Start clean-up"
-                        entity: vacuum.robot
+                        entity: script.desktop
                         tap_action:
-                           action: call-service
-                           service: vacuum.start
-                           entity_id: vacuum.robot
-                        hold_action:
-                           action: call-service
-                           service: vacuum.return_to_base
-                           entity_id: vacuum.robot
+                            action: call-service
+                            service: script.desktop
                       - type: entity-button
                         entity: script.turn_media_off
                         tap_action:
@@ -1011,6 +1004,18 @@ views:
                     - script.start_timer
                   title: Timer
                   show_header_toggle: false
+                - type: entity-button
+                  icon: mdi:robot
+                  name: "Start clean-up"
+                  entity: vacuum.robot
+                  tap_action:
+                     action: call-service
+                     service: vacuum.start
+                     entity_id: vacuum.robot
+                  hold_action:
+                     action: call-service
+                     service: vacuum.return_to_base
+                     entity_id: vacuum.robot
   - id: media
     path: media
     icon: mdi:television
@@ -1265,6 +1270,11 @@ views:
                       tap_action:
                           action: call-service
                           service: script.media_centre
+                    - type: entity-button
+                      entity: script.desktop
+                      tap_action:
+                          action: call-service
+                          service: script.desktop
                     - type: entity-button
                       entity: script.turn_media_off
                       tap_action:

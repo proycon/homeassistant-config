@@ -76,8 +76,8 @@ switch:
     platform: command_line
     switches:
         kodi:
-            command_on: "killall kodi-standalone kodi kodi_v7.bin; kodi-standalone &"
-            command_off: "killall kodi-standalone kodi kodi_v7.bin"
+            command_on: "killall kodi-standalone kodi kodi.bin_v8; kodi-standalone &"
+            command_off: "killall kodi-standalone kodi kodi.bin_v8"
             command_state: "ps aux | grep kodi | grep -v grep"
         xorg:
             command_on: "killall Xorg; startx &"
