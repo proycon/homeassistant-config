@@ -39,7 +39,7 @@ fi
 apt install lirc lirc-compat-remotes || exit 1
 
 if [ ! -d /home/homeautomation ]; then
-    useradd -s /bin/zsh -m -d /home/homeautomation -G pi,adm,dialout,cdrom,sudo,audio,video,plugdev,users,input,netdev,spi,i2c,gpio homeautomation || exit 1
+    useradd -s /bin/bash -m -d /home/homeautomation -G pi,adm,dialout,cdrom,sudo,audio,video,plugdev,users,input,netdev,spi,i2c,gpio homeautomation || exit 1
 fi
 
 if [ ! -d /home/homeautomation/homeassistant ]; then
