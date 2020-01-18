@@ -324,7 +324,7 @@ automation:
        platform: homeassistant
        event: start
     action:
-       service: shell_command.start_pycec
+       service: shell_command.start_pycec #I don't think we really use this yet, it fails anyhow.. it's could be used  by the hdmi_cec component from the master
 
   - id: ir_send
     alias: IR Send
