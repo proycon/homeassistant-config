@@ -19,7 +19,7 @@ systemctl enable ssh || exit 2
 systemctl set-default multi-user.target || exit 2 #no graphical UI by default
 ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
 
-apt install aptitude tmux git gcc make lirc lirc-compat-remotes zsh kodi kodi-audioencoder-flat kodi-audioencoder-lame kodi-audioencoder-vorbis wiringpi python3-virtualenv || exit 1
+apt install aptitude tmux git gcc make lirc lirc-compat-remotes zsh kodi kodi-audioencoder-flac kodi-audioencoder-lame kodi-audioencoder-vorbis wiringpi python3-virtualenv || exit 1
 
 
 if [ ! -d /home/homeautomation ]; then
