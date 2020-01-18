@@ -62,6 +62,8 @@ if [ ! -d /home/homeautomation/homeassistant ]; then
     make install || exit 4
     cd /home/homeautomation/homeassistant
     ln -s /home/homeautomation/homeassistant/config/my.lircd.conf /etc/lirc/lircd.conf.d/my.lircd.conf || exit 5
+    cp -f config/homeautomation@homeautomation.service /etc/systemd/system/
+    systemctl daemon-reload
 fi
 
 systemctl enable lircd
@@ -69,6 +71,6 @@ systemctl enable lircd
 cd /home/homeautomation/homeassistant
 sudo -u homeassistant ./setup.sh || exit 6
 
+systemctl enable homeautomation@homeautomation
+
 echo "please reboot first now"
-
-
