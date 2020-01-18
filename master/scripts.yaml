@@ -1063,16 +1063,13 @@ desktop:
         - service: mqtt.publish
           data:
               topic: "home/soundoutput/pi1"
-              payload: "hdmi"
+              payload: "speakers"
         - delay:
             seconds: 1
         - service: media_player.select_source
           entity_id: media_player.yamaha_receiver
           data:
               source: HDMI2
-        - condition: state
-          entity_id: switch.pi1_xorg
-          state: 'off'
         - service: switch.turn_on
           entity_id: switch.pi1_xorg
 
