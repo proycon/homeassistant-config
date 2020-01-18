@@ -12,7 +12,6 @@ deps
 tts
 secrets.yaml
 known_devices.yaml
-*.conf
 plex.conf
 phue.conf
 harmony_media_room.conf
