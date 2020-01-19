@@ -1822,7 +1822,7 @@ mpc_play:
             topic: "home/sound/pi1"
             payload_template: 'computerbeep_5.wav'
         - service: shell_command.mpc
-          data:
+          data_template:
               type: "{{states.input_select.mpc_type.state}}"
               value: "{{states.input_text.mpc_search.state}}"
               filter: "{{states.input_select.mpc_filter.state}}"
