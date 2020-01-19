@@ -12,6 +12,8 @@ if [ -z "$1" ]; then
 fi
 PI=$1
 
+echo "pi$PI" > /etc/hostname
+
 apt update || exit 2
 apt upgrade || exit 2
 systemctl enable ssh || exit 2
@@ -19,7 +21,7 @@ systemctl enable ssh || exit 2
 systemctl set-default multi-user.target || exit 2 #no graphical UI by default
 ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
 
-apt install aptitude tmux git gcc make zsh kodi kodi-audioencoder-flac kodi-audioencoder-lame kodi-audioencoder-vorbis wiringpi python3-virtualenv vim || exit 1
+apt install aptitude tmux git gcc make zsh kodi kodi-audioencoder-flac kodi-audioencoder-lame kodi-audioencoder-vorbis wiringpi python3-virtualenv virtualenv vim || exit 1
 
 if grep "MYSETUP: LIRC" /boot/config.txt; then
     echo "lirc already set up"
