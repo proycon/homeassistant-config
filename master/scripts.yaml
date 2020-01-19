@@ -1808,15 +1808,23 @@ play_youtube_link_bedroom:
 mpc_clear:
     alias: Clear playlist
     sequence:
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_5.wav'
         - service: shell_command.mpcclear
 
 mpc_play:
     alias: Search and play music
     sequence:
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_5.wav'
         - service: shell_command.mpc
           data:
               type: "{{states.input_select.mpc_type.state}}"
               value: "{{states.input_text.mpc_search.state}}"
-              filter: "livingroom"
+              filter: "{{states.input_select.mpc_filter.state}}"
 
 
