@@ -84,7 +84,7 @@ switch:
             command_off: "sudo systemctl stop lightdm"
             command_state: "ps aux | grep lightdm | grep -v grep"
         musicplayer:
-            command_on: "killall vlc; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; cvlc http://192.168.0.1:8000/stream.mp3 >/dev/null 2>/dev/null &"
+            command_on: "killall vlc; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; cvlc --alsa-audio-device=hw:3,0 http://192.168.0.1:8000/stream.mp3 >/dev/null 2>/dev/null &"
             command_off: "killall vlc"
             command_state: "ps aux | grep vlc | grep -v grep"
        #noisedetector:
