@@ -1,0 +1,13 @@
+[Unit]
+Description=Home Automation
+After=network-online.target
+
+[Service]
+Type=simple
+User=%i
+ExecStartPre=/bin/sleep 10
+ExecStart=/home/homeautomation/homeassistant/run.sh
+
+[Install]
+WantedBy=multi-user.target
+

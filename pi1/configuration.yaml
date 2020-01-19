@@ -46,7 +46,6 @@ homeassistant:
 #
 
 ffmpeg:
-    ffmpeg_bin: /usr/bin/avconv
 
 
 binary_sensor:
@@ -56,21 +55,20 @@ binary_sensor:
       pull_mode: DOWN
       invert_logic: true
       bouncetime: 60
-      device_class: opening
     - platform: rpi_gpio
       ports:
         18: doorbell
       pull_mode: DOWN
       invert_logic: false
       bouncetime: 60
-    - platform: ffmpeg_noise
-      input: !secret noisedetector_input
-      extra_arguments: -filter:a highpass=f=300,lowpass=f=2500,volume=volume=2 -codec:a libmp3lame -ar 16000
-      output: !secret noisedetector_output
-      initial_state: false
-      duration: 2
-      reset: 60
-      peak: -32
+   #- platform: ffmpeg_noise
+   #  input: !secret noisedetector_input
+   #  extra_arguments: -filter:a highpass=f=300,lowpass=f=2500,volume=volume=2 -codec:a libmp3lame -ar 16000
+   #  output: !secret noisedetector_output
+   #  initial_state: false
+   #  duration: 2
+   #  reset: 60
+   #  peak: -32
 
 
 
@@ -78,21 +76,21 @@ switch:
     platform: command_line
     switches:
         kodi:
-            command_on: "killall kodi-standalone kodi kodi_v7.bin; kodi-standalone &"
-            command_off: "killall kodi-standalone kodi kodi_v7.bin"
+            command_on: "aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; killall kodi-standalone kodi kodi.bin_v8; kodi-standalone &"
+            command_off: "killall kodi-standalone kodi kodi.bin_v8"
             command_state: "ps aux | grep kodi | grep -v grep"
         xorg:
-            command_on: "killall Xorg; startx &"
-            command_off: "killall Xorg"
-            command_state: "ps aux | grep Xorg | grep -v grep"
+            command_on: "aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; sudo systemctl start lightdm"
+            command_off: "sudo systemctl stop lightdm"
+            command_state: "ps aux | grep lightdm | grep -v grep"
         musicplayer:
-            command_on: "killall vlc; cvlc http://192.168.0.1:8000/stream.mp3 >/dev/null 2>/dev/null &"
+            command_on: "killall vlc; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; cvlc http://192.168.0.1:8000/stream.mp3 >/dev/null 2>/dev/null &"
             command_off: "killall vlc"
             command_state: "ps aux | grep vlc | grep -v grep"
-        noisedetector:
-            command_on: "avconv -f alsa -i hw:1,0 -vn -f rtp rtp://236.0.0.1:2000 &"
-            command_off: "killall avconv"
-            command_state: "ps aux | grep avconv | grep -v grep"
+       #noisedetector:
+       #    command_on: "avconv -f alsa -i hw:1,0 -vn -f rtp rtp://236.0.0.1:2000 &"
+       #    command_off: "killall avconv"
+       #    command_state: "ps aux | grep avconv | grep -v grep"
 
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
 automation:
@@ -326,7 +324,7 @@ automation:
        platform: homeassistant
        event: start
     action:
-       service: shell_command.start_pycec
+       service: shell_command.start_pycec #I don't think we really use this yet, it fails anyhow.. it's could be used  by the hdmi_cec component from the master
 
   - id: ir_send
     alias: IR Send
@@ -368,7 +366,7 @@ automation:
 media_player speaker:
     - platform: vlc
       name: speaker
-      arguments: '--alsa-audio-device=hw:1,0'
+      arguments: '--alsa-audio-device=hw:3,0'
 
 shell_command:
     start_pycec: python -m pycec

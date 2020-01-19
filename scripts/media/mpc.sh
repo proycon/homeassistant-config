@@ -1,4 +1,5 @@
 #!/bin/bash
+export MPD_HOST="proycon@mediaserver.anaproy.lxd"
 if [ -z "$3" ] || [[ "$3" == "no" ]]; then
     mpc search "$1" "$2" | mpc add
 elif [ -z "$4" ]; then

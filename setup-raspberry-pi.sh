@@ -19,19 +19,30 @@ apt upgrade || exit 2
 systemctl enable ssh || exit 2
 
 systemctl set-default multi-user.target || exit 2 #no graphical UI by default
-ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
 
-apt install aptitude tmux git gcc make zsh kodi kodi-audioencoder-flac kodi-audioencoder-lame kodi-audioencoder-vorbis wiringpi python3-virtualenv virtualenv vim || exit 1
+apt install aptitude tmux git gcc make zsh kodi kodi-audioencoder-flac kodi-audioencoder-lame kodi-audioencoder-vorbis wiringpi python3-virtualenv virtualenv vim cec-utils libcec-dev python-libcec || exit 1
 
-if grep "MYSETUP: LIRC" /boot/config.txt; then
-    echo "lirc already set up"
+echo "homeautomation    ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/030_homeautomation
+
+
+
+if grep "MYSETUP" /boot/config.txt; then
+    echo "already set up"
 else
-    echo "#MYSETUP: LIRC" >> /boot/config.txt
+    echo "#MYSETUP" >> /boot/config.txt
+    if [ $PI -eq 1 ] || [ $PI -eq 2 ]; then
+        #set default device to USB audio and disable internal sound
+        sed -i s/defaults.ctl.card 0/defaults.ctl.card 1/ /usr/share/alsa/alsa.conf
+        sed -i s/defaults.pcm.card 0/defaults.pcm.card 1/ /usr/share/alsa/alsa.conf
+    fi
     if [ $PI -eq 1 ]; then
         echo "dtoverlay=gpio-ir-tx,gpio_pin=17" >> /boot/config.txt
+        echo " snd_bcm2835.enable_headphones=1 snd_bcm2835.enable_hdmi=1 snd_bcm2835.enable_compat_alsa=0" >> /boot/cmdline.txt
     elif [ $PI -eq 2 ]; then
+        sed -i s/audio=on/audio=off/ /boot/config.txt
         echo "dtoverlay=gpio-ir,gpio_pin=24" >> /boot/config.txt
         echo "dtoverlay=gpio-ir-tx,gpio_pin=4" >> /boot/config.txt
+        echo "dtoverlay=w1-gpio,gpiopin=11" >> /boot/config.txt
     fi
 
     echo "REBOOT FIRST NOW AND THEN RUN THIS SCRIPT AGAIN"
@@ -42,7 +53,12 @@ apt install lirc lirc-compat-remotes || exit 1
 
 if [ ! -d /home/homeautomation ]; then
     useradd -s /bin/bash -m -d /home/homeautomation -G pi,adm,dialout,cdrom,sudo,audio,video,plugdev,users,input,netdev,spi,i2c,gpio homeautomation || exit 1
+    sudo -u homeautomation mkdir /home/homeautomation/bin
+    sudo -u homeautomation mkdir /home/homeautomation/Server
+    echo "sshfs -o reconnect,workaround=rename,idmap=user,follow_symlinks,allow_other,ro proycon@mediaserver.anaproy.lxd:/mediashare /home/homeautomation/Server" > /home/homeautomation/bin/mountssh
+    chmod a+x /home/homeautomation/bin/mountssh
 fi
+
 
 if [ ! -d /home/homeautomation/homeassistant ]; then
     cd /home/homeautomation
@@ -54,6 +70,8 @@ if [ ! -d /home/homeautomation/homeassistant ]; then
     make install || exit 4
     cd /home/homeautomation/homeassistant
     ln -s /home/homeautomation/homeassistant/config/my.lircd.conf /etc/lirc/lircd.conf.d/my.lircd.conf || exit 5
+    cp -f config/homeautomation@homeautomation.service /etc/systemd/system/
+    systemctl daemon-reload
 fi
 
 systemctl enable lircd
@@ -61,6 +79,6 @@ systemctl enable lircd
 cd /home/homeautomation/homeassistant
 sudo -u homeautomation ./setup.sh || exit 6
 
+systemctl enable homeautomation@homeautomation
+
 echo "please reboot first now"
-
-
