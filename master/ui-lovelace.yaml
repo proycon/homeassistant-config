@@ -2018,6 +2018,9 @@ views:
           - device_tracker.pi3
           - device_tracker.kpn_router
           - device_tracker.gardencam
+          - device_tracker.smile
+          - device_tracker.rockrobo
+          - device_tracker.printer
         title: Devices
         show_header_toggle: true
       - type: entities
