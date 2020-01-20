@@ -1082,12 +1082,14 @@ turn_media_off:
       data:
           topic: "home/soundoutput/pi1"
           payload: "speakers"
-    - service: switch.turn_off
-      entity_id: switch.tv
     - service: media_player.turn_off
       entity_id: media_player.yamaha_receiver
+    - delay:
+        seconds: 1
     - service: switch.turn_off
       entity_id: switch.tv_decoder
+    - service: switch.turn_off
+      entity_id: switch.tv
     - service: switch.turn_off
       entity_id: switch.pi1_xorg
     - service: switch.turn_off
