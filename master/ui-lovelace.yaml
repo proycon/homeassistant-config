@@ -2011,12 +2011,13 @@ views:
         show_header_toggle: true
       - type: entities
         entities:
-          - device_tracker.caprica
+          - device_tracker.rocinante
           - device_tracker.mhysa
           - device_tracker.pi1
           - device_tracker.pi2
           - device_tracker.pi3
           - device_tracker.kpn_router
+          - device_tracker.wifi_router
           - device_tracker.gardencam
           - device_tracker.smile
           - device_tracker.rockrobo
