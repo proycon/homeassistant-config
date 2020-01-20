@@ -2044,6 +2044,7 @@ views:
           - device_tracker.netty
           - device_tracker.erik
           - device_tracker.patrick
+          - device_tracker.cora
         title: Visitors
         show_header_toggle: true
       - type: entities
