@@ -1778,6 +1778,7 @@ views:
                 - device_tracker.netty
                 - device_tracker.erik
                 - device_tracker.patrick
+                - device_tracker.cora
   - path: events
     title: Event Photos
     panel: true
