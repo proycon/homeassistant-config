@@ -1933,7 +1933,7 @@ views:
           - sensor.power_production_normal
           - sensor.gas_consumption
         title: Power Consumption
-        show_header_toggle: true
+        show_header_toggle: false
       - type: entities
         entities:
           - automation.daily_snapshot_archiving
@@ -1944,7 +1944,7 @@ views:
           - automation.street_snapshots
           - input_boolean.flip_main_camera
         title: Snapshots
-        show_header_toggle: true
+        show_header_toggle: false
       - type: entities
         entities:
           - automation.lights_on_in_the_evening
@@ -1965,7 +1965,7 @@ views:
           - automation.reset_wake_time_wednesday
           - automation.reset_wake_time_weekend
         title: Lights
-        show_header_toggle: true
+        show_header_toggle: false
       - type: entities
         entities:
           - automation.doorbell
@@ -1983,7 +1983,7 @@ views:
           - script.soundoutput_speakers
           - script.speech_test
         title: Sound
-        show_header_toggle: true
+        show_header_toggle: false
       - type: entities
         entities:
           - script.doorbell_sound
@@ -2009,18 +2009,23 @@ views:
           - script.make_event_snapshots_front_door
           - script.make_event_snapshots_hall_upstairs
         title: Event Snapshots
-        show_header_toggle: true
+        show_header_toggle: false
       - type: entities
         entities:
-          - device_tracker.caprica
+          - device_tracker.rocinante
           - device_tracker.mhysa
           - device_tracker.pi1
           - device_tracker.pi2
           - device_tracker.pi3
           - device_tracker.kpn_router
+          - device_tracker.wifi_router
+          - device_tracker.kpn_router
           - device_tracker.gardencam
+          - device_tracker.smile
+          - device_tracker.rockrobo
+          - device_tracker.printer
         title: Devices
-        show_header_toggle: true
+        show_header_toggle: false
       - type: entities
         entities:
           - input_number.timer
@@ -2048,7 +2053,7 @@ views:
           - device_tracker.cora
           - device_tracker.hans2
         title: Visitors
-        show_header_toggle: true
+        show_header_toggle: false
       - type: entities
         entities:
           - script.repoll_slaves

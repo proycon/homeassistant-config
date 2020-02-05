@@ -780,14 +780,12 @@ switch tv:
     platform: mqtt
     name: TV
     command_topic: "home/hdmi_cec_send/pi1"
-    state_topic: "home/hdmi_cec_send/pi1"
     payload_on: "on 0"
     payload_off: "standby 0"
 switch tv_bedroom:
     platform: mqtt
     name: TV Bedroom
     command_topic: "home/ir_send/pi2"
-    state_topic: "home/ir_send/pi2"
     payload_on: '{"device":"tvboven","key":"KEY_POWER","state":"on"}'
     payload_off: '{"device":"tvboven","key":"KEY_POWER","state":"off"}'
 switch technofire:
