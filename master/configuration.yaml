@@ -779,6 +779,7 @@ switch pi2_xorg:
 switch tv:
     platform: mqtt
     name: TV
+    command_topic: "home/ir_send/pi1"
     payload_on: '{"device":"tvbeneden","key":"KEY_POWER","state":"on"}'
     payload_off: '{"device":"tvbeneden","key":"KEY_POWER","state":"off"}'
     #command_topic: "home/hdmi_cec_send/pi1"
