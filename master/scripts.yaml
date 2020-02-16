@@ -1033,8 +1033,8 @@ listen_to_music:
 media_centre:
     alias: Media Centre
     sequence:
-        - service: switch.turn_on
-          entity_id: switch.tv
+        - service: script.turn_on
+          entity_id: script.tv_on
         - delay:
             seconds: 1
         - service: media_player.turn_on
@@ -1056,6 +1056,25 @@ media_centre:
           state: 'off'
         - service: switch.turn_on
           entity_id: switch.pi1_kodi
+
+tv_on:
+    alias: TV on
+    sequence:
+        - condition: state
+          entity_id: switch.tv
+          state: 'off'
+        - service: switch.turn_on
+          entity_id: switch_tv
+
+tv_off:
+    alias: TV off
+    sequence:
+        - condition: state
+          entity_id: switch.tv
+          state: 'on'
+        - service: switch.turn_off
+          entity_id: switch_tv
+
 
 desktop:
     alias: Desktop
@@ -1094,8 +1113,8 @@ turn_media_off:
       entity_id: switch.tv_decoder
     - delay:
         seconds: 1
-    - service: switch.turn_off
-      entity_id: switch.tv
+    - service: script.turn_on
+      entity_id: script.tv_off
     - service: switch.turn_off
       entity_id: switch.pi1_xorg
     - service: switch.turn_off
