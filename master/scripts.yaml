@@ -1064,7 +1064,7 @@ tv_on:
           entity_id: switch.tv
           state: 'off'
         - service: switch.turn_on
-          entity_id: switch_tv
+          entity_id: switch.tv
 
 tv_off:
     alias: TV off
@@ -1073,7 +1073,7 @@ tv_off:
           entity_id: switch.tv
           state: 'on'
         - service: switch.turn_off
-          entity_id: switch_tv
+          entity_id: switch.tv
 
 
 desktop:
