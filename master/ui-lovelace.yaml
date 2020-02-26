@@ -1779,6 +1779,7 @@ views:
                 - device_tracker.erik
                 - device_tracker.patrick
                 - device_tracker.cora
+                - device_tracker.hans2
   - path: events
     title: Event Photos
     panel: true
@@ -2050,6 +2051,7 @@ views:
           - device_tracker.erik
           - device_tracker.patrick
           - device_tracker.cora
+          - device_tracker.hans2
         title: Visitors
         show_header_toggle: false
       - type: entities
