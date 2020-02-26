@@ -362,7 +362,7 @@ media_player speaker:
 shell_command:
     start_pycec: python -m pycec
     ir_send: /home/homeautomation/homeassistant/scripts/media/irsend.sh "{{ device }}" "{{ key }}"
-    433send: /home/homeautomation/homeassistant/scripts/switch/433send.sh 8 "{{ protocol }}" "{{ group }}" "{{ unit }}" "{{ state }}"
+    433send: /home/homeautomation/homeassistant/scripts/switch/433send.sh 7 "{{ protocol }}" "{{ group }}" "{{ unit }}" "{{ state }}"
     hdmi_cec_send: /home/homeautomation/homeassistant/scripts/media/hdmicecsend.sh "{{ payload }}"
     soundoutput: sudo amixer cset numid=3 "{{ outputid }}"
 
