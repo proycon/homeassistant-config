@@ -2101,6 +2101,18 @@
      - service: script.turn_on
        entity_id: script.tvdecoder_right
 
+- id: remote_tv_on_manual
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 3
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: switch.turn_on
+       entity_id: switch.tv
+
 - id: remote_cursor_left
   condition:
     - condition: state
@@ -2116,6 +2128,18 @@
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_left
+
+- id: remote_tv_decoder_on_manual
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 6
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+     - service: switch.turn_on
+       entity_id: switch.tv_decoder
 
 - id: remote_cursor_up
   condition:
@@ -2216,6 +2240,7 @@
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_playpause
+
 
 - id: remote_music_pause
   alias: remote_music_pause
