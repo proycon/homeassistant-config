@@ -60,7 +60,7 @@ binary_sensor:
         20: doorbell
       pull_mode: DOWN
       invert_logic: false
-      bouncetime: 60
+      bouncetime: 300
    #- platform: ffmpeg_noise
    #  input: !secret noisedetector_input
    #  extra_arguments: -filter:a highpass=f=300,lowpass=f=2500,volume=volume=2 -codec:a libmp3lame -ar 16000
