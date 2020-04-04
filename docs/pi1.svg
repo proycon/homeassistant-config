@@ -107,9 +107,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4"
+     inkscape:zoom="2.8284271"
      inkscape:cx="342.07919"
-     inkscape:cy="453.18154"
+     inkscape:cy="396.613"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -139,8 +139,8 @@
        id="rect4689"
        width="732.54224"
        height="1034.7159"
-       x="14.752587"
-       y="100.56596"
+       x="15.813248"
+       y="89.959358"
        rx="10"
        ry="10" />
     <path
@@ -625,7 +625,7 @@
          style="font-size:16px;line-height:1.25"> </tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 424.2568,658.75878 65.65992,2.02031"
+       d="m 426.02457,677.49711 65.65992,2.02031"
        id="path3382"
        inkscape:connector-curvature="0" />
     <path
@@ -636,12 +636,12 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:'Gillius ADF';-inkscape-font-specification:'Gillius ADF';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       x="490.48355"
-       y="677.92987"
+       x="492.25131"
+       y="696.66821"
        id="text3402"><tspan
          sodipodi:role="line"
-         x="490.48355"
-         y="677.92987"
+         x="492.25131"
+         y="696.66821"
          id="tspan3406"
          style="font-size:20px;line-height:1.25">doorbell</tspan></text>
     <text
@@ -668,12 +668,12 @@
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 488.90656,659.76893 35.35534,-19.1929"
+       d="m 490.67433,678.50726 35.35534,-19.1929"
        id="path3420"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 528.30251,660.77909 h 92.93404"
+       d="m 530.07028,679.51742 h 92.93404"
        id="path3422"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
@@ -703,8 +703,8 @@
        id="rect3457"
        width="31.31473"
        height="9.5964489"
-       x="440.41925"
-       y="655.72833" />
+       x="442.18701"
+       y="674.46667" />
     <rect
        style="fill:#808080"
        id="rect3457-5"
@@ -715,7 +715,7 @@
        inkscape:transform-center-y="-44.951788" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 622.25397,398.79349 -1.01742,261.9856"
+       d="m 622.25397,398.79349 0.75035,280.72393"
        id="path3488"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
@@ -1141,13 +1141,13 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:13.33333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       x="438.32486"
-       y="651.17731"
+       x="440.09262"
+       y="669.91565"
        id="text4085-3"><tspan
          sodipodi:role="line"
          id="tspan4083-6"
-         x="438.32486"
-         y="651.17731">1kΩ</tspan></text>
+         x="440.09262"
+         y="669.91565">10kΩ</tspan></text>
     <path
        style="fill:#000000;stroke:#000000;stroke-width:1.08471322px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Send)"
        d="m 365.125,655.61218 v 5.58886"

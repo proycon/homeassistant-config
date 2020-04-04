@@ -57,7 +57,7 @@ binary_sensor:
       bouncetime: 60
     - platform: rpi_gpio
       ports:
-        20: doorbell
+        21: doorbell
       pull_mode: DOWN
       invert_logic: false
       bouncetime: 300
