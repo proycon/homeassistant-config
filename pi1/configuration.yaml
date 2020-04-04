@@ -76,8 +76,8 @@ switch:
     platform: command_line
     switches:
         kodi:
-            command_on: "aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; killall kodi.bin_v8; kodi-standalone &"
-            command_off: "killall kodi.bin_v8"
+            command_on: "aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; killall kodi kodi-standalone kodi.bin_v8; kodi-standalone &"
+            command_off: "killall kodi kodi-standalone kodi.bin_v8"
             command_state: "ps aux | grep kodi | grep -v grep"
         xorg:
             command_on: "aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; sudo systemctl start lightdm"
