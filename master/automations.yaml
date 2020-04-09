@@ -209,9 +209,9 @@
         - condition: template
           value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
         - condition: template
-          value_template: '{% if states.automation.doorbell.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.doorbell.attributes.last_triggered)) >= 20 }} false {% else %} true {% endif %}'
+          value_template: '{% if states.automation.doorbell.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.doorbell.attributes.last_triggered)) >= 20 }} {% else %} true {% endif %}'
         - condition: template
-          value_template: '{% if states.binary_sensor.front_door.last_changed  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.front_door.last_changed)) >= 60 }} false {% else %} true {% endif %}'
+          value_template: '{% if states.binary_sensor.front_door.last_changed  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.front_door.last_changed)) >= 60 }} {% else %} true {% endif %}'
   action: # sound is handled separately
       - service: input_select.select_option
         data:
@@ -266,9 +266,9 @@
         - condition: template
           value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
         - condition: template
-          value_template: '{% if states.automation.doorbell_sound.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.doorbell_sound.attributes.last_triggered)) >= 20 }} false {% else %} true {% endif %}'
+          value_template: '{% if states.automation.doorbell_sound.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.doorbell_sound.attributes.last_triggered)) >= 20 }} {% else %} true {% endif %}'
         - condition: template
-          value_template: '{% if states.binary_sensor.front_door.last_changed  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.front_door.last_changed)) >= 60 }} false {% else %} true {% endif %}'
+          value_template: '{% if states.binary_sensor.front_door.last_changed  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.front_door.last_changed)) >= 60 }} {% else %} true {% endif %}'
   action:
     - service: script.turn_on
       entity_id: script.doorbell_sound
