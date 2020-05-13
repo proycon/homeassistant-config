@@ -1,5 +1,4 @@
 default_view:
-    view: yes
     icon: mdi:home
     entities:
         - sensor.time
@@ -33,7 +32,6 @@ default_view:
 media_view:
     name: Media
     icon: mdi:television
-    view: yes
     entities:
         - sensor.time
         - group.media_volume
@@ -48,7 +46,6 @@ media_view:
 media_view_bedroom:
     name: Media Bedroom
     icon: mdi:hotel
-    view: yes
     entities:
         - sensor.time
         - group.media_volume_bedroom
@@ -63,7 +60,6 @@ media_view_bedroom:
 dog:
     name: Dog
     icon: mdi:paw
-    view: yes
     entities:
         - binary_sensor.anybodyhome
         - alarm_control_panel.alarm_system
@@ -79,7 +75,6 @@ dog:
         - group.dog_commands
 
 light_view:
-    view: yes
     name: Lights
     icon: mdi:lightbulb
     entities:
@@ -97,7 +92,6 @@ light_view:
 history_view:
     name: History
     icon: mdi:timetable
-    view: yes
     entities:
         - group.last_movements
         - group.event_cameras
@@ -328,7 +322,6 @@ config_lights:
 
 config_tests:
     name: Tests
-    control: hidden
     entities:
         - script.doorbell_sound
         - script.dog_sound
@@ -345,7 +338,6 @@ config_tests:
 
 timer:
     name: Timer
-    control: hidden
     entities:
         - input_number.timer
         - script.start_timer
@@ -363,7 +355,6 @@ config_eventsnapshots:
 
 light_shortcuts:
     name: Light Shortcuts
-    control: hidden
     entities:
         - script.lights_on
         - script.lights_off
@@ -372,7 +363,6 @@ light_shortcuts:
 
 living_lights:
     name: Living Room lights
-    control: hidden
     entities:
         - switch.tv_spots
         - switch.front_room
@@ -403,7 +393,6 @@ guard_lights:
 
 cameras:
     name: Cameras
-    control: hidden
     entities:
         - camera.living_room
         - input_select.ipcam_direction
@@ -424,7 +413,6 @@ doors:
 media_activities:
     name: Media Activities
     icon: mdi:television
-    control: hidden
     entities:
         - input_text.youtube_link
         - script.play_youtube_link
@@ -432,7 +420,6 @@ media_activities:
 media_activities_bedroom:
     name: Media Activities Bedroom
     icon: mdi:television
-    control: hidden
     entities:
         - input_text.youtube_link_bedroom
         - script.play_youtube_link_bedroom
@@ -440,7 +427,6 @@ media_activities_bedroom:
 media_devices:
     name: Devices
     icon: mdi:television
-    control: hidden
     entities:
         - switch.tv_decoder
         - switch.tv #hdmi_0 #TV, 50PFK5300/12
@@ -457,7 +443,6 @@ media_devices:
 media_devices_bedroom:
     name: Devices Bedroom
     icon: mdi:television
-    control: hidden
     entities:
         - switch.tv_bedroom
         - switch.tv_decoder_bedroom
@@ -484,7 +469,6 @@ devices:
 fireplace:
     name: Fireplace
     icon: mdi:fire
-    control: hidden
     entities:
         - input_select.fireplace
         - input_number.fireplace_brightness
@@ -494,7 +478,6 @@ fireplace:
 dresser_ambilight:
     name: Dresser Ambilight
     icon: mdi:lamp
-    control: hidden
     entities:
         - input_select.dresser_ambilight
         - input_number.dresser_ambilight_brightness
@@ -510,7 +493,6 @@ fans:
 robot:
     name: Robot
     icon: mdi:robot
-    control: hidden
     entities:
         - sensor.robot_battery
         - sensor.robot_cleaning_count

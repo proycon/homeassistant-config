@@ -1,6 +1,5 @@
 #------------ Startup notification ------------------------
 - alias: Startup
-  hide_entity: True
   trigger:
       platform: homeassistant
       event: start
@@ -35,42 +34,36 @@
 
 #------------ Snapshots ------------------------
 - alias: Frontdoor snapshots
-  hide_entity: False
   trigger:
     platform: time_pattern
     seconds: '/9' #every ten seconds
   action:
     - service: shell_command.snapshot_frontdoor
 - alias: Hall upstairs snapshots
-  hide_entity: False
   trigger:
     platform: time_pattern
     seconds: '/11' #every eleven seconds
   action:
     - service: shell_command.snapshot_hallupstairs
 - alias: Living room snapshots
-  hide_entity: False
   trigger:
     platform: time_pattern
     seconds: '/3' #every five seconds
   action:
     - service: shell_command.snapshot_livingroom
 - alias: Street snapshots
-  hide_entity: False
   trigger:
     platform: time_pattern
     seconds: '/1' #every second
   action:
     - service: shell_command.snapshot_street
 - alias: Garden snapshots
-  hide_entity: False
   trigger:
     platform: time_pattern
     seconds: '/5' #every five seconds
   action:
     - service: shell_command.snapshot_garden
 - alias: Daily snapshot archiving
-  hide_entity: False
   trigger:
     platform: time
     at: "00:00:00"
