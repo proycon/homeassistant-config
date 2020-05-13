@@ -987,7 +987,7 @@ watch_tv:
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - delay:
-            seconds: 2
+            seconds: 8
         - service: switch.turn_on
           entity_id: switch.tv_decoder
         - delay:
