@@ -50,32 +50,6 @@ zone:
     radius: 10
     icon: mdi:home
 
-weblink:
-    entities:
-        - name: Kodi Control Interface
-          url: !secret kodi_pi1_url
-          icon: mdi:kodi
-        - name: Iris - MPD Control Interface
-          url: !secret mpd_url
-          icon: mdi:music-box-outline
-        - name: MPD Music Stream
-          url: !secret music_stream_url
-          icon: mdi:play-circle
-        - name: Wifi Router
-          url: !secret wifi_router_url
-          icon: mdi:router-wireless
-        - name: IPCam
-          url: !secret ipcam_url
-          icon: mdi:camcorder
-        - name: KPN Router
-          url: !secret kpn_router_url
-          icon: mdi:upload-network
-        - name: Syncthing proycon
-          url: https://mediaserver.anaproy.lxd:8383
-          icon: mdi:sync
-        - name: Syncthing Hans
-          url: https://mediaserver.anaproy.lxd:8384
-          icon: mdi:sync
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -100,7 +74,6 @@ recorder:
     exclude:
       domains:
         - shell_command
-        - weblink
         - group
       entities: !include exclude.yaml
 
@@ -109,7 +82,6 @@ history:
     exclude:
       domains:
         - shell_command
-        - weblink
         - group
       entities: !include exclude.yaml
 
