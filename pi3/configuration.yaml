@@ -61,6 +61,21 @@ sensor:
       - humidity
   - platform: rflink
     automatic_add: true
+    devices:
+        dkw2012_0054_hum:
+            sensor_type: humidity
+        dkw2012_0054_winsp:
+            sensor_type: windspeed
+        dkw2012_0054_wings:
+            sensor_type: windgusts
+        dkw2012_0054_windir:
+            sensor_type: winddirection
+        dkw2012_0054_rain:
+            sensor_type: total_rain
+        dkw2012_0054_temp:
+            sensor_type: temperature
+        dkw2012_0054_update_time:
+            sensor_type: timestamp
 
 binary_sensor:
   - platform: rpi_gpio
@@ -142,6 +157,90 @@ automation:
         data:
             topic: "home/sensor/humidity_living_room"
             payload_template: "{{ states('sensor.dht_sensor_humidity') }}"
+  - id: s2m_weatherstation_rain
+    alias: s2m_weatherstation_rain
+    trigger:
+        - platform: state
+          entity_id: sensor.dkw2012_0054_rain
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/rain"
+            payload: "{{ states('sensor.dkw2012_0054_rain')}}"
+  - id: s2m_weatherstation_temp
+    alias: s2m_weatherstation_temp
+    trigger:
+        - platform: state
+          entity_id: sensor.dkw2012_0054_temp
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/temp"
+            payload: "{{ states('sensor.dkw2012_0054_temp') }}"
+  - id: s2m_weatherstation_hum
+    alias: s2m_weatherstation_hum
+    trigger:
+        - platform: state
+          entity_id: sensor.dkw2012_0054_hum
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/hum"
+            payload: "{{ states('sensor.dkw2012_0054_hum') }}"
+  - id: s2m_weatherstation_winddir
+    alias: s2m_weatherstation_winddir
+    trigger:
+        - platform: state
+          entity_id: sensor.dkw2012_0054_windir
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/winddir"
+            payload: "{{ states('sensor.dkw2012_0054_windir') }}"
+  - id: s2m_weatherstation_winsp
+    alias: s2m_weatherstation_winsp
+    trigger:
+        - platform: state
+          entity_id: sensor.dkw2012_0054_winsp
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/windspeed"
+            payload: "{{ states('sensor.dkw2012_0054_winsp')  }}"
+  - id: s2m_weatherstation_wings
+    alias: s2m_weatherstation_wings
+    trigger:
+        - platform: state
+          entity_id: sensor.dkw2012_0054_wings
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/windgustspeed"
+            payload: "{{ states('sensor.dkw2012_0054_wings') }}"
+  - id: s2m_weatherstation_lastupdate
+    alias: s2m_weatherstation_lastupdate
+    trigger:
+        - platform: state
+          entity_id: sensor.dkw2012_0054_update_time
+        - platform: mqtt
+          topic: home/poll #an explicit re-poll of states, issued by master when it starts
+    action:
+        service: mqtt.publish
+        data_template:
+            topic: "home/weatherstation/lastupdate"
+            payload: "{{ states('sensor.dkw2012_0054_update_time') }}"
 #MQTT
 mqtt:
     broker: 192.168.0.1
