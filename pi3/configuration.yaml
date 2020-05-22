@@ -6,16 +6,13 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Amsterdam
 
-http:
-  # Uncomment this to add a password (recommended!)
-  api_password: !secret api_password
-  # use_x_forwarded_for: True
-  # Uncomment this if you are using SSL or running in Docker etc
-  # base_url: example.duckdns.org:8123
-
 #frontend:
 
 
+rflink:
+    port: /dev/serial/by-id/usb-Arduino__www.arduino.cc__0042_557313234363512101D2-if00
+    wait_for_ack: False
+    reconnect_interval: 10
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -26,11 +23,14 @@ http:
   # Optional, allows Home Assistant developers to focus on popular components.
   # include_used_components: true
 
-# Discover some devices automatically
-#discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 #conversation:
+
+config:
+
+# Discover some devices automatically
+discovery:
 
 # Enables support for tracking state changes over time.
 #history:
