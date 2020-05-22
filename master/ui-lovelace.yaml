@@ -9,6 +9,11 @@ resources:
     type: js
   - url: /local/custom-ui/gap-card.js
     type: js
+  - url: /local/custom-ui/lovelace-card-preloader.js
+    type: js
+preload:
+  - picture-elements
+  - decluttering
 views:
   - id: home
     path: home
