@@ -52,6 +52,8 @@ sensor:
     monitored_conditions:
       - temperature
       - humidity
+  - platform: rflink
+    automatic_add: true
 
 binary_sensor:
   - platform: rpi_gpio
