@@ -37,6 +37,13 @@ discovery:
 
 # View all events in a logbook
 #logbook:
+#
+
+logger:
+  default: info
+  logs:
+    rflink: debug
+    homeassistant.components.rflink: debug
 
 # Track the sun
 #sun:
