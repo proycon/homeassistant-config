@@ -849,7 +849,7 @@ media_player kodi_bedroom:
       password: !secret kodi_password
 
 matrix:
-  homeserver: https://matrix.org
+  homeserver: https://matrix.anaproy.nl
   username: !secret matrix_id
   password: !secret matrix_password
   rooms:
