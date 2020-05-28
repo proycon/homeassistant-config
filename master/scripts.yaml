@@ -1111,10 +1111,6 @@ turn_media_off:
         seconds: 1
     - service: switch.turn_off
       entity_id: switch.tv_decoder
-    - delay:
-        seconds: 1
-    - service: script.turn_on
-      entity_id: script.tv_off
     - service: switch.turn_off
       entity_id: switch.pi1_xorg
     - service: switch.turn_off
@@ -1123,6 +1119,10 @@ turn_media_off:
       entity_id: switch.pi1_music_player
     - service: media_player.media_stop
       entity_id: media_player.mpd
+    - delay:
+        seconds: 6
+    - service: script.turn_on
+      entity_id: script.tv_off
 
 update_kodi_library:
     alias: Update Kodi Library
