@@ -1,5 +1,9 @@
 title: Home
 # Include external resources
+preload:
+  - picture-elements
+  - picture-entity
+  - decluttering
 resources:
   - url: /local/custom-ui/button-card.js
     type: js
@@ -11,9 +15,6 @@ resources:
     type: js
   - url: /local/custom-ui/lovelace-card-preloader.js
     type: js
-preload:
-  - picture-elements
-  - decluttering
 views:
   - id: home
     path: home
