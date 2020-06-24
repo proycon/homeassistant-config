@@ -663,9 +663,14 @@
         - condition: state
           entity_id: input_boolean.proycon_inside_house
           state: "off"
-        - condition: state
-          entity_id: device_tracker.proyphone
-          state: "home"
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: device_tracker.proyphone
+              state: "home"
+            - condition: state
+              entity_id: device_tracker.pinephone
+              state: "home"
         - condition: state
           entity_id: input_boolean.inside_house
           state: "on"
@@ -830,9 +835,23 @@
       to: 'not_home'
       for:
           minutes: 10
+    - platform: state
+      entity_id: device_tracker.pinephone
+      from: 'home'
+      to: 'not_home'
+      for:
+          minutes: 10
   action:
-     - service: input_boolean.turn_off
-       entity_id: input_boolean.proycon_inside_house
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: device_tracker.proyphone
+          state: "not_home"
+        - condition: state
+          entity_id: device_tracker.pinephone
+          state: "not_home"
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.proycon_inside_house
 - id: hans_left_house
   alias: Hans Left House
   trigger:
@@ -850,6 +869,10 @@
   trigger:
     - platform: state
       entity_id: device_tracker.proyphone
+      from: 'not_home'
+      to: 'home'
+    - platform: state
+      entity_id: device_tracker.pinephone
       from: 'not_home'
       to: 'home'
     - platform: state

@@ -24,6 +24,11 @@ views:
                           "home": "/local/presence/proycon_in.jpg"
                           "not_home": "/local/presence/proycon_out.jpg"
                     - type:  picture-entity
+                      entity: device_tracker.pinephone
+                      state_image:
+                          "home": "/local/presence/proycon_in.jpg"
+                          "not_home": "/local/presence/proycon_out.jpg"
+                    - type:  picture-entity
                       entity: device_tracker.hansphone
                       state_image:
                           "home": "/local/presence/hans_in.jpg"
