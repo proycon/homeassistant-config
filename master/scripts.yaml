@@ -1781,11 +1781,19 @@ start_timer:
 vacuum_turn_on:
     alias: Vacuum turn on
     sequence:
-        service: xiaomi_miio.vacuum_remote_control_start
-        entity_id: vacuum.robot
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_5.wav'
+        - service: xiaomi_miio.vacuum_remote_control_start
+          entity_id: vacuum.robot
 vacuum_turn_off:
     alias: Vacuum turn off
     sequence:
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_5.wav'
         - service: xiaomi_miio.vacuum_remote_control_stop
           entity_id: vacuum.robot
         - service: vacuum.return_to_base
