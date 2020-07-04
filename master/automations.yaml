@@ -1975,6 +1975,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 2
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/media/tv"
   action:
      - service: script.turn_on
        entity_id: script.watch_tv
@@ -1998,6 +2000,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 8
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/mute"
   action:
      - service: script.turn_on
        entity_id: script.avr_mute
@@ -2017,6 +2021,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 8
         scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/media/off"
   action:
      - service: script.turn_on
        entity_id: script.turn_media_off
@@ -2040,6 +2046,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 4
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/media/music"
   action:
      - service: script.turn_on
        entity_id: script.listen_to_music
@@ -2059,6 +2067,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 4
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/music/off"
   action:
      - service: media_player.media_stop
        entity_id: media_player.mpd
@@ -2092,6 +2102,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 2
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/music/next"
   action:
      - service: media_player.media_next_track
        entity_id: media_player.mpd
@@ -2117,6 +2129,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 6
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/music/previous"
   action:
      - service: media_player.media_previous_track
        entity_id: media_player.mpd
@@ -2133,6 +2147,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 2
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/tvdecoder/next"
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_channelup
@@ -2149,6 +2165,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 2
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/tvdecoder/right"
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_right
@@ -2161,7 +2179,13 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 3
         scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/tv/on"
   action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi1"
+        payload_template: 'computerbeep_5.wav'
      - service: switch.turn_on
        entity_id: switch.tv
 
@@ -2177,6 +2201,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 6
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/tvdecoder/left"
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_left
@@ -2189,6 +2215,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 6
         scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/tvdecoder/on"
   action:
      - service: switch.turn_on
        entity_id: switch.tv_decoder
@@ -2205,6 +2233,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 5
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/tvdecoder/up"
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_up
@@ -2221,6 +2251,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 1
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/tvdecoder/down"
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_up
@@ -2237,6 +2269,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 6
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/tvdecoder/previous"
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_channeldown
@@ -2253,6 +2287,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 1
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/volup"
   action:
       - service: media_player.volume_set
         entity_id: media_player.yamaha_receiver
@@ -2271,6 +2307,9 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 5
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/voldown"
+      payload: "OK"
   action:
       - service: media_player.volume_set
         entity_id: media_player.yamaha_receiver
@@ -2289,6 +2328,9 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 3
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/tv/pause"
+      payload: "OK"
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_playpause
@@ -2312,6 +2354,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 3
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/music/pauseplay"
   action:
      - service: media_player.media_pause
        entity_id: media_player.mpd
@@ -2334,6 +2378,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 3
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/music/pauseplay"
   action:
      - service: media_player.media_play
        entity_id: media_player.mpd
@@ -2350,6 +2396,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 3
         scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/tvdecoder/ok"
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_ok
@@ -2366,6 +2414,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 3
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/tvdecoder/back"
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_back
@@ -2383,6 +2433,8 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 7
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/robot/on"
   action:
      - service: script.turn_on
        entity_id: script.vacuum_turn_on
@@ -2400,6 +2452,8 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 7
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/robot/off"
   action:
      - service: script.turn_on
        entity_id: script.vacuum_turn_off
@@ -2417,6 +2471,8 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 7
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/robot/pause"
   action:
      - service: script.turn_on
        entity_id: script.vacuum_pause
@@ -2431,6 +2487,8 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 8
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/jaiko/pee"
   action:
     - service: script.turn_on
       entity_id: script.jaiko_peed
@@ -2444,6 +2502,8 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 8
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/jaiko/poop"
   action:
     - service: script.turn_on
       entity_id: script.jaiko_pooped
@@ -2457,6 +2517,8 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 8
         scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/jaiko/fed"
   action:
     - service: script.turn_on
       entity_id: script.jaiko_fed
