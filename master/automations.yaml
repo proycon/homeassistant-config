@@ -2186,8 +2186,8 @@
       data_template:
         topic: "home/sound/pi1"
         payload_template: 'computerbeep_5.wav'
-     - service: switch.turn_on
-       entity_id: switch.tv
+    - service: switch.turn_on
+      entity_id: switch.tv
 
 - id: remote_cursor_left
   condition:
