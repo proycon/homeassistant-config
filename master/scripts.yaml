@@ -976,6 +976,10 @@ reset_guard_lights:
 watch_tv:
     alias: Watch TV
     sequence:
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_5.wav'
         - service: switch.turn_on
           entity_id: switch.tv
         - service: mqtt.publish
@@ -1000,6 +1004,10 @@ watch_tv:
 listen_to_music:
     alias: Listen to Music
     sequence:
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_5.wav'
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - service: mqtt.publish
@@ -1033,6 +1041,10 @@ listen_to_music:
 media_centre:
     alias: Media Centre
     sequence:
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_5.wav'
         - service: script.turn_on
           entity_id: script.tv_on
         - delay:
@@ -1079,6 +1091,10 @@ tv_off:
 desktop:
     alias: Desktop
     sequence:
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_5.wav'
         - service: switch.turn_on
           entity_id: switch.tv
         - service: media_player.turn_on
@@ -1105,6 +1121,10 @@ turn_media_off:
       data:
           topic: "home/soundoutput/pi1"
           payload: "speakers"
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi1"
+        payload_template: 'computerbeep_5.wav'
     - service: media_player.turn_off
       entity_id: media_player.yamaha_receiver
     - delay:
@@ -1204,6 +1224,10 @@ listen_to_music_bedroom:
 media_centre_bedroom:
     alias: Media Centre Bedroom
     sequence:
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi2"
+            payload_template: 'computerbeep_5.wav'
         - service: switch.turn_on
           entity_id: switch.tv_bedroom
         - service: switch.turn_off
@@ -1220,6 +1244,10 @@ media_centre_bedroom:
 desktop_bedroom:
     alias: Desktop Bedroom
     sequence:
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi2"
+            payload_template: 'computerbeep_5.wav'
         - service: switch.turn_on
           entity_id: switch.tv_bedroom
         - service: switch.turn_off
@@ -1235,6 +1263,10 @@ desktop_bedroom:
 turn_media_off_bedroom:
     alias: Turn media off
     sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi2"
+        payload_template: 'computerbeep_5.wav'
     - service: switch.turn_off
       entity_id: switch.tv_bedroom
     - service: switch.turn_off
@@ -1520,6 +1552,10 @@ matrix_test:
 night_scene:
     alias: Turn on night scene
     sequence:
+      - service: mqtt.publish
+        data_template:
+          topic: "home/sound/pi1"
+          payload_template: 'computerbeep_5.wav'
       - service: switch.turn_on
         entity_id: switch.tv_spots
       - wait_template: "{{ states('switch.tv_spots') == 'on' }}"
@@ -1771,12 +1807,20 @@ soundoutput_hdmi:
 start_timer:
     alias: Start Timer
     sequence:
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_5.wav'
         - delay: '00:{{ states.input_number.timer.state | int }}:00'
         - service: media_player.play_media
           data:
              entity_id: media_player.hall_speaker
              media_content_id: file:///home/homeautomation/homeassistant/media/meditationend.ogg
              media_content_type: 'music'
+        - service: mqtt.publish
+          data:
+              topic: "home/notify/timer"
+              payload: "FINISHED"
 
 vacuum_turn_on:
     alias: Vacuum turn on

@@ -219,6 +219,10 @@
       - service: timer.start
         data:
           entity_id: timer.reset_ipcam
+      - service: mqtt.publish
+        data:
+            topic: "home/notify/doorbell"
+            payload: "ON"
       - service: switch.turn_on
         entity_id: switch.hall
       - service: timer.start
@@ -313,6 +317,10 @@
   action:
     - service: script.turn_on
       entity_id: script.alarm
+    - service: mqtt.publish
+      data:
+          topic: "home/notify/alarm"
+          payload: "TRIGGERED"
     - service: notify.xmpp_proycon
       data_template:
           message: "INTRUDER ALERT!! ALARM TRIGGERED AT {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
@@ -389,6 +397,10 @@
       data:
           topic: "home/say/pi1"
           payload: "System armed"
+    - service: mqtt.publish
+      data:
+          topic: "home/notify/armed"
+          payload: "System armed"
     - service: notify.xmpp_proycon
       data:
           message: "System armed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
@@ -408,6 +420,10 @@
   action:
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.alarm_system
+    - service: mqtt.publish
+      data:
+          topic: "home/notify/disarmed"
+          payload: "System disarmed"
     - service: notify.xmpp_proycon
       data:
           message: "System disarmed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
@@ -437,6 +453,10 @@
   action:
     - service: script.turn_on
       entity_id: script.home_notification_lights
+    - service: mqtt.publish
+      data:
+          topic: "home/notify/disarmed"
+          payload: "System disarmed"
 - id: home_notification_lights_finished
   alias: "Home Notification Lights Finished"
   trigger:
@@ -494,6 +514,10 @@
       data:
           topic: "home/say/pi1"
           payload: "Front door still open"
+    - service: mqtt.publish
+      data:
+          topic: "home/notify/warning"
+          payload: "Front door still open"
     - service: notify.xmpp_proycon
       data:
           message: "Front door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
@@ -526,6 +550,10 @@
     - service: notify.xmpp_hans
       data:
           message: "Back door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+    - service: mqtt.publish
+      data:
+          topic: "home/notify/warning"
+          payload: "Front door still open"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Back door still open"
