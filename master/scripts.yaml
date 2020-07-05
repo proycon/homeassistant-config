@@ -351,7 +351,7 @@ tvdecoder_ard:
       - service: mqtt.publish
         data:
             topic: "home/ir_send/pi1"
-            payload: '{"device":"VIP1853","key":"KEY_4"}'
+            payload: '{"device":"VIP1853","key":"KEY_5"}'
 tvdecoder_zdf:
     alias: TV Channel - ZDF
     sequence:
@@ -364,7 +364,7 @@ tvdecoder_zdf:
       - service: mqtt.publish
         data:
             topic: "home/ir_send/pi1"
-            payload: '{"device":"VIP1853","key":"KEY_5"}'
+            payload: '{"device":"VIP1853","key":"KEY_6"}'
 tvdecoder_wdr:
     alias: TV Channel - WDR
     sequence:
@@ -686,7 +686,7 @@ tvdecoder2_ard:
       - service: mqtt.publish
         data:
             topic: "home/ir_send/pi2"
-            payload: '{"device":"VIP1853","key":"KEY_4"}'
+            payload: '{"device":"VIP1853","key":"KEY_5"}'
 tvdecoder2_zdf:
     alias: TV Channel - ZDF
     sequence:
@@ -699,7 +699,7 @@ tvdecoder2_zdf:
       - service: mqtt.publish
         data:
             topic: "home/ir_send/pi2"
-            payload: '{"device":"VIP1853","key":"KEY_5"}'
+            payload: '{"device":"VIP1853","key":"KEY_6"}'
 tvdecoder2_wdr:
     alias: TV Channel - WDR
     sequence:

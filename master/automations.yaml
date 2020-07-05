@@ -1210,11 +1210,13 @@
 
 - alias: Bathroom Vent On
   trigger:
-    platform: state
-    entity_id: binary_sensor.bathroom_too_humid
-    to: "on"
-    for:
-       minutes: 20
+    - platform: state
+      entity_id: binary_sensor.bathroom_too_humid
+      to: "on"
+      for:
+         minutes: 20
+    - platform: mqtt
+      topic: "home/command/bathroom_vent/on"
   condition:
       condition: and
       conditions:
@@ -1230,9 +1232,11 @@
 
 - alias: Bathroom Vent Off
   trigger:
-    platform: numeric_state
-    entity_id: sensor.bathroom_sensor_relative_humidity
-    below: 70
+    - platform: numeric_state
+      entity_id: sensor.bathroom_sensor_relative_humidity
+      below: 70
+    - platform: mqtt
+      topic: "home/command/bathroom_vent/off"
   condition:
     - condition: state
       entity_id: switch.bathroom_vent
@@ -2857,3 +2861,84 @@
         data:
             entity_id: climate.thermostat
             temperature: 18
+
+- id: remote_channel_npo1
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder/channel/npo1"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder_npo1
+- id: remote_channel_npo2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder/channel/npo2"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder_npo2
+- id: remote_channel_npo3
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder/channel/npo3"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder_npo3
+- id: remote_channel_een
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder/channel/een"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder_een
+- id: remote_channel_canvas
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder/channel/canvas"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder_canvas
+- id: remote_channel_bbc1st
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder/channel/bbc1st"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder_bbc1st
+- id: remote_channel_bbc1
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder/channel/bbc1"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder_bbc1st
+- id: remote_channel_bbc2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder/channel/bbc2"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder_bbc1st
+- id: remote_channel_ard
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder/channel/ard"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder_ard
+- id: remote_channel_zdf
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder/channel/zdf"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder_zdf
+- id: remote_channel_wdr
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder/channel/wdr"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder_zdf
+
+
+
