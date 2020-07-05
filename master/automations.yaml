@@ -1010,9 +1010,9 @@
       to: 'disarmed'
   action:
       - service: script.turn_off
-        entity_id: script.alarm
-      - service: script.turn_off
         entity_id: script.alarm_iteration
+      - service: script.turn_off
+        entity_id: script.alarm
       - service: script.turn_off
         entity_id: script.sirene_lights
       - service: timer.start
@@ -1790,6 +1790,8 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 1
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/lights/on"
   action:
       service: script.turn_on
       entity_id: script.lights_on
@@ -1813,6 +1815,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 7
         scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/lights/off"
   action:
       service: script.turn_on
       entity_id: script.lights_off
@@ -1832,6 +1836,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 7
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/lights/night"
   action:
       service: script.turn_on
       entity_id: script.night_scene
@@ -1845,6 +1851,8 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 2
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/lights/evening"
   action:
       service: script.turn_on
       entity_id: script.evening_scene
@@ -1868,6 +1876,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 7
         scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/lights/fireplace/on"
   action:
      - service: input_select.select_option
        data:
@@ -1905,6 +1915,8 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 3
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/lights/fireplace/off"
   action:
      - service: script.turn_on
        entity_id: script.extinguish_dresser_ambilight
@@ -1924,6 +1936,8 @@
         entity_id: zwave.remotec_zrc90
         scene_id: 3
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/lights/ambilight/on"
   action:
      - service: input_select.select_option
        data:
@@ -1947,6 +1961,183 @@
        entity_id: script.ignite_fireplace
      - service: script.turn_on
        entity_id: script.ignite_dresser_ambilight
+
+- id: remote_lights_office_on
+  alias: remote_lights_office_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/office/on"
+  action:
+      service: switch.turn_on
+      entity_id: switch.office
+- id: remote_lights_office_off
+  alias: remote_lights_office_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/office/off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.office
+- id: remote_lights_back_room_on
+  alias: remote_lights_back_room_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/back_room/on"
+  action:
+      service: switch.turn_on
+      entity_id: switch.back_room
+- id: remote_lights_back_room_off
+  alias: remote_lights_back_room_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/back_room/off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.back_room
+- id: remote_lights_front_room_on
+  alias: remote_lights_front_room_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/front_room/on"
+  action:
+      service: switch.turn_on
+      entity_id: switch.front_room
+- id: remote_lights_front_room_off
+  alias: remote_lights_front_room_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/front_room/off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.front_room
+- id: remote_lights_midspots_on
+  alias: remote_lights_midspots_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/midspots/on"
+  action:
+      service: switch.turn_on
+      entity_id: switch.midspots
+- id: remote_lights_midspots_off
+  alias: remote_lights_midspots_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/midspots/off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.midspots
+- id: remote_lights_tv_spots_on
+  alias: remote_lights_tv_spots_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/tv_spots/on"
+  action:
+      service: switch.turn_on
+      entity_id: switch.tv_spots
+- id: remote_lights_tv_spots_off
+  alias: remote_lights_tv_spots_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/tv_spots/off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.tv_spots
+- id: remote_lights_back_corner_on
+  alias: remote_lights_back_corner_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/back_corner/on"
+  action:
+      service: switch.turn_on
+      entity_id: switch.back_corner
+- id: remote_lights_back_corner_off
+  alias: remote_lights_back_corner_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/back_corner/off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.back_corner
+- id: remote_lights_balcony_on
+  alias: remote_lights_balcony_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/balcony/on"
+  action:
+      service: switch.turn_on
+      entity_id: switch.balcony
+- id: remote_lights_balcony_off
+  alias: remote_lights_balcony_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/balcony/off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.balcony
+- id: remote_lights_garden_on
+  alias: remote_lights_garden_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/garden/on"
+  action:
+      service: switch.turn_on
+      entity_id: switch.garden
+- id: remote_lights_garden_off
+  alias: remote_lights_garden_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/garden/off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.garden
+- id: remote_lights_kitchen_on
+  alias: remote_lights_kitchen_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/kitchen/on"
+  action:
+      service: switch.turn_on
+      entity_id: switch.kitchen
+- id: remote_lights_kitchen_off
+  alias: remote_lights_kitchen_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/kitchen/off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.kitchen
+- id: remote_lights_hall_on
+  alias: remote_lights_hall_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/hall/on"
+  action:
+      service: switch.turn_on
+      entity_id: switch.hall
+- id: remote_lights_hall_off
+  alias: remote_lights_hall_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/hall/off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.hall
+- id: remote_lights_bedroom_on
+  alias: remote_lights_bedroom_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/bedroom/on"
+  action:
+      service: switch.turn_on
+      entity_id: switch.bedroom
+- id: remote_lights_bedroom_off
+  alias: remote_lights_bedroom_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/bedroom/off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.bedroom
 
 - id: remote_tv_on
   alias: remote_tv_on
@@ -2329,7 +2520,7 @@
         scene_id: 3
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
-      topic: "home/command/tv/pause"
+      topic: "home/command/tvdecoder/pause"
       payload: "OK"
   action:
      - service: script.turn_on
