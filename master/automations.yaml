@@ -1976,7 +1976,7 @@
     - platform: mqtt
       topic: "home/command/lights/office/off"
   action:
-      service: switch.turn_on
+      service: switch.turn_off
       entity_id: switch.office
 - id: remote_lights_back_room_on
   alias: remote_lights_back_room_on
@@ -1992,7 +1992,7 @@
     - platform: mqtt
       topic: "home/command/lights/back_room/off"
   action:
-      service: switch.turn_on
+      service: switch.turn_off
       entity_id: switch.back_room
 - id: remote_lights_front_room_on
   alias: remote_lights_front_room_on
@@ -2008,7 +2008,7 @@
     - platform: mqtt
       topic: "home/command/lights/front_room/off"
   action:
-      service: switch.turn_on
+      service: switch.turn_off
       entity_id: switch.front_room
 - id: remote_lights_midspots_on
   alias: remote_lights_midspots_on
@@ -2024,7 +2024,7 @@
     - platform: mqtt
       topic: "home/command/lights/midspots/off"
   action:
-      service: switch.turn_on
+      service: switch.turn_off
       entity_id: switch.midspots
 - id: remote_lights_tv_spots_on
   alias: remote_lights_tv_spots_on
@@ -2040,7 +2040,7 @@
     - platform: mqtt
       topic: "home/command/lights/tv_spots/off"
   action:
-      service: switch.turn_on
+      service: switch.turn_off
       entity_id: switch.tv_spots
 - id: remote_lights_back_corner_on
   alias: remote_lights_back_corner_on
@@ -2056,7 +2056,7 @@
     - platform: mqtt
       topic: "home/command/lights/back_corner/off"
   action:
-      service: switch.turn_on
+      service: switch.turn_off
       entity_id: switch.back_corner
 - id: remote_lights_balcony_on
   alias: remote_lights_balcony_on
@@ -2072,7 +2072,7 @@
     - platform: mqtt
       topic: "home/command/lights/balcony/off"
   action:
-      service: switch.turn_on
+      service: switch.turn_off
       entity_id: switch.balcony
 - id: remote_lights_garden_on
   alias: remote_lights_garden_on
@@ -2088,7 +2088,7 @@
     - platform: mqtt
       topic: "home/command/lights/garden/off"
   action:
-      service: switch.turn_on
+      service: switch.turn_off
       entity_id: switch.garden
 - id: remote_lights_kitchen_on
   alias: remote_lights_kitchen_on
@@ -2104,7 +2104,7 @@
     - platform: mqtt
       topic: "home/command/lights/kitchen/off"
   action:
-      service: switch.turn_on
+      service: switch.turn_off
       entity_id: switch.kitchen
 - id: remote_lights_hall_on
   alias: remote_lights_hall_on
@@ -2120,7 +2120,7 @@
     - platform: mqtt
       topic: "home/command/lights/hall/off"
   action:
-      service: switch.turn_on
+      service: switch.turn_off
       entity_id: switch.hall
 - id: remote_lights_bedroom_on
   alias: remote_lights_bedroom_on
@@ -2136,7 +2136,7 @@
     - platform: mqtt
       topic: "home/command/lights/bedroom/off"
   action:
-      service: switch.turn_on
+      service: switch.turn_off
       entity_id: switch.bedroom
 
 - id: remote_tv_on
