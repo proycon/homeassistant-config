@@ -84,7 +84,7 @@ switch:
             command_off: "sudo systemctl stop lightdm"
             command_state: "ps aux | grep lightdm | grep -v grep"
         musicplayer:
-            command_on: "killall mpv; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; mpv -no-video --audio-device='alsa/hw:CARD=b1,DEV=0' http://anaproy.nl:8000/stream.mp3 >/dev/null 2>/dev/null &"
+            command_on: "killall mpv; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; mplayer -ao alsa:device=hw=0.0 http://anaproy.nl:8000/stream.mp3 >/dev/null 2>/dev/null &" # hw=0.0 is not a typo, it's what mplayer expects for hw:0,0
             command_off: "killall mpv"
             command_state: "ps aux | grep mpv | grep -v grep"
        #noisedetector:
