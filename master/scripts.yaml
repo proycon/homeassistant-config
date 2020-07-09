@@ -860,7 +860,7 @@ alarm_iteration:
         - service: media_player.play_media
           data:
               entity_id: media_player.hall_speaker
-              media_content_id: file:///home/homeautomation/homeassistant/media/alarm.ogg
+              media_content_id: file:///home/homeautomation/homeassistant/media/redalert.ogg
               media_content_type: 'music'
         - condition: state
           entity_id: alarm_control_panel.alarm_system

@@ -346,10 +346,18 @@
               - !secret hansphone
     - service: script.turn_on
       entity_id: script.sirene_lights
+    - service: script.turn_on
+      entity_id: switch.roof
+    - delay:
+        seconds: 1
     - service: switch.turn_on
       entity_id: switch.office
     - delay:
         seconds: 1
+    - service: mqtt.publish
+      data_template:
+         topic: "home/sound/pi1"
+         payload_template: 'intruderalert.ogg'
     - service: switch.turn_off
       entity_id: switch.tv_spots
     - delay:
@@ -375,10 +383,6 @@
         seconds: 1
     - service: switch.turn_off
       entity_id: switch.back_room
-    - delay:
-        seconds: 1
-    - service: script.turn_on
-      entity_id: switch.roof
     - delay:
         seconds: 1
     - service: script.turn_on
