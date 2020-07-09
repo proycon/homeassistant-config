@@ -1829,7 +1829,7 @@ vacuum_turn_on:
           data_template:
             topic: "home/sound/pi1"
             payload_template: 'computerbeep_5.wav'
-        - service: xiaomi_miio.vacuum_remote_control_start
+        - service: vacuum.start
           entity_id: vacuum.robot
 vacuum_turn_off:
     alias: Vacuum turn off
@@ -1838,14 +1838,14 @@ vacuum_turn_off:
           data_template:
             topic: "home/sound/pi1"
             payload_template: 'computerbeep_5.wav'
-        - service: xiaomi_miio.vacuum_remote_control_stop
+        - service: vacuum.stop
           entity_id: vacuum.robot
         - service: vacuum.return_to_base
           entity_id: vacuum.robot
 vacuum_pause:
     alias: Vacuum pause
     sequence:
-        service: xiaomi_miio.vacuum_remote_control_stop
+        service: vacuum.pause
         entity_id: vacuum.robot
 vacuum_return_to_home:
     alias: Vacuum return to home
