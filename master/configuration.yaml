@@ -180,6 +180,7 @@ alarm_control_panel:
     - platform: manual
       name: Alarm System
       trigger_time: 5
+      delay_time: 5
 
 device_tracker:
     - platform: ubus
