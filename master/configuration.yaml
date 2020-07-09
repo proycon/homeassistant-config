@@ -366,13 +366,14 @@ input_text:
         name: Value
 
 climate:
-    - platform: plugwise
-      name: Thermostat
-      username: !secret thermostat_user
-      password: !secret thermostat_password
-      host: !secret thermostat_ip
-      port: 80
-      scan_interval: 10
+    # Set up through interface
+    #- platform: plugwise
+    #  name: Thermostat
+    #  username: !secret thermostat_user
+    #  password: !secret thermostat_password
+    #  host: !secret thermostat_ip
+    #  port: 80
+    #  scan_interval: 10
 
 timer:
     home_notification_lights:
@@ -399,10 +400,10 @@ sensor:
             value_template: "{{ states.sensor.time.state[:2]|int * 60  + states.sensor.time.state[2:4]|int  - states.sensor.wake_up_time.state[:2]|int * 60  + states.sensor.wake_up_time.state[2:4]|int }}"
           temperature_thermostat:
             friendly_name: Temperature Thermostat
-            value_template: "{{ states.climate.thermostat.attributes.current_temperature }}"
+            value_template: "{{ states.climate.anna.attributes.current_temperature }}"
           target_temperature_thermostat:
             friendly_name: Target Temperature
-            value_template: "{{ states.climate.thermostat.attributes.temperature }}"
+            value_template: "{{ states.climate.anna.attributes.temperature }}"
           robot_battery:
             friendly_name: Robot Battery
             value_template: "{{ states.vacuum.robot.attributes.battery_level }}"

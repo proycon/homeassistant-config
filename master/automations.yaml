@@ -2854,7 +2854,7 @@
   action:
       - service: climate.set_temperature
         data:
-            entity_id: climate.thermostat
+            entity_id: climate.anna
             temperature: 21
 
 - id: thermostat_morning_hanswork_reset
@@ -2871,7 +2871,7 @@
   action:
       - service: climate.set_temperature
         data:
-            entity_id: climate.thermostat
+            entity_id: climate.anna
             temperature: 18
 
 - id: thermostat_morning_default
@@ -2881,7 +2881,7 @@
   action:
       - service: climate.set_temperature
         data:
-            entity_id: climate.thermostat
+            entity_id: climate.anna
             temperature: 21
 
 - id: thermostat_evening
@@ -2891,7 +2891,7 @@
   action:
       - service: climate.set_temperature
         data:
-            entity_id: climate.thermostat
+            entity_id: climate.anna
             temperature: 18
 
 - id: remote_channel_npo1
