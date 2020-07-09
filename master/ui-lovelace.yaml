@@ -944,7 +944,7 @@ views:
             - type: vertical-stack
               cards:
                   - type: thermostat
-                    entity: climate.thermostat
+                    entity: climate.anna
             - type: vertical-stack
               cards:
                 - type: weather-forecast
