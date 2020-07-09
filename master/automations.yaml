@@ -595,6 +595,36 @@
     - service: shell_command.event_snapshots
       data:
           cams: "street frontdoor"
+- id: door_opened_sleep
+  alias: "Door opened while asleep"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.back_door
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.front_door
+      to: 'on'
+  condition:
+     condition: and
+     conditions:
+        - condition: time
+          after: '22:00'
+          before: '09:00'
+        - condition: state
+          entity_id: binary_sensor.anybodyhome
+          state: "on"
+        - condition: state
+          entity_id: switch.tv_spots
+          state: "off"
+        - condition: template
+          value_template: '{% if states.binary_sensor.pir_hall.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.pir_hall.attributes.last_updated)) > 300 }} {% else %} false {% endif %}'
+        - condition: template
+          value_template: '{% if states.binary_sensor.pir_kitchen.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.pir_kitchen.attributes.last_updated)) > 300 }} {% else %} false {% endif %}'
+  action:
+     - service: mqtt.publish
+       data_template:
+          topic: "home/sound/pi1"
+          payload_template: 'doorbuzz.ogg'
 - id: hall_light_off
   alias: "Hall light off"
   trigger:

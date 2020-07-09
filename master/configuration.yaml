@@ -530,16 +530,6 @@ sensor:
     - platform: dsmr
       port: /dev/ttyUSB-P1
       dsmr_version: 4
-    - platform: statistics
-      name: PIR Statistics Jaiko Short
-      entity_id: binary_sensor.pir_jaiko
-      max_age:
-          minutes: 3
-    - platform: statistics
-      name: PIR Statistics Jaiko Long
-      entity_id: binary_sensor.pir_jaiko
-      max_age:
-          hours: 3
 
 
 
