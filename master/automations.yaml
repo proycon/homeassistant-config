@@ -1236,12 +1236,17 @@
         - condition: state
           entity_id: binary_sensor.anybodyhome
           state: "on"
-        - condition: numeric_state
-          entity_id: sensor.fibaro_hall_luminance
-          below: 7
         - condition: state
           entity_id: switch.hall
           state: "off"
+        - condition: or
+          conditions:
+            - condition: numeric_state
+              entity_id: sensor.fibaro_hall_luminance
+              below: 10
+            - condition: time
+              after: '22:00'
+              before: '07:00'
   action:
       - service: switch.turn_on
         entity_id: switch.hall
@@ -1696,7 +1701,7 @@
           message: "Pi 1 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.matrix
       data:
-          message: "pi 1 is down @{{ now().strftime('%y-%m-%d [%h:%m:%s]') }}"
+          message: "Pi 1 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Pi 1 is down"
