@@ -403,37 +403,6 @@ views:
                       color: black
                       font-family: Helvetica
                   - type: state-label
-                    entity: sensor.last_movement_jaiko
-                    style:
-                      top: 36%
-                      left: 50%
-                      background: center
-                      text-align: center
-                      font-size: 0.6em
-                      font-style: italic
-                      color: black
-                      font-family: Helvetica
-                  - type: state-label
-                    entity: sensor.dogsensor_temperature
-                    style:
-                      top: 38%
-                      left: 50%
-                      background: center
-                      text-align: center
-                      font-size: 0.7em
-                      color: black
-                      font-family: Helvetica
-                  - type: state-label
-                    entity: sensor.dogsensor_luminance
-                    style:
-                      top: 40%
-                      left: 50%
-                      background: center
-                      text-align: center
-                      font-size: 0.7em
-                      color: black
-                      font-family: Helvetica
-                  - type: state-label
                     entity: sensor.temperature_thermostat
                     suffix: " C"
                     style:
@@ -676,6 +645,37 @@ views:
                     style:
                        top: 70%
                        left: 19%
+                  - type: state-label
+                    entity: sensor.last_movement_overloop
+                    style:
+                      top: 72%
+                      left: 19%
+                      background: center
+                      text-align: center
+                      font-size: 0.6em
+                      font-style: italic
+                      color: black
+                      font-family: Helvetica
+                  - type: state-label
+                    entity: sensor.overloop_temperature
+                    style:
+                      top: 74%
+                      left: 19%
+                      background: center
+                      text-align: center
+                      font-size: 0.7em
+                      color: black
+                      font-family: Helvetica
+                  - type: state-label
+                    entity: sensor.overloop_luminance
+                    style:
+                      top: 76%
+                      left: 19%
+                      background: center
+                      text-align: center
+                      font-size: 0.7em
+                      color: black
+                      font-family: Helvetica
                   - type: state-icon
                     entity: binary_sensor.pir_office
                     style:
@@ -1816,7 +1816,6 @@ views:
     badges:
       - binary_sensor.anybodyhome
       - binary_sensor.noise
-      - sensor.dogsensor_temperature
       - sensor.time
     cards:
       - type: entities
