@@ -2760,10 +2760,6 @@
         entity_id: binary_sensor.pir_living_room
         from: "off"
         to: "on"
-      - platform: state
-        entity_id: binary_sensor.pir_jaiko
-        from: "off"
-        to: "on"
   condition:
       - condition: state
         entity_id: input_boolean.notify_livingroom_movement
@@ -2778,6 +2774,7 @@
         payload_template: 'chime.wav'
     - service: input_boolean.turn_off
       entity_id: input_boolean.notify_livingroom_movement
+
 
 - id: reset_wake_time
   alias: reset wake time #for the NEXT day!

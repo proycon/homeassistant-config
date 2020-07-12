@@ -59,10 +59,10 @@ dog:
         - alarm_control_panel.alarm_system
         - binary_sensor.jaiko_crated
         - binary_sensor.noise
-        - sensor.dogsensor_temperature
+        - sensor.overloop_temperature
         - sensor.time
         - binary_sensor.noise
-        - binary_sensor.pir_jaiko
+        - binary_sensor.pir_overloop
         - camera.jaiko
         - camera.living_room
         - group.jaiko
@@ -169,7 +169,7 @@ inside_environment:
     name: Inside Environment
     entities:
         - sensor.temperature_living_room
-        - sensor.dogsensor_temperature
+        - sensor.overloop_temperature
         - sensor.bathroom_sensor_temperature
         - sensor.bathroom_sensor_relative_humidity
         - binary_sensor.bathroom_too_humid
@@ -181,12 +181,12 @@ inside_environment:
         - sensor.fibaro_office_luminance
         - sensor.fibaro_hall_temperature
         - sensor.fibaro_hall_luminance
-        - sensor.dogsensor_luminance
+        - sensor.overloop_luminance
         - binary_sensor.pir_living_room
         - binary_sensor.pir_kitchen
         - binary_sensor.pir_hall
         - binary_sensor.pir_office
-        - binary_sensor.pir_jaiko
+        - binary_sensor.pir_overloop
         - sensor.ir_send_activity
 
 
@@ -211,7 +211,7 @@ crate:
     name: Crate
     icon: mdi:paw
     entities:
-        - binary_sensor.pir_jaiko
+        - binary_sensor.pir_overloop
         - sensor.pir_statistics_jaiko_short
         - sensor.pir_statistics_jaiko_long
 

@@ -328,11 +328,6 @@ views:
                       left: 60%
                       width: 7%
                       padding: 50px 50px 100px 50px
-                  - type: state-icon
-                    entity: binary_sensor.pir_jaiko
-                    style:
-                       top: 33%
-                       left: 49%
                   - type: image
                     entity: binary_sensor.front_door
                     image: /local/icons/closed.png
@@ -676,6 +671,11 @@ views:
                       left: 19%
                       width: 7%
                       padding: 50px 50px 100px 50px
+                  - type: state-icon
+                    entity: binary_sensor.pir_overloop
+                    style:
+                       top: 70%
+                       left: 19%
                   - type: state-icon
                     entity: binary_sensor.pir_office
                     style:
@@ -1816,7 +1816,6 @@ views:
     badges:
       - binary_sensor.anybodyhome
       - binary_sensor.noise
-      - binary_sensor.pir_jaiko
       - sensor.dogsensor_temperature
       - sensor.time
     cards:
