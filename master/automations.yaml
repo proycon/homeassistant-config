@@ -613,18 +613,58 @@
         - condition: state
           entity_id: binary_sensor.anybodyhome
           state: "on"
-        - condition: state
-          entity_id: switch.tv_spots
-          state: "off"
         - condition: template
-          value_template: '{% if states.binary_sensor.pir_hall.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.pir_hall.attributes.last_updated)) > 300 }} {% else %} false {% endif %}'
+          value_template: '{% if states.binary_sensor.pir_hall.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.pir_hall.attributes.last_updated)) > 300 }} {% else %} true {% endif %}'
         - condition: template
-          value_template: '{% if states.binary_sensor.pir_kitchen.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.pir_kitchen.attributes.last_updated)) > 300 }} {% else %} false {% endif %}'
+          value_template: '{% if states.binary_sensor.pir_kitchen.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.pir_kitchen.attributes.last_updated)) > 300 }} {% else %} true {% endif %}'
+        - condition: template
+          value_template: '{% if states.binary_sensor.proyhome.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.proyhome.attributes.last_updated)) > 300 }} {% else %} true {% endif %}'
+        - condition: template
+          value_template: '{% if states.binary_sensor.hanshome.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.hanshome.attributes.last_updated)) > 300 }} {% else %} true {% endif %}'
   action:
+     - service: switch.turn_on
+       entity_id: switch.bedroom
      - service: mqtt.publish
        data_template:
           topic: "home/sound/pi1"
           payload_template: 'doorbuzz.ogg'
+     - service: tts.picotts_say
+       entity_id: media_player.hall_speaker
+       data:
+          message: "Door opened"
+     - service: notify.matrix
+       data:
+          message: "Door opened, please check! @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+- id: motion_overloop
+  alias: Motion Overloop
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_overloop
+      from: "off"
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.alarm_system
+      state: armed_away
+  action:
+     - service: mqtt.publish
+       data_template:
+          topic: "home/sound/pi1"
+          payload_template: 'redalert.ogg'
+     - service: media_player.play_media
+       data:
+          entity_id: media_player.hall_speaker
+          media_content_id: file:///home/homeautomation/homeassistant/media/intruderalert.ogg
+          media_content_type: 'music'
+     - service: notify.matrix
+       data:
+          message: "overloop motion detected, please check immediately! @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+     - service: input_select.select_option
+       data:
+          entity_id: input_select.ipcam_direction
+          option: Hall
+     - service: timer.start
+       entity_id: timer.reset_ipcam
 - id: hall_light_off
   alias: "Hall light off"
   trigger:
@@ -1182,8 +1222,12 @@
 - id: hall_light_on_motion
   alias: hall Light On Motion
   trigger:
-      platform: state
+    - platform: state
       entity_id: binary_sensor.pir_hall
+      from: "off"
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.pir_overloop
       from: "off"
       to: "on"
   condition:
@@ -1205,8 +1249,14 @@
 - id: hall_light_off_after_motion
   alias: Hall Light Off after motion
   trigger:
-      platform: state
+    - platform: state
       entity_id: binary_sensor.pir_hall
+      from: "on"
+      to: "off"
+      for:
+          seconds: 90
+    - platform: state
+      entity_id: binary_sensor.pir_overloop
       from: "on"
       to: "off"
       for:
@@ -1214,6 +1264,9 @@
   condition:
       - condition: state
         entity_id: binary_sensor.front_door
+        state: "off"
+      - condition: state
+        entity_id: binary_sensor.pir_hall
         state: "off"
   action:
       - service: switch.turn_off
@@ -1643,7 +1696,7 @@
           message: "Pi 1 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
     - service: notify.matrix
       data:
-          message: "Pi 1 is down @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+          message: "pi 1 is down @{{ now().strftime('%y-%m-%d [%h:%m:%s]') }}"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Pi 1 is down"

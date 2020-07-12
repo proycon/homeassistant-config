@@ -598,6 +598,16 @@ binary_sensor:
             - device_tracker.cora
             - device_tracker.hans2
         device_class: occupancy
+      proyhome:
+        value_template: '{% if is_state("device_tracker.proyphone","home") or is_state("device_tracker.pinephone","home") %}True{% else %}False{% endif %}'
+        entity_id:
+            - device_tracker.proyphone
+            - device_tracker.pinephone
+      hanshome:
+        value_template: '{% if is_state("device_tracker.hansphone","home") or is_state("device_tracker.hans2","home") %}True{% else %}False{% endif %}'
+        entity_id:
+            - device_tracker.hansphone
+            - device_tracker.hans2
       guest_inside:
         friendly_name: "Guest inside?"
         value_template: '{% if is_state("input_boolean.guest_inside_house","on") %}True{% else %}False{% endif %}'
