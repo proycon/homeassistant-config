@@ -404,10 +404,9 @@ views:
                       font-family: Helvetica
                   - type: state-label
                     entity: sensor.daikinap75591_inside_temperature
-                    suffix: " C"
                     style:
                       top: 33%
-                      left: 47%
+                      left: 49%
                       background: center
                       text-align: center
                       font-size: 0.7em
@@ -753,7 +752,6 @@ views:
                       font-family: Helvetica
                   - type: state-label
                     entity: sensor.daikinap82317_inside_temperature
-                    suffix: " C"
                     style:
                       top: 33%
                       left: 47%
