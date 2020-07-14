@@ -3119,7 +3119,7 @@
   condition:
       - condition: state
         entity_id: climate.daikinap75591
-        state: on
+        state: "on"
   action:
       - service: climate.set_fan_mode
         data:
