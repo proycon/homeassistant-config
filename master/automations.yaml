@@ -3024,7 +3024,7 @@
          above: 25
        - condition: state
          entity_id: climate.daikinap75591
-         state: off
+         state: "off"
        - condition: state
          entity_id: binary_sensor.anybodyhome
          state: "on"
@@ -3062,7 +3062,7 @@
       conditions:
        - condition: state
          entity_id: climate.daikinap75591
-         state: off
+         state: "off"
        - condition: state
          entity_id: binary_sensor.anybodyhome
          state: "on"
@@ -3093,7 +3093,7 @@
   condition:
       - condition: state
         entity_id: climate.daikinap75591
-        state: on
+        state: "on"
   action:
       - service: climate.turn_off
         entity_id: climate.daikinap75591
@@ -3149,7 +3149,7 @@
          above: 25
        - condition: state
          entity_id: climate.daikinap82317
-         state: off
+         state: "off"
        - condition: state
          entity_id: binary_sensor.anybodyhome
          state: "on"
@@ -3190,7 +3190,7 @@
       conditions:
        - condition: state
          entity_id: climate.daikinap82317
-         state: off
+         state: "off"
        - condition: state
          entity_id: binary_sensor.anybodyhome
          state: "on"
@@ -3231,7 +3231,7 @@
   condition:
       - condition: state
         entity_id: climate.daikinap82317
-        state: on
+        state: "on"
   action:
       - service: climate.turn_off
         entity_id: climate.daikinap82317
@@ -3241,9 +3241,9 @@
       platform: time
       at: '22:00:00'
   condition:
-       condition: state
+     - condition: state
        entity_id: climate.daikinap82317
-       state: on
+       state: "on"
   action:
       - service: climate.set_fan_mode
         data:
@@ -3257,7 +3257,7 @@
   condition:
        condition: state
        entity_id: climate.daikinap82317
-       state: on
+       state: "on"
   action:
       - service: climate.set_fan_mode
         data:
