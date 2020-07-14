@@ -1946,12 +1946,10 @@ views:
     cards:
       - type: entities
         entities:
-          - sensor.power_consumption_low
-          - sensor.power_consumption_normal
-          - sensor.power_production_low
-          - sensor.power_production_normal
+          - sensor.power_consumption
+          - sensor.power_production
           - sensor.gas_consumption
-        title: Power Consumption
+        title: Power Stats
         show_header_toggle: false
       - type: entities
         entities:
