@@ -946,13 +946,13 @@ home_notification_lights:
       state: "idle"
     - service: timer.start
       entity_id: timer.home_notification_lights
-    - service: script.turn_on
-      entity_id: script.green_lights
     - service: switch.turn_on
       entity_id: switch.porch
     - wait_template: "{{ states('switch.porch') == 'on' }}"
     - service: switch.turn_on
       entity_id: switch.hall
+    - service: script.turn_on
+      entity_id: script.green_lights
     - wait_template: "{{ states('switch.hall') == 'on' }}"
     - service: switch.turn_on
       entity_id: switch.garden
