@@ -2312,6 +2312,31 @@
      - service: switch.turn_off
        entity_id: switch.pi1_music_player
 
+- id: remote_music_load
+  alias: remote_music_load
+  condition: #so we don't accidentally start music when TV is on
+    - condition: state
+      entity_id: switch.tv
+      state: "off"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 6
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 4
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/music/load"
+  action:
+     - service: script.turn_on
+       entity_id: script.mpc_playlist
+
 - id: remote_music_next
   alias: remote_music_next
   condition:

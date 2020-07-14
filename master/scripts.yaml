@@ -1037,6 +1037,20 @@ listen_to_music:
           data:
               entity_id: media_player.mpd
 
+load_music:
+    alias: Load Music
+    sequence:
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_6.wav'
+        - service: shell_command.mpcclear
+        - service: shell_command.mpc
+          data_template:
+              type: "{{states.input_select.mpc_type.state}}"
+              value: "{{states.input_text.mpc_search.state}}"
+              filter: "{{states.input_select.mpc_filter.state}}"
+
 
 media_centre:
     alias: Media Centre
@@ -1903,11 +1917,23 @@ mpc_play:
         - service: mqtt.publish
           data_template:
             topic: "home/sound/pi1"
-            payload_template: 'computerbeep_5.wav'
+            payload_template: 'computerbeep_6.wav'
         - service: shell_command.mpc
           data_template:
               type: "{{states.input_select.mpc_type.state}}"
               value: "{{states.input_text.mpc_search.state}}"
               filter: "{{states.input_select.mpc_filter.state}}"
+
+
+mpc_playlist:
+    alias: Play list
+    sequence:
+        - service: mqtt.publish
+          data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'computerbeep_6.wav'
+        - service: shell_command.mpcplaylist
+          data_template:
+              playlist: "{{states.input_text.mpc_playlist.state}}"
 
 

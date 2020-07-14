@@ -1326,6 +1326,10 @@ views:
                           - input_text.mpc_search
                           - input_select.mpc_filter
                           - script.mpc_play
+                    - type: entities
+                      entities:
+                          - input_text.mpc_playlist
+                          - script.mpc_playlist
                     - type: media-control
                       entity: media_player.mpd
                     - type: media-control
