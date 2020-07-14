@@ -3004,3 +3004,262 @@
   action:
       - service: alarm_control_panel.alarm_disarm
         entity_id: alarm_control_panel.alarm_system
+
+- id: airco_living_on
+  trigger:
+      - platform: numeric_state
+        entity_id: sensor.daikinap75591_inside_temperature
+        above: 25
+        for:
+            minutes: 15
+      - platform: state
+        entity_id: binary_sensor.back_door
+        from: "on"
+        to: "off"
+  condition:
+      condition: and
+      conditions:
+       - condition: numeric_state
+         entity_id: sensor.daikinap75591_inside_temperature
+         above: 25
+       - condition: state
+         entity_id: climate.daikinap75591
+         state: off
+       - condition: state
+         entity_id: binary_sensor.anybodyhome
+         state: "on"
+       - condition: state
+         entity_id: binary_sensor.back_door
+         state: "off"
+  action:
+      - service: climate.set_temperature
+        data:
+            entity_id: climate.daikinap75591
+            hvac_mode: cool
+            temperature: 23
+            target_temp_high: 24
+            target_temp_low: 22
+      - service: climate.set_swing_mode
+        data:
+            entity_id: climate.daikinap75591
+            swing_mode: Horizontal
+      - service: climate.set_fan_mode
+        data:
+            entity_id: climate.daikinap75591
+            swing_mode: Auto
+      - service: climate.turn_on
+        entity_id: climate.daikinap75591
+
+- id: airco_living_on_refusal
+  trigger:
+      - platform: numeric_state
+        entity_id: sensor.daikinap75591_inside_temperature
+        above: 25
+        for:
+            minutes: 15
+  condition:
+      condition: and
+      conditions:
+       - condition: state
+         entity_id: climate.daikinap75591
+         state: off
+       - condition: state
+         entity_id: binary_sensor.anybodyhome
+         state: "on"
+       - condition: state
+         entity_id: binary_sensor.back_door
+         state: "on"
+  action:
+      - condition: time
+        after: '09:00'
+        before: '22:00'
+      - service: mqtt.publish
+        data:
+            topic: "home/say/pi1"
+            payload: "Please close the back door so air conditioning can be enabled"
+
+- id: airco_living_off
+  trigger:
+      - platform: numeric_state
+        entity_id: sensor.daikinap75591_inside_temperature
+        below: 23
+        for:
+            minutes: 15
+      - platform: state
+        entity_id: binary_sensor.back_door
+        to: 'on'
+        for:
+           minutes: 10
+  condition:
+      - condition: state
+        entity_id: climate.daikinap75591
+        state: on
+  action:
+      - service: climate.turn_off
+        entity_id: climate.daikinap75591
+
+- id: airco_living_silent
+  trigger:
+      platform: time
+      at: '22:00:00'
+  condition:
+       condition: state
+       entity_id: climate.daikinap75591
+       state: on
+  action:
+      - service: climate.set_fan_mode
+        data:
+            entity_id: climate.daikinap75591
+            fan_mode: Silence
+
+- id: airco_living_full
+  trigger:
+      platform: time
+      at: '09:00:00'
+  condition:
+       condition: state
+       entity_id: climate.daikinap75591
+       state: on
+  action:
+      - service: climate.set_fan_mode
+        data:
+            entity_id: climate.daikinap75591
+            fan_mode: Auto
+
+- id: airco_bedroom_on
+  trigger:
+      - platform: numeric_state
+        entity_id: sensor.daikinap82317_inside_temperature
+        above: 25
+        for:
+            minutes: 15
+      - platform: state
+        entity_id: binary_sensor.bedroom_window_left
+        from: "on"
+        to: "off"
+      - platform: state
+        entity_id: binary_sensor.bedroom_window_right
+        from: "on"
+        to: "off"
+  condition:
+      condition: and
+      conditions:
+       - condition: numeric_state
+         entity_id: sensor.daikinap82317_inside_temperature
+         above: 25
+       - condition: state
+         entity_id: climate.daikinap82317
+         state: off
+       - condition: state
+         entity_id: binary_sensor.anybodyhome
+         state: "on"
+       - condition: state
+         entity_id: binary_sensor.bedroom_window_left
+         state: "off"
+       - condition: state
+         entity_id: binary_sensor.bedroom_window_right
+         state: "off"
+  action:
+      - service: climate.set_temperature
+        data:
+            entity_id: climate.daikinap82317
+            hvac_mode: cool
+            temperature: 23
+            target_temp_high: 24
+            target_temp_low: 22
+      - service: climate.set_swing_mode
+        data:
+            entity_id: climate.daikinap82317
+            swing_mode: Off
+      - service: climate.set_fan_mode
+        data:
+            entity_id: climate.daikinap82317
+            fan_mode: Auto
+      - service: climate.turn_on
+        entity_id: climate.daikinap82317
+
+- id: airco_bedroom_on_refusal
+  trigger:
+      - platform: numeric_state
+        entity_id: sensor.daikinap82317_inside_temperature
+        above: 25
+        for:
+            minutes: 15
+  condition:
+      condition: and
+      conditions:
+       - condition: state
+         entity_id: climate.daikinap82317
+         state: off
+       - condition: state
+         entity_id: binary_sensor.anybodyhome
+         state: "on"
+       - condition: or
+         conditions:
+           - condition: state
+             entity_id: binary_sensor.bedroom_window_left
+             state: "on"
+           - condition: state
+             entity_id: binary_sensor.bedroom_window_right
+             state: "on"
+  action:
+      - condition: time
+        after: '09:00'
+        before: '22:00'
+      - service: mqtt.publish
+        data:
+            topic: "home/say/pi1"
+            payload: "Please close the windows upstairs so air conditioning can be enabled"
+
+- id: airco_bedroom_off
+  trigger:
+      - platform: numeric_state
+        entity_id: sensor.daikinap82317_inside_temperature
+        below: 23
+        for:
+            minutes: 15
+      - platform: state
+        entity_id: binary_sensor.bedroom_window_left
+        to: 'on'
+        for:
+           minutes: 10
+      - platform: state
+        entity_id: binary_sensor.bedroom_window_right
+        to: 'on'
+        for:
+           minutes: 10
+  condition:
+      - condition: state
+        entity_id: climate.daikinap82317
+        state: on
+  action:
+      - service: climate.turn_off
+        entity_id: climate.daikinap82317
+
+- id: airco_bedroom_silent
+  trigger:
+      platform: time
+      at: '22:00:00'
+  condition:
+       condition: state
+       entity_id: climate.daikinap82317
+       state: on
+  action:
+      - service: climate.set_fan_mode
+        data:
+            entity_id: climate.daikinap82317
+            fan_mode: Silence
+
+- id: airco_bedroom_full
+  trigger:
+      platform: time
+      at: '09:00:00'
+  condition:
+       condition: state
+       entity_id: climate.daikinap82317
+       state: on
+  action:
+      - service: climate.set_fan_mode
+        data:
+            entity_id: climate.daikinap82317
+            fan_mode: Auto
