@@ -3103,9 +3103,9 @@
       platform: time
       at: '22:00:00'
   condition:
-       condition: state
-       entity_id: climate.daikinap75591
-       state: on
+      - condition: state
+        entity_id: climate.daikinap75591
+        state: "on"
   action:
       - service: climate.set_fan_mode
         data:
@@ -3117,9 +3117,9 @@
       platform: time
       at: '09:00:00'
   condition:
-       condition: state
-       entity_id: climate.daikinap75591
-       state: on
+      - condition: state
+        entity_id: climate.daikinap75591
+        state: on
   action:
       - service: climate.set_fan_mode
         data:
