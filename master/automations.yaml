@@ -3288,3 +3288,14 @@
         data:
             entity_id: climate.daikinap82317
             fan_mode: Auto
+
+- alias: command_test_notification
+  trigger:
+      - platform: mqtt
+        topic: home/command/test/notification
+        payload: on
+  action:
+    - service: mqtt.publish
+      data:
+          topic: "home/notify/test"
+          payload: "test"
