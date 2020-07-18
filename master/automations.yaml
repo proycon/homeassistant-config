@@ -3293,7 +3293,6 @@
   trigger:
       - platform: mqtt
         topic: home/command/test/notification
-        payload: on
   action:
     - service: mqtt.publish
       data:
