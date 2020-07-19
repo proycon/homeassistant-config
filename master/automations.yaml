@@ -3309,3 +3309,10 @@
         topic: home/command/status
   action:
     - service: script.send_status
+
+- alias: auto_status
+  trigger:
+    platform: time_pattern
+    seconds: '/300' #every five minutes
+  action:
+    - service: script.send_status

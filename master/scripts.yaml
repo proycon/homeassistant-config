@@ -1950,11 +1950,11 @@ send_status:
         - service: mqtt.publish
           data:
               topic: "home/status/temperature"
-              payload_template: "{{ states('sensor.temperature_thermostat') }}C (living), {{ states('sensor.bedroom_temperature') }}C (bedroom), {{ states('sensor.fibaro_office_temperature') }}C (office)"
+              payload_template: "{{ states('sensor.temperature_thermostat') }} °C (living), {{ states('sensor.bedroom_temperature') }} °C (bedroom), {{ states('sensor.fibaro_office_temperature') }} °C (office)"
         - service: mqtt.publish
           data:
               topic: "home/status/climate"
-              payload_template: "{{ states.climate.anna.attributes.temperature }}C (CV {{ states.climate.anna.attributes.hvac_action }}), {% if is_state('climate.daikinap75591','on') %}bedroom-airco{% endif %} {% if is_state('climate.daikinap82317','on') %}office-airco{% endif %}"
+              payload_template: "{{ states.climate.anna.attributes.temperature }} °C (CV {{ states.climate.anna.attributes.hvac_action }}), {% if is_state('climate.daikinap75591','on') %}bedroom-airco{% endif %} {% if is_state('climate.daikinap82317','on') %}office-airco{% endif %}"
         - service: mqtt.publish
           data:
               topic: "home/status/doors"
