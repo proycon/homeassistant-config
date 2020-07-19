@@ -1958,11 +1958,11 @@ send_status:
         - service: mqtt.publish
           data:
               topic: "home/status/doors"
-              payload_template: "{% if is_state('states.binary_sensor.front_door','on') %}frontdoor{% endif %} {% if is_state('states.binary_sensor.back_door','on') %}backdoor{% endif %} {% if is_state('states.binary_sensor.bedroom_window_left','on') %}bedroom-left{% endif %} {% if is_state('states.binary_sensor.bedroom_win','on') %}bedroom_right{% endif %} {% if is_state('states.binary_sensor.bathroom_window_sensor','on') %}bathroom{% endif %}"
+              payload_template: "{% if is_state('binary_sensor.front_door','on') %}frontdoor{% endif %} {% if is_state('binary_sensor.back_door','on') %}backdoor{% endif %} {% if is_state('binary_sensor.bedroom_window_left','on') %}bedroom-left{% endif %} {% if is_state('binary_sensor.bedroom_win','on') %}bedroom_right{% endif %} {% if is_state('binary_sensor.bathroom_window_sensor','on') %}bathroom{% endif %}"
         - service: mqtt.publish
           data:
               topic: "home/status/lights"
-              payload_template: "{% if is_state('states.switch.tv_spots','on') %}tv-spots{% endif %} {% if is_state('states.switch.front_room','on') %}sofa{% endif %} {% if is_state('states.switch.midspots','on') %}mid-spots{% endif %} {% if is_state('states.switch.back_room','on') %}backroom{% endif %} {% if is_state('states.switch.back_corner','on') %}back-corner{% endif %} {% if is_state('states.switch.hall','on') %}hall{% endif %} {% if is_state('states.switch.kitchen','on') %}kitchen{% endif %} {% if is_state('states.switch.office','on') %}office{% endif %} {% if is_state('states.switch.bedroom','on') %}bedroom{% endif %} {% if is_state('states.switch.garden','on') %}garden{% endif %} {% if is_state('states.switch.porch','on') %}porch{% endif %}"
+              payload_template: "{% if is_state('switch.tv_spots','on') %}tv-spots{% endif %} {% if is_state('switch.front_room','on') %}sofa{% endif %} {% if is_state('switch.midspots','on') %}mid-spots{% endif %} {% if is_state('switch.back_room','on') %}backroom{% endif %} {% if is_state('switch.back_corner','on') %}back-corner{% endif %} {% if is_state('switch.hall','on') %}hall{% endif %} {% if is_state('switch.kitchen','on') %}kitchen{% endif %} {% if is_state('switch.office','on') %}office{% endif %} {% if is_state('switch.bedroom','on') %}bedroom{% endif %} {% if is_state('switch.garden','on') %}garden{% endif %} {% if is_state('switch.porch','on') %}porch{% endif %}"
 
 
 
