@@ -435,6 +435,10 @@
       from: 'not_home'
       to: 'home'
     - platform: state
+      entity_id: device_tracker.pinephone
+      from: 'not_home'
+      to: 'home'
+    - platform: state
       entity_id: device_tracker.hansphone
       from: 'not_home'
       to: 'home'
@@ -3298,3 +3302,10 @@
       data:
           topic: "home/notify/test"
           payload: "test"
+
+- alias: request_status
+  trigger:
+      - platform: mqtt
+        topic: home/command/status
+  action:
+    - service: script.send_status
