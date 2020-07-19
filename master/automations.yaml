@@ -3316,21 +3316,61 @@
       seconds: '/300' #every five minutes
     - platform: state
       entity_id: binary_sensor.front_door
+      to: 'on'
     - platform: state
       entity_id: binary_sensor.back_door
+      to: 'on'
     - platform: state
       entity_id: binary_sensor.bedroom_window_left
+      to: 'on'
     - platform: state
       entity_id: binary_sensor.bedroom_window_right
+      to: 'on'
     - platform: state
       entity_id: binary_sensor.bathroom_window_sensor
+      to: 'on'
     - platform: state
       entity_id: binary_sensor.anybodyhome
+      to: 'on'
     - platform: state
       entity_id: device_tracker.proyphone
+      to: 'home'
     - platform: state
       entity_id: device_tracker.pinephone
+      to: 'home'
     - platform: state
       entity_id: device_tracker.hansphone
+      to: 'home'
+    - platform: state
+      entity_id: binary_sensor.front_door
+      to: 'off'
+      for:
+        seconds: 5
+    - platform: state
+      entity_id: binary_sensor.back_door
+      to: 'off'
+      for:
+        seconds: 5
+    - platform: state
+      entity_id: binary_sensor.bedroom_window_left
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.bedroom_window_right
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.bathroom_window_sensor
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.anybodyhome
+      to: 'off'
+    - platform: state
+      entity_id: device_tracker.proyphone
+      to: 'not_home'
+    - platform: state
+      entity_id: device_tracker.pinephone
+      to: 'not_home'
+    - platform: state
+      entity_id: device_tracker.hansphone
+      to: 'not_home'
   action:
     - service: script.send_status
