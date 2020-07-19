@@ -3312,7 +3312,25 @@
 
 - alias: auto_status
   trigger:
-    platform: time_pattern
-    seconds: '/300' #every five minutes
+    - platform: time_pattern
+      seconds: '/300' #every five minutes
+    - platform: state
+      entity_id: binary_sensor.front_door
+    - platform: state
+      entity_id: binary_sensor.back_door
+    - platform: state
+      entity_id: binary_sensor.bedroom_window_left
+    - platform: state
+      entity_id: binary_sensor.bedroom_window_right
+    - platform: state
+      entity_id: binary_sensor.bathroom_window_sensor
+    - platform: state
+      entity_id: binary_sensor.anybodyhome
+    - platform: state
+      entity_id: device_tracker.proyphone
+    - platform: state
+      entity_id: device_tracker.pinephone
+    - platform: state
+      entity_id: device_tracker.hansphone
   action:
     - service: script.send_status
