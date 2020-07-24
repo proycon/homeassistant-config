@@ -435,6 +435,10 @@
       from: 'not_home'
       to: 'home'
     - platform: state
+      entity_id: device_tracker.pinephone
+      from: 'not_home'
+      to: 'home'
+    - platform: state
       entity_id: device_tracker.hansphone
       from: 'not_home'
       to: 'home'
@@ -3298,3 +3302,35 @@
       data:
           topic: "home/notify/test"
           payload: "test"
+
+- alias: request_status
+  trigger:
+      - platform: mqtt
+        topic: home/command/status
+  action:
+    - service: script.send_status
+
+- alias: auto_status
+  trigger:
+    - platform: time_pattern
+      minutes: '/5' #every five minutes
+    - platform: state
+      entity_id: binary_sensor.front_door
+    - platform: state
+      entity_id: binary_sensor.back_door
+    - platform: state
+      entity_id: binary_sensor.bedroom_window_left
+    - platform: state
+      entity_id: binary_sensor.bedroom_window_right
+    - platform: state
+      entity_id: binary_sensor.bathroom_window_sensor
+    - platform: state
+      entity_id: binary_sensor.anybodyhome
+    - platform: state
+      entity_id: device_tracker.proyphone
+    - platform: state
+      entity_id: device_tracker.pinephone
+    - platform: state
+      entity_id: device_tracker.hansphone
+  action:
+    - service: script.send_status
