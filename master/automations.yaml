@@ -3134,7 +3134,7 @@
 - id: airco_living_off
   trigger:
       - platform: numeric_state
-        entity_id: sensor.daikinap75591_inside_temperature
+        entity_id: sensor.temperature_thermostat
         below: 23
         for:
             minutes: 15
@@ -3300,7 +3300,7 @@
 - id: airco_bedroom_off
   trigger:
       - platform: numeric_state
-        entity_id: sensor.daikinap82317_inside_temperature
+        entity_id: sensor.bedroom_temperature
         below: 23
         for:
             minutes: 15
