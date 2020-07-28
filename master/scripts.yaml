@@ -1835,6 +1835,7 @@ start_timer:
           data:
               topic: "home/notify/timer"
               payload: "FINISHED"
+              qos: 1
 
 vacuum_turn_on:
     alias: Vacuum turn on

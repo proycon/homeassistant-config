@@ -225,6 +225,7 @@
       - service: mqtt.publish
         data:
             topic: "home/notify/doorbell"
+            qos: 1
             payload: "ON"
       - service: switch.turn_on
         entity_id: switch.hall
@@ -320,6 +321,7 @@
     - service: mqtt.publish
       data:
           topic: "home/notify/alarm"
+          qos: 1
           payload: "TRIGGERED"
     - service: notify.mail_both
       data_template:
@@ -405,6 +407,7 @@
       data:
           topic: "home/notify/armed"
           payload: "System armed"
+          qos: 1
     - service: notify.matrix
       data:
           message: "System armed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
@@ -422,6 +425,7 @@
       data:
           topic: "home/notify/disarmed"
           payload: "System disarmed"
+          qos: 1
     - service: notify.matrix
       data:
           message: "System disarmed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
@@ -453,6 +457,7 @@
       data:
           topic: "home/notify/disarmed"
           payload: "System already disarmed"
+          qos: 1
     - service: notify.matrix
       data:
           message: "System already disarmed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
@@ -517,6 +522,7 @@
       data:
           topic: "home/notify/warning"
           payload: "Front door still open"
+          qos: 1
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Front door still open"
@@ -541,6 +547,7 @@
       data:
           topic: "home/notify/warning"
           payload: "Front door still open"
+          qos: 1
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Back door still open"
@@ -3369,6 +3376,7 @@
       data:
           topic: "home/notify/test"
           payload: "test"
+          qos: 1
 
 - alias: request_status
   trigger:
