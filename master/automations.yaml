@@ -225,6 +225,7 @@
       - service: mqtt.publish
         data:
             topic: "home/notify/doorbell"
+            qos: 1
             payload: "ON"
       - service: switch.turn_on
         entity_id: switch.hall
@@ -320,6 +321,7 @@
     - service: mqtt.publish
       data:
           topic: "home/notify/alarm"
+          qos: 1
           payload: "TRIGGERED"
     - service: notify.mail_both
       data_template:
@@ -405,6 +407,7 @@
       data:
           topic: "home/notify/armed"
           payload: "System armed"
+          qos: 1
     - service: notify.matrix
       data:
           message: "System armed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
@@ -422,6 +425,7 @@
       data:
           topic: "home/notify/disarmed"
           payload: "System disarmed"
+          qos: 1
     - service: notify.matrix
       data:
           message: "System disarmed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
@@ -453,6 +457,7 @@
       data:
           topic: "home/notify/disarmed"
           payload: "System already disarmed"
+          qos: 1
     - service: notify.matrix
       data:
           message: "System already disarmed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
@@ -517,6 +522,7 @@
       data:
           topic: "home/notify/warning"
           payload: "Front door still open"
+          qos: 1
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Front door still open"
@@ -541,6 +547,7 @@
       data:
           topic: "home/notify/warning"
           payload: "Front door still open"
+          qos: 1
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] Back door still open"
@@ -3079,6 +3086,30 @@
       - service: climate.turn_on
         entity_id: climate.daikinap75591
 
+- id: remote_airco_living_on
+  trigger:
+     - platform: mqtt
+       topic: "home/command/airco/living/cool"
+  action:
+      - service: climate.set_temperature
+        data:
+            entity_id: climate.daikinap75591
+            hvac_mode: cool
+            temperature: 23
+            target_temp_high: 24
+            target_temp_low: 22
+      - service: climate.set_swing_mode
+        data:
+            entity_id: climate.daikinap75591
+            swing_mode: Horizontal
+      - service: climate.set_fan_mode
+        data:
+            entity_id: climate.daikinap75591
+            swing_mode: Auto
+      - service: climate.turn_on
+        entity_id: climate.daikinap75591
+
+
 - id: airco_living_on_refusal
   trigger:
       - platform: numeric_state
@@ -3110,7 +3141,7 @@
 - id: airco_living_off
   trigger:
       - platform: numeric_state
-        entity_id: sensor.daikinap75591_inside_temperature
+        entity_id: sensor.temperature_thermostat
         below: 23
         for:
             minutes: 15
@@ -3127,10 +3158,20 @@
       - service: climate.turn_off
         entity_id: climate.daikinap75591
 
+- id: remote_airco_living_off
+  trigger:
+     - platform: mqtt
+       topic: "home/command/airco/living/off"
+  action:
+      - service: climate.turn_off
+        entity_id: climate.daikinap75591
+
 - id: airco_living_silent
   trigger:
-      platform: time
-      at: '22:00:00'
+     - platform: time
+       at: '22:00:00'
+     - platform: mqtt
+       topic: "home/command/airco/living/silent"
   condition:
       - condition: state
         entity_id: climate.daikinap75591
@@ -3207,6 +3248,29 @@
       - service: climate.turn_on
         entity_id: climate.daikinap82317
 
+- id: remote_airco_bedroom_on
+  trigger:
+     - platform: mqtt
+       topic: "home/command/airco/bedroom/cool"
+  action:
+      - service: climate.set_temperature
+        data:
+            entity_id: climate.daikinap82317
+            hvac_mode: cool
+            temperature: 23
+            target_temp_high: 24
+            target_temp_low: 22
+      - service: climate.set_swing_mode
+        data:
+            entity_id: climate.daikinap82317
+            swing_mode: Off
+      - service: climate.set_fan_mode
+        data:
+            entity_id: climate.daikinap82317
+            fan_mode: Auto
+      - service: climate.turn_on
+        entity_id: climate.daikinap82317
+
 - id: airco_bedroom_on_refusal
   trigger:
       - platform: numeric_state
@@ -3243,7 +3307,7 @@
 - id: airco_bedroom_off
   trigger:
       - platform: numeric_state
-        entity_id: sensor.daikinap82317_inside_temperature
+        entity_id: sensor.bedroom_temperature
         below: 23
         for:
             minutes: 15
@@ -3265,10 +3329,20 @@
       - service: climate.turn_off
         entity_id: climate.daikinap82317
 
+- id: remote_airco_bedroom_off
+  trigger:
+     - platform: mqtt
+       topic: "home/command/airco/bedroom/off"
+  action:
+      - service: climate.turn_off
+        entity_id: climate.daikinap82317
+
 - id: airco_bedroom_silent
   trigger:
-      platform: time
-      at: '22:00:00'
+     - platform: time
+       at: '22:00:00'
+     - platform: mqtt
+       topic: "home/command/airco/bedroom/silent"
   condition:
      - condition: state
        entity_id: climate.daikinap82317
@@ -3302,6 +3376,7 @@
       data:
           topic: "home/notify/test"
           payload: "test"
+          qos: 1
 
 - alias: request_status
   trigger:
