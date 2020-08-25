@@ -2833,7 +2833,7 @@
        - service: input_number.set_value
          data:
              entity_id: input_number.wake_up_minutes
-             value: 30
+             value: 50
 
 - id: reset_wake_time_weekend
   alias: reset wake time weekend #for the NEXT day!
@@ -3334,3 +3334,73 @@
       entity_id: device_tracker.hansphone
   action:
     - service: script.send_status
+
+- alias: command_wake_800
+  trigger:
+      - platform: mqtt
+        topic: home/command/wake/800
+  action:
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_hour
+             value: 8
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_minutes
+             value: 00
+
+- alias: command_wake_830
+  trigger:
+      - platform: mqtt
+        topic: home/command/wake/830
+  action:
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_hour
+             value: 8
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_minutes
+             value: 30
+
+- alias: command_wake_850
+  trigger:
+      - platform: mqtt
+        topic: home/command/wake/850
+  action:
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_hour
+             value: 8
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_minutes
+             value: 50
+
+- alias: command_wake_930
+  trigger:
+      - platform: mqtt
+        topic: home/command/wake/930
+  action:
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_hour
+             value: 9
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_minutes
+             value: 30
+
+- alias: command_wake_1030
+  trigger:
+      - platform: mqtt
+        topic: home/command/wake/1030
+  action:
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_hour
+             value: 10
+       - service: input_number.set_value
+         data:
+             entity_id: input_number.wake_up_minutes
+             value: 30
