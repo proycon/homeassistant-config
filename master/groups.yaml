@@ -2,7 +2,7 @@ default_view:
     icon: mdi:home
     entities:
         - sensor.time
-        - binary_sensor.anybodyhome
+        - binary_sensor.anybody_home
         - alarm_control_panel.alarm_system
         - device_tracker.proyphone
         - device_tracker.hansphone
@@ -55,7 +55,7 @@ dog:
     name: Dog
     icon: mdi:paw
     entities:
-        - binary_sensor.anybodyhome
+        - binary_sensor.anybody_home
         - alarm_control_panel.alarm_system
         - binary_sensor.jaiko_crated
         - binary_sensor.noise
@@ -109,7 +109,7 @@ camera_view:
     icon: mdi:camcorder
     entities:
         - sensor.time
-        - binary_sensor.anybodyhome
+        - binary_sensor.anybody_home
         - alarm_control_panel.alarm_system
         - device_tracker.proyphone
         - device_tracker.hansphone

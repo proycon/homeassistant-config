@@ -959,6 +959,7 @@ home_notification_lights:
     - wait_template: "{{ states('switch.garden') == 'on' }}"
     - service: switch.turn_on
       entity_id: switch.back_room
+
 reset_guard_lights:
     alias: Reset Guard Lights
     sequence:
@@ -973,6 +974,7 @@ reset_guard_lights:
           data:
               entity_id:
                 - switch.garden
+
 watch_tv:
     alias: Watch TV
     sequence:
@@ -1966,4 +1968,17 @@ send_status:
               payload_template: "{% if is_state('switch.tv_spots','on') %}tv-spots{% endif %} {% if is_state('switch.front_room','on') %}sofa{% endif %} {% if is_state('switch.midspots','on') %}mid-spots{% endif %} {% if is_state('switch.back_room','on') %}backroom{% endif %} {% if is_state('switch.back_corner','on') %}back-corner{% endif %} {% if is_state('switch.hall','on') %}hall{% endif %} {% if is_state('switch.kitchen','on') %}kitchen{% endif %} {% if is_state('switch.office','on') %}office{% endif %} {% if is_state('switch.bedroom','on') %}bedroom{% endif %} {% if is_state('switch.garden','on') %}garden{% endif %} {% if is_state('switch.porch','on') %}porch{% endif %}"
 
 
-
+disarm:
+  sequence:
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.alarm_system
+    - service: mqtt.publish
+      data:
+          topic: "home/notify/disarmed"
+          payload: "System disarmed"
+          qos: 1
+    - service: notify.matrix
+      data:
+          message: "System disarmed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
+    - service: script.turn_on
+      entity_id: script.home_notification_lights

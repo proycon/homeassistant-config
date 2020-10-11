@@ -282,6 +282,618 @@
     - service: script.turn_on
       entity_id: script.ipcam_topreset
 
+
+
+- id: home_notification_lights_finished
+  alias: "Home Notification Lights Finished"
+  trigger:
+     - platform: event
+       event_type: timer.finished
+       event_data:
+          entity_id: timer.home_notification_lights
+     - platform: event
+       event_type: timer.cancelled
+       event_data:
+          entity_id: timer.home_notification_lights
+  action:
+     - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') %}on{% else %}off{% endif %}"
+       data:
+          entity_id: switch.back_room
+     - service: script.reset_fireplace
+       entity_id: script.reset_fireplace
+     - delay:
+         seconds: 3
+     - service: script.turn_on
+       entity_id: script.reset_guard_lights
+     - delay:
+         seconds: 10
+     - condition: state
+       entity_id: binary_sensor.front_door
+       state: 'off'
+
+- id: reset_ipcam_finished
+  alias: "Reset IPCam Finished"
+  trigger:
+     - platform: event
+       event_type: timer.finished
+       event_data:
+          entity_id: timer.reset_ipcam
+  action:
+     - service: script.turn_on
+       entity_id: script.reset_ipcam
+
+- id: front_door_still_open
+  alias: "Front door still open"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door
+      to: 'on'
+      for:
+          seconds: 30
+  condition:
+    - condition: time
+      after: '06:00'
+      before: '22:00'
+  action:
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: Front door still open
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Front door still open"
+    - service: mqtt.publish
+      data:
+          topic: "home/notify/warning"
+          payload: "Front door still open"
+          qos: 1
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] Front door still open"
+          message: "Front door still open"
+    - service: notify.matrix
+      data:
+          message: "Front door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+
+- id: back_door_still_open
+  alias: "Back door still open"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.back_door
+      to: 'on'
+      for:
+          seconds: 30
+  condition:
+    - condition: time
+      after: '06:00'
+      before: '22:00'
+  action:
+    - service: mqtt.publish
+      data:
+          topic: "home/notify/warning"
+          payload: "Front door still open"
+          qos: 1
+    - service: notify.mail_both
+      data_template:
+          title: "[homeautomation] Back door still open"
+          message: "Back door still open"
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Back door still open"
+    - service: notify.matrix
+      data:
+          message: "Back door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+
+- id: front_door_opened
+  alias: "Front door opened"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door
+      from: 'off'
+      to: 'on'
+  condition:
+      condition: template
+      value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
+  action:
+    - service: switch.turn_on
+      entity_id: switch.hall
+    - service: input_select.select_option
+      data:
+          entity_id: input_select.ipcam_direction
+          option: Hall
+    - service: timer.cancel
+      entity_id: timer.home_notification_lights
+    - service: timer.start
+      entity_id: timer.reset_ipcam
+    - delay:
+        seconds: 3
+    - service: shell_command.event_snapshots
+      data:
+          cams: "street frontdoor"
+
+- id: door_opened_sleep
+  alias: "Door opened while asleep"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.back_door
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.front_door
+      to: 'on'
+  condition:
+     condition: and
+     conditions:
+        - condition: time
+          after: '22:00'
+          before: '09:00'
+        - condition: state
+          entity_id: binary_sensor.anybody_home
+          state: "on"
+          # check if it wasn't us moving about:
+        - condition: template
+          value_template: '{% if states.binary_sensor.pir_hall.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.pir_hall.attributes.last_updated)) > 300 }} {% else %} true {% endif %}'
+        - condition: template
+          value_template: '{% if states.binary_sensor.pir_kitchen.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.pir_kitchen.attributes.last_updated)) > 300 }} {% else %} true {% endif %}'
+        - condition: template
+          value_template: '{% if states.binary_sensor.proycon_connected.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.proycon_connected.attributes.last_updated)) > 300 }} {% else %} true {% endif %}'
+        - condition: template
+          value_template: '{% if states.binary_sensor.hans_connected.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.hans_connected.attributes.last_updated)) > 300 }} {% else %} true {% endif %}'
+  action:
+     - service: switch.turn_on
+       entity_id: switch.bedroom
+     - service: mqtt.publish
+       data_template:
+          topic: "home/sound/pi1"
+          payload_template: 'doorbuzz.ogg'
+     - service: tts.picotts_say
+       entity_id: media_player.hall_speaker
+       data:
+          message: "Door opened"
+     - service: notify.matrix
+       data:
+          message: "Door opened, please check! @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+
+- id: motion_overloop
+  alias: Motion Overloop
+  trigger:
+      platform: state
+      entity_id: binary_sensor.pir_overloop
+      from: "off"
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.alarm_system
+      state: armed_away
+  action:
+     - service: mqtt.publish
+       data_template:
+          topic: "home/sound/pi1"
+          payload_template: 'redalert.ogg'
+     - service: media_player.play_media
+       data:
+          entity_id: media_player.hall_speaker
+          media_content_id: file:///home/homeautomation/homeassistant/media/intruderalert.ogg
+          media_content_type: 'music'
+     - service: notify.matrix
+       data:
+          message: "overloop motion detected, please check immediately! @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
+     - service: input_select.select_option
+       data:
+          entity_id: input_select.ipcam_direction
+          option: Hall
+     - service: timer.start
+       entity_id: timer.reset_ipcam
+- id: hall_light_off
+  alias: "Hall light off"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door
+      from: 'on'
+      to: 'off'
+      for:
+          minutes: 5
+  action:
+    - service: switch.turn_off
+      entity_id: switch.hall
+- id: back_door_opened
+  alias: "back door opened"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.back_door
+      from: 'off'
+      to: 'on'
+  action:
+    - service: input_select.select_option
+      data:
+          entity_id: input_select.ipcam_direction
+          option: Back
+    - delay:
+        seconds: 2
+    - service: script.turn_on
+      entity_id: script.reset_guard_lights
+    - service: timer.start
+      entity_id: timer.reset_ipcam
+    - service: script.turn_on
+      entity_id: script.reset_fireplace
+    - delay:
+        seconds: 4
+    - service: shell_command.event_snapshots
+      data:
+          cams: "livingroom"
+- id: window_upstairs_opened
+  alias: "Window upstairs opened"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.bedroom_window_left
+      from: 'off'
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.bedroom_window_right
+      from: 'off'
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.bathroom_window_sensor
+      from: 'off'
+      to: 'on'
+  action:
+    - service: input_select.select_option
+      data:
+          entity_id: input_select.ipcam_direction
+          option: Hall
+    - service: timer.start
+      entity_id: timer.reset_ipcam
+
+#######################################################################################################
+#                            PRESENCE DETECTION
+#######################################################################################################
+
+- id: home_detection_proycon
+  trigger: #when doors close on reentry
+    - platform: state
+      entity_id: binary_sensor.front_door
+      from: 'on'
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.back_door
+      from: 'on'
+      to: 'off'
+  condition: #reconnection to network must be recent enough (10mins)
+    - condition: state
+      value_template: '{% if is_state("binary_sensor.proycon_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.proycon_connected.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.proycon_home
+
+- id: home_detection_hans
+  trigger: #when doors close on reentry
+    - platform: state
+      entity_id: binary_sensor.front_door
+      from: 'on'
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.back_door
+      from: 'on'
+      to: 'off'
+  condition: #reconnection to network must be recent enough (10mins)
+    - condition: state
+      value_template: '{% if is_state("binary_sensor.hans_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.hans_connected.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.hans_home
+
+- id: home_detection_guest
+  trigger: #when doors close on reentry
+    - platform: state
+      entity_id: binary_sensor.front_door
+      from: 'on'
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.back_door
+      from: 'on'
+      to: 'off'
+  condition: #reconnection to network must be recent enough (10mins)
+    - condition: state
+      value_template: '{% if is_state("binary_sensor.guest_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.guest_connected.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.guest_home
+
+- id: home_greeting_proycon
+  trigger:
+    - platform: state
+      entity_id: input_boolean.proycon_home
+      from: 'off'
+      to: 'on'
+  action:
+    - delay:
+        seconds: 4
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Hello Martin"
+
+- id: home_greeting_hans
+  trigger:
+    - platform: state
+      entity_id: input_boolean.hans_home
+      from: 'off'
+      to: 'on'
+  action:
+    - delay:
+        seconds: 6
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Hello Hans"
+
+- id: home_greeting_guest
+  trigger:
+    - platform: state
+      entity_id: input_boolean.guest_home
+      from: 'off'
+      to: 'on'
+  action:
+    - delay:
+        seconds: 2
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Hello Visitor"
+
+- id: leave_detection_proycon
+  alias: Proycon Left House
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.proycon_connected
+      from: 'on'
+      to: 'off'
+      for:
+          minutes: 5
+  action:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.proycon_connected
+          state: "off"
+        - condition: template
+          value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 900 %}True{% else %}False{% endif %}'
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.proycon_home
+
+- id: leave_detection_hans
+  alias: Hans Left House
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hans_connected
+      from: 'on'
+      to: 'off'
+      for:
+          minutes: 5
+  action:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.hans_connected
+          state: "off"
+        - condition: template
+          value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 900 %}True{% else %}False{% endif %}'
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.hans_home
+
+- id: leave_detection_guest
+  alias: Guest Left House
+  trigger:
+    - platform: state
+      entity_id: device_tracker.guest_connected
+      from: 'on'
+      to: 'off'
+      for:
+          minutes: 5
+  action:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: device_tracker.guest_connected
+          state: "off"
+        - condition: template
+          value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 900 %}True{% else %}False{% endif %}'
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.guest_home
+
+- id: arrival_proycon
+  alias: Arrival Proycon
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.proycon_connected
+      from: 'off'
+      to: 'on'
+  condition:
+    - condition: and
+      conditions:
+        - condition: time
+          after: '9:30'
+          before: '22:30'
+        - condition: state
+          entity_id: binary_sensor.proycon_home
+          state: "off"
+  action:
+    - service: script.turn_on
+      entity_id: script.disarm
+    - service: media_player.play_media
+      data:
+         entity_id: media_player.hall_speaker
+         media_content_id: file:///home/homeautomation/homeassistant/media/authaccept.mp3
+         media_content_type: 'music'
+    - delay:
+        seconds: 2
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Martin coming home"
+
+- id: arrival_hans
+  alias: Arrival Hans
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hans_connected
+      from: 'off'
+      to: 'on'
+  condition:
+    - condition: and
+      conditions:
+        - condition: time
+          after: '9:30'
+          before: '22:30'
+        - condition: state
+          entity_id: binary_sensor.hans_home
+          state: "off"
+  action:
+    - service: script.turn_on
+      entity_id: script.disarm
+    - service: media_player.play_media
+      data:
+         entity_id: media_player.hall_speaker
+         media_content_id: file:///home/homeautomation/homeassistant/media/authaccept.mp3
+         media_content_type: 'music'
+    - delay:
+        seconds: 2
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Hans coming home"
+    - service: notify.matrix
+      data:
+          message: "Hans coming home @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
+
+- id: arrival_guest
+  alias: Arrival guest
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.guest_connected
+      from: 'off'
+      to: 'on'
+  condition:
+    - condition: and
+      conditions:
+        - condition: time
+          after: '9:30'
+          before: '23:00'
+        - condition: state
+          entity_id: binary_sensor.guest_home
+          state: "off"
+  action:
+    - service: script.turn_on
+      entity_id: script.disarm
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Guest arriving"
+
+- id: arrival_proycon_postentry
+  alias: Arrival Proycon (Post Entry)
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.proycon_connected
+      from: 'off'
+      to: 'on'
+  condition:
+    - condition: and
+      conditions:
+          - condition: state
+            entity_id: binary_sensor.anybody_home
+            state: "on"
+          - condition: state
+            entity_id: input_boolean.proycon_home
+            state: "off"
+    - condition: template
+      value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
+  action:
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Welcome back Martin"
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.proycon_home
+
+- id: arrival_hans_postentry
+  alias: Arrival hans (Post Entry)
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hans_connected
+      from: 'off'
+      to: 'on'
+  condition:
+    - condition: and
+      conditions:
+          - condition: state
+            entity_id: binary_sensor.anybody_home
+            state: "on"
+          - condition: state
+            entity_id: input_boolean.hans_home
+            state: "off"
+    - condition: template
+      value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
+  action:
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Welcome back Hans"
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.hans_home
+
+- id: presence_fallsafe_proycon
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.proycon_connected
+      from: 'off'
+      to: 'on'
+      for:
+          minutes: 15
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.proycon_home
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.anybody_home
+          state: "on"
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.proycon_home
+
+- id: presence_fallsafe_hans
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hans_connected
+      from: 'off'
+      to: 'on'
+      for:
+          minutes: 15
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.hans_home
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.anybody_home
+          state: "on"
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.hans_home
+
+
+
+
+##########################################################################################
+#                    ALARM SYSTEM
+##########################################################################################
+
+# Note: disarming is triggered by the arrival_* automations in the presence section
+
 - id: alarm_trigger
   alias: Alarm trigger
   trigger:
@@ -389,11 +1001,12 @@
         seconds: 1
     - service: script.turn_on
       entity_id: switch.porch
+
 - id: arm_when_away
   alias: 'Arm when away'
   trigger:
     - platform: state
-      entity_id: binary_sensor.anybodyhome
+      entity_id: binary_sensor.anybody_home
       from: 'on'
       to: 'off'
   action:
@@ -411,666 +1024,6 @@
     - service: notify.matrix
       data:
           message: "System armed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
-- id: disarm_when_home
-  alias: 'Disarm when home'
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.anybodyhome
-      from: 'off'
-      to: 'on'
-  action:
-    - service: alarm_control_panel.alarm_disarm
-      entity_id: alarm_control_panel.alarm_system
-    - service: mqtt.publish
-      data:
-          topic: "home/notify/disarmed"
-          payload: "System disarmed"
-          qos: 1
-    - service: notify.matrix
-      data:
-          message: "System disarmed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
-    - service: script.turn_on
-      entity_id: script.home_notification_lights
-- id: already_disarmed_notification #when someone comes home and system is already disarmed (due to other person being home), signal for safe entry
-  alias: 'Already disarmed notification'
-  trigger:
-    - platform: state
-      entity_id: device_tracker.proyphone
-      from: 'not_home'
-      to: 'home'
-    - platform: state
-      entity_id: device_tracker.pinephone
-      from: 'not_home'
-      to: 'home'
-    - platform: state
-      entity_id: device_tracker.hansphone
-      from: 'not_home'
-      to: 'home'
-  condition:
-    - condition: state
-      entity_id: alarm_control_panel.alarm_system
-      state: 'disarmed'
-  action:
-    - service: script.turn_on
-      entity_id: script.home_notification_lights
-    - service: mqtt.publish
-      data:
-          topic: "home/notify/disarmed"
-          payload: "System already disarmed"
-          qos: 1
-    - service: notify.matrix
-      data:
-          message: "System already disarmed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
-- id: home_notification_lights_finished
-  alias: "Home Notification Lights Finished"
-  trigger:
-     - platform: event
-       event_type: timer.finished
-       event_data:
-          entity_id: timer.home_notification_lights
-     - platform: event
-       event_type: timer.cancelled
-       event_data:
-          entity_id: timer.home_notification_lights
-  action:
-     - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') %}on{% else %}off{% endif %}"
-       data:
-          entity_id: switch.back_room
-     - service: script.reset_fireplace
-       entity_id: script.reset_fireplace
-     - delay:
-         seconds: 3
-     - service: script.turn_on
-       entity_id: script.reset_guard_lights
-     - delay:
-         seconds: 10
-     - condition: state
-       entity_id: binary_sensor.front_door
-       state: 'off'
-- id: reset_ipcam_finished
-  alias: "Reset IPCam Finished"
-  trigger:
-     - platform: event
-       event_type: timer.finished
-       event_data:
-          entity_id: timer.reset_ipcam
-  action:
-     - service: script.turn_on
-       entity_id: script.reset_ipcam
-- id: front_door_still_open
-  alias: "Front door still open"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.front_door
-      to: 'on'
-      for:
-          seconds: 30
-  condition:
-    - condition: time
-      after: '06:00'
-      before: '22:00'
-  action:
-    - service: tts.picotts_say
-      entity_id: media_player.hall_speaker
-      data:
-          message: Front door still open
-    - service: mqtt.publish
-      data:
-          topic: "home/say/pi1"
-          payload: "Front door still open"
-    - service: mqtt.publish
-      data:
-          topic: "home/notify/warning"
-          payload: "Front door still open"
-          qos: 1
-    - service: notify.mail_both
-      data_template:
-          title: "[homeautomation] Front door still open"
-          message: "Front door still open"
-    - service: notify.matrix
-      data:
-          message: "Front door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
-- id: back_door_still_open
-  alias: "Back door still open"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.back_door
-      to: 'on'
-      for:
-          seconds: 30
-  condition:
-    - condition: time
-      after: '06:00'
-      before: '22:00'
-  action:
-    - service: mqtt.publish
-      data:
-          topic: "home/notify/warning"
-          payload: "Front door still open"
-          qos: 1
-    - service: notify.mail_both
-      data_template:
-          title: "[homeautomation] Back door still open"
-          message: "Back door still open"
-    - service: mqtt.publish
-      data:
-          topic: "home/say/pi1"
-          payload: "Back door still open"
-    - service: notify.matrix
-      data:
-          message: "Back door still open @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
-- id: front_door_opened
-  alias: "Front door opened"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.front_door
-      from: 'off'
-      to: 'on'
-  condition:
-      condition: template
-      value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
-  action:
-    - service: switch.turn_on
-      entity_id: switch.hall
-    - service: input_select.select_option
-      data:
-          entity_id: input_select.ipcam_direction
-          option: Hall
-    - service: timer.cancel
-      entity_id: timer.home_notification_lights
-    - service: timer.start
-      entity_id: timer.reset_ipcam
-    - delay:
-        seconds: 3
-    - service: shell_command.event_snapshots
-      data:
-          cams: "street frontdoor"
-- id: door_opened_sleep
-  alias: "Door opened while asleep"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.back_door
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.front_door
-      to: 'on'
-  condition:
-     condition: and
-     conditions:
-        - condition: time
-          after: '22:00'
-          before: '09:00'
-        - condition: state
-          entity_id: binary_sensor.anybodyhome
-          state: "on"
-        - condition: template
-          value_template: '{% if states.binary_sensor.pir_hall.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.pir_hall.attributes.last_updated)) > 300 }} {% else %} true {% endif %}'
-        - condition: template
-          value_template: '{% if states.binary_sensor.pir_kitchen.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.pir_kitchen.attributes.last_updated)) > 300 }} {% else %} true {% endif %}'
-        - condition: template
-          value_template: '{% if states.binary_sensor.proyhome.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.proyhome.attributes.last_updated)) > 300 }} {% else %} true {% endif %}'
-        - condition: template
-          value_template: '{% if states.binary_sensor.hanshome.last_updated  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.hanshome.attributes.last_updated)) > 300 }} {% else %} true {% endif %}'
-  action:
-     - service: switch.turn_on
-       entity_id: switch.bedroom
-     - service: mqtt.publish
-       data_template:
-          topic: "home/sound/pi1"
-          payload_template: 'doorbuzz.ogg'
-     - service: tts.picotts_say
-       entity_id: media_player.hall_speaker
-       data:
-          message: "Door opened"
-     - service: notify.matrix
-       data:
-          message: "Door opened, please check! @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
-- id: motion_overloop
-  alias: Motion Overloop
-  trigger:
-      platform: state
-      entity_id: binary_sensor.pir_overloop
-      from: "off"
-      to: "on"
-  condition:
-    - condition: state
-      entity_id: alarm_control_panel.alarm_system
-      state: armed_away
-  action:
-     - service: mqtt.publish
-       data_template:
-          topic: "home/sound/pi1"
-          payload_template: 'redalert.ogg'
-     - service: media_player.play_media
-       data:
-          entity_id: media_player.hall_speaker
-          media_content_id: file:///home/homeautomation/homeassistant/media/intruderalert.ogg
-          media_content_type: 'music'
-     - service: notify.matrix
-       data:
-          message: "overloop motion detected, please check immediately! @{{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
-     - service: input_select.select_option
-       data:
-          entity_id: input_select.ipcam_direction
-          option: Hall
-     - service: timer.start
-       entity_id: timer.reset_ipcam
-- id: hall_light_off
-  alias: "Hall light off"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.front_door
-      from: 'on'
-      to: 'off'
-      for:
-          minutes: 5
-  action:
-    - service: switch.turn_off
-      entity_id: switch.hall
-- id: back_door_opened
-  alias: "back door opened"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.back_door
-      from: 'off'
-      to: 'on'
-  action:
-    - service: input_select.select_option
-      data:
-          entity_id: input_select.ipcam_direction
-          option: Back
-    - delay:
-        seconds: 2
-    - service: script.turn_on
-      entity_id: script.reset_guard_lights
-    - service: timer.start
-      entity_id: timer.reset_ipcam
-    - service: script.turn_on
-      entity_id: script.reset_fireplace
-    - delay:
-        seconds: 4
-    - service: shell_command.event_snapshots
-      data:
-          cams: "livingroom"
-- id: window_upstairs_opened
-  alias: "Window upstairs opened"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.bedroom_window_left
-      from: 'off'
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.bedroom_window_right
-      from: 'off'
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.bathroom_window_sensor
-      from: 'off'
-      to: 'on'
-  action:
-    - service: input_select.select_option
-      data:
-          entity_id: input_select.ipcam_direction
-          option: Hall
-    - service: timer.start
-      entity_id: timer.reset_ipcam
-- id: home_greeting
-  alias: "Home Greeting"
-  trigger: #when doors close on reentry
-    - platform: state
-      entity_id: binary_sensor.front_door
-      from: 'on'
-      to: 'off'
-    - platform: state
-      entity_id: binary_sensor.back_door
-      from: 'on'
-      to: 'off'
-  condition: #and we were not home
-    - condition: state
-      entity_id: input_boolean.inside_house
-      state: "off"
-  action:
-    - service: input_boolean.turn_on
-      entity_id: input_boolean.inside_house
-    - delay:
-        seconds: 20
-    - service: mqtt.publish
-      data:
-          topic: "home/say/pi1"
-          payload: "Welcome home"
-- id: home_greeting_proycon
-  alias: "Home Greeting proycon"
-  trigger: #when doors close on reentry
-    - platform: state
-      entity_id: binary_sensor.front_door
-      from: 'on'
-      to: 'off'
-    - platform: state
-      entity_id: binary_sensor.back_door
-      from: 'on'
-      to: 'off'
-  condition: #and we were not home
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: input_boolean.proycon_inside_house
-          state: "off"
-        - condition: or
-          conditions:
-            - condition: state
-              entity_id: device_tracker.proyphone
-              state: "home"
-            - condition: state
-              entity_id: device_tracker.pinephone
-              state: "home"
-        - condition: state
-          entity_id: input_boolean.inside_house
-          state: "on"
-  action:
-    - service: input_boolean.turn_on
-      entity_id: input_boolean.proycon_inside_house
-    - delay:
-        seconds: 10
-    - service: mqtt.publish
-      data:
-          topic: "home/say/pi1"
-          payload: "Hello Martin"
-- id: home_greeting_hans
-  alias: "Home Greeting Hans"
-  trigger: #when doors close on reentry
-    - platform: state
-      entity_id: binary_sensor.front_door
-      from: 'on'
-      to: 'off'
-    - platform: state
-      entity_id: binary_sensor.back_door
-      from: 'on'
-      to: 'off'
-  condition: #and we were not home
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: input_boolean.hans_inside_house
-          state: "off"
-        - condition: state
-          entity_id: device_tracker.hansphone
-          state: "home"
-        - condition: state
-          entity_id: input_boolean.inside_house
-          state: "on"
-  action:
-    - service: input_boolean.turn_on
-      entity_id: input_boolean.hans_inside_house
-    - delay:
-        seconds: 10
-    - service: mqtt.publish
-      data:
-          topic: "home/say/pi1"
-          payload: "Hello Hans"
-- id: home_greeting_guest
-  alias: "Home Greeting Guest"
-  trigger: #when doors close on reentry
-    - platform: state
-      entity_id: binary_sensor.front_door
-      from: 'on'
-      to: 'off'
-    - platform: state
-      entity_id: binary_sensor.back_door
-      from: 'on'
-      to: 'off'
-  condition: #and we were not home
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: input_boolean.guest_inside_house
-          state: "off"
-        - condition: or
-          conditions:
-            - condition: state
-              entity_id: device_tracker.chris
-              state: "home"
-            - condition: state
-              entity_id: device_tracker.evelynda
-              state: "home"
-            - condition: state
-              entity_id: device_tracker.erik
-              state: "home"
-            - condition: state
-              entity_id: device_tracker.patrick
-              state: "home"
-            - condition: state
-              entity_id: device_tracker.netty
-              state: "home"
-            - condition: state
-              entity_id: device_tracker.jan
-              state: "home"
-  action:
-    - service: input_boolean.turn_on
-      entity_id: input_boolean.guest_inside_house
-    - delay:
-        seconds: 20
-    - service: mqtt.publish
-      data:
-          topic: "home/say/pi1"
-          payload: "Hello Visitor"
-
-- id: guest_left_house
-  alias: Guest Left House
-  trigger:
-    - platform: state
-      entity_id: device_tracker.chris
-      from: 'home'
-      to: 'not_home'
-      for:
-          minutes: 10
-    - platform: state
-      entity_id: device_tracker.evelynda
-      from: 'home'
-      to: 'not_home'
-      for:
-          minutes: 10
-    - platform: state
-      entity_id: device_tracker.erik
-      from: 'home'
-      to: 'not_home'
-      for:
-          minutes: 10
-    - platform: state
-      entity_id: device_tracker.patrick
-      from: 'home'
-      to: 'not_home'
-      for:
-          minutes: 10
-    - platform: state
-      entity_id: device_tracker.netty
-      from: 'home'
-      to: 'not_home'
-      for:
-          minutes: 10
-    - platform: state
-      entity_id: device_tracker.jan
-      from: 'home'
-      to: 'not_home'
-      for:
-          minutes: 10
-  condition:
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: device_tracker.chris
-          state: "not_home"
-        - condition: state
-          entity_id: device_tracker.evelynda
-          state: "not_home"
-        - condition: state
-          entity_id: device_tracker.erik
-          state: "not_home"
-        - condition: state
-          entity_id: device_tracker.patrick
-          state: "not_home"
-        - condition: state
-          entity_id: device_tracker.netty
-          state: "not_home"
-        - condition: state
-          entity_id: device_tracker.jan
-          state: "not_home"
-  action:
-     - service: input_boolean.turn_off
-       entity_id: input_boolean.guest_inside_house
-
-- id: proycon_left_house
-  alias: Proycon Left House
-  trigger:
-    - platform: state
-      entity_id: device_tracker.proyphone
-      from: 'home'
-      to: 'not_home'
-      for:
-          minutes: 10
-    - platform: state
-      entity_id: device_tracker.pinephone
-      from: 'home'
-      to: 'not_home'
-      for:
-          minutes: 10
-  action:
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: device_tracker.proyphone
-          state: "not_home"
-        - condition: state
-          entity_id: device_tracker.pinephone
-          state: "not_home"
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.proycon_inside_house
-- id: hans_left_house
-  alias: Hans Left House
-  trigger:
-    - platform: state
-      entity_id: device_tracker.hansphone
-      from: 'home'
-      to: 'not_home'
-      for:
-          minutes: 10
-  action:
-     - service: input_boolean.turn_off
-       entity_id: input_boolean.hans_inside_house
-- id: coming_home_notification
-  alias: Coming Home Notification
-  trigger:
-    - platform: state
-      entity_id: device_tracker.proyphone
-      from: 'not_home'
-      to: 'home'
-    - platform: state
-      entity_id: device_tracker.pinephone
-      from: 'not_home'
-      to: 'home'
-    - platform: state
-      entity_id: device_tracker.hansphone
-      from: 'not_home'
-      to: 'home'
-  action:
-    - condition: time
-      after: '9:30'
-      before: '23:00'
-    - service: media_player.play_media
-      data:
-         entity_id: media_player.hall_speaker
-         media_content_id: file:///home/homeautomation/homeassistant/media/authaccept.mp3
-         media_content_type: 'music'
-    - delay:
-        seconds: 2
-    - service: mqtt.publish
-      data:
-          topic: "home/say/pi1"
-          payload: "Coming home"
-- id: both_left_house
-  alias: Both Left House
-  trigger:
-    - platform: state
-      entity_id: input_boolean.proycon_inside_house
-      from: 'on'
-      to: 'off'
-    - platform: state
-      entity_id: input_boolean.hans_inside_house
-      from: 'on'
-      to: 'off'
-    - platform: state
-      entity_id: input_boolean.guest_inside_house
-      from: 'on'
-      to: 'off'
-  condition:
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: input_boolean.proycon_inside_house
-          state: "off"
-        - condition: state
-          entity_id: input_boolean.hans_inside_house
-          state: "off"
-        - condition: state
-          entity_id: input_boolean.guest_inside_house
-          state: "off"
-  action:
-     - service: input_boolean.turn_off
-       entity_id: input_boolean.inside_house
-     - service: script.turn_on
-       entity_id: script.turn_media_off
-- id: office_morning_lights_off_hans
-  alias: office_morning Lights off Hans
-  trigger:
-      - platform: time
-        at: '06:00:00'
-  condition:
-      condition: time
-      weekday:
-          - mon
-          - tue
-          - thu
-          - fri
-  action:
-       - service: switch.turn_off
-         entity_id: switch.office
-- id: ignite_fireplace_in_evening
-  alias: Ignite fireplace in evening
-  trigger:
-     platform: sun
-     event: sunset
-     offset: '2:00:00'
-  condition:
-     - condition: and
-       conditions:
-         - condition: state
-           entity_id: binary_sensor.anybodyhome
-           state: "on"
-         - condition: time
-           after: '17:00'
-           before: '23:00'
-  action:
-     - service: input_select.select_option
-       data:
-           entity_id: input_select.fireplace
-           option: Fire
-     - service: input_number.set_value
-       data:
-           entity_id: input_number.fireplace_brightness
-           value: 255
-     - service: input_number.set_value
-       data:
-           entity_id: input_number.dresser_ambilight_brightness
-           value: 40
-     - service: input_select.select_option
-       data:
-           entity_id: input_select.dresser_ambilight
-           option: Lamp
-     - delay:
-           seconds: 1
-     - service: script.turn_on
-       entity_id: script.ignite_fireplace
-     - service: script.turn_on
-       entity_id: script.ignite_dresser_ambilight
 
 - id: alarm_cancelled
   alias: Alarm Cancelled
@@ -1112,6 +1065,95 @@
            target:
               - !secret proyphone
               - !secret hansphone
+######################################################################
+
+#some extra actions in case we both leave the house:
+- id: both_left_house
+  alias: Both Left House
+  trigger:
+    - platform: state
+      entity_id: input_boolean.proycon_home
+      from: 'on'
+      to: 'off'
+    - platform: state
+      entity_id: input_boolean.hans_home
+      from: 'on'
+      to: 'off'
+    - platform: state
+      entity_id: input_boolean.guest_home
+      from: 'on'
+      to: 'off'
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.proycon_home
+          state: "off"
+        - condition: state
+          entity_id: input_boolean.hans_home
+          state: "off"
+        - condition: state
+          entity_id: input_boolean.guest_home
+          state: "off"
+  action:
+     - service: script.turn_on
+       entity_id: script.turn_media_off
+
+
+- id: office_morning_lights_off_hans
+  alias: office_morning Lights off Hans
+  trigger:
+      - platform: time
+        at: '06:00:00'
+  condition:
+      condition: time
+      weekday:
+          - mon
+          - tue
+          - thu
+          - fri
+  action:
+       - service: switch.turn_off
+         entity_id: switch.office
+- id: ignite_fireplace_in_evening
+  alias: Ignite fireplace in evening
+  trigger:
+     platform: sun
+     event: sunset
+     offset: '2:00:00'
+  condition:
+     - condition: and
+       conditions:
+         - condition: state
+           entity_id: binary_sensor.anybody_home
+           state: "on"
+         - condition: time
+           after: '17:00'
+           before: '23:00'
+  action:
+     - service: input_select.select_option
+       data:
+           entity_id: input_select.fireplace
+           option: Fire
+     - service: input_number.set_value
+       data:
+           entity_id: input_number.fireplace_brightness
+           value: 255
+     - service: input_number.set_value
+       data:
+           entity_id: input_number.dresser_ambilight_brightness
+           value: 40
+     - service: input_select.select_option
+       data:
+           entity_id: input_select.dresser_ambilight
+           option: Lamp
+     - delay:
+           seconds: 1
+     - service: script.turn_on
+       entity_id: script.ignite_fireplace
+     - service: script.turn_on
+       entity_id: script.ignite_dresser_ambilight
+
 
 - id: kitchen_light_on_motion
   alias: Kitchen Light On Motion
@@ -1124,7 +1166,7 @@
       condition: and
       conditions:
         - condition: state
-          entity_id: binary_sensor.anybodyhome
+          entity_id: binary_sensor.anybody_home
           state: "on"
         - condition: numeric_state
           entity_id: sensor.fibaro_multisensor_luminance
@@ -1160,7 +1202,7 @@
       condition: and
       conditions:
         - condition: state
-          entity_id: binary_sensor.anybodyhome
+          entity_id: binary_sensor.anybody_home
           state: "on"
         - condition: numeric_state
           entity_id: sensor.fibaro_office_luminance
@@ -1201,7 +1243,7 @@
             after: '22:00'
             before: '06:00'
           - condition: state
-            entity_id: binary_sensor.anybodyhome
+            entity_id: binary_sensor.anybody_home
             state: "on"
           - condition: state
             entity_id: switch.tv_spots
@@ -1225,7 +1267,7 @@
       condition: and
       conditions:
         - condition: state
-          entity_id: binary_sensor.anybodyhome
+          entity_id: binary_sensor.anybody_home
           state: "on"
         - condition: state
           entity_id: switch.hall
@@ -1357,7 +1399,7 @@
           after: '22:00'
           before: '09:00'
         - condition: state
-          entity_id: binary_sensor.anybodyhome
+          entity_id: binary_sensor.anybody_home
           state: "on"
         - condition: state
           entity_id: sun.sun
@@ -1420,7 +1462,7 @@
           after: '20:30'
           before: '07:00'
         - condition: state
-          entity_id: binary_sensor.anybodyhome
+          entity_id: binary_sensor.anybody_home
           state: "on"
         - condition: state
           entity_id: sun.sun
@@ -1446,7 +1488,7 @@
           after: '20:30'
           before: '01:00'
         - condition: state
-          entity_id: binary_sensor.anybodyhome
+          entity_id: binary_sensor.anybody_home
           state: "on"
         - condition: state
           entity_id: sun.sun
@@ -1528,7 +1570,7 @@
       condition: and
       conditions:
           - condition: state
-            entity_id: binary_sensor.anybodyhome
+            entity_id: binary_sensor.anybody_home
             state: "on"
   action:
       - service: script.turn_on
@@ -1547,7 +1589,7 @@
       condition: and
       conditions:
           - condition: state
-            entity_id: binary_sensor.anybodyhome
+            entity_id: binary_sensor.anybody_home
             state: "on"
   action:
       - service: script.turn_on
@@ -1615,7 +1657,7 @@
       condition: and
       conditions:
           - condition: state
-            entity_id: binary_sensor.anybodyhome
+            entity_id: binary_sensor.anybody_home
             state: "on"
           - condition: state
             entity_id: alarm_control_panel.alarm_system
@@ -1655,7 +1697,7 @@
       condition: and
       conditions:
           - condition: state
-            entity_id: binary_sensor.anybodyhome
+            entity_id: binary_sensor.anybody_home
             state: "on"
           - condition: state
             entity_id: alarm_control_panel.alarm_system
@@ -3062,7 +3104,7 @@
          entity_id: climate.daikinap75591
          state: "off"
        - condition: state
-         entity_id: binary_sensor.anybodyhome
+         entity_id: binary_sensor.anybody_home
          state: "on"
        - condition: state
          entity_id: binary_sensor.back_door
@@ -3124,7 +3166,7 @@
          entity_id: climate.daikinap75591
          state: "off"
        - condition: state
-         entity_id: binary_sensor.anybodyhome
+         entity_id: binary_sensor.anybody_home
          state: "on"
        - condition: state
          entity_id: binary_sensor.back_door
@@ -3221,7 +3263,7 @@
          entity_id: climate.daikinap82317
          state: "off"
        - condition: state
-         entity_id: binary_sensor.anybodyhome
+         entity_id: binary_sensor.anybody_home
          state: "on"
        - condition: state
          entity_id: binary_sensor.bedroom_window_left
@@ -3285,7 +3327,7 @@
          entity_id: climate.daikinap82317
          state: "off"
        - condition: state
-         entity_id: binary_sensor.anybodyhome
+         entity_id: binary_sensor.anybody_home
          state: "on"
        - condition: or
          conditions:
@@ -3400,7 +3442,9 @@
     - platform: state
       entity_id: binary_sensor.bathroom_window_sensor
     - platform: state
-      entity_id: binary_sensor.anybodyhome
+      entity_id: binary_sensor.anybody_connected
+    - platform: state
+      entity_id: binary_sensor.anybody_home
     - platform: state
       entity_id: device_tracker.proyphone
     - platform: state

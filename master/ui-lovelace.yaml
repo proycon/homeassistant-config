@@ -24,20 +24,23 @@ views:
                     #    "home": "/local/presence/proycon_in.jpg"
                     #    "not_home": "/local/presence/proycon_out.jpg"
                     - type:  picture-entity
-                      entity: device_tracker.pinephone
+                      entity: input_boolean.proycon_home
                       state_image:
-                          "home": "/local/presence/proycon_in.jpg"
-                          "not_home": "/local/presence/proycon_out.jpg"
+                          "on": "/local/presence/proycon_in.jpg"
+                          "off": "/local/presence/proycon_out.jpg"
                     - type:  picture-entity
-                      entity: device_tracker.hansphone
+                      entity: input_boolean.hans_home
                       state_image:
-                          "home": "/local/presence/hans_in.jpg"
-                          "not_home": "/local/presence/hans_out.jpg"
+                          "on": "/local/presence/hans_in.jpg"
+                          "off": "/local/presence/hans_out.jpg"
                     - type:  picture-entity
                       entity: alarm_control_panel.alarm_system
                       state_image:
                           "disarmed": "/local/icons/ok.png"
-                          "armed": "/local/icons/watching.png"
+                          "armed_home": "/local/icons/watching.png"
+                          "armed_away": "/local/icons/watching.png"
+                          "armed_night": "/local/icons/watching.png"
+                          "armed_custom_bypass": "/local/icons/watching.png"
                           "triggered": "/local/icons/alert.png"
                 - type: horizontal-stack
                   cards:
@@ -1735,12 +1738,18 @@ views:
               title: Presence (48h)
               hours_to_show: 48
               entities:
-                  - entity: binary_sensor.anybodyhome
+                  - entity: binary_sensor.anybody_home
                     name: Anybody home?
-                  - entity: device_tracker.proyphone
+                  - entity: input_boolean.proycon_home
                     name: Maarten
-                  - entity: device_tracker.hansphone
+                  - entity: input_boolean.hans_home
                     name: Hans
+                  - entity: input_boolean.hans_inside
+                    name: Guest
+                  - entity: binary_sensor.proycon_connected
+                    name: Maarten (connected)
+                  - entity: binary_sensor.hans_connected
+                    name: Hans (connected)
                   - entity: alarm_control_panel.alarm_system
                     name: Alarm System
         - type: history-graph
@@ -1796,7 +1805,7 @@ views:
           title: Visitors (30days)
           hours_to_show: 720
           entities:
-                - binary_sensor.guest_inside
+                - input_boolean.guest_home_house
                 - device_tracker.chris
                 - device_tracker.evelynda
                 - device_tracker.jan
@@ -1842,7 +1851,7 @@ views:
   - path: dog
     title: Dog
     badges:
-      - binary_sensor.anybodyhome
+      - binary_sensor.anybody_home
       - binary_sensor.noise
       - sensor.time
     cards:
@@ -2075,6 +2084,13 @@ views:
           - device_tracker.hans2
         title: Visitors
         show_header_toggle: false
+      - title: Presence
+        type: entities
+        show_header_toggle: false
+        entities:
+            - input_boolean.proycon_home
+            - input_boolean.hans_home
+            - input_boolean.guest_home
       - type: entities
         entities:
           - script.repoll_slaves

@@ -338,17 +338,14 @@ input_number:
         step: 1
 
 input_boolean:
-    inside_house:
-        name: inside house? #anybody
+    proycon_home: #measures if actually INSIDE house
+        name: Proycon home?
         initial: on
-    proycon_inside_house:
-        name: Proycon inside house?
+    hans_home:
+        name: Hans home?
         initial: on
-    hans_inside_house:
-        name: Hans inside house?
-        initial: on
-    guest_inside_house:
-        name: Guest inside house?
+    guest_home:
+        name: Guest inside?
         initial: off
     flip_main_camera:
         name: Flip main camera
@@ -588,36 +585,46 @@ binary_sensor pir_living_room:
 binary_sensor:
     platform: template
     sensors:
-      anybodyhome:
-        friendly_name: "Anybody home?"
-        value_template: '{% if is_state("device_tracker.proyphone","home") or is_state("device_tracker.pinephone","home") or is_state("device_tracker.hansphone","home") or is_state("device_tracker.chris","home") or is_state("device_tracker.erik","home") or is_state("device_tracker.patrick","home") or is_state("device_tracker.netty","home") or is_state("device_tracker.jan","home") or is_state("device_tracker.patrick","home") or is_state("device_tracker.cora","home") or is_state("device_tracker.hans2","home") %}True{% else %}False{% endif %}'
+      anybody_connected:
+        friendly_name: "Anybody connected?"
+        value_template: '{% if is_state("binary_sensor.proycon_connected","on") or is_state("binary_sensor.hans_connected","on") or is_state("binary_sensor.guest_connected","on") or  %}True{% else %}False{% endif %}'
+        device_class: occupancy
+      guest_connected:
+        friendly_name: "Guest connected?"
+        value_template: '{% if is_state("device_tracker.chris","home") or is_state("device_tracker.erik","home") or is_state("device_tracker.patrick","home") or is_state("device_tracker.netty","home") or is_state("device_tracker.jan","home") or is_state("device_tracker.patrick","home") or is_state("device_tracker.cora","home") %}True{% else %}False{% endif %}'
         entity_id:
-            - device_tracker.proyphone
-            - device_tracker.pinephone
-            - device_tracker.hansphone
             - device_tracker.chris
             - device_tracker.erik
             - device_tracker.patrick
             - device_tracker.netty
             - device_tracker.jan
             - device_tracker.cora
-            - device_tracker.hans2
         device_class: occupancy
-      proyhome:
+      proycon_connected:
+        friendly_name: "Proycon connected?"
         value_template: '{% if is_state("device_tracker.proyphone","home") or is_state("device_tracker.pinephone","home") %}True{% else %}False{% endif %}'
         entity_id:
             - device_tracker.proyphone
             - device_tracker.pinephone
-      hanshome:
-        value_template: '{% if is_state("device_tracker.hansphone","home") or is_state("device_tracker.hans2","home") %}True{% else %}False{% endif %}'
+        device_class: occupancy
+      hans_connected:
+        friendly_name: "Hans connected?"
+        value_template: '{% if is_state("device_tracker.hansphone","home") %}True{% else %}False{% endif %}'
         entity_id:
             - device_tracker.hansphone
-            - device_tracker.hans2
-      guest_inside:
-        friendly_name: "Guest inside?"
-        value_template: '{% if is_state("input_boolean.guest_inside_house","on") %}True{% else %}False{% endif %}'
+        device_class: occupancy
+      anydoor:
+        value_template: '{% if is_state("binary_sensor.back_door","on") or is_state("binary_sensor.front_door","on") %}True{% else %}False{% endif %}'
         entity_id:
-            - input_boolean.guest_inside_house
+            - binary_sensor.back_door
+            - binary_sensor.front_door
+      anybody_home:
+        friendly_name: "Anybody home?" #measures if anybody is actually inside, rather than just connected to the WLAN
+        value_template: '{% if is_state("input_boolean.proycon_home","on") or is_state("input_boolean.hans_home","on") or is_state("input_boolean.guest_home","on") %}True{% else %}False{% endif %}'
+        entity_id:
+            - input_boolean.proycon_home
+            - input_boolean.hans_home
+            - input_boolean.guest_home
         device_class: occupancy
       pir_kitchen:
         friendly_name: "PIR Kitchen"
