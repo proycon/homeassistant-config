@@ -18,11 +18,6 @@ views:
               cards:
                 - type: horizontal-stack
                   cards:
-                    #- type:  picture-entity
-                    #entity: device_tracker.proyphone
-                    #state_image:
-                    #    "home": "/local/presence/proycon_in.jpg"
-                    #    "not_home": "/local/presence/proycon_out.jpg"
                     - type:  picture-entity
                       entity: input_boolean.proycon_home
                       state_image:
