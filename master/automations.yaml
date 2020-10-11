@@ -560,7 +560,7 @@
       from: 'on'
       to: 'off'
   condition: #reconnection to network must be recent enough (10mins)
-    - condition: template
+      condition: template
       value_template: '{% if is_state("binary_sensor.proycon_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.proycon_connected.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
     - service: input_boolean.turn_on
@@ -577,7 +577,7 @@
       from: 'on'
       to: 'off'
   condition: #reconnection to network must be recent enough (10mins)
-    - condition: template
+      condition: template
       value_template: '{% if is_state("binary_sensor.hans_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.hans_connected.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
     - service: input_boolean.turn_on
@@ -594,7 +594,7 @@
       from: 'on'
       to: 'off'
   condition: #reconnection to network must be recent enough (10mins)
-    - condition: state
+      condition: state
       value_template: '{% if is_state("binary_sensor.guest_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.guest_connected.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
     - service: input_boolean.turn_on
@@ -710,17 +710,15 @@
       from: 'off'
       to: 'on'
   condition:
-    - condition: and
-      conditions:
-        - condition: time
-          after: '9:30'
-          before: '22:30'
-        - condition: state
-          entity_id: binary_sensor.proycon_home
-          state: "off"
+      condition: state
+      entity_id: binary_sensor.proycon_home
+      state: "off"
   action:
     - service: script.turn_on
       entity_id: script.disarm
+    - condition: time
+      after: '9:30'
+      before: '22:30'
     - service: media_player.play_media
       data:
          entity_id: media_player.hall_speaker
@@ -741,17 +739,15 @@
       from: 'off'
       to: 'on'
   condition:
-    - condition: and
-      conditions:
-        - condition: time
-          after: '9:30'
-          before: '22:30'
-        - condition: state
-          entity_id: binary_sensor.hans_home
-          state: "off"
+      condition: state
+      entity_id: binary_sensor.hans_home
+      state: "off"
   action:
     - service: script.turn_on
       entity_id: script.disarm
+    - condition: time
+      after: '9:30'
+      before: '22:30'
     - service: media_player.play_media
       data:
          entity_id: media_player.hall_speaker
@@ -775,14 +771,9 @@
       from: 'off'
       to: 'on'
   condition:
-    - condition: and
-      conditions:
-        - condition: time
-          after: '9:30'
-          before: '23:00'
-        - condition: state
-          entity_id: binary_sensor.guest_home
-          state: "off"
+      condition: state
+      entity_id: binary_sensor.guest_home
+      state: "off"
   action:
     - service: script.turn_on
       entity_id: script.disarm
@@ -799,7 +790,7 @@
       from: 'off'
       to: 'on'
   condition:
-    - condition: and
+      condition: and
       conditions:
           - condition: state
             entity_id: binary_sensor.anybody_home
@@ -825,7 +816,7 @@
       from: 'off'
       to: 'on'
   condition:
-    - condition: and
+      condition: and
       conditions:
           - condition: state
             entity_id: binary_sensor.anybody_home
@@ -852,7 +843,7 @@
       for:
           minutes: 15
   condition:
-    - condition: and
+      condition: and
       conditions:
         - condition: state
           entity_id: input_boolean.proycon_home
@@ -873,7 +864,7 @@
       for:
           minutes: 15
   condition:
-    - condition: and
+      condition: and
       conditions:
         - condition: state
           entity_id: input_boolean.hans_home
