@@ -560,7 +560,7 @@
       from: 'on'
       to: 'off'
   condition: #reconnection to network must be recent enough (10mins)
-    - condition: state
+    - condition: template
       value_template: '{% if is_state("binary_sensor.proycon_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.proycon_connected.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
     - service: input_boolean.turn_on
@@ -577,7 +577,7 @@
       from: 'on'
       to: 'off'
   condition: #reconnection to network must be recent enough (10mins)
-    - condition: state
+    - condition: template
       value_template: '{% if is_state("binary_sensor.hans_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.hans_connected.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
     - service: input_boolean.turn_on
