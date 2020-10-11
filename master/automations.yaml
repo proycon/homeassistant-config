@@ -807,8 +807,8 @@
           - condition: state
             entity_id: input_boolean.proycon_home
             state: "off"
-    - condition: template
-      value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
+          - condition: template
+            value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
     - service: mqtt.publish
       data:
@@ -833,8 +833,8 @@
           - condition: state
             entity_id: input_boolean.hans_home
             state: "off"
-    - condition: template
-      value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
+          - condition: template
+            value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
     - service: mqtt.publish
       data:
