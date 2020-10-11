@@ -22,7 +22,7 @@ frontend:
 lovelace:
     mode: yaml
     resources:
-      - url: /local/custom-ui/button-card.js
+      - url: /local/custom-ui/lovelace-card-preloader.js
         type: js
       - url: /local/custom-ui/card-tools.js
         type: js
@@ -30,7 +30,7 @@ lovelace:
         type: js
       - url: /local/custom-ui/gap-card.js
         type: js
-      - url: /local/custom-ui/lovelace-card-preloader.js
+      - url: /local/custom-ui/button-card.js
         type: js
 
 
