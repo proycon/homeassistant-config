@@ -593,69 +593,40 @@ binary_sensor:
       guest_connected:
         friendly_name: "Guest connected?"
         value_template: '{% if is_state("device_tracker.chris","home") or is_state("device_tracker.erik","home") or is_state("device_tracker.patrick","home") or is_state("device_tracker.netty","home") or is_state("device_tracker.jan","home") or is_state("device_tracker.patrick","home") or is_state("device_tracker.cora","home") %}True{% else %}False{% endif %}'
-        entity_id:
-            - device_tracker.chris
-            - device_tracker.erik
-            - device_tracker.patrick
-            - device_tracker.netty
-            - device_tracker.jan
-            - device_tracker.cora
         device_class: occupancy
       proycon_connected:
         friendly_name: "Proycon connected?"
         value_template: '{% if is_state("device_tracker.proyphone","home") or is_state("device_tracker.pinephone","home") %}True{% else %}False{% endif %}'
-        entity_id:
-            - device_tracker.proyphone
-            - device_tracker.pinephone
         device_class: occupancy
       hans_connected:
         friendly_name: "Hans connected?"
         value_template: '{% if is_state("device_tracker.hansphone","home") %}True{% else %}False{% endif %}'
-        entity_id:
-            - device_tracker.hansphone
         device_class: occupancy
       anydoor:
         value_template: '{% if is_state("binary_sensor.back_door","on") or is_state("binary_sensor.front_door","on") %}True{% else %}False{% endif %}'
-        entity_id:
-            - binary_sensor.back_door
-            - binary_sensor.front_door
       anybody_home:
         friendly_name: "Anybody home?" #measures if anybody is actually inside, rather than just connected to the WLAN
         value_template: '{% if is_state("input_boolean.proycon_home","on") or is_state("input_boolean.hans_home","on") or is_state("input_boolean.guest_home","on") %}True{% else %}False{% endif %}'
-        entity_id:
-            - input_boolean.proycon_home
-            - input_boolean.hans_home
-            - input_boolean.guest_home
         device_class: occupancy
       pir_kitchen:
         friendly_name: "PIR Kitchen"
         value_template: '{{ is_state("sensor.fibaro_multisensor_burglar", "8") }}'
-        entity_id:
-            - sensor.fibaro_multisensor_burglar
         device_class: motion
       pir_hall:
         friendly_name: "PIR Hall"
         value_template: '{{ is_state("sensor.fibaro_hall_burglar", "8") }}'
-        entity_id:
-            - sensor.fibaro_hall_burglar
         device_class: motion
       pir_office:
         friendly_name: "PIR Office"
         value_template: '{{ is_state("sensor.fibaro_office_burglar", "8") }}'
-        entity_id:
-            - sensor.fibaro_office_burglar
         device_class: motion
       pir_overloop:
         friendly_name: "PIR Overloop"
         value_template: '{{ is_state("sensor.overloop_burglar", "8") }}'
-        entity_id:
-            - sensor.overloop_burglar
         device_class: motion
       bathroom_too_humid:
         friendly_name: "Bathroom too humid"
         value_template: '{{ states("sensor.bathroom_sensor_relative_humidity") | float > 75.0 }}'
-        entity_id:
-            - sensor.bathroom_sensor_relative_humidity
 
 switch tv_spots:
     platform: mqtt
