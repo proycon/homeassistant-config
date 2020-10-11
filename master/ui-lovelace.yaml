@@ -10,11 +10,9 @@ views:
     title: Home
     panel: true
     cards:
-        - type: layout-card
-          layout: vertical-stack
+        - type: vertical-stack
           cards:
-            - type: layout-card
-              layout: horizontal-stack
+            - type: horizontal-stack
               cards:
                 - type: vertical-stack
                   cards:
@@ -137,8 +135,7 @@ views:
                                 service: script.turn_media_off
                               - action: call-service
                                 service: script.lights_off
-        - type: layout-card
-          style: horizontal-stack
+        - type: horizontal-stack
           cards:
             - type: picture-elements
               image: /local/floorplans/downstairs.png
@@ -952,8 +949,7 @@ views:
                       left: 83%
                       width: 4%
                       padding: 0px
-        - type: layout-card
-          style: horizontal-stack
+        - type: horizontal-stack
           cards:
             - type: picture-entity
               entity: camera.living_room
@@ -962,15 +958,13 @@ views:
         - type: entities
           entities:
             - input_select.ipcam_direction
-        - type: layout-card
-          style: horizontal-stack
+        - type: horizontal-stack
           cards:
             - type: vertical-stack
               cards:
                 - type: picture-entity
                   entity: camera.garden
-        - type: layout-card
-          style: horizontal-stack
+        - type: horizontal-stack
           cards:
             - type: vertical-stack
               cards:
@@ -994,8 +988,7 @@ views:
                #- type: iframe
                #  aspect_ratio: 90%
                #  url: !secret windy_url
-        - type: layout-card
-          style: horizontal-stack
+        - type: horizontal-stack
           cards:
             - type: vertical-stack
               cards:
