@@ -646,8 +646,6 @@
       entity_id: binary_sensor.proycon_connected
       from: 'on'
       to: 'off'
-      for:
-          minutes: 5
   action:
     - condition: and
       conditions:
@@ -655,7 +653,7 @@
           entity_id: binary_sensor.proycon_connected
           state: "off"
         - condition: template
-          value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 900 %}True{% else %}False{% endif %}'
+          value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.last_updated)) < 900 %}True{% else %}False{% endif %}'
     - service: input_boolean.turn_off
       entity_id: input_boolean.proycon_home
 
@@ -666,8 +664,6 @@
       entity_id: binary_sensor.hans_connected
       from: 'on'
       to: 'off'
-      for:
-          minutes: 5
   action:
     - condition: and
       conditions:
@@ -675,7 +671,7 @@
           entity_id: binary_sensor.hans_connected
           state: "off"
         - condition: template
-          value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 900 %}True{% else %}False{% endif %}'
+          value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.last_updated)) < 900 %}True{% else %}False{% endif %}'
     - service: input_boolean.turn_off
       entity_id: input_boolean.hans_home
 
@@ -695,7 +691,7 @@
           entity_id: device_tracker.guest_connected
           state: "off"
         - condition: template
-          value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 900 %}True{% else %}False{% endif %}'
+          value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.last_updated)) < 900 %}True{% else %}False{% endif %}'
     - service: input_boolean.turn_off
       entity_id: input_boolean.guest_home
 
@@ -796,7 +792,7 @@
             entity_id: input_boolean.proycon_home
             state: "off"
           - condition: template
-            value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
+            value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
     - service: mqtt.publish
       data:
@@ -822,7 +818,7 @@
             entity_id: input_boolean.hans_home
             state: "off"
           - condition: template
-            value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
+            value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
     - service: mqtt.publish
       data:
