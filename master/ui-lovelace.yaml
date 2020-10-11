@@ -135,6 +135,59 @@ views:
                                 service: script.turn_media_off
                               - action: call-service
                                 service: script.lights_off
+                      - type: entities
+                        title: Media Devices
+                        entities:
+                          - switch.tv_decoder
+                          - switch.tv
+                          - switch.pi1_kodi
+                          - switch.pi1_xorg
+                          - switch.pi1_music_player
+                        show_header_toggle: false
+                      - type: horizontal-stack
+                        cards:
+                            - type: entity-button
+                              entity: script.tvdecoder_left
+                              icon: mdi:arrow-left
+                              name: ""
+                              tap_action:
+                                action: call-service
+                                service: script.tvdecoder_left
+                            - type: entity-button
+                              entity: script.tvdecoder_right
+                              icon: mdi:arrow-right
+                              name: ""
+                              tap_action:
+                                action: call-service
+                                service: script.tvdecoder_right
+                            - type: entity-button
+                              entity: script.tvdecoder_up
+                              icon: mdi:arrow-up
+                              name: ""
+                              tap_action:
+                                  action: call-service
+                                  service: script.tvdecoder_up
+                            - type: entity-button
+                              entity: script.tvdecoder_down
+                              icon: mdi:arrow-down
+                              name: ""
+                              tap_action:
+                                  action: call-service
+                                  service: script.tvdecoder_down
+                            - type: entity-button
+                              entity: script.tvdecoder_ok
+                              icon: mdi:thumb-up
+                              name: ""
+                              tap_action:
+                                action: call-service
+                                service: script.tvdecoder_ok
+                            - type: entity-button
+                              entity: script.tvdecoder_back
+                              icon: mdi:backburger
+                              name: ""
+                              tap_action:
+                                  action: call-service
+                                  service: script.tvdecoder_back
             - type: horizontal-stack
               cards:
                 - type: picture-elements
@@ -972,8 +1025,6 @@ views:
                         entity: climate.anna
                       - type: thermostat
                         entity: climate.daikinap75591
-                      - type: thermostat
-                        entity: climate.daikinap82317
                 - type: vertical-stack
                   cards:
                     - type: weather-forecast
@@ -985,6 +1036,8 @@ views:
                           url: 'https://www.buienradar.nl/weer/eindhoven/nl/2756253'
                           name: Buienradar
                           icon: 'mdi:weather-pouring'
+                    - type: thermostat
+                      entity: climate.daikinap82317
                    #- type: iframe
                    #  aspect_ratio: 90%
                    #  url: !secret windy_url
@@ -1019,6 +1072,16 @@ views:
                           tap_action:
                               action: call-service
                               service: script.jaiko_pooped
+                        - type: entity-button
+                          icon: mdi:robot
+                          name: "Start clean-up"
+                          entity: vacuum.robot
+                          tap_action:
+                             action: call-service
+                             service: script.vacuum_turn_on
+                          hold_action:
+                             action: call-service
+                             service: script.vacuum_turn_off
                 - type: vertical-stack
                   cards:
                     - type: entities
@@ -1034,16 +1097,6 @@ views:
                         - script.start_timer
                       title: Timer
                       show_header_toggle: false
-                    - type: entity-button
-                      icon: mdi:robot
-                      name: "Start clean-up"
-                      entity: vacuum.robot
-                      tap_action:
-                         action: call-service
-                         service: script.vacuum_turn_on
-                      hold_action:
-                         action: call-service
-                         service: script.vacuum_turn_off
   - id: media
     path: media
     icon: mdi:television
