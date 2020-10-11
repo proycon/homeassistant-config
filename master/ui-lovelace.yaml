@@ -18,11 +18,11 @@ views:
               cards:
                 - type: horizontal-stack
                   cards:
-                    - type:  picture-entity
-                      entity: device_tracker.proyphone
-                      state_image:
-                          "home": "/local/presence/proycon_in.jpg"
-                          "not_home": "/local/presence/proycon_out.jpg"
+                    #- type:  picture-entity
+                    #entity: device_tracker.proyphone
+                    #state_image:
+                    #    "home": "/local/presence/proycon_in.jpg"
+                    #    "not_home": "/local/presence/proycon_out.jpg"
                     - type:  picture-entity
                       entity: device_tracker.pinephone
                       state_image:
@@ -1370,7 +1370,7 @@ views:
                   show_header_toggle: false
   - id: mediabedroom
     path: mediabedroom
-    icon: mdi:hotel
+    icon: mdi:bed
     title: Media Bedroom
     panel: true
     cards:
@@ -2083,7 +2083,7 @@ views:
         entities:
           - switch.bathroom_vent
         title: Switch
-    icon: 'mdi:settings'
+    icon: 'mdi:cog'
   - path: links
     icon: 'mdi:link'
     name: Links
