@@ -236,9 +236,6 @@
         data_template:
             message: "There is somebody at the door ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
             title: "The doorbell rang"
-      - service: notify.xmpp_proycon
-        data_template:
-          message: "The doorbell rang, there is somebody at the door ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
       - service: notify.mail_both
         data_template:
             title: "[homeautomation] Doorbell rang ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
@@ -932,12 +929,6 @@
           message: "INTRUDER ALERT!! ALARM TRIGGERED AT {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
     - service: notify.matrix
       data:
-          message: "INTRUDER ALERT!! ALARM TRIGGERED AT {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
-    - service: notify.xmpp_proycon
-      data_template:
-          message: "INTRUDER ALERT!! ALARM TRIGGERED AT {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
-    - service: notify.xmpp_hans
-      data_template:
           message: "INTRUDER ALERT!! ALARM TRIGGERED AT {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
     - service: persistent_notification.create
       data_template:
