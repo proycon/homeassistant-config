@@ -588,7 +588,7 @@ binary_sensor:
     sensors:
       anybody_connected:
         friendly_name: "Anybody connected?"
-        value_template: '{% if is_state("binary_sensor.proycon_connected","on") or is_state("binary_sensor.hans_connected","on") or is_state("binary_sensor.guest_connected","on") or  %}True{% else %}False{% endif %}'
+        value_template: '{% if is_state("binary_sensor.proycon_connected","on") or is_state("binary_sensor.hans_connected","on") or is_state("binary_sensor.guest_connected","on") %}True{% else %}False{% endif %}'
         device_class: occupancy
       guest_connected:
         friendly_name: "Guest connected?"
