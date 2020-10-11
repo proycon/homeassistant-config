@@ -16,11 +16,6 @@ homeassistant:
 
 # Enables the frontend
 frontend:
-    javascript_version: latest
-    extra_html_url:
-        - /local/custom-ui/state-card-tiles.html
-    extra_html_url_es5:
-        - /local/custom-ui/state-card-tiles.html
     themes: !include themes.yaml
 
 # Enables configuration UI
