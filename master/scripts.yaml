@@ -772,11 +772,15 @@ tvdecoder2_rai1:
 doorbell_sound:
     alias: Doorbell sound
     sequence:
-        - service: media_player.play_media
-          data:
-              entity_id: media_player.hall_speaker
-              media_content_id: file:///home/homeautomation/homeassistant/media/doorbell.ogg
-              media_content_type: 'music'
+      - service: media_player.play_media
+        data:
+            entity_id: media_player.hall_speaker
+            media_content_id: file:///home/homeautomation/homeassistant/media/doorbell.ogg
+            media_content_type: 'music'
+      - service: mqtt.publish
+        data_template:
+            topic: "home/sound/pi1"
+            payload_template: 'doorbell.ogg'
 dog_sound:
     alias: Dog sound
     sequence:

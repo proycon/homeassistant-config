@@ -558,7 +558,7 @@
       to: 'off'
   condition: #reconnection to network must be recent enough (10mins)
       condition: template
-      value_template: '{% if is_state("binary_sensor.proycon_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.proycon_connected.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
+      value_template: '{% if is_state("binary_sensor.proycon_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.proycon_connected.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.proycon_home
@@ -575,7 +575,7 @@
       to: 'off'
   condition: #reconnection to network must be recent enough (10mins)
       condition: template
-      value_template: '{% if is_state("binary_sensor.hans_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.hans_connected.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
+      value_template: '{% if is_state("binary_sensor.hans_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.hans_connected.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.hans_home
@@ -592,7 +592,7 @@
       to: 'off'
   condition: #reconnection to network must be recent enough (10mins)
       condition: template
-      value_template: '{% if is_state("binary_sensor.guest_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.guest_connected.attributes.last_updated)) < 600 %}True{% else %}False{% endif %}'
+      value_template: '{% if is_state("binary_sensor.guest_connected", "on") and (as_timestamp(now())-as_timestamp(states.binary_sensor.guest_connected.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.guest_home
@@ -695,6 +695,7 @@
     - service: input_boolean.turn_off
       entity_id: input_boolean.guest_home
 
+#this script triggers if the phone reconnects to the wlan; and disarms the system so entry can proceed
 - id: arrival_proycon
   alias: Arrival Proycon
   trigger:
@@ -738,6 +739,9 @@
   action:
     - service: script.turn_on
       entity_id: script.disarm
+    - service: notify.matrix
+      data:
+          message: "Hans coming home @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
     - condition: time
       after: '9:30'
       before: '22:30'
@@ -752,9 +756,6 @@
       data:
           topic: "home/say/pi1"
           payload: "Hans coming home"
-    - service: notify.matrix
-      data:
-          message: "Hans coming home @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
 
 - id: arrival_guest
   alias: Arrival guest
@@ -775,6 +776,7 @@
           topic: "home/say/pi1"
           payload: "Guest arriving"
 
+#this script triggers if the phone reconnects to the wlan only after the door has already closed
 - id: arrival_proycon_postentry
   alias: Arrival Proycon (Post Entry)
   trigger:
@@ -794,10 +796,6 @@
           - condition: template
             value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
-    - service: mqtt.publish
-      data:
-          topic: "home/say/pi1"
-          payload: "Welcome back Martin"
     - service: input_boolean.turn_on
       entity_id: input_boolean.proycon_home
 
@@ -820,10 +818,6 @@
           - condition: template
             value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.last_updated)) < 600 %}True{% else %}False{% endif %}'
   action:
-    - service: mqtt.publish
-      data:
-          topic: "home/say/pi1"
-          payload: "Welcome back Hans"
     - service: input_boolean.turn_on
       entity_id: input_boolean.hans_home
 
@@ -870,7 +864,38 @@
       entity_id: input_boolean.hans_home
 
 
+- id: arrival_beep
+  trigger:
+    - platform: state
+      entity_id: input_boolean.proycon_home
+      from: 'off'
+      to: 'on'
+    - platform: state
+      entity_id: input_boolean.hans_home
+      from: 'off'
+      to: 'on'
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi1"
+        payload_template: 'computerbeep_34.wav'
 
+
+- id: leave_beep
+  trigger:
+    - platform: state
+      entity_id: input_boolean.proycon_home
+      from: 'on'
+      to: 'off'
+    - platform: state
+      entity_id: input_boolean.hans_home
+      from: 'on'
+      to: 'off'
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi1"
+        payload_template: 'computerbeep_69.wav'
 
 ##########################################################################################
 #                    ALARM SYSTEM
