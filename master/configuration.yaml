@@ -132,12 +132,21 @@ logbook:
         - script.turn_media_off
         - script.lights_on
         - script.lights_off
+        - script.night_scene
+        - script.mpc_play
+        - script.play_youtube_link
+        - script.play_youtube_link_bedroom
+        - script.play_youtube_playlist
+        - script.vacuum_turn_on
+        - script.vacuum_turn_off
         - script.alarm
+        - script.disarm
         - script.ignite_dresser_ambilight
         - script.ignite_fireplace
         - script.extinguish_dresser_ambilight
         - script.extinguish_fireplace
         - script.wake_up_alarm
+        - script.home_notification_lights
     exclude:
       entities:
         - automation.frontdoor_snapshots
@@ -145,6 +154,8 @@ logbook:
         - automation.street_snapshots
         - automation.living_room_snapshots
         - automation.hall_upstairs_snapshots
+        - automation.auto_status
+        - script.send_status
 
 # Track the sun
 sun:

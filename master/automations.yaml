@@ -3398,14 +3398,14 @@
           payload: "test"
           qos: 1
 
-- alias: request_status
+- id: request_status
   trigger:
       - platform: mqtt
         topic: home/command/status
   action:
     - service: script.send_status
 
-- alias: auto_status
+- id: auto_status
   trigger:
     - platform: time_pattern
       minutes: '/5' #every five minutes
