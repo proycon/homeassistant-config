@@ -3431,6 +3431,7 @@
     - service: script.send_status
 
 - id: auto_status
+  alias: auto_status
   trigger:
     - platform: time_pattern
       minutes: '/5' #every five minutes
