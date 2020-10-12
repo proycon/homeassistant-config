@@ -547,6 +547,7 @@
 #######################################################################################################
 
 - id: home_detection_proycon
+  alias: "Proycon back inside home"
   trigger: #when doors close on reentry
     - platform: state
       entity_id: binary_sensor.front_door
@@ -564,6 +565,7 @@
       entity_id: input_boolean.proycon_home
 
 - id: home_detection_hans
+  alias: "Hans back inside home"
   trigger: #when doors close on reentry
     - platform: state
       entity_id: binary_sensor.front_door
@@ -581,6 +583,7 @@
       entity_id: input_boolean.hans_home
 
 - id: home_detection_guest
+  alias: "Home detection Guest"
   trigger: #when doors close on reentry
     - platform: state
       entity_id: binary_sensor.front_door
@@ -598,6 +601,7 @@
       entity_id: input_boolean.guest_home
 
 - id: home_greeting_proycon
+  alias: "Greeting proycon back home"
   trigger:
     - platform: state
       entity_id: input_boolean.proycon_home
@@ -612,6 +616,7 @@
           payload: "Hello Martin"
 
 - id: home_greeting_hans
+  alias: "Greeting Hans back home"
   trigger:
     - platform: state
       entity_id: input_boolean.hans_home
@@ -626,6 +631,7 @@
           payload: "Hello Hans"
 
 - id: home_greeting_guest
+  alias: "Home greeting guest"
   trigger:
     - platform: state
       entity_id: input_boolean.guest_home
@@ -822,6 +828,7 @@
       entity_id: input_boolean.hans_home
 
 - id: presence_fallsafe_proycon
+  alias: Proycon home after earlier misses
   trigger:
     - platform: state
       entity_id: binary_sensor.proycon_connected
@@ -843,6 +850,7 @@
       entity_id: input_boolean.proycon_home
 
 - id: presence_fallsafe_hans
+  alias: Hans home after earlier misses
   trigger:
     - platform: state
       entity_id: binary_sensor.hans_connected
@@ -865,6 +873,7 @@
 
 
 - id: arrival_beep
+  alias: Arrival beep
   trigger:
     - platform: state
       entity_id: input_boolean.proycon_home
@@ -882,6 +891,7 @@
 
 
 - id: leave_beep
+  alias: Departure beep
   trigger:
     - platform: state
       entity_id: input_boolean.proycon_home
