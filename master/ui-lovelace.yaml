@@ -2176,7 +2176,7 @@ views:
             name: Wifi Router
             icon: 'mdi:router-wireless'
           - type: weblink
-            url: 'http://192.168.0.4'
+            url: 'http://192.168.0.188'
             name: IPCam
             icon: 'mdi:camcorder'
           - type: weblink
