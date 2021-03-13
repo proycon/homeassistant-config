@@ -1041,33 +1041,6 @@ views:
               cards:
                 - type: vertical-stack
                   cards:
-                      - type: entities
-                        name: Jaiko
-                        icon: mdi:dog
-                        entities:
-                            - sensor.last_fed_jaiko
-                            - sensor.last_peed_jaiko
-                            - sensor.last_pooped_jaiko
-                      - type: horizontal-stack
-                        cards:
-                        - type: entity-button
-                          icon: mdi:bone
-                          entity: script.jaiko_fed
-                          tap_action:
-                              action: call-service
-                              service: script.jaiko_fed
-                        - type: entity-button
-                          icon: mdi:water
-                          entity: script.jaiko_peed
-                          tap_action:
-                              action: call-service
-                              service: script.jaiko_peed
-                        - type: entity-button
-                          icon: mdi:emoticon-poop
-                          entity: script.jaiko_pooped
-                          tap_action:
-                              action: call-service
-                              service: script.jaiko_pooped
                         - type: entity-button
                           icon: mdi:robot
                           name: "Start clean-up"
@@ -1834,16 +1807,6 @@ views:
             - entity: sensor.hourly_gas_consumption
               name: Hourly gas consumption
         - type: history-graph
-          title: Jaiko (24h)
-          hours_to_show: 24
-          entities:
-              - entity: sensor.last_fed_jaiko
-                name: Fed
-              - entity: sensor.last_peed_jaiko
-                name: Peed
-              - entity: sensor.last_pooped_jaiko
-                name: pooped
-        - type: history-graph
           title: Media (24h)
           hours_to_show: 24
           entities:
@@ -1901,46 +1864,6 @@ views:
           - type: picture-entity
             entity: camera.event_12
 
-  - path: dog
-    title: Dog
-    badges:
-      - binary_sensor.anybody_home
-      - binary_sensor.noise
-      - sensor.time
-    cards:
-      - type: entities
-        entities:
-          - input_boolean.notify_livingroom_movement
-          - input_select.ipcam_direction
-          - type: weblink
-            url: 'rtsp://192.168.3.108/videoMain'
-            name: Jaikocam Stream
-            icon: 'mdi:paw'
-          - sensor.last_movement_jaiko
-          - sensor.last_movement_living_room
-          - script.jaiko_fed
-          - sensor.last_fed_jaiko
-          - script.jaiko_peed
-          - sensor.last_peed_jaiko
-          - script.jaiko_pooped
-          - sensor.last_pooped_jaiko
-        title: Jaiko
-        show_header_toggle: true
-      - type: entities
-        entities:
-          - script.command_nee
-          - script.command_zit
-          - script.command_lig
-          - script.command_rustig
-          - script.command_stil
-          - script.command_goedzo
-        title: Dog commmands
-        show_header_toggle: true
-      - type: alarm-panel
-        entity: alarm_control_panel.alarm_system
-      - type: picture-entity
-        entity: camera.living_room
-    icon: 'mdi:paw'
   - path: light_view
     title: Lights
     badges:

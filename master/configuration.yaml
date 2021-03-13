@@ -468,15 +468,6 @@ sensor:
           last_movement_bathroom_window:
             friendly_name: Last movement bathroom_window_sensor
             value_template: "{{ states.binary_sensor.bathroom_window_sensor.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-          last_fed_jaiko:
-            friendly_name: Last fed Jaiko
-            value_template: "{{ states.script.jaiko_fed.attributes.last_triggered.astimezone().strftime('%a %H:%M:%S') }}"
-          last_peed_jaiko:
-            friendly_name: Last peed Jaiko
-            value_template: "{{ states.script.jaiko_peed.attributes.last_triggered.astimezone().strftime('%a %H:%M:%S') }}"
-          last_pooped_jaiko:
-            friendly_name: Last pooped Jaiko
-            value_template: "{{ states.script.jaiko_pooped.attributes.last_triggered.astimezone().strftime('%a %H:%M:%S') }}"
     - platform: mqtt
       name: Temperature Living Room
       unit_of_measurement: °C
