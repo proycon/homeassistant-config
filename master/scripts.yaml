@@ -914,34 +914,9 @@ reset_ipcam:
     alias: Reset IPcam
     sequence:
       - service: input_select.select_option
-        data_template:
+        data:
           entity_id: input_select.ipcam_direction
           option: "achter"
-
-#register
-jaiko_fed:
-    alias: Jaiko fed
-    sequence:
-        - service: mqtt.publish
-          data_template:
-            topic: "home/sound/pi1"
-            payload_template: 'computerbeep_65.wav'
-
-jaiko_peed:
-    alias: Jaiko peed
-    sequence:
-        - service: mqtt.publish
-          data_template:
-            topic: "home/sound/pi1"
-            payload_template: 'computerbeep_65.wav'
-
-jaiko_pooped:
-    alias: Jaiko pooped
-    sequence:
-        - service: mqtt.publish
-          data_template:
-            topic: "home/sound/pi1"
-            payload_template: 'computerbeep_65.wav'
 
 
 home_notification_lights:

@@ -147,6 +147,7 @@ logbook:
         - script.extinguish_fireplace
         - script.wake_up_alarm
         - script.home_notification_lights
+        - script.reset_ipcam
     exclude:
       entities:
         - automation.frontdoor_snapshots
