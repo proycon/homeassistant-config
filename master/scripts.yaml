@@ -878,6 +878,8 @@ ipcam_topreset:
         - service: rest_command.ipcam_topreset
           data_template:
               ipcam_ip: !secret ipcam_ip
+              ipcam_user: !secret ipcam_user
+              ipcam_password: !secret ipcam_password
               preset: '{{ input_select.ipcam_direction }}'
 ignite_fireplace:
     alias: Ignite Fireplace
