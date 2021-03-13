@@ -14,11 +14,6 @@
       name: Garden
       file_path: /home/homeautomation/homeassistant/snapshots/_garden.jpg
     - platform: mjpeg
-      name: living_room_live
-      mjpeg_url: !secret ipcam_mjpeg_url
-      authentication: basic
-      username: !secret ipcam_user
-      password: !secret ipcam_password
     - platform: mjpeg
       name: Garden Live
       mjpeg_url: !secret gardencam_mjpeg_url
