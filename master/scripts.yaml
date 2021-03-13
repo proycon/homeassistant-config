@@ -880,7 +880,7 @@ ipcam_topreset:
               ipcam_ip: !secret ipcam_ip
               ipcam_user: !secret ipcam_user
               ipcam_password: !secret ipcam_password
-              preset: '{{ input_select.ipcam_direction }}'
+              preset: '{{ states.input_select.ipcam_direction.state }}'
 ignite_fireplace:
     alias: Ignite Fireplace
     sequence:
