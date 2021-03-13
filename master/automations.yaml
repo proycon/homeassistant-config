@@ -212,7 +212,7 @@
       - service: input_select.select_option
         data:
           entity_id: input_select.ipcam_direction
-          option: straat
+          option: voor
       - service: script.turn_on
         entity_id: script.yellow_lights
       - service: script.turn_on
@@ -392,7 +392,7 @@
       to: 'on'
   condition:
       condition: template
-      value_template: "{{ states('sensor.ir_send_activity') == 'unknown' }}"
+      value_template: "{{ states('sensor.ir_send_activity') == 'unknown' or states('sensor.ir_send_activity') == 'unavailable' }}"
   action:
     - service: switch.turn_on
       entity_id: switch.hall
