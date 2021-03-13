@@ -1445,18 +1445,19 @@
            seconds: 1
      - service: script.turn_on
        entity_id: script.ignite_dresser_ambilight
+     - service: timer.start
+       entity_id: timer.reset_night_light
 
 - alias: Night light off
   trigger:
-      platform: state
-      entity_id: binary_sensor.pir_living_room
-      from: "on"
-      to: "off"
-      for:
-          minutes: 5
-  condition:
-      condition: template
-      value_template: '{% if states.automation.night_light_on_motion.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.night_light_on_motion.attributes.last_triggered)) < 90 }} {% else %} false {% endif %}'
+     - platform: event
+       event_type: timer.finished
+       event_data:
+          entity_id: timer.reset_night_light
+     - platform: event
+       event_type: timer.cancelled
+       event_data:
+          entity_id: timer.reset_night_light
   action:
      - service: script.turn_on
        entity_id: script.extinguish_dresser_ambilight
