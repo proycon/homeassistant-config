@@ -960,9 +960,9 @@ watch_tv:
     alias: Watch TV
     sequence:
         - service: mqtt.publish
-          data_template:
-            topic: "home/sound/pi1"
-            payload_template: 'computerbeep_5.wav'
+          data:
+              topic: "home/say/pi1"
+              payload: "Starting TV"
         - service: switch.turn_on
           entity_id: switch.tv
         - service: mqtt.publish
@@ -988,9 +988,9 @@ listen_to_music:
     alias: Listen to Music
     sequence:
         - service: mqtt.publish
-          data_template:
-            topic: "home/sound/pi1"
-            payload_template: 'computerbeep_5.wav'
+          data:
+              topic: "home/say/pi1"
+              payload: "Starting Music"
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - service: mqtt.publish
@@ -1024,9 +1024,9 @@ load_music:
     alias: Load Music
     sequence:
         - service: mqtt.publish
-          data_template:
-            topic: "home/sound/pi1"
-            payload_template: 'computerbeep_6.wav'
+          data:
+              topic: "home/say/pi1"
+              payload: "Loading Music"
         - service: shell_command.mpcclear
         - service: shell_command.mpc
           data_template:
@@ -1039,9 +1039,9 @@ media_centre:
     alias: Media Centre
     sequence:
         - service: mqtt.publish
-          data_template:
-            topic: "home/sound/pi1"
-            payload_template: 'computerbeep_5.wav'
+          data:
+              topic: "home/say/pi1"
+              payload: "Starting Media Centre"
         - service: script.turn_on
           entity_id: script.tv_on
         - delay:
@@ -1089,9 +1089,9 @@ desktop:
     alias: Desktop
     sequence:
         - service: mqtt.publish
-          data_template:
-            topic: "home/sound/pi1"
-            payload_template: 'computerbeep_5.wav'
+          data:
+              topic: "home/say/pi1"
+              payload: "Starting Desktop"
         - service: switch.turn_on
           entity_id: switch.tv
         - service: media_player.turn_on
@@ -1119,9 +1119,9 @@ turn_media_off:
           topic: "home/soundoutput/pi1"
           payload: "speakers"
     - service: mqtt.publish
-      data_template:
-        topic: "home/sound/pi1"
-        payload_template: 'computerbeep_5.wav'
+      data:
+          topic: "home/say/pi1"
+          payload: "Stopping all media"
     - service: media_player.turn_off
       entity_id: media_player.yamaha_receiver
     - delay:
@@ -1805,9 +1805,9 @@ start_timer:
     alias: Start Timer
     sequence:
         - service: mqtt.publish
-          data_template:
+          data:
             topic: "home/sound/pi1"
-            payload_template: 'computerbeep_5.wav'
+            payload: 'Timer started'
         - delay: '00:{{ states.input_number.timer.state | int }}:00'
         - service: media_player.play_media
           data:
@@ -1824,18 +1824,18 @@ vacuum_turn_on:
     alias: Vacuum turn on
     sequence:
         - service: mqtt.publish
-          data_template:
+          data:
             topic: "home/sound/pi1"
-            payload_template: 'computerbeep_5.wav'
+            payload: 'Starting the clean-up'
         - service: vacuum.start
           entity_id: vacuum.robot
 vacuum_turn_off:
     alias: Vacuum turn off
     sequence:
         - service: mqtt.publish
-          data_template:
+          data:
             topic: "home/sound/pi1"
-            payload_template: 'computerbeep_5.wav'
+            payload: 'Stopping the clean-up'
         - service: vacuum.stop
           entity_id: vacuum.robot
         - service: vacuum.return_to_base
@@ -1889,19 +1889,19 @@ play_youtube_link_bedroom:
 mpc_clear:
     alias: Clear playlist
     sequence:
-        - service: mqtt.publish
-          data_template:
-            topic: "home/sound/pi1"
-            payload_template: 'computerbeep_5.wav'
         - service: shell_command.mpcclear
+        - service: mqtt.publish
+          data:
+              topic: "home/say/pi1"
+              payload: "Playlist cleared"
 
 mpc_play:
     alias: Search and play music
     sequence:
         - service: mqtt.publish
-          data_template:
+          data:
             topic: "home/sound/pi1"
-            payload_template: 'computerbeep_6.wav'
+            payload: 'Searching and playing music'
         - service: shell_command.mpc
           data_template:
               type: "{{states.input_select.mpc_type.state}}"
@@ -1913,9 +1913,9 @@ mpc_playlist:
     alias: Play list
     sequence:
         - service: mqtt.publish
-          data_template:
-            topic: "home/sound/pi1"
-            payload_template: 'computerbeep_6.wav'
+          data:
+              topic: "home/say/pi1"
+              payload: "Playing playlist"
         - service: shell_command.mpcplaylist
           data_template:
               playlist: "{{states.input_text.mpc_playlist.state}}"
