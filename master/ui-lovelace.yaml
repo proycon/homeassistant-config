@@ -1008,15 +1008,11 @@ views:
                   entity: camera.living_room
                 - type: picture-entity
                   entity: camera.street
+                - type: picture-entity
+                  entity: camera.garden
             - type: entities
               entities:
                 - input_select.ipcam_direction
-            - type: horizontal-stack
-              cards:
-                - type: vertical-stack
-                  cards:
-                    - type: picture-entity
-                      entity: camera.garden
             - type: horizontal-stack
               cards:
                 - type: vertical-stack
