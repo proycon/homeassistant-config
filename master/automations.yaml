@@ -212,7 +212,7 @@
       - service: input_select.select_option
         data:
           entity_id: input_select.ipcam_direction
-          option: Front
+          option: straat
       - service: script.turn_on
         entity_id: script.yellow_lights
       - service: script.turn_on
@@ -399,7 +399,7 @@
     - service: input_select.select_option
       data:
           entity_id: input_select.ipcam_direction
-          option: Hall
+          option: gangdeur
     - service: timer.cancel
       entity_id: timer.home_notification_lights
     - service: timer.start
@@ -479,7 +479,7 @@
      - service: input_select.select_option
        data:
           entity_id: input_select.ipcam_direction
-          option: Hall
+          option: gangdeur
      - service: timer.start
        entity_id: timer.reset_ipcam
 - id: hall_light_off
@@ -505,7 +505,7 @@
     - service: input_select.select_option
       data:
           entity_id: input_select.ipcam_direction
-          option: Back
+          option: achter
     - delay:
         seconds: 2
     - service: script.turn_on
@@ -538,7 +538,7 @@
     - service: input_select.select_option
       data:
           entity_id: input_select.ipcam_direction
-          option: Hall
+          option: gangdeur
     - service: timer.start
       entity_id: timer.reset_ipcam
 

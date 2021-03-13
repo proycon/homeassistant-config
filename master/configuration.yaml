@@ -180,7 +180,8 @@ shell_command:
 
 rest_command:
     ipcam_topreset:
-        url: 'http://{{ ip }}/cgi/ptdc.cgi?command=goto_preset_position&index={{ index }}'
+        #url: 'http://{{ ip }}/cgi/ptdc.cgi?command=goto_preset_position&index={{ index }}'
+        url: 'http://{{ ipcam_ip }}/cgi-bin/CGIProxy.fcgi?cmd=ptzGotoPresetPoint&usr={{ipcam_user}}&pwd={{ipcam_pass})&name={{ preset }}'
         username: !secret ipcam_user
         password: !secret ipcam_password
 
@@ -225,16 +226,12 @@ input_select:
     ipcam_direction:
         name: Camera Direction Living room
         options:
-            - Hall
-            - Dresser
-            - Back
-            - TV
-            - Couch
-            - Front
-            - Bed Jaiko
-            - Floor
-            - Mand Jaiko
-            - Front table
+            - achter
+            - voor
+            - gangdeur
+            - onder
+            - onderachter
+            - straat
     fireplace:
         name: Fireplace
         options:

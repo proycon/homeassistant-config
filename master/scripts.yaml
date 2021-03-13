@@ -877,8 +877,8 @@ ipcam_topreset:
     sequence:
         - service: rest_command.ipcam_topreset
           data_template:
-              ip: !secret ipcam_ip
-              index: '{% if is_state("input_select.ipcam_direction","Hall") %}0{% elif is_state("input_select.ipcam_direction","Dresser") %}1{% elif is_state("input_select.ipcam_direction","Back") %}2{% elif is_state("input_select.ipcam_direction","TV") %}3{% elif is_state("input_select.ipcam_direction","Couch") %}4{% elif is_state("input_select.ipcam_direction","Front") %}5{% elif is_state("input_select.ipcam_direction","Bed Jaiko") %}6{% elif is_state("input_select.ipcam_direction","Floor") %}7{% elif is_state("input_select.ipcam_direction","Mand Jaiko") %}8{% elif is_state("input_select.ipcam_direction","Front table") %}9{% endif %}'
+              ipcam_ip: !secret ipcam_ip
+              preset: '{{ input_select.ipcam_direction }}'
 ignite_fireplace:
     alias: Ignite Fireplace
     sequence:
@@ -914,7 +914,7 @@ reset_ipcam:
       - service: input_select.select_option
         data_template:
           entity_id: input_select.ipcam_direction
-          option: "{% if states('input_boolean.jaiko_crated') == 'on' %}Bed Jaiko{% else %}Back{% endif %}"
+          option: "achter"
 
 #register
 jaiko_fed:
