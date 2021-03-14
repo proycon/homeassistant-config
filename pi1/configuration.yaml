@@ -84,9 +84,10 @@ switch:
             command_off: "sudo systemctl stop lightdm"
             command_state: "ps aux | grep lightdm | grep -v grep"
         musicplayer:
-            command_on: "killall mplayer; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; mplayer -ao alsa:device=hw=0.0 http://anaproy.nl:8000/stream.mp3 >/dev/null 2>/dev/null &" # hw=0.0 is not a typo, it's what mplayer expects for hw:0,0
+            command_on: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; snapclient -h mediaserver.anaprox.lxd >/dev/null 2>/dev/null &"
             command_off: "killall mplayer"
             command_state: "ps aux | grep mplayer | grep -v grep"
+            #command_on: "killall mplayer; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; mplayer -ao alsa:device=hw=0.0 http://anaproy.nl:8000/stream.mp3 >/dev/null 2>/dev/null &" # hw=0.0 is not a typo, it's what mplayer expects for hw:0,0
        #noisedetector:
        #    command_on: "avconv -f alsa -i hw:1,0 -vn -f rtp rtp://236.0.0.1:2000 &"
        #    command_off: "killall avconv"
