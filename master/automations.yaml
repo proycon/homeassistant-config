@@ -3538,3 +3538,103 @@
          data:
              entity_id: input_number.wake_up_minutes
              value: 30
+
+- alias: command_homecam_voor
+  trigger:
+      - platform: mqtt
+        topic: home/command/homecam/voor
+  action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.ipcam_direction
+          option: voor
+
+- alias: command_homecam_achter
+  trigger:
+      - platform: mqtt
+        topic: home/command/homecam/achter
+  action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.ipcam_direction
+          option: achter
+
+- alias: command_homecam_straat
+  trigger:
+      - platform: mqtt
+        topic: home/command/homecam/straat
+  action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.ipcam_direction
+          option: straat
+
+- alias: command_homecam_onder
+  trigger:
+      - platform: mqtt
+        topic: home/command/homecam/onder
+  action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.ipcam_direction
+          option: onder
+
+- alias: command_homecam_onderachter
+  trigger:
+      - platform: mqtt
+        topic: home/command/homecam/onderachter
+  action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.ipcam_direction
+          option: onderachter
+
+- alias: command_homecam_gangdeur
+  trigger:
+      - platform: mqtt
+        topic: home/command/homecam/gangdeur
+  action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.ipcam_direction
+          option: gangdeur
+
+- alias: command_heating_19
+  trigger:
+      - platform: mqtt
+        topic: home/command/heating/19
+  action:
+      - service: climate.set_temperature
+        data:
+            entity_id: climate.anna
+            temperature: 19
+
+- alias: command_heating_20
+  trigger:
+      - platform: mqtt
+        topic: home/command/heating/20
+  action:
+      - service: climate.set_temperature
+        data:
+            entity_id: climate.anna
+            temperature: 20
+
+- alias: command_heating_21
+  trigger:
+      - platform: mqtt
+        topic: home/command/heating/21
+  action:
+      - service: climate.set_temperature
+        data:
+            entity_id: climate.anna
+            temperature: 21
+
+- alias: command_heating_22
+  trigger:
+      - platform: mqtt
+        topic: home/command/heating/22
+  action:
+      - service: climate.set_temperature
+        data:
+            entity_id: climate.anna
+            temperature: 22
