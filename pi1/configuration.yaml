@@ -84,7 +84,7 @@ switch:
             command_off: "sudo systemctl stop lightdm"
             command_state: "ps aux | grep lightdm | grep -v grep"
         musicplayer:
-            command_on: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; snapclient -s 1 -h mediaserver.anaproy.lxd >/dev/null 2>/dev/null &"
+            command_on: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; snapclient -s sysdefault -h mediaserver.anaproy.lxd >/dev/null 2>/dev/null &"
             command_off: "killall snapclient"
             command_state: "ps aux | grep snapclient | grep -v grep"
             #command_on: "killall mplayer; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; mplayer -ao alsa:device=hw=0.0 http://anaproy.nl:8000/stream.mp3 >/dev/null 2>/dev/null &" # hw=0.0 is not a typo, it's what mplayer expects for hw:0,0
@@ -225,26 +225,26 @@ automation:
         entity_id: media_player.speaker
         data_template:
             message: '{{ trigger.payload }}'
-  - id: m2s_soundoutput_speakers
-    alias: m2s_soundoutput_speakers
-    trigger:
-        platform: mqtt
-        topic: "home/soundoutput/pi1"
-        payload: 'speakers'
-    action:
-        service: shell_command.soundoutput
-        data:
-            outputid: '1'
-  - id: m2s_soundoutput_hdmi
-    alias: m2s_soundoutput_hdmi
-    trigger:
-        platform: mqtt
-        topic: "home/soundoutput/pi1"
-        payload: 'hdmi'
-    action:
-        service: shell_command.soundoutput
-        data:
-            outputid: '2'
+    #- id: m2s_soundoutput_speakers
+    #  alias: m2s_soundoutput_speakers
+    #  trigger:
+    #      platform: mqtt
+    #      topic: "home/soundoutput/pi1"
+    #      payload: 'speakers'
+    #  action:
+    #      service: shell_command.soundoutput
+    #      data:
+    #          outputid: '1'
+    #- id: m2s_soundoutput_hdmi
+    #  alias: m2s_soundoutput_hdmi
+    #  trigger:
+    #      platform: mqtt
+    #      topic: "home/soundoutput/pi1"
+    #      payload: 'hdmi'
+    #  action:
+    #      service: shell_command.soundoutput
+    #      data:
+    #          outputid: '2'
   - id: m2s_noisedetector_on
     alias: m2s_noisedetector_on
     trigger:
@@ -365,7 +365,7 @@ shell_command:
     ir_send: /home/homeautomation/homeassistant/scripts/media/irsend.sh "{{ device }}" "{{ key }}"
     433send: /home/homeautomation/homeassistant/scripts/switch/433send.sh 7 "{{ protocol }}" "{{ group }}" "{{ unit }}" "{{ state }}"
     hdmi_cec_send: /home/homeautomation/homeassistant/scripts/media/hdmicecsend.sh "{{ payload }}"
-    soundoutput: sudo amixer cset numid=3 "{{ outputid }}"
+    #soundoutput: sudo amixer cset numid=3 "{{ outputid }}"
 
 
 
