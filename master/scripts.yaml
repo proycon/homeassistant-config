@@ -965,10 +965,6 @@ watch_tv:
               payload: "Starting TV"
         - service: switch.turn_on
           entity_id: switch.tv
-        - service: mqtt.publish
-          data:
-              topic: "home/soundoutput/pi1"
-              payload: "speakers"
         - delay:
             seconds: 1
         - service: media_player.turn_on
@@ -993,10 +989,6 @@ listen_to_music:
               payload: "Starting Music"
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
-        - service: mqtt.publish
-          data:
-              topic: "home/soundoutput/pi1"
-              payload: "hdmi"
         - service: switch.turn_off
           entity_id: switch.pi1_xorg
         - service: switch.turn_off
@@ -1050,10 +1042,6 @@ media_centre:
           entity_id: media_player.yamaha_receiver
         - service: switch.turn_off
           entity_id: switch.pi1_xorg
-        - service: mqtt.publish
-          data:
-              topic: "home/soundoutput/pi1"
-              payload: "hdmi"
         - delay:
             seconds: 1
         - service: media_player.select_source
@@ -1098,10 +1086,6 @@ desktop:
           entity_id: media_player.yamaha_receiver
         - service: switch.turn_off
           entity_id: switch.pi1_kodi
-        - service: mqtt.publish
-          data:
-              topic: "home/soundoutput/pi1"
-              payload: "speakers"
         - delay:
             seconds: 1
         - service: media_player.select_source
@@ -1114,10 +1098,6 @@ desktop:
 turn_media_off:
     alias: Turn media off
     sequence:
-    - service: mqtt.publish
-      data:
-          topic: "home/soundoutput/pi1"
-          payload: "speakers"
     - service: mqtt.publish
       data:
           topic: "home/say/pi1"
