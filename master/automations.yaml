@@ -2266,6 +2266,9 @@
         - condition: state
           entity_id: media_player.mpd
           state: "paused"
+        - condition: state
+          entity_id: media_player.mpd
+          state: "unavailable"
   trigger:
     - platform: event
       event_type: zwave.scene_activated
