@@ -304,9 +304,6 @@
        entity_id: script.reset_guard_lights
      - delay:
          seconds: 10
-     - condition: state
-       entity_id: binary_sensor.front_door
-       state: 'off'
 
 - id: reset_ipcam_finished
   alias: "Reset IPCam Finished"
