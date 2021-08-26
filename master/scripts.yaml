@@ -1099,9 +1099,9 @@ turn_media_off:
     alias: Turn media off
     sequence:
     - service: mqtt.publish
-      data:
-          topic: "home/say/pi1"
-          payload: "Stopping all media"
+      data_template:
+        topic: "home/sound/pi2"
+        payload_template: 'computerbeep_5.wav'
     - service: media_player.turn_off
       entity_id: media_player.yamaha_receiver
     - delay:

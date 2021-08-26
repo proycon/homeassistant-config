@@ -175,15 +175,25 @@
   action:
       service: switch.turn_on
       entity_id: switch.porch
-- id: porch_light_off_after_dawn
-  alias: Porch light off after dawn
+- id: porch_garden_light_off_after_dawn
+  alias: Porch and garden light off after dawn
   trigger:
       platform: sun
       event: sunrise
       offset: '01:00:00'
   action:
-      service: switch.turn_off
+    - service: switch.turn_off
       entity_id: switch.porch
+    - service: script.turn_off
+      entity_id: switch.garden
+- id: porch_off_at_night
+  alias: porch_off_at_night
+  trigger:
+      platform: time
+      at: '23:30:00'
+  action:
+      - service: script.turn_off
+        entity_id: switch.porch
 - id: lights_off_at_night
   alias: Lights off at night
   trigger:
@@ -192,6 +202,10 @@
   action:
       - service: script.turn_on
         entity_id: script.lights_off
+      - service: script.turn_off
+        entity_id: switch.porch
+      - service: script.turn_off
+        entity_id: switch.garden
 - id: doorbell
   alias: Doorbell
   trigger:
@@ -232,6 +246,7 @@
       - service: timer.start
         data:
           entity_id: timer.home_notification_lights
+          duration:  '00:02:00'
       - service: persistent_notification.create
         data_template:
             message: "There is somebody at the door ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }})"
@@ -2248,6 +2263,22 @@
   action:
       service: switch.turn_off
       entity_id: switch.bedroom
+- id: remote_lights_porch_on
+  alias: remote_lights_porch_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/porch/on"
+  action:
+      service: switch.turn_on
+      entity_id: switch.porch
+- id: remote_lights_porch_off
+  alias: remote_lights_porch_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/porch/off"
+  action:
+      service: switch.turn_off
+      entity_id: switch.porch
 
 - id: remote_tv_on
   alias: remote_tv_on
