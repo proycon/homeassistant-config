@@ -2969,6 +2969,7 @@
              value: 00
 
 - id: thermostat_morning_hanswork
+  alias: thermostat_morning_hanswork
   trigger:
       - platform: time
         at: '05:00:00'
@@ -2986,6 +2987,7 @@
             temperature: 21
 
 - id: thermostat_morning_hanswork_reset
+  alias: thermostat_morning_hanswork_reset
   trigger:
       - platform: time
         at: '06:00:00'
@@ -3003,6 +3005,7 @@
             temperature: 18
 
 - id: thermostat_morning_default
+  alias: thermostat_morning_default
   trigger:
       - platform: time
         at: '08:45:00'
@@ -3013,6 +3016,7 @@
             temperature: 21
 
 - id: thermostat_evening
+  alias: thermostat_evening
   trigger:
       - platform: time
         at: '23:30:00'
@@ -3023,6 +3027,7 @@
             temperature: 18
 
 - id: remote_channel_npo1
+  alias: remote_channel_npo1
   trigger:
     - platform: mqtt
       topic: "home/command/tvdecoder/channel/npo1"
@@ -3030,6 +3035,7 @@
       - service: script.turn_on
         entity_id: script.tvdecoder_npo1
 - id: remote_channel_npo2
+  alias: remote_channel_npo2
   trigger:
     - platform: mqtt
       topic: "home/command/tvdecoder/channel/npo2"
@@ -3037,6 +3043,7 @@
       - service: script.turn_on
         entity_id: script.tvdecoder_npo2
 - id: remote_channel_npo3
+  alias: remote_channel_npo3
   trigger:
     - platform: mqtt
       topic: "home/command/tvdecoder/channel/npo3"
@@ -3079,6 +3086,7 @@
       - service: script.turn_on
         entity_id: script.tvdecoder_bbc1st
 - id: remote_channel_ard
+  alias: remote_channel_ard
   trigger:
     - platform: mqtt
       topic: "home/command/tvdecoder/channel/ard"
@@ -3086,6 +3094,7 @@
       - service: script.turn_on
         entity_id: script.tvdecoder_ard
 - id: remote_channel_zdf
+  alias: remote_channel_zdf
   trigger:
     - platform: mqtt
       topic: "home/command/tvdecoder/channel/zdf"
@@ -3093,6 +3102,7 @@
       - service: script.turn_on
         entity_id: script.tvdecoder_zdf
 - id: remote_channel_wdr
+  alias: remote_channel_wdr
   trigger:
     - platform: mqtt
       topic: "home/command/tvdecoder/channel/wdr"
@@ -3115,6 +3125,7 @@
         entity_id: alarm_control_panel.alarm_system
 
 - id: remote_cancel_alarm
+  alias: remote_cancel_alarm
   trigger:
      - platform: mqtt
        topic: "home/command/alarm/cancel"
@@ -3129,6 +3140,7 @@
         entity_id: alarm_control_panel.alarm_system
 
 - id: airco_living_on
+  alias: airco_living_on
   trigger:
       - platform: numeric_state
         entity_id: sensor.daikinap75591_inside_temperature
@@ -3174,6 +3186,7 @@
         entity_id: climate.daikinap75591
 
 - id: remote_airco_living_on
+  alias: remote_airco_living_on
   trigger:
      - platform: mqtt
        topic: "home/command/airco/living/cool"
@@ -3198,6 +3211,7 @@
 
 
 - id: airco_living_on_refusal
+  alias: airco_living_on_refusal
   trigger:
       - platform: numeric_state
         entity_id: sensor.daikinap75591_inside_temperature
@@ -3226,6 +3240,7 @@
             payload: "Please close the back door so air conditioning can be enabled"
 
 - id: airco_living_off
+  alias: airco_living_off
   trigger:
       - platform: numeric_state
         entity_id: sensor.temperature_thermostat
@@ -3246,6 +3261,7 @@
         entity_id: climate.daikinap75591
 
 - id: remote_airco_living_off
+  alias: remote_airco_living_off
   trigger:
      - platform: mqtt
        topic: "home/command/airco/living/off"
@@ -3254,6 +3270,7 @@
         entity_id: climate.daikinap75591
 
 - id: airco_living_silent
+  alias: airco_living_silent
   trigger:
      - platform: time
        at: '22:00:00'
@@ -3270,6 +3287,7 @@
             fan_mode: Silence
 
 - id: airco_living_full
+  alias: airco_living_full
   trigger:
       platform: time
       at: '09:00:00'
@@ -3284,6 +3302,7 @@
             fan_mode: Auto
 
 - id: airco_bedroom_on
+  alias: airco_bedroom_on
   trigger:
       - platform: numeric_state
         entity_id: sensor.daikinap82317_inside_temperature
@@ -3336,6 +3355,7 @@
         entity_id: climate.daikinap82317
 
 - id: remote_airco_bedroom_on
+  alias: remote_airco_bedroom_on
   trigger:
      - platform: mqtt
        topic: "home/command/airco/bedroom/cool"
@@ -3359,6 +3379,7 @@
         entity_id: climate.daikinap82317
 
 - id: airco_bedroom_on_refusal
+  alias: airco_bedroom_on_refusal
   trigger:
       - platform: numeric_state
         entity_id: sensor.daikinap82317_inside_temperature
@@ -3392,6 +3413,7 @@
             payload: "Please close the windows upstairs so air conditioning can be enabled"
 
 - id: airco_bedroom_off
+  alias: airco_bedroom_off
   trigger:
       - platform: numeric_state
         entity_id: sensor.bedroom_temperature
@@ -3425,6 +3447,7 @@
         entity_id: climate.daikinap82317
 
 - id: airco_bedroom_silent
+  alias: airco_bedroom_silent
   trigger:
      - platform: time
        at: '22:00:00'
@@ -3454,7 +3477,8 @@
             entity_id: climate.daikinap82317
             fan_mode: Auto
 
-- alias: command_test_notification
+- id: command_test_notification
+  alias: command_test_notification
   trigger:
       - platform: mqtt
         topic: home/command/test/notification
@@ -3466,6 +3490,7 @@
           qos: 1
 
 - id: request_status
+  alias: request_status
   trigger:
       - platform: mqtt
         topic: home/command/status
