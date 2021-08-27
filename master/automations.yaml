@@ -184,7 +184,7 @@
   action:
     - service: switch.turn_off
       entity_id: switch.porch
-    - service: script.turn_off
+    - service: switch.turn_off
       entity_id: switch.garden
 - id: porch_off_at_night
   alias: porch_off_at_night
@@ -192,7 +192,7 @@
       platform: time
       at: '23:30:00'
   action:
-      - service: script.turn_off
+      - service: switch.turn_off
         entity_id: switch.porch
 - id: lights_off_at_night
   alias: Lights off at night
@@ -202,9 +202,9 @@
   action:
       - service: script.turn_on
         entity_id: script.lights_off
-      - service: script.turn_off
+      - service: switch.turn_off
         entity_id: switch.porch
-      - service: script.turn_off
+      - service: switch.turn_off
         entity_id: switch.garden
 - id: doorbell
   alias: Doorbell
@@ -1024,7 +1024,7 @@
       entity_id: switch.back_room
     - delay:
         seconds: 1
-    - service: script.turn_on
+    - service: switch.turn_on
       entity_id: switch.porch
 
 - id: arm_when_away
