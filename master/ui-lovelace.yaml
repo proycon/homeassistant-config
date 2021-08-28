@@ -1027,19 +1027,6 @@ views:
            #  aspect_ratio: 90%
            #  url: !secret windy_url
         - type: entities
-          entities:
-            - sensor.wake_up_time
-            - input_number.wake_up_hour
-            - input_number.wake_up_minutes
-          title: Wake up alarm
-          show_header_toggle: false
-        - type: entities
-          entities:
-            - input_number.timer
-            - script.start_timer
-          title: Timer
-          show_header_toggle: false
-        - type: entities
           title: Media Devices
           view_layout:
               position: sidebar
@@ -1103,6 +1090,19 @@ views:
             - fan.ceiling_fan
           title: Fans
           show_header_toggle: true
+        - type: entities
+          entities:
+            - sensor.wake_up_time
+            - input_number.wake_up_hour
+            - input_number.wake_up_minutes
+          title: Wake up alarm
+          show_header_toggle: false
+        - type: entities
+          entities:
+            - input_number.timer
+            - script.start_timer
+          title: Timer
+          show_header_toggle: false
   - id: media
     path: media
     icon: mdi:television
