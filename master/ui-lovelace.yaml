@@ -1078,10 +1078,6 @@ views:
           show_header_toggle: true
         - type: entities
           entities:
-          title: Guard lights
-          show_header_toggle: true
-        - type: entities
-          entities:
             - input_select.fireplace
             - input_number.fireplace_brightness
             - script.ignite_fireplace
