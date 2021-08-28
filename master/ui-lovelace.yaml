@@ -1018,14 +1018,13 @@ views:
                 entity: climate.daikinap82317
         - type: entities
           show_header_toggle: false
+          view_layout:
+              position: sidebar
           entities:
              - type: weblink
                url: 'https://www.buienradar.nl/weer/eindhoven/nl/2756253'
                name: Buienradar
                icon: 'mdi:weather-pouring'
-           #- type: iframe
-           #  aspect_ratio: 90%
-           #  url: !secret windy_url
         - type: entities
           title: Media Devices
           view_layout:
@@ -1037,59 +1036,68 @@ views:
             - switch.pi1_xorg
             - switch.pi1_music_player
           show_header_toggle: false
-        - type: horizontal-stack
-          cards:
-          - type: vertical-stack
-            cards:
-            - type: entities
-              entities:
-                - switch.tv_spots
-                - switch.front_room
-                - switch.technofire
-                - switch.ambilight
-                - switch.midspots
-                - switch.back_room
-                - switch.back_corner
-                - switch.hall
-              title: Downstairs lights
-              show_header_toggle: false
-            - type: entities
-              entities:
-                - input_select.fireplace
-                - input_number.fireplace_brightness
-                - script.ignite_fireplace
-                - script.extinguish_fireplace
-              title: Fireplace
-              show_header_toggle: false
-          - type: vertical-stack
-            cards:
-            - type: entities
-              entities:
-                - switch.office
-                - switch.bedroom
-              title: Upstairs Lights
-              show_header_toggle: true
-            - type: entities
-              entities:
-                - switch.garden
-                - switch.balcony
-                - switch.porch
-                - switch.roof
-              title: Outside lights
-              show_header_toggle: true
-            - type: entities
-              entities:
-                - input_select.dresser_ambilight
-                - input_number.dresser_ambilight_brightness
-                - script.ignite_dresser_ambilight
-                - script.extinguish_dresser_ambilight
-              title: Dresser Ambilight
-              show_header_toggle: false
+        - type: entities
+          title: YouTube
+          icon: mdi:youtube
+          show_header_toggle: false
+          view_layout:
+              position: sidebar
+          entities:
+             - input_text.youtube_link
+             - script.play_youtube_link
+        - type: entities
+          entities:
+            - switch.tv_spots
+            - switch.front_room
+            - switch.technofire
+            - switch.ambilight
+            - switch.midspots
+            - switch.back_room
+            - switch.back_corner
+            - switch.hall
+          title: Downstairs lights
+          show_header_toggle: false
+        - type: entities
+          entities:
+            - switch.office
+            - switch.bedroom
+          title: Upstairs Lights
+          show_header_toggle: true
+          view_layout:
+              position: sidebar
+        - type: entities
+          entities:
+            - switch.garden
+            - switch.balcony
+            - switch.porch
+            - switch.roof
+          title: Outside lights
+          show_header_toggle: true
+          view_layout:
+              position: sidebar
+        - type: entities
+          entities:
+            - input_select.fireplace
+            - input_number.fireplace_brightness
+            - script.ignite_fireplace
+            - script.extinguish_fireplace
+          title: Fireplace
+          show_header_toggle: false
+        - type: entities
+          entities:
+            - input_select.dresser_ambilight
+            - input_number.dresser_ambilight_brightness
+            - script.ignite_dresser_ambilight
+            - script.extinguish_dresser_ambilight
+          title: Dresser Ambilight
+          show_header_toggle: false
         - type: entities
           entities:
             - fan.ceiling_fan
           title: Fans
           show_header_toggle: true
+          view_layout:
+              position: sidebar
         - type: entities
           entities:
             - sensor.wake_up_time
