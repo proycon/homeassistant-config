@@ -1026,6 +1026,13 @@ views:
                name: Buienradar
                icon: 'mdi:weather-pouring'
         - type: entities
+          entities:
+            - fan.ceiling_fan
+          title: Fans
+          show_header_toggle: true
+          view_layout:
+              position: sidebar
+        - type: entities
           title: Media Devices
           view_layout:
               position: sidebar
@@ -1083,6 +1090,8 @@ views:
             - script.extinguish_fireplace
           title: Fireplace
           show_header_toggle: false
+          view_layout:
+              position: sidebar
         - type: entities
           entities:
             - input_select.dresser_ambilight
@@ -1091,13 +1100,6 @@ views:
             - script.extinguish_dresser_ambilight
           title: Dresser Ambilight
           show_header_toggle: false
-        - type: entities
-          entities:
-            - fan.ceiling_fan
-          title: Fans
-          show_header_toggle: true
-          view_layout:
-              position: sidebar
         - type: entities
           entities:
             - sensor.wake_up_time
