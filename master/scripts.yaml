@@ -1906,7 +1906,7 @@ send_status:
         - service: mqtt.publish
           data:
               topic: "home/status/presence"
-              payload_template: "{% if is_state('device_tracker.pinephone','home') %}proycon{% endif %} {% if is_state('device_tracker.hansphone','home') %}hans{% endif %}"
+              payload_template: "{% if is_state('input_boolean.proycon_home','on') %}proycon{% endif %} {% if is_state('input_boolean.hans_home','on') %}hans{% endif %}"
         - service: mqtt.publish
           data:
               topic: "home/status/alarm"
@@ -1922,7 +1922,7 @@ send_status:
         - service: mqtt.publish
           data:
               topic: "home/status/doors"
-              payload_template: "{% if is_state('binary_sensor.front_door','on') %}frontdoor{% endif %} {% if is_state('binary_sensor.back_door','on') %}backdoor{% endif %} {% if is_state('binary_sensor.bedroom_window_left','on') %}bedroom-left{% endif %} {% if is_state('binary_sensor.bedroom_win','on') %}bedroom_right{% endif %} {% if is_state('binary_sensor.bathroom_window_sensor','on') %}bathroom{% endif %}"
+              payload_template: "{% if is_state('binary_sensor.front_door','on') %}frontdoor{% endif %} {% if is_state('binary_sensor.back_door','on') %}backdoor{% endif %} {% if is_state('binary_sensor.bedroom_window_left','on') %}bedroom-left{% endif %} {% if is_state('binary_sensor.bedroom_window_right','on') %}bedroom_right{% endif %} {% if is_state('binary_sensor.bathroom_window_sensor','on') %}bathroom{% endif %}"
         - service: mqtt.publish
           data:
               topic: "home/status/lights"
