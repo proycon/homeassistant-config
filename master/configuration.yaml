@@ -772,21 +772,23 @@ switch noise_detector:
     name: Noise detector
     command_topic: "home/noisedetector/set/pi1"
     state_topic: "home/noisedetector/get/pi1"
-switch bedroom_highspots:
-    platform: command_line
-    friendly_name: Bedroom Highspots
-    command_on: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi?relay=0"
-    command_off: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi?relay=0"
-    command_state: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}"
-    value_template: "{{ value[7] == \"1\" }}"
+
+switch:
+  - platform: command_line
+    switches:
+      bedroom_highspots:
+        friendly_name: Bedroom Highspots
+        command_on: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi?relay=0"
+        command_off: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi?relay=0"
+        command_state: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}"
+        value_template: "{{ value[7] == \"1\" }}"
+      bedroom_midspots:
+        friendly_name: Bedroom Midspots
+        command_on: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi?relay=1"
+        command_off: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi?relay=1"
+        command_state: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}"
+        value_template: "{{ value[8] == \"1\" }}"
     #output is: relays 00000000
-switch bedroom_midspots:
-    platform: command_line
-    friendly_name: Bedroom Midspots
-    command_on: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi?relay=1"
-    command_off: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi?relay=1"
-    command_state: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}"
-    value_template: "{{ value[8] == \"1\" }}"
 
 
 
