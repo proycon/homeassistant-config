@@ -121,6 +121,8 @@ logbook:
         - binary_sensor.bedroom_window_left
         - binary_sensor.bedroom_window_right
         - binary_sensor.bathroom_window_sensor
+        - binary_sensor.roof_window_east
+        - binary_sensor.roof_window_west
         - binary_sensor.doorbell
         - binary_sensor.anybodyhome
         - binary_sensor.noise
@@ -442,9 +444,15 @@ sensor:
           bathroom_window_battery:
             friendly_name: Bathroom Window Battery
             value_template: "{{ states.zwave.bathroom_window.attributes.battery_level }}"
+          roof_window_east_battery:
+            friendly_name: Roof Window East Battery
+            value_template: "{{ states.zwave.roof_window_east.attributes.battery_level }}"
+          roof_window_west_battery:
+            friendly_name: Roof Window west Battery
+            value_template: "{{ states.zwave.roof_window_west.attributes.battery_level }}"
           downstairs_remote_battery:
-            friendly_name: Downstairs remote battery
-            value_template: "{{ states.zwave.downstairs_remote_battery.attributes.battery_level }}"
+            friendly_name: Remote downstairs small battery
+            value_template: "{{ states.zwave.remote_downstairs_small.attributes.battery_level }}"
           last_movement_overloop:
             friendly_name: Last movement Overloop
             value_template: "{{ states.binary_sensor.pir_overloop.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
@@ -475,6 +483,12 @@ sensor:
           last_movement_bathroom_window:
             friendly_name: Last movement bathroom_window_sensor
             value_template: "{{ states.binary_sensor.bathroom_window_sensor.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+          last_movement_roof_window_east:
+            friendly_name: Last movement roof window east
+            value_template: "{{ states.binary_sensor.roof_window_east.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+          last_movement_roof_window_west:
+            friendly_name: Last movement roof window west
+            value_template: "{{ states.binary_sensor.roof_window_west.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
     - platform: mqtt
       name: Temperature Living Room
       unit_of_measurement: °C

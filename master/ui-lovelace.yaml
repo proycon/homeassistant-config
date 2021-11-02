@@ -670,8 +670,8 @@ views:
                   'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
                   'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
                 style:
-                  top: 40%
-                  left: 63%
+                  top: 45%
+                  left: 47%
                   width: 7%
                   padding: 50px 50px 100px 50px
               - type: image
@@ -688,9 +688,57 @@ views:
                   'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
                 style:
                   top: 55%
-                  left: 63%
+                  left: 47%
                   width: 7%
                   padding: 50px 50px 100px 50px
+              - type: image
+                entity: binary_sensor.dakraam_oost_sensor
+                image: /local/icons/closed.png
+                state_image:
+                   'on': /local/icons/open.png
+                state_filter:
+                  'on': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px red)
+                  'off': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px black)
+                style:
+                   top: 55%
+                   left: 63%
+                   width: 5%
+                   padding: 25px
+              - type: state-label
+                entity: sensor.last_movement_roof_window_east
+                style:
+                  top: 58%
+                  left: 63%
+                  background: center
+                  text-align: center
+                  font-size: 0.6em
+                  font-style: italic
+                  color: black
+                  font-family: Helvetica
+              - type: image
+                entity: binary_sensor.dakraam_west_sensor
+                image: /local/icons/closed.png
+                state_image:
+                   'on': /local/icons/open.png
+                state_filter:
+                  'on': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px red)
+                  'off': brightness(100%) saturate(1.5) drop-shadow(0px 0px 10px black)
+                style:
+                   top: 61%
+                   left: 63%
+                   width: 5%
+                   padding: 25px
+              - type: state-label
+                entity: sensor.last_movement_roof_window_west
+                style:
+                  top: 64%
+                  left: 63%
+                  background: center
+                  text-align: center
+                  font-size: 0.6em
+                  font-style: italic
+                  color: black
+                  font-family: Helvetica
               - type: image
                 entity: switch.roof
                 tap_action:
