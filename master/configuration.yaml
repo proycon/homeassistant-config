@@ -485,10 +485,10 @@ sensor:
             value_template: "{{ states.binary_sensor.bathroom_window_sensor.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
           last_movement_roof_window_east:
             friendly_name: Last movement roof window east
-            value_template: "{{ states.binary_sensor.roof_window_east.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+            value_template: "{{ states.binary_sensor.dakraam_oost_sensor.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
           last_movement_roof_window_west:
             friendly_name: Last movement roof window west
-            value_template: "{{ states.binary_sensor.roof_window_west.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+            value_template: "{{ states.binary_sensor.dakraam_west_sensor.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
     - platform: mqtt
       name: Temperature Living Room
       unit_of_measurement: °C
