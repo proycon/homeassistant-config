@@ -1940,6 +1940,12 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 7
         scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 7
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/off"
   action:
@@ -2100,6 +2106,12 @@
   trigger:
     - platform: mqtt
       topic: "home/command/lights/office/off"
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 7
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
       service: switch.turn_off
       entity_id: switch.office
@@ -2244,6 +2256,12 @@
   trigger:
     - platform: mqtt
       topic: "home/command/lights/hall/off"
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 7
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
       service: switch.turn_off
       entity_id: switch.hall
@@ -2260,6 +2278,50 @@
   trigger:
     - platform: mqtt
       topic: "home/command/lights/bedroom/off"
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 2
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 2
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  action:
+      service: switch.turn_off
+      entity_id: switch.bedroom
+- id: remote_lights_bedroom_toggle_on
+  alias: remote_lights_bedroom_toggle_on
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 2
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  condition:
+      - condition: state
+        entity_id: switch.bedroom
+        state: "off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.bedroom
+- id: remote_lights_bedroom_toggle_off
+  alias: remote_lights_bedroom_toggle_off
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 2
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  condition:
+      - condition: state
+        entity_id: switch.bedroom
+        state: "on"
   action:
       service: switch.turn_off
       entity_id: switch.bedroom
@@ -2279,6 +2341,116 @@
   action:
       service: switch.turn_off
       entity_id: switch.porch
+
+- id: remote_lights_bedroom_midspots_on
+  alias: remote_lights_bedroom_midspots_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/bedroom_midspots/on"
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 3
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  condition:
+      - condition: state
+        entity_id: switch.bedroom_midspots
+        state: "off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.bedroom_midspots
+
+- id: remote_lights_bedroom_midspots_off
+  alias: remote_lights_bedroom_midspots_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/bedroom_midspots/off"
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 3
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  condition:
+      - condition: state
+        entity_id: switch.bedroom_midspots
+        state: "on"
+  action:
+      service: switch.turn_off
+      entity_id: switch.bedroom_midspots
+
+- id: remote_lights_bedroom_highspots_on
+  alias: remote_lights_bedroom_highspots_on
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/bedroom_highspots/on"
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 4
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  condition:
+      - condition: state
+        entity_id: switch.bedroom_highspots
+        state: "off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.bedroom_highspots
+
+- id: remote_lights_bedroom_highspots_off
+  alias: remote_lights_bedroom_highspots_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/bedroom_highspots/off"
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 4
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  condition:
+      - condition: state
+        entity_id: switch.bedroom_highspots
+        state: "on"
+  action:
+      service: switch.turn_off
+      entity_id: switch.bedroom_highspots
+
+- id: remote_lights_balcony_toggle_on
+  alias: remote_lights_balcony_toggle_on
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 8
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  condition:
+      - condition: state
+        entity_id: switch.balcony
+        state: "off"
+  action:
+      service: switch.turn_on
+      entity_id: switch.balcony
+- id: remote_lights_balcony_toggle_off
+  alias: remote_lights_balcony_toggle_off
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 8
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  condition:
+      - condition: state
+        entity_id: switch.balcony
+        state: "on"
+  action:
+      service: switch.turn_off
+      entity_id: switch.balcony
+
 
 - id: remote_tv_on
   alias: remote_tv_on

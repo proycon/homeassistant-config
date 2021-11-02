@@ -182,7 +182,11 @@ shell_command:
 rest_command:
     ipcam_topreset:
         url: 'http://{{ ipcam_ip }}:88/cgi-bin/CGIProxy.fcgi?cmd=ptzGotoPresetPoint&usr={{ ipcam_user }}&pwd={{ ipcam_password }}&name={{ preset }}'
-        #url: 'http://{{ ip }}/cgi/ptdc.cgi?command=goto_preset_position&index={{ index }}'
+    bedroomspots_high:
+        url: 'http://{{ eth008_ip }}/io.cgi?relay=0'
+        username: '{{ eth008_username }}'
+        password: '{{ eth008_password }}'
+
 
 alarm_control_panel:
     - platform: manual
@@ -768,6 +772,23 @@ switch noise_detector:
     name: Noise detector
     command_topic: "home/noisedetector/set/pi1"
     state_topic: "home/noisedetector/get/pi1"
+switch bedroom_highspots:
+    platform: command_line
+    name: Bedroom Highspots
+    command_on: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi?relay=0"
+    command_off: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi?relay=0"
+    command_state: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi"
+    value_template: "{{ value[7] == \"1\" }}"
+    #output is: relays 00000000
+switch bedroom_midspots:
+    platform: command_line
+    name: Bedroom Midspots
+    command_on: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi?relay=1"
+    command_off: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi?relay=1"
+    command_state: "curl --user {{ eth008_user }}:{{ eth008_password }} http://{{ eth008_ip }}/io.cgi"
+    value_template: "{{ value[8] == \"1\" }}"
+
+
 
 fan:
   - platform: mqtt
