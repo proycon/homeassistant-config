@@ -658,6 +658,40 @@ views:
                   width: 7%
                   padding: 50px 50px 100px 50px
               - type: image
+                entity: switch.bedroom_midspots
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 40%
+                  left: 63%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
+                entity: switch.bedroom_highspots
+                tap_action:
+                    action: toggle
+                hold_action:
+                    action: more-info
+                image: /local/icons/light_bulb_off.png
+                state_image:
+                  'on': /local/icons/light_bulb_on.png
+                state_filter:
+                  'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
+                  'off': brightness(80%) saturate(0.8) drop-shadow(0px 0px 10px black)
+                style:
+                  top: 55%
+                  left: 63%
+                  width: 7%
+                  padding: 50px 50px 100px 50px
+              - type: image
                 entity: switch.roof
                 tap_action:
                     action: toggle
@@ -1068,6 +1102,8 @@ views:
           entities:
             - switch.office
             - switch.bedroom
+            - switch.bedroom_midspots
+            - switch.bedroom_highspots
           title: Upstairs Lights
           show_header_toggle: true
           view_layout:
