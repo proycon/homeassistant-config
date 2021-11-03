@@ -3089,6 +3089,7 @@
       weekday:
           - sun
           - mon
+          - tue
           - wed
           - thu
   action:
@@ -3121,35 +3122,17 @@
              entity_id: input_number.wake_up_minutes
              value: 15
 
-- id: reset_wake_time_wednesday
-  alias: reset wake time wednesday #for the NEXT day!
+- id: thermostat_morning_default
+  alias: thermostat_morning_default
   trigger:
       - platform: time
-        at: '14:00:00'
-  condition:
-      condition: time
-      weekday:
-          - tue
-  action:
-       - service: input_number.set_value
-         data:
-             entity_id: input_number.wake_up_hour
-             value: 9
-       - service: input_number.set_value
-         data:
-             entity_id: input_number.wake_up_minutes
-             value: 00
-
-- id: thermostat_morning_hanswork
-  alias: thermostat_morning_hanswork
-  trigger:
-      - platform: time
-        at: '05:00:00'
+        at: '05:45:00'
   condition:
       condition: time
       weekday:
           - mon
           - tue
+          - wed
           - thu
           - fri
   action:
@@ -3158,29 +3141,16 @@
             entity_id: climate.anna
             temperature: 21
 
-- id: thermostat_morning_hanswork_reset
-  alias: thermostat_morning_hanswork_reset
-  trigger:
-      - platform: time
-        at: '06:00:00'
-  condition:
-      condition: time
-      weekday:
-          - mon
-          - tue
-          - thu
-          - fri
-  action:
-      - service: climate.set_temperature
-        data:
-            entity_id: climate.anna
-            temperature: 18
-
 - id: thermostat_morning_default
   alias: thermostat_morning_default
   trigger:
       - platform: time
-        at: '08:45:00'
+        at: '06:30:00'
+  condition:
+      condition: time
+      weekday:
+        - sat
+        - sun
   action:
       - service: climate.set_temperature
         data:
