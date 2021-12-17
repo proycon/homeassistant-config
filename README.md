@@ -22,6 +22,7 @@ Goals
     * TV
     * Audio
     * Cameras
+    * Heating and air conditioning
     * Lots of environment sensors for automations
 * **Open-source** and **no** third-party cloud solutions, I like to own and safeguard my data!
 * Security/Alarm system
@@ -35,7 +36,7 @@ I have the following devices:
     * Quad core
     * 16GB RAM
     * Aeotec Z-Stick
-    * *Webserver*: Apache
+    * *Webserver*: Nginx
     * *MQTT Broker:* Mosquitto
     * *Audio streaming:* [Mopidy](https://www.mopidy.com/) (MPD) + Modidy-spotify + Iris + Icecast
     * *Messaging:* XMPP (Prosody)
@@ -67,12 +68,13 @@ I have the following devices:
 * **Z-Wave**
     * Aeotec Z-Stick
     * 3x [Fibaro Motion/light/temperature sensor](https://www.fibaro.com/en/products/motion-sensor/)
-    * 1x Neo Coolcam Door/window sensor
+    * 3x Neo Coolcam Door/window sensor
     * 2x Nodon Softremote buttons for scene selection/quick remote functionality
     * 1x Philiotech Temperature/Humidity Sensor for bathroom
-    * 1x Remotec ZRC-90 remote
+    * 3x Remotec ZRC-90 remote
  * **Other**
     * *Slimme Meter* for power consumption, connected to main server
+    * Solar panels
     * Speakers throughout the house for text-to-speech notifications
     * Wake up timer through bedroom TV
     * Xiaomi Roborock S2 (rooted, access over ssh with root@$IP, using my normal personal ssh keypair)
