@@ -3092,8 +3092,8 @@
             entity_id: climate.anna
             temperature: 21
 
-- id: thermostat_morning_default
-  alias: thermostat_morning_default
+- id: thermostat_morning_default_weekend
+  alias: thermostat_morning_default_weekend
   trigger:
       - platform: time
         at: '06:30:00'
