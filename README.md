@@ -47,12 +47,12 @@ I have the following devices:
 * **Slave**: Raspberry Pi 2 (Raspbian) ([GPIO wiring schematic](https://github.com/proycon/homeassistant-config/blob/master/docs/pi2.svg))
     * GPIO: 433.92Mhz Transmitter for lights
     * GPIO: Door/window sensors (wired, reed contacts)
-    * GPIO: Neopixels LED for ambilight in living room
+    * GPIO: Neopixels LED (WS2812B) for ambilight in living room
     * GPIO: IR LED for remote control of TV/audio
     * GPIO: IR Receiver
 * **Slave**: Raspberry Pi 3 (Raspbian)
     * GPIO: [DH-22 temperature/humidity sensor](https://www.adafruit.com/product/385)
-    * GPIO: Neopixels LED fireplace ([video](https://www.youtube.com/watch?v=i18eXQIXzXg), [sources](https://github.com/proycon/homeassistant-config/tree/master/scripts/technofire))
+    * GPIO: Neopixels LED (WS2912B) fireplace ([video](https://www.youtube.com/watch?v=i18eXQIXzXg), [sources](https://github.com/proycon/homeassistant-config/tree/master/scripts/technofire))
     * GPIO: [PIR sensor](https://www.adafruit.com/product/189)
 * **IP Cams**
     * Living room (D-Link 5222-L)
@@ -74,6 +74,9 @@ I have the following devices:
     * 3x Remotec ZRC-90 remote
  * **Other**
     * *Slimme Meter* for power consumption, connected to main server
+    * Plugwise Anna thermostat
+    * Devantech ETH-008 relais switch for upstairs lights
+    * Daitek air conditioning with wifi module
     * Solar panels
     * Speakers throughout the house for text-to-speech notifications
     * Wake up timer through bedroom TV
