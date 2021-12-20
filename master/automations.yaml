@@ -3587,6 +3587,8 @@
   trigger:
       - platform: mqtt
         topic: home/command/status
+      - platform: mqtt
+        topic: home/command/ping
   action:
     - service: script.send_status
 
