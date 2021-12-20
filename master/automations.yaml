@@ -3787,3 +3787,13 @@
         data:
             entity_id: climate.anna
             temperature: 22
+
+- alias: ping
+  trigger:
+      - platform: mqtt
+        topic: home/command/ping
+  action:
+      - service: mqtt.publish
+        data_template:
+            topic: "home/notify/ping"
+            payload_template: "{{ trigger.payload }}"
