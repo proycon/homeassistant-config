@@ -1944,7 +1944,7 @@
       event_type: zwave.scene_activated
       event_data:
         entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 7
+        scene_id: 8
         scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/off"
@@ -2300,7 +2300,7 @@
       event_type: zwave.scene_activated
       event_data:
         entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 2
+        scene_id: 7
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
@@ -2316,7 +2316,7 @@
       event_type: zwave.scene_activated
       event_data:
         entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 2
+        scene_id: 7
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
@@ -2574,8 +2574,40 @@
      - service: script.turn_on
        entity_id: script.listen_to_music
 
+- id: remote_music_bedroom_on
+  alias: remote_music_bedroom_on
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 6
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/media/music2"
+  action:
+     - service: script.turn_on
+       entity_id: script.listen_to_music2
+
+- id: remote_music_bedroom_off
+  alias: remote_music_bedroom_off
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 6
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/music2/off"
+  action:
+     - service: media_player.media_stop
+       entity_id: media_player.mpd
+     - service: switch.turn_off
+       entity_id: switch.pi2_music_player
+
 - id: remote_music_off
-  alias: remote_music_on
+  alias: remote_music_off
   trigger:
     - platform: event
       event_type: zwave.scene_activated
@@ -3223,19 +3255,6 @@
       - service: script.turn_on
         entity_id: script.tvdecoder_zdf
 
-- id: remote_trigger_alarm
-  trigger:
-     - platform: mqtt
-       topic: "home/command/alarm/trigger"
-     - platform: event
-       event_type: zwave.scene_activated
-       event_data:
-         entity_id: zwave.remotec_zrc90
-         scene_id: 4
-         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-  action:
-      - service: alarm_control_panel.alarm_trigger
-        entity_id: alarm_control_panel.alarm_system
 
 - id: remote_cancel_alarm
   alias: remote_cancel_alarm
