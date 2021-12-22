@@ -2646,6 +2646,12 @@
     - platform: event
       event_type: zwave.scene_activated
       event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 7
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 2
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
@@ -2676,6 +2682,12 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 6
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 7
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/previous"
   action:
@@ -2693,6 +2705,12 @@
       event_data:
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 2
+        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 7
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/next"
@@ -2816,6 +2834,12 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510
         scene_id: 6
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_zrc90
+        scene_id: 7
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/previous"
   action:
@@ -2976,7 +3000,7 @@
       event_type: zwave.scene_activated
       event_data:
         entity_id: zwave.remotec_zrc90
-        scene_id: 7
+        scene_id: 8
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/robot/on"
@@ -2995,32 +3019,13 @@
       event_type: zwave.scene_activated
       event_data:
         entity_id: zwave.remotec_zrc90
-        scene_id: 7
+        scene_id: 8
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/robot/off"
   action:
      - service: script.turn_on
        entity_id: script.vacuum_turn_off
-
-- id: remote_robot_pause
-  alias: remote_robot_pause
-  condition: #so we don't accidentally start robot when TV is on
-    - condition: state
-      entity_id: switch.tv
-      state: "off"
-  trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 7
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: mqtt
-      topic: "home/command/robot/pause"
-  action:
-     - service: script.turn_on
-       entity_id: script.vacuum_pause
 
 - id: notify_livingroom_movement
   alias: Notify Livingroom Movement
