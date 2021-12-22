@@ -2534,6 +2534,21 @@
      - service: script.turn_on
        entity_id: script.turn_media_off
 
+- id: remote_media_kodi
+  alias: remote_media_kodi
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510
+        scene_id: 8
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/kodi/on"
+  action:
+     - service: switch.turn_on
+       entity_id: switch.pi1_kodi
+
 - id: remote_music_on
   alias: remote_music_on
   condition: #so we don't accidentally start music when TV is on
