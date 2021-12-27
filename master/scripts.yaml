@@ -1012,6 +1012,28 @@ listen_to_music:
           data:
               entity_id: media_player.mpd
 
+listen_to_music2:
+    alias: Listen to Music 2
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/say/pi2"
+              payload: "Starting Music"
+        - service: switch.turn_off
+          entity_id: switch.pi2_xorg
+        - service: switch.turn_off
+          entity_id: switch.pi2_kodi
+        - delay:
+            seconds: 1
+        - service: media_player.turn_on
+          data:
+              entity_id: media_player.mpd
+        - delay:
+            seconds: 1
+        - service: media_player.play_media
+          data:
+              entity_id: media_player.mpd
+
 load_music:
     alias: Load Music
     sequence:
