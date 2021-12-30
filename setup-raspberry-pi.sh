@@ -42,6 +42,7 @@ else
         sed -i s/audio=on/audio=off/ /boot/config.txt
         echo "dtoverlay=gpio-ir,gpio_pin=24" >> /boot/config.txt
         echo "dtoverlay=gpio-ir-tx,gpio_pin=4" >> /boot/config.txt
+        #OLD: echo "dtoverlay=lirc-rpi,gpio_out_pin=4,gpio_in_pin=24" >> /boot/config.txt
         echo "dtoverlay=w1-gpio,gpiopin=11" >> /boot/config.txt
     fi
 
