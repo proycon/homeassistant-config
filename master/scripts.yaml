@@ -1928,27 +1928,27 @@ send_status:
         - service: mqtt.publish
           data:
               topic: "home/status/presence"
-              payload_template: "{% if is_state('input_boolean.proycon_home','on') %}proycon{% endif %} {% if is_state('input_boolean.hans_home','on') %}hans{% endif %}"
+              payload_template: "{{now().timestamp()|int}}: {% if is_state('input_boolean.proycon_home','on') %}proycon{% endif %} {% if is_state('input_boolean.hans_home','on') %}hans{% endif %}"
         - service: mqtt.publish
           data:
               topic: "home/status/alarm"
-              payload_template: "{{ states('alarm_control_panel.alarm_system') }}"
+              payload_template: "{{now().timestamp()|int}}: {{ states('alarm_control_panel.alarm_system') }}"
         - service: mqtt.publish
           data:
               topic: "home/status/temperature"
-              payload_template: "{{ states('sensor.temperature_thermostat') }} °C (living), {{ states('sensor.bedroom_temperature') }} °C (bedroom), {{ states('sensor.fibaro_office_temperature') }} °C (office)"
+              payload_template: "{{now().timestamp()|int}}: {{ states('sensor.temperature_thermostat') }} °C (living), {{ states('sensor.bedroom_temperature') }} °C (bedroom), {{ states('sensor.fibaro_office_temperature') }} °C (office)"
         - service: mqtt.publish
           data:
               topic: "home/status/climate"
-              payload_template: "{{ states.climate.anna.attributes.temperature }} °C (CV {{ states.climate.anna.attributes.hvac_action }}), {% if is_state('climate.daikinap75591','on') %}bedroom-airco{% endif %} {% if is_state('climate.daikinap82317','on') %}office-airco{% endif %}"
+              payload_template: "{{now().timestamp()|int}}: {{ states.climate.anna.attributes.temperature }} °C (CV {{ states.climate.anna.attributes.hvac_action }}), {% if is_state('climate.daikinap75591','on') %}bedroom-airco{% endif %} {% if is_state('climate.daikinap82317','on') %}office-airco{% endif %}"
         - service: mqtt.publish
           data:
               topic: "home/status/doors"
-              payload_template: "{% if is_state('binary_sensor.front_door','on') %}frontdoor{% endif %} {% if is_state('binary_sensor.back_door','on') %}backdoor{% endif %} {% if is_state('binary_sensor.bedroom_window_left','on') %}bedroom-left{% endif %} {% if is_state('binary_sensor.bedroom_window_right','on') %}bedroom_right{% endif %} {% if is_state('binary_sensor.bathroom_window_sensor','on') %}bathroom{% endif %}"
+              payload_template: "{{now().timestamp()|int}}: {% if is_state('binary_sensor.front_door','on') %}frontdoor{% endif %} {% if is_state('binary_sensor.back_door','on') %}backdoor{% endif %} {% if is_state('binary_sensor.bedroom_window_left','on') %}bedroom-left{% endif %} {% if is_state('binary_sensor.bedroom_window_right','on') %}bedroom_right{% endif %} {% if is_state('binary_sensor.bathroom_window_sensor','on') %}bathroom{% endif %}"
         - service: mqtt.publish
           data:
               topic: "home/status/lights"
-              payload_template: "{% if is_state('switch.tv_spots','on') %}tv-spots{% endif %} {% if is_state('switch.front_room','on') %}sofa{% endif %} {% if is_state('switch.midspots','on') %}mid-spots{% endif %} {% if is_state('switch.back_room','on') %}backroom{% endif %} {% if is_state('switch.back_corner','on') %}back-corner{% endif %} {% if is_state('switch.hall','on') %}hall{% endif %} {% if is_state('switch.kitchen','on') %}kitchen{% endif %} {% if is_state('switch.office','on') %}office{% endif %} {% if is_state('switch.bedroom','on') %}bedroom{% endif %} {% if is_state('switch.garden','on') %}garden{% endif %} {% if is_state('switch.porch','on') %}porch{% endif %}"
+              payload_template: "{{now().timestamp()|int}}: {% if is_state('switch.tv_spots','on') %}tv-spots{% endif %} {% if is_state('switch.front_room','on') %}sofa{% endif %} {% if is_state('switch.midspots','on') %}mid-spots{% endif %} {% if is_state('switch.back_room','on') %}backroom{% endif %} {% if is_state('switch.back_corner','on') %}back-corner{% endif %} {% if is_state('switch.hall','on') %}hall{% endif %} {% if is_state('switch.kitchen','on') %}kitchen{% endif %} {% if is_state('switch.office','on') %}office{% endif %} {% if is_state('switch.bedroom','on') %}bedroom{% endif %} {% if is_state('switch.garden','on') %}garden{% endif %} {% if is_state('switch.porch','on') %}porch{% endif %}"
 
 
 disarm:
