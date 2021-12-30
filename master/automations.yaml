@@ -240,7 +240,7 @@
         data:
             topic: "home/notify/doorbell"
             qos: 1
-            payload: "ON"
+            payload: "{{now().timestamp()|int}}: ON"
       - service: switch.turn_on
         entity_id: switch.hall
       - service: timer.start
@@ -355,7 +355,7 @@
     - service: mqtt.publish
       data:
           topic: "home/notify/warning"
-          payload: "Front door still open"
+          payload: "{{now().timestamp()|int}}: Front door still open"
           qos: 1
     - service: notify.mail_both
       data_template:
@@ -381,7 +381,7 @@
     - service: mqtt.publish
       data:
           topic: "home/notify/warning"
-          payload: "Front door still open"
+          payload: "{{now().timestamp()|int}}: Front door still open"
           qos: 1
     - service: notify.mail_both
       data_template:
@@ -965,7 +965,7 @@
       data:
           topic: "home/notify/alarm"
           qos: 1
-          payload: "TRIGGERED"
+          payload: "{{now().timestamp()|int}}: TRIGGERED"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
@@ -1044,7 +1044,7 @@
     - service: mqtt.publish
       data:
           topic: "home/notify/armed"
-          payload: "System armed"
+          payload: "{{now().timestamp()|int}}: System armed"
           qos: 1
     - service: notify.matrix
       data:
@@ -3618,7 +3618,7 @@
     - service: mqtt.publish
       data:
           topic: "home/notify/test"
-          payload: "test"
+          payload: "{{now().timestamp()|int}}: test"
           qos: 1
 
 - id: request_status
@@ -3837,4 +3837,4 @@
       - service: mqtt.publish
         data_template:
             topic: "home/notify/ping"
-            payload_template: "{{ trigger.payload }}"
+            payload_template: "{{now().timestamp()|int}}: {{ trigger.payload }}"

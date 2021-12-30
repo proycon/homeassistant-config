@@ -1819,7 +1819,7 @@ start_timer:
         - service: mqtt.publish
           data:
               topic: "home/notify/timer"
-              payload: "FINISHED"
+              payload: "{{now().timestamp()|int}}: FINISHED"
               qos: 1
 
 vacuum_turn_on:
@@ -1958,7 +1958,7 @@ disarm:
     - service: mqtt.publish
       data:
           topic: "home/notify/disarmed"
-          payload: "System disarmed"
+          payload: "{{now().timestamp()|int}}: System disarmed"
           qos: 1
     - service: notify.matrix
       data:
