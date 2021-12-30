@@ -77,15 +77,15 @@ switch:
     switches:
         kodi:
             command_on: "aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; killall kodi kodi-standalone kodi.bin_v8; kodi-standalone &"
-            command_off: "killall kodi kodi-standalone kodi.bin_v8"
+            command_off: "killall kodi kodi-standalone kodi.bin_v8; aplay /home/homeautomation/homeassistant/media/computerbeep_9.wav"
             command_state: "ps aux | grep kodi | grep -v grep"
         xorg:
             command_on: "aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; sudo systemctl start lightdm"
-            command_off: "sudo systemctl stop lightdm"
+            command_off: "sudo systemctl stop lightdm; aplay /home/homeautomation/homeassistant/media/computerbeep_9.wav"
             command_state: "ps aux | grep lightdm | grep -v grep"
         musicplayer:
             command_on: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; snapclient -s sysdefault -h mediaserver.anaproy.lxd >/dev/null 2>/dev/null &"
-            command_off: "killall snapclient"
+            command_off: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_9.wav"
             command_state: "ps aux | grep snapclient | grep -v grep"
             #command_on: "killall mplayer; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; mplayer -ao alsa:device=hw=0.0 http://anaproy.nl:8000/stream.mp3 >/dev/null 2>/dev/null &" # hw=0.0 is not a typo, it's what mplayer expects for hw:0,0
        #noisedetector:
