@@ -81,7 +81,7 @@ if [ ! -d /home/homeautomation/homeassistant ]; then
     make install || exit 4
     cd /home/homeautomation/homeassistant
     ln -s /home/homeautomation/homeassistant/config/my.lircd.conf /etc/lirc/lircd.conf.d/my.lircd.conf || exit 5
-    cp -f config/homeautomation@homeautomation.service /etc/systemd/system/
+    cp -f homeassistant/config/homeautomation@homeautomation.service /etc/systemd/system/
     systemctl daemon-reload
 fi
 
