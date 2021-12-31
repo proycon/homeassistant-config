@@ -92,4 +92,5 @@ sudo -u homeautomation ./setup.sh || exit 6
 
 systemctl enable homeautomation@homeautomation
 
-echo "please reboot first now"
+echo "Note: copy SSH keys manually from another raspberry pi"
+echo "Done, please reboot first now"
