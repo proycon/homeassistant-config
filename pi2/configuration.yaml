@@ -133,7 +133,6 @@ automation:
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
   - id: s2m_backdoor
     alias: s2m_backdoor
-    hide_entity: true
     trigger:
         - platform: state
           entity_id: binary_sensor.backdoor
@@ -149,7 +148,6 @@ automation:
 
   - id: s2m_bedroomwindow_right
     alias: s2m_bedroomwindow_right
-    hide_entity: true
     trigger:
         - platform: state
           entity_id: binary_sensor.bedroomwindow_right
@@ -164,7 +162,6 @@ automation:
             payload: "{{ states('binary_sensor.bedroomwindow_right') | upper }}"
   - id: s2m_bedroomwindow_left
     alias: s2m_bedroomwindow_left
-    hide_entity: true
     trigger:
         - platform: state
           entity_id: binary_sensor.bedroomwindow_left
@@ -450,7 +447,6 @@ mqtt:
     client_id: pi2
     certificate: /etc/ssl/certs/ca-certificates.crt
     tls_insecure: true #allow non-matching hostnames
-    tls_version: '1.2'
     keepalive: 60
     username: homeassistant
     password: !secret api_password
