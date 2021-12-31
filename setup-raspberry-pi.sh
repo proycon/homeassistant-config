@@ -20,7 +20,8 @@ systemctl enable ssh || exit 2
 
 systemctl set-default multi-user.target || exit 2 #no graphical UI by default
 
-apt install aptitude tmux git gcc make zsh kodi kodi-audioencoder-flac kodi-audioencoder-lame kodi-audioencoder-vorbis python3-virtualenv virtualenv vim cec-utils libcec-dev python3-libcec || exit 1
+apt install aptitude tmux git gcc make zsh kodi python3-virtualenv virtualenv vim cec-utils libcec-dev python3-cec || exit 1
+apt install kodi-audioencoder-vorbis kodi-audioencoder-flac kodi-audioencoder-lame
 
 echo "homeautomation    ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/030_homeautomation
 
@@ -39,7 +40,7 @@ else
         echo "dtoverlay=gpio-ir-tx,gpio_pin=17" >> /boot/config.txt
         echo " snd_bcm2835.enable_headphones=1 snd_bcm2835.enable_hdmi=1 snd_bcm2835.enable_compat_alsa=0" >> /boot/cmdline.txt
     elif [ $PI -eq 2 ]; then
-        sed -i s/audio=on/audio=off/ /boot/config.txt
+        sed -i 's/audio=on/audio=off/' /boot/config.txt
         echo "dtoverlay=gpio-ir,gpio_pin=24" >> /boot/config.txt
         echo "dtoverlay=gpio-ir-tx,gpio_pin=4" >> /boot/config.txt
         #OLD: echo "dtoverlay=lirc-rpi,gpio_out_pin=4,gpio_in_pin=24" >> /boot/config.txt
@@ -49,6 +50,8 @@ else
     echo "REBOOT FIRST NOW AND THEN RUN THIS SCRIPT AGAIN"
     exit 0
 fi
+
+
 
 apt install lirc lirc-compat-remotes || exit 1
 
@@ -60,6 +63,13 @@ if [ ! -d /home/homeautomation ]; then
     chmod a+x /home/homeautomation/bin/mountssh
 fi
 
+if [ ! -d /home/homeautomation/WiringPi ]; then
+    cd /home/homeautomation
+    sudo -u homeautomation git clone https://github.com/WiringPi/WiringPi
+    cd /home/homeautomation/WiringPi
+    ./build
+    ldconfig
+fi
 
 if [ ! -d /home/homeautomation/homeassistant ]; then
     cd /home/homeautomation
