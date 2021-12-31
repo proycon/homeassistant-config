@@ -2111,7 +2111,7 @@
       event_data:
         entity_id: zwave.remotec_unknown_type_0001_id_8510_2
         scene_id: 7
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
       service: switch.turn_off
       entity_id: switch.office
