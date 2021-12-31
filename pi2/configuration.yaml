@@ -95,7 +95,6 @@ binary_sensor:
       pull_mode: DOWN
       invert_logic: true
       bouncetime: 60
-      device_class: opening
 
 switch:
   - platform: command_line
