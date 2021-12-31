@@ -2549,6 +2549,15 @@
      - service: switch.turn_on
        entity_id: switch.pi1_kodi
 
+- id: remote_media_kodi2
+  alias: remote_media_kodi2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/kodi2/on"
+  action:
+     - service: switch.turn_on
+       entity_id: switch.pi2_kodi
+
 - id: remote_music_on
   alias: remote_music_on
   condition: #so we don't accidentally start music when TV is on
@@ -2587,7 +2596,7 @@
       topic: "home/command/media/music2"
   action:
      - service: script.turn_on
-       entity_id: script.listen_to_music2
+       entity_id: script.listen_to_music_bedroom
 
 - id: remote_music_bedroom_off
   alias: remote_music_bedroom_off
