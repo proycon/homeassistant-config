@@ -21,7 +21,7 @@ systemctl enable ssh || exit 2
 systemctl set-default multi-user.target || exit 2 #no graphical UI by default
 
 apt install aptitude tmux git gcc make zsh kodi python3-virtualenv virtualenv vim cec-utils libcec-dev python3-cec scons snapclient || exit 1
-apt install kodi-audioencoder-vorbis kodi-audioencoder-flac kodi-audioencoder-lame
+apt install kodi-audioencoder-flac
 
 echo "homeautomation    ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/030_homeautomation
 
@@ -101,5 +101,5 @@ sudo -u homeautomation ./setup.sh || exit 6
 systemctl enable homeautomation@homeautomation
 systemctl disable snapclient  #do not run on boot
 
-echo "Note: copy SSH keys manually from another raspberry pi"
+echo "Note: copy SSH keys manually from another raspberry pi!"
 echo "Done, please reboot first now"
