@@ -672,7 +672,7 @@
           state: "off"
         - condition: template
           value_template: '{% if states.binary_sensor.anydoor.last_updated and (as_timestamp(now())-as_timestamp(states.binary_sensor.anydoor.last_updated)) < 900 %}True{% else %}False{% endif %}'
-        - condition: template
+        - condition: state
           entity_id: input_boolean.proycon_home
           state: "on"
         - condition: template
