@@ -81,8 +81,6 @@ sensor:
           firstline_00fc_temp:
               sensor_type: temperature
     - platform: onewire
-      names:
-          28-0000059319c4: Bedroom
 
 
 
