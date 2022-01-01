@@ -84,7 +84,9 @@ switch:
             command_off: "sudo systemctl stop lightdm; aplay /home/homeautomation/homeassistant/media/computerbeep_9.wav"
             command_state: "ps aux | grep lightdm | grep -v grep"
         musicplayer:
-            command_on: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; snapclient -s sysdefault -h mediaserver.anaproy.lxd >/dev/null 2>/dev/null &"
+            command_on: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; snapclient -s 36 -h mediaserver.anaproy.lxd >/dev/null 2>/dev/null &"
+            #-s 36 corresponds to:
+            #[Info] (Player) Player name: alsa, device: sysdefault:CARD=vc4hdmi1, description: vc4-hdmi-1, MAI PCM i2s-hifi-0
             command_off: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_9.wav"
             command_state: "ps aux | grep snapclient | grep -v grep"
             #command_on: "killall mplayer; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; mplayer -ao alsa:device=hw=0.0 http://anaproy.nl:8000/stream.mp3 >/dev/null 2>/dev/null &" # hw=0.0 is not a typo, it's what mplayer expects for hw:0,0
