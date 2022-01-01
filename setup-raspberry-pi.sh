@@ -20,7 +20,7 @@ systemctl enable ssh || exit 2
 
 systemctl set-default multi-user.target || exit 2 #no graphical UI by default
 
-apt install aptitude tmux git gcc make zsh kodi python3-virtualenv virtualenv vim cec-utils libcec-dev python3-cec libttspico-utils || exit 1
+apt install aptitude tmux git gcc make zsh kodi python3-virtualenv virtualenv vim cec-utils libcec-dev python3-cec scons snapclient libttspico-utils || exit 1
 apt install kodi-audioencoder-vorbis kodi-audioencoder-flac kodi-audioencoder-lame
 
 echo "homeautomation    ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/030_homeautomation
@@ -67,8 +67,16 @@ if [ ! -d /home/homeautomation/WiringPi ]; then
     cd /home/homeautomation
     sudo -u homeautomation git clone https://github.com/WiringPi/WiringPi
     cd /home/homeautomation/WiringPi
-    ./build
+    ./build || exit 3
     ldconfig
+fi
+
+if [ ! -d /home/homeautomation/rpi_ws281x ]; then
+    cd /home/homeautomation/rpi_ws281x
+    sudo -u homeautomation git clone https://github.com/jgarff/rpi_ws281x || exit 3
+    sudo -u homeautomation scons || exit 3
+    cd /home/homeautomation/rpi_ws281x/python
+    python setup.py install  || exit 3
 fi
 
 if [ ! -d /home/homeautomation/homeassistant ]; then
@@ -91,6 +99,7 @@ cd /home/homeautomation/homeassistant
 sudo -u homeautomation ./setup.sh || exit 6
 
 systemctl enable homeautomation@homeautomation
+systemctl disable snapclient  #do not run on boot
 
 echo "Note: copy SSH keys manually from another raspberry pi"
 echo "Done, please reboot first now"
