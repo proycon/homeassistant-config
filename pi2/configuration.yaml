@@ -360,14 +360,14 @@ automation:
     alias: s2m_bedroom_temperature
     trigger:
         - platform: state
-          entity_id: sensor.bedroom_temperature
+          entity_id: sensor.28.0000059319c4_temperature
         - platform: mqtt
           topic: home/poll #an explicit re-poll of states, issued by master when it starts
     action:
         service: mqtt.publish
         data_template:
             topic: "home/sensor/bedroom_temperature"
-            payload: "{{ states('sensor.bedroom_temperature') }}"
+            payload: "{{ states('sensor.28.0000059319c4_temperature') }}"
   - id: s2m_musicplayer
     alias: s2m_musicplayer
     trigger:
