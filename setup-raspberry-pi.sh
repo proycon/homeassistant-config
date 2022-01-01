@@ -20,7 +20,7 @@ systemctl enable ssh || exit 2
 
 systemctl set-default multi-user.target || exit 2 #no graphical UI by default
 
-apt install aptitude tmux git gcc make zsh kodi python3-virtualenv virtualenv vim cec-utils libcec-dev python3-cec scons snapclient libttspico-utils || exit 1
+apt install aptitude tmux git gcc make zsh kodi python3-virtualenv virtualenv vim cec-utils libcec-dev python3-cec scons snapclient libttspico-utils sshfs || exit 1
 apt install kodi-audioencoder-flac
 
 echo "homeautomation    ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/030_homeautomation
@@ -55,6 +55,8 @@ fi
 
 apt install lirc lirc-compat-remotes || exit 1
 sed -i 's/devinput/default/' /etc/lirc/lirc_options.conf
+
+sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
 
 if [ ! -d /home/homeautomation ]; then
     useradd -s /bin/bash -m -d /home/homeautomation -G pi,adm,dialout,cdrom,sudo,audio,video,plugdev,users,input,netdev,spi,i2c,gpio homeautomation || exit 1
