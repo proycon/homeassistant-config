@@ -2560,8 +2560,8 @@
     - platform: mqtt
       topic: "home/command/kodi2/on"
   action:
-     - service: switch.turn_on
-       entity_id: switch.pi2_kodi
+    - service: switch.turn_on
+      entity_id: switch.pi2_kodi
 
 - id: remote_music_on
   alias: remote_music_on
