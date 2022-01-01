@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$1" | cec-client -s -d 1
+echo "$2" | cec-client -s -d "$1"

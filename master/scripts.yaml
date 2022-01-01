@@ -1483,13 +1483,6 @@ wake_up_alarm:
 
 
 
-turn_tv_upstairs_on: #obsolete now (CEC doesn't do off, using IR instead)
-    alias: Turn TV upstairs on
-    sequence:
-      - service: mqtt.publish
-        data:
-            topic: "home/hdmi_cec_send/pi2"
-            payload: "on 0"
 
 
 make_event_snapshots_living_room:
