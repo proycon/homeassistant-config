@@ -1079,8 +1079,8 @@ media_centre:
           data:
               topic: "home/say/pi1"
               payload: "Starting Media Centre"
-        - service: script.turn_on
-          entity_id: script.tv_on
+        - service: switch.turn_on
+          entity_id: switch.tv
         - delay:
             seconds: 1
         - service: media_player.turn_on
@@ -1099,23 +1099,7 @@ media_centre:
         - service: switch.turn_on
           entity_id: switch.pi1_kodi
 
-tv_on:
-    alias: TV on
-    sequence:
-        - condition: state
-          entity_id: switch.tv
-          state: 'off'
-        - service: switch.turn_on
-          entity_id: switch.tv
 
-tv_off:
-    alias: TV off
-    sequence:
-        - condition: state
-          entity_id: switch.tv
-          state: 'on'
-        - service: switch.turn_off
-          entity_id: switch.tv
 
 
 desktop:
@@ -1147,8 +1131,6 @@ turn_media_off:
       data_template:
         topic: "home/sound/pi2"
         payload_template: 'computerbeep_5.wav'
-    - service: media_player.turn_off
-      entity_id: media_player.yamaha_receiver
     - delay:
         seconds: 1
     - service: switch.turn_off
@@ -1162,9 +1144,13 @@ turn_media_off:
     - service: media_player.media_stop
       entity_id: media_player.mpd
     - delay:
-        seconds: 6
-    - service: script.turn_on
-      entity_id: script.tv_off
+        seconds: 2
+    - service: switch.turn_off
+      entity_id: switch.tv
+    - delay:
+        seconds: 4
+    - service: media_player.turn_off
+      entity_id: media_player.yamaha_receiver
 
 update_kodi_library:
     alias: Update Kodi Library
