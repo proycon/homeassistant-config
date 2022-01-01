@@ -54,6 +54,7 @@ fi
 
 
 apt install lirc lirc-compat-remotes || exit 1
+sed -i 's/devinput/default/' /etc/lirc/lirc_options.conf
 
 if [ ! -d /home/homeautomation ]; then
     useradd -s /bin/bash -m -d /home/homeautomation -G pi,adm,dialout,cdrom,sudo,audio,video,plugdev,users,input,netdev,spi,i2c,gpio homeautomation || exit 1
