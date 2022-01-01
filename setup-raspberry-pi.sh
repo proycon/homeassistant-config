@@ -20,7 +20,7 @@ systemctl enable ssh || exit 2
 
 systemctl set-default multi-user.target || exit 2 #no graphical UI by default
 
-apt install aptitude tmux git gcc make zsh kodi python3-virtualenv virtualenv vim cec-utils libcec-dev python3-cec scons snapclient || exit 1
+apt install aptitude tmux git gcc make zsh kodi python3-virtualenv virtualenv vim cec-utils libcec-dev python3-cec scons snapclient libttspico-utils || exit 1
 apt install kodi-audioencoder-flac
 
 echo "homeautomation    ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/030_homeautomation
