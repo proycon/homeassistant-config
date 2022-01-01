@@ -12,6 +12,7 @@ reset_lights:
           data:
               entity_id: switch.bedroom
         - wait_template: "{{ states('switch.bedroom') == 'off' }}"
+          timeout: "00:00:05"
         - service: script.turn_on
           data_template:
               entity_id: "script.lights_{% if is_state('sun.sun','below_horizon') %}on{% else %}off{% endif %}"
@@ -21,54 +22,70 @@ lights_on:
         - service: switch.turn_on
           entity_id: switch.tv_spots
         - wait_template: "{{ states('switch.tv_spots') == 'on' }}"
+          timeout: "00:00:05"
         - service: switch.turn_on
           entity_id: switch.back_corner
         - wait_template: "{{ states('switch.back_corner') == 'on' }}"
+          timeout: "00:00:05"
         - service: switch.turn_on
           entity_id: switch.back_room
         - wait_template: "{{ states('switch.back_room') == 'on' }}"
+          timeout: "00:00:05"
         - service: switch.turn_on
           entity_id: switch.front_room
         - wait_template: "{{ states('switch.front_room') == 'on' }}"
+          timeout: "00:00:05"
         - service: switch.turn_on
           entity_id: switch.midspots
         - wait_template: "{{ states('switch.midspots') == 'on' }}"
+          timeout: "00:00:05"
 lights_off:
     alias: Lights off
     sequence:
         - service: switch.turn_off
           entity_id: switch.back_corner
         - wait_template: "{{ states('switch.back_corner') == 'off' }}"
+          timeout: "00:00:05"
         - service: switch.turn_off
           entity_id: switch.back_room
         - wait_template: "{{ states('switch.back_room') == 'off' }}"
+          timeout: "00:00:05"
         - service: switch.turn_off
           entity_id: switch.front_room
         - wait_template: "{{ states('switch.front_room') == 'off' }}"
+          timeout: "00:00:05"
         - service: switch.turn_off
           entity_id: switch.midspots
         - wait_template: "{{ states('switch.midspots') == 'off' }}"
+          timeout: "00:00:05"
         - service: switch.turn_off
           entity_id: switch.garden
         - wait_template: "{{ states('switch.garden') == 'off' }}"
+          timeout: "00:00:05"
         - service: switch.turn_off
           entity_id: switch.balcony
         - wait_template: "{{ states('switch.balcony') == 'off' }}"
+          timeout: "00:00:05"
         - service: switch.turn_off
           entity_id: switch.roof
         - wait_template: "{{ states('switch.roof') == 'off' }}"
+          timeout: "00:00:05"
         - service: switch.turn_off
           entity_id: switch.tv_spots
         - wait_template: "{{ states('switch.tv_spots') == 'off' }}"
+          timeout: "00:00:05"
         - service: switch.turn_off
           entity_id: switch.kitchen
         - wait_template: "{{ states('switch.kitchen') == 'off' }}"
+          timeout: "00:00:05"
         - service: switch.turn_off
           entity_id: switch.office
         - wait_template: "{{ states('switch.office') == 'off' }}"
+          timeout: "00:00:05"
         - service: switch.turn_off
           entity_id: switch.hall
         - wait_template: "{{ states('switch.hall') == 'off' }}"
+          timeout: "00:00:05"
         - service: script.turn_on
           entity_id: script.extinguish_fireplace
         - service: script.turn_on
@@ -930,14 +947,17 @@ home_notification_lights:
     - service: switch.turn_on
       entity_id: switch.porch
     - wait_template: "{{ states('switch.porch') == 'on' }}"
+      timeout: "00:00:05"
     - service: switch.turn_on
       entity_id: switch.hall
     - service: script.turn_on
       entity_id: script.green_lights
     - wait_template: "{{ states('switch.hall') == 'on' }}"
+      timeout: "00:00:05"
     - service: switch.turn_on
       entity_id: switch.garden
     - wait_template: "{{ states('switch.garden') == 'on' }}"
+      timeout: "00:00:05"
     - service: switch.turn_on
       entity_id: switch.back_room
 
@@ -949,6 +969,7 @@ reset_guard_lights:
               entity_id:
                 - switch.porch
         - wait_template: "{{ states('switch.porch') == 'on' }}"
+          timeout: "00:00:05"
         - delay:
             seconds: 2
         - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int < 2 or states.sensor.time.state[:2]|int > 6) %}on{% else %}off{% endif %}"
@@ -1514,6 +1535,7 @@ play_youtube_playlist:
     - service: script.turn_on
       entity_id: script.media_centre
     - wait_template: "{{ states.switch.pi1_kodi.state == 'on' }}"
+      timeout: "00:00:05"
     - delay:
         seconds: 4
     - service: media_player.play_media
@@ -1546,24 +1568,31 @@ night_scene:
       - service: switch.turn_on
         entity_id: switch.tv_spots
       - wait_template: "{{ states('switch.tv_spots') == 'on' }}"
+        timeout: "00:00:05"
       - service: switch.turn_on
         entity_id: switch.back_corner
       - wait_template: "{{ states('switch.back_corner') == 'on' }}"
+        timeout: "00:00:05"
       - service: switch.turn_off
         entity_id: switch.back_room
       - wait_template: "{{ states('switch.back_room') == 'off' }}"
+        timeout: "00:00:05"
       - service: switch.turn_off
         entity_id: switch.front_room
       - wait_template: "{{ states('switch.front_room') == 'off' }}"
+        timeout: "00:00:05"
       - service: switch.turn_off
         entity_id: switch.midspots
       - wait_template: "{{ states('switch.midspots') == 'off' }}"
+        timeout: "00:00:05"
       - service: switch.turn_off
         entity_id: switch.kitchen
       - wait_template: "{{ states('switch.kitchen') == 'off' }}"
+        timeout: "00:00:05"
       - service: switch.turn_off
         entity_id: switch.hall
       - wait_template: "{{ states('switch.hall') == 'off' }}"
+        timeout: "00:00:05"
       - service: script.turn_on
         entity_id: script.ignite_fireplace
       - service: input_number.set_value
@@ -1583,24 +1612,31 @@ evening_scene:
       - service: switch.turn_on
         entity_id: switch.tv_spots
       - wait_template: "{{ states('switch.tv_spots') == 'on' }}"
+        timeout: "00:00:05"
       - service: switch.turn_on
         entity_id: switch.back_corner
       - wait_template: "{{ states('switch.back_corner') == 'on' }}"
+        timeout: "00:00:05"
       - service: switch.turn_on
         entity_id: switch.back_room
       - wait_template: "{{ states('switch.back_room') == 'on' }}"
+        timeout: "00:00:05"
       - service: switch.turn_off
         entity_id: switch.front_room
       - wait_template: "{{ states('switch.front_room') == 'off' }}"
+        timeout: "00:00:05"
       - service: switch.turn_off
         entity_id: switch.midspots
       - wait_template: "{{ states('switch.midspots') == 'off' }}"
+        timeout: "00:00:05"
       - service: switch.turn_off
         entity_id: switch.kitchen
       - wait_template: "{{ states('switch.kitchen') == 'off' }}"
+        timeout: "00:00:05"
       - service: switch.turn_off
         entity_id: switch.hall
       - wait_template: "{{ states('switch.hall') == 'off' }}"
+        timeout: "00:00:05"
       - service: script.turn_on
         entity_id: script.ignite_fireplace
       - service: input_number.set_value
@@ -1852,6 +1888,7 @@ play_youtube_link:
        - service: script.turn_on
          entity_id: script.media_centre
        - wait_template: "{{ states.switch.pi1_kodi.state == 'on' }}"
+         timeout: "00:00:30"
        - delay:
            seconds: 4
        - service: media_player.play_media
@@ -1868,6 +1905,7 @@ play_youtube_link_bedroom:
        - service: script.turn_on
          entity_id: script.media_centre_bedroom
        - wait_template: "{{ states.switch.pi2_kodi.state == 'on' }}"
+         timeout: "00:00:30"
        - delay:
            seconds: 4
        - service: media_player.play_media
