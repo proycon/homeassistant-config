@@ -2582,6 +2582,25 @@
         item:
           directory: "{{ trigger.payload }}"
 
+- id: playdir_kodi_default
+  alias: playdir_kodi_default
+  trigger:
+    - platform: mqtt
+      topic: "home/command/kodi/playdir"
+    - platform: mqtt
+      topic: "home/command/kodi1/playdir"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi1"
+        payload_template: 'computerbeep_5.wav'
+    - service: kodi.call_method
+      data_template:
+        entity_id: media_player.kodi
+        method: Player.Open
+        item:
+          directory: "/home/homeautomation/Server/videoqueue/"
+
 - id: playdir_kodi2
   alias: playdir_kodi2
   trigger:
@@ -2598,6 +2617,23 @@
         method: Player.Open
         item:
           directory: "{{ trigger.payload }}"
+
+- id: playdir_kodi2_default
+  alias: playdir_kodi2_default
+  trigger:
+    - platform: mqtt
+      topic: "home/command/kodi2/playdir"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi2"
+        payload_template: 'computerbeep_5.wav'
+    - service: kodi.call_method
+      data_template:
+        entity_id: media_player.kodi_bedroom
+        method: Player.Open
+        item:
+          directory: "/home/homeautomation/Server/videoqueue/"
 
 - id: remote_music_on
   alias: remote_music_on
@@ -3893,7 +3929,7 @@
   trigger:
       - platform: mqtt
         topic: home/command/youtube
-  sequence:
+  action:
      - service: input_text.set_value
        entity_id: input_text.youtube_link
        data_template:
@@ -3905,7 +3941,7 @@
   trigger:
       - platform: mqtt
         topic: home/command/youtube2
-  sequence:
+  action:
      - service: input_text.set_value
        entity_id: input_text.youtube_link_bedroom
        data_template:
