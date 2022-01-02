@@ -2563,6 +2563,40 @@
     - service: switch.turn_on
       entity_id: switch.pi2_kodi
 
+- id: play_kodi
+  alias: play_kodi
+  trigger:
+    - platform: mqtt
+      topic: "home/command/kodi/play"
+    - platform: mqtt
+      topic: "home/command/kodi1/play"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi1"
+        payload_template: 'computerbeep_5.wav'
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.kodi
+        media_content_type: "{{ trigger.payload | split(':')[0] }}"
+        media_content_id: "{{ trigger.payload | split(':')[1:] | join(':') }}"
+
+- id: play_kodi2
+  alias: play_kodi2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/kodi2/play"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi2"
+        payload_template: 'computerbeep_5.wav'
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.kodi_bedroom
+        media_content_type: "{{ trigger.payload | split(':')[0] }}"
+        media_content_id: "{{ trigger.payload | split(':')[1:] | join(':') }}"
+
 - id: remote_music_on
   alias: remote_music_on
   condition: #so we don't accidentally start music when TV is on

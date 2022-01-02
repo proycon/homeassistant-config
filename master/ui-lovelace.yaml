@@ -1133,6 +1133,7 @@ views:
               position: sidebar
           entities:
              - input_text.youtube_link
+             - script.add_youtube_link
              - script.play_youtube_link
         - type: entities
           entities:
@@ -1519,6 +1520,7 @@ views:
                       show_header_toggle: false
                       entities:
                          - input_text.youtube_link
+                         - script.add_youtube_link
                          - script.play_youtube_link
                 - type: entities
                   entities:
@@ -1802,8 +1804,9 @@ views:
                       icon: mdi:youtube
                       show_header_toggle: false
                       entities:
-                         - input_text.youtube_link
-                         - script.play_youtube_link
+                         - input_text.youtube_link_bedroom
+                         - script.add_youtube_link_bedroom
+                         - script.play_youtube_link_bedroom
   - path: history
     icon: 'mdi:chart-line'
     title: History
