@@ -1135,6 +1135,7 @@ views:
              - input_text.youtube_link
              - script.add_youtube_link
              - script.play_youtube_link
+             - script.play_videoqueue
         - type: entities
           entities:
             - switch.tv_spots
