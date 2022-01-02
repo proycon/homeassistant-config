@@ -8,7 +8,7 @@ URL="$2"
 PI="$3"
 
 cd /home/homeautomation
-. scripts/secrets.sh
+. homeassistant/scripts/secrets.sh
 
 if [ ! -z "$MQTT_HOST" ]; then
     echo "No MQTT host defined">&2
