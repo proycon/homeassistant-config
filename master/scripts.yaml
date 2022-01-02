@@ -1872,6 +1872,18 @@ play_youtube_link:
              url: "{{ states.input_text.youtube_link.state }}"
              pi: 1
 
+play_videoqueue:
+    alias: Play current queue
+    sequence:
+       - service: script.turn_on
+         entity_id: script.media_centre
+       - service: kodi.call_method
+         data_template:
+           entity_id: media_player.kodi
+           method: Player.Open
+           item:
+             directory: "/home/homeautomation/Server/videoqueue/"
+
 play_youtube_link_bedroom:
     alias: Play Youtube link bedroom
     sequence:
@@ -1882,6 +1894,18 @@ play_youtube_link_bedroom:
              mode: play
              url: "{{ states.input_text.youtube_link_bedroom.state }}"
              pi: 2
+
+play_videoqueue_bedroom:
+    alias: Play current queue bedroom
+    sequence:
+       - service: script.turn_on
+         entity_id: script.media_centre_bedroom
+       - service: kodi.call_method
+         data_template:
+           entity_id: media_player.kodi2
+           method: Player.Open
+           item:
+             directory: "/home/homeautomation/Server/videoqueue/"
 
 add_youtube_link:
     alias: Add Youtube link
