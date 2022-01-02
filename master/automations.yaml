@@ -3888,3 +3888,27 @@
         data_template:
             topic: "home/notify/ping"
             payload_template: "{{now().timestamp()|int}}: {{ trigger.payload }}"
+
+- alias: command_play_youtube_link
+  trigger:
+      - platform: mqtt
+        topic: home/command/youtube
+  sequence:
+     - service: input_text.set_value
+       entity_id: input_text.youtube_link
+       data_template:
+         value: "{{ trigger.payload }}"
+     - service: script.turn_on
+       entity_id: script.play_youtube_link
+
+- alias: command_play_youtube_link_bedroom
+  trigger:
+      - platform: mqtt
+        topic: home/command/youtube2
+  sequence:
+     - service: input_text.set_value
+       entity_id: input_text.youtube_link_bedroom
+       data_template:
+         value: "{{ trigger.payload }}"
+     - service: script.turn_on
+       entity_id: script.play_youtube_link_bedroom
