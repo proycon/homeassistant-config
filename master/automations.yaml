@@ -2586,9 +2586,9 @@
   alias: playdir_kodi_default
   trigger:
     - platform: mqtt
-      topic: "home/command/kodi/playdir"
+      topic: "home/command/kodi/playdir_default"
     - platform: mqtt
-      topic: "home/command/kodi1/playdir"
+      topic: "home/command/kodi1/playdir_default"
   action:
     - service: mqtt.publish
       data_template:
@@ -2622,7 +2622,7 @@
   alias: playdir_kodi2_default
   trigger:
     - platform: mqtt
-      topic: "home/command/kodi2/playdir"
+      topic: "home/command/kodi2/playdir_default"
   action:
     - service: mqtt.publish
       data_template:
