@@ -2576,7 +2576,7 @@
         topic: "home/sound/pi1"
         payload_template: 'computerbeep_5.wav'
     - service: media_player.play_media
-      data:
+      data_template:
         entity_id: media_player.kodi
         media_content_type: "{{ trigger.payload | split(':')[0] }}"
         media_content_id: "{{ trigger.payload | split(':')[1:] | join(':') }}"
@@ -2592,7 +2592,7 @@
         topic: "home/sound/pi2"
         payload_template: 'computerbeep_5.wav'
     - service: media_player.play_media
-      data:
+      data_template:
         entity_id: media_player.kodi_bedroom
         media_content_type: "{{ trigger.payload | split(':')[0] }}"
         media_content_id: "{{ trigger.payload | split(':')[1:] | join(':') }}"
