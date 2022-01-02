@@ -2578,8 +2578,8 @@
     - service: media_player.play_media
       data_template:
         entity_id: media_player.kodi
-        media_content_type: "{{ trigger.payload | split(':')[0] }}"
-        media_content_id: "{{ trigger.payload | split(':')[1:] | join(':') }}"
+        media_content_type: "{{ trigger.payload.split(':')[0] }}"
+        media_content_id: "{{ trigger.payload.split(':')[1:] | join(':') }}"
 
 - id: play_kodi2
   alias: play_kodi2
@@ -2594,8 +2594,8 @@
     - service: media_player.play_media
       data_template:
         entity_id: media_player.kodi_bedroom
-        media_content_type: "{{ trigger.payload | split(':')[0] }}"
-        media_content_id: "{{ trigger.payload | split(':')[1:] | join(':') }}"
+        media_content_type: "{{ trigger.payload.split(':')[0] }}"
+        media_content_id: "{{ trigger.payload.split(':')[1:] | join(':') }}"
 
 - id: remote_music_on
   alias: remote_music_on
