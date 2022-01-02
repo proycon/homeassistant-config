@@ -72,7 +72,9 @@ RET=$?
 cd /nettmp/videoqueue
 if ls -1 $SEQNR-*; then
     if [ "$SEQNR" = "001" ]; then
-        mosquitto_pub -I youtube -h "$MQTT_HOST" -p 8883 -u "$MQTT_USER" -P "$MQTT_PASSWORD" --cafile /etc/ssl/certs/ISRG_Root_X1.pem -t "home/command/kodi$PI/play" -m "directory:/nettmp/videoqueue/" --qos 1
+        #raw query, but we let home assistant mediate via MQTT
+        #curl -X POST --user $KODI_USER:$KODI_PASSWORD -H "content-type:application/json" http://192.168.0.12:8080/jsonrpc -d '{"jsonrpc":"2.0","id":1,"method":"Player.Open","params":{"item": {"directory":"/home/homeautomation/Server/videoqueue/" } } }'
+        mosquitto_pub -I youtube -h "$MQTT_HOST" -p 8883 -u "$MQTT_USER" -P "$MQTT_PASSWORD" --cafile /etc/ssl/certs/ISRG_Root_X1.pem -t "home/command/kodi$PI/playdir" -m "/home/homeautomation/Server/videoqueue/" --qos 1
     else
         mosquitto_pub -I youtube -h "$MQTT_HOST" -p 8883 -u "$MQTT_USER" -P "$MQTT_PASSWORD" --cafile /etc/ssl/certs/ISRG_Root_X1.pem -t "home/say/pi$PI" -m "ready" --qos 1
     fi
