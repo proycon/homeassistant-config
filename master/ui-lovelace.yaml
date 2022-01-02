@@ -1522,6 +1522,7 @@ views:
                          - input_text.youtube_link
                          - script.add_youtube_link
                          - script.play_youtube_link
+                         - script.play_videoqueue
                 - type: entities
                   entities:
                       - input_text.say
@@ -1807,6 +1808,7 @@ views:
                          - input_text.youtube_link_bedroom
                          - script.add_youtube_link_bedroom
                          - script.play_youtube_link_bedroom
+                         - script.play_videoqueue_bedroom
   - path: history
     icon: 'mdi:chart-line'
     title: History
