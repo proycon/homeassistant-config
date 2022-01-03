@@ -1124,12 +1124,52 @@ desktop:
         - service: switch.turn_on
           entity_id: switch.pi1_xorg
 
+media_centre_bedroom:
+    alias: Media Centre bedroom
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/say/pi2"
+              payload: "Starting Media Centre"
+        - service: switch.turn_on
+          entity_id: switch.tv_bedroom
+        - delay:
+            seconds: 1
+        - service: switch.turn_off
+          entity_id: switch.pi2_xorg
+        - delay:
+            seconds: 1
+        - condition: state
+          entity_id: switch.pi2_kodi
+          state: 'off'
+        - service: switch.turn_on
+          entity_id: switch.pi2_kodi
+
+
+
+
+desktop_bedroom:
+    alias: Desktop
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/say/pi2"
+              payload: "Starting Desktop"
+        - service: switch.turn_on
+          entity_id: switch.tv_bedroom
+        - service: switch.turn_off
+          entity_id: switch.pi2_kodi
+        - delay:
+            seconds: 1
+        - service: switch.turn_on
+          entity_id: switch.pi2_xorg
+
 turn_media_off:
     alias: Turn media off
     sequence:
     - service: mqtt.publish
       data_template:
-        topic: "home/sound/pi2"
+        topic: "home/sound/pi1"
         payload_template: 'computerbeep_5.wav'
     - delay:
         seconds: 1
@@ -1151,6 +1191,30 @@ turn_media_off:
         seconds: 4
     - service: media_player.turn_off
       entity_id: media_player.yamaha_receiver
+
+turn_media_off_bedroom:
+    alias: Turn media off bedroom
+    sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi2"
+        payload_template: 'computerbeep_5.wav'
+    - delay:
+        seconds: 1
+    - service: switch.turn_off
+      entity_id: switch.tv_decoder_bedroom
+    - service: switch.turn_off
+      entity_id: switch.pi2_xorg
+    - service: switch.turn_off
+      entity_id: switch.pi2_kodi
+    - service: switch.turn_off
+      entity_id: switch.pi2_music_player
+    - service: media_player.media_stop
+      entity_id: media_player.mpd
+    - delay:
+        seconds: 2
+    - service: switch.turn_off
+      entity_id: switch.tv_bedroom
 
 update_kodi_library:
     alias: Update Kodi Library
