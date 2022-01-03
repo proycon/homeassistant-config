@@ -2014,6 +2014,23 @@ mpc_play:
               type: "{{states.input_select.mpc_type.state}}"
               value: "{{states.input_text.mpc_search.state}}"
               filter: "{{states.input_select.mpc_filter.state}}"
+        - service: script.turn_on
+          entity_id: script.listen_to_music
+
+mpc_play_bedroom:
+    alias: Search and play music (bedroom)
+    sequence:
+        - service: mqtt.publish
+          data:
+            topic: "home/say/pi2"
+            payload: 'Searching and playing music'
+        - service: shell_command.mpc
+          data_template:
+              type: "{{states.input_select.mpc_type.state}}"
+              value: "{{states.input_text.mpc_search.state}}"
+              filter: "{{states.input_select.mpc_filter.state}}"
+        - service: script.turn_on
+          entity_id: script.listen_to_music_bedroom
 
 
 mpc_playlist:
@@ -2026,6 +2043,21 @@ mpc_playlist:
         - service: shell_command.mpcplaylist
           data_template:
               playlist: "{{states.input_text.mpc_playlist.state}}"
+        - service: script.turn_on
+          entity_id: script.listen_to_music
+
+mpc_playlist_bedroom:
+    alias: Play list bedroom
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/say/pi2"
+              payload: "Playing playlist"
+        - service: shell_command.mpcplaylist
+          data_template:
+              playlist: "{{states.input_text.mpc_playlist.state}}"
+        - service: script.turn_on
+          entity_id: script.listen_to_music_bedroom
 
 send_status:
     alias: Send status
