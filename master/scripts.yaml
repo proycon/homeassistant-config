@@ -1875,7 +1875,7 @@ start_timer:
     sequence:
         - service: mqtt.publish
           data:
-            topic: "home/sound/pi1"
+            topic: "home/say/pi1"
             payload: 'Timer started'
         - delay: '00:{{ states.input_number.timer.state | int }}:00'
         - service: media_player.play_media
@@ -1894,7 +1894,7 @@ vacuum_turn_on:
     sequence:
         - service: mqtt.publish
           data:
-            topic: "home/sound/pi1"
+            topic: "home/say/pi1"
             payload: 'Starting the clean-up'
         - service: vacuum.start
           entity_id: vacuum.robot
@@ -1903,7 +1903,7 @@ vacuum_turn_off:
     sequence:
         - service: mqtt.publish
           data:
-            topic: "home/sound/pi1"
+            topic: "home/say/pi1"
             payload: 'Stopping the clean-up'
         - service: vacuum.stop
           entity_id: vacuum.robot
@@ -2007,7 +2007,7 @@ mpc_play:
     sequence:
         - service: mqtt.publish
           data:
-            topic: "home/sound/pi1"
+            topic: "home/say/pi1"
             payload: 'Searching and playing music'
         - service: shell_command.mpc
           data_template:
