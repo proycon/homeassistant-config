@@ -991,7 +991,7 @@ watch_tv:
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - delay:
-            seconds: 8
+            seconds: 10
         - service: switch.turn_on
           entity_id: switch.tv_decoder
         - delay:
@@ -1124,12 +1124,52 @@ desktop:
         - service: switch.turn_on
           entity_id: switch.pi1_xorg
 
+media_centre_bedroom:
+    alias: Media Centre bedroom
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/say/pi2"
+              payload: "Starting Media Centre"
+        - service: switch.turn_on
+          entity_id: switch.tv_bedroom
+        - delay:
+            seconds: 1
+        - service: switch.turn_off
+          entity_id: switch.pi2_xorg
+        - delay:
+            seconds: 1
+        - condition: state
+          entity_id: switch.pi2_kodi
+          state: 'off'
+        - service: switch.turn_on
+          entity_id: switch.pi2_kodi
+
+
+
+
+desktop_bedroom:
+    alias: Desktop
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/say/pi2"
+              payload: "Starting Desktop"
+        - service: switch.turn_on
+          entity_id: switch.tv_bedroom
+        - service: switch.turn_off
+          entity_id: switch.pi2_kodi
+        - delay:
+            seconds: 1
+        - service: switch.turn_on
+          entity_id: switch.pi2_xorg
+
 turn_media_off:
     alias: Turn media off
     sequence:
     - service: mqtt.publish
       data_template:
-        topic: "home/sound/pi2"
+        topic: "home/sound/pi1"
         payload_template: 'computerbeep_5.wav'
     - delay:
         seconds: 1
@@ -1151,6 +1191,30 @@ turn_media_off:
         seconds: 4
     - service: media_player.turn_off
       entity_id: media_player.yamaha_receiver
+
+turn_media_off_bedroom:
+    alias: Turn media off bedroom
+    sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi2"
+        payload_template: 'computerbeep_5.wav'
+    - delay:
+        seconds: 1
+    - service: switch.turn_off
+      entity_id: switch.tv_decoder_bedroom
+    - service: switch.turn_off
+      entity_id: switch.pi2_xorg
+    - service: switch.turn_off
+      entity_id: switch.pi2_kodi
+    - service: switch.turn_off
+      entity_id: switch.pi2_music_player
+    - service: media_player.media_stop
+      entity_id: media_player.mpd
+    - delay:
+        seconds: 2
+    - service: switch.turn_off
+      entity_id: switch.tv_bedroom
 
 update_kodi_library:
     alias: Update Kodi Library
@@ -1811,7 +1875,7 @@ start_timer:
     sequence:
         - service: mqtt.publish
           data:
-            topic: "home/sound/pi1"
+            topic: "home/say/pi1"
             payload: 'Timer started'
         - delay: '00:{{ states.input_number.timer.state | int }}:00'
         - service: media_player.play_media
@@ -1830,7 +1894,7 @@ vacuum_turn_on:
     sequence:
         - service: mqtt.publish
           data:
-            topic: "home/sound/pi1"
+            topic: "home/say/pi1"
             payload: 'Starting the clean-up'
         - service: vacuum.start
           entity_id: vacuum.robot
@@ -1839,7 +1903,7 @@ vacuum_turn_off:
     sequence:
         - service: mqtt.publish
           data:
-            topic: "home/sound/pi1"
+            topic: "home/say/pi1"
             payload: 'Stopping the clean-up'
         - service: vacuum.stop
           entity_id: vacuum.robot
@@ -1872,6 +1936,18 @@ play_youtube_link:
              url: "{{ states.input_text.youtube_link.state }}"
              pi: 1
 
+play_videoqueue:
+    alias: Play current queue
+    sequence:
+       - service: script.turn_on
+         entity_id: script.media_centre
+       - service: kodi.call_method
+         data_template:
+           entity_id: media_player.kodi
+           method: Player.Open
+           item:
+             directory: "/home/homeautomation/Server/videoqueue/"
+
 play_youtube_link_bedroom:
     alias: Play Youtube link bedroom
     sequence:
@@ -1882,6 +1958,18 @@ play_youtube_link_bedroom:
              mode: play
              url: "{{ states.input_text.youtube_link_bedroom.state }}"
              pi: 2
+
+play_videoqueue_bedroom:
+    alias: Play current queue bedroom
+    sequence:
+       - service: script.turn_on
+         entity_id: script.media_centre_bedroom
+       - service: kodi.call_method
+         data_template:
+           entity_id: media_player.kodi2
+           method: Player.Open
+           item:
+             directory: "/home/homeautomation/Server/videoqueue/"
 
 add_youtube_link:
     alias: Add Youtube link
@@ -1919,13 +2007,30 @@ mpc_play:
     sequence:
         - service: mqtt.publish
           data:
-            topic: "home/sound/pi1"
+            topic: "home/say/pi1"
             payload: 'Searching and playing music'
         - service: shell_command.mpc
           data_template:
               type: "{{states.input_select.mpc_type.state}}"
               value: "{{states.input_text.mpc_search.state}}"
               filter: "{{states.input_select.mpc_filter.state}}"
+        - service: script.turn_on
+          entity_id: script.listen_to_music
+
+mpc_play_bedroom:
+    alias: Search and play music (bedroom)
+    sequence:
+        - service: mqtt.publish
+          data:
+            topic: "home/say/pi2"
+            payload: 'Searching and playing music'
+        - service: shell_command.mpc
+          data_template:
+              type: "{{states.input_select.mpc_type.state}}"
+              value: "{{states.input_text.mpc_search.state}}"
+              filter: "{{states.input_select.mpc_filter.state}}"
+        - service: script.turn_on
+          entity_id: script.listen_to_music_bedroom
 
 
 mpc_playlist:
@@ -1938,6 +2043,21 @@ mpc_playlist:
         - service: shell_command.mpcplaylist
           data_template:
               playlist: "{{states.input_text.mpc_playlist.state}}"
+        - service: script.turn_on
+          entity_id: script.listen_to_music
+
+mpc_playlist_bedroom:
+    alias: Play list bedroom
+    sequence:
+        - service: mqtt.publish
+          data:
+              topic: "home/say/pi2"
+              payload: "Playing playlist"
+        - service: shell_command.mpcplaylist
+          data_template:
+              playlist: "{{states.input_text.mpc_playlist.state}}"
+        - service: script.turn_on
+          entity_id: script.listen_to_music_bedroom
 
 send_status:
     alias: Send status

@@ -1135,6 +1135,7 @@ views:
              - input_text.youtube_link
              - script.add_youtube_link
              - script.play_youtube_link
+             - script.play_videoqueue
         - type: entities
           entities:
             - switch.tv_spots
@@ -1522,6 +1523,7 @@ views:
                          - input_text.youtube_link
                          - script.add_youtube_link
                          - script.play_youtube_link
+                         - script.play_videoqueue
                 - type: entities
                   entities:
                       - input_text.say
@@ -1766,6 +1768,36 @@ views:
                           tap_action:
                               action: call-service
                               service: script.tvdecoder2_antena3
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: script.watch_tv_bedroom
+                      tap_action:
+                          action: call-service
+                          service: script.watch_tv_bedroom
+                    - type: entity-button
+                      entity: script.listen_to_music_bedroom
+                      tap_action:
+                          action: call-service
+                          service: script.listen_to_music_bedroom
+                    - type: entity-button
+                      entity: script.media_centre_bedroom
+                      tap_action:
+                          action: call-service
+                          service: script.media_centre_bedroom
+                    - type: entity-button
+                      entity: script.desktop_bedroom
+                      tap_action:
+                          action: call-service
+                          service: script.desktop_bedroom
+                    - type: entity-button
+                      entity: script.turn_media_off_bedroom
+                      tap_action:
+                          action: call-service
+                          service: script.turn_media_off_bedroom
+                      hold_action:
+                        - action: call-service
+                          service: script.turn_media_off_bedroom
                 - type: entities
                   title: Devices
                   entities:
@@ -1777,6 +1809,17 @@ views:
                   show_header_toggle: false
                 - type: vertical-stack
                   cards:
+                    - type: entities
+                      entities:
+                          - script.mpc_clear
+                          - input_select.mpc_type
+                          - input_text.mpc_search
+                          - input_select.mpc_filter
+                          - script.mpc_play_bedroom
+                    - type: entities
+                      entities:
+                          - input_text.mpc_playlist
+                          - script.mpc_playlist_bedroom
                     - type: media-control
                       entity: media_player.mpd
                     - type: media-control
@@ -1807,6 +1850,7 @@ views:
                          - input_text.youtube_link_bedroom
                          - script.add_youtube_link_bedroom
                          - script.play_youtube_link_bedroom
+                         - script.play_videoqueue_bedroom
   - path: history
     icon: 'mdi:chart-line'
     title: History

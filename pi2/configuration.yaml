@@ -106,7 +106,7 @@ switch:
             command_off: "sudo systemctl stop lightdm; aplay /home/homeautomation/homeassistant/media/computerbeep_9.wav"
             command_state: "ps aux | grep lightdm | grep -v grep"
         musicplayer:
-            command_on: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; snapclient -s sysdefault -h mediaserver.anaproy.lxd >/dev/null 2>/dev/null &"
+            command_on: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; snapclient -s 17 -h mediaserver.anaproy.lxd >/dev/null 2>/dev/null &"
             command_off: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_9.wav"
             command_state: "ps aux | grep snapclient | grep -v grep"
   - platform: rflink
@@ -436,6 +436,10 @@ shell_command:
     hdmi_cec_send: /home/homeautomation/homeassistant/scripts/media/hdmicecsend.sh "/dev/cec1" "{{ payload }}"
     technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }}'
     wakeup: sudo /home/homeautomation/homeassistant/scripts/wakeup/wakeup.xinit.sh
+
+tts:
+  platform: picotts
+  language: 'en-GB'
 
 #MQTT
 mqtt:

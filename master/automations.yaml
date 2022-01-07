@@ -2563,39 +2563,77 @@
     - service: switch.turn_on
       entity_id: switch.pi2_kodi
 
-- id: play_kodi
-  alias: play_kodi
+- id: playdir_kodi
+  alias: playdir_kodi
   trigger:
     - platform: mqtt
-      topic: "home/command/kodi/play"
+      topic: "home/command/kodi/playdir"
     - platform: mqtt
-      topic: "home/command/kodi1/play"
+      topic: "home/command/kodi1/playdir"
   action:
     - service: mqtt.publish
       data_template:
         topic: "home/sound/pi1"
         payload_template: 'computerbeep_5.wav'
-    - service: media_player.play_media
-      data:
+    - service: kodi.call_method
+      data_template:
         entity_id: media_player.kodi
-        media_content_type: "{{ trigger.payload | split(':')[0] }}"
-        media_content_id: "{{ trigger.payload | split(':')[1:] | join(':') }}"
+        method: Player.Open
+        item:
+          directory: "{{ trigger.payload }}"
 
-- id: play_kodi2
-  alias: play_kodi2
+- id: playdir_kodi_default
+  alias: playdir_kodi_default
   trigger:
     - platform: mqtt
-      topic: "home/command/kodi2/play"
+      topic: "home/command/kodi/playdir_default"
+    - platform: mqtt
+      topic: "home/command/kodi1/playdir_default"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi1"
+        payload_template: 'computerbeep_5.wav'
+    - service: kodi.call_method
+      data_template:
+        entity_id: media_player.kodi
+        method: Player.Open
+        item:
+          directory: "/home/homeautomation/Server/videoqueue/"
+
+- id: playdir_kodi2
+  alias: playdir_kodi2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/kodi2/playdir"
   action:
     - service: mqtt.publish
       data_template:
         topic: "home/sound/pi2"
         payload_template: 'computerbeep_5.wav'
-    - service: media_player.play_media
-      data:
+    - service: kodi.call_method
+      data_template:
         entity_id: media_player.kodi_bedroom
-        media_content_type: "{{ trigger.payload | split(':')[0] }}"
-        media_content_id: "{{ trigger.payload | split(':')[1:] | join(':') }}"
+        method: Player.Open
+        item:
+          directory: "{{ trigger.payload }}"
+
+- id: playdir_kodi2_default
+  alias: playdir_kodi2_default
+  trigger:
+    - platform: mqtt
+      topic: "home/command/kodi2/playdir_default"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi2"
+        payload_template: 'computerbeep_5.wav'
+    - service: kodi.call_method
+      data_template:
+        entity_id: media_player.kodi_bedroom
+        method: Player.Open
+        item:
+          directory: "/home/homeautomation/Server/videoqueue/"
 
 - id: remote_music_on
   alias: remote_music_on
@@ -2741,6 +2779,33 @@
      - service: media_player.media_next_track
        entity_id: media_player.mpd
 
+- id: remote_music_next2
+  alias: remote_music_next2
+  condition:
+    - condition: state
+      entity_id: switch.tv_bedroom
+      state: "off"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.mpd
+          state: "playing"
+        - condition: state
+          entity_id: media_player.mpd
+          state: "paused"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 2
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/music/next"
+  action:
+     - service: media_player.media_next_track
+       entity_id: media_player.mpd
+
 - id: remote_music_prev
   alias: remote_music_prev
   condition:
@@ -2767,6 +2832,33 @@
       event_data:
         entity_id: zwave.remotec_zrc90
         scene_id: 7
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/music/previous"
+  action:
+     - service: media_player.media_previous_track
+       entity_id: media_player.mpd
+
+- id: remote_music_prev2
+  alias: remote_music_prev2
+  condition:
+    - condition: state
+      entity_id: switch.tv_bedroom
+      state: "off"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.mpd
+          state: "playing"
+        - condition: state
+          entity_id: media_player.mpd
+          state: "paused"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 1
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/previous"
@@ -3886,3 +3978,27 @@
         data_template:
             topic: "home/notify/ping"
             payload_template: "{{now().timestamp()|int}}: {{ trigger.payload }}"
+
+- alias: command_play_youtube_link
+  trigger:
+      - platform: mqtt
+        topic: home/command/youtube
+  action:
+     - service: input_text.set_value
+       entity_id: input_text.youtube_link
+       data_template:
+         value: "{{ trigger.payload }}"
+     - service: script.turn_on
+       entity_id: script.play_youtube_link
+
+- alias: command_play_youtube_link_bedroom
+  trigger:
+      - platform: mqtt
+        topic: home/command/youtube2
+  action:
+     - service: input_text.set_value
+       entity_id: input_text.youtube_link_bedroom
+       data_template:
+         value: "{{ trigger.payload }}"
+     - service: script.turn_on
+       entity_id: script.play_youtube_link_bedroom
