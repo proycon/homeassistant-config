@@ -2779,6 +2779,33 @@
      - service: media_player.media_next_track
        entity_id: media_player.mpd
 
+- id: remote_music_next2
+  alias: remote_music_next2
+  condition:
+    - condition: state
+      entity_id: switch.tv_bedroom
+      state: "off"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.mpd
+          state: "playing"
+        - condition: state
+          entity_id: media_player.mpd
+          state: "paused"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 2
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/music/next"
+  action:
+     - service: media_player.media_next_track
+       entity_id: media_player.mpd
+
 - id: remote_music_prev
   alias: remote_music_prev
   condition:
@@ -2805,6 +2832,33 @@
       event_data:
         entity_id: zwave.remotec_zrc90
         scene_id: 7
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/music/previous"
+  action:
+     - service: media_player.media_previous_track
+       entity_id: media_player.mpd
+
+- id: remote_music_prev2
+  alias: remote_music_prev2
+  condition:
+    - condition: state
+      entity_id: switch.tv_bedroom
+      state: "off"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.mpd
+          state: "playing"
+        - condition: state
+          entity_id: media_player.mpd
+          state: "paused"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 1
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/previous"
