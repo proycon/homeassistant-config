@@ -295,6 +295,27 @@
       entity_id: script.ipcam_topreset
 
 
+- id: doorbell_sound2
+  alias: Doorbell sound2
+  trigger:
+      platform: state
+      entity_id: binary_sensor.doorbell
+      from: "off"
+      to: "on"
+  condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ states('sensor.ir_send_activity') == 'unavailable' or states('sensor.ir_send_activity') == 'unknown' }}"
+        - condition: template
+          value_template: '{% if states.automation.doorbell.attributes.last_triggered  %} {{(as_timestamp(now())-as_timestamp(states.automation.doorbell.attributes.last_triggered)) >= 3 }} {% else %} true {% endif %}'
+        - condition: template
+          value_template: '{% if states.binary_sensor.front_door.last_changed  %} {{(as_timestamp(now())-as_timestamp(states.binary_sensor.front_door.last_changed)) < 60 }} {% else %} true {% endif %}'
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi1"
+        payload_template: 'computerbeep_34.wav'
 
 - id: home_notification_lights_finished
   alias: "Home Notification Lights Finished"
