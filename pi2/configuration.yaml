@@ -11,12 +11,11 @@ rflink:
     wait_for_ack: False
     reconnect_interval: 10
 
-#logger:
-#  default: error
-#  logs:
-#    rflink: debug
-#    homeassistant.components.rflink: debug
-
+logger:
+  default: error
+  logs:
+    rflink: debug
+    homeassistant.components.rflink: debug
 
 #http:
   # Uncomment this to add a password (recommended!)
