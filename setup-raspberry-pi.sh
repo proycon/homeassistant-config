@@ -75,8 +75,9 @@ if [ ! -d /home/homeautomation/WiringPi ]; then
 fi
 
 if [ ! -d /home/homeautomation/rpi_ws281x ]; then
-    cd /home/homeautomation/rpi_ws281x
+    cd /home/homeautomation
     sudo -u homeautomation git clone https://github.com/jgarff/rpi_ws281x || exit 3
+    cd /home/homeautomation/rpi_ws281x
     sudo -u homeautomation scons || exit 3
     cd /home/homeautomation/rpi_ws281x/python
     python setup.py install  || exit 3
