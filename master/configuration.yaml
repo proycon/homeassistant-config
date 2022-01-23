@@ -535,6 +535,14 @@ sensor:
       unit_of_measurement: "%"
       state_topic: "home/sensor/humidity_living_room"
     - platform: mqtt
+      name: Temperature Attic
+      unit_of_measurement: °C
+      state_topic: "home/sensor/temperature_attic"
+    - platform: mqtt
+      name: Humidity Attic
+      unit_of_measurement: "%"
+      state_topic: "home/sensor/humidity_attic"
+    - platform: mqtt
       name: Bedroom Temperature
       unit_of_measurement: °C
       state_topic: "home/sensor/bedroom_temperature"
