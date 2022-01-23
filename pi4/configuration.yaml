@@ -86,6 +86,34 @@ automation:
           data_template:
               topic: "home/technofire/pi4/state"
               payload: '{% if trigger.topic.split("/")[-2] == "off" or trigger.payload == "OFF" %}OFF{% else %}ON{% endif %}'
+  - id: s2m_dht_sensor_temperature
+    alias: s2m_dht_sensor_temperature
+    trigger:
+        - platform: state
+          entity_id: sensor.dht_sensor_temperature
+        - platform: homeassistant
+          event: start
+        - platform: mqtt
+          topic: home/poll
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/sensor/temperature_attic"
+            payload_template: "{{ states('sensor.dht_sensor_temperature') }}"
+  - id: s2m_dht_sensor_humidity
+    alias: s2m_dht_sensor_humidity
+    trigger:
+        - platform: state
+          entity_id: sensor.dht_sensor_humidity
+        - platform: homeassistant
+          event: start
+        - platform: mqtt
+          topic: home/poll
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/sensor/humidity_attic"
+            payload_template: "{{ states('sensor.dht_sensor_humidity') }}"
 
 shell_command:
     technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }} 60'
