@@ -48,9 +48,13 @@ discovery:
 # Track the sun
 #sun:
 
-# Weather Prediction
-#sensor:
-#  platform: yr
+sensor:
+  - platform: dht
+    sensor: AM2302
+    pin: 4
+    monitored_conditions:
+      - temperature
+      - humidity
 
 automation:
 ######### SENSOR PROPAGATION SLAVE->MASTER (MQTT) #########
@@ -58,7 +62,7 @@ automation:
     alias: Technofire JSON
     trigger:
         platform: mqtt
-        topic: "home/technofire/pi2/jsonset"
+        topic: "home/technofire/pi4/jsonset"
     action:
         - service: shell_command.technofire
           data_template:
@@ -66,13 +70,13 @@ automation:
              brightness: '{{ trigger.payload_json.brightness }}'
         - service: mqtt.publish
           data_template:
-              topic: "home/technofire/pi2/state"
+              topic: "home/technofire/pi4/state"
               payload: '{% if trigger.payload_json.scene == "off" %}OFF{% else %}ON{% endif %}'
   - id: technofire
     alias: Technofire
     trigger:
         platform: mqtt
-        topic: "home/technofire/pi2/set/#"
+        topic: "home/technofire/pi4/set/#"
     action:
         - service: shell_command.technofire
           data_template:
@@ -80,11 +84,11 @@ automation:
              brightness: '{{ trigger.topic.split("/")[-1] }}'
         - service: mqtt.publish
           data_template:
-              topic: "home/technofire/pi2/state"
+              topic: "home/technofire/pi4/state"
               payload: '{% if trigger.topic.split("/")[-2] == "off" or trigger.payload == "OFF" %}OFF{% else %}ON{% endif %}'
 
 shell_command:
-    technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }}'
+    technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }} 60'
 
 #MQTT
 mqtt:
