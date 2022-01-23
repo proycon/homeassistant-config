@@ -246,6 +246,8 @@ input_select:
             - Fire
             - Lamp
             - Ambilight
+            - Rainbow
+            - Rainbow Slow
             - Rainbow Cycle
             - Colorcycle Fast
             - Colorcycle
@@ -268,6 +270,8 @@ input_select:
             - Fire
             - Lamp
             - Ambilight
+            - Rainbow
+            - Rainbow Slow
             - Rainbow Cycle
             - Colorcycle Fast
             - Colorcycle
@@ -290,6 +294,8 @@ input_select:
             - Fire
             - Lamp
             - Ambilight
+            - Rainbow
+            - Rainbow Slow
             - Rainbow Cycle
             - Colorcycle Fast
             - Colorcycle
@@ -818,7 +824,7 @@ switch ambilight:
 switch bedroom_ambilight:
     platform: mqtt
     name: Bedroom Ambilight
-    command_topic: "home/technofire/pi4/set/lamp/60"
+    command_topic: "home/technofire/pi4/set/rainbow_slow/60"
     state_topic: "home/technofire/pi4/state"
 switch noise_detector:
     platform: mqtt

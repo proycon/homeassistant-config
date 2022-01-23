@@ -2307,7 +2307,7 @@
       event_data:
         entity_id: zwave.remotec_unknown_type_0001_id_8510_2
         scene_id: 7
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom_ambilight
@@ -2323,7 +2323,7 @@
       event_data:
         entity_id: zwave.remotec_unknown_type_0001_id_8510_2
         scene_id: 7
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom_ambilight
