@@ -945,6 +945,26 @@ views:
                   color: black
                   font-family: Helvetica
               - type: state-label
+                entity: sensor.temperature_attic
+                style:
+                  top: 59%
+                  left: 30%
+                  background: center
+                  text-align: center
+                  font-size: 0.7em
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.humidity_attic
+                style:
+                  top: 61%
+                  left: 30%
+                  background: center
+                  text-align: center
+                  font-size: 0.7em
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
                 entity: sensor.fibaro_office_temperature
                 style:
                   top: 75%
