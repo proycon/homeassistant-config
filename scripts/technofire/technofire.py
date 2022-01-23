@@ -193,6 +193,9 @@ if __name__ == '__main__':
     elif scene == "rainbow":
         while True:
             rainbow(strip)
+    elif scene == "rainbow_slow":
+        while True:
+            rainbow(strip,250)
     elif scene == "rainbow_cycle":
         while True:
             rainbowCycle(strip)
