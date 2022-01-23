@@ -2299,26 +2299,38 @@
   action:
       service: switch.turn_on
       entity_id: switch.bedroom
-- id: remote_lights_bedroom_off
-  alias: remote_lights_bedroom_off
+- id: remote_lights_ambilight_bedroom_toggle_on
+  alias: remote_lights_ambilight_bedroom_toggle_on
   trigger:
-    - platform: mqtt
-      topic: "home/command/lights/bedroom/off"
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 7
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: event
       event_type: zwave.scene_activated
       event_data:
         entity_id: zwave.remotec_unknown_type_0001_id_8510_2
         scene_id: 7
         scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  condition:
+      - condition: state
+        entity_id: switch.bedroom_ambilight
+        state: "off"
   action:
-      service: switch.turn_off
-      entity_id: switch.bedroom
+     - service: switch.turn_on
+       entity_id: switch.bedroom_ambilight
+- id: remote_lights_ambilight_bedroom_toggle_off
+  alias: remote_lights_ambilight_bedroom_toggle_off
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
+        scene_id: 7
+        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+  condition:
+      - condition: state
+        entity_id: switch.bedroom_ambilight
+        state: "on"
+  action:
+     - service: switch.turn_off
+       entity_id: switch.bedroom_ambilight
 - id: remote_lights_bedroom_toggle_on
   alias: remote_lights_bedroom_toggle_on
   trigger:

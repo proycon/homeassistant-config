@@ -815,6 +815,11 @@ switch ambilight:
     name: Ambilight
     command_topic: "home/technofire/pi2/set/lamp/40"
     state_topic: "home/technofire/pi2/state"
+switch bedroom_ambilight:
+    platform: mqtt
+    name: Bedroom Ambilight
+    command_topic: "home/technofire/pi4/set/lamp/60"
+    state_topic: "home/technofire/pi4/state"
 switch noise_detector:
     platform: mqtt
     name: Noise detector
