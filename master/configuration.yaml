@@ -145,8 +145,10 @@ logbook:
         - script.disarm
         - script.ignite_dresser_ambilight
         - script.ignite_fireplace
+        - script.ignite_bedroom_ambilight
         - script.extinguish_dresser_ambilight
         - script.extinguish_fireplace
+        - script.extinguish_bedroom_ambilight
         - script.wake_up_alarm
         - script.home_notification_lights
         - script.reset_ipcam
@@ -282,6 +284,28 @@ input_select:
             - Purple
             - Cyan
             - White
+    bedroom_ambilight:
+        name: Bedroom Ambilight
+        options:
+            - Fire
+            - Lamp
+            - Ambilight
+            - Rainbow Cycle
+            - Colorcycle Fast
+            - Colorcycle
+            - Colorcycle Slow
+            - Sirene
+            - Knightrider
+            - Red Cycle
+            - Green Cycle
+            - Blue Cycle
+            - Red
+            - Green
+            - Blue
+            - Yellow
+            - Purple
+            - Cyan
+            - White
     mpc_type:
         name: Type
         options:
@@ -314,6 +338,12 @@ input_number:
         initial: 255
     dresser_ambilight_brightness:
         name: Dresser Ambilight brightness
+        min: 0
+        max: 255
+        step: 1
+        initial: 255
+    bedroom_ambilight_brightness:
+        name: Bedroom Ambilight brightness
         min: 0
         max: 255
         step: 1

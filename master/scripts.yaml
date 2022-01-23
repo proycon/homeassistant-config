@@ -90,6 +90,8 @@ lights_off:
           entity_id: script.extinguish_fireplace
         - service: script.turn_on
           entity_id: script.extinguish_dresser_ambilight
+        - service: script.turn_on
+          entity_id: script.extinguish_bedroom_ambilight
 avr_volup:
     alias: Volume up (AVR)
     sequence:
@@ -926,6 +928,20 @@ extinguish_dresser_ambilight:
         data:
             topic: "home/technofire/pi2/jsonset"
             payload: '{"scene":"off","brightness":"0"}'
+ignite_bedroom_ambilight:
+    alias: Ignite bedroom ambilight
+    sequence:
+      - service: mqtt.publish
+        data_template:
+            topic: "home/technofire/pi4/jsonset"
+            payload_template: '{"scene":"{{ states.input_select.bedroom_ambilight.state.replace(" ","_") |lower }}","brightness":"{{ states.input_number.bedroom_ambilight_brightness.state|int }}"}'
+extinguish_bedroom_ambilight:
+    alias: Extinguish bedroom ambilight
+    sequence:
+      - service: mqtt.publish
+        data:
+            topic: "home/technofire/pi4/jsonset"
+            payload: '{"scene":"off","brightness":"0"}'
 
 reset_ipcam:
     alias: Reset IPcam
@@ -1454,6 +1470,10 @@ sirene_lights:
            data:
                entity_id: input_number.dresser_ambilight_brightness
                value: 255
+         - service: input_number.set_value
+           data:
+               entity_id: input_number.bedroom_ambilight_brightness
+               value: 255
          - service: input_select.select_option
            data:
                entity_id: input_select.dresser_ambilight
@@ -1464,6 +1484,8 @@ sirene_lights:
            entity_id: script.ignite_fireplace
          - service: script.turn_on
            entity_id: script.ignite_dresser_ambilight
+         - service: script.turn_on
+           entity_id: script.ignite_bedroom_ambilight
 
 reset_fireplace:
      alias: Reset Fireplace

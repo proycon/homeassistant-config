@@ -1188,6 +1188,14 @@ views:
           show_header_toggle: false
         - type: entities
           entities:
+            - input_select.bedroom_ambilight
+            - input_number.bedroom_ambilight_brightness
+            - script.ignite_bedroom_ambilight
+            - script.extinguish_bedroom_ambilight
+          title: Bedroom Ambilight
+          show_header_toggle: false
+        - type: entities
+          entities:
             - sensor.wake_up_time
             - input_number.wake_up_hour
             - input_number.wake_up_minutes
