@@ -152,12 +152,13 @@ def sirene(strip):
     off(strip)
     time.sleep(0.15)
 
-def colorFade(strip, color):
+def colorFade(strip, color, wait_ms=250):
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
     for i in range(256):
         strip.setBrightness(i)
         strip.show()
+    time.sleep(wait_ms/1000.0)
     for i in range(255,0,-1):
         strip.setBrightness(i)
         strip.show()
