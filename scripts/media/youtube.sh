@@ -25,6 +25,12 @@ if [ -z "$MQTT_PASSWORD" ]; then
     exit 2
 fi
 
+if [ ! -d /nettmp/videoqueue ]; then
+    mosquitto_pub -I youtube -h "$MQTT_HOST" -p 8883 -u "$MQTT_USER" -P "$MQTT_PASSWORD" --cafile /etc/ssl/certs/ISRG_Root_X1.pem -t "home/say/pi$PI" -m "unable to download, disk not mounted" --qos 1
+    exit 2
+fi
+
+
 case $MODE in
     play)
         rm /nettmp/videoqueue/.seqnr
