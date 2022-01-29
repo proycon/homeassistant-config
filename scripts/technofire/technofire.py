@@ -238,7 +238,8 @@ if __name__ == '__main__':
     elif scene == "lamp":
         singlecolor(strip, Color(196,181,51))
     elif scene == "redalert":
-        colorFade(strip, Color(255,0,0))
+        while True:
+            colorFade(strip, Color(255,0,0))
     elif scene == "sirene":
         while True:
             sirene(strip)
