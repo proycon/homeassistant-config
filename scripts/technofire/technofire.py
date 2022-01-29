@@ -152,6 +152,14 @@ def sirene(strip):
     off(strip)
     time.sleep(0.15)
 
+def colorFade(strip, color):
+    for i in range(strip.numPixels()):
+        strip.setPixelColor(i, color)
+    for i in range(256):
+        strip.setBrightness(i)
+    for i in range(255,0,-1):
+        strip.setBrightness(i)
+
 
 # Main program logic follows:
 if __name__ == '__main__':
@@ -229,6 +237,8 @@ if __name__ == '__main__':
         singlecolor(strip, Color(244,243,169))
     elif scene == "lamp":
         singlecolor(strip, Color(196,181,51))
+    elif scene == "redalert":
+        colorFade(strip, Color(255,0,0))
     elif scene == "sirene":
         while True:
             sirene(strip)
