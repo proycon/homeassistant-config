@@ -157,8 +157,10 @@ def colorFade(strip, color):
         strip.setPixelColor(i, color)
     for i in range(256):
         strip.setBrightness(i)
+        strip.show()
     for i in range(255,0,-1):
         strip.setBrightness(i)
+        strip.show()
 
 
 # Main program logic follows:
