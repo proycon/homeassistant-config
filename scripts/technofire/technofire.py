@@ -243,6 +243,15 @@ if __name__ == '__main__':
     elif scene == "redalert":
         while True:
             colorFade(strip, Color(255,0,0))
+    elif scene == "yellowalert":
+        while True:
+            colorFade(strip, Color(255,255,0))
+    elif scene == "greenalert":
+        while True:
+            colorFade(strip, Color(0,255,0))
+    elif scene == "bluealert":
+        while True:
+            colorFade(strip, Color(0,0,255))
     elif scene == "sirene":
         while True:
             sirene(strip)
