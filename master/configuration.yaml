@@ -254,6 +254,7 @@ input_select:
             - Colorcycle Slow
             - Sirene
             - Knightrider
+            - Redalert
             - Red Cycle
             - Green Cycle
             - Blue Cycle
@@ -278,6 +279,7 @@ input_select:
             - Colorcycle Slow
             - Sirene
             - Knightrider
+            - Redalert
             - Red Cycle
             - Green Cycle
             - Blue Cycle
@@ -302,6 +304,7 @@ input_select:
             - Colorcycle Slow
             - Sirene
             - Knightrider
+            - Redalert
             - Red Cycle
             - Green Cycle
             - Blue Cycle
