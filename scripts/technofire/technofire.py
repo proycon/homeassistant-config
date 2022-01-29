@@ -152,16 +152,20 @@ def sirene(strip):
     off(strip)
     time.sleep(0.15)
 
-def colorFade(strip, color, wait_ms=250):
+def colorFade(strip, color, maxbrightness=255, wait_ms=250, wait_fade_ms=0):
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
-    for i in range(256):
+    for i in range(maxbrightness+1):
         strip.setBrightness(i)
         strip.show()
+        if wait_fade_ms > 0:
+            time.sleep(wait_fade_ms/1000.0)
     time.sleep(wait_ms/1000.0)
-    for i in range(255,0,-1):
+    for i in range(maxbrightness,0,-1):
         strip.setBrightness(i)
         strip.show()
+        if wait_fade_ms > 0:
+            time.sleep(wait_fade_ms/1000.0)
 
 
 # Main program logic follows:
@@ -246,6 +250,9 @@ if __name__ == '__main__':
     elif scene == "yellowalert":
         while True:
             colorFade(strip, Color(255,255,0))
+    elif scene == "yellowalert_slow":
+        while True:
+            colorFade(strip, Color(255,255,0),maxbrightness=100,wait_fade_ms=25)
     elif scene == "greenalert":
         while True:
             colorFade(strip, Color(0,255,0))
