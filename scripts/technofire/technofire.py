@@ -199,46 +199,46 @@ if __name__ == '__main__':
         while True:
             fire(strip)
     elif scene == "red_wipe":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorWipe(strip, Color(255, 0, 0))  # Red wipe
     elif scene == "blue_wipe":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorWipe(strip, Color(0, 255, 0))  # Blue wipe
     elif scene == "green_wipe":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorWipe(strip, Color(0, 0, 255))  # Blue wipe
     elif scene == "white_chase":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             theaterChase(strip, Color(127, 127, 127))  # White theater chase
     elif scene == "red_chase":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             theaterChase(strip, Color(127,   0,   0))  # Red theater chase
     elif scene == "blue_chase":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             theaterChase(strip, Color(0,   0,   127))  # Red theater chase
     elif scene == "knightrider":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             knightrider(strip)
     elif scene == "rainbow":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             rainbow(strip)
     elif scene == "rainbow_slow":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             rainbow(strip,250)
     elif scene == "rainbow_cycle":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             rainbowCycle(strip)
     elif scene == "colorcycle_fast":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorCycle(strip)
     elif scene == "colorcycle":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorCycle(strip,500)
     elif scene == "colorcycle_slow":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorCycle(strip,2000)
     elif scene == "rainbow_chase":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
            theaterChaseRainbow(strip)
     elif scene == "white":
         singlecolor(strip, Color(255,255,255))
@@ -259,31 +259,31 @@ if __name__ == '__main__':
     elif scene == "lamp":
         singlecolor(strip, Color(196,181,51))
     elif scene == "redalert":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorFade(strip, Color(255,0,0))
     elif scene == "red_notice":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorFade(strip, Color(255,0,0),maxbrightness=100,wait_fade_ms=25)
     elif scene == "yellowalert":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorFade(strip, Color(255,255,0))
     elif scene == "yellow_notice":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorFade(strip, Color(255,255,0),maxbrightness=100,wait_fade_ms=25)
     elif scene == "greenalert":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorFade(strip, Color(0,255,0))
     elif scene == "green_notice":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorFade(strip, Color(0,255,0),maxbrightness=100,wait_fade_ms=25)
     elif scene == "bluealert":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorFade(strip, Color(0,0,255))
     elif scene == "blue_notice":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             colorFade(strip, Color(0,0,255),maxbrightness=100,wait_fade_ms=25)
     elif scene == "sirene":
-        for _ in loop(args.iterations):
+        for _ in loop(args.iter):
             sirene(strip)
     elif scene == "off":
         off(strip)
