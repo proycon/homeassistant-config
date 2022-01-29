@@ -17,8 +17,8 @@ colorstate = {}
 
 parser = argparse.ArgumentParser(description="", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 #snippet hints --> addargb,addargs,addargi,addargf, addargpos, addarglist
-parser.add_argument('--leds',type=int, help="help", action='LED count', default=30)
-parser.add_argument('--pin',type=int, help="help", action='GPIO PIN', default=18)
+parser.add_argument('--leds',type=int, help="LED count", action='store', default=30)
+parser.add_argument('--pin',type=int, help="GPIO pin", action='store', default=18)
 parser.add_argument('--brightness','-b',type=int, help="Brightness (0..255)", action='store', default=255)
 parser.add_argument('--iter','-i',type=int, help="Number of iterations (0=infinite)", action='store', default=0)
 parser.add_argument('scene', nargs=1, help="Scene")
