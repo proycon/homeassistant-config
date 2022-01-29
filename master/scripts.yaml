@@ -1461,7 +1461,7 @@ sirene_lights:
          - service: input_select.select_option
            data:
                entity_id: input_select.fireplace
-               option: Sirene
+               option: Redalert
          - service: input_number.set_value
            data:
                entity_id: input_number.fireplace_brightness
@@ -1477,7 +1477,13 @@ sirene_lights:
          - service: input_select.select_option
            data:
                entity_id: input_select.dresser_ambilight
-               option: Sirene
+               option: Redalert
+         - delay:
+               seconds: 1
+         - service: input_select.select_option
+           data:
+               entity_id: input_select.bedroom_ambilight
+               option: Redalert
          - delay:
                seconds: 1
          - service: script.turn_on
