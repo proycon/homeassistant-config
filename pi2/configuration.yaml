@@ -215,6 +215,7 @@ automation:
           data_template:
              scene: '{{ trigger.payload_json.scene }}'
              brightness: '{{ trigger.payload_json.brightness }}'
+             iterations: '{{ trigger.payload_json.iterations | default(0) }}'
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi2/state"
@@ -229,6 +230,7 @@ automation:
           data_template:
              scene: '{% if trigger.payload == "OFF" %}off{% else %}{{ trigger.topic.split("/")[-2] }}{% endif %}'
              brightness: '{{ trigger.topic.split("/")[-1] }}'
+             iterations: 0
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi2/state"
@@ -433,7 +435,7 @@ shell_command:
     ir_send: /home/homeautomation/homeassistant/scripts/media/irsend.sh "{{ device }}" "{{ key }}"
     433send: /home/homeautomation/homeassistant/scripts/switch/433send.sh 4 "{{ protocol }}" "{{ group }}" "{{ unit }}" "{{ state }}"
     hdmi_cec_send: /home/homeautomation/homeassistant/scripts/media/hdmicecsend.sh "/dev/cec1" "{{ payload }}"
-    technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }}'
+    technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh --brightness {{ brightness }} --iter {{ iterations }} {{ scene.replace(" ","_") | lower }}'
     wakeup: sudo /home/homeautomation/homeassistant/scripts/wakeup/wakeup.xinit.sh
 
 tts:

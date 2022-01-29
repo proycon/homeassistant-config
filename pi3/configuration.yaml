@@ -84,7 +84,7 @@ binary_sensor:
 
 
 shell_command:
-    technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }}'
+    technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh --brightness {{ brightness }} --iter {{ iterations }} {{ scene.replace(" ","_") | lower }}'
 
 automation:
   - id: technofire_json
@@ -97,6 +97,7 @@ automation:
           data_template:
              scene: '{{ trigger.payload_json.scene }}'
              brightness: '{{ trigger.payload_json.brightness }}'
+             iterations: '{{ trigger.payload_json.iterations | default(0) }}'
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi3/state"
@@ -111,6 +112,7 @@ automation:
           data_template:
              scene: '{% if trigger.payload == "OFF" %}off{% else %}{{ trigger.topic.split("/")[-2] }}{% endif %}'
              brightness: '{% if trigger.payload == "OFF" %}0{% else %}{{ trigger.topic.split("/")[-1] }}{% endif %}'
+             iterations: 0
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi3/state"

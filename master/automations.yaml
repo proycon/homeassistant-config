@@ -1010,7 +1010,7 @@
               - !secret proyphone
               - !secret hansphone
     - service: script.turn_on
-      entity_id: script.sirene_lights
+      entity_id: script.alarm_lights
     - service: script.turn_on
       entity_id: switch.roof
     - delay:
@@ -1089,7 +1089,7 @@
       - service: script.turn_off
         entity_id: script.alarm
       - service: script.turn_off
-        entity_id: script.sirene_lights
+        entity_id: script.alarm_lights
       - service: timer.start
         data:
             entity_id: timer.reset_ipcam

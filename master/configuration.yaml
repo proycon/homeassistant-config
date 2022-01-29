@@ -255,9 +255,13 @@ input_select:
             - Sirene
             - Knightrider
             - Redalert
+            - Red notice
             - Yellowalert
+            - Yellow notice
             - Greenalert
+            - Green notice
             - Bluealert
+            - Blue notice
             - Red Cycle
             - Green Cycle
             - Blue Cycle
@@ -283,9 +287,13 @@ input_select:
             - Sirene
             - Knightrider
             - Redalert
+            - Red notice
             - Yellowalert
+            - Yellow notice
             - Greenalert
+            - Green notice
             - Bluealert
+            - Blue notice
             - Red Cycle
             - Green Cycle
             - Blue Cycle
@@ -311,9 +319,13 @@ input_select:
             - Sirene
             - Knightrider
             - Redalert
+            - Red notice
             - Yellowalert
+            - Yellow notice
             - Greenalert
+            - Green notice
             - Bluealert
+            - Blue notice
             - Red Cycle
             - Green Cycle
             - Blue Cycle

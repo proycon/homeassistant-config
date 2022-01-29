@@ -7,6 +7,7 @@ import time
 import random
 import sys
 import os
+import argparse
 
 HOST = os.uname()[1]
 
@@ -14,19 +15,31 @@ from neopixel import *
 
 colorstate = {}
 
+parser = argparse.ArgumentParser(description="", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+#snippet hints --> addargb,addargs,addargi,addargf, addargpos, addarglist
+parser.add_argument('--leds',type=int, help="help", action='LED count', default=30)
+parser.add_argument('--pin',type=int, help="help", action='GPIO PIN', default=18)
+parser.add_argument('--brightness','-b',type=int, help="Brightness (0..255)", action='store', default=255)
+parser.add_argument('--iter','-i',type=int, help="Number of iterations (0=infinite)", action='store', default=0)
+parser.add_argument('scene', nargs=1, help="Scene")
+args = parser.parse_args() #parsed arguments can be accessed as attributes
+
 # LED strip configuration:
-try:
-    LED_COUNT = int(sys.argv[3])     # Set to 0 for darkest and 255 for brightest
-except:
-    LED_COUNT  = 30      # Number of LED pixels.
-LED_PIN        = 18      # GPIO pin connected to the pixels (must support PWM!).
+LED_COUNT      = args.leds      # Number of LED pixels.
+LED_PIN        = args.pin       # GPIO pin connected to the pixels (must support PWM!).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
-try:
-    LED_BRIGHTNESS = int(sys.argv[2])     # Set to 0 for darkest and 255 for brightest
-except:
-    LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS = args.brightness     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
+
+
+def loop(iterations):
+    if iterations == 0:
+        while True:
+            yield 0
+    else:
+        for i in range(0,iterations):
+            yield i
 
 def off(strip):
     for i in range(strip.numPixels()):
@@ -168,6 +181,7 @@ def colorFade(strip, color, maxbrightness=255, wait_ms=250, wait_fade_ms=0):
             time.sleep(wait_fade_ms/1000.0)
 
 
+
 # Main program logic follows:
 if __name__ == '__main__':
     # Create NeoPixel object with appropriate configuration.
@@ -185,46 +199,46 @@ if __name__ == '__main__':
         while True:
             fire(strip)
     elif scene == "red_wipe":
-        while True:
+        for _ in loop(args.iterations):
             colorWipe(strip, Color(255, 0, 0))  # Red wipe
     elif scene == "blue_wipe":
-        while True:
+        for _ in loop(args.iterations):
             colorWipe(strip, Color(0, 255, 0))  # Blue wipe
     elif scene == "green_wipe":
-        while True:
+        for _ in loop(args.iterations):
             colorWipe(strip, Color(0, 0, 255))  # Blue wipe
     elif scene == "white_chase":
-        while True:
+        for _ in loop(args.iterations):
             theaterChase(strip, Color(127, 127, 127))  # White theater chase
     elif scene == "red_chase":
-        while True:
+        for _ in loop(args.iterations):
             theaterChase(strip, Color(127,   0,   0))  # Red theater chase
     elif scene == "blue_chase":
-        while True:
+        for _ in loop(args.iterations):
             theaterChase(strip, Color(0,   0,   127))  # Red theater chase
     elif scene == "knightrider":
-        while True:
+        for _ in loop(args.iterations):
             knightrider(strip)
     elif scene == "rainbow":
-        while True:
+        for _ in loop(args.iterations):
             rainbow(strip)
     elif scene == "rainbow_slow":
-        while True:
+        for _ in loop(args.iterations):
             rainbow(strip,250)
     elif scene == "rainbow_cycle":
-        while True:
+        for _ in loop(args.iterations):
             rainbowCycle(strip)
     elif scene == "colorcycle_fast":
-        while True:
+        for _ in loop(args.iterations):
             colorCycle(strip)
     elif scene == "colorcycle":
-        while True:
+        for _ in loop(args.iterations):
             colorCycle(strip,500)
     elif scene == "colorcycle_slow":
-        while True:
+        for _ in loop(args.iterations):
             colorCycle(strip,2000)
     elif scene == "rainbow_chase":
-        while True:
+        for _ in loop(args.iterations):
            theaterChaseRainbow(strip)
     elif scene == "white":
         singlecolor(strip, Color(255,255,255))
@@ -245,22 +259,31 @@ if __name__ == '__main__':
     elif scene == "lamp":
         singlecolor(strip, Color(196,181,51))
     elif scene == "redalert":
-        while True:
+        for _ in loop(args.iterations):
             colorFade(strip, Color(255,0,0))
+    elif scene == "red_notice":
+        for _ in loop(args.iterations):
+            colorFade(strip, Color(255,0,0),maxbrightness=100,wait_fade_ms=25)
     elif scene == "yellowalert":
-        while True:
+        for _ in loop(args.iterations):
             colorFade(strip, Color(255,255,0))
-    elif scene == "yellowalert_slow":
-        while True:
+    elif scene == "yellow_notice":
+        for _ in loop(args.iterations):
             colorFade(strip, Color(255,255,0),maxbrightness=100,wait_fade_ms=25)
     elif scene == "greenalert":
-        while True:
+        for _ in loop(args.iterations):
             colorFade(strip, Color(0,255,0))
+    elif scene == "green_notice":
+        for _ in loop(args.iterations):
+            colorFade(strip, Color(0,255,0),maxbrightness=100,wait_fade_ms=25)
     elif scene == "bluealert":
-        while True:
+        for _ in loop(args.iterations):
             colorFade(strip, Color(0,0,255))
+    elif scene == "blue_notice":
+        for _ in loop(args.iterations):
+            colorFade(strip, Color(0,0,255),maxbrightness=100,wait_fade_ms=25)
     elif scene == "sirene":
-        while True:
+        for _ in loop(args.iterations):
             sirene(strip)
     elif scene == "off":
         off(strip)

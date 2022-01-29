@@ -68,6 +68,7 @@ automation:
           data_template:
              scene: '{{ trigger.payload_json.scene }}'
              brightness: '{{ trigger.payload_json.brightness }}'
+             iterations: '{{ trigger.payload_json.iterations | default(0) }}'
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi4/state"
@@ -82,6 +83,7 @@ automation:
           data_template:
              scene: '{% if trigger.payload == "OFF" %}off{% else %}{{ trigger.topic.split("/")[-2] }}{% endif %}'
              brightness: '{{ trigger.topic.split("/")[-1] }}'
+             iterations: 0
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi4/state"
@@ -116,7 +118,7 @@ automation:
             payload_template: "{{ states('sensor.dht_sensor_humidity') }}"
 
 shell_command:
-    technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh {{ scene.replace(" ","_") | lower }} {{ brightness }} 60'
+    technofire: 'sudo /home/homeautomation/homeassistant/scripts/technofire/technofire.sh --brightness {{ brightness }} --leds 60 --iter {{ iterations }} {{ scene.replace(" ","_") | lower }}'
 
 #MQTT
 mqtt:
