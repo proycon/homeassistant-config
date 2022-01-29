@@ -190,7 +190,7 @@ if __name__ == '__main__':
     strip.begin()
 
     try:
-        scene = sys.argv[1]
+        scene = args.scene
     except IndexError:
         scene = "fire"
 
