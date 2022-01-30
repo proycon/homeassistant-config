@@ -1072,6 +1072,14 @@
           topic: "home/notify/armed"
           payload: "{{now().timestamp()|int}}: System armed"
           qos: 1
+    - service: mqtt.publish
+      data_template:
+          topic: "home/technofire/pi2/jsonset"
+          payload_template: '{"scene":"red_notice","brightness":"255","iterations":"3"}'
+    - service: mqtt.publish
+      data_template:
+          topic: "home/technofire/pi4/jsonset"
+          payload_template: '{"scene":"red_notice","brightness":"255","iterations":"3"}'
     - service: notify.matrix
       data:
           message: "System armed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
