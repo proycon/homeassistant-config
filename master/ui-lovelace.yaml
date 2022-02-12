@@ -502,7 +502,7 @@ views:
               - type: state-label
                 entity: sensor.co2_living_room
                 style:
-                  top: 62%
+                  top: 82%
                   left: 80%
                   background: center
                   text-align: center
@@ -1946,6 +1946,12 @@ views:
               name: Outside
             - entity: sensor.weather_temperature
               name: Buienradar
+        - type: history-graph
+          title: CO2 (48h)
+          hours_to_show: 48
+          entities:
+            - entity: sensor.co2_living_room
+              name: Living (co2)
         - type: history-graph
           title: Luminance (48h)
           hours_to_show: 48
