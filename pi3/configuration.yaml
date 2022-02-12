@@ -14,6 +14,11 @@ rflink:
     wait_for_ack: False
     reconnect_interval: 10
 
+sensor:
+  - platform: mhz19
+    name: mhz19
+    serial_device: /dev/ttyAMA0
+
 # Checks for available updates
 # Note: This component will send some information about your system to
 # the developers to assist with development of Home Assistant.
@@ -159,6 +164,20 @@ automation:
         data:
             topic: "home/sensor/humidity_living_room"
             payload_template: "{{ states('sensor.dht_sensor_humidity') }}"
+  - id: s2m_co2
+    alias: s2m_co2
+    trigger:
+        - platform: state
+          entity_id: sensor.mhz19
+        - platform: homeassistant
+          event: start
+        - platform: mqtt
+          topic: home/poll
+    action:
+        service: mqtt.publish
+        data:
+            topic: "home/sensor/co2_living_room"
+            payload_template: "{{ states('sensor.mhz19') }}"
   - id: s2m_weatherstation_rain
     alias: s2m_weatherstation_rain
     trigger:
