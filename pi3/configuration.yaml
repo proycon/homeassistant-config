@@ -14,10 +14,6 @@ rflink:
     wait_for_ack: False
     reconnect_interval: 10
 
-sensor:
-  - platform: mhz19
-    name: mhz19
-    serial_device: /dev/ttyAMA0
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -64,6 +60,9 @@ sensor:
     monitored_conditions:
       - temperature
       - humidity
+  - platform: mhz19
+    name: mhz19
+    serial_device: /dev/ttyAMA0
   - platform: rflink
     automatic_add: true
     devices:

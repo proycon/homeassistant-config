@@ -492,7 +492,17 @@ views:
               - type: state-label
                 entity: sensor.humidity_living_room
                 style:
-                  top: 59%
+                  top: 60%
+                  left: 80%
+                  background: center
+                  text-align: center
+                  font-size: 0.7em
+                  color: black
+                  font-family: Helvetica
+              - type: state-label
+                entity: sensor.co2_living_room
+                style:
+                  top: 62%
                   left: 80%
                   background: center
                   text-align: center

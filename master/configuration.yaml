@@ -559,6 +559,10 @@ sensor:
       unit_of_measurement: "%"
       state_topic: "home/sensor/humidity_living_room"
     - platform: mqtt
+      name: CO2 Living Room
+      unit_of_measurement: ppm
+      state_topic: "home/sensor/co2_living_room"
+    - platform: mqtt
       name: Temperature Attic
       unit_of_measurement: °C
       state_topic: "home/sensor/temperature_attic"
