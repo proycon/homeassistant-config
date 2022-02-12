@@ -4043,3 +4043,23 @@
          value: "{{ trigger.payload }}"
      - service: script.turn_on
        entity_id: script.play_youtube_link_bedroom
+
+- id: ventilation_warning
+  alias: ventilation_warning
+  trigger:
+      - platform: numeric_state
+        entity_id: sensor.co2_living_room
+        above: 1000
+        for:
+            minutes: 5
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/pi1"
+        payload_template: 'computerbeep_22.wav'
+    - service: script.turn_on
+      entity_id: script.blue_lights
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pi1"
+          payload: "Ventilation required, please open a door or window"

@@ -1384,51 +1384,34 @@ green_lights:
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi2/jsonset"
-              payload_template: '{"scene":"green_notice","brightness":"255","iterations":"4"}'
+              payload_template: '{"scene":"green_notice","brightness":"255","iterations":"5"}'
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi3/jsonset"
-              payload_template: '{"scene":"green_notice","brightness":"255","iterations":"4"}'
+              payload_template: '{"scene":"green_notice","brightness":"255","iterations":"5"}'
 yellow_lights:
      alias: Yellow Lights
      sequence:
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi2/jsonset"
-              payload_template: '{"scene":"yellow_notice","brightness":"255","iterations":"4"}'
+              payload_template: '{"scene":"yellow_notice","brightness":"255","iterations":"5"}'
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi3/jsonset"
-              payload_template: '{"scene":"yellow_notice","brightness":"255","iterations":"4"}'
+              payload_template: '{"scene":"yellow_notice","brightness":"255","iterations":"5"}'
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi4/jsonset"
-              payload_template: '{"scene":"yellow_notice","brightness":"255","iterations":"4"}'
+              payload_template: '{"scene":"yellow_notice","brightness":"255","iterations":"5"}'
+
 blue_lights:
      alias: Blue Lights
      sequence:
-         - service: input_select.select_option
-           data:
-               entity_id: input_select.fireplace
-               option: Blue
-         - service: input_number.set_value
-           data:
-               entity_id: input_number.fireplace_brightness
-               value: 255
-         - service: input_number.set_value
-           data:
-               entity_id: input_number.dresser_ambilight_brightness
-               value: 255
-         - service: input_select.select_option
-           data:
-               entity_id: input_select.dresser_ambilight
-               option: Blue
-         - delay:
-               seconds: 1
-         - service: script.turn_on
-           entity_id: script.ignite_fireplace
-         - service: script.turn_on
-           entity_id: script.ignite_dresser_ambilight
+        - service: mqtt.publish
+          data_template:
+              topic: "home/technofire/pi2/jsonset"
+              payload_template: '{"scene":"blue_notice","brightness":"255","iterations":"5"}'
 
 
 alarm_lights:
