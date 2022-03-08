@@ -3323,7 +3323,7 @@
       - service: climate.set_temperature
         data:
             entity_id: climate.anna
-            temperature: 21
+            temperature: 20
 
 - id: thermostat_morning_default_weekend
   alias: thermostat_morning_default_weekend
@@ -3339,13 +3339,24 @@
       - service: climate.set_temperature
         data:
             entity_id: climate.anna
-            temperature: 21
+            temperature: 20
 
 - id: thermostat_evening
   alias: thermostat_evening
   trigger:
       - platform: time
-        at: '23:30:00'
+        at: '19:00:00'
+  action:
+      - service: climate.set_temperature
+        data:
+            entity_id: climate.anna
+            temperature: 21
+
+- id: thermostat_night
+  alias: thermostat_night
+  trigger:
+      - platform: time
+        at: '23:00:00'
   action:
       - service: climate.set_temperature
         data:
