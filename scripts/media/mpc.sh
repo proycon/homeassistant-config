@@ -1,5 +1,5 @@
 #!/bin/bash
-export MPD_HOST="proycon@mediaserver.anaproy.lxd"
+export MPD_HOST="192.168.0.1"
 TYPE=$1
 VALUE=$2
 FILTER=$3

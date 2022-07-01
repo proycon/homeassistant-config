@@ -1,3 +1,3 @@
 #!/bin/bash
-export MPD_HOST="proycon@mediaserver.anaproy.lxd"
+export MPD_HOST="192.168.0.1"
 mpc clear
