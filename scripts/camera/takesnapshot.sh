@@ -25,11 +25,11 @@ if [ ! -z "$2" ]; then
     fi
 fi
 
-if [ "$MODE" == "frontdoor" ]; then
+if [ "$MODE" = "frontdoor" ]; then
     fswebcam -S 3 -r 640x480 -d $FRONTDOORCAM_DEV --save $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
-elif [ "$MODE" == "hallupstairs" ]; then
+elif [ "$MODE" = "hallupstairs" ]; then
     fswebcam -S 3 -r 640x480 -d $HALLUPSTAIRSCAM_DEV --save $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
-elif [ "$MODE" == "livingroom" ]; then
+elif [ "$MODE" = "livingroom" ]; then
     curl -sS "http://$LIVINGROOMCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$LIVINGROOMCAM_USER&pwd=$LIVINGROOMCAM_PASSWORD" -o tmp.jpg 2>$LOGDIR/camera.$MODE.log
     #curl -sS --netrc-file $LIVINGROOMCAM_NETRC http://$LIVINGROOMCAM_IP/image/jpeg.cgi -o tmp.jpg 2>$LOGDIR/camera.$MODE.log
     if [ $FLIP -eq 1 ]; then
@@ -37,11 +37,13 @@ elif [ "$MODE" == "livingroom" ]; then
     else
         mv tmp.jpg $DATE.$MODE.jpg
     fi
-elif [ "$MODE" == "street" ]; then
+elif [ "$MODE" = "street" ]; then
+    curl -sS "http://$STREETCAM_USER:$STREETCAM_PASSWORD@$STREETCAM_IP/Streaming/Channels/1/picture" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
+elif [ "$MODE" == "balcony" ]; then
     curl -sS "http://$STREETCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$STREETCAM_USER&pwd=$STREETCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
-elif [ "$MODE" == "jaiko" ]; then
+elif [ "$MODE" = "jaiko" ]; then
     curl -sS "http://$JAIKOCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$JAIKOCAM_USER&pwd=$JAIKOCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
-elif [ "$MODE" == "garden" ]; then
+elif [ "$MODE" = "garden" ]; then
     curl -sS "http://$GARDENCAM_IP/snapshot.cgi?user=$GARDENCAM_USER&pwd=$GARDENCAM_PASSWORD" -o $DATE.$MODE.jpg 2>$LOGDIR/camera.$MODE.log
 else
     rm "$MODE.lock"
