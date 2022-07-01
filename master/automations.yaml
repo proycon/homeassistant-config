@@ -51,7 +51,7 @@
 - alias: Street snapshots
   trigger:
     platform: time_pattern
-    seconds: '/1' #every second
+    seconds: '/5' #every five seconds
   action:
     - service: shell_command.snapshot_street
 - alias: Garden snapshots
