@@ -191,7 +191,7 @@ views:
             - type: picture-entity
               entity: camera.street
             - type: picture-entity
-              entity: camera.garden
+              entity: camera.balcony
         - type: picture-elements
           view_layout:
               position: sidebar

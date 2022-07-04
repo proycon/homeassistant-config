@@ -5,6 +5,9 @@
       name: Street
       file_path: /home/homeautomation/homeassistant/snapshots/_street.jpg
     - platform: local_file
+      name: Balcony
+      file_path: /home/homeautomation/homeassistant/snapshots/_balcony.jpg
+    - platform: local_file
       name: Front door
       file_path: /home/homeautomation/homeassistant/snapshots/_frontdoor.jpg
     - platform: local_file

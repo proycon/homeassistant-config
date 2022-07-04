@@ -30,18 +30,18 @@
 
 
 #------------ Snapshots ------------------------
-- alias: Frontdoor snapshots
-  trigger:
-    platform: time_pattern
-    seconds: '/9' #every ten seconds
-  action:
-    - service: shell_command.snapshot_frontdoor
-- alias: Hall upstairs snapshots
-  trigger:
-    platform: time_pattern
-    seconds: '/11' #every eleven seconds
-  action:
-    - service: shell_command.snapshot_hallupstairs
+#- alias: Frontdoor snapshots
+#  trigger:
+#    platform: time_pattern
+#    seconds: '/9' #every ten seconds
+#  action:
+#- service: shell_command.snapshot_frontdoor
+#- alias: Hall upstairs snapshots
+#  trigger:
+#    platform: time_pattern
+#    seconds: '/11' #every eleven seconds
+#  action:
+#    - service: shell_command.snapshot_hallupstairs
 - alias: Living room snapshots
   trigger:
     platform: time_pattern
@@ -54,12 +54,18 @@
     seconds: '/5' #every five seconds
   action:
     - service: shell_command.snapshot_street
-- alias: Garden snapshots
+- alias: Balcony snapshots
   trigger:
     platform: time_pattern
-    seconds: '/5' #every five seconds
+    seconds: '/2' #every five seconds
   action:
-    - service: shell_command.snapshot_garden
+    - service: shell_command.snapshot_balcony
+#- alias: Garden snapshots#
+#  trigger:
+#    platform: time_pattern
+#    seconds: '/5' #every five seconds
+# action:
+#    - service: shell_command.snapshot_garden
 - alias: Daily snapshot archiving
   trigger:
     platform: time
