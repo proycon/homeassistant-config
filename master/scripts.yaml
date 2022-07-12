@@ -47,6 +47,11 @@ lights_off:
     alias: Lights off
     sequence:
         - service: switch.turn_off
+          entity_id: switch.tv_spots
+        - wait_template: "{{ states('switch.tv_spots') == 'off' }}"
+          timeout: "00:00:05"
+        - delay: "00:00:01"
+        - service: switch.turn_off
           entity_id: switch.back_corner
         - wait_template: "{{ states('switch.back_corner') == 'off' }}"
           timeout: "00:00:05"
@@ -65,11 +70,6 @@ lights_off:
         - service: switch.turn_off
           entity_id: switch.midspots
         - wait_template: "{{ states('switch.midspots') == 'off' }}"
-          timeout: "00:00:05"
-        - delay: "00:00:01"
-        - service: switch.turn_off
-          entity_id: switch.tv_spots
-        - wait_template: "{{ states('switch.tv_spots') == 'off' }}"
           timeout: "00:00:05"
         - delay: "00:00:01"
         - service: switch.turn_off
