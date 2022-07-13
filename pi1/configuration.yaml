@@ -84,7 +84,7 @@ switch:
             command_off: "sudo systemctl stop lightdm; aplay -D hw:1,0 /home/homeautomation/homeassistant/media/computerbeep_9.wav"
             command_state: "ps aux | grep lightdm | grep -v grep"
         musicplayer:
-            command_on: "killall snapclient; aplay -D hw:1,0 /home/homeautomation/homeassistant/media/computerbeep_5.wav; snapclient -s 36 -h mediaserver.anaproy.lxd >/dev/null 2>/dev/null &"
+            command_on: "killall snapclient; aplay -D hw:1,0 /home/homeautomation/homeassistant/media/computerbeep_5.wav; snapclient -s 36 -h anaproy.nl >/dev/null 2>/dev/null &"
             #-s 36 corresponds to:
             #[Info] (Player) Player name: alsa, device: sysdefault:CARD=vc4hdmi1, description: vc4-hdmi-1, MAI PCM i2s-hifi-0
             command_off: "killall snapclient; aplay -D hw:1,0 /home/homeautomation/homeassistant/media/computerbeep_9.wav"

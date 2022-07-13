@@ -105,7 +105,7 @@ switch:
             command_off: "sudo systemctl stop lightdm; aplay /home/homeautomation/homeassistant/media/computerbeep_9.wav"
             command_state: "ps aux | grep lightdm | grep -v grep"
         musicplayer:
-            command_on: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; snapclient -s 17 -h mediaserver.anaproy.lxd >/dev/null 2>/dev/null &"
+            command_on: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_5.wav; snapclient -s 17 -h anaproy.nl >/dev/null 2>/dev/null &"
             command_off: "killall snapclient; aplay /home/homeautomation/homeassistant/media/computerbeep_9.wav"
             command_state: "ps aux | grep snapclient | grep -v grep"
   - platform: rflink
