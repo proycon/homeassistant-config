@@ -7,7 +7,11 @@ MODE="$1"
 URL="$2"
 PI="$3"
 
-cd /home/homeautomation
+say() {
+    mosquitto_pub -I youtube -h "$MQTT_HOST" -p 8883 -u "$MQTT_USER" -P "$MQTT_PASSWORD" --cafile /etc/ssl/certs/ISRG_Root_X1.pem -t "home/say/pi$PI" -m "$1" --qos 1
+}
+
+cd /home/homeautomation || exit 3
 . homeassistant/scripts/secrets.sh
 
 if [ -z "$MQTT_HOST" ]; then
@@ -26,7 +30,7 @@ if [ -z "$MQTT_PASSWORD" ]; then
 fi
 
 if [ ! -d /nettmp/videoqueue ]; then
-    mosquitto_pub -I youtube -h "$MQTT_HOST" -p 8883 -u "$MQTT_USER" -P "$MQTT_PASSWORD" --cafile /etc/ssl/certs/ISRG_Root_X1.pem -t "home/say/pi$PI" -m "unable to download, disk not mounted" --qos 1
+    say "unable to download, disk not mounted"
     exit 2
 fi
 
@@ -60,7 +64,7 @@ esac
 
 case $URL in
     http://*|https://*)
-        URL=$URL
+        URL="$URL"
         ;;
     *)
         URL="https://www.youtube.com/watch?v=$URL"
@@ -71,20 +75,20 @@ echo $SEQNR > /nettmp/videoqueue/.seqnr
 SEQNR=$(printf "%03d" $SEQNR)
 
 
-echo "Downloading $url as #$SEQNR" >&2
-mosquitto_pub -I youtube -h "$MQTT_HOST" -p 8883 -u "$MQTT_USER" -P "$MQTT_PASSWORD" --cafile /etc/ssl/certs/ISRG_Root_X1.pem -t "home/say/pi$PI" -m "downloading, please wait" --qos 1
+echo "Downloading $URL as #$SEQNR" >&2
+say "downloading, please wait"
 yt-dlp -f "bestvideo[height<=1080]+bestaudio" -P temp:/nettmp/videotmp -P home:/nettmp/videoqueue -o "$SEQNR-%(title)s.%(ext)s" "$URL"
 RET=$?
-cd /nettmp/videoqueue
+cd /nettmp/videoqueue || exit 3
 if ls -1 $SEQNR-*; then
     if [ "$MODE" = "play" ]; then
         #raw query, but we let home assistant mediate via MQTT
         #curl -X POST --user $KODI_USER:$KODI_PASSWORD -H "content-type:application/json" http://192.168.0.12:8080/jsonrpc -d '{"jsonrpc":"2.0","id":1,"method":"Player.Open","params":{"item": {"directory":"/home/homeautomation/Server/videoqueue/" } } }'
         mosquitto_pub -I youtube -h "$MQTT_HOST" -p 8883 -u "$MQTT_USER" -P "$MQTT_PASSWORD" --cafile /etc/ssl/certs/ISRG_Root_X1.pem -t "home/command/kodi$PI/playdir" -m "/home/homeautomation/Server/videoqueue/" --qos 1
     else
-        mosquitto_pub -I youtube -h "$MQTT_HOST" -p 8883 -u "$MQTT_USER" -P "$MQTT_PASSWORD" --cafile /etc/ssl/certs/ISRG_Root_X1.pem -t "home/say/pi$PI" -m "ready" --qos 1
+        say "ready"
     fi
 else
-    mosquitto_pub -I youtube -h "$MQTT_HOST" -p 8883 -u "$MQTT_USER" -P "$MQTT_PASSWORD" --cafile /etc/ssl/certs/ISRG_Root_X1.pem -t "home/say/pi$PI" -m "download failed" --qos 1
+    say "download failed"
 fi
 exit $RET
