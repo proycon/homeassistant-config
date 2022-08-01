@@ -9,13 +9,6 @@ fi
 havevar "$GPIO_PIN"
 havedep "$HAROOT/programs/gpio_binary_sensor"
 
-if [ -z "$1" ]; then
-    error "handle_gpio: No gpio pin provided!"
-    return 1
-else
-    GPIO_PIN=$1
-fi
-
 case "$GPIO_PULL" in
     down|DOWN)
         OPTS="-d"
