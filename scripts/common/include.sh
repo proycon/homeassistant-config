@@ -23,6 +23,12 @@ debug() {
     echo "[$NOW] DEBUG: $*">&2
 }
 
+settrap() {
+    #kill all chlidren on when dying
+    [ "$EXIT" = "" ] && EXIT=0
+    trap "EXIT=1 && trap - TERM && kill -- 0" INT TERM EXIT
+}
+
 
 havedep() {
     command -v "$1" >/dev/null 2>/dev/null || die "missing dependency $1"
@@ -99,8 +105,7 @@ mqtt_receiver() {
     mqttcheck
     #run asynchronously
     (
-        EXIT=0
-        trap 'EXIT=1' HUP
+        settrap
         while [ $EXIT -eq 0 ]; do
             info "mqttsub: $*"
             #shellcheck disable=SC2068,SC2086
@@ -148,8 +153,7 @@ mqtt_transmitter() {
     [ ! -e "$HAROOT/scripts/mqttsenders/$SENDER.sh" ] && die "Script mqttsenders/$SENDER.sh not found"
     shift
     (
-        EXIT=0
-        trap 'EXIT=1' HUP
+        settrap
         while [ $EXIT -eq 0 ]; do
             info "mqtt_transmitter: $SENDER $*"
             #shellcheck disable=SC2068,SC2086

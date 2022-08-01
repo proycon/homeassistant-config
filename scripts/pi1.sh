@@ -4,6 +4,8 @@ HAROOT="/home/homeautomation/homeassistant"
 
 . "$HAROOT/scripts/common/include.sh"
 
+settrap
+
 export GPIO_PIN_433SEND=7
 export SNAPCAST_SOUNDCARD=36
 
