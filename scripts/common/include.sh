@@ -3,23 +3,23 @@
 EXIT=0
 
 die() {
-    NOW=$(date +%Y-%m-%d %H:%M:%S)
+    NOW=$(date "+%Y-%m-%d %H:%M:%S")
     echo "[$NOW] FATAL ERROR: $*">&2
     exit 2
 }
 
 error() {
-    NOW=$(date +%Y-%m-%d %H:%M:%S)
+    NOW=$(date "+%Y-%m-%d %H:%M:%S")
     echo "[$NOW] ERROR: $*">&2
 }
 
 info() {
-    NOW=$(date +%Y-%m-%d %H:%M:%S)
+    NOW=$(date "+%Y-%m-%d %H:%M:%S")
     echo "[$NOW] INFO: $*">&2
 }
 
 debug() {
-    NOW=$(date +%Y-%m-%d %H:%M:%S)
+    NOW=$(date "+%Y-%m-%d %H:%M:%S")
     echo "[$NOW] DEBUG: $*">&2
 }
 
