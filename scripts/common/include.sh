@@ -1,9 +1,5 @@
 #!/bin/sh
 
-#technically not POSIX but most shells support it
-#shellcheck disable=SC3040
-set -o pipefail
-
 EXIT=0
 
 die() {
