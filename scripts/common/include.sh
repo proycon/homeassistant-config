@@ -106,10 +106,13 @@ mqtt_receiver() {
             #shellcheck disable=SC2068,SC2086
             if ! mosquitto_sub -c -q 1 -i "$HOSTNAME" -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASSWORD" --cafile "$CACERT" -t '#' -F "@H:@M:@S|%t|%p" $MQTT_OPTIONS | "$HAROOT/scripts/common/mqtthandler.sh" $@; then
                 #small delay before reconnecting
-                error "mqttsub failed ($*), reconnecting after 10s grace period..."
-                sleep 10
+                error "mqttsub failed ($*)"
             fi
             #note: mqtthandler is a separate script rather than inline here because it requires bash rather than posix shell
+            if [ $EXIT -ne 0 ]; then
+                error "reconnecting after 10s grace period..."
+                sleep 10
+            fi
         done
     ) &
 }
