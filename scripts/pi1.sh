@@ -1,6 +1,6 @@
 #!/bin/sh
 
-HAROOT="/home/homeautomation/homeassistant"
+export HAROOT="/home/homeautomation/homeassistant"
 
 . "$HAROOT/scripts/common/include.sh"
 

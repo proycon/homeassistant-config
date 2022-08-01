@@ -4,6 +4,8 @@ export HAROOT="/home/homeautomation/homeassistant"
 
 . "$HAROOT/scripts/common/include.sh"
 
+settrap #kill all children when dying
+
 export GPIO_PIN_433SEND=4
 export SNAPCAST_SOUNDCARD=17
 export ONEWIRE_DEVICE_ID=28-0000059319c4
@@ -42,3 +44,5 @@ export GPIO_PIN=22
 export GPIO_INVERT=1
 export GPIO_PULL=down
 mqtt_transmitter "home/binary_sensor/bedroomwindow_left" 0 gpio
+
+wait #wait for all children
