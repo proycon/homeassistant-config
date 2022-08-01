@@ -34,8 +34,7 @@ havevar() {
 
 
 if [ -z "$HAROOT" ]; then
-    error "$HAROOT not set"
-    exit 2
+    die "$HAROOT not set"
 fi
 
 if [ -e "$HAROOT/.mqtt_secrets" ]; then
@@ -149,7 +148,7 @@ mqtt_transmitter() {
         EXIT=0
         trap 'EXIT=1' HUP
         while [ $EXIT -eq 0 ]; do
-            info "mqtt_transmitter: $*"
+            info "mqtt_transmitter: $SENDER $*"
             #shellcheck disable=SC2068,SC2086
             if [ $INTERVAL -gt 0 ]; then
                 #sender runs at specified interval
@@ -176,10 +175,8 @@ mqtt_transmitter() {
                     fi
                 done
                 #shellcheck disable=SC2181 #--> usage of $?
-                if [ $? -ne 0 ]; then
-                    error "mqtt sender failed ($SENDER.sh $*), reconnecting after 10s grace period..."
-                    sleep 10
-                fi
+                error "mqtt sender failed ($SENDER.sh $*), reconnecting after 10s grace period..."
+                sleep 10
             fi
         done
     ) &
