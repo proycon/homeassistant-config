@@ -9,7 +9,7 @@ fi
 havedep pico2wave
 
 TMPFILE="$(mktemp -q /$TMPDIR/XXXXXXX.wav)"
-pico2wave -l en-GB -w "$TMPFILE" "$PAYLOAD" && $PLAY "$TMPFILE" 
+pico2wave -l en-GB -w "$TMPFILE" "$@" && $PLAY "$TMPFILE" 
 RET=$?
 rm "$TMPFILE"
 exit $RET
