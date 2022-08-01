@@ -4,7 +4,7 @@ HAROOT="/home/homeautomation/homeassistant"
 
 . "$HAROOT/scripts/common/include.sh"
 
-settrap
+settrap #kill all children when dying
 
 export GPIO_PIN_433SEND=7
 export SNAPCAST_SOUNDCARD=36
@@ -22,3 +22,5 @@ export GPIO_INVERT=0
 export GPIO_PULL=down
 mqtt_transmitter "home/binary_sensor/doorbell" 0 gpio
 
+#wait for all processes to end
+wait
