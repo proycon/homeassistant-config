@@ -142,8 +142,8 @@ mqtt_transmitter() {
     fi
 
     [ -n "$1" ] || die "no sender specified"
-
     SENDER=$1
+    [ ! -e "$HAROOT/scripts/mqttsenders/$SENDER.sh" ] && die "Script mqttsenders/$SENDER.sh not found"
     shift
     (
         EXIT=0
@@ -153,7 +153,7 @@ mqtt_transmitter() {
             #shellcheck disable=SC2068,SC2086
             if [ $INTERVAL -gt 0 ]; then
                 #sender runs at specified interval
-                PAYLOAD=$("$HAROOT/scripts/common/mqttsenders/$SENDER.sh" $@)
+                PAYLOAD=$("$HAROOT/scripts/mqttsenders/$SENDER.sh" $@)
                 #shellcheck disable=SC2181 #--> usage of $?
                 if [ $? -ne 0 ]; then
                     #small delay before reconnecting
@@ -169,7 +169,7 @@ mqtt_transmitter() {
                 fi
             else
                 #sender runs continuously (invoked once), each outputted line is transmitted over mqtt as payload
-                "$HAROOT/scripts/common/mqttsenders/$SENDER.sh" $@ | while IFS= read -r PAYLOAD; do
+                "$HAROOT/scripts/mqttsenders/$SENDER.sh" $@ | while IFS= read -r PAYLOAD; do
                     if ! mosquitto_pub -I "$HOSTNAME" -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASSWORD" --cafile "$CACERT" -t "$TOPIC" -m "$PAYLOAD" -l --qos 1 $MQTT_OPTIONS; then
                         error "mqttpub from sender failed ($SENDER.sh $*)..."
                         return 1
