@@ -35,7 +35,7 @@ if [ "$MODE" = "livingroom" ]; then
     fi
 elif [ "$MODE" = "street" ]; then
     curl -sS "http://$STREETCAM_USER:$STREETCAM_PASSWORD@$STREETCAM_IP/Streaming/Channels/1/picture" -o "$DATE.$MODE.jpg" 2>"$LOGDIR/camera.$MODE.log"
-elif [ "$MODE" == "balcony" ]; then
+elif [ "$MODE" = "balcony" ]; then
     curl -sS "http://$BALCONYCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$BALCONYCAM_USER&pwd=$BALCONYCAM_PASSWORD" -o "$DATE.$MODE.jpg" 2>"$LOGDIR/camera.$MODE.log"
 elif [ "$MODE" = "jaiko" ]; then
     curl -sS "http://$JAIKOCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$JAIKOCAM_USER&pwd=$JAIKOCAM_PASSWORD" -o "$DATE.$MODE.jpg" 2>"$LOGDIR/camera.$MODE.log"
