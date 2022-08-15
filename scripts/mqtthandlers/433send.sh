@@ -15,6 +15,7 @@ handle_433send() {
             (
                 if "$HAROOT/scripts/switch/433send.sh" "$GPIO_PIN_433SEND" "$PROTOCOL" "$GROUP" "$UNIT" "$STATE"; then
                     #and send confirmation back to the broker
+                    STATE=$(echo "$STATE" | tr '[:lower:]' '[:upper:]')
                     mqttpub "home/433send/get/$PROTOCOL/$GROUP/$UNIT" "$STATE"
                 else
                     error "433send failed: $HAROOT/scripts/switch/433send.sh $GPIO_PIN_433SEND $PROTOCOL $GROUP $UNIT $STATE"
