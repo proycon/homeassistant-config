@@ -581,14 +581,14 @@ sensor:
       expire_after: 3
       value_template: 1
     - platform: mqtt
-      name: Outside Temperature 1
+      name: Outside Temperature
       unit_of_measurement: °C
-      state_topic: "home/weatherstation/temp"
+      state_topic: "home/sensor/outside_temperature"
       expire_after: 3600
     - platform: mqtt
       name: Outside Humidity
       unit_of_measurement: "%"
-      state_topic: "home/weatherstation/hum"
+      state_topic: "home/sensor/outside_humidity"
       expire_after: 3600
     - platform: mqtt
       name: Wind Direction

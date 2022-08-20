@@ -156,7 +156,7 @@ outside_environment:
     entities:
         - sensor.weather_symbol
         - sensor.weather_temperature
-        - sensor.outside_temperature_1
+        - sensor.outside_temperature
         - sensor.outside_temperature_2
         - sensor.outside_humidity
         - sensor.wind_direction

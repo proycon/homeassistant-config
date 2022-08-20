@@ -577,7 +577,7 @@ views:
                   color: black
                   font-family: Helvetica
               - type: state-label
-                entity: sensor.outside_temperature_1
+                entity: sensor.outside_temperature
                 style:
                   top: 2%
                   left: 90%
@@ -1005,7 +1005,7 @@ views:
                   color: black
                   font-family: Helvetica
               - type: state-label
-                entity: sensor.outside_temperature_1
+                entity: sensor.outside_temperature
                 style:
                   top: 10%
                   left: 80%
@@ -1918,7 +1918,7 @@ views:
               name: Bedroom
             - entity: sensor.bathroom_sensor_temperature
               name: Bathroom
-            - entity: sensor.outside_temperature_1
+            - entity: sensor.outside_temperature
               name: Outside
             - entity: sensor.weather_temperature
               name: Buienradar
@@ -1942,7 +1942,7 @@ views:
               name: Bedroom
             - entity: sensor.bathroom_sensor_temperature
               name: Bathroom
-            - entity: sensor.outside_temperature_1
+            - entity: sensor.outside_temperature
               name: Outside
             - entity: sensor.weather_temperature
               name: Buienradar
