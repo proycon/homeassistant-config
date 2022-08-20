@@ -581,6 +581,11 @@ sensor:
       expire_after: 3
       value_template: 1
     - platform: mqtt
+      name: Greenhouse Temperature
+      unit_of_measurement: °C
+      state_topic: "home/sensor/greenhouse_temperature"
+      expire_after: 3600
+    - platform: mqtt
       name: Outside Temperature
       unit_of_measurement: °C
       state_topic: "home/sensor/outside_temperature"
