@@ -1009,7 +1009,7 @@ reset_outside_lights:
           data:
               entity_id:
                 - switch.garden
-        - service: switch.turn.off
+        - service: switch.turn_off
           data:
             entity_id: switch.roof
         - delay:
