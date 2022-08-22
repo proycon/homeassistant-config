@@ -5,6 +5,7 @@ repoll_slaves:
         data:
             topic: "home/poll"
             payload: "ON"
+
 reset_lights:
     alias: Reset Lights
     sequence:
@@ -16,6 +17,9 @@ reset_lights:
         - service: script.turn_on
           data_template:
               entity_id: "script.lights_{% if is_state('sun.sun','below_horizon') %}on{% else %}off{% endif %}"
+        - service: script.turn_on
+          entity_id: script.reset_outside_lights
+
 lights_on:
     alias: Lights on
     sequence:
@@ -992,21 +996,24 @@ home_notification_lights:
     - service: switch.turn_on
       entity_id: switch.back_room
 
-reset_guard_lights:
-    alias: Reset Guard Lights
+reset_outside_lights:
+    alias: Reset Outside Lights
     sequence:
-        - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') %}on{% else %}off{% endif %}"
+        - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int > 6) and (states.sensor.time.state[:2]|int <= 23) %}on{% else %}off{% endif %}"
           data:
               entity_id:
                 - switch.porch
-        - wait_template: "{{ states('switch.porch') == 'on' }}"
-          timeout: "00:00:05"
         - delay:
             seconds: 2
-        - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int < 2 or states.sensor.time.state[:2]|int > 6) %}on{% else %}off{% endif %}"
+        - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int > 6) %}on{% else %}off{% endif %}"
           data:
               entity_id:
                 - switch.garden
+        - service: switch.turn.off
+          data:
+            entity_id: switch.roof
+        - delay:
+            seconds: 2
 
 watch_tv:
     alias: Watch TV

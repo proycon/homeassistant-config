@@ -170,8 +170,10 @@
       event: sunset
       offset: '01:00:00'
   action:
-      service: switch.turn_on
-      entity_id: group.garden_lights
+      - service: switch.turn_on
+        entity_id: switch.garden
+      - service: switch.turn_on
+        entity_id: switch.balcony
 - id: porch_light_on_at_night
   alias: Porch light on at night
   trigger:
@@ -196,10 +198,18 @@
   alias: porch_off_at_night
   trigger:
       platform: time
-      at: '23:30:00'
+      at: '23:00:00'
   action:
       - service: switch.turn_off
         entity_id: switch.porch
+- id: balcony_off_at_night
+  alias: balcony_off_at_night
+  trigger:
+      platform: time
+      at: '22:00:00'
+  action:
+      - service: switch.turn_off
+        entity_id: switch.balcony
 - id: lights_off_at_night
   alias: Lights off at night
   trigger:
@@ -343,7 +353,7 @@
      - delay:
          seconds: 3
      - service: script.turn_on
-       entity_id: script.reset_guard_lights
+       entity_id: script.reset_outside_lights
      - delay:
          seconds: 10
 
@@ -439,6 +449,10 @@
       data:
           entity_id: input_select.ipcam_direction
           option: gangdeur
+    - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int < 2 or states.sensor.time.state[:2]|int > 6) %}on{% else %}off{% endif %}"
+      data:
+          entity_id:
+            - switch.porch
     - service: timer.cancel
       entity_id: timer.home_notification_lights
     - service: timer.start
@@ -547,8 +561,10 @@
           option: achter
     - delay:
         seconds: 2
-    - service: script.turn_on
-      entity_id: script.reset_guard_lights
+    - service_template: "switch.turn_{% if is_state('sun.sun','below_horizon') and (states.sensor.time.state[:2]|int < 2 or states.sensor.time.state[:2]|int > 6) %}on{% else %}off{% endif %}"
+      data:
+          entity_id:
+            - switch.garden
     - service: timer.start
       entity_id: timer.reset_ipcam
     - service: script.turn_on
