@@ -1803,8 +1803,8 @@ start_timer:
              media_content_type: 'music'
         - service: mqtt.publish
           data:
-              topic: "home/notify/timer"
-              payload: "{{now().timestamp()|int}}: FINISHED"
+              topic: "home/notify/everywhere"
+              payload: "{{now().timestamp()|int}}: TIMER FINISHED"
               qos: 1
 
 vacuum_turn_on:
@@ -2012,7 +2012,7 @@ disarm:
       entity_id: alarm_control_panel.alarm_system
     - service: mqtt.publish
       data:
-          topic: "home/notify/disarmed"
+          topic: "home/notify/everywhere"
           payload: "{{now().timestamp()|int}}: System disarmed"
           qos: 1
     - service: notify.matrix

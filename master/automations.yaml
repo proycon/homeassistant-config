@@ -254,9 +254,9 @@
           entity_id: timer.reset_ipcam
       - service: mqtt.publish
         data:
-            topic: "home/notify/doorbell"
+            topic: "home/notify/everywhere"
             qos: 1
-            payload: "{{now().timestamp()|int}}: ON"
+            payload: "{{now().timestamp()|int}}: The doorbell rings"
       - service: switch.turn_on
         entity_id: switch.hall
       - service: timer.start
@@ -391,7 +391,7 @@
           payload: "Front door still open"
     - service: mqtt.publish
       data:
-          topic: "home/notify/warning"
+          topic: "home/notify/everywhere"
           payload: "{{now().timestamp()|int}}: Front door still open"
           qos: 1
     - service: notify.mail_both
@@ -417,7 +417,7 @@
   action:
     - service: mqtt.publish
       data:
-          topic: "home/notify/warning"
+          topic: "home/notify/everywhere"
           payload: "{{now().timestamp()|int}}: Front door still open"
           qos: 1
     - service: notify.mail_both
@@ -1027,9 +1027,9 @@
       entity_id: script.alarm
     - service: mqtt.publish
       data:
-          topic: "home/notify/alarm"
+          topic: "home/notify/everywhere"
           qos: 1
-          payload: "{{now().timestamp()|int}}: TRIGGERED"
+          payload: "{{now().timestamp()|int}}: INTRUDER ALERT! ALARM TRIGGERED!"
     - service: notify.mail_both
       data_template:
           title: "[homeautomation] INTRUDER ALERT!! ALARM TRIGGERED AT ({{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}!!! CHECK IMMEDIATELY!!!"
@@ -3861,7 +3861,7 @@
     - service: mqtt.publish
       data:
           topic: "home/notify/test"
-          payload: "{{now().timestamp()|int}}: test"
+          payload: "{{now().timestamp()|int}}: home automation notification test"
           qos: 1
 
 - id: request_status
