@@ -3869,36 +3869,8 @@
   trigger:
       - platform: mqtt
         topic: home/command/status
-      - platform: mqtt
-        topic: home/command/ping
-  action:
-    - service: script.send_status
-
-- id: auto_status
-  alias: auto_status
-  trigger:
-    - platform: time_pattern
-      minutes: '/5' #every five minutes
-    - platform: state
-      entity_id: binary_sensor.front_door
-    - platform: state
-      entity_id: binary_sensor.back_door
-    - platform: state
-      entity_id: binary_sensor.bedroom_window_left
-    - platform: state
-      entity_id: binary_sensor.bedroom_window_right
-    - platform: state
-      entity_id: binary_sensor.bathroom_window_sensor
-    - platform: state
-      entity_id: binary_sensor.anybody_connected
-    - platform: state
-      entity_id: binary_sensor.anybody_home
-    - platform: state
-      entity_id: device_tracker.proyphone
-    - platform: state
-      entity_id: device_tracker.pinephone
-    - platform: state
-      entity_id: device_tracker.hansphone
+      - platform: time_pattern
+        minutes: '/5' #every ten minutes
   action:
     - service: script.send_status
 
@@ -4079,7 +4051,7 @@
   action:
       - service: mqtt.publish
         data_template:
-            topic: "home/notify/ping"
+            topic: "home/ping"
             payload_template: "{{now().timestamp()|int}}: {{ trigger.payload }}"
 
 - alias: command_play_youtube_link

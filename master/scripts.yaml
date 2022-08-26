@@ -1981,29 +1981,97 @@ send_status:
     alias: Send status
     sequence:
         - service: mqtt.publish
-          data:
-              topic: "home/status/presence"
-              payload_template: "{{now().timestamp()|int}}: {% if is_state('input_boolean.proycon_home','on') %}proycon{% endif %} {% if is_state('input_boolean.hans_home','on') %}hans{% endif %}"
+          data_template:
+              topic: "home/presence/proycon"
+              payload: "{{ states.input_boolean.proycon_home.state|upper }}"
         - service: mqtt.publish
-          data:
-              topic: "home/status/alarm"
-              payload_template: "{{now().timestamp()|int}}: {{ states('alarm_control_panel.alarm_system') }}"
+          data_template:
+              topic: "home/presence/hans"
+              payload: "{{ states.input_boolean.hans_home.state|upper }}"
         - service: mqtt.publish
-          data:
-              topic: "home/status/temperature"
-              payload_template: "{{now().timestamp()|int}}: {{ states('sensor.temperature_thermostat') }} °C (living), {{ states('sensor.bedroom_temperature') }} °C (bedroom), {{ states('sensor.fibaro_office_temperature') }} °C (office)"
+          data_template:
+              topic: "home/alarm"
+              payload: "{{ states('alarm_control_panel.alarm_system') }}"
         - service: mqtt.publish
-          data:
-              topic: "home/status/climate"
-              payload_template: "{{now().timestamp()|int}}: {{ states.climate.anna.attributes.temperature }} °C (CV {{ states.climate.anna.attributes.hvac_action }}), {% if is_state('climate.daikinap75591','on') %}bedroom-airco{% endif %} {% if is_state('climate.daikinap82317','on') %}office-airco{% endif %}"
+          data_template:
+              topic: "home/binary_sensor/front_door"
+              payload: "{{ states('binary_sensor.front_door') }}"
         - service: mqtt.publish
-          data:
-              topic: "home/status/doors"
-              payload_template: "{{now().timestamp()|int}}: {% if is_state('binary_sensor.front_door','on') %}frontdoor{% endif %} {% if is_state('binary_sensor.back_door','on') %}backdoor{% endif %} {% if is_state('binary_sensor.bedroom_window_left','on') %}bedroom-left{% endif %} {% if is_state('binary_sensor.bedroom_window_right','on') %}bedroom_right{% endif %} {% if is_state('binary_sensor.bathroom_window_sensor','on') %}bathroom{% endif %}"
+          data_template:
+              topic: "home/binary_sensor/back_door"
+              payload: "{{ states('binary_sensor.back_door') }}"
         - service: mqtt.publish
-          data:
-              topic: "home/status/lights"
-              payload_template: "{{now().timestamp()|int}}: {% if is_state('switch.tv_spots','on') %}tv-spots{% endif %} {% if is_state('switch.front_room','on') %}sofa{% endif %} {% if is_state('switch.midspots','on') %}mid-spots{% endif %} {% if is_state('switch.back_room','on') %}backroom{% endif %} {% if is_state('switch.back_corner','on') %}back-corner{% endif %} {% if is_state('switch.hall','on') %}hall{% endif %} {% if is_state('switch.kitchen','on') %}kitchen{% endif %} {% if is_state('switch.office','on') %}office{% endif %} {% if is_state('switch.bedroom','on') %}bedroom{% endif %} {% if is_state('switch.garden','on') %}garden{% endif %} {% if is_state('switch.porch','on') %}porch{% endif %}"
+          data_template:
+              topic: "home/binary_sensor/bathroom_window_sensor"
+              payload: "{{ states('binary_sensor.bathroom_window_sensor') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/binary_sensor/bedroom_window_right"
+              payload: "{{ states('binary_sensor.bedroom_window_right') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/binary_sensor/bedroom_window_left"
+              payload: "{{ states('binary_sensor.bedroom_window_left') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/binary_sensor/roof_window_east"
+              payload: "{{ states('binary_sensor.roof_window_east') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/binary_sensor/roof_window_west"
+              payload: "{{ states('binary_sensor.roof_window_west') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/climate/cv"
+              payload: "{{ states.climate.anna.attributes.temperature }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/lights/tv_spots"
+              payload: "{{ states('switch.tv_spots') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/lights/front_room"
+              payload: "{{ states('switch.front_room') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/lights/midspots"
+              payload: "{{ states('switch.midspots') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/lights/back_room"
+              payload: "{{ states('switch.back_room') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/lights/back_corner"
+              payload: "{{ states('switch.back_corner') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/lights/kitchen"
+              payload: "{{ states('switch.kitchen') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/lights/porch"
+              payload: "{{ states('switch.porch') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/lights/garden"
+              payload: "{{ states('switch.garden') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/lights/roof"
+              payload: "{{ states('switch.roof') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/lights/bedroom"
+              payload: "{{ states('switch.bedroom') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/lights/office"
+              payload: "{{ states('switch.office') }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/lights/hall"
+              payload: "{{ states('switch.hall') }}"
 
 
 disarm:
