@@ -495,7 +495,7 @@
        entity_id: switch.bedroom
      - service: mqtt.publish
        data_template:
-          topic: "home/sound/pi1"
+          topic: "home/sound/everywhere"
           payload_template: 'doorbuzz.ogg'
      - service: tts.picotts_say
        entity_id: media_player.hall_speaker
@@ -519,7 +519,7 @@
   action:
      - service: mqtt.publish
        data_template:
-          topic: "home/sound/pi1"
+          topic: "home/sound/everywhere"
           payload_template: 'redalert.ogg'
      - service: media_player.play_media
        data:
@@ -962,7 +962,7 @@
   action:
     - service: mqtt.publish
       data_template:
-        topic: "home/sound/pi1"
+        topic: "home/sound/everywhere"
         payload_template: 'computerbeep_34.wav'
 
 
@@ -980,7 +980,7 @@
   action:
     - service: mqtt.publish
       data_template:
-        topic: "home/sound/pi1"
+        topic: "home/sound/everywhere"
         payload_template: 'computerbeep_69.wav'
 
 ##########################################################################################
@@ -1059,7 +1059,7 @@
         seconds: 1
     - service: mqtt.publish
       data_template:
-         topic: "home/sound/pi1"
+         topic: "home/sound/everywhere"
          payload_template: 'intruderalert.ogg'
     - service: switch.turn_off
       entity_id: switch.tv_spots
@@ -3308,7 +3308,7 @@
           message: "Reporting movement in living room as requested (once) @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
     - service: mqtt.publish
       data_template:
-        topic: "home/sound/pi1"
+        topic: "home/sound/everywhere"
         payload_template: 'chime.wav'
     - service: input_boolean.turn_off
       entity_id: input_boolean.notify_livingroom_movement
