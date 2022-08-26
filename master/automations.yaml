@@ -1103,11 +1103,11 @@
       entity_id: alarm_control_panel.alarm_system
     - service: mqtt.publish
       data:
-          topic: "home/say/pi1"
+          topic: "home/say/everywhere"
           payload: "System armed"
     - service: mqtt.publish
       data:
-          topic: "home/notify/armed"
+          topic: "home/notify/everywhere"
           payload: "{{now().timestamp()|int}}: System armed"
           qos: 1
     - service: mqtt.publish
@@ -3860,7 +3860,7 @@
   action:
     - service: mqtt.publish
       data:
-          topic: "home/notify/test"
+          topic: "home/notify/everywhere"
           payload: "{{now().timestamp()|int}}: home automation notification test"
           qos: 1
 
