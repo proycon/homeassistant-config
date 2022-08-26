@@ -817,7 +817,7 @@ doorbell_sound:
             media_content_type: 'music'
       - service: mqtt.publish
         data_template:
-            topic: "home/sound/pi1"
+            topic: "home/sound/everywhere"
             payload_template: 'doorbell.ogg'
 dog_sound:
     alias: Dog sound
