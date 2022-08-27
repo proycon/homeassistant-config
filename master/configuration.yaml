@@ -201,10 +201,6 @@ alarm_control_panel:
       delay_time: 5
 
 device_tracker:
-    - platform: ubus
-      host: !secret wifirouter_host
-      username: !secret wifirouter_user
-      password: !secret wifirouter_pass
     - platform: ping
       hosts:
           pi1: !secret pi1_ip
