@@ -4051,7 +4051,7 @@
   action:
       - service: mqtt.publish
         data_template:
-            topic: "home/ping/{{trigger.payload}}"
+            topic: "home/sound/{{trigger.payload}}/ping.wav"
 
 - alias: command_play_youtube_link
   trigger:

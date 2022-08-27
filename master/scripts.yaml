@@ -2027,11 +2027,11 @@ send_status:
         - service: mqtt.publish
           data_template:
               topic: "home/climate/aircoboven"
-              payload: "{{ states.climate.daikinap75591 }}"
+              payload: "{{ states.climate.daikinap75591.state }}"
         - service: mqtt.publish
           data_template:
               topic: "home/climate/aircobeneden"
-              payload: "{{ states.climate.daikinap82317 }}"
+              payload: "{{ states.climate.daikinap82317.state }}"
         - service: mqtt.publish
           data_template:
               topic: "home/lights/tv_spots"
