@@ -4051,8 +4051,7 @@
   action:
       - service: mqtt.publish
         data_template:
-            topic: "home/ping"
-            payload_template: "{{now().timestamp()|int}}: {{ trigger.payload }}"
+            topic: "home/ping/{{trigger.payload}}"
 
 - alias: command_play_youtube_link
   trigger:
