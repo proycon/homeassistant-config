@@ -213,12 +213,12 @@ device_tracker:
           mhysa: !secret mhysa_ip
           wifi_router: !secret wifi_router_ip
           kpn_router: !secret kpn_router_ip
-    - platform: traccar
-      username: !secret traccar_user
-      password: !secret traccar_password
-      host: !secret traccar_host
-      port: !secret traccar_port
-      monitored_conditions: ['all_events']
+   #- platform: traccar
+   #  username: !secret traccar_user
+   #  password: !secret traccar_password
+   #  host: !secret traccar_host
+   #  port: !secret traccar_port
+   #  monitored_conditions: ['all_events']
 
 # Text to speech
 tts:
