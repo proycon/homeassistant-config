@@ -685,7 +685,7 @@ binary_sensor:
         device_class: occupancy
       hans_connected:
         friendly_name: "Hans connected?"
-        value_template: '{% if is_state("device_tracker.hansphone","home") %}True{% else %}False{% endif %}'
+        value_template: '{% if is_state("device_tracker.hansphone","home") or is_state("device_tracker.d0_49_7c_3e_a1_4b", "home") %}True{% else %}False{% endif %}'
         device_class: occupancy
       anydoor:
         value_template: '{% if is_state("binary_sensor.back_door","on") or is_state("binary_sensor.front_door","on") %}True{% else %}False{% endif %}'
