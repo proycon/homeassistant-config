@@ -1994,12 +1994,12 @@ send_status:
               payload: "{{ states('alarm_control_panel.alarm_system') }}"
         - service: mqtt.publish
           data_template:
-              topic: "home/binary_sensor/front_door"
-              payload: "{{ states('binary_sensor.front_door') }}"
+              topic: "home/binary_sensor/frontdoor"
+              payload: "{{ states('binary_sensor.frontdoor') }}"
         - service: mqtt.publish
           data_template:
-              topic: "home/binary_sensor/back_door"
-              payload: "{{ states('binary_sensor.back_door') }}"
+              topic: "home/binary_sensor/backdoor"
+              payload: "{{ states('binary_sensor.backdoor') }}"
         - service: mqtt.publish
           data_template:
               topic: "home/binary_sensor/bathroom_window_sensor"
@@ -2007,11 +2007,11 @@ send_status:
         - service: mqtt.publish
           data_template:
               topic: "home/binary_sensor/bedroom_window_right"
-              payload: "{{ states('binary_sensor.bedroom_window_right') }}"
+              payload: "{{ states('binary_sensor.bedroomwindow_right') }}"
         - service: mqtt.publish
           data_template:
               topic: "home/binary_sensor/bedroom_window_left"
-              payload: "{{ states('binary_sensor.bedroom_window_left') }}"
+              payload: "{{ states('binary_sensor.bedroomwindow_left') }}"
         - service: mqtt.publish
           data_template:
               topic: "home/binary_sensor/roof_window_east"
@@ -2023,7 +2023,15 @@ send_status:
         - service: mqtt.publish
           data_template:
               topic: "home/climate/cv"
-              payload: "{{ states.climate.anna.attributes.temperature }}"
+              payload: "{{ states.climate.anna.attributes.hvac_action }} {{ states.climate.anna.attributes.temperature }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/climate/aircoboven"
+              payload: "{{ states.climate.daikinap75591 }}"
+        - service: mqtt.publish
+          data_template:
+              topic: "home/climate/aircobeneden"
+              payload: "{{ states.climate.daikinap82317 }}"
         - service: mqtt.publish
           data_template:
               topic: "home/lights/tv_spots"
