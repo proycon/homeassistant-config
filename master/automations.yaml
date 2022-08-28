@@ -418,7 +418,7 @@
     - service: mqtt.publish
       data:
           topic: "home/notify/everywhere"
-          payload: "{{now().timestamp()|int}}: Front door still open"
+          payload: "{{now().timestamp()|int}}: Back door still open"
           qos: 1
     - service: notify.mail_both
       data_template:
