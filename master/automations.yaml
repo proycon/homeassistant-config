@@ -792,6 +792,10 @@
   action:
     - service: script.turn_on
       entity_id: script.disarm
+    - service: mqtt.publish
+      data:
+          topic: "home/sound/pine64-pinephone"
+          payload: "authaccept.mp3"
     - condition: time
       after: '9:30'
       before: '22:30'
@@ -838,6 +842,10 @@
       data:
           topic: "home/say/pi1"
           payload: "Hans coming home"
+    - service: mqtt.publish
+      data:
+          topic: "home/say/pine64-pinephone"
+          payload: "Hans coming home"
 
 - id: arrival_guest
   alias: Arrival guest
@@ -855,7 +863,7 @@
       entity_id: script.disarm
     - service: mqtt.publish
       data:
-          topic: "home/say/pi1"
+          topic: "home/say/everywhere"
           payload: "Guest arriving"
 
 #this script triggers if the phone reconnects to the wlan only after the door has already closed
