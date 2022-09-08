@@ -1019,6 +1019,12 @@
     - condition: state
       entity_id: alarm_control_panel.alarm_system
       state: armed_away
+    - condition: state
+      entity_id: input_boolean.hans_connected
+      state: off
+    - condition: state
+      entity_id: input_boolean.proycon_connected
+      state: off
   action:
     - service: alarm_control_panel.alarm_trigger
       entity_id: alarm_control_panel.alarm_system

@@ -115,6 +115,7 @@ logbook:
         - media_player
         - alarm_control_panel
         - automation
+        - input_boolean
       entities:
         - binary_sensor.front_door
         - binary_sensor.back_door
