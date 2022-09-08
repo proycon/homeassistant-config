@@ -159,6 +159,7 @@ logbook:
         - automation.street_snapshots
         - automation.living_room_snapshots
         - automation.hall_upstairs_snapshots
+        - automation.balcony_snapshots
         - automation.auto_status
         - script.send_status
 
