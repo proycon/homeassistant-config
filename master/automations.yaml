@@ -1016,15 +1016,23 @@
       entity_id: binary_sensor.bathroom_window_sensor
       to: 'on'
   condition:
-    - condition: state
-      entity_id: alarm_control_panel.alarm_system
-      state: armed_away
-    - condition: state
-      entity_id: input_boolean.hans_connected
-      state: off
-    - condition: state
-      entity_id: input_boolean.proycon_connected
-      state: off
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: alarm_control_panel.alarm_system
+        state: armed_away
+      - condition: state
+        entity_id: input_boolean.hans_connected
+        state: off
+      - condition: state
+        entity_id: input_boolean.proycon_connected
+        state: off
+      - condition: state
+        entity_id: input_boolean.hans_home
+        state: off
+      - condition: state
+        entity_id: input_boolean.proycon_home
+        state: off
   action:
     - service: alarm_control_panel.alarm_trigger
       entity_id: alarm_control_panel.alarm_system
