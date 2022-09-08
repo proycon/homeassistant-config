@@ -1030,7 +1030,7 @@
       - condition: state
         entity_id: input_boolean.hans_home
         state: off
-      - condition: state
+      - condition:
         entity_id: input_boolean.proycon_home
         state: off
   action:
