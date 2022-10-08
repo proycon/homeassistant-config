@@ -1022,10 +1022,10 @@
           entity_id: alarm_control_panel.alarm_system
           state: armed_away
         - condition: state
-          entity_id: input_boolean.hans_connected
+          entity_id: binary_sensor.hans_connected
           state: off
         - condition: state
-          entity_id: input_boolean.proycon_connected
+          entity_id: binary_sensor.proycon_connected
           state: off
         - condition: state
           entity_id: input_boolean.hans_home
@@ -4119,3 +4119,37 @@
       data:
           topic: "home/say/pi1"
           payload: "Ventilation required, please open a door or window"
+
+- alias: command_presence_both_away
+  trigger:
+      - platform: mqtt
+        topic: home/command/presence/both_away
+  action:
+     - service: input_boolean.turn_off
+       entity_id: input_boolean.proycon_home
+     - service: input_boolean.turn_off
+       entity_id: input_boolean.hans_home
+
+- alias: command_presence_away
+  trigger:
+      - platform: mqtt
+        topic: home/command/presence/away
+  action:
+     - service: input_boolean.turn_off
+       entity_id: input_boolean.proycon_home
+
+- alias: command_presence_home
+  trigger:
+      - platform: mqtt
+        topic: home/command/presence/home
+  action:
+     - service: input_boolean.turn_on
+       entity_id: input_boolean.proycon_home
+
+- alias: command_presence_hans_home
+  trigger:
+      - platform: mqtt
+        topic: home/command/presence/home
+  action:
+     - service: input_boolean.turn_on
+       entity_id: input_boolean.hans_home
