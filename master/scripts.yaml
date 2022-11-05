@@ -2026,6 +2026,10 @@ send_status:
               payload: "{{ states.climate.anna.attributes.hvac_action }} {{ states.climate.anna.attributes.temperature }}"
         - service: mqtt.publish
           data_template:
+              topic: "home/sensor/temperature_living_room_2"
+              payload: "{{ states.climate.anna.attributes.current_temperature }}"
+        - service: mqtt.publish
+          data_template:
               topic: "home/climate/aircoboven"
               payload: "{{ states.climate.daikinap75591.state }}"
         - service: mqtt.publish
