@@ -2006,11 +2006,11 @@ send_status:
               payload: "{{ states('binary_sensor.bathroom_window_sensor') }}"
         - service: mqtt.publish
           data_template:
-              topic: "home/binary_sensor/bedroom_window_right"
+              topic: "home/binary_sensor/bedroomwindow_right"
               payload: "{{ states('binary_sensor.bedroomwindow_right') }}"
         - service: mqtt.publish
           data_template:
-              topic: "home/binary_sensor/bedroom_window_left"
+              topic: "home/binary_sensor/bedroomwindow_left"
               payload: "{{ states('binary_sensor.bedroomwindow_left') }}"
         - service: mqtt.publish
           data_template:
