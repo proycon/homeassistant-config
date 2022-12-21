@@ -1006,22 +1006,14 @@ listen_to_music:
           entity_id: switch.pi1_kodi
         - delay:
             seconds: 1
-        - service: switch.turn_on
-          entity_id: switch.pi1_music_player
         - service: media_player.select_source
           entity_id: media_player.yamaha_receiver
           data:
               source: HDMI2
         - delay:
             seconds: 1
-        - service: media_player.turn_on
-          data:
-              entity_id: media_player.mpd
-        - delay:
-            seconds: 1
-        - service: media_player.play_media
-          data:
-              entity_id: media_player.mpd
+        - service: switch.turn_on
+          entity_id: switch.pi1_music_player
 
 listen_to_music_bedroom:
     alias: Listen to Music 2
@@ -1036,17 +1028,6 @@ listen_to_music_bedroom:
           entity_id: switch.pi2_kodi
         - service: switch.turn_on
           entity_id: switch.pi2_music_player
-        - delay:
-            seconds: 1
-        - service: media_player.turn_on
-          data:
-              entity_id: media_player.mpd
-        - delay:
-            seconds: 1
-        - service: media_player.play_media
-          data:
-              entity_id: media_player.mpd
-
 load_music:
     alias: Load Music
     sequence:
