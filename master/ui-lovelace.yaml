@@ -1185,6 +1185,7 @@ views:
             - switch.midspots
             - switch.back_room
             - switch.back_corner
+            - switch.kitchen
             - switch.hall
           title: Downstairs lights
           show_header_toggle: false
