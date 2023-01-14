@@ -2116,6 +2116,7 @@ views:
           - switch.midspots
           - switch.back_room
           - switch.back_corner
+          - switch.kitchen
         title: Living Room lights
         show_header_toggle: false
       - type: entities

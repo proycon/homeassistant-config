@@ -748,8 +748,8 @@ switch back_corner:
 switch kitchen:
     platform: mqtt
     name: Kitchen
-    state_topic: "home/433send/get/newkaku/120/7"
-    command_topic: "home/433send/set/pi1/newkaku/120/7"
+    state_topic: "home/433send/get/newkaku/120/8"
+    command_topic: "home/433send/set/pi1/newkaku/120/8"
 switch bedroom:
     platform: mqtt
     name: Bedroom
