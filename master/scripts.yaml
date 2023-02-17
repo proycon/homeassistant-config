@@ -2065,19 +2065,3 @@ send_status:
           data_template:
               topic: "home/lights/hall"
               payload: "{{ states('switch.hall') }}"
-
-
-disarm:
-  sequence:
-    - service: alarm_control_panel.alarm_disarm
-      entity_id: alarm_control_panel.alarm_system
-    - service: mqtt.publish
-      data:
-          topic: "home/notify/everywhere"
-          payload: "{{now().timestamp()|int}}: System disarmed"
-          qos: 1
-    - service: notify.matrix
-      data:
-          message: "System disarmed @{{now().strftime('%Y-%m-%d [%H:%M:%S]')}}"
-    - service: script.turn_on
-      entity_id: script.home_notification_lights

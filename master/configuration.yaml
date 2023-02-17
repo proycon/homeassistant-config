@@ -143,7 +143,6 @@ logbook:
         - script.vacuum_turn_on
         - script.vacuum_turn_off
         - script.alarm
-        - script.disarm
         - script.ignite_dresser_ambilight
         - script.ignite_fireplace
         - script.ignite_bedroom_ambilight
@@ -197,10 +196,13 @@ rest_command:
 
 
 alarm_control_panel:
-    - platform: manual
+    - platform: manual_mqtt
+      state_topic: home/alarm
+      command_topic: home/alarm/set
       name: Alarm System
-      trigger_time: 5
-      delay_time: 5
+      delay_time: 60
+      trigger_time: 600
+      arming_time: 60
 
 device_tracker:
     - platform: ping
@@ -407,7 +409,7 @@ input_number:
         step: 1
 
 input_boolean:
-    proycon_home: #measures if actually INSIDE house
+    proycon_home:
         name: Proycon home?
         initial: on
     hans_home:
@@ -692,7 +694,7 @@ binary_sensor:
       anydoor:
         value_template: '{% if is_state("binary_sensor.back_door","on") or is_state("binary_sensor.front_door","on") %}True{% else %}False{% endif %}'
       anybody_home:
-        friendly_name: "Anybody home?" #measures if anybody is actually inside, rather than just connected to the WLAN
+        friendly_name: "Anybody home?"
         value_template: '{% if is_state("input_boolean.proycon_home","on") or is_state("input_boolean.hans_home","on") or is_state("input_boolean.guest_home","on") %}True{% else %}False{% endif %}'
         device_class: occupancy
       pir_kitchen:
