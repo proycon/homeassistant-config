@@ -752,6 +752,15 @@
       data:
           topic: "home/sound/everywhere"
           payload: "authaccept.mp3"
+    - service: timer.start
+      data:
+          entity_id: timer.reset_ipcam
+    - service: script.turn_on
+      data:
+          entity_id: script.reset_lights
+    - service: script.turn_on
+      data:
+          entity_id: script.reset_fireplace
 
 - id: alarm_arming
   alias: Alarm arming
