@@ -1166,15 +1166,18 @@ views:
             - switch.pi1_music_player
           show_header_toggle: false
         - type: entities
-          title: YouTube
+          title: Video Streaming (YouTube)
           icon: mdi:youtube
           show_header_toggle: false
           view_layout:
               position: sidebar
           entities:
              - input_text.youtube_link
-             - script.add_youtube_link
              - script.play_youtube_link
+             - script.pause_youtube
+             - script.stop_youtube
+             - script.next_youtube
+             - script.add_youtube_link
              - script.play_videoqueue
         - type: entities
           entities:
