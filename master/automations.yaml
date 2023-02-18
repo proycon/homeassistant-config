@@ -880,11 +880,45 @@
     - service: mqtt.publish
       data_template:
         topic: "home/sound/everywhere"
-        payload_template: 'beep_off.wav'
+        payload_template: 'beep_off.mp3'
     - service: mqtt.publish
       data:
           topic: "home/presence/proycon"
           payload: "OFF"
+
+- id: proycon_arrived
+  alias: proycon arrived
+  trigger:
+    - platform: state
+      entity_id: input_boolean.proycon_home
+      from: 'off'
+      to: 'on'
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/everywhere"
+        payload_template: 'computerbeep_34.mp3'
+    - service: mqtt.publish
+      data:
+          topic: "home/presence/proycon"
+          payload: "ON"
+
+- id: hans_arrived
+  alias: Hans arrived
+  trigger:
+    - platform: state
+      entity_id: input_boolean.hans_home
+      from: 'off'
+      to: 'on'
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home/sound/everywhere"
+        payload_template: 'computerbeep_34.mp3'
+    - service: mqtt.publish
+      data:
+          topic: "home/presence/hans"
+          payload: "ON"
 
 - id: hans_leaving
   alias: hans leaving
@@ -897,7 +931,7 @@
     - service: mqtt.publish
       data_template:
         topic: "home/sound/everywhere"
-        payload_template: 'beep_off.wav'
+        payload_template: 'beep_off.mp3'
     - service: mqtt.publish
       data:
           topic: "home/presence/proycon"
