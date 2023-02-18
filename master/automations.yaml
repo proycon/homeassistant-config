@@ -728,7 +728,8 @@
   trigger:
     - platform: state
       entity_id: alarm_control_panel.alarm_system
-      to: 'arming'
+      from: 'disarmed'
+      to: 'pending'
   action:
     - service: mqtt.publish
       data_template:
@@ -771,6 +772,11 @@
   trigger:
     - platform: state
       entity_id: alarm_control_panel.alarm_system
+      from: 'armed_away'
+      to: 'pending'
+    - platform: state
+      entity_id: alarm_control_panel.alarm_system
+      from: 'armed_home'
       to: 'pending'
   action:
     - service: mqtt.publish
