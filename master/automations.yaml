@@ -722,6 +722,35 @@
     - service: alarm_control_panel.alarm_arm_away
       entity_id: alarm_control_panel.alarm_system
 
+- id: disarm_when_home
+  alias: 'Disarm when home'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.anybody_home
+      from: 'off'
+      to: 'on'
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: alarm_control_panel.alarm_system
+          state: armed_away
+        - condition: state
+          entity_id: alarm_control_panel.alarm_system
+          state: armed_home
+        - condition: state
+          entity_id: alarm_control_panel.alarm_system
+          state: pending
+        - condition: state
+          entity_id: alarm_control_panel.alarm_system
+          state: triggered
+  action:
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.alarm_system
+    - service: mqtt.publish
+      data:
+          topic: "home/sound/everywhere"
+          payload: "authaccept.mp3"
 
 - id: alarm_arming
   alias: Alarm arming
@@ -730,6 +759,11 @@
       entity_id: alarm_control_panel.alarm_system
       from: 'disarmed'
       to: 'pending'
+    - platform: state
+      entity_id: alarm_control_panel.alarm_system
+      from: 'disarmed'
+      to: 'arming'
+      #not sure if this exists
   action:
     - service: mqtt.publish
       data_template:
@@ -794,8 +828,8 @@
   action:
     - service: mqtt.publish
       data:
-          topic: "home/sound/everywhere"
-          payload: "authaccept.mp3"
+          topic: "home/sound/homeautomation"
+          payload: "computerbeep_22.mp3"
 
 - id: alarm_cancelled
   alias: Alarm Cancelled
