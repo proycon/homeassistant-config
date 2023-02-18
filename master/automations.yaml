@@ -3926,3 +3926,19 @@
   action:
      - service: input_boolean.toggle
        entity_id: input_boolean.hans_home
+
+- alias: command_videoplayer
+  trigger:
+      - platform: mqtt
+        topic: home/command/videoplayer/pi1
+  action:
+     - service: script.turn_on
+       entity_id: script.videoplayer
+
+- alias: command_videoplayer_bedroom
+  trigger:
+      - platform: mqtt
+        topic: home/command/videoplayer/pi2
+  action:
+     - service: script.turn_on
+       entity_id: script.videoplayer_bedroom
