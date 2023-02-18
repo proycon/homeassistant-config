@@ -201,8 +201,8 @@ alarm_control_panel:
       command_topic: home/alarm/set
       name: Alarm System
       delay_time: 60
+      pending_time: 60
       trigger_time: 600
-      arming_time: 60
 
 device_tracker:
     - platform: ping
