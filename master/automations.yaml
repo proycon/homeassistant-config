@@ -3860,14 +3860,6 @@
      - service: input_boolean.turn_on
        entity_id: input_boolean.hans_home
 
-- alias: command_presence_hans_home
-  trigger:
-      - platform: mqtt
-        topic: home/nfc
-        
-  action:
-     - service: input_boolean.turn_on
-       entity_id: input_boolean.hans_home
 
 - alias: nfc_proycon
   trigger:
