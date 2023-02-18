@@ -1858,14 +1858,14 @@ play_youtube_link:
              payload: "{{ states.input_text.youtube_link.state }}"
 
 pause_youtube:
-    alias: Stop Youtube link
+    alias: Pause/play
     sequence:
        - service: mqtt.publish
          data_template:
              topic: "home/video/pi1/pause"
              payload: ""
 stop_youtube:
-    alias: Stop Youtube link
+    alias: Stop
     sequence:
        - service: mqtt.publish
          data_template:
@@ -1873,7 +1873,7 @@ stop_youtube:
              payload: ""
 
 next_youtube:
-    alias: Stop Youtube link
+    alias: Next
     sequence:
        - service: mqtt.publish
          data_template:
