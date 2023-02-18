@@ -1457,20 +1457,6 @@ make_event_snapshots_all:
           data:
              cams: "street livingroom garden hallupstairs frontdoor"
 
-play_youtube_playlist:
-    alias: Play YouTube
-    sequence:
-    - service: script.turn_on
-      entity_id: script.media_centre
-    - wait_template: "{{ states.switch.pi1_kodi.state == 'on' }}"
-      timeout: "00:00:05"
-    - delay:
-        seconds: 4
-    - service: media_player.play_media
-      entity_id: media_player.kodi
-      data_template:
-        media_content_id: !secret youtube_play_playlist
-        media_content_type: 'video'
 
 mail_test:
     alias: Mail test
@@ -1829,68 +1815,60 @@ play_youtube_link:
     sequence:
        - service: script.turn_on
          entity_id: script.media_centre
-       - service: shell_command.youtube
+       - service: mqtt.publish
          data_template:
-             mode: play
-             url: "{{ states.input_text.youtube_link.state }}"
-             pi: 1
+             topic: "home/video/pi1/play"
+             payload: "{{ states.input_text.youtube_link.state }}"
 
 play_videoqueue:
     alias: Play current queue
     sequence:
        - service: script.turn_on
          entity_id: script.media_centre
-       - service: kodi.call_method
+       - service: mqtt.publish
          data_template:
-           entity_id: media_player.kodi
-           method: Player.Open
-           item:
-             directory: "/home/homeautomation/Server/videoqueue/"
+             topic: "home/video/pi1/play"
+             payload: ""
 
 play_youtube_link_bedroom:
     alias: Play Youtube link bedroom
     sequence:
        - service: script.turn_on
          entity_id: script.media_centre_bedroom
-       - service: shell_command.youtube
+       - service: mqtt.publish
          data_template:
-             mode: play
-             url: "{{ states.input_text.youtube_link_bedroom.state }}"
-             pi: 2
+             topic: "home/video/pi2/play"
+             payload: "{{ states.input_text.youtube_link.state }}"
 
 play_videoqueue_bedroom:
     alias: Play current queue bedroom
     sequence:
        - service: script.turn_on
          entity_id: script.media_centre_bedroom
-       - service: kodi.call_method
+       - service: mqtt.publish
          data_template:
-           entity_id: media_player.kodi2
-           method: Player.Open
-           item:
-             directory: "/home/homeautomation/Server/videoqueue/"
+             topic: "home/video/pi2/play"
+             payload: ""
 
 add_youtube_link:
     alias: Add Youtube link
     sequence:
        - service: script.turn_on
          entity_id: script.media_centre
-       - service: shell_command.youtube
+       - service: mqtt.publish
          data_template:
-             mode: add
-             url: "{{ states.input_text.youtube_link.state }}"
-             pi: 1
+             topic: "home/video/pi1/add"
+             payload: "{{ states.input_text.youtube_link.state }}"
 
 add_youtube_link_bedroom:
     alias: Add Youtube link bedroom
     sequence:
        - service: script.turn_on
          entity_id: script.media_centre_bedroom
-       - service: shell_command.youtube
+       - service: mqtt.publish
          data_template:
-             mode: add
-             url: "{{ states.input_text.youtube_link_bedroom.state }}"
-             pi: 2
+             topic: "home/video/pi2/add"
+             payload: "{{ states.input_text.youtube_link.state }}"
 
 mpc_clear:
     alias: Clear playlist

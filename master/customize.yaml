@@ -145,8 +145,6 @@ sensor.humidity_living_room:
     icon: mdi:water-percent
 script.repoll_slaves:
     icon: mdi:reload
-script.play_youtube_playlist:
-    icon: mdi:youtube
 script.play_youtube_link:
     icon: mdi:youtube
 device_tracker.mhysa:
@@ -219,10 +217,6 @@ input_text.tiles_media_activities:
       - entity: script.media_centre
         icon: mdi:kodi
         column: 2
-        row: 1
-      - entity: script.play_youtube_playlist
-        icon: mdi:youtube
-        column: 3
         row: 1
       - entity: script.listen_to_music
         icon: mdi:music-circle
@@ -548,10 +542,6 @@ input_text.tiles_media_activities_bedroom:
       - entity: script.media_centre_bedroom
         icon: mdi:kodi
         column: 2
-        row: 1
-      - entity: script.play_youtube_playlist_bedroom
-        icon: mdi:youtube
-        column: 3
         row: 1
       - entity: script.listen_to_music_bedroom
         icon: mdi:music-circle
