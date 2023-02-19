@@ -1056,9 +1056,6 @@
         - condition: state
           entity_id: binary_sensor.anybody_home
           state: "on"
-        - condition: numeric_state
-          entity_id: sensor.fibaro_multisensor_luminance
-          below: 40
         - condition: state
           entity_id: switch.kitchen
           state: "off"
