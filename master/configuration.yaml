@@ -43,6 +43,9 @@ http:
   base_url: !secret base_url
   ip_ban_enabled: False
   login_attempts_threshold: 5
+  cors_allowed_origins:
+    - https://anaproy.nl
+    - https://home.anaproy.nl
 
 config:
 
@@ -980,8 +983,8 @@ notify:
     timeout: 10
     encryption: none
     debug: true
-    #username: !secret mail_user
-    #password: !secret mail_password
+    username: !secret mail_user
+    password: !secret mail_password
     recipient:
         - !secret xmpp_proycon
         - !secret xmpp_hans
