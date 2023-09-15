@@ -2467,6 +2467,7 @@
 
 - id: remote_media_off2
   alias: remote_media_off2
+  trigger:
     - platform: mqtt
       topic: "home/command/media_bedroom/off"
   action:
