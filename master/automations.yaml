@@ -2150,6 +2150,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510_2
         scene_id: 7
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/lights/bedroom_ambilight/on"
   condition:
       - condition: state
         entity_id: switch.bedroom_ambilight
@@ -2166,6 +2168,8 @@
         entity_id: zwave.remotec_unknown_type_0001_id_8510_2
         scene_id: 7
         scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: mqtt
+      topic: "home/command/lights/bedroom_ambilight/off"
   condition:
       - condition: state
         entity_id: switch.bedroom_ambilight
@@ -2368,6 +2372,53 @@
      - service: script.turn_on
        entity_id: script.watch_tv
 
+- id: remote_tv_bedroom_on
+  alias: remote_tv_bedroom_on
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.mpd
+          state: "off"
+        - condition: state
+          entity_id: media_player.mpd
+          state: "paused"
+        - condition: state
+          entity_id: media_player.mpd
+          state: "unavailable"
+  trigger:
+    - platform: mqtt
+      topic: "home/command/media_bedroom/tv"
+  action:
+     - service: script.turn_on
+       entity_id: script.watch_tv_bedroom
+
+- id: remote_mediacentre_on
+  alias: remote_mediacentre_on
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "off"
+  trigger:
+    - platform: mqtt
+      topic: "home/command/media/centre"
+  action:
+     - service: script.turn_on
+       entity_id: script.media_centre
+
+- id: remote_mediacentre2_on
+  alias: remote_mediacentre2_on
+  condition:
+    - condition: state
+      entity_id: switch.tv
+      state: "off"
+  trigger:
+    - platform: mqtt
+      topic: "home/command/media_bedroom/centre"
+  action:
+     - service: script.turn_on
+       entity_id: script.media_centre_bedroom
+
 - id: remote_mute
   alias: remote_mute
   condition:
@@ -2413,6 +2464,14 @@
   action:
      - service: script.turn_on
        entity_id: script.turn_media_off
+
+- id: remote_media_off2
+  alias: remote_media_off2
+    - platform: mqtt
+      topic: "home/command/media_bedroom/off"
+  action:
+     - service: script.turn_on
+       entity_id: script.turn_media_off_bedroom
 
 - id: remote_media_kodi
   alias: remote_media_kodi
@@ -2546,6 +2605,8 @@
         scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/media/music2"
+    - platform: mqtt
+      topic: "home/command/media_bedroom/music"
   action:
      - service: script.turn_on
        entity_id: script.listen_to_music_bedroom
@@ -2765,6 +2826,14 @@
      - service: script.turn_on
        entity_id: script.tvdecoder_channelup
 
+- id: remote_channel_next2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/next"
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder2_channeldown
+
 - id: remote_cursor_right
   condition:
     - condition: state
@@ -2782,6 +2851,14 @@
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_right
+
+- id: remote_cursor_right2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/right"
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder2_right
 
 - id: remote_tv_on_manual
   trigger:
@@ -2819,6 +2896,14 @@
      - service: script.turn_on
        entity_id: script.tvdecoder_left
 
+- id: remote_cursor_left2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/left"
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder2_left
+
 - id: remote_tv_decoder_on_manual
   trigger:
     - platform: event
@@ -2851,6 +2936,14 @@
      - service: script.turn_on
        entity_id: script.tvdecoder_up
 
+- id: remote_cursor_up2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/up"
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder2_up
+
 - id: remote_cursor_down
   condition:
     - condition: state
@@ -2868,6 +2961,14 @@
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_up
+
+- id: remote_cursor_down2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/down"
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder2_down
 
 - id: remote_channel_prev
   condition:
@@ -2892,6 +2993,14 @@
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_channeldown
+
+- id: remote_channel_prev2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/previous"
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder2_channeldown
 
 - id: remote_volume_up
   condition:
@@ -2951,6 +3060,13 @@
      - service: script.turn_on
        entity_id: script.tvdecoder_playpause
 
+- id: remote_playpause_tv2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/pause"
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder2_playpause
 
 - id: remote_music_pause
   alias: remote_music_pause
@@ -3018,6 +3134,14 @@
      - service: script.turn_on
        entity_id: script.tvdecoder_ok
 
+- id: remote_tv2_ok
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/ok"
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder2_ok
+
 - id: remote_tv_back
   condition:
     - condition: state
@@ -3035,6 +3159,14 @@
   action:
      - service: script.turn_on
        entity_id: script.tvdecoder_back
+
+- id: remote_tv2_back
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/back"
+  action:
+     - service: script.turn_on
+       entity_id: script.tvdecoder2_back
 
 - id: remote_robot_on
   alias: remote_robot_on
@@ -3281,6 +3413,89 @@
       - service: script.turn_on
         entity_id: script.tvdecoder_zdf
 
+- id: remote_upstairs_channel_npo1
+  alias: remote_upstairs_channel_npo1
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/channel/npo1"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder2_npo1
+- id: remote_upstairs_channel_npo2
+  alias: remote_upstairs_channel_npo2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/channel/npo2"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder2_npo2
+- id: remote_upstairs_channel_npo3
+  alias: remote_upstairs_channel_npo3
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/channel/npo3"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder2_npo3
+- id: remote_upstairs_channel_een
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/channel/een"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder2_een
+- id: remote_upstairs_channel_canvas
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/channel/canvas"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder2_canvas
+- id: remote_upstairs_channel_bbc1st
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/channel/bbc1st"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder2_bbc1st
+- id: remote_upstairs_channel_bbc1
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/channel/bbc1"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder2_bbc1st
+- id: remote_upstairs_channel_bbc2
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/channel/bbc2"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder2_bbc1st
+- id: remote_upstairs_channel_ard
+  alias: remote_upstairs_channel_ard
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/channel/ard"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder2_ard
+- id: remote_upstairs_channel_zdf
+  alias: remote_upstairs_channel_zdf
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/channel/zdf"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder2_zdf
+- id: remote_upstairs_channel_wdr
+  alias: remote_upstairs_channel_wdr
+  trigger:
+    - platform: mqtt
+      topic: "home/command/tvdecoder2/channel/wdr"
+  action:
+      - service: script.turn_on
+        entity_id: script.tvdecoder2_zdf
 
 - id: remote_cancel_alarm
   alias: remote_cancel_alarm
@@ -3956,3 +4171,19 @@
   action:
      - service: script.turn_on
        entity_id: script.videoplayer_bedroom
+
+- alias: command_desktop
+  trigger:
+      - platform: mqtt
+        topic: home/command/media/desktop
+  action:
+     - service: script.turn_on
+       entity_id: script.desktop
+
+- alias: command_desktop_bedroom
+  trigger:
+      - platform: mqtt
+        topic: home/command/media_bedroom/desktop
+  action:
+     - service: script.turn_on
+       entity_id: script.desktop_bedroom
