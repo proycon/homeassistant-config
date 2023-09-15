@@ -952,6 +952,10 @@
       data:
           topic: "home/presence/proycon"
           payload: "ON"
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: "Welcome"
 
 - id: hans_arrived
   alias: Hans arrived
@@ -969,6 +973,10 @@
       data:
           topic: "home/presence/hans"
           payload: "ON"
+    - service: tts.picotts_say
+      entity_id: media_player.hall_speaker
+      data:
+          message: "Welcome"
 
 - id: hans_leaving
   alias: hans leaving
@@ -4002,6 +4010,17 @@
         data:
           entity_id: input_select.ipcam_direction
           option: gangdeur
+
+
+- alias: command_heating_18
+  trigger:
+      - platform: mqtt
+        topic: home/command/heating/18
+  action:
+      - service: climate.set_temperature
+        data:
+            entity_id: climate.anna
+            temperature: 18
 
 - alias: command_heating_19
   trigger:
