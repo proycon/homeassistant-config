@@ -2133,6 +2133,14 @@
   action:
       service: switch.turn_on
       entity_id: switch.bedroom
+- id: remote_lights_bedroom_off
+  alias: remote_lights_bedroom_off
+  trigger:
+    - platform: mqtt
+      topic: "home/command/lights/bedroom/off"
+  action:
+      service: switch.turn_off
+      entity_id: switch.bedroom
 - id: remote_lights_ambilight_bedroom_toggle_on
   alias: remote_lights_ambilight_bedroom_toggle_on
   trigger:
