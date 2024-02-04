@@ -98,15 +98,13 @@ script.ignite_fireplace:
     icon: mdi:fire
 script.ignite_dresser_ambilight:
     icon: mdi:lamp
-switch.pi1_desktop:
-    icon: mdi:desktop-classic
 script.media_centre:
     icon: mdi:kodi
 script.desktop:
     icon: mdi:desktop-classic
 switch.pi1_kodi:
     icon: mdi:kodi
-switch.pi1_xorg:
+switch.pi1_desktop:
     icon: mdi:desktop-classic
 switch.pi2_desktop:
     icon: mdi:desktop-classic

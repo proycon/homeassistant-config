@@ -818,11 +818,11 @@ switch pi1_music_player:
     name: Pi1 Music Player
     command_topic: "home/musicplayer/set/pi1"
     state_topic: "home/musicplayer/get/pi1"
-switch pi1_xorg:
+switch pi1_desktop:
     platform: mqtt
-    name: Pi1 Xorg
-    command_topic: "home/xorg/set/pi1"
-    state_topic: "home/xorg/get/pi1"
+    name: Pi1 Desktop
+    command_topic: "home/desktop/set/pi1"
+    state_topic: "home/desktop/get/pi1"
 switch pi2_kodi:
     platform: mqtt
     name: Pi2 Kodi
@@ -833,11 +833,11 @@ switch pi2_music_player:
     name: Pi2 Music Player
     command_topic: "home/musicplayer/set/pi2"
     state_topic: "home/musicplayer/get/pi2"
-switch pi2_xorg:
+switch pi2_desktop:
     platform: mqtt
     name: Pi2 Xorg
-    command_topic: "home/xorg/set/pi2"
-    state_topic: "home/xorg/get/pi2"
+    command_topic: "home/desktop/set/pi2"
+    state_topic: "home/desktop/get/pi2"
 switch tv:
     platform: mqtt
     name: TV

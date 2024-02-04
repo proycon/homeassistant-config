@@ -1001,7 +1001,7 @@ listen_to_music:
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - service: switch.turn_off
-          entity_id: switch.pi1_xorg
+          entity_id: switch.pi1_desktop
         - service: switch.turn_off
           entity_id: switch.pi1_kodi
         - delay:
@@ -1023,7 +1023,7 @@ listen_to_music_bedroom:
               topic: "home/say/pi2"
               payload: "Starting Music"
         - service: switch.turn_off
-          entity_id: switch.pi2_xorg
+          entity_id: switch.pi2_desktop
         - service: switch.turn_off
           entity_id: switch.pi2_kodi
         - service: switch.turn_on
@@ -1057,7 +1057,7 @@ media_centre:
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - service: switch.turn_off
-          entity_id: switch.pi1_xorg
+          entity_id: switch.pi1_desktop
         - delay:
             seconds: 1
         - service: media_player.select_source
@@ -1084,7 +1084,7 @@ videoplayer:
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - service: switch.turn_off
-          entity_id: switch.pi1_xorg
+          entity_id: switch.pi1_desktop
         - service: switch.turn_off
           entity_id: switch.pi1_kodi
         - delay:
@@ -1116,7 +1116,7 @@ desktop:
           data:
               source: HDMI2
         - service: switch.turn_on
-          entity_id: switch.pi1_xorg
+          entity_id: switch.pi1_desktop
 
 
 
@@ -1135,7 +1135,7 @@ turn_media_off:
     - service: switch.turn_off
       entity_id: switch.tv_decoder
     - service: switch.turn_off
-      entity_id: switch.pi1_xorg
+      entity_id: switch.pi1_desktop
     - service: switch.turn_off
       entity_id: switch.pi1_kodi
     - service: switch.turn_off
@@ -1163,7 +1163,7 @@ turn_media_off_bedroom:
     - service: switch.turn_off
       entity_id: switch.tv_decoder_bedroom
     - service: switch.turn_off
-      entity_id: switch.pi2_xorg
+      entity_id: switch.pi2_desktop
     - service: switch.turn_off
       entity_id: switch.pi2_kodi
     - service: switch.turn_off
@@ -1248,7 +1248,7 @@ media_centre_bedroom:
         - service: switch.turn_on
           entity_id: switch.tv_bedroom
         - service: switch.turn_off
-          entity_id: switch.pi2_xorg
+          entity_id: switch.pi2_desktop
         - delay:
             seconds: 1
           #TODO: select source
@@ -1268,7 +1268,7 @@ videoplayer_bedroom:
         - service: switch.turn_on
           entity_id: switch.tv_bedroom
         - service: switch.turn_off
-          entity_id: switch.pi2_xorg
+          entity_id: switch.pi2_desktop
         - service: switch.turn_off
           entity_id: switch.pi2_kodi
 
@@ -1286,10 +1286,10 @@ desktop_bedroom:
         - delay:
             seconds: 1
         - condition: state
-          entity_id: switch.pi2_xorg
+          entity_id: switch.pi2_desktop
           state: 'off'
         - service: switch.turn_on
-          entity_id: switch.pi2_xorg
+          entity_id: switch.pi2_desktop
 
 turn_media_off_bedroom:
     alias: Turn media off
@@ -1303,7 +1303,7 @@ turn_media_off_bedroom:
     - service: switch.turn_off
       entity_id: switch.tv_decoder_bedroom
     - service: switch.turn_off
-      entity_id: switch.pi2_xorg
+      entity_id: switch.pi2_desktop
     - service: switch.turn_off
       entity_id: switch.pi2_kodi
     - service: switch.turn_off
