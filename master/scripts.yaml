@@ -1133,6 +1133,10 @@ turn_media_off:
     - delay:
         seconds: 1
     - service: switch.turn_off
+      entity_id: switch.tv
+    - delay:
+        seconds: 1
+    - service: switch.turn_off
       entity_id: switch.tv_decoder
     - service: switch.turn_off
       entity_id: switch.pi1_desktop
@@ -1143,11 +1147,7 @@ turn_media_off:
     - service: media_player.media_stop
       entity_id: media_player.mpd
     - delay:
-        seconds: 2
-    - service: switch.turn_off
-      entity_id: switch.tv
-    - delay:
-        seconds: 4
+        seconds: 5
     - service: media_player.turn_off
       entity_id: media_player.yamaha_receiver
 
