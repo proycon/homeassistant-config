@@ -974,14 +974,14 @@ watch_tv:
           data:
               topic: "home/say/pi1"
               payload: "Starting TV"
+        - service: media_player.turn_on
+          entity_id: media_player.yamaha_receiver
+        - delay:
+            seconds: 5
         - service: switch.turn_on
           entity_id: switch.tv
         - delay:
             seconds: 1
-        - service: media_player.turn_on
-          entity_id: media_player.yamaha_receiver
-        - delay:
-            seconds: 10
         - service: switch.turn_on
           entity_id: switch.tv_decoder
         - delay:
