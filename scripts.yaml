@@ -977,13 +977,12 @@ watch_tv:
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - delay:
-            seconds: 5
+            seconds: 8
+        - service: shell_command.tv_decoder_on
+        - delay:
+            seconds: 2
         - service: switch.turn_on
           entity_id: switch.tv
-        - delay:
-            seconds: 1
-        - service: switch.turn_on
-          entity_id: switch.tv_decoder
         - delay:
             seconds: 1
         - service: media_player.select_source
