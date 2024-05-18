@@ -1,24 +1,20 @@
-#!/bin/bash
+#!/bin/sh
 
-HADIR=/home/homeautomation/homeassistant/
+if [ -n "$HOME" ]; then
+    HADIR="$HOME/homeassistant/"
+else
+    HADIR=/home/homeautomation/homeassistant/
+fi
 cd $HADIR
 
 if [ ! -d "$HADIR/env" ]; then
-    virtualenv --python=python3 env
+    python3 -m venv env
 fi
 
 . env/bin/activate
 
-pip install -U homeassistant
-#pip install pycec cec
-
-ln -sf $HADIR/scripts $HADIR/master/scripts
-ln -sf $HADIR/scripts $HADIR/pi1/scripts
-ln -sf $HADIR/scripts $HADIR/pi2/scripts
-ln -sf $HADIR/scripts $HADIR/pi3/scripts
-ln -sf $HADIR/custom_components $HADIR/master/custom_components
-ln -sf $HADIR/custom_components $HADIR/pi1/custom_components
-ln -sf $HADIR/custom_components $HADIR/pi2/custom_components
-ln -sf $HADIR/custom_components $HADIR/pi3/custom_components
-
-
+if [ -n "$HASS_VERSION" ]; then
+    pip install homeassistant==$HASS_VERSION
+else
+    pip install -U homeassistant
+fi

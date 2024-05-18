@@ -1,29 +1,27 @@
-#!/bin/bash
+#!/bin/sh
 
-HOST=$(hostname)
-HADIR=/home/homeautomation/homeassistant/
-cd $HADIR
-if [ $HOST == "homeautomation" ]; then
-    export PULSE_SERVER="10.252.116.1"
+die() {
+    echo "$*" >&2
+    exit 2
+}
+
+if [ -n "$HOME" ]; then
+    HADIR="$HOME/homeassistant/"
+else
+    HADIR=/home/homeautomation/homeassistant/
 fi
-if [ $HOST == "roma" ] || [ $HOST == "homeautomation" ]; then
-    HOST="master"
-fi
+cd "$HADIR" || die "Directory does not exist"
+export PULSE_SERVER="192.168.0.1"
 
 if [ ! -d "$HADIR/env" ]; then
     echo "Virtualenv not setup yet for $HOST" >&2
-    ./setup.py
+    ./setup.sh || die "Setup failed"
 fi
+
 if [ -d "$HADIR/snapshots" ]; then
-    rm $HADIR/snapshots/*.lock
+    rm "$HADIR"/snapshots/*.lock
 fi
 
-. $HADIR/env/bin/activate
+. "$HADIR/env/bin/activate"
 
-if [ ! -d "$HADIR/$HOST" ]; then
-    echo "No way to start for host $HOST" >&2
-    exit 2
-fi
-
-hass -c "$HADIR/$HOST"
-
+hass -c "$HADIR"
