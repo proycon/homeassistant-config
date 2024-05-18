@@ -1,6 +1,3 @@
-[submodule "scripts/switch/433mhzforpi"]
-	path = scripts/switch/433mhzforpi
-	url = https://github.com/proycon/433mhzforrpi.git
 [submodule "media"]
 	path = media
 	url = git@github.com:proycon/homeautomation-media/
