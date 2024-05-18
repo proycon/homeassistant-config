@@ -12,6 +12,7 @@ if [ ! -d "$HADIR/env" ]; then
 fi
 
 . env/bin/activate
+pip install wheel
 
 if [ -n "$HASS_VERSION" ]; then
     pip install homeassistant==$HASS_VERSION
