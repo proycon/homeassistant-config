@@ -15,7 +15,9 @@ fi
 pip install wheel
 
 if [ -n "$HASS_VERSION" ]; then
+    echo "Installing explicit HASS version: $HASS_VERSION"
     pip install homeassistant==$HASS_VERSION
 else
-    pip install -U homeassistant
+    echo "Installing latest HASS version"
+    pip install homeassistant
 fi
