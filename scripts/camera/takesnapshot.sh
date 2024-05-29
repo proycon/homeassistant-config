@@ -25,14 +25,15 @@ if [ -n "$2" ]; then
 fi
 
 if [ "$MODE" = "livingroom" ]; then
-    curl -sS "http://$LIVINGROOMCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$LIVINGROOMCAM_USER&pwd=$LIVINGROOMCAM_PASSWORD" -o tmp.jpg
+    curl -sS "http://$LIVINGROOMCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$LIVINGROOMCAM_USER&pwd=$LIVINGROOMCAM_PASSWORD" -o "tmp.$MODE.jpg"
     if [ $FLIP -eq 1 ]; then
-        convert -flip -flop tmp.jpg "$DATE.$MODE.jpg"
+        convert -flip -flop "tmp.$MODE.jpg" "_$MODE.jpg"
     else
-        mv tmp.jpg "$DATE.$MODE.jpg"
+        mv "tmp.$MODE.jpg" "_$MODE.jpg"
     fi
 elif [ "$MODE" = "street" ]; then
-    curl -sS "http://$STREETCAM_USER:$STREETCAM_PASSWORD@$STREETCAM_IP/Streaming/Channels/1/picture" -o "$DATE.$MODE.jpg"
+    curl -sS "http://$STREETCAM_USER:$STREETCAM_PASSWORD@$STREETCAM_IP/Streaming/Channels/1/picture" -o "tmp.$MODE.jpg"
+    mv "tmp.$MODE.jpg" "_$MODE.jpg"
 elif [ "$MODE" = "balcony" ]; then
     curl -sS "http://$BALCONYCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$BALCONYCAM_USER&pwd=$BALCONYCAM_PASSWORD" -o "$DATE.$MODE.jpg"
 elif [ "$MODE" = "garden" ]; then
@@ -45,11 +46,5 @@ fi
 
 rm "$MODE.lock"
 
-if [ -f "$DATE.$MODE.jpg" ]; then
-    ln -sf "$DATE.$MODE.jpg" "_$MODE.jpg"
-else
-    echo "Failed to take a snapshot for $MODE" >&2
-    exit 3
-fi
 
 exit 0
