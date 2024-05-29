@@ -845,21 +845,21 @@ mqtt:
 #       - medium
 #       - high
 
-switch:
-  - platform: command_line
-    switches:
-      bedroom_highspots:
-        friendly_name: Bedroom Highspots
-        command_on: /home/homeautomation/homeassistant/scripts/switch/eth008.sh 0
-        command_off: /home/homeautomation/homeassistant/scripts/switch/eth008.sh 0
-        command_state: /home/homeautomation/homeassistant/scripts/switch/eth008.sh
-        value_template: "{{ value[7] == \"1\" }}"
-      bedroom_midspots:
-        friendly_name: Bedroom Midspots
-        command_on: /home/homeautomation/homeassistant/scripts/switch/eth008.sh 1
-        command_off: /home/homeautomation/homeassistant/scripts/switch/eth008.sh 1
-        command_state: /home/homeautomation/homeassistant/scripts/switch/eth008.sh
-        value_template: "{{ value[8] == \"1\" }}"
+command_line:
+  - switch:
+      unique_id: bedroom_highspots
+      friendly_name: Bedroom Highspots
+      command_on: /home/homeautomation/homeassistant/scripts/switch/eth008.sh 0
+      command_off: /home/homeautomation/homeassistant/scripts/switch/eth008.sh 0
+      command_state: /home/homeautomation/homeassistant/scripts/switch/eth008.sh
+      value_template: "{{ value[7] == \"1\" }}"
+  - switch:
+      unique_id: bedroom_midspots
+      friendly_name: Bedroom Midspots
+      command_on: /home/homeautomation/homeassistant/scripts/switch/eth008.sh 1
+      command_off: /home/homeautomation/homeassistant/scripts/switch/eth008.sh 1
+      command_state: /home/homeautomation/homeassistant/scripts/switch/eth008.sh
+      value_template: "{{ value[8] == \"1\" }}"
     #output is: relays 00000000
 
 
