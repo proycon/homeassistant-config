@@ -12,7 +12,7 @@ if [ ! -d "$HADIR/env" ]; then
 fi
 
 . env/bin/activate
-pip install wheel psycopg2 numpy scipy
+pip install wheel psycopg2 numpy scipy vext vext.gi
 
 if [ -n "$HASS_VERSION" ]; then
     echo "Installing explicit HASS version: $HASS_VERSION"
