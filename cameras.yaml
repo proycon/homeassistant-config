@@ -16,9 +16,6 @@
     - platform: local_file
       name: Garden
       file_path: /home/homeautomation/homeassistant/snapshots/_garden.jpg
-    - platform: mjpeg
-      name: Garden Live
-      mjpeg_url: !secret gardencam_mjpeg_url
     - platform: local_file
       name: Event 1
       file_path: /home/homeautomation/homeassistant/snapshots/event.1.jpg

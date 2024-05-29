@@ -36,9 +36,9 @@ lovelace:
 
 http:
   trusted_proxies:
+    - 10.0.2.100
     - 127.0.0.1
     - ::1
-    - 10.252.116.1
   use_x_forwarded_for: True
   base_url: !secret base_url
   ip_ban_enabled: False
@@ -59,24 +59,6 @@ zone:
     longitude: !secret longitude
     radius: 10
     icon: mdi:home
-
-
-# Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
-
-# Discover some devices automatically
-discovery:
-
-# Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
-
-
 
 
 recorder:
@@ -451,10 +433,6 @@ timer:
         duration: '00:03:00'
 
 sensor:
-    - platform: buienradar #weather prediction
-      monitored_conditions:
-          - symbol
-          - temperature
     - platform: time_date
       display_options:
           - 'time'
@@ -548,125 +526,12 @@ sensor:
           last_movement_roof_window_west:
             friendly_name: Last movement roof window west
             value_template: "{{ states.binary_sensor.dakraam_west_sensor.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-    - platform: mqtt
-      name: Temperature Living Room
-      unit_of_measurement: °C
-      state_topic: "home/sensor/temperature_living_room"
-    - platform: mqtt
-      name: Humidity Living Room
-      unit_of_measurement: "%"
-      state_topic: "home/sensor/humidity_living_room"
-    - platform: mqtt
-      name: CO2 Living Room
-      unit_of_measurement: ppm
-      state_topic: "home/sensor/co2_living_room"
-    - platform: mqtt
-      name: Temperature Attic
-      unit_of_measurement: °C
-      state_topic: "home/sensor/temperature_attic"
-    - platform: mqtt
-      name: Humidity Attic
-      unit_of_measurement: "%"
-      state_topic: "home/sensor/humidity_attic"
-    - platform: mqtt
-      name: Bedroom Temperature
-      unit_of_measurement: °C
-      state_topic: "home/sensor/bedroom_temperature"
-    - platform: mqtt
-      name: IR Send Activity
-      state_topic: "home/ir_send/pi1"
-      expire_after: 3
-      value_template: 1
-    - platform: mqtt
-      name: Greenhouse Temperature
-      unit_of_measurement: °C
-      state_topic: "home/sensor/greenhouse_temperature"
-      expire_after: 3600
-    - platform: mqtt
-      name: Outside Temperature
-      unit_of_measurement: °C
-      state_topic: "home/sensor/outside_temperature"
-      expire_after: 3600
-    - platform: mqtt
-      name: Outside Humidity
-      unit_of_measurement: "%"
-      state_topic: "home/sensor/outside_humidity"
-      expire_after: 3600
-    - platform: mqtt
-      name: Wind Direction
-      unit_of_measurement: °
-      state_topic: "home/weatherstation/winddir"
-      expire_after: 3600
-    - platform: mqtt
-      name: Wind Speed
-      unit_of_measurement: km/h
-      state_topic: "home/weatherstation/windspeed"
-      expire_after: 3600
-    - platform: mqtt
-      name: Wind Gusts
-      unit_of_measurement: km/h
-      state_topic: "home/weatherstation/windgustspeed"
-      expire_after: 3600
-    - platform: mqtt
-      name: Outside Temperature 2
-      unit_of_measurement: °C
-      state_topic: "home/weatherstation2/temp"
-      expire_after: 3600
-    - platform: mqtt
-      name: Total Rain
-      unit_of_measurement: mm
-      state_topic: "home/weatherstation/rain"
-      expire_after: 3600
-    - platform: dsmr
-      port: /dev/ttyUSB-P1
-      dsmr_version: 4
 
 
+  # - name: P1
+  #port: /dev/ttyUSB-P1
+  #dsmr_version: 4
 
-
-binary_sensor doorbell:
-    platform: mqtt
-    name: Doorbell
-    state_topic: "home/binary_sensor/doorbell"
-
-binary_sensor frontdoor:
-    platform: mqtt
-    name: Front Door
-    state_topic: "home/binary_sensor/frontdoor"
-    device_class: door
-
-binary_sensor backdoor:
-    platform: mqtt
-    name: Back Door
-    state_topic: "home/binary_sensor/backdoor"
-    device_class: door
-
-binary_sensor bedroomwindow_right:
-    platform: mqtt
-    name: Bedroom window Right
-    state_topic: "home/binary_sensor/bedroomwindow_right"
-    device_class: door
-
-binary_sensor bedroomwindow_left:
-    platform: mqtt
-    name: Bedroom window Left
-    state_topic: "home/binary_sensor/bedroomwindow_left"
-    device_class: door
-
-
-binary_sensor noise:
-    platform: mqtt
-    name: Noise
-    state_topic: "home/binary_sensor/noise"
-    device_class: sound
-
-binary_sensor pir_living_room:
-    platform: mqtt
-    name: PIR Living Room
-    state_topic: "home/binary_sensor/pir_living_room"
-    payload_on: "ON"
-    payload_off: "OFF"
-    device_class: motion
 
 
 binary_sensor:
@@ -714,162 +579,246 @@ binary_sensor:
         friendly_name: "Bathroom too humid"
         value_template: '{{ states("sensor.bathroom_sensor_relative_humidity") | float > 75.0 }}'
 
-switch tv_spots:
-    platform: mqtt
-    name: TV Spots
-    state_topic: "home/433send/get/elro/31/E"
-    command_topic: "home/433send/set/pi1/elro/31/E"
-switch office:
-    platform: mqtt
-    name: Office
-    state_topic: "home/433send/get/elro/15/A"
-    command_topic: "home/433send/set/pi2/elro/15/A"
-switch front_room:
-    platform: mqtt
-    name: Front Room
-    state_topic: "home/433send/get/oldkaku/M/10"
-    command_topic: "home/433send/set/pi1/oldkaku/M/10"
-switch midspots:
-    platform: mqtt
-    name: Midspots
-    state_topic: "home/433send/get/elro/31/B"
-    command_topic: "home/433send/set/pi2/elro/31/B"
-switch back_room:
-    platform: mqtt
-    name: Back room
-    state_topic: "home/433send/get/elro/31/A"
-    command_topic: "home/433send/set/pi2/elro/31/A"
-switch back_corner:
-    platform: mqtt
-    name: Back Corner
-    state_topic: "home/433send/get/elro/31/C"
-    command_topic: "home/433send/set/pi2/elro/31/C"
-switch kitchen:
-    platform: mqtt
-    name: Kitchen
-    state_topic: "home/433send/get/newkaku/120/8"
-    command_topic: "home/433send/set/pi1/newkaku/120/8"
-switch bedroom:
-    platform: mqtt
-    name: Bedroom
-    state_topic: "home/433send/get/elro/15/C"
-    command_topic: "home/433send/set/pi2/elro/15/C"
-switch garden:
-    platform: mqtt
-    name: Garden
-    state_topic: "home/433send/get/elro/23/A"
-    command_topic: "home/433send/set/pi2/elro/23/A"
-switch balcony:
-    platform: mqtt
-    name: Balcony
-    state_topic: "home/433send/get/newkaku/121/9"
-    command_topic: "home/433send/set/pi2/newkaku/121/9"
-    #state_topic: "home/elro/get/23/2"
-    #command_topic: "home/elro/set/pi2/23/2"
-switch hall:
-    platform: mqtt
-    name: Hall
-    state_topic: "home/433send/get/elro/15/B"
-    command_topic: "home/433send/set/pi1/elro/15/B"
-switch roof:
-    platform: mqtt
-    name: Roof
-    state_topic: "home/433send/get/newkaku/121/8"
-    command_topic: "home/433send/set/pi2/newkaku/121/8"
-    #state_topic: "home/elro/get/23/4"
-    #command_topic: "home/elro/set/pi2/23/4"
-switch porch:
-    platform: mqtt
-    name: Porch
-    state_topic: "home/433send/get/oldkaku/M/11"
-    command_topic: "home/433send/set/pi1/oldkaku/M/11"
-switch bathroom_vent:
-    platform: mqtt
-    name: Bathroom Vent
-    state_topic: "home/433send/get/newkaku/121/7"
-    command_topic: "home/433send/set/pi2/newkaku/121/7"
-    #state_topic: "home/elro/get/23/4"
-    #command_topic: "home/elro/set/pi2/23/4"
-switch tv_decoder:
-    platform: mqtt
-    name: TV Decoder
-    command_topic: "home/ir_send/pi1"
-    payload_on: '{"device":"VIP1853","key":"POWER"}'
-    payload_off: '{"device":"VIP1853","key":"POWER"}'
-switch tv_decoder_bedroom:
-    platform: mqtt
-    name: TV Decoder Bedroom
-    command_topic: "home/ir_send/pi2"
-    payload_on: '{"device":"VIP1853","key":"POWER"}'
-    payload_off: '{"device":"VIP1853","key":"POWER"}'
-switch pi1_kodi:
-    platform: mqtt
-    name: Pi1 Kodi
-    command_topic: "home/kodi/set/pi1"
-    state_topic: "home/kodi/get/pi1"
-switch pi1_music_player:
-    platform: mqtt
-    name: Pi1 Music Player
-    command_topic: "home/musicplayer/set/pi1"
-    state_topic: "home/musicplayer/get/pi1"
-switch pi1_desktop:
-    platform: mqtt
-    name: Pi1 Desktop
-    command_topic: "home/desktop/set/pi1"
-    state_topic: "home/desktop/get/pi1"
-switch pi2_kodi:
-    platform: mqtt
-    name: Pi2 Kodi
-    command_topic: "home/kodi/set/pi2"
-    state_topic: "home/kodi/get/pi2"
-switch pi2_music_player:
-    platform: mqtt
-    name: Pi2 Music Player
-    command_topic: "home/musicplayer/set/pi2"
-    state_topic: "home/musicplayer/get/pi2"
-switch pi2_desktop:
-    platform: mqtt
-    name: Pi2 Xorg
-    command_topic: "home/desktop/set/pi2"
-    state_topic: "home/desktop/get/pi2"
-switch tv:
-    platform: mqtt
-    name: TV
-    #command_topic: "home/ir_send/pi1"
-    #payload_on: '{"device":"tvbeneden","key":"KEY_POWER","state":"on"}'
-    #payload_off: '{"device":"tvbeneden","key":"KEY_POWER","state":"off"}'
-    command_topic: "home/hdmi_cec_send/pi1"
-    payload_on: "on 0"
-    payload_off: "standby 0"
-switch tv_bedroom:
-    platform: mqtt
-    name: TV Bedroom
-    #command_topic: "home/ir_send/pi2"
-    #payload_on: '{"device":"tvboven","key":"KEY_POWER","state":"on"}'
-    #payload_off: '{"device":"tvboven","key":"KEY_POWER","state":"off"}'
-    command_topic: "home/hdmi_cec_send/pi2"
-    payload_on: "on 0"
-    payload_off: "standby 0"
-switch technofire:
-    platform: mqtt
-    name: Technofire
-    command_topic: "home/technofire/pi3/set/fire/255"
-    state_topic: "home/technofire/pi3/state"
-switch ambilight:
-    platform: mqtt
-    name: Ambilight
-    command_topic: "home/technofire/pi2/set/lamp/40"
-    state_topic: "home/technofire/pi2/state"
-switch bedroom_ambilight:
-    platform: mqtt
-    name: Bedroom Ambilight
-    command_topic: "home/technofire/pi4/set/rainbow_slow/60"
-    state_topic: "home/technofire/pi4/state"
-switch noise_detector:
-    platform: mqtt
-    name: Noise detector
-    command_topic: "home/noisedetector/set/pi1"
-    state_topic: "home/noisedetector/get/pi1"
+
+#MQTT
+mqtt:
+  broker: 192.168.0.1
+  port: 8883
+  client_id: master
+  certificate: /etc/ssl/certs/ca-certificates.crt
+  tls_insecure: true #allow non-matching hostnames
+  keepalive: 60
+  username: homeassistant
+  password: !secret api_password
+
+  binary_sensor doorbell:
+      platform: mqtt
+      name: Doorbell
+      state_topic: "home/binary_sensor/doorbell"
+
+  binary_sensor frontdoor:
+      platform: mqtt
+      name: Front Door
+      state_topic: "home/binary_sensor/frontdoor"
+      device_class: door
+
+  binary_sensor backdoor:
+      platform: mqtt
+      name: Back Door
+      state_topic: "home/binary_sensor/backdoor"
+      device_class: door
+
+  binary_sensor bedroomwindow_right:
+      platform: mqtt
+      name: Bedroom window Right
+      state_topic: "home/binary_sensor/bedroomwindow_right"
+      device_class: door
+
+  binary_sensor bedroomwindow_left:
+      platform: mqtt
+      name: Bedroom window Left
+      state_topic: "home/binary_sensor/bedroomwindow_left"
+      device_class: door
+
+
+  binary_sensor noise:
+      platform: mqtt
+      name: Noise
+      state_topic: "home/binary_sensor/noise"
+      device_class: sound
+
+  binary_sensor pir_living_room:
+      platform: mqtt
+      name: PIR Living Room
+      state_topic: "home/binary_sensor/pir_living_room"
+      payload_on: "ON"
+      payload_off: "OFF"
+      device_class: motion
+
+  sensor:
+    - name: Temperature Living Room
+      unit_of_measurement: °C
+      state_topic: "home/sensor/temperature_living_room"
+    - name: Humidity Living Room
+      unit_of_measurement: "%"
+      state_topic: "home/sensor/humidity_living_room"
+    - name: CO2 Living Room
+      unit_of_measurement: ppm
+      state_topic: "home/sensor/co2_living_room"
+    - name: Temperature Attic
+      unit_of_measurement: °C
+      state_topic: "home/sensor/temperature_attic"
+    - name: Humidity Attic
+      unit_of_measurement: "%"
+      state_topic: "home/sensor/humidity_attic"
+    - name: Bedroom Temperature
+      unit_of_measurement: °C
+      state_topic: "home/sensor/bedroom_temperature"
+    - name: IR Send Activity
+      state_topic: "home/ir_send/pi1"
+      expire_after: 3
+      value_template: 1
+    - name: Greenhouse Temperature
+      unit_of_measurement: °C
+      state_topic: "home/sensor/greenhouse_temperature"
+      expire_after: 3600
+    - name: Outside Temperature
+      unit_of_measurement: °C
+      state_topic: "home/sensor/outside_temperature"
+      expire_after: 3600
+    - name: Outside Humidity
+      unit_of_measurement: "%"
+      state_topic: "home/sensor/outside_humidity"
+      expire_after: 3600
+    - name: Wind Direction
+      unit_of_measurement: °
+      state_topic: "home/weatherstation/winddir"
+      expire_after: 3600
+    - name: Wind Speed
+      unit_of_measurement: km/h
+      state_topic: "home/weatherstation/windspeed"
+      expire_after: 3600
+    - name: Wind Gusts
+      unit_of_measurement: km/h
+      state_topic: "home/weatherstation/windgustspeed"
+      expire_after: 3600
+    - name: Outside Temperature 2
+      unit_of_measurement: °C
+      state_topic: "home/weatherstation2/temp"
+      expire_after: 3600
+    - name: Total Rain
+      unit_of_measurement: mm
+      state_topic: "home/weatherstation/rain"
+      expire_after: 3600
+
+  switch tv_spots:
+      name: TV Spots
+      state_topic: "home/433send/get/elro/31/E"
+      command_topic: "home/433send/set/pi1/elro/31/E"
+  switch office:
+      name: Office
+      state_topic: "home/433send/get/elro/15/A"
+      command_topic: "home/433send/set/pi2/elro/15/A"
+  switch front_room:
+      name: Front Room
+      state_topic: "home/433send/get/oldkaku/M/10"
+      command_topic: "home/433send/set/pi1/oldkaku/M/10"
+  switch midspots:
+      name: Midspots
+      state_topic: "home/433send/get/elro/31/B"
+      command_topic: "home/433send/set/pi2/elro/31/B"
+  switch back_room:
+      name: Back room
+      state_topic: "home/433send/get/elro/31/A"
+      command_topic: "home/433send/set/pi2/elro/31/A"
+  switch back_corner:
+      name: Back Corner
+      state_topic: "home/433send/get/elro/31/C"
+      command_topic: "home/433send/set/pi2/elro/31/C"
+  switch kitchen:
+      name: Kitchen
+      state_topic: "home/433send/get/newkaku/120/8"
+      command_topic: "home/433send/set/pi1/newkaku/120/8"
+  switch bedroom:
+      name: Bedroom
+      state_topic: "home/433send/get/elro/15/C"
+      command_topic: "home/433send/set/pi2/elro/15/C"
+  switch garden:
+      name: Garden
+      state_topic: "home/433send/get/elro/23/A"
+      command_topic: "home/433send/set/pi2/elro/23/A"
+  switch balcony:
+      name: Balcony
+      state_topic: "home/433send/get/newkaku/121/9"
+      command_topic: "home/433send/set/pi2/newkaku/121/9"
+      #state_topic: "home/elro/get/23/2"
+      #command_topic: "home/elro/set/pi2/23/2"
+  switch hall:
+      name: Hall
+      state_topic: "home/433send/get/elro/15/B"
+      command_topic: "home/433send/set/pi1/elro/15/B"
+  switch roof:
+      name: Roof
+      state_topic: "home/433send/get/newkaku/121/8"
+      command_topic: "home/433send/set/pi2/newkaku/121/8"
+      #state_topic: "home/elro/get/23/4"
+      #command_topic: "home/elro/set/pi2/23/4"
+  switch porch:
+      name: Porch
+      state_topic: "home/433send/get/oldkaku/M/11"
+      command_topic: "home/433send/set/pi1/oldkaku/M/11"
+  switch bathroom_vent:
+      name: Bathroom Vent
+      state_topic: "home/433send/get/newkaku/121/7"
+      command_topic: "home/433send/set/pi2/newkaku/121/7"
+      #state_topic: "home/elro/get/23/4"
+      #command_topic: "home/elro/set/pi2/23/4"
+  switch tv_decoder:
+      name: TV Decoder
+      command_topic: "home/ir_send/pi1"
+      payload_on: '{"device":"VIP1853","key":"POWER"}'
+      payload_off: '{"device":"VIP1853","key":"POWER"}'
+  switch tv_decoder_bedroom:
+      name: TV Decoder Bedroom
+      command_topic: "home/ir_send/pi2"
+      payload_on: '{"device":"VIP1853","key":"POWER"}'
+      payload_off: '{"device":"VIP1853","key":"POWER"}'
+  switch pi1_kodi:
+      name: Pi1 Kodi
+      command_topic: "home/kodi/set/pi1"
+      state_topic: "home/kodi/get/pi1"
+  switch pi1_music_player:
+      name: Pi1 Music Player
+      command_topic: "home/musicplayer/set/pi1"
+      state_topic: "home/musicplayer/get/pi1"
+  switch pi1_desktop:
+      name: Pi1 Desktop
+      command_topic: "home/desktop/set/pi1"
+      state_topic: "home/desktop/get/pi1"
+  switch pi2_kodi:
+      name: Pi2 Kodi
+      command_topic: "home/kodi/set/pi2"
+      state_topic: "home/kodi/get/pi2"
+  switch pi2_music_player:
+      name: Pi2 Music Player
+      command_topic: "home/musicplayer/set/pi2"
+      state_topic: "home/musicplayer/get/pi2"
+  switch pi2_desktop:
+      name: Pi2 Xorg
+      command_topic: "home/desktop/set/pi2"
+      state_topic: "home/desktop/get/pi2"
+  switch tv:
+      name: TV
+      #command_topic: "home/ir_send/pi1"
+      #payload_on: '{"device":"tvbeneden","key":"KEY_POWER","state":"on"}'
+      #payload_off: '{"device":"tvbeneden","key":"KEY_POWER","state":"off"}'
+      command_topic: "home/hdmi_cec_send/pi1"
+      payload_on: "on 0"
+      payload_off: "standby 0"
+  switch tv_bedroom:
+      name: TV Bedroom
+      #command_topic: "home/ir_send/pi2"
+      #payload_on: '{"device":"tvboven","key":"KEY_POWER","state":"on"}'
+      #payload_off: '{"device":"tvboven","key":"KEY_POWER","state":"off"}'
+      command_topic: "home/hdmi_cec_send/pi2"
+      payload_on: "on 0"
+      payload_off: "standby 0"
+  switch technofire:
+      name: Technofire
+      command_topic: "home/technofire/pi3/set/fire/255"
+      state_topic: "home/technofire/pi3/state"
+  switch ambilight:
+      name: Ambilight
+      command_topic: "home/technofire/pi2/set/lamp/40"
+      state_topic: "home/technofire/pi2/state"
+  switch bedroom_ambilight:
+      name: Bedroom Ambilight
+      command_topic: "home/technofire/pi4/set/rainbow_slow/60"
+      state_topic: "home/technofire/pi4/state"
+  switch noise_detector:
+      name: Noise detector
+      command_topic: "home/noisedetector/set/pi1"
+      state_topic: "home/noisedetector/get/pi1"
 
 switch:
   - platform: command_line
@@ -906,14 +855,6 @@ fan:
       - high
 
 
-vacuum:
-  - name: robot
-    platform: xiaomi_miio
-    host: !secret roboip
-    token: !secret robotoken
-
-weather:
-    - platform: buienradar
 
 #hdmi_cec:
 #    host: !secret pi1_ip
@@ -989,16 +930,6 @@ notify:
     platform: matrix
     default_room: !secret matrix_room
 
-#MQTT
-mqtt:
-    broker: 192.168.0.1
-    port: 8883
-    client_id: master
-    certificate: /etc/ssl/certs/ca-certificates.crt
-    tls_insecure: true #allow non-matching hostnames
-    keepalive: 60
-    username: homeassistant
-    password: !secret api_password
 
 
 #mqtt_eventstream:
