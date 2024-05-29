@@ -60,7 +60,6 @@ zone:
     radius: 10
     icon: mdi:home
 
-
 recorder:
     db_url: !secret db_url
     exclude:
@@ -77,20 +76,11 @@ history:
         - group
       entities: !include exclude.yaml
 
-#influxdb:
-#   host: 127.0.0.1
-#   username: home-assistant
-#   password: !secret api_password
-#   exclude:
-#     domains:
-#       - shell_command
-#       - weblink
-#       - group
-#     entities: !include exclude.yaml
-
 system_health:
 
 mobile_app:
+
+stream:
 
 # View all events in a logbook
 logbook:
@@ -585,50 +575,43 @@ mqtt:
   broker: 192.168.0.1
   port: 8883
   client_id: master
-  certificate: /etc/ssl/certs/ca-certificates.crt
+  certificate: Auto
   tls_insecure: true #allow non-matching hostnames
   keepalive: 60
   username: homeassistant
   password: !secret api_password
 
   binary_sensor doorbell:
-      platform: mqtt
       name: Doorbell
       state_topic: "home/binary_sensor/doorbell"
 
   binary_sensor frontdoor:
-      platform: mqtt
       name: Front Door
       state_topic: "home/binary_sensor/frontdoor"
       device_class: door
 
   binary_sensor backdoor:
-      platform: mqtt
       name: Back Door
       state_topic: "home/binary_sensor/backdoor"
       device_class: door
 
   binary_sensor bedroomwindow_right:
-      platform: mqtt
       name: Bedroom window Right
       state_topic: "home/binary_sensor/bedroomwindow_right"
       device_class: door
 
   binary_sensor bedroomwindow_left:
-      platform: mqtt
       name: Bedroom window Left
       state_topic: "home/binary_sensor/bedroomwindow_left"
       device_class: door
 
 
   binary_sensor noise:
-      platform: mqtt
       name: Noise
       state_topic: "home/binary_sensor/noise"
       device_class: sound
 
   binary_sensor pir_living_room:
-      platform: mqtt
       name: PIR Living Room
       state_topic: "home/binary_sensor/pir_living_room"
       payload_on: "ON"
@@ -820,6 +803,20 @@ mqtt:
       command_topic: "home/noisedetector/set/pi1"
       state_topic: "home/noisedetector/get/pi1"
 
+  fan:
+      name: "Ceiling fan"
+      command_topic: "home/fan"
+      speed_command_topic: "home/fan"
+      payload_on: "true"
+      payload_off: "off"
+      payload_low_speed: "2"
+      payload_medium_speed: "4"
+      payload_high_speed: "6"
+      speeds:
+        - low
+        - medium
+        - high
+
 switch:
   - platform: command_line
     switches:
@@ -839,20 +836,6 @@ switch:
 
 
 
-fan:
-  - platform: mqtt
-    name: "Ceiling fan"
-    command_topic: "home/fan"
-    speed_command_topic: "home/fan"
-    payload_on: "true"
-    payload_off: "off"
-    payload_low_speed: "2"
-    payload_medium_speed: "4"
-    payload_high_speed: "6"
-    speeds:
-      - low
-      - medium
-      - high
 
 
 
