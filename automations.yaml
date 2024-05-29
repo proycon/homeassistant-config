@@ -54,24 +54,24 @@
     seconds: '/5' #every five seconds
   action:
     - service: shell_command.snapshot_street
-- alias: Balcony snapshots
-  trigger:
-    platform: time_pattern
-    seconds: '/2' #every five seconds
-  action:
-    - service: shell_command.snapshot_balcony
+#- alias: Balcony snapshots
+#  trigger:
+#   platform: time_pattern
+#   seconds: '/2' #every five seconds
+# action:
+#   - service: shell_command.snapshot_balcony
 #- alias: Garden snapshots#
 #  trigger:
 #    platform: time_pattern
 #    seconds: '/5' #every five seconds
 # action:
 #    - service: shell_command.snapshot_garden
-- alias: Daily snapshot archiving
-  trigger:
-    platform: time
-    at: "00:00:00"
-  action:
-    - service: shell_command.archive_snapshots
+#- alias: Daily snapshot archiving
+#  trigger:
+#    platform: time
+#    at: "00:00:00"
+#  action:
+#    - service: shell_command.archive_snapshots
 - id: lights_on_in_the_evening
   alias: Lights on in the evening
   trigger:

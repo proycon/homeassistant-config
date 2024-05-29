@@ -136,8 +136,8 @@ logbook:
 sun:
 
 shell_command:
-    #snapshot_livingroom: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh livingroom
-    #snapshot_street: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh street
+    snapshot_livingroom: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh livingroom
+    snapshot_street: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh street
     #snapshot_balcony: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh balcony
     #snapshot_garden: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh garden
     #snapshot_frontdoor: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh frontdoor
@@ -147,7 +147,7 @@ shell_command:
     mpc: "/home/homeautomation/homeassistant/scripts/media/mpc.sh \"{{ type }}\" \"{{ value }}\" \"{{ filter }}\""
     mpcplaylist: "/home/homeautomation/homeassistant/scripts/media/mpcplaylist.sh \"{{ playlist }}\""
     #event_snapshots: /home/homeautomation/homeassistant/scripts/camera/eventsnapshots.sh "{{ cams }}"
-    snapshot_clear_locks: find "/home/homeautomation/homeassistant/snapshots/" -type f -name "*.lock" | xargs rm
+    snapshot_clear_locks: find "/tmp/" -type f -name "*.lock" | xargs rm
     youtube: /home/homeautomation/homeassistant/scripts/media/youtube.sh "{{ mode }}" "{{ url }}" "{{ pi }}"
 
 rest_command:
