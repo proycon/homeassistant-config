@@ -169,11 +169,6 @@ logbook:
 # Track the sun
 sun:
 
-zwave:
-    usb_path: /dev/ttyACM-zwave
-    #debug: true
-
-
 shell_command:
     snapshot_livingroom: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh livingroom
     snapshot_street: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh street
