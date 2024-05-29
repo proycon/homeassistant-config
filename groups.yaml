@@ -174,13 +174,14 @@ inside_environment:
         - binary_sensor.bathroom_too_humid
         - sensor.humidity_living_room
         - sensor.bedroom_temperature
-        - sensor.fibaro_multisensor_temperature
-        - sensor.fibaro_multisensor_luminance
-        - sensor.fibaro_office_temperature
-        - sensor.fibaro_office_luminance
-        - sensor.fibaro_hall_temperature
-        - sensor.fibaro_hall_luminance
-        - sensor.overloop_luminance
+        - sensor.nodeid_2_nodeid_2_temperature_air
+        - sensor.nodeid_2_nodeid_2_illuminance
+        - sensor.nodeid_6_nodeid_6_temperature_air
+        - sensor.nodeid_6_nodeid_6_illuminance
+        - sensor.nodeid_7_nodeid_7_temperature_air
+        - sensor.nodeid_7_nodeid_7_illuminance
+        - sensor.nodeid_12_nodeid_12_temperature_air
+        - sensor.nodeid_12_nodeid_12_illuminance
         - binary_sensor.pir_living_room
         - binary_sensor.pir_kitchen
         - binary_sensor.pir_hall
