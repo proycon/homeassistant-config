@@ -566,8 +566,6 @@ binary_sensor:
 
 #MQTT
 mqtt:
-  client_id: master
-
   binary_sensor doorbell:
       name: Doorbell
       state_topic: "home/binary_sensor/doorbell"
