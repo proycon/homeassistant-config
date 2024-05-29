@@ -40,7 +40,6 @@ http:
     - 127.0.0.1
     - ::1
   use_x_forwarded_for: True
-  base_url: !secret base_url
   ip_ban_enabled: False
   login_attempts_threshold: 5
   cors_allowed_origins:
@@ -70,11 +69,6 @@ recorder:
 
 # Enables support for tracking state changes over time.
 history:
-    exclude:
-      domains:
-        - shell_command
-        - group
-      entities: !include exclude.yaml
 
 system_health:
 
