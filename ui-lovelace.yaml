@@ -508,7 +508,7 @@ views:
                   color: black
                   font-family: Helvetica
               - type: state-label
-                entity: sensor.fibaro_hall_temperature
+                entity: sensor.nodeid_7_nodeid_7_temperature_air
                 style:
                   top: 85%
                   left: 28%
@@ -518,7 +518,7 @@ views:
                   color: black
                   font-family: Helvetica
               - type: state-label
-                entity: sensor.fibaro_hall_luminance
+                entity: sensor.nodeid_7_nodeid_7_illuminance
                 style:
                   top: 87%
                   left: 28%
@@ -539,7 +539,7 @@ views:
                   color: black
                   font-family: Helvetica
               - type: state-label
-                entity: sensor.fibaro_multisensor_temperature #kitchen
+                entity: sensor.nodeid_2_nodeid_2_temperature_air #kitchen
                 style:
                   top: 40%
                   left: 31%
@@ -549,7 +549,7 @@ views:
                   color: black
                   font-family: Helvetica
               - type: state-label
-                entity: sensor.fibaro_multisensor_luminance #kitchen
+                entity: sensor.nodeid_2_nodeid_2_illuminance #kitchen
                 style:
                   top: 42%
                   left: 31%
@@ -983,7 +983,7 @@ views:
                   color: black
                   font-family: Helvetica
               - type: state-label
-                entity: sensor.fibaro_office_temperature
+                entity: sensor.nodeid_6_nodeid_6_temperature_air
                 style:
                   top: 75%
                   left: 70%
@@ -993,7 +993,7 @@ views:
                   color: black
                   font-family: Helvetica
               - type: state-label
-                entity: sensor.fibaro_office_luminance
+                entity: sensor.nodeid_6_nodeid_6_illuminance
                 style:
                   top: 77%
                   left: 70%
@@ -1920,11 +1920,11 @@ views:
               name: Living
             - entity: sensor.dogsensor_temperature
               name: Living (backroom)
-            - entity: sensor.fibaro_multisensor_temperature
+            - entity: sensor.nodeid_2_nodeid_2_temperature_air
               name: Kitchen
-            - entity: sensor.fibaro_hall_temperature
+            - entity: sensor.nodeid_7_nodeid_7_temperature_air
               name: Hall
-            - entity: sensor.fibaro_office_temperature
+            - entity: sensor.nodeid_6_nodeid_6_temperature_air
               name: Office
             - entity: sensor.bedroom_temperature
               name: Bedroom
@@ -1944,11 +1944,11 @@ views:
               name: Living
             - entity: sensor.dogsensor_temperature
               name: Living (backroom)
-            - entity: sensor.fibaro_multisensor_temperature
+            - entity: sensor.nodeid_2_nodeid_2_temperature_air
               name: Kitchen
-            - entity: sensor.fibaro_hall_temperature
+            - entity: sensor.nodeid_7_nodeid_7_temperature_air
               name: Hall
-            - entity: sensor.fibaro_office_temperature
+            - entity: sensor.nodeid_6_nodeid_6_temperature_air
               name: Office
             - entity: sensor.bedroom_temperature
               name: Bedroom
@@ -1968,11 +1968,11 @@ views:
           title: Luminance (48h)
           hours_to_show: 48
           entities:
-            - entity: sensor.fibaro_multisensor_luminance
+            - entity: sensor.nodeid_2_nodeid_2_illuminance 
               name: Kitchen
-            - entity: sensor.fibaro_hall_luminance
+            - entity: sensor.nodeid_7_nodeid_7_illuminance
               name: Hall
-            - entity: sensor.fibaro_office_luminance
+            - entity: sensor.nodeid_6_nodeid_6_illuminance
               name: Office
         - type: vertical-stack
           cards:
@@ -2273,9 +2273,10 @@ views:
         show_header_toggle: false
       - type: entities
         entities:
-          - sensor.office_fibaro_battery
-          - sensor.kitchen_fibaro_battery
-          - sensor.hall_fibaro_battery
+          - sensor.nodeid_6_nodeid_6_battery_level
+          - sensor.nodeid_2_nodeid_2_battery_level
+          - sensor.nodeid_7_nodeid_7_battery_level
+          - sensor.nodeid_12_nodeid_12_battery_level
           - sensor.bathroom_humidity_battery
           - sensor.bathroom_window_battery
           - sensor.downstairs_remote_battery
