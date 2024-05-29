@@ -1150,11 +1150,9 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.pir_hall
-      from: "off"
       to: "on"
     - platform: state
       entity_id: binary_sensor.pir_overloop
-      from: "off"
       to: "on"
   condition:
       condition: and
