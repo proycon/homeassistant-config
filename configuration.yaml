@@ -538,19 +538,19 @@ binary_sensor:
         device_class: occupancy
       pir_kitchen:
         friendly_name: "PIR Kitchen"
-        value_template: '{{ is_state("sensor.binary_sensor.nodeid_2_nodeid_2_motion_sensor_status", "on") or states.binary_sensor.nodeid_2_nodeid_2_motion_sensor_status.attributes.value  == 8 }}'
+        value_template: '{{ is_state("binary_sensor.nodeid_2_nodeid_2_motion_sensor_status", "on") }}'
         device_class: motion
       pir_hall:
         friendly_name: "PIR Hall"
-        value_template: '{{ is_state("sensor.binary_sensor.nodeid_7_nodeid_7_motion_sensor_status", "on") or states.binary_sensor.nodeid_7_nodeid_7_motion_sensor_status.attributes.value  == 8 }}'
+        value_template: '{{ is_state("binary_sensor.nodeid_7_nodeid_7_motion_sensor_status", "on")  }}'
         device_class: motion
       pir_office:
         friendly_name: "PIR Office"
-        value_template: '{{ is_state("sensor.binary_sensor.nodeid_6_nodeid_6_motion_sensor_status", "on") or states.binary_sensor.nodeid_6_nodeid_6_motion_sensor_status.attributes.value  == 8 }}'
+        value_template: '{{ is_state("binary_sensor.nodeid_6_nodeid_6_motion_sensor_status", "on")  }}'
         device_class: motion
       pir_overloop:
         friendly_name: "PIR Overloop"
-        value_template: '{{ is_state("sensor.binary_sensor.nodeid_12_nodeid_12_motion_sensor_status", "on") or states.binary_sensor.nodeid_12_nodeid_12_motion_sensor_status.attributes.value == 8 }}'
+        value_template: '{{ is_state("binary_sensor.nodeid_12_nodeid_12_motion_sensor_status", "on") }}'
         device_class: motion
       bathroom_too_humid:
         friendly_name: "Bathroom too humid"
