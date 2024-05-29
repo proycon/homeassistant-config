@@ -12,7 +12,7 @@ if [ ! -d "$HADIR/env" ]; then
 fi
 
 . env/bin/activate
-pip install wheel
+pip install wheel psycopg2
 
 if [ -n "$HASS_VERSION" ]; then
     echo "Installing explicit HASS version: $HASS_VERSION"
