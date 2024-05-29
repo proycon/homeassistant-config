@@ -848,7 +848,7 @@ mqtt:
 command_line:
   - switch:
       unique_id: bedroom_highspots
-      _name: Bedroom Highspots
+      name: Bedroom Highspots
       command_on: /home/homeautomation/homeassistant/scripts/switch/eth008.sh 0
       command_off: /home/homeautomation/homeassistant/scripts/switch/eth008.sh 0
       command_state: /home/homeautomation/homeassistant/scripts/switch/eth008.sh
