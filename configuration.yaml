@@ -835,19 +835,19 @@ mqtt:
       command_topic: "home/technofire/pi4/set/rainbow_slow/60"
       state_topic: "home/technofire/pi4/state"
 
-  - fan:
-      name: "Ceiling fan"
-      command_topic: "home/fan"
-      speed_command_topic: "home/fan"
-      payload_on: "true"
-      payload_off: "off"
-      payload_low_speed: "2"
-      payload_medium_speed: "4"
-      payload_high_speed: "6"
-      speeds:
-        - low
-        - medium
-        - high
+# - fan:
+#     name: "Ceiling fan"
+#     command_topic: "home/fan"
+#     speed_command_topic: "home/fan"
+#     payload_on: "true"
+#     payload_off: "off"
+#     payload_low_speed: "2"
+#     payload_medium_speed: "4"
+#     payload_high_speed: "6"
+#     speeds:
+#       - low
+#       - medium
+#       - high
 
 switch:
   - platform: command_line
