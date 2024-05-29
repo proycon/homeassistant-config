@@ -11,7 +11,7 @@ else
     HADIR=/home/homeautomation/homeassistant/
 fi
 cd "$HADIR" || die "Directory does not exist"
-export PULSE_SERVER="192.168.0.1"
+export PULSE_SERVER="10.0.2.2"
 
 if [ ! -d "$HADIR/env" ]; then
     echo "Virtualenv not setup yet for $HOST" >&2
