@@ -93,19 +93,19 @@
   alias: Lights on when dark during the day
   trigger:
     - platform: numeric_state
-      entity_id: sensor.fibaro_office_luminance
+      entity_id: sensor.nodeid_6_nodeid_6_illuminance
       below: 20
     - platform: numeric_state
-      entity_id: sensor.fibaro_hall_luminance
+      entity_id: sensor.nodeid_7_nodeid_7_illuminance
       below: 8
   condition:
     - condition: and
       conditions:
           - condition: numeric_state
-            entity_id: sensor.fibaro_office_luminance
+            entity_id: sensor.nodeid_6_nodeid_6_illuminance
             below: 20
           - condition: numeric_state
-            entity_id: sensor.fibaro_hall_luminance
+            entity_id: sensor.nodeid_7_nodeid_7_illuminance
             below: 8
           - condition: template
             value_template: '{{ states.sensor.wake_up_relative_time.state > 0 }}'
@@ -124,19 +124,19 @@
   alias: Lights off when light during the day
   trigger:
     - platform: numeric_state
-      entity_id: sensor.fibaro_office_luminance
+      entity_id: sensor.nodeid_6_nodeid_6_illuminance
       above: 80
     - platform: numeric_state
-      entity_id: sensor.fibaro_hall_luminance
+      entity_id: sensor.nodeid_7_nodeid_7_illuminance
       above: 12
   condition:
     - condition: and
       conditions:
           - condition: numeric_state
-            entity_id: sensor.fibaro_office_luminance
+            entity_id: sensor.nodeid_6_nodeid_6_illuminance
             above: 20
           - condition: numeric_state
-            entity_id: sensor.fibaro_hall_luminance
+            entity_id: sensor.nodeid_7_nodeid_7_illuminance
             above: 8
           - condition: template
             value_template: '{{ sensor.wake_up_relative_time > 0 }}'
@@ -1098,7 +1098,7 @@
           entity_id: binary_sensor.anybody_home
           state: "on"
         - condition: numeric_state
-          entity_id: sensor.fibaro_office_luminance
+          entity_id: sensor.nodeid_6_nodeid_6_illuminance
           below: 10
         - condition: state
           entity_id: switch.office
@@ -1168,7 +1168,7 @@
         - condition: or
           conditions:
             - condition: numeric_state
-              entity_id: sensor.fibaro_hall_luminance
+              entity_id: sensor.nodeid_7_nodeid_7_illuminance
               below: 10
             - condition: time
               after: '22:00'

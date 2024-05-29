@@ -1469,30 +1469,12 @@ make_event_snapshots_street:
         - service: shell_command.event_snapshots
           data:
               cams: "street"
-make_event_snapshots_garden:
-    alias: Make Event Snapshots garden
-    sequence:
-        - service: shell_command.event_snapshots
-          data:
-              cams: "garden"
-make_event_snapshots_front_door:
-    alias: Make Event Snapshots front_door
-    sequence:
-        - service: shell_command.event_snapshots
-          data:
-              cams: "frontdoor"
-make_event_snapshots_hall_upstairs:
-    alias: Make Event Snapshots hall_upstairs
-    sequence:
-        - service: shell_command.event_snapshots
-          data:
-              cams: "hallupstairs"
 make_event_snapshots_all:
     alias: Make Event Snapshots all
     sequence:
         - service: shell_command.event_snapshots
           data:
-             cams: "street livingroom garden hallupstairs frontdoor"
+             cams: "street livingroom"
 
 
 mail_test:
