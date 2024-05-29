@@ -76,6 +76,11 @@ mobile_app:
 
 stream:
 
+logger:
+  default: warning
+  logs:
+    homeassistant.components.mqtt: debug
+
 # View all events in a logbook
 logbook:
     include:
