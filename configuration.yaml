@@ -173,13 +173,6 @@ alarm_control_panel:
       trigger_time: 600
 
 device_tracker:
-    - platform: ping
-      hosts:
-          pi1: !secret pi1_ip
-          pi2: !secret pi2_ip
-          pi3: !secret pi3_ip
-          wifi_router: !secret wifi_router_ip
-          kpn_router: !secret kpn_router_ip
    #- platform: traccar
    #  username: !secret traccar_user
    #  password: !secret traccar_password
