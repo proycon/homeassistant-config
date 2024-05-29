@@ -4,6 +4,7 @@ homeassistant:
   # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude
   longitude: !secret longitude
+  country: NL
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 161
   # metric for Metric, imperial for Imperial
@@ -49,8 +50,6 @@ http:
 config:
 
 ffmpeg:
-
-map:
 
 zone:
   - name: Home
@@ -571,196 +570,246 @@ binary_sensor:
 
 #MQTT
 mqtt:
-  binary_sensor doorbell:
+  - binary_sensor:
+      unique_id: doorbell
       name: Doorbell
       state_topic: "home/binary_sensor/doorbell"
 
-  binary_sensor frontdoor:
+  - binary_sensor:
+      unique_id: frontdoor
       name: Front Door
       state_topic: "home/binary_sensor/frontdoor"
       device_class: door
 
-  binary_sensor backdoor:
+  - binary_sensor:
+      unique_id: backdoor
       name: Back Door
       state_topic: "home/binary_sensor/backdoor"
       device_class: door
 
-  binary_sensor bedroomwindow_right:
+  - binary_sensor:
+      unique_id: bedroomwindow_right
       name: Bedroom window Right
       state_topic: "home/binary_sensor/bedroomwindow_right"
       device_class: door
 
-  binary_sensor bedroomwindow_left:
+  - binary_sensor:
+      unique_id: bedroomwindow_left
       name: Bedroom window Left
       state_topic: "home/binary_sensor/bedroomwindow_left"
       device_class: door
 
-
-  binary_sensor noise:
-      name: Noise
-      state_topic: "home/binary_sensor/noise"
-      device_class: sound
-
-  binary_sensor pir_living_room:
+  - binary_sensor:
+      unique_id: pir_living_room
       name: PIR Living Room
       state_topic: "home/binary_sensor/pir_living_room"
       payload_on: "ON"
       payload_off: "OFF"
       device_class: motion
 
-  sensor:
-    - name: Temperature Living Room
+  - sensor:
+      unique_id: temperature_living_room
+      name: Temperature Living Room
       unit_of_measurement: °C
       state_topic: "home/sensor/temperature_living_room"
-    - name: Humidity Living Room
+  - sensor:
+      unique_id: humidity_living_room
+      name: Humidity Living Room
       unit_of_measurement: "%"
       state_topic: "home/sensor/humidity_living_room"
-    - name: CO2 Living Room
+  - sensor:
+      unique_id: co2_living_room
+      name: CO2 Living Room
       unit_of_measurement: ppm
       state_topic: "home/sensor/co2_living_room"
-    - name: Temperature Attic
+  - sensor:
+      unique_id: temperature_attic
+      name: Temperature Attic
       unit_of_measurement: °C
       state_topic: "home/sensor/temperature_attic"
-    - name: Humidity Attic
+  - sensor:
+      unique_id: humidity_attic
+      name: Humidity Attic
       unit_of_measurement: "%"
       state_topic: "home/sensor/humidity_attic"
-    - name: Bedroom Temperature
+  - sensor:
+      unique_id: bedroom_temperature
+      name: Bedroom Temperature
       unit_of_measurement: °C
       state_topic: "home/sensor/bedroom_temperature"
-    - name: IR Send Activity
+  - sensor:
+      unique_id: ir_send
+      name: IR Send Activity
       state_topic: "home/ir_send/pi1"
       expire_after: 3
       value_template: 1
-    - name: Greenhouse Temperature
+  - sensor:
+      unique_id: greenhouse_temperature
+      name: Greenhouse Temperature
       unit_of_measurement: °C
       state_topic: "home/sensor/greenhouse_temperature"
       expire_after: 3600
-    - name: Outside Temperature
+  - sensor:
+      unique_id: outside_temperature
+      name: Outside Temperature
       unit_of_measurement: °C
       state_topic: "home/sensor/outside_temperature"
       expire_after: 3600
-    - name: Outside Humidity
+  - sensor:
+      unique_id: outside_humidity
+      name: Outside Humidity
       unit_of_measurement: "%"
       state_topic: "home/sensor/outside_humidity"
       expire_after: 3600
-    - name: Wind Direction
+  - sensor:
+      unique_id: winddir
+      name: Wind Direction
       unit_of_measurement: °
       state_topic: "home/weatherstation/winddir"
       expire_after: 3600
-    - name: Wind Speed
+  - sensor:
+      unique_id: windspeed
+      name: Wind Speed
       unit_of_measurement: km/h
       state_topic: "home/weatherstation/windspeed"
       expire_after: 3600
-    - name: Wind Gusts
+  - sensor:
+      unique_id: windgustspeed
+      name: Wind Gusts
       unit_of_measurement: km/h
       state_topic: "home/weatherstation/windgustspeed"
       expire_after: 3600
-    - name: Outside Temperature 2
+  - sensor:
+      unique_id: outside_temperature2
       unit_of_measurement: °C
       state_topic: "home/weatherstation2/temp"
       expire_after: 3600
-    - name: Total Rain
+  - sensor:
+      unique_id: totalrain
       unit_of_measurement: mm
       state_topic: "home/weatherstation/rain"
       expire_after: 3600
 
-  switch tv_spots:
+  - switch: 
+      unique_id: tv_spots
       name: TV Spots
       state_topic: "home/433send/get/elro/31/E"
       command_topic: "home/433send/set/pi1/elro/31/E"
-  switch office:
+  - switch:
+      unique_id: office
       name: Office
       state_topic: "home/433send/get/elro/15/A"
       command_topic: "home/433send/set/pi2/elro/15/A"
-  switch front_room:
+  - switch:
+      unique_id: front_room
       name: Front Room
       state_topic: "home/433send/get/oldkaku/M/10"
       command_topic: "home/433send/set/pi1/oldkaku/M/10"
-  switch midspots:
+  - switch:
+      unique_id: midspots
       name: Midspots
       state_topic: "home/433send/get/elro/31/B"
       command_topic: "home/433send/set/pi2/elro/31/B"
-  switch back_room:
+  - switch:
+      unique_id: back_room
       name: Back room
       state_topic: "home/433send/get/elro/31/A"
       command_topic: "home/433send/set/pi2/elro/31/A"
-  switch back_corner:
+  - switch:
+      unique_id: back_corner
       name: Back Corner
       state_topic: "home/433send/get/elro/31/C"
       command_topic: "home/433send/set/pi2/elro/31/C"
-  switch kitchen:
+  - switch:
+      unique_id: kitchen
       name: Kitchen
       state_topic: "home/433send/get/newkaku/120/8"
       command_topic: "home/433send/set/pi1/newkaku/120/8"
-  switch bedroom:
+  - switch:
+      unique_id: bedroom
       name: Bedroom
       state_topic: "home/433send/get/elro/15/C"
       command_topic: "home/433send/set/pi2/elro/15/C"
-  switch garden:
+  - switch:
+      unique_id: garden
       name: Garden
       state_topic: "home/433send/get/elro/23/A"
       command_topic: "home/433send/set/pi2/elro/23/A"
-  switch balcony:
+  - switch: 
+      unique_id: balcony
       name: Balcony
       state_topic: "home/433send/get/newkaku/121/9"
       command_topic: "home/433send/set/pi2/newkaku/121/9"
       #state_topic: "home/elro/get/23/2"
       #command_topic: "home/elro/set/pi2/23/2"
-  switch hall:
+  - switch:
+      unique_id: hall
       name: Hall
       state_topic: "home/433send/get/elro/15/B"
       command_topic: "home/433send/set/pi1/elro/15/B"
-  switch roof:
+  - switch:
+      unique_id: roof
       name: Roof
       state_topic: "home/433send/get/newkaku/121/8"
       command_topic: "home/433send/set/pi2/newkaku/121/8"
       #state_topic: "home/elro/get/23/4"
       #command_topic: "home/elro/set/pi2/23/4"
-  switch porch:
+  - switch:
+      unique_id: porch
       name: Porch
       state_topic: "home/433send/get/oldkaku/M/11"
       command_topic: "home/433send/set/pi1/oldkaku/M/11"
-  switch bathroom_vent:
+  - switch:
+      unique_id: bathroom_vent
       name: Bathroom Vent
       state_topic: "home/433send/get/newkaku/121/7"
       command_topic: "home/433send/set/pi2/newkaku/121/7"
       #state_topic: "home/elro/get/23/4"
       #command_topic: "home/elro/set/pi2/23/4"
-  switch tv_decoder:
+  - switch:
+      unique_id: tv_decoder
       name: TV Decoder
       command_topic: "home/ir_send/pi1"
       payload_on: '{"device":"VIP1853","key":"POWER"}'
       payload_off: '{"device":"VIP1853","key":"POWER"}'
-  switch tv_decoder_bedroom:
+  - switch:
+      unique_id: tv_decoder_bedroom
       name: TV Decoder Bedroom
       command_topic: "home/ir_send/pi2"
       payload_on: '{"device":"VIP1853","key":"POWER"}'
       payload_off: '{"device":"VIP1853","key":"POWER"}'
-  switch pi1_kodi:
+  - switch:
+      unique_id: pi1_kodi
       name: Pi1 Kodi
       command_topic: "home/kodi/set/pi1"
       state_topic: "home/kodi/get/pi1"
-  switch pi1_music_player:
+  - switch: 
+      unique_id: pi1_music_player
       name: Pi1 Music Player
       command_topic: "home/musicplayer/set/pi1"
       state_topic: "home/musicplayer/get/pi1"
-  switch pi1_desktop:
+  - switch:
+      unique_id: pi1_desktop
       name: Pi1 Desktop
       command_topic: "home/desktop/set/pi1"
       state_topic: "home/desktop/get/pi1"
-  switch pi2_kodi:
+  - switch:
+      unique_id: pi2_kodi
       name: Pi2 Kodi
       command_topic: "home/kodi/set/pi2"
       state_topic: "home/kodi/get/pi2"
-  switch pi2_music_player:
+  - switch: 
+      unique_id: pi2_music_player
       name: Pi2 Music Player
       command_topic: "home/musicplayer/set/pi2"
       state_topic: "home/musicplayer/get/pi2"
-  switch pi2_desktop:
+  - switch:
+      unique_id: pi2_desktop
       name: Pi2 Xorg
       command_topic: "home/desktop/set/pi2"
       state_topic: "home/desktop/get/pi2"
-  switch tv:
+  - switch:
+      unique_id: tv
       name: TV
       #command_topic: "home/ir_send/pi1"
       #payload_on: '{"device":"tvbeneden","key":"KEY_POWER","state":"on"}'
@@ -768,7 +817,8 @@ mqtt:
       command_topic: "home/hdmi_cec_send/pi1"
       payload_on: "on 0"
       payload_off: "standby 0"
-  switch tv_bedroom:
+  - switch:
+      unique_id: tv_bedroom
       name: TV Bedroom
       #command_topic: "home/ir_send/pi2"
       #payload_on: '{"device":"tvboven","key":"KEY_POWER","state":"on"}'
@@ -776,24 +826,23 @@ mqtt:
       command_topic: "home/hdmi_cec_send/pi2"
       payload_on: "on 0"
       payload_off: "standby 0"
-  switch technofire:
+  - switch:
+      unique_id: technofire
       name: Technofire
       command_topic: "home/technofire/pi3/set/fire/255"
       state_topic: "home/technofire/pi3/state"
-  switch ambilight:
+  - switch:
+      unique_id: ambilight
       name: Ambilight
       command_topic: "home/technofire/pi2/set/lamp/40"
       state_topic: "home/technofire/pi2/state"
-  switch bedroom_ambilight:
+  - switch:
+      unique_id: bedroom_ambilight
       name: Bedroom Ambilight
       command_topic: "home/technofire/pi4/set/rainbow_slow/60"
       state_topic: "home/technofire/pi4/state"
-  switch noise_detector:
-      name: Noise detector
-      command_topic: "home/noisedetector/set/pi1"
-      state_topic: "home/noisedetector/get/pi1"
 
-  fan:
+  - fan:
       name: "Ceiling fan"
       command_topic: "home/fan"
       speed_command_topic: "home/fan"
