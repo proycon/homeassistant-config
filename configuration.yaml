@@ -92,7 +92,7 @@ logbook:
         - binary_sensor.bedroom_window_right
         - binary_sensor.bathroom_window_bathroom_window_door_state_simple
         - binary_sensor.roof_window_east
-        - binary_sensor.roof_window_west
+        - binary_sensor.nodeid_16_nodeid_16_door_window
         - binary_sensor.doorbell
         - binary_sensor.anybodyhome
         - binary_sensor.noise
