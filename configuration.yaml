@@ -138,11 +138,6 @@ sun:
 shell_command:
     snapshot_livingroom: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh livingroom
     snapshot_street: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh street
-    #snapshot_balcony: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh balcony
-    #snapshot_garden: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh garden
-    #snapshot_frontdoor: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh frontdoor
-    #snapshot_hallupstairs: /home/homeautomation/homeassistant/scripts/camera/takesnapshot.sh hallupstairs
-    #archive_snapshots: /home/homeautomation/homeassistant/scripts/camera/archive.sh
     mpcclear: /home/homeautomation/homeassistant/scripts/media/mpcclear.sh
     mpc: "/home/homeautomation/homeassistant/scripts/media/mpc.sh \"{{ type }}\" \"{{ value }}\" \"{{ filter }}\""
     mpcplaylist: "/home/homeautomation/homeassistant/scripts/media/mpcplaylist.sh \"{{ playlist }}\""
