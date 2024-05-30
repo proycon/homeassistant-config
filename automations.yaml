@@ -1447,17 +1447,9 @@
 
 - alias: Master off switch
   trigger:
-      - platform: event
-        event_type: zwave.scene_activated
-        event_data:
-          entity_id: zwave.downstairs_remote
-          scene_id: 13 #Doubleclick on closed circle button (10: closed circle, 20: plus, 30: open circle, 40: minus)
-      - platform: event
-        event_type: zwave.scene_activated
-        event_data:
-          entity_id: zwave.remotec_zrc90
-          scene_id: 1
-          scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+     - platform: state
+       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_001
+       to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       condition: and
       conditions:
@@ -1670,12 +1662,9 @@
         entity_id: switch.midspots
         state: "off"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 1
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_001
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/on"
   action:
@@ -1689,24 +1678,15 @@
         entity_id: switch.tv_spots
         state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 1
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 7
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 8
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_001
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_007
+      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_008
+      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/off"
   action:
@@ -1716,18 +1696,12 @@
 - id: remote_night_scene
   alias: remote_night_scene
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 2
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 7
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_002
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_007
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/night"
   action:
@@ -1737,12 +1711,9 @@
 - id: remote_evening_scene
   alias: remote_evening_scene
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 2
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_002
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/evening"
   action:
@@ -1756,18 +1727,12 @@
         entity_id: switch.technofire
         state: "off"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 3
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 7
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_003
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_007
+      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/fireplace/on"
   action:
@@ -1801,12 +1766,9 @@
         entity_id: switch.technofire
         state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 3
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_003
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/fireplace/off"
   action:
@@ -1822,12 +1784,9 @@
         entity_id: switch.technofire
         state: "off"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 3
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_003
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/ambilight/on"
   action:
@@ -1867,12 +1826,9 @@
   trigger:
     - platform: mqtt
       topic: "home/command/lights/office/off"
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 7
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
       service: switch.turn_off
       entity_id: switch.office
@@ -2017,12 +1973,9 @@
   trigger:
     - platform: mqtt
       topic: "home/command/lights/hall/off"
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 7
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
       service: switch.turn_off
       entity_id: switch.hall
@@ -2045,12 +1998,9 @@
 - id: remote_lights_ambilight_bedroom_toggle_on
   alias: remote_lights_ambilight_bedroom_toggle_on
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 7
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/bedroom_ambilight/on"
   condition:
@@ -2063,12 +2013,9 @@
 - id: remote_lights_ambilight_bedroom_toggle_off
   alias: remote_lights_ambilight_bedroom_toggle_off
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 7
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/bedroom_ambilight/off"
   condition:
@@ -2081,12 +2028,9 @@
 - id: remote_lights_bedroom_toggle_on
   alias: remote_lights_bedroom_toggle_on
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 7
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom
@@ -2097,12 +2041,9 @@
 - id: remote_lights_bedroom_toggle_off
   alias: remote_lights_bedroom_toggle_off
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 7
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom
@@ -2132,12 +2073,9 @@
   trigger:
     - platform: mqtt
       topic: "home/command/lights/bedroom_midspots/on"
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 3
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_003
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom_midspots
@@ -2151,12 +2089,9 @@
   trigger:
     - platform: mqtt
       topic: "home/command/lights/bedroom_midspots/off"
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 3
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_003
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom_midspots
@@ -2170,12 +2105,9 @@
   trigger:
     - platform: mqtt
       topic: "home/command/lights/bedroom_highspots/on"
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 4
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_004
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom_highspots
@@ -2189,12 +2121,9 @@
   trigger:
     - platform: mqtt
       topic: "home/command/lights/bedroom_highspots/off"
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 4
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_004
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom_highspots
@@ -2206,12 +2135,9 @@
 - id: remote_lights_balcony_toggle_on
   alias: remote_lights_balcony_toggle_on
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 8
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_008
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.balcony
@@ -2222,12 +2148,9 @@
 - id: remote_lights_balcony_toggle_off
   alias: remote_lights_balcony_toggle_off
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 8
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_008
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.balcony
@@ -2255,18 +2178,12 @@
           entity_id: media_player.mpd
           state: "unavailable"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 5
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 2
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_005
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_002
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/media/tv"
   action:
@@ -2327,18 +2244,12 @@
       entity_id: switch.tv
       state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 5
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 8
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_005
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_008
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/mute"
   action:
@@ -2348,18 +2259,12 @@
 - id: remote_media_off
   alias: remote_media_off
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 5
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 8
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_005
+      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_008
+      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/media/off"
   action:
@@ -2378,12 +2283,9 @@
 - id: remote_media_kodi
   alias: remote_media_kodi
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 8
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_008
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/kodi/on"
   action:
@@ -2478,18 +2380,12 @@
       entity_id: switch.tv
       state: "off"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 6
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 4
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_006
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_004
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/media/music"
   action:
@@ -2499,12 +2395,9 @@
 - id: remote_music_bedroom_on
   alias: remote_music_bedroom_on
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 6
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_006
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/media/music2"
     - platform: mqtt
@@ -2516,12 +2409,9 @@
 - id: remote_music_bedroom_off
   alias: remote_music_bedroom_off
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 6
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_006
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music2/off"
   action:
@@ -2533,18 +2423,12 @@
 - id: remote_music_off
   alias: remote_music_off
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 6
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 4
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_006
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_004
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/off"
   action:
@@ -2560,18 +2444,12 @@
       entity_id: switch.tv
       state: "off"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 6
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 4
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_006
+      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_004
+      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/load"
   action:
@@ -2593,24 +2471,15 @@
           entity_id: media_player.mpd
           state: "paused"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 6
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 7
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 2
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_006
+      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_007
+      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_002
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/next"
   action:
@@ -2632,12 +2501,9 @@
           entity_id: media_player.mpd
           state: "paused"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 2
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_002
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/next"
   action:
@@ -2659,18 +2525,12 @@
           entity_id: media_player.mpd
           state: "paused"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 6
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 7
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_007
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_006
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/previous"
   action:
@@ -2692,12 +2552,9 @@
           entity_id: media_player.mpd
           state: "paused"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510_2
-        scene_id: 1
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_001
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/previous"
   action:
@@ -2710,18 +2567,12 @@
       entity_id: switch.tv
       state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 2
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 7
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_007
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_002
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/next"
   action:
@@ -2742,12 +2593,9 @@
       entity_id: switch.tv
       state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 2
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_002
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/right"
   action:
@@ -2764,12 +2612,9 @@
 
 - id: remote_tv_on_manual
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 3
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_003
+      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tv/on"
   action:
@@ -2786,12 +2631,9 @@
       entity_id: switch.tv
       state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 6
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_006
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/left"
   action:
@@ -2808,12 +2650,9 @@
 
 - id: remote_tv_decoder_on_manual
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 6
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_006
+      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/on"
   action:
@@ -2826,12 +2665,9 @@
       entity_id: switch.tv
       state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 5
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_005
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/up"
   action:
@@ -2852,12 +2688,9 @@
       entity_id: switch.tv
       state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 1
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_001
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/down"
   action:
@@ -2878,18 +2711,12 @@
       entity_id: switch.tv
       state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 6
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 7
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_006
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_007
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/previous"
   action:
@@ -2910,12 +2737,9 @@
       entity_id: media_player.yamaha_receiver
       state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 1
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_001
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/volup"
   action:
@@ -2930,12 +2754,9 @@
       entity_id: media_player.yamaha_receiver
       state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 5
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_005
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/voldown"
   action:
@@ -2950,12 +2771,9 @@
       entity_id: switch.tv
       state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 3
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_003
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/pause"
   action:
@@ -2982,12 +2800,9 @@
           entity_id: media_player.mpd
           state: "playing"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 3
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_003
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/pauseplay"
   action:
@@ -3006,12 +2821,9 @@
           entity_id: media_player.mpd
           state: "paused"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 3
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_003
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/pauseplay"
   action:
@@ -3024,12 +2836,9 @@
       entity_id: switch.tv
       state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 3
-        scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_003
+      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/ok"
   action:
@@ -3050,12 +2859,9 @@
       entity_id: switch.tv
       state: "on"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_unknown_type_0001_id_8510
-        scene_id: 3
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_003
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/back"
   action:
@@ -3077,12 +2883,9 @@
       entity_id: switch.tv
       state: "off"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 8
-        scene_data: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_008
+      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/robot/on"
   action:
@@ -3096,12 +2899,9 @@
       entity_id: switch.tv
       state: "off"
   trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.remotec_zrc90
-        scene_id: 8
-        scene_data: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+    - platform: state
+      entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_008
+      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/robot/off"
   action:
@@ -3404,12 +3204,9 @@
   trigger:
      - platform: mqtt
        topic: "home/command/alarm/cancel"
-     - platform: event
-       event_type: zwave.scene_activated
-       event_data:
-         entity_id: zwave.remotec_zrc90
-         scene_id: 4
-         scene_data: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+     - platform: state
+       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_004
+       to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
       - service: alarm_control_panel.alarm_disarm
         entity_id: alarm_control_panel.alarm_system
