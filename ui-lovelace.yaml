@@ -2307,15 +2307,12 @@ views:
       - type: entities
         entities:
           - script.repoll_slaves
+          - script.update
         title: Script
       - type: entities
         entities:
           - switch.bathroom_vent
         title: Switch
-      - type: entities
-        entities:
-          - shell_command.update
-        title: update
     icon: 'mdi:cog'
   - path: links
     icon: 'mdi:link'

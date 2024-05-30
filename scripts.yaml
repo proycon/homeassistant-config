@@ -2061,3 +2061,8 @@ send_status:
           data_template:
               topic: "home/lights/hall"
               payload: "{{ states('switch.hall') }}"
+
+update:
+    alias: Git update
+    sequence:
+      - service: shell_command.update
