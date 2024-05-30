@@ -17,33 +17,23 @@ else
     touch "$MODE.lock"
 fi
 
-FLIP=0
-if [ -n "$2" ]; then
-    if [ "$2" = "ON" ] || [ "$2" = "on" ] || [ "$2" = "true" ]; then
-        FLIP=1
-    fi
-fi
+[ -e "$MODE.01.jpg"] && mv -f "$MODE.01.jpg" "$MODE.02.jpg"
 
 if [ "$MODE" = "livingroom" ]; then
     curl -sS "http://$LIVINGROOMCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$LIVINGROOMCAM_USER&pwd=$LIVINGROOMCAM_PASSWORD" -o "tmp.$MODE.jpg"
-    if [ $FLIP -eq 1 ]; then
-        convert -flip -flop "tmp.$MODE.jpg" "_$MODE.jpg"
-    else
-        mv "tmp.$MODE.jpg" "_$MODE.jpg"
-    fi
 elif [ "$MODE" = "street" ]; then
     curl -sS "http://$STREETCAM_USER:$STREETCAM_PASSWORD@$STREETCAM_IP/Streaming/Channels/1/picture" -o "tmp.$MODE.jpg"
-    mv "tmp.$MODE.jpg" "_$MODE.jpg"
 elif [ "$MODE" = "balcony" ]; then
-    curl -sS "http://$BALCONYCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$BALCONYCAM_USER&pwd=$BALCONYCAM_PASSWORD" -o "$DATE.$MODE.jpg"
+    curl -sS "http://$BALCONYCAM_IP:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=$BALCONYCAM_USER&pwd=$BALCONYCAM_PASSWORD" -o "tmp.$MODE.jpg"
 elif [ "$MODE" = "garden" ]; then
-    curl -sS "http://$GARDENCAM_IP/snapshot.cgi?user=$GARDENCAM_USER&pwd=$GARDENCAM_PASSWORD" -o "$DATE.$MODE.jpg"
+    curl -sS "http://$GARDENCAM_IP/snapshot.cgi?user=$GARDENCAM_USER&pwd=$GARDENCAM_PASSWORD" -o "tmp.$MODE.jpg"
 else
     rm "$MODE.lock"
     echo "No such mode: $MODE" >&2
     exit 2
 fi
-
+[ -e "$MODE.00.jpg"] && mv -f "$MODE.00.jpg" "$MODE.01.jpg"
+mv "tmp.$MODE.jpg" "$MODE.00.jpg"
 rm "$MODE.lock"
 
 

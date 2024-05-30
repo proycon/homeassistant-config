@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/homeautomation/homeassistant/snapshots/ || exit 3
+cd /tmp || exit 3
 while [ -f eventsnapshots.lock ]; do
     sleep 1
 done
@@ -23,7 +23,6 @@ mv -f event.3.jpg event.$((NUMCAMS+3)).jpg
 mv -f event.2.jpg event.$((NUMCAMS+2)).jpg
 mv -f event.1.jpg event.$((NUMCAMS+1)).jpg
 NUM=0
-DATE=$(date +%Y-%m-%d_)
 EVENTDATE=$(date +%Y-%m-%d_%H:%M:%S)
 for CAM in ${CAMS[@]}; do
     NUM=$((NUM+1))
@@ -35,7 +34,7 @@ for CAM in ${CAMS[@]}; do
     else
         LENGTH=10
     fi
-    IMAGES=$(find . -maxdepth 1 -name "$DATE*$CAM*jpg" | sort | tail -n $LENGTH)
+    IMAGES=$(find . -maxdepth 1 -name "$CAM.??.jpg" | sort | tail -n $LENGTH)
     echo "$EVENTDATE - $CAM - Event $NUM - Images: $IMAGES">&2
     IMAGEARRAY=($IMAGES)
     FIRSTIMAGE=${IMAGEARRAY[0]}

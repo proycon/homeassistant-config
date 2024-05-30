@@ -146,7 +146,7 @@ shell_command:
     mpcclear: /home/homeautomation/homeassistant/scripts/media/mpcclear.sh
     mpc: "/home/homeautomation/homeassistant/scripts/media/mpc.sh \"{{ type }}\" \"{{ value }}\" \"{{ filter }}\""
     mpcplaylist: "/home/homeautomation/homeassistant/scripts/media/mpcplaylist.sh \"{{ playlist }}\""
-    #event_snapshots: /home/homeautomation/homeassistant/scripts/camera/eventsnapshots.sh "{{ cams }}"
+    event_snapshots: /home/homeautomation/homeassistant/scripts/camera/eventsnapshots.sh "{{ cams }}"
     snapshot_clear_locks: find "/tmp/" -type f -name "*.lock" | xargs rm
     youtube: /home/homeautomation/homeassistant/scripts/media/youtube.sh "{{ mode }}" "{{ url }}" "{{ pi }}"
 
