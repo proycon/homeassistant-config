@@ -7,12 +7,9 @@ Introduction
 ------------
 
 Prior to Home Assistant, I ran my own custom-built home automation software. This got too time consuming to maintain and
-expand so in the summer of 2017 I migrated everything to Home Assistant.
+expand so in the summer of 2017 I migrated everything to Home Assistant. As time went by some of the choices Home Assistant made no longer aligned with mine and I found it too bloated and too GUI-drived, so I started migrating parts back to my new custom-built solution called [lighthome](https://git.sr.ht/~proycon/lighthome). These two now work in tandem and complement another.
 
-I have a main server and various Raspberry Pis distributed through the house (for wiring reasons). One of the challenges
-was getting them to communicate properly with Home Assistant. I decided on simply running a Home Assistant instance on each
-(EventStream solutions did not work properly for me), have the master instance control as much as possible, and the
-slaves as bare as possible, with communication proceeding over MQTT.
+I have a main server and various Raspberry Pis distributed through the house (for wiring reasons). The main server runs home assistant and is the nexus of my home automation (it also runs a small lighthome instance), the raspberry pis and various other clients (even my phone) run lighthome.
 
 Goals
 --------
