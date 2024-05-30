@@ -2309,6 +2309,10 @@ views:
         entities:
           - switch.bathroom_vent
         title: Switch
+      - type: entities
+        entities:
+          - shell_command.update
+        title: update
     icon: 'mdi:cog'
   - path: links
     icon: 'mdi:link'
@@ -2316,18 +2320,6 @@ views:
     cards:
       - type: entities
         entities:
-          - type: weblink
-            url: 'http://192.168.0.12:8080/'
-            name: Kodi Control Interface
-            icon: 'mdi:kodi'
-          - type: weblink
-            url: 'http://mediaserver.anaproy.lxd:6601/iris'
-            name: MPD Control Interface
-            icon: 'mdi:music-box-outline'
-          - type: weblink
-            url: 'http://anaproy.nl:8000/stream.mp3'
-            name: MPD Music Stream
-            icon: 'mdi:play-circle'
           - type: weblink
             url: "http://192.168.3.1"
             name: Wifi Router
@@ -2338,20 +2330,8 @@ views:
             icon: 'mdi:camcorder'
           - type: weblink
             url: 'http://192.168.2.254'
-            name: KPN Router
+            name: WAN Router
             icon: 'mdi:upload-network'
-          - type: weblink
-            url: 'http://mediaserver.anaproy.lxd:8383'
-            name: Syncthing proycon
-            icon: 'mdi:sync'
-          - type: weblink
-            url: 'http://mediaserver.anaproy.lxd:8384'
-            name: Syncthing hans
-            icon: 'mdi:sync'
-          - type: weblink
-            url: 'http://192.168.0.1:8082/'
-            name: Traccar
-            icon: 'mdi:map-marker'
         title: Links
         show_header_toggle: true
 
