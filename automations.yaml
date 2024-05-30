@@ -1064,9 +1064,11 @@
         - condition: state
           entity_id: binary_sensor.anybody_home
           state: "on"
-        - condition: state
-          entity_id: switch.kitchen
-          state: "off"
+        - condition: not
+          conditions:
+          - condition: state
+            entity_id: switch.kitchen
+            state: "on"
   action:
       - service: switch.turn_on
         entity_id: switch.kitchen
@@ -1100,9 +1102,11 @@
         - condition: numeric_state
           entity_id: sensor.nodeid_6_nodeid_6_illuminance
           below: 10
-        - condition: state
-          entity_id: switch.office
-          state: "off"
+        - condition: not
+          conditions:
+          - condition: state
+            entity_id: switch.office
+            state: "on"
   action:
       - service: switch.turn_on
         entity_id: switch.office
@@ -1160,9 +1164,11 @@
         - condition: state
           entity_id: binary_sensor.anybody_home
           state: "on"
-        - condition: state
-          entity_id: switch.hall
-          state: "off"
+        - condition: not
+          conditions:
+          - condition: state
+            entity_id: switch.hall
+            state: "on"
         - condition: or
           conditions:
             - condition: numeric_state
@@ -1658,9 +1664,11 @@
 - id: remote_lights_on
   alias: remote8_lights_on
   condition:
-      - condition: state
-        entity_id: switch.midspots
-        state: "off"
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: switch.midspots
+          state: "on"
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_001
@@ -1674,9 +1682,11 @@
 - id: remote_lights_off
   alias: remote8_lights_off
   condition:
-      - condition: state
-        entity_id: switch.tv_spots
-        state: "on"
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: switch.tv_spots
+          state: "on"
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_001
@@ -1723,9 +1733,11 @@
 - id: remote_fireplace_on
   alias: remote8_fireplace_on
   condition:
-      - condition: state
-        entity_id: switch.technofire
-        state: "off"
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: switch.technofire
+          state: "on"
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_003
@@ -1780,9 +1792,11 @@
 - id: remote_ambilight_cycle
   alias: remote8_ambilight_cycle
   condition:
-      - condition: state
-        entity_id: switch.technofire
-        state: "off"
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: switch.technofire
+          state: "on"
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_003
@@ -2004,9 +2018,11 @@
     - platform: mqtt
       topic: "home/command/lights/bedroom_ambilight/on"
   condition:
-      - condition: state
-        entity_id: switch.bedroom_ambilight
-        state: "off"
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: switch.bedroom_ambilight
+          state: "on"
   action:
      - service: switch.turn_on
        entity_id: switch.bedroom_ambilight
@@ -2032,9 +2048,11 @@
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
       to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
-      - condition: state
-        entity_id: switch.bedroom
-        state: "off"
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: switch.bedroom
+          state: "on"
   action:
       service: switch.turn_on
       entity_id: switch.bedroom
@@ -2077,9 +2095,11 @@
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_003
       to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
-      - condition: state
-        entity_id: switch.bedroom_midspots
-        state: "off"
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: switch.bedroom_midspots
+          state: "on"
   action:
       service: switch.turn_on
       entity_id: switch.bedroom_midspots
@@ -2109,9 +2129,11 @@
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_004
       to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
-      - condition: state
-        entity_id: switch.bedroom_highspots
-        state: "off"
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: switch.bedroom_highspots
+          state: "on"
   action:
       service: switch.turn_on
       entity_id: switch.bedroom_highspots
@@ -2139,9 +2161,11 @@
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_008
       to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
-      - condition: state
-        entity_id: switch.balcony
-        state: "off"
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: switch.balcony
+          state: "on"
   action:
       service: switch.turn_on
       entity_id: switch.balcony
