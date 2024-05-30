@@ -861,7 +861,7 @@ views:
                   color: black
                   font-family: Helvetica
               - type: image
-                entity: binary_sensor.bathroom_window_sensor
+                entity: binary_sensor.bathroom_window_bathroom_window_door_state_simple
                 image: /local/icons/closed.png
                 state_image:
                    'on': /local/icons/open.png
@@ -1986,7 +1986,7 @@ views:
                     name: Front Door
                   - entity: binary_sensor.back_door
                     name: Back Door
-                  - entity: binary_sensor.bathroom_window_sensor
+                  - entity: binary_sensor.bathroom_window_bathroom_window_door_state_simple
                     name: Bathroom W.
                   - entity: binary_sensor.bedroom_window_left
                     name: Bedroom Left

@@ -90,7 +90,7 @@ logbook:
         - binary_sensor.back_door
         - binary_sensor.bedroom_window_left
         - binary_sensor.bedroom_window_right
-        - binary_sensor.bathroom_window_sensor
+        - binary_sensor.bathroom_window_bathroom_window_door_state_simple
         - binary_sensor.roof_window_east
         - binary_sensor.roof_window_west
         - binary_sensor.doorbell
@@ -495,8 +495,8 @@ sensor:
             friendly_name: Last movement bedroom window right
             value_template: "{{ states.binary_sensor.bedroom_window_right.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
           last_movement_bathroom_window:
-            friendly_name: Last movement bathroom_window_sensor
-            value_template: "{{ states.binary_sensor.bathroom_window_sensor.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+            friendly_name: Last movement bathroom_window_bathroom_window_door_state_simple
+            value_template: "{{ states.binary_sensor.bathroom_window_bathroom_window_door_state_simple.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
           last_movement_roof_window_east:
             friendly_name: Last movement roof window east
             value_template: "{{ states.binary_sensor.dakraam_oost_sensor.last_updated.astimezone().strftime('%a %H:%M:%S') }}"

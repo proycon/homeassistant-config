@@ -12,7 +12,7 @@ default_view:
         - binary_sensor.back_door
         - binary_sensor.bedroom_window_left
         - binary_sensor.bedroom_window_right
-        - binary_sensor.bathroom_window_sensor
+        - binary_sensor.bathroom_window_bathroom_window_door_state_simple
         - binary_sensor.jaiko_crated
         - binary_sensor.noise
         - sensor.temperature_living_room
@@ -118,7 +118,7 @@ camera_view:
         - binary_sensor.back_door
         - binary_sensor.bedroom_window_left
         - binary_sensor.bedroom_window_right
-        - binary_sensor.bathroom_window_sensor
+        - binary_sensor.bathroom_window_bathroom_window_door_state_simple
         - camera.jaikocam_live
         - camera.garden_live
         - camera.hall_upstairs
@@ -149,7 +149,7 @@ doors_and_windows:
         - binary_sensor.back_door
         - binary_sensor.bedroom_window_left
         - binary_sensor.bedroom_window_right
-        - binary_sensor.bathroom_window_sensor
+        - binary_sensor.bathroom_window_bathroom_window_door_state_simple
 
 outside_environment:
     name: Outside Environment

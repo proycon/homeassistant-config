@@ -1981,7 +1981,7 @@ send_status:
         - service: mqtt.publish
           data_template:
               topic: "home/binary_sensor/bathroom_window_sensor"
-              payload: "{{ states('binary_sensor.bathroom_window_sensor') }}"
+              payload: "{{ states('binary_sensor.bathroom_window_bathroom_window_door_state_simple') }}"
         - service: mqtt.publish
           data_template:
               topic: "home/binary_sensor/bedroomwindow_right"

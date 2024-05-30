@@ -582,7 +582,7 @@
       from: 'off'
       to: 'on'
     - platform: state
-      entity_id: binary_sensor.bathroom_window_sensor
+      entity_id: binary_sensor.bathroom_window_bathroom_window_door_state_simple
       from: 'off'
       to: 'on'
   action:
@@ -616,7 +616,7 @@
       entity_id: binary_sensor.bedroom_window_right
       to: 'on'
     - platform: state
-      entity_id: binary_sensor.bathroom_window_sensor
+      entity_id: binary_sensor.bathroom_window_bathroom_window_door_state_simple
       to: 'on'
   condition:
     - condition: and
