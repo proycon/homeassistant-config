@@ -1449,7 +1449,7 @@
   trigger:
      - platform: state
        entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_001
-       to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+       to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       condition: and
       conditions:
@@ -1664,7 +1664,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_001
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/on"
   action:
@@ -1680,13 +1680,13 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_001
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_007
-      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_008
-      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/off"
   action:
@@ -1698,10 +1698,10 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_002
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_007
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/night"
   action:
@@ -1713,7 +1713,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_002
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/evening"
   action:
@@ -1729,10 +1729,10 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_003
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_007
-      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/fireplace/on"
   action:
@@ -1768,7 +1768,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_003
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/fireplace/off"
   action:
@@ -1786,7 +1786,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_003
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/ambilight/on"
   action:
@@ -1828,7 +1828,7 @@
       topic: "home/command/lights/office/off"
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
       service: switch.turn_off
       entity_id: switch.office
@@ -1975,7 +1975,7 @@
       topic: "home/command/lights/hall/off"
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
       service: switch.turn_off
       entity_id: switch.hall
@@ -2000,7 +2000,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/bedroom_ambilight/on"
   condition:
@@ -2015,7 +2015,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/lights/bedroom_ambilight/off"
   condition:
@@ -2030,7 +2030,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom
@@ -2043,7 +2043,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_007
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom
@@ -2075,7 +2075,7 @@
       topic: "home/command/lights/bedroom_midspots/on"
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_003
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom_midspots
@@ -2091,7 +2091,7 @@
       topic: "home/command/lights/bedroom_midspots/off"
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_003
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom_midspots
@@ -2107,7 +2107,7 @@
       topic: "home/command/lights/bedroom_highspots/on"
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_004
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom_highspots
@@ -2123,7 +2123,7 @@
       topic: "home/command/lights/bedroom_highspots/off"
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_004
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.bedroom_highspots
@@ -2137,7 +2137,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_008
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.balcony
@@ -2150,7 +2150,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_008
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   condition:
       - condition: state
         entity_id: switch.balcony
@@ -2180,10 +2180,10 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_005
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_002
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/media/tv"
   action:
@@ -2246,10 +2246,10 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_005
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_008
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/mute"
   action:
@@ -2261,10 +2261,10 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_005
-      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_008
-      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/media/off"
   action:
@@ -2285,7 +2285,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_008
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/kodi/on"
   action:
@@ -2382,10 +2382,10 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_006
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_004
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/media/music"
   action:
@@ -2397,7 +2397,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_006
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/media/music2"
     - platform: mqtt
@@ -2411,7 +2411,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_006
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music2/off"
   action:
@@ -2425,10 +2425,10 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_006
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_004
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/off"
   action:
@@ -2446,10 +2446,10 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_006
-      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_004
-      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/load"
   action:
@@ -2473,13 +2473,13 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_006
-      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_007
-      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_002
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/next"
   action:
@@ -2503,7 +2503,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_002
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/next"
   action:
@@ -2527,10 +2527,10 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_007
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_006
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/previous"
   action:
@@ -2554,7 +2554,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_bedroom_remote_bedroom_scene_state_scene_001
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/previous"
   action:
@@ -2569,10 +2569,10 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_007
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_002
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/next"
   action:
@@ -2595,7 +2595,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_002
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/right"
   action:
@@ -2614,7 +2614,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_003
-      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tv/on"
   action:
@@ -2633,7 +2633,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_006
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/left"
   action:
@@ -2652,7 +2652,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_006
-      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/on"
   action:
@@ -2667,7 +2667,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_005
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/up"
   action:
@@ -2690,7 +2690,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_001
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/down"
   action:
@@ -2713,10 +2713,10 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_006
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_007
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/previous"
   action:
@@ -2739,7 +2739,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_001
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/volup"
   action:
@@ -2756,7 +2756,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_005
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/voldown"
   action:
@@ -2773,7 +2773,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_003
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/pause"
   action:
@@ -2802,7 +2802,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_003
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/pauseplay"
   action:
@@ -2823,7 +2823,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_003
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/music/pauseplay"
   action:
@@ -2838,7 +2838,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_003
-      to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/ok"
   action:
@@ -2861,7 +2861,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_front_room_remote_front_room_scene_state_scene_003
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/tvdecoder/back"
   action:
@@ -2885,7 +2885,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_008
-      to: 0 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '0' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/robot/on"
   action:
@@ -2901,7 +2901,7 @@
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_008
-      to: 3 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+      to: '3' #0 = single press, 2 = continued press, 1 = release, 3 = double press
     - platform: mqtt
       topic: "home/command/robot/off"
   action:
@@ -3206,7 +3206,7 @@
        topic: "home/command/alarm/cancel"
      - platform: state
        entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_004
-       to: 2 #0 = single press, 2 = continued press, 1 = release, 3 = double press
+       to: '2' #0 = single press, 2 = continued press, 1 = release, 3 = double press
   action:
       - service: alarm_control_panel.alarm_disarm
         entity_id: alarm_control_panel.alarm_system
