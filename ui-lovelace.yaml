@@ -2277,9 +2277,12 @@ views:
           - sensor.nodeid_2_nodeid_2_battery_level
           - sensor.nodeid_7_nodeid_7_battery_level
           - sensor.nodeid_12_nodeid_12_battery_level
+          - sensor.remote_livingroom_remote_livingroom_battery_level
+          - sensor.remote_front_room_remote_front_room_battery_level
+          - sensor.remote_bedroom_remote_bedroom_battery_level
+          - sensor.bathroom_window_bathroom_window_battery_level
+          - sensor.nodeid_16_nodeid_16_battery_level
           - sensor.bathroom_humidity_battery
-          - sensor.bathroom_window_battery
-          - sensor.downstairs_remote_battery
         title: Battery Stats
         show_header_toggle: true
       - type: entities
