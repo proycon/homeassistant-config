@@ -1186,13 +1186,11 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.pir_hall
-      from: "on"
       to: "off"
       for:
           seconds: 90
     - platform: state
       entity_id: binary_sensor.pir_overloop
-      from: "on"
       to: "off"
       for:
           seconds: 90
