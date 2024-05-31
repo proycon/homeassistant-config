@@ -1197,12 +1197,16 @@
       for:
           seconds: 90
   condition:
-      - condition: state
-        entity_id: binary_sensor.front_door
-        state: "off"
-      - condition: state
-        entity_id: binary_sensor.pir_hall
-        state: "off"
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.front_door
+          state: "on"
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.pir_hall
+          state: "on"
   action:
       - service: switch.turn_off
         entity_id: switch.hall
