@@ -1666,11 +1666,9 @@
 - id: remote_lights_on
   alias: remote8_lights_on
   condition:
-      - condition: not
-        conditions:
-        - condition: state
-          entity_id: switch.midspots
-          state: "on"
+      - condition: state
+        entity_id: switch.tv_spots
+        state: "off"
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_001
@@ -1684,11 +1682,9 @@
 - id: remote_lights_off
   alias: remote8_lights_off
   condition:
-      - condition: not
-        conditions:
-        - condition: state
-          entity_id: switch.tv_spots
-          state: "on"
+      - condition: state
+        entity_id: switch.tv_spots
+        state: "on"
   trigger:
     - platform: state
       entity_id: sensor.remote_livingroom_remote_livingroom_scene_state_scene_001
