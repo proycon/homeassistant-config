@@ -706,7 +706,7 @@ mqtt:
       unique_id: back_corner
       name: Back Corner
       state_topic: "home/433send/get/elro/31/C"
-      command_topic: "home/433send/set/pi2/elro/31/C"
+      command_topic: "home/433send/set/pi1/elro/31/C"
   - switch:
       unique_id: kitchen
       name: Kitchen
