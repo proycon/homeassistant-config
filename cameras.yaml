@@ -5,18 +5,6 @@
       name: Street
       file_path: /tmp/street.00.jpg
     - platform: local_file
-      name: Balcony
-      file_path: /tmp/balcony.00.jpg
-    - platform: local_file
-      name: Front door
-      file_path: /tmp/frontdoor.00.jpg
-    - platform: local_file
-      name: Hall upstairs
-      file_path: /tmp/hallupstairs.00.jpg
-    - platform: local_file
-      name: Garden
-      file_path: /tmp/garden.00.jpg
-    - platform: local_file
       name: Event 1
       file_path: /tmp/event.1.jpg
     - platform: local_file
@@ -49,6 +37,6 @@
     - platform: local_file
       name: Event 11
       file_path: /tmp/event.11.jpg
-    - platform: local_file
+    - platform: local_file 
       name: Event 12
       file_path: /tmp/event.12.jpg
