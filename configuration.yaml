@@ -881,10 +881,6 @@ media_player yamaha_receiver:
         HDMI1: "TV Decoder"
         HDMI2: "Pi1"
 
-media_player mpd:
-  - platform: mpd
-    host: !secret mpd_host
-
 #media_player kodi:
 #- platform: kodi
 #name: Kodi
