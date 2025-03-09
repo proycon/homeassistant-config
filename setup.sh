@@ -12,7 +12,10 @@ if [ ! -d "$HADIR/env" ]; then
 fi
 
 . env/bin/activate
-#pip install wheel psycopg2 numpy scipy vext vext.gi
+#pip install wheel psycopg2-binary vext vext.gi
+
+#be a bit less strict for some modules
+export CFLAGS="-Wno-int-conversion"
 
 if [ -n "$HASS_VERSION" ]; then
     echo "Installing explicit HASS version: $HASS_VERSION"
