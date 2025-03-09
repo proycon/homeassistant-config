@@ -818,7 +818,7 @@ doorbell_sound:
       - service: mqtt.publish
         data_template:
             topic: "home/sound/everywhere"
-            payload_template: 'doorbell.ogg'
+            payload: 'doorbell.ogg'
 dog_sound:
     alias: Dog sound
     sequence:
@@ -877,7 +877,7 @@ ignite_fireplace:
       - service: mqtt.publish
         data_template:
             topic: "home/technofire/pi3/jsonset"
-            payload_template: '{"scene":"{{ states.input_select.fireplace.state.replace(" ","_") |lower }}","brightness":"{{ states.input_number.fireplace_brightness.state|int }}"}'
+            payload: '{"scene":"{{ states.input_select.fireplace.state.replace(" ","_") |lower }}","brightness":"{{ states.input_number.fireplace_brightness.state|int }}"}'
 extinguish_fireplace:
     alias: Extinguish Fireplace
     sequence:
@@ -891,7 +891,7 @@ ignite_dresser_ambilight:
       - service: mqtt.publish
         data_template:
             topic: "home/technofire/pi2/jsonset"
-            payload_template: '{"scene":"{{ states.input_select.dresser_ambilight.state.replace(" ","_") |lower }}","brightness":"{{ states.input_number.dresser_ambilight_brightness.state|int }}"}'
+            payload: '{"scene":"{{ states.input_select.dresser_ambilight.state.replace(" ","_") |lower }}","brightness":"{{ states.input_number.dresser_ambilight_brightness.state|int }}"}'
 extinguish_dresser_ambilight:
     alias: Extinguish dresser ambilight
     sequence:
@@ -905,7 +905,7 @@ ignite_bedroom_ambilight:
       - service: mqtt.publish
         data_template:
             topic: "home/technofire/pi4/jsonset"
-            payload_template: '{"scene":"{{ states.input_select.bedroom_ambilight.state.replace(" ","_") |lower }}","brightness":"{{ states.input_number.bedroom_ambilight_brightness.state|int }}"}'
+            payload: '{"scene":"{{ states.input_select.bedroom_ambilight.state.replace(" ","_") |lower }}","brightness":"{{ states.input_number.bedroom_ambilight_brightness.state|int }}"}'
 extinguish_bedroom_ambilight:
     alias: Extinguish bedroom ambilight
     sequence:
@@ -1079,7 +1079,7 @@ videoplayer:
         - service: mqtt.publish
           data_template:
             topic: "home/sound/pi1"
-            payload_template: 'computerbeep_5.wav'
+            payload: 'computerbeep_5.wav'
         - service: media_player.turn_on
           entity_id: media_player.yamaha_receiver
         - service: switch.turn_off
@@ -1128,7 +1128,7 @@ turn_media_off:
     - service: mqtt.publish
       data_template:
         topic: "home/sound/pi1"
-        payload_template: 'computerbeep_5.wav'
+        payload: 'computerbeep_5.wav'
     - delay:
         seconds: 1
     - service: switch.turn_off
@@ -1220,7 +1220,7 @@ media_centre_bedroom:
         - service: mqtt.publish
           data_template:
             topic: "home/sound/pi2"
-            payload_template: 'computerbeep_5.wav'
+            payload: 'computerbeep_5.wav'
         - service: switch.turn_on
           entity_id: switch.tv_bedroom
         - service: switch.turn_off
@@ -1240,7 +1240,7 @@ videoplayer_bedroom:
         - service: mqtt.publish
           data_template:
             topic: "home/sound/pi2"
-            payload_template: 'computerbeep_5.wav'
+            payload: 'computerbeep_5.wav'
         - service: switch.turn_on
           entity_id: switch.tv_bedroom
         - service: switch.turn_off
@@ -1254,7 +1254,7 @@ desktop_bedroom:
         - service: mqtt.publish
           data_template:
             topic: "home/sound/pi2"
-            payload_template: 'computerbeep_5.wav'
+            payload: 'computerbeep_5.wav'
         - service: switch.turn_on
           entity_id: switch.tv_bedroom
         - service: switch.turn_off
@@ -1273,7 +1273,7 @@ turn_media_off_bedroom:
     - service: mqtt.publish
       data_template:
         topic: "home/sound/pi2"
-        payload_template: 'computerbeep_5.wav'
+        payload: 'computerbeep_5.wav'
     - service: switch.turn_off
       entity_id: switch.tv_bedroom
     - service: switch.turn_off
@@ -1317,26 +1317,26 @@ green_lights:
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi2/jsonset"
-              payload_template: '{"scene":"green_notice","brightness":"255","iterations":"5"}'
+              payload: '{"scene":"green_notice","brightness":"255","iterations":"5"}'
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi3/jsonset"
-              payload_template: '{"scene":"green_notice","brightness":"255","iterations":"5"}'
+              payload: '{"scene":"green_notice","brightness":"255","iterations":"5"}'
 yellow_lights:
      alias: Yellow Lights
      sequence:
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi2/jsonset"
-              payload_template: '{"scene":"yellow_notice","brightness":"255","iterations":"5"}'
+              payload: '{"scene":"yellow_notice","brightness":"255","iterations":"5"}'
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi3/jsonset"
-              payload_template: '{"scene":"yellow_notice","brightness":"255","iterations":"5"}'
+              payload: '{"scene":"yellow_notice","brightness":"255","iterations":"5"}'
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi4/jsonset"
-              payload_template: '{"scene":"yellow_notice","brightness":"255","iterations":"5"}'
+              payload: '{"scene":"yellow_notice","brightness":"255","iterations":"5"}'
 
 blue_lights:
      alias: Blue Lights
@@ -1344,7 +1344,7 @@ blue_lights:
         - service: mqtt.publish
           data_template:
               topic: "home/technofire/pi2/jsonset"
-              payload_template: '{"scene":"blue_notice","brightness":"255","iterations":"5"}'
+              payload: '{"scene":"blue_notice","brightness":"255","iterations":"5"}'
 
 
 alarm_lights:
@@ -1353,15 +1353,15 @@ alarm_lights:
       - service: mqtt.publish
         data_template:
             topic: "home/technofire/pi2/jsonset"
-            payload_template: '{"scene":"redalert","brightness":"255","iterations":"0"}'
+            payload: '{"scene":"redalert","brightness":"255","iterations":"0"}'
       - service: mqtt.publish
         data_template:
             topic: "home/technofire/pi3/jsonset"
-            payload_template: '{"scene":"redalert","brightness":"255","iterations":"0"}'
+            payload: '{"scene":"redalert","brightness":"255","iterations":"0"}'
       - service: mqtt.publish
         data_template:
             topic: "home/technofire/pi4/jsonset"
-            payload_template: '{"scene":"redalert","brightness":"255","iterations":"0"}'
+            payload: '{"scene":"redalert","brightness":"255","iterations":"0"}'
 
 reset_fireplace:
      alias: Reset Fireplace
@@ -1407,7 +1407,7 @@ wake_up_alarm:
         - service: mqtt.publish
           data_template:
                 topic: "home/sound/pi2"
-                payload_template: 'morningbells_long.ogg'
+                payload: 'morningbells_long.ogg'
         - delay:
            minutes: 45
         - service: switch.turn_off
@@ -1473,7 +1473,7 @@ night_scene:
       - service: mqtt.publish
         data_template:
           topic: "home/sound/pi1"
-          payload_template: 'computerbeep_5.wav'
+          payload: 'computerbeep_5.wav'
       - service: switch.turn_on
         entity_id: switch.tv_spots
       - delay: "00:00:01"
