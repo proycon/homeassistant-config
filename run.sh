@@ -24,4 +24,7 @@ fi
 
 . "$HADIR/env/bin/activate"
 
+#be a bit less strict for some modules
+export CFLAGS="-Wno-int-conversion"
+
 hass -c "$HADIR"
