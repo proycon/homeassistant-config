@@ -689,10 +689,10 @@ mqtt:
       name: Office
       state_topic: "home/lights/office"
       command_topic: "home/command/lights/office"
-      payload_on: on
-      payload_off: off
-      state_on: on
-      state_off: off
+      payload_on: "on"
+      payload_off: "off"
+      state_on: "on"
+      state_off: "off"
   - switch:
       unique_id: front_room
       name: Front Room
@@ -703,19 +703,19 @@ mqtt:
       name: Midspots
       state_topic: "home/lights/midspots"
       command_topic: "home/command/lights/midspots"
-      payload_on: on
-      payload_off: off
-      state_on: on
-      state_off: off
+      payload_on: "on"
+      payload_off: "off"
+      state_on: "on"
+      state_off: "off"
   - switch:
       unique_id: back_room
       name: Back room
       state_topic: "home/lights/back_room"
       command_topic: "home/command/lights/back_room"
-      payload_on: on
-      payload_off: off
-      state_on: on
-      state_off: off
+      payload_on: "on"
+      payload_off: "off"
+      state_on: "on"
+      state_off: "off"
   - switch:
       unique_id: back_corner
       name: Back Corner
