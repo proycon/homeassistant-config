@@ -697,8 +697,8 @@ mqtt:
   - switch:
       unique_id: midspots
       name: Midspots
-      state_topic: "home/433send/get/elro/31/B"
-      command_topic: "home/433send/set/pi2/elro/31/B"
+      state_topic: "home/lights/midspots"
+      command_topic: "home/command/lights/midspots"
   - switch:
       unique_id: back_room
       name: Back room
