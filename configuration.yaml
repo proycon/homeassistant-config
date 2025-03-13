@@ -722,8 +722,13 @@ mqtt:
   - switch:
       unique_id: back_corner
       name: Back Corner
-      state_topic: "home/433send/get/elro/31/C"
-      command_topic: "home/433send/set/pi1/elro/31/C"
+      state_topic: "home/lights/back_corner"
+      command_topic: "home/command/lights/back_corner"
+      value_template: “{% if value == on %}on{% else %}off{% endif %}”
+      payload_on: "on"
+      payload_off: "off"
+      state_on: "on"
+      state_off: "off"
   - switch:
       unique_id: kitchen
       name: Kitchen
@@ -749,8 +754,13 @@ mqtt:
   - switch:
       unique_id: hall
       name: Hall
-      state_topic: "home/433send/get/elro/15/B"
-      command_topic: "home/433send/set/pi1/elro/15/B"
+      state_topic: "home/lights/hall"
+      command_topic: "home/command/lights/hall"
+      value_template: “{% if value == on %}on{% else %}off{% endif %}”
+      payload_on: "on"
+      payload_off: "off"
+      state_on: "on"
+      state_off: "off"
   - switch:
       unique_id: roof
       name: Roof
