@@ -699,6 +699,8 @@ mqtt:
       name: Midspots
       state_topic: "home/lights/midspots"
       command_topic: "home/command/lights/midspots"
+      payload_on: on
+      payload_off: off
   - switch:
       unique_id: back_room
       name: Back room
