@@ -689,6 +689,7 @@ mqtt:
       name: Office
       state_topic: "home/lights/office"
       command_topic: "home/command/lights/office"
+      value_template: “{% if value == on %}on{% else %}off{% endif %}”
       payload_on: "on"
       payload_off: "off"
       state_on: "on"
@@ -703,6 +704,7 @@ mqtt:
       name: Midspots
       state_topic: "home/lights/midspots"
       command_topic: "home/command/lights/midspots"
+      value_template: “{% if value == on %}on{% else %}off{% endif %}”
       payload_on: "on"
       payload_off: "off"
       state_on: "on"
@@ -712,6 +714,7 @@ mqtt:
       name: Back room
       state_topic: "home/lights/back_room"
       command_topic: "home/command/lights/back_room"
+      value_template: “{% if value == on %}on{% else %}off{% endif %}”
       payload_on: "on"
       payload_off: "off"
       state_on: "on"
