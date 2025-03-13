@@ -687,8 +687,12 @@ mqtt:
   - switch:
       unique_id: office
       name: Office
-      state_topic: "home/433send/get/elro/15/A"
-      command_topic: "home/433send/set/pi2/elro/15/A"
+      state_topic: "home/lights/office"
+      command_topic: "home/command/lights/office"
+      payload_on: on
+      payload_off: off
+      state_on: on
+      state_off: off
   - switch:
       unique_id: front_room
       name: Front Room
@@ -701,11 +705,17 @@ mqtt:
       command_topic: "home/command/lights/midspots"
       payload_on: on
       payload_off: off
+      state_on: on
+      state_off: off
   - switch:
       unique_id: back_room
       name: Back room
-      state_topic: "home/433send/get/elro/31/A"
-      command_topic: "home/433send/set/pi2/elro/31/A"
+      state_topic: "home/lights/back_room"
+      command_topic: "home/command/lights/back_room"
+      payload_on: on
+      payload_off: off
+      state_on: on
+      state_off: off
   - switch:
       unique_id: back_corner
       name: Back Corner
