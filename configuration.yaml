@@ -732,15 +732,17 @@ mqtt:
   - switch:
       unique_id: garden
       name: Garden
-      state_topic: "home/433send/get/elro/23/A"
-      command_topic: "home/433send/set/pi2/elro/23/A"
+      state_topic: "home/lights/garden"
+      command_topic: "home/command/lights/garden"
+      state_on: "on"
+      state_off: "off"
   - switch: 
       unique_id: balcony
       name: Balcony
-      state_topic: "home/433send/get/newkaku/121/9"
-      command_topic: "home/433send/set/pi2/newkaku/121/9"
-      #state_topic: "home/elro/get/23/2"
-      #command_topic: "home/elro/set/pi2/23/2"
+      state_topic: "home/lights/balcony"
+      command_topic: "home/command/lights/balcony"
+      state_on: "on"
+      state_off: "off"
   - switch:
       unique_id: hall
       name: Hall
@@ -758,8 +760,10 @@ mqtt:
   - switch:
       unique_id: porch
       name: Porch
-      state_topic: "home/433send/get/oldkaku/M/11"
-      command_topic: "home/433send/set/pi1/oldkaku/M/11"
+      state_topic: "home/lights/porch"
+      command_topic: "home/command/lights/porch"
+      state_on: "on"
+      state_off: "off"
   - switch:
       unique_id: bathroom_vent
       name: Bathroom Vent
