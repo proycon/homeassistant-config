@@ -684,9 +684,6 @@ mqtt:
       name: TV Spots
       state_topic: "home/lights/tv_spots"
       command_topic: "home/command/lights/tv_spots"
-      value_template: “{% if value == "on" %}ON{% else %}OFF{% endif %}”
-      payload_on: "on"
-      payload_off: "off"
       state_on: "on"
       state_off: "off"
   - switch:
@@ -694,9 +691,6 @@ mqtt:
       name: Office
       state_topic: "home/lights/office"
       command_topic: "home/command/lights/office"
-      value_template: “{% if value == "on" %}ON{% else %}OFF{% endif %}”
-      payload_on: "on"
-      payload_off: "off"
       state_on: "on"
       state_off: "off"
   - switch:
@@ -709,9 +703,6 @@ mqtt:
       name: Midspots
       state_topic: "home/lights/midspots"
       command_topic: "home/command/lights/midspots"
-      value_template: “{% if value == on %}ON{% else %}OFF{% endif %}”
-      payload_on: "on"
-      payload_off: "off"
       state_on: "on"
       state_off: "off"
   - switch:
@@ -719,17 +710,13 @@ mqtt:
       name: Back room
       state_topic: "home/lights/back_room"
       command_topic: "home/command/lights/back_room"
-      value_template: “{% if value == "on" %}on{% else %}off{% endif %}”
-      payload_on: "on"
-      payload_off: "off"
+      state_on: "on"
+      state_off: "off"
   - switch:
       unique_id: back_corner
       name: Back Corner
       state_topic: "home/lights/back_corner"
       command_topic: "home/command/lights/back_corner"
-      value_template: “{% if value == on %}on{% else %}off{% endif %}”
-      payload_on: "on"
-      payload_off: "off"
       state_on: "on"
       state_off: "off"
   - switch:
@@ -759,9 +746,6 @@ mqtt:
       name: Hall
       state_topic: "home/lights/hall"
       command_topic: "home/command/lights/hall"
-      value_template: “{% if value == on %}on{% else %}off{% endif %}”
-      payload_on: "on"
-      payload_off: "off"
       state_on: "on"
       state_off: "off"
   - switch:
