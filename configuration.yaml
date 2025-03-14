@@ -696,8 +696,10 @@ mqtt:
   - switch:
       unique_id: front_room
       name: Front Room
-      state_topic: "home/433send/get/oldkaku/M/10"
-      command_topic: "home/433send/set/pi1/oldkaku/M/10"
+      state_topic: "home/lights/front_room"
+      command_topic: "home/command/lights/front_room"
+      state_on: "on"
+      state_off: "off"
   - switch:
       unique_id: midspots
       name: Midspots
