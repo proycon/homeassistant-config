@@ -729,8 +729,10 @@ mqtt:
   - switch:
       unique_id: bedroom
       name: Bedroom
-      state_topic: "home/433send/get/elro/15/C"
-      command_topic: "home/433send/set/pi2/elro/15/C"
+      state_topic: "home/lights/bedroom"
+      command_topic: "home/command/lights/bedroom"
+      state_on: "on"
+      state_off: "off"
   - switch:
       unique_id: garden
       name: Garden
