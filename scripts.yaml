@@ -94,7 +94,7 @@ avr_mute:
       - service: media_player.volume_mute
         entity_id: media_player.yamaha_receiver
         data_template:
-           muted: '{{ not states.media_player.yamaha_receiver.attributes.is_volume_muted }}'
+           is_volume_muted: '{{ not states.media_player.yamaha_receiver.attributes.is_volume_muted }}'
 
 avr_power:
     alias: Power (AVR) #replace with switch?
