@@ -424,155 +424,120 @@ sensor:
 
 template:
   - binary_sensor:
-     - anybody_connected:
-          default_entity_id: binary_sensor.anybody_connected
-          friendly_name: "Anybody connected?"
-          state: '{% if is_state("binary_sensor.proycon_connected","on") or is_state("binary_sensor.hans_connected","on") or is_state("binary_sensor.guest_connected","on") %}True{% else %}False{% endif %}'
-          device_class: occupancy
-     - guest_connected:
-          default_entity_id: binary_sensor.guest_connected
-          friendly_name: "Guest connected?"
-          state: '{% if is_state("device_tracker.chris","home") or is_state("device_tracker.erik","home") or is_state("device_tracker.patrick","home") or is_state("device_tracker.netty","home") or is_state("device_tracker.jan","home") or is_state("device_tracker.patrick","home") or is_state("device_tracker.cora","home") %}True{% else %}False{% endif %}'
-          device_class: occupancy
-     - proycon_connected:
-          default_entity_id: binary_sensor.proycon_connected
-          friendly_name: "Proycon connected?"
-          state: '{% if is_state("device_tracker.proyphone","home") or is_state("device_tracker.pinephone","home") %}True{% else %}False{% endif %}'
-          device_class: occupancy
-     - hans_connected:
-          default_entity_id: binary_sensor.hans_connected
-          friendly_name: "Hans connected?"
-          state: '{% if is_state("device_tracker.hansphone","home") or is_state("device_tracker.d0_49_7c_3e_a1_4b", "home") %}True{% else %}False{% endif %}'
-          device_class: occupancy
-     - anydoor:
-          default_entity_id: binary_sensor.anydoor
-          state: '{% if is_state("binary_sensor.back_door","on") or is_state("binary_sensor.front_door","on") %}True{% else %}False{% endif %}'
-     - anybody_home:
-         default_entity_id: binary_sensor.anybody_home
-         friendly_name: "Anybody home?"
-         state: '{% if is_state("input_boolean.proycon_home","on") or is_state("input_boolean.hans_home","on") or is_state("input_boolean.guest_home","on") %}True{% else %}False{% endif %}'
-         device_class: occupancy
-     - pir_kitchen:
-         default_entity_id: binary_sensor.pir_kitchen
-         friendly_name: "PIR Kitchen"
-         state: '{{ is_state("binary_sensor.nodeid_2_nodeid_2_motion_sensor_status", "on") }}'
-         device_class: motion
-     - pir_hall:
-         default_entity_id: binary_sensor.pir_hall
-         friendly_name: "PIR Hall"
-         state: '{{ is_state("binary_sensor.nodeid_7_nodeid_7_motion_sensor_status", "on")  }}'
-         device_class: motion
-     - pir_office:
-         default_entity_id: binary_sensor.pir_office
-         friendly_name: "PIR Office"
-         state: '{{ is_state("binary_sensor.nodeid_6_nodeid_6_motion_sensor_status", "on")  }}'
-         device_class: motion
-     - pir_overloop:
-         default_entity_id: binary_sensor.pir_overloop
-         friendly_name: "PIR Overloop"
-         state: '{{ is_state("binary_sensor.nodeid_12_nodeid_12_motion_sensor_status", "on") }}'
-         device_class: motion
-     - bathroom_too_humid:
-         default_entity_id: binary_sensor.bathroom_too_humid
-         friendly_name: "Bathroom too humid"
-         state: '{{ states("sensor.bathroom_sensor_relative_humidity") | float > 75.0 }}'
+     - default_entity_id: binary_sensor.anybody_connected
+       friendly_name: "Anybody connected?"
+       state: '{% if is_state("binary_sensor.proycon_connected","on") or is_state("binary_sensor.hans_connected","on") or is_state("binary_sensor.guest_connected","on") %}True{% else %}False{% endif %}'
+       device_class: occupancy
+     - default_entity_id: binary_sensor.guest_connected
+       friendly_name: "Guest connected?"
+       state: '{% if is_state("device_tracker.chris","home") or is_state("device_tracker.erik","home") or is_state("device_tracker.patrick","home") or is_state("device_tracker.netty","home") or is_state("device_tracker.jan","home") or is_state("device_tracker.patrick","home") or is_state("device_tracker.cora","home") %}True{% else %}False{% endif %}'
+       device_class: occupancy
+     - default_entity_id: binary_sensor.proycon_connected
+       friendly_name: "Proycon connected?"
+       state: '{% if is_state("device_tracker.proyphone","home") or is_state("device_tracker.pinephone","home") %}True{% else %}False{% endif %}'
+       device_class: occupancy
+     - default_entity_id: binary_sensor.hans_connected
+       friendly_name: "Hans connected?"
+       state: '{% if is_state("device_tracker.hansphone","home") or is_state("device_tracker.d0_49_7c_3e_a1_4b", "home") %}True{% else %}False{% endif %}'
+       device_class: occupancy
+     - default_entity_id: binary_sensor.anydoor
+       state: '{% if is_state("binary_sensor.back_door","on") or is_state("binary_sensor.front_door","on") %}True{% else %}False{% endif %}'
+     - default_entity_id: binary_sensor.anybody_home
+       friendly_name: "Anybody home?"
+       state: '{% if is_state("input_boolean.proycon_home","on") or is_state("input_boolean.hans_home","on") or is_state("input_boolean.guest_home","on") %}True{% else %}False{% endif %}'
+       device_class: occupancy
+     - default_entity_id: binary_sensor.pir_kitchen
+       friendly_name: "PIR Kitchen"
+       state: '{{ is_state("binary_sensor.nodeid_2_nodeid_2_motion_sensor_status", "on") }}'
+       device_class: motion
+     - default_entity_id: binary_sensor.pir_hall
+       friendly_name: "PIR Hall"
+       state: '{{ is_state("binary_sensor.nodeid_7_nodeid_7_motion_sensor_status", "on")  }}'
+       device_class: motion
+     - default_entity_id: binary_sensor.pir_office
+       friendly_name: "PIR Office"
+       state: '{{ is_state("binary_sensor.nodeid_6_nodeid_6_motion_sensor_status", "on")  }}'
+       device_class: motion
+     - default_entity_id: binary_sensor.pir_overloop
+       friendly_name: "PIR Overloop"
+       state: '{{ is_state("binary_sensor.nodeid_12_nodeid_12_motion_sensor_status", "on") }}'
+       device_class: motion
+     - default_entity_id: binary_sensor.bathroom_too_humid
+       friendly_name: "Bathroom too humid"
+       state: '{{ states("sensor.bathroom_sensor_relative_humidity") | float > 75.0 }}'
   - sensor:
-    - wake_up_time:
-        default_entity_id: sensor.wake_up_time
-        friendly_name: 'Wake up Time'
-        state: '{{ "%0.02d:%0.02d" | format(states("input_number.wake_up_hour") | int, states("input_number.wake_up_minutes") | int) }}'
-    - wake_up_relative_time:
-        default_entity_id: sensor.wake_up_relative_time
-        friendly_name: Wake up relative time #seconds after wake up time
-        state: "{{ states.sensor.time.state[:2]|int * 60  + states.sensor.time.state[2:4]|int  - states.sensor.wake_up_time.state[:2]|int * 60  + states.sensor.wake_up_time.state[2:4]|int }}"
-    - temperature_thermostat:
-        default_entity_id: sensor.temperature_thermostat
-        friendly_name: Temperature Thermostat
-        state: "{{ states.climate.anna.attributes.current_temperature }}"
-    - target_temperature_thermostat:
-        default_entity_id: sensor.target_temperature_thermostat
-        friendly_name: Target Temperature
-        state: "{{ states.climate.anna.attributes.temperature }}"
-    - office_fibaro_battery:
-        default_entity_id: sensor.office_fibaro_battery
-        friendly_name: Office Fibaro Battery
-        state: "{{ states.zwave.fibaro_office.attributes.battery_level }}"
-    - kitchen_fibaro_battery:
-        default_entity_id: sensor.kitchen_fibaro_battery
-        friendly_name: Kitchen Fibaro Battery
-        state: "{{ states.zwave.fibaro_multisensor.attributes.battery_level }}"
-    - hall_fibaro_battery:
-        default_entity_id: sensor.hall_fibaro_battery
-        friendly_name: Hall Fibaro Battery
-        state: "{{ states.zwave.fibaro_hall.attributes.battery_level }}"
-    - bathroom_humidity_battery:
-        default_entity_id: sensor.bathroom_humidity_battery
-        friendly_name: Bathroom Humidity Battery
-        state: "{{ states.zwave.bathroom_sensor.attributes.battery_level }}"
-    - bathroom_window_battery:
-        default_entity_id: sensor.bathroom_window_battery
-        friendly_name: Bathroom Window Battery
-        state: "{{ states.zwave.bathroom_window.attributes.battery_level }}"
-    - roof_window_east_battery:
-        default_entity_id: sensor.roof_window_east_battery
-        friendly_name: Roof Window East Battery
-        state: "{{ states.zwave.roof_window_east.attributes.battery_level }}"
-    - roof_window_west_battery:
-        default_entity_id: sensor.roof_window_west_battery
-        friendly_name: Roof Window west Battery
-        state: "{{ states.zwave.roof_window_west.attributes.battery_level }}"
-    - downstairs_remote_battery:
-        default_entity_id: sensor.downstairs_remote_battery
-        friendly_name: Remote downstairs small battery
-        state: "{{ states.zwave.remote_downstairs_small.attributes.battery_level }}"
-    - last_movement_overloop:
-        default_entity_id: sensor.last_movement_overloop
-        friendly_name: Last movement Overloop
-        state: "{{ states.binary_sensor.pir_overloop.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-    - last_movement_kitchen:
-        default_entity_id: sensor.last_movement_kitchen
-        friendly_name: Last movement Kitchen
-        state: "{{ states.binary_sensor.pir_kitchen.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-    - last_movement_hall:
-        default_entity_id: sensor.last_movement_hall
-        friendly_name: Last movement Hall
-        state: "{{ states.binary_sensor.pir_hall.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-    - last_movement_office:
-        default_entity_id: sensor.last_movement_office
-        friendly_name: Last movement Office
-        state: "{{ states.binary_sensor.pir_office.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-    - last_movement_living_room:
-        default_entity_id: sensor.last_movement_living_room
-        friendly_name: Last movement living room
-        state: "{{ states.binary_sensor.pir_living_room.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-    - last_movement_front_door:
-        default_entity_id: sensor.last_movement_front_door
-        friendly_name: Last movement front door
-        state: "{{ states.binary_sensor.front_door.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-    - last_movement_back_door:
-        default_entity_id: sensor.last_movement_back_door
-        friendly_name: Last movement back door
-        state: "{{ states.binary_sensor.back_door.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-    - last_movement_bedroom_window_left:
-        default_entity_id: sensor.last_movement_bedroom_window_left
-        friendly_name: Last movement bedroom window left
-        state: "{{ states.binary_sensor.bedroom_window_left.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-    - last_movement_bedroom_window_right:
-        default_entity_id: sensor.last_movement_bedroom_window_right
-        friendly_name: Last movement bedroom window right
-        state: "{{ states.binary_sensor.bedroom_window_right.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-    - last_movement_bathroom_window:
-        default_entity_id: sensor.last_movement_bathroom_window
-        friendly_name: Last movement bathroom_window_bathroom_window_door_state_simple
-        state: "{{ states.binary_sensor.bathroom_window_bathroom_window_door_state_simple.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-    - last_movement_roof_window_east:
-        default_entity_id: sensor.last_movement_roof_window_east
-        friendly_name: Last movement roof window east
-        state: "{{ states.binary_sensor.dakraam_oost_sensor.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
-    - last_movement_roof_window_west:
-        default_entity_id: sensor.last_movement_roof_window_west
-        friendly_name: Last movement roof window west
-        state: "{{ states.binary_sensor.dakraam_west_sensor.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+    - default_entity_id: sensor.wake_up_time
+      friendly_name: 'Wake up Time'
+      state: '{{ "%0.02d:%0.02d" | format(states("input_number.wake_up_hour") | int, states("input_number.wake_up_minutes") | int) }}'
+    - default_entity_id: sensor.wake_up_relative_time
+      friendly_name: Wake up relative time #seconds after wake up time
+      state: "{{ states.sensor.time.state[:2]|int * 60  + states.sensor.time.state[2:4]|int  - states.sensor.wake_up_time.state[:2]|int * 60  + states.sensor.wake_up_time.state[2:4]|int }}"
+    - default_entity_id: sensor.temperature_thermostat
+      friendly_name: Temperature Thermostat
+      state: "{{ states.climate.anna.attributes.current_temperature }}"
+    - default_entity_id: sensor.target_temperature_thermostat
+      friendly_name: Target Temperature
+      state: "{{ states.climate.anna.attributes.temperature }}"
+    - default_entity_id: sensor.office_fibaro_battery
+      friendly_name: Office Fibaro Battery
+      state: "{{ states.zwave.fibaro_office.attributes.battery_level }}"
+    - default_entity_id: sensor.kitchen_fibaro_battery
+      friendly_name: Kitchen Fibaro Battery
+      state: "{{ states.zwave.fibaro_multisensor.attributes.battery_level }}"
+    - default_entity_id: sensor.hall_fibaro_battery
+      friendly_name: Hall Fibaro Battery
+      state: "{{ states.zwave.fibaro_hall.attributes.battery_level }}"
+    - default_entity_id: sensor.bathroom_humidity_battery
+      friendly_name: Bathroom Humidity Battery
+      state: "{{ states.zwave.bathroom_sensor.attributes.battery_level }}"
+    - default_entity_id: sensor.bathroom_window_battery
+      friendly_name: Bathroom Window Battery
+      state: "{{ states.zwave.bathroom_window.attributes.battery_level }}"
+    - default_entity_id: sensor.roof_window_east_battery
+      friendly_name: Roof Window East Battery
+      state: "{{ states.zwave.roof_window_east.attributes.battery_level }}"
+    - default_entity_id: sensor.roof_window_west_battery
+      friendly_name: Roof Window west Battery
+      state: "{{ states.zwave.roof_window_west.attributes.battery_level }}"
+    - default_entity_id: sensor.downstairs_remote_battery
+      friendly_name: Remote downstairs small battery
+      state: "{{ states.zwave.remote_downstairs_small.attributes.battery_level }}"
+    - default_entity_id: sensor.last_movement_overloop
+      friendly_name: Last movement Overloop
+      state: "{{ states.binary_sensor.pir_overloop.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+    - default_entity_id: sensor.last_movement_kitchen
+      friendly_name: Last movement Kitchen
+      state: "{{ states.binary_sensor.pir_kitchen.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+    - default_entity_id: sensor.last_movement_hall
+      friendly_name: Last movement Hall
+      state: "{{ states.binary_sensor.pir_hall.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+    - default_entity_id: sensor.last_movement_office
+      friendly_name: Last movement Office
+      state: "{{ states.binary_sensor.pir_office.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+    - default_entity_id: sensor.last_movement_living_room
+      friendly_name: Last movement living room
+      state: "{{ states.binary_sensor.pir_living_room.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+    - default_entity_id: sensor.last_movement_front_door
+      friendly_name: Last movement front door
+      state: "{{ states.binary_sensor.front_door.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+    - default_entity_id: sensor.last_movement_back_door
+      friendly_name: Last movement back door
+      state: "{{ states.binary_sensor.back_door.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+    - default_entity_id: sensor.last_movement_bedroom_window_left
+      friendly_name: Last movement bedroom window left
+      state: "{{ states.binary_sensor.bedroom_window_left.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+    - default_entity_id: sensor.last_movement_bedroom_window_right
+      friendly_name: Last movement bedroom window right
+      state: "{{ states.binary_sensor.bedroom_window_right.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+    - default_entity_id: sensor.last_movement_bathroom_window
+      friendly_name: Last movement bathroom_window_bathroom_window_door_state_simple
+      state: "{{ states.binary_sensor.bathroom_window_bathroom_window_door_state_simple.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+    - default_entity_id: sensor.last_movement_roof_window_east
+      friendly_name: Last movement roof window east
+      state: "{{ states.binary_sensor.dakraam_oost_sensor.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
+    - default_entity_id: sensor.last_movement_roof_window_west
+      friendly_name: Last movement roof window west
+      state: "{{ states.binary_sensor.dakraam_west_sensor.last_updated.astimezone().strftime('%a %H:%M:%S') }}"
 
 
 #MQTT
