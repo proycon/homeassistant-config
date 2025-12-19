@@ -185,11 +185,11 @@ views:
           entities:
             - input_select.ipcam_direction
         - type: picture-entity
-          entity: camera.living_room
+          entity: camera.living_room_2
         - type: horizontal-stack
           cards:
             - type: picture-entity
-              entity: camera.street
+              entity: camera.street_2
         - type: picture-elements
           view_layout:
               position: sidebar
