@@ -184,7 +184,6 @@ tts:
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
-camera: !include cameras.yaml
 
 
 input_select:
