@@ -7,7 +7,6 @@
       - service: frontend.set_theme
         data:
             name: proyslate
-      - service: shell_command.snapshot_clear_locks #clear all snapshot locks on startup
       - service: script.turn_on  #trigger RPi slaves to send their know().strftime('%Y-%m-%d [%H:%M:%S]')n statusses again
         data:
             entity_id: script.repoll_slaves
@@ -29,49 +28,6 @@
             payload: "Home automation started"
 
 
-#------------ Snapshots ------------------------
-#- alias: Frontdoor snapshots
-#  trigger:
-#    platform: time_pattern
-#    seconds: '/9' #every ten seconds
-#  action:
-#- service: shell_command.snapshot_frontdoor
-#- alias: Hall upstairs snapshots
-#  trigger:
-#    platform: time_pattern
-#    seconds: '/11' #every eleven seconds
-#  action:
-#    - service: shell_command.snapshot_hallupstairs
-- alias: Living room snapshots
-  trigger:
-    platform: time_pattern
-    seconds: '/3' #every five seconds
-  action:
-    - service: shell_command.snapshot_livingroom
-- alias: Street snapshots
-  trigger:
-    platform: time_pattern
-    seconds: '/5' #every five seconds
-  action:
-    - service: shell_command.snapshot_street
-#- alias: Balcony snapshots
-#  trigger:
-#   platform: time_pattern
-#   seconds: '/2' #every five seconds
-# action:
-#   - service: shell_command.snapshot_balcony
-#- alias: Garden snapshots#
-#  trigger:
-#    platform: time_pattern
-#    seconds: '/5' #every five seconds
-# action:
-#    - service: shell_command.snapshot_garden
-#- alias: Daily snapshot archiving
-#  trigger:
-#    platform: time
-#    at: "00:00:00"
-#  action:
-#    - service: shell_command.archive_snapshots
 - id: lights_on_in_the_evening
   alias: Lights on in the evening
   trigger:
@@ -276,9 +232,6 @@
             message: "The doorbell rang, there is somebody at the door - {{ now().strftime('%Y-%m-%d [%H:%M:%S]') }}"
       - delay:
           seconds: 6
-      - service: shell_command.event_snapshots
-        data:
-          cams: "street frontdoor"
 - id: doorbell_sound
   alias: Doorbell Sound
   trigger:
@@ -459,9 +412,6 @@
       entity_id: timer.reset_ipcam
     - delay:
         seconds: 3
-    - service: shell_command.event_snapshots
-      data:
-          cams: "street frontdoor"
 
 - id: door_opened_sleep
   alias: "Door opened while asleep"
@@ -567,9 +517,7 @@
       entity_id: script.reset_fireplace
     - delay:
         seconds: 4
-    - service: shell_command.event_snapshots
-      data:
-          cams: "livingroom"
+
 - id: window_upstairs_opened
   alias: "Window upstairs opened"
   trigger:
@@ -698,9 +646,6 @@
       entity_id: switch.midspots
     - delay:
         seconds: 1
-    - service: shell_command.event_snapshots
-      data:
-          cams: "livingroom street garden hallupstairs frontdoor"
     - service: switch.turn_off
       entity_id: switch.back_corner
     - delay:
