@@ -1382,28 +1382,6 @@ wake_up_alarm:
 
 
 
-
-
-make_event_snapshots_living_room:
-    alias: Make Event Snapshots Living Room
-    sequence:
-        - service: shell_command.event_snapshots
-          data:
-              cams: "livingroom"
-make_event_snapshots_street:
-    alias: Make Event Snapshots Street
-    sequence:
-        - service: shell_command.event_snapshots
-          data:
-              cams: "street"
-make_event_snapshots_all:
-    alias: Make Event Snapshots all
-    sequence:
-        - service: shell_command.event_snapshots
-          data:
-             cams: "street livingroom"
-
-
 mail_test:
     alias: Mail test
     sequence:
